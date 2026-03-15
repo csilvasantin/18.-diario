@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qué se cuece – 15 de marzo de 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --green: #33ff66;
+            --green-dim: #1a8c3a;
+            --green-glow: rgba(51,255,102,.25);
+            --amber: #ffb000;
+            --bg: #0a0f0a;
+            --card-bg: #0d130d;
+            --border: #1f4d2a;
+            --muted: #6abf7a;
+            --max-w: 820px;
+        }
+
+        :root.light {
+            --green: #1a6630;
+            --green-dim: #2e8b57;
+            --green-glow: rgba(26,102,48,.15);
+            --amber: #b36000;
+            --bg: #ffffff;
+            --card-bg: #f5f5f5;
+            --border: #c8ddd0;
+            --muted: #4a7a5a;
+        }
+
+        .scanlines {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 3px,
+                rgba(0,0,0,.10) 3px,
+                rgba(0,0,0,.10) 4px
+            );
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            background: var(--bg);
+            color: var(--green);
+            line-height: 1.5;
+            padding: 0 0 32px;
+        }
+
+        header {
+            background: var(--bg);
+            border-bottom: 2px solid var(--green);
+            padding: 10px 12px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 0 18px var(--green-glow);
+        }
+
+        header .inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .site-logo {
+            display: block;
+            flex-shrink: 0;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        header h1 {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            color: var(--green);
+            text-shadow: 0 0 10px var(--green), 0 0 20px var(--green-glow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header h1::before {
+            content: "> ";
+            color: var(--amber);
+        }
+
+        header time {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        main {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 12px 10px 0;
+        }
+
+        .section-title {
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            color: var(--amber);
+            text-shadow: 0 0 8px rgba(255,176,0,.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            border-top: 1px solid var(--border);
+            padding: 8px 0 6px 0;
+            margin: 20px 0 8px;
+        }
+
+        .section-title::before {
+            content: "## ";
+            opacity: .6;
+        }
+
+        article {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--green-dim);
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            transition: border-color .15s, box-shadow .15s;
+        }
+
+        article:hover {
+            border-left-color: var(--green);
+            box-shadow: 0 0 12px var(--green-glow);
+        }
+
+        .article-body {
+            min-width: 0;
+        }
+
+        article h3 {
+            font-size: clamp(0.88rem, 2.5vw, 0.97rem);
+            line-height: 1.35;
+            margin-bottom: 3px;
+        }
+
+        article h3 a {
+            color: var(--green);
+            text-decoration: none;
+            text-shadow: 0 0 6px var(--green-glow);
+        }
+
+        article h3 a:hover {
+            color: var(--bg);
+            text-shadow: 0 0 10px var(--green);
+        }
+
+        .meta {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .meta::before {
+            content: "[";
+        }
+
+        .meta::after {
+            content: "]";
+        }
+
+        article p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        footer {
+            max-width: var(--max-w);
+            margin: 24px auto 0;
+            padding: 10px 10px 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        footer::before {
+            content: "// ";
+            color: var(--green-dim);
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--green);
+        }
+
+        .footer-ai-note {
+            margin-top: 6px;
+            color: var(--green-dim);
+            font-size: 0.72rem;
+        }
+
+        .footer-ai-note::before {
+            content: "// ";
+            color: var(--green-dim);
+            opacity: .6;
+        }
+
+        .tabs {
+            max-width: var(--max-w);
+            margin: 12px auto 0;
+            padding: 0 10px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            background: var(--bg);
+            color: var(--muted);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            padding: 6px 14px;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: color .15s, border-color .15s;
+        }
+
+        .tab-btn:hover {
+            color: var(--green);
+            border-color: var(--green-dim);
+        }
+
+        .tab-btn.active {
+            color: var(--amber);
+            border-color: var(--amber);
+            text-shadow: 0 0 8px rgba(255,176,0,.4);
+        }
+
+        .tab-btn.active::before {
+            content: "> ";
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        :root.light .scanlines {
+            display: none;
+        }
+
+        #theme-toggle {
+            margin-left: auto;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            cursor: pointer;
+            transition: color .15s, border-color .15s;
+        }
+
+        #theme-toggle:hover {
+            color: var(--green);
+            border-color: var(--green-dim);
+        }
+
+        @media (max-width: 480px) {
+            article {
+                padding: 8px 10px;
+            }
+            .tab-btn {
+                padding: 5px 10px;
+                font-size: 0.72rem;
+            }
+            .site-logo {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="inner">
+            <svg class="site-logo" viewBox="0 0 40 40" width="32" height="32">
+                <rect class="logo-bg" width="40" height="40"/>
+            </svg>
+            <h1>Qué se cuece</h1>
+            <time>15 de marzo de 2026 17:29h</time>
+            <button id="theme-toggle">☀ claro</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="en-el-mundo">En el mundo</button>
+            <button class="tab-btn" data-tab="paises-catalanes">Países Catalanes</button>
+            <button class="tab-btn" data-tab="podcasts">Podcasts</button>
+            <button class="tab-btn" data-tab="encuentros">Encuentros</button>
+        </div>
+
+        <div id="tab-en-el-mundo" class="tab-panel active">
+            <h2 class="section-title">En el mundo</h2>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.macrumors.com/2026/03/15/ios-27-may-add-a-useful-setting/">Apple intenta añadir una nueva configuración útil a iOS 27</a></h3>
+                    <div class="meta">MacRumors — 15 de marzo de 2026</div>
+                    <p>iOS 27 podría incluir una nueva configuración para ajustar con precisión la apariencia de la interfaz del sistema.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://9to5google.com/2026/03/15/galaxy-s26-ultra-faster-charging/">El Galaxy S26 Ultra recuerda que la carga rápida solo importa si puedes utilizarla</a></h3>
+                    <div class="meta">9to5Google — 15 de marzo de 2026</div>
+                    <p>Samsung Galaxy S26 Ultra: la carga rápida es inútil si no puedes acceder a ella fácilmente.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.macrumors.com/2026/03/15/apples-studio-display-new-low/">Los nuevos Studio Display de Apple de 2026 alcanzan precios mínimos en Amazon con descuentos de hasta 100 dólares</a></h3>
+                    <div class="meta">MacRumors — 15 de marzo de 2026</div>
+                    <p>Amazon aplica el primer descuento al Studio Display 2026 de Apple, dejándolo a 1.499 dólares.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/facial-recognition-is-jailing-the-wrong-people-police-keep-using-it-anyway">El reconocimiento facial encarcela a personas equivocadas, pero la policía sigue utilizándolo — una abuela de Tennessee es la última víctima</a></h3>
+                    <div class="meta">Tom's Hardware — 15 de marzo de 2026</div>
+                    <p>Una abuela de Tennessee pasó seis meses en prisión por identificación errónea mediante reconocimiento facial.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://firthemouse.github.io/">Muestra HN: GDSL – Núcleo de 800 líneas: subconjunto Lisp en 500, subconjunto C en 1300</a></h3>
+                    <div class="meta">Hacker News — 15 de marzo de 2026</div>
+                    <p>Kernel compacto implementando subconjuntos de Lisp y C en menos de 1800 líneas de código total.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://techcrunch.com/2026/03/15/wiz-investor-unpacks-googles-32b-acquisition/">Inversor de Wiz analiza la adquisición de 32.000 millones de dólares de Google</a></h3>
+                    <div class="meta">TechCrunch — 15 de marzo de 2026</div>
+                    <p>Shardul Shah de Index Ventures explica la mayor adquisición de Google jamás realizada.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.tomshardware.com/video-games/console-gaming/microsofts-unhackable-xbox-one-has-been-hacked-by-bliss-the-2013-console-finally-fell-to-voltage-glitching-allowing-the-loading-of-unsigned-code-at-every-level">La Xbox One de Microsoft, considerada «inhackeable», ha sido hackeada utilizando voltage glitching</a></h3>
+                    <div class="meta">Tom's Hardware — 15 de marzo de 2026</div>
+                    <p>Hackers han conseguido vulnerar la Xbox One mediante técnicas de voltage glitching, permitiendo cargar código sin firmar.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://blog.zuthof.nl/2023/06/02/what-makes-intel-optane-stand-out/">Qué hace que Intel Optane destaque (2023)</a></h3>
+                    <div class="meta">Hacker News — 15 de marzo de 2026</div>
+                    <p>Análisis de las características diferenciales de la tecnología Intel Optane en 2023.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.macrumors.com/2026/03/15/macbook-neo-2-no-touch-screen/">MacBook Neo 2 con pantalla táctil: de sí a quizás a no</a></h3>
+                    <div class="meta">MacRumors — 15 de marzo de 2026</div>
+                    <p>Apple ha descartado probablemente la pantalla táctil para el MacBook Neo 2, según Mark Gurman de Bloomberg.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.digitaltrends.com/home-theater/lg-42-inch-oled-tv-monitor-plus-samsung-tv-fixes-tcl-qm6k-pro-tips-you-asked/">Preguntas: ¿TV OLED LG 42 pulgadas como monitor? Más correcciones Samsung y consejos TCL QM6K Pro</a></h3>
+                    <div class="meta">Digital Trends — 15 de marzo de 2026</div>
+                    <p>Respuesta a preguntas sobre usar LG C4 como monitor, configuración Samsung, rendimiento TCL QM6K Pro y conexión satélite Sony Bravia.</p>
+                </div>
+            </article>
+        </div>
+
+        <div id="tab-paises-catalanes" class="tab-panel">
+            <h2 class="section-title">Países Catalanes</h2>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://lleidadiari.cat/hisenda-reforcara-control-negoci-digital/">Atención: Así reforzará Hacienda la vigilancia en 2026</a></h3>
+                    <div class="meta">Lleida Diari — 15 de marzo de 2026</div>
+                    <p>Hacienda intensificará en 2026 la vigilancia sobre negocio digital, patrimonios ocultos y economía sumergida.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.elnacional.cat/ca/tecnologia/aquest-mobil-tcl-cau-en-picat-seu-minim-historic-festa-ofertes-primavera-amazon_1610400_102.html">Este móvil de TCL cae en picado a su mínimo histórico en la Fiesta de las Ofertas de Primavera de Amazon</a></h3>
+                    <div class="meta">El Nacional.cat — 15 de marzo de 2026</div>
+                    <p>Teléfono TCL con pantalla de 6,9 pulgadas y 8 GB de RAM alcanza su precio más bajo en la oferta primaveral de Amazon.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.elnacional.cat/ca/tecnologia/google-presenta-groundsource-ia-ajuda-predir-desastres-naturals-com-inundacions-danes_1610811_102.html">Google presenta Groundsource: una IA que ayuda a predecir desastres naturales como inundaciones o daños</a></h3>
+                    <div class="meta">El Nacional.cat — 15 de marzo de 2026</div>
+                    <p>Google crea Groundsource, sistema de IA que transforma informes públicos en datos para anticipar inundaciones urbanas repentinas.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.vilaweb.cat/noticies/diversos-drones-impacten-a-laeroport-internacional-de-kuwait-sense-fer-victimes/">Varios drones impactan en el aeropuerto internacional de Kuwait sin causar víctimas</a></h3>
+                    <div class="meta">VilaWeb — 14 de marzo de 2026</div>
+                    <p>Drones atacan el aeropuerto internacional de Kuwait causando daños materiales pero sin víctimas mortales.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.elnacional.cat/ca/tecnologia/elon-musk-ordena-descens-4400-satellits-starlink-evitar-collisions-reforcar-seguretat-orbita_1610184_102.html">Elon Musk ordena el descenso de 4.400 satélites Starlink para evitar colisiones y reforzar la seguridad</a></h3>
+                    <div class="meta">El Nacional.cat — 14 de marzo de 2026</div>
+                    <p>Musk ordena rebajar satélites Starlink para prevenir colisiones espaciales y mejorar la seguridad orbital.</p>
+                </div>
+            </article>
+        </div>
+
+        <div id="tab-podcasts" class="tab-panel">
+            <h2 class="section-title">Podcasts</h2>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://mossegalapoma.cat/les-dades-obertes-i-la-transparencia-publica-programa-656/">Los datos abiertos y la transparencia pública – programa 656</a></h3>
+                    <div class="meta">Mossega la poma — 13 de marzo de 2026</div>
+                    <p>Exploramos cómo los datos abiertos y la gestión digital transforman la transparencia gubernamental y la cultura pública.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://podcasts.cat/36/33868712/">L'Altra Ràdio - Qué es la agnotología algorítmica</a></h3>
+                    <div class="meta">L'altra ràdio — 12 de marzo de 2026</div>
+                    <p>La doctora Àtia Cortés explica la agnotología algorítmica, concepto emergente sobre cómo los algoritmos generan desinformación.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://podcasts.cat/191/33863599/">El gòTIC - ¡Tenemos una misión!</a></h3>
+                    <div class="meta">El Gòtic — 11 de marzo de 2026</div>
+                    <p>Curso del gòTIC Tàrrega para compartir recursos y estrategias ante los retos de la ciudadanía digital.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://mossegalapoma.cat/com-la-ia-esta-revolucionant-lescriptura-i-la-publicacio-de-llibres-programa-655/">Cómo la IA está revolucionando la escritura y la publicación de libros – Programa 655</a></h3>
+                    <div class="meta">Mossega la poma — 7 de marzo de 2026</div>
+                    <p>Dani comparte experiencias sobre el uso de IA en escritura, corrección y contenido, transformando la industria editorial.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://podcasts.cat/36/33845240/">L'Altra Ràdio - "Day One", la serie del Mobile World Congress</a></h3>
+                    <div class="meta">L'altra ràdio — 5 de marzo de 2026</div>
+                    <p>El MWC celebra su vigésima edición en Barcelona con foco en inteligencia artificial, marcando un cambio estructural respecto a la conectividad.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.societatdelainformacio.com/podcast/la-nova-constellacio-de-satellits-starlink-permetra-cobertura-als-telefons-mobils/">La nueva constelación de satélites Starlink permitirá cobertura en los teléfonos móviles</a></h3>
+                    <div class="meta">Societat de la Informació — 3 de marzo de 2026</div>
+                    <p>Starlink lanzará satélites de órbita super-baja para ofrecer cobertura directa a los móviles globalmente, transformándose en operadora de telecomunicaciones.</p>
+                </div>
+            </article>
+        </div>
+
+        <div id="tab-encuentros" class="tab-panel">
+            <h2 class="section-title">Encuentros</h2>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.meetup.com/wordpressbcn/events/313756353/">10web, una IA para crear WordPress por Aleix Martí</a></h3>
+                    <div class="meta">WordPress BCN — 12 de marzo de 2026</div>
+                    <p>10web ofrece IA para crear WordPress funcionales rápidamente sin codificar manualmente, acelerando el desarrollo web.</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-body">
+                    <h3><a href="https://www.meetup.com/ai-professionals-barcelona/events/313659377/">Construye tu historia de marca más rápidamente con IA - Taller práctico 'IA para los negocios'</a></h3>
+                    <div class="meta">AI Professionals Barcelona — 6 de marzo de 2026</div>
+                    <p>Taller práctico de IA para clarificar problemas de los clientes y construir estrategias de marca efectivas.</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <strong>Fuentes:</strong>
+        <a href="https://www.macrumors.com">MacRumors</a>,
+        <a href="https://9to5google.com">9to5Google</a>,
+        <a href="https://www.tomshardware.com">Tom's Hardware</a>,
+        <a href="https://firthemouse.github.io">Hacker News</a>,
+        <a href="https://techcrunch.com">TechCrunch</a>,
+        <a href="https://www.digitaltrends.com">Digital Trends</a>,
+        <a href="https://lleidadiari.cat">Lleida Diari</a>,
+        <a href="https://www.elnacional.cat">El Nacional.cat</a>,
+        <a href="https://www.vilaweb.cat">VilaWeb</a>,
+        <a href="https://mossegalapoma.cat">Mossega la poma</a>,
+        <a href="https://podcasts.cat">L'altra ràdio</a>,
+        <a href="https://podcasts.cat">El Gòtic</a>,
+        <a href="https://www.societatdelainformacio.com">Societat de la Informació</a>,
+        <a href="https://www.meetup.com">WordPress BCN</a>,
+        <a href="https://www.meetup.com">AI Professionals Barcelona</a>
+
+        <div class="footer-ai-note">Generado el 15 de marzo de 2026 a las 17:29h. Esta página se regenera automáticamente cada 4 horas mediante inteligencia artificial.</div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        const toggle = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'light') {
+            root.classList.add('light');
+            toggle.textContent = '◾ oscuro';
+        }
+
+        toggle.addEventListener('click', () => {
+            const isLight = root.classList.toggle('light');
+            toggle.textContent = isLight ? '◾ oscuro' : '☀ claro';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    </script>
+</body>
+</html>
