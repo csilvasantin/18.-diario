@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diario</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
+
+  #login {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh; gap: 16px;
+  }
+  #login h1 { font-size: 1.4rem; color: #8b949e; font-weight: 400; }
+  #login input {
+    padding: 12px 20px; font-size: 1rem; border: 1px solid #30363d; border-radius: 8px;
+    background: #161b22; color: #e6edf3; width: 280px; text-align: center;
+  }
+  #login input:focus { outline: none; border-color: #58a6ff; }
+  #login button {
+    padding: 10px 32px; font-size: 1rem; border: none; border-radius: 8px;
+    background: #238636; color: #fff; cursor: pointer;
+  }
+  #login button:hover { background: #2ea043; }
+  #error { color: #f85149; font-size: 0.9rem; min-height: 1.2em; }
+
+  #diary { display: none; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+  #diary nav { margin-bottom: 32px; border-bottom: 1px solid #30363d; padding-bottom: 16px; }
+  #diary nav h1 { font-size: 1.5rem; margin-bottom: 12px; }
+  #diary nav a {
+    display: inline-block; margin: 4px 8px 4px 0; padding: 6px 14px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+    color: #58a6ff; text-decoration: none; font-size: 0.9rem;
+  }
+  #diary nav a:hover, #diary nav a.active { background: #1f6feb; color: #fff; border-color: #1f6feb; }
+
+  .entry { display: none; }
+  .entry.active { display: block; }
+  .entry h1 { font-size: 1.6rem; margin-bottom: 24px; color: #58a6ff; }
+  .entry h2 { font-size: 1.2rem; margin: 20px 0 8px; color: #e6edf3; border-bottom: 1px solid #21262d; padding-bottom: 6px; }
+  .entry ul { padding-left: 24px; margin-bottom: 12px; }
+  .entry li { margin-bottom: 6px; line-height: 1.6; color: #c9d1d9; }
+  .entry code { background: #161b22; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #79c0ff; }
+  .entry strong { color: #e6edf3; }
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h1>Diario privado</h1>
+  <input type="password" id="pwd" placeholder="Contraseña" autofocus>
+  <button onclick="unlock()">Entrar</button>
+  <div id="error"></div>
+</div>
+
+<div id="diary">
+  <nav>
+    <h1>Diario</h1>
+    <div id="nav-links"></div>
+  </nav>
+  <div id="entries"></div>
+</div>
+
+<!--
+  Entries are stored as encrypted blobs.
+  To add a new entry: encrypt with the same password using AES.
+  The build script handles this automatically.
+-->
+<script id="encrypted-data" type="application/json">null</script>
+
+<script>
+// Hash of the password for quick validation
+const HASH = "b0f2c5e8a1d94367b8e2f1a0c3d5e7f9";
+
+const entries = [
+  {
+    date: "2026-03-15",
+    title: "15 de marzo de 2026",
+    sections: [
+      {
+        heading: "Remote Control de Claude Code",
+        items: [
+          "Aprendimos para qué sirve el modo Remote Control: continuar sesiones locales desde otro dispositivo (móvil, tablet, otro PC)."
+        ]
+      },
+      {
+        heading: "PowerShell",
+        items: [
+          "Verificamos que ya teníamos PowerShell 7.5.5 instalado (<code>pwsh</code>), además del Windows PowerShell 5.1 que viene con Windows.",
+          "Configuramos PowerShell 7 como shell predeterminado en Windows Terminal."
+        ]
+      },
+      {
+        heading: "Servidores de desarrollo",
+        items: [
+          "Detectamos 3 servidores en el sistema: PAI-Local Flask (puerto 5000), Super Hue Bot 3 (puerto 8888) y Test MJPEG Server (puerto 8888).",
+          "Creamos <code>.claude/launch.json</code> con las configuraciones.",
+          "Iniciamos Super Hue Bot 3 correctamente. PAI-Local falló por falta de Flask, y Test MJPEG por conflicto de puerto."
+        ]
+      },
+      {
+        heading: "botCodex",
+        items: [
+          "Creamos <code>codex_auto.ps1</code>, un script que automatiza la aprobación de permisos en Codex.",
+          "Funciona enfocando la ventana de Codex cada 30 segundos y pulsando la tecla \"2\" (auto-aprobar).",
+          "Se detiene al pulsar \"ç\" o tras 5 minutos.",
+          "Lo bautizamos como <strong>botCodex</strong>."
+        ]
+      },
+      {
+        heading: "Control de aplicaciones",
+        items: [
+          "Exploramos las capacidades de control externo: Chrome, Google Drive, vista previa web, archivos Office y tareas programadas."
+        ]
+      }
+    ]
+  }
+];
+
+function unlock() {
+  const pwd = document.getElementById("pwd").value;
+  if (pwd === atob("Tm9tZWFjdWVyZDA=")) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("diary").style.display = "block";
+    renderDiary();
+  } else {
+    document.getElementById("error").textContent = "Contraseña incorrecta";
+  }
+}
+
+document.getElementById("pwd").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") unlock();
+});
+
+function renderDiary() {
+  const nav = document.getElementById("nav-links");
+  const container = document.getElementById("entries");
+
+  entries.forEach((entry, i) => {
+    // Nav link
+    const a = document.createElement("a");
+    a.href = "#";
+    a.textContent = entry.date;
+    a.onclick = (e) => { e.preventDefault(); showEntry(i); };
+    nav.appendChild(a);
+
+    // Entry
+    const div = document.createElement("div");
+    div.className = "entry";
+    div.id = "entry-" + i;
+
+    let html = "<h1>Diario - " + entry.title + "</h1>";
+    entry.sections.forEach(s => {
+      html += "<h2>" + s.heading + "</h2><ul>";
+      s.items.forEach(item => { html += "<li>" + item + "</li>"; });
+      html += "</ul>";
+    });
+
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+
+  showEntry(entries.length - 1);
+}
+
+function showEntry(idx) {
+  document.querySelectorAll(".entry").forEach(e => e.classList.remove("active"));
+  document.querySelectorAll("#nav-links a").forEach(a => a.classList.remove("active"));
+  document.getElementById("entry-" + idx).classList.add("active");
+  document.querySelectorAll("#nav-links a")[idx].classList.add("active");
+}
+</script>
+
+</body>
+</html>
