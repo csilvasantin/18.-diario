@@ -181,7 +181,10 @@ const entries = [
           "Añadimos un lanzador de arranque automático para Windows: <code>CodexBot-Autostart.cmd</code>.",
           "Instalamos ese lanzador en la carpeta <code>Startup</code> del usuario para que <code>CodexBot</code> arranque al iniciar sesión.",
           "Verificamos detección real contra la ventana de <code>Codex</code> abierta en el equipo.",
-          "Confirmamos que el bot genera capturas en <code>screenshots/</code> y que queda corriendo como proceso PowerShell independiente."
+          "Confirmamos que el bot genera capturas en <code>screenshots/</code> y que queda corriendo como proceso PowerShell independiente.",
+          "Después sustituimos el arranque simple por un <strong>watcher</strong> que supervisa la app <code>Codex</code>.",
+          "Con este cambio, si <code>Codex</code> está abierto el watcher arranca <code>CodexBot</code>, y si <code>Codex</code> desaparece el bot se cierra solo.",
+          "El watcher queda instalado también por <code>Startup</code>, así que el comportamiento sigue disponible automáticamente tras iniciar sesión."
         ]
       },
       {
