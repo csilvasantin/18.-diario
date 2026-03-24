@@ -204,6 +204,66 @@ const entries = [
         ]
       }
     ]
+  },
+  {
+    date: "2026-03-24",
+    title: "24 de marzo de 2026",
+    sections: [
+      {
+        heading: "Clonado masivo de repositorios GitHub",
+        items: [
+          "Listamos los <strong>22 repositorios públicos</strong> de <code>csilvasantin</code> usando <code>gh api</code>.",
+          "Clonamos todos a <code>/Users/csilvasantin/Claude/</code> vía HTTPS (SSH no estaba configurado en este Mac).",
+          "Repos incluidos: admira-equipos, AdmiraNext-Team, AenaJones, AenaMallorca, ainimation, bitsandatoms, carla, carlaxtanco, ClaudeBot, CodexBot, Control-de-Tienda, csilvasantin.github.io, diario, Emulador-de-Spectrum, game-platform, Hacker, Matrix, pong-tron, sitges, Spectrum, tech, xtanco-game."
+        ]
+      },
+      {
+        heading: "Sistema de backup automático a Google Drive",
+        items: [
+          "Detectamos que Google Drive está montado en <code>/Users/csilvasantin/Library/CloudStorage/GoogleDrive-csilvasantin@gmail.com/Mi unidad/</code>.",
+          "Creamos el script <code>sync-to-drive.sh</code> que sincroniza todos los repos a Google Drive cada 10 minutos.",
+          "Se instaló como servicio <code>launchd</code> (<code>com.csilvasantin.github-backup.plist</code>) para que arranque automáticamente con el Mac.",
+          "El sistema muestra una <strong>notificación de macOS</strong> cada vez que sincroniza repos con cambios."
+        ]
+      },
+      {
+        heading: "Estructura del backup en Google Drive",
+        items: [
+          "<code>Mi unidad/GitHub-Backups/latest/</code> — Copia actual de cada repo, se actualiza cada 10 minutos.",
+          "<code>Mi unidad/GitHub-Backups/diario/YYYY-MM-DD/</code> — Snapshot <strong>completo</strong> de todos los repos por día. Permite volver atrás a cualquier fecha.",
+          "<code>Mi unidad/GitHub-Backups/cambios/YYYY-MM-DD/</code> — Solo los archivos que cambiaron ese día, con <code>_diff.patch</code> (diff detallado), <code>_resumen.txt</code> y <code>_eliminados.txt</code>.",
+          "<code>Mi unidad/GitHub-Backups/pre-restauracion/</code> — Backup de seguridad automático que se crea antes de cada restauración.",
+          "Retención: <strong>90 días</strong> de backups diarios."
+        ]
+      },
+      {
+        heading: "Script de restauración",
+        items: [
+          "Creamos <code>restaurar-backup.sh</code> para volver a cualquier versión anterior de forma sencilla.",
+          "<code>./restaurar-backup.sh</code> — Lista los días disponibles con backup.",
+          "<code>./restaurar-backup.sh 2026-03-24</code> — Muestra los repos con backup de ese día.",
+          "<code>./restaurar-backup.sh 2026-03-24 ClaudeBot</code> — Restaura ClaudeBot al estado del 24 de marzo.",
+          "Antes de restaurar, guarda automáticamente la versión actual en <code>pre-restauracion/</code> como red de seguridad.",
+          "Preserva el directorio <code>.git</code> para poder seguir trabajando con git normalmente después de restaurar."
+        ]
+      },
+      {
+        heading: "Comandos útiles",
+        items: [
+          "<code>bash ~/Claude/sync-to-drive.sh</code> — Forzar sincronización manual.",
+          "<code>cat ~/Claude/.sync-log.txt</code> — Ver el log de sincronizaciones.",
+          "<code>launchctl unload ~/Library/LaunchAgents/com.csilvasantin.github-backup.plist</code> — Parar el servicio automático.",
+          "<code>launchctl load ~/Library/LaunchAgents/com.csilvasantin.github-backup.plist</code> — Reanudar el servicio automático."
+        ]
+      },
+      {
+        heading: "Publicación",
+        items: [
+          "Las novedades de esta fecha quedan publicadas en HTML en este mismo <code>index.html</code>.",
+          "URL pública: <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>"
+        ]
+      }
+    ]
   }
 ];
 
