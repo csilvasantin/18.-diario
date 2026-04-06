@@ -4,49 +4,180 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
+  :root {
+    --matrix-bg: #020703;
+    --matrix-panel: rgba(6, 19, 10, 0.84);
+    --matrix-panel-strong: rgba(5, 15, 8, 0.94);
+    --matrix-border: rgba(0, 255, 110, 0.22);
+    --matrix-text: #b7f7c7;
+    --matrix-muted: #5ca772;
+    --matrix-bright: #39ff6f;
+    --matrix-bright-soft: #88ffad;
+    --matrix-code: #04110a;
+    --matrix-danger: #ff6b6b;
+    --matrix-shadow: 0 0 0 1px rgba(0, 255, 110, 0.06), 0 24px 80px rgba(0, 0, 0, 0.45), 0 0 32px rgba(57, 255, 111, 0.08);
+  }
+  body {
+    font-family: 'Share Tech Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background:
+      radial-gradient(circle at top, rgba(30, 100, 45, 0.2), transparent 32%),
+      linear-gradient(180deg, #04110a 0%, #020703 100%);
+    color: var(--matrix-text);
+    min-height: 100vh;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 100% 4px;
+    opacity: 0.08;
+    z-index: 1;
+  }
+
+  #matrix-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 
   #login {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     min-height: 100vh; gap: 16px;
+    position: relative; z-index: 2;
   }
-  #login h1 { font-size: 1.4rem; color: #8b949e; font-weight: 400; }
+  #login h1 {
+    font-size: 1.6rem;
+    color: var(--matrix-bright);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-shadow: 0 0 12px rgba(57, 255, 111, 0.35);
+  }
   #login input {
-    padding: 12px 20px; font-size: 1rem; border: 1px solid #30363d; border-radius: 8px;
-    background: #161b22; color: #e6edf3; width: 280px; text-align: center;
+    padding: 12px 20px; font-size: 1rem; border: 1px solid var(--matrix-border); border-radius: 10px;
+    background: rgba(1, 16, 7, 0.9); color: var(--matrix-bright-soft); width: 280px; text-align: center;
+    box-shadow: inset 0 0 18px rgba(57, 255, 111, 0.05);
   }
-  #login input:focus { outline: none; border-color: #58a6ff; }
+  #login input:focus { outline: none; border-color: var(--matrix-bright); box-shadow: 0 0 0 4px rgba(57, 255, 111, 0.08); }
   #login button {
-    padding: 10px 32px; font-size: 1rem; border: none; border-radius: 8px;
-    background: #238636; color: #fff; cursor: pointer;
+    padding: 10px 32px; font-size: 1rem; border: 1px solid rgba(57, 255, 111, 0.35); border-radius: 999px;
+    background: linear-gradient(180deg, rgba(21, 90, 42, 0.9), rgba(6, 44, 18, 0.95)); color: #effff4; cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(57, 255, 111, 0.12);
   }
-  #login button:hover { background: #2ea043; }
-  #error { color: #f85149; font-size: 0.9rem; min-height: 1.2em; }
+  #login button:hover { filter: brightness(1.08); }
+  #error { color: var(--matrix-danger); font-size: 0.9rem; min-height: 1.2em; }
 
-  #diary { display: none; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-  #diary nav { margin-bottom: 32px; border-bottom: 1px solid #30363d; padding-bottom: 16px; }
-  #diary nav h1 { font-size: 1.5rem; margin-bottom: 12px; }
-  #diary nav a {
-    display: inline-block; margin: 4px 8px 4px 0; padding: 6px 14px;
-    background: #161b22; border: 1px solid #30363d; border-radius: 6px;
-    color: #58a6ff; text-decoration: none; font-size: 0.9rem;
+  #diary {
+    display: none;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 20px 56px;
+    position: relative;
+    z-index: 2;
   }
-  #diary nav a:hover, #diary nav a.active { background: #1f6feb; color: #fff; border-color: #1f6feb; }
+  #diary nav {
+    margin-bottom: 32px;
+    padding: 18px 18px 20px;
+    border: 1px solid var(--matrix-border);
+    border-radius: 18px;
+    background: var(--matrix-panel);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--matrix-shadow);
+  }
+  #diary nav h1 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: var(--matrix-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    text-shadow: 0 0 18px rgba(57, 255, 111, 0.18);
+  }
+  #entry-selector {
+    width: min(320px, 100%);
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    border: 1px solid var(--matrix-border);
+    border-radius: 10px;
+    background: rgba(0, 16, 8, 0.92);
+    color: var(--matrix-bright-soft);
+    box-shadow: inset 0 0 20px rgba(57, 255, 111, 0.05);
+  }
+  #entry-selector:focus { outline: none; border-color: var(--matrix-bright); box-shadow: 0 0 0 4px rgba(57, 255, 111, 0.08); }
 
   .entry { display: none; }
-  .entry.active { display: block; }
-  .entry h1 { font-size: 1.6rem; margin-bottom: 24px; color: #58a6ff; }
-  .entry h2 { font-size: 1.2rem; margin: 20px 0 8px; color: #e6edf3; border-bottom: 1px solid #21262d; padding-bottom: 6px; }
+  .entry.active {
+    display: block;
+    background: var(--matrix-panel-strong);
+    border: 1px solid var(--matrix-border);
+    border-radius: 22px;
+    padding: 28px 24px;
+    box-shadow: var(--matrix-shadow);
+    animation: panel-in 220ms ease-out;
+  }
+  .entry h1 {
+    font-size: 1.7rem;
+    margin-bottom: 24px;
+    color: var(--matrix-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 20px rgba(57, 255, 111, 0.18);
+  }
+  .entry h2 {
+    font-size: 1.08rem;
+    margin: 26px 0 12px;
+    color: var(--matrix-bright-soft);
+    border-bottom: 1px solid rgba(0, 255, 110, 0.14);
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
   .entry ul { padding-left: 24px; margin-bottom: 12px; }
-  .entry li { margin-bottom: 6px; line-height: 1.6; color: #c9d1d9; }
-  .entry code { background: #161b22; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #79c0ff; }
-  .entry strong { color: #e6edf3; }
+  .entry li { margin-bottom: 10px; line-height: 1.7; color: var(--matrix-text); }
+  .entry li::marker { color: var(--matrix-bright); }
+  .entry a { color: var(--matrix-bright); }
+  .entry code {
+    background: var(--matrix-code);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: var(--matrix-bright);
+    border: 1px solid rgba(0, 255, 110, 0.12);
+  }
+  .entry strong { color: #ecfff0; }
+
+  @keyframes panel-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    #diary { padding: 24px 14px 40px; }
+    #diary nav { padding: 16px; border-radius: 16px; }
+    .entry.active { padding: 22px 16px; border-radius: 18px; }
+    .entry h1 { font-size: 1.35rem; }
+  }
 </style>
 </head>
 <body>
+<canvas id="matrix-canvas" aria-hidden="true"></canvas>
 
 <div id="login">
   <h1>Diario privado</h1>
@@ -58,7 +189,7 @@
 <div id="diary">
   <nav>
     <h1>Diario</h1>
-    <div id="nav-links"></div>
+    <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
   </nav>
   <div id="entries"></div>
 </div>
@@ -73,6 +204,10 @@
 <script>
 // Hash of the password for quick validation
 const HASH = "b0f2c5e8a1d94367b8e2f1a0c3d5e7f9";
+
+function isLocalAccess() {
+  return ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
+}
 
 const entries = [
   {
@@ -266,6 +401,54 @@ const entries = [
     ]
   },
   {
+    date: "2026-03-28",
+    title: "28 de marzo de 2026",
+    sections: [
+      {
+        heading: "Qué se hizo",
+        items: [
+          "<code>AdmiraNext-Team</code>: el trabajo visible de hoy se concentró en el watchdog y el panel de <code>teamwork</code>: capturas remotas más fiables, reintentos con cooldown para equipos offline, refresh in-place de previews cada 30s y ordenación online primero/offline después hasta <code>v1.9.6</code>.",
+          "En el árbol local de <code>AdmiraNext-Team</code> quedaron además cambios sin commit en la home pública (<code>public/index.html</code>, <code>public/styles.css</code>, <code>public/app.js</code>) y en <code>data/machines.json</code>, con subida de versión a <code>0.1.3</code> y datos locales del Mac Mini.",
+          "<code>xtanco-game</code>: se añadieron tres vídeos nuevos al signage (<code>Pulso Propio</code>, <code>Siempre Volvía</code>, <code>Que Hablen de Mí</code>), se registraron en <code>game.html</code> y <code>2026-03-25/game.html</code>, y se ajustó el avance automático al terminar cada vídeo con mensajes LED específicos.",
+          "<code>onboarding</code>: se tocaron <code>AGENTS.md</code> y <code>CURRENT_STATE.md</code> para dejar mejor descrito el puesto físico y la lectura correcta de pantallas/capturas.",
+          "<code>pulpo</code>: existe ya el commit base de fundación del proyecto y quedan cambios locales abiertos en <code>STATE.md</code>, <code>TASKS.md</code> y la landing."
+        ]
+      },
+      {
+        heading: "Qué se validó",
+        items: [
+          "En <code>AdmiraNext-Team</code> sí hay evidencia de validación funcional hoy: commits con nuevas capturas en <code>data/screenshots/</code>, ajustes de <code>src/ssh-exec.js</code> y publicación incremental hasta <code>v1.9.6</code>.",
+          "En <code>xtanco-game</code> queda validada la generación de assets y su cableado en código, pero no he encontrado evidencia suficiente de una prueba final en navegador hoy.",
+          "El diario ya tenía una entrada de <code>2026-03-28</code>; se ha actualizado esa misma fecha en vez de duplicarla."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La entrada previa del diario para hoy no cuadraba con el historial <code>git</code> real y mezclaba trabajo de otras sesiones; se ha rehecho desde evidencia.",
+          "Hay varios repos con cambios locales no cerrados (<code>AdmiraNext-Team</code>, <code>xtanco-game</code>, <code>onboarding</code>, <code>pulpo</code>, <code>diario</code>), así que cualquier <code>pull</code> o publicación debe hacerse con cuidado.",
+          "Parte del trabajo de hoy existe solo como cambios en workspace y no como commits, lo que reduce la trazabilidad si no se cierra pronto."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Se prioriza registrar solo hechos respaldados por commits, diffs o archivos modificados hoy.",
+          "No se toca de forma destructiva ningún repo con worktree sucio.",
+          "La entrada del día se mantiene breve y centrada en estado operativo, validación y pendientes."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Cerrar o descartar explícitamente los cambios locales de <code>AdmiraNext-Team</code>, sobre todo la home pública y <code>data/machines.json</code>.",
+          "Probar en navegador el signage de <code>xtanco-game</code> con los tres vídeos nuevos antes de darlo por terminado.",
+          "Decidir si la documentación local de <code>onboarding</code> y la landing de <code>pulpo</code> deben convertirse en commits separados mañana."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-03-29",
     title: "29 de marzo de 2026 — Resumen semanal",
     sections: [
@@ -333,6 +516,54 @@ const entries = [
         items: [
           "Las novedades de esta fecha quedan publicadas en HTML en este mismo <code>index.html</code>.",
           "URL pública: <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>"
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-03-30",
+    title: "30 de marzo de 2026",
+    sections: [
+      {
+        heading: "Qué se hizo",
+        items: [
+          "No he encontrado commits fechados hoy en los repositorios revisados de Admirito.",
+          "El frente activo principal sigue siendo <code>AdmiraNext-Team</code>, con cambios locales abiertos en <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code>, <code>data/machines.json</code> y tres capturas de <code>data/screenshots/</code>.",
+          "En ese diff sigue visible el rediseño de la home pública a estética arcade, la subida de versión a <code>0.1.3</code> y la ampliación de datos de conexión del Mac Mini con IP local y comando SSH directo.",
+          "En <code>AdmiraNext-Team-latest</code> siguen abiertos cambios sin commit en <code>src/ssh-exec.js</code>, <code>src/server.js</code> y <code>public/teamwork.js</code> para robustecer <code>osascript</code> remoto, aceptar <code>idle</code>, permitir <code>PORT</code> por entorno y mostrar <code>Sin señal</code> cuando no hay snapshot.",
+          "También siguen abiertos otros worktrees con cambios locales (<code>onboarding</code>, <code>pulpo</code>, <code>ACE-Step</code>, <code>diario</code>), pero no aparece evidencia de cierres nuevos hoy."
+        ]
+      },
+      {
+        heading: "Qué se validó",
+        items: [
+          "Sí queda validado el estado actual del workspace: hay trabajo local relevante todavía no cerrado en <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>.",
+          "No he encontrado evidencia de validación nueva hoy mediante commits, pruebas automáticas o ejecución final en navegador.",
+          "La entrada de hoy no existía; se crea <code>2026-03-30.md</code> en vez de duplicar otra fecha."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Hoy no hay trazabilidad de cierre en <code>git log</code>; lo importante sigue repartido como diff local.",
+          "<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> mantienen trabajo solapado sobre monitorización, capturas e interfaz, lo que sigue haciendo ambigua la base correcta para publicar.",
+          "Hay varios repos con worktree sucio a la vez, así que cualquier <code>pull</code>, rebase o publicación exige cuidado."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar el día con criterio conservador: solo hechos respaldados por <code>git status</code>, <code>git log</code> y diffs presentes en el workspace.",
+          "Dejar explícito que hoy el estado es más de consolidación y revisión que de entrega cerrada.",
+          "Mantener el foco del diario en <code>AdmiraNext-Team</code>, porque ahí está el bloque principal de trabajo abierto."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Elegir una única línea de verdad entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>.",
+          "Probar en navegador el rediseño arcade de <code>AdmiraNext-Team</code> y validar el comportamiento real del panel antes de cerrar commit.",
+          "Separar los cambios por bloques coherentes: UI pública, datos/capturas de máquinas y watchdog/SSH."
         ]
       }
     ]
@@ -424,35 +655,62 @@ const entries = [
         ]
       }
     ]
+  },
+  {
+    date: "2026-04-06",
+    title: "6 de abril de 2026",
+    sections: [
+      {
+        heading: "Actualizacion del diario",
+        items: [
+          "Codex reviso el worktree de la automatizacion de <code>diario</code> antes de editar y lo encontro alineado con <code>origin/main</code>, sin cambios locales pendientes en ese checkout.",
+          "Se actualiza la entrada unica <code>2026-04-06.md</code> para dejar esta fecha separada del resto.",
+          "La actividad reflejada hoy en este repo corresponde a esta automatizacion de mantenimiento y publicacion del diario; no se anade actividad no respaldada por archivos o git."
+        ]
+      },
+      {
+        heading: "Publicacion HTML",
+        items: [
+          "Se actualizo este <code>index.html</code> para que la entrada del 6 de abril de 2026 tambien quede publicada en la version web.",
+          "La URL publica esperada tras el push es <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+        ]
+      }
+    ]
   }
 ];
 
 function unlock() {
   const pwd = document.getElementById("pwd").value;
   if (pwd === atob("Tm9tZWFjdWVyZDA=")) {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("diary").style.display = "block";
-    renderDiary();
+    openDiary();
   } else {
     document.getElementById("error").textContent = "Contraseña incorrecta";
   }
+}
+
+function openDiary() {
+  document.getElementById("login").style.display = "none";
+  document.getElementById("diary").style.display = "block";
+  renderDiary();
 }
 
 document.getElementById("pwd").addEventListener("keydown", function(e) {
   if (e.key === "Enter") unlock();
 });
 
+if (isLocalAccess()) {
+  openDiary();
+}
+
 function renderDiary() {
-  const nav = document.getElementById("nav-links");
+  const selector = document.getElementById("entry-selector");
   const container = document.getElementById("entries");
 
   entries.forEach((entry, i) => {
-    // Nav link
-    const a = document.createElement("a");
-    a.href = "#";
-    a.textContent = entry.date;
-    a.onclick = (e) => { e.preventDefault(); showEntry(i); };
-    nav.appendChild(a);
+    const option = document.createElement("option");
+    option.value = String(i);
+    option.textContent = entry.date;
+    selector.appendChild(option);
 
     // Entry
     const div = document.createElement("div");
@@ -470,15 +728,58 @@ function renderDiary() {
     container.appendChild(div);
   });
 
+  selector.addEventListener("change", (event) => {
+    showEntry(Number(event.target.value));
+  });
+
   showEntry(entries.length - 1);
 }
 
 function showEntry(idx) {
   document.querySelectorAll(".entry").forEach(e => e.classList.remove("active"));
-  document.querySelectorAll("#nav-links a").forEach(a => a.classList.remove("active"));
   document.getElementById("entry-" + idx).classList.add("active");
-  document.querySelectorAll("#nav-links a")[idx].classList.add("active");
+  document.getElementById("entry-selector").value = String(idx);
 }
+
+(function startMatrixBackground() {
+  const canvas = document.getElementById("matrix-canvas");
+  const ctx = canvas.getContext("2d");
+  const glyphs = "01アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]<>/*+-=";
+  const fontSize = 14;
+  let columns = 0;
+  let drops = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    columns = Math.max(1, Math.floor(canvas.width / fontSize));
+    drops = Array.from({ length: columns }, () => Math.floor(Math.random() * canvas.height / fontSize));
+  }
+
+  function draw() {
+    ctx.fillStyle = "rgba(2, 7, 3, 0.09)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = fontSize + "px Share Tech Mono, monospace";
+
+    for (let i = 0; i < columns; i++) {
+      const char = glyphs[Math.floor(Math.random() * glyphs.length)];
+      const x = i * fontSize;
+      const y = drops[i] * fontSize;
+
+      ctx.fillStyle = Math.random() > 0.985 ? "#d8ffe3" : "#39ff6f";
+      ctx.fillText(char, x, y);
+
+      if (y > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i] += 1;
+    }
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  setInterval(draw, 48);
+})();
 </script>
 
 </body>
