@@ -711,61 +711,109 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "En <code>StreamDeck</code> se conecto el Stream Deck XL al <code>MacBookAirBlanco</code>, se instaló el software de Elgato y se dejó creado el repo <code>csilvasantin/StreamDeck</code> con rama <code>main</code> conectada por HTTPS.",
-          "Se generó una nueva clave <code>~/.ssh/github_ed25519</code>, se añadió a GitHub como <code>MacBookAirBlanco</code> y se actualizó <code>~/.ssh/config</code> para futuras conexiones.",
-          "Se prepararon dos botones fisicos de aprobacion para Claude Code y Codex en la fila superior del perfil por defecto, con AppleScript que enfoca la app, envia <code>Enter</code> y devuelve el foco a la aplicacion original.",
-          "En esos scripts se corrigio el error <code>-1719</code> envolviendo en <code>try/end try</code> la deteccion del proceso <code>frontmost</code> antes de ejecutarlo desde Stream Deck.",
-          "En <code>AdmiraNext-Team</code> siguio el rediseño del panel con cambios grandes en <code>public/styles.css</code>, ampliacion de <code>public/app.js</code> para agrupar maquinas por miembro y una portada tipo arcade con bloque <code>Player Select</code>.",
-          "En <code>data/machines.json</code> se completo mejor la conectividad del Mac Mini con <code>ip_local</code> y <code>connect_local</code>, y quedaron regeneradas varias capturas en <code>data/screenshots/</code>.",
-          "En <code>AdmiraNext-Team-latest</code> se endurecio la parte de control remoto: <code>src/server.js</code> ya acepta <code>PORT</code> por entorno y el estado <code>idle</code>, mientras <code>src/ssh-exec.js</code> centraliza el quoting de AppleScript remoto para reducir fallos por comandos mal escapados.",
-          "En <code>ACE-Step</code> se añadió una ruta de respaldo en <code>acestep/pipeline_ace_step.py</code> para guardar audio con <code>soundfile</code> cuando <code>torchaudio.save</code> falla.",
-          "En <code>Memorizer</code> se retomo el trabajo en la copia local del Mac Mini (<code>/Users/csilvasantin/Claude/repos/Memorizer</code>), se reviso el diff abierto de la integracion con Yarig.ai y se detecto un desajuste entre el conteo de tareas pausadas y su representacion visual en el resumen diario.",
-          "En <code>src/yarig.py</code> se corrigio ese comportamiento para que las tareas pausadas aparezcan con icono <code>⏸</code> en la lista del panel, y se añadió una prueba nueva en <code>tests/test_yarig_summary.py</code> para cubrir el caso."
+          "En <code>AdmiraNext-Team</code> siguio el rediseño grande del panel publico: <code>public/app.js</code> ya agrupa maquinas por miembro, aparece un bloque <code>Player Select</code> con perfiles tipo arcade y <code>public/styles.css</code> rehace fuerte la portada y las tarjetas.",
+          "En <code>package.json</code> quedo reflejado el salto a <code>0.1.3</code>, y en <code>data/machines.json</code> se añadieron <code>ip_local</code> y <code>connect_local</code> para el Mac Mini junto con capturas regeneradas en <code>data/screenshots/</code>.",
+          "En <code>AdmiraNext-Team-latest</code> quedo trabajo local para robustecer el control remoto: <code>src/server.js</code> acepta <code>PORT</code> por entorno y el estado <code>idle</code>, mientras <code>src/ssh-exec.js</code> centraliza el quoting de AppleScript remoto y simplifica parte del refresco de snapshots.",
+          "En ese repo alternativo tambien sigue sin seguimiento <code>INICIO_Y_CIERRE_DEL_DIA.md</code>, asi que el flujo de arranque y cierre del dia todavia no esta decidido como artefacto estable.",
+          "En el repo <code>diario</code> la entrada del dia ya existia; se ha actualizado esta misma en vez de duplicarla para reflejar el estado real del workspace al cierre de hoy."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "El repo <code>StreamDeck</code> quedo subido a GitHub con tres commits y los scripts compilados funcionando desde el perfil del dispositivo.",
           "<code>node --check public/app.js</code> paso sin errores en <code>AdmiraNext-Team</code>.",
-          "<code>data/machines.json</code> se parseo correctamente con Node tras el ajuste de SSH local.",
-          "Los diffs del dia muestran trabajo real en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>ACE-Step</code>, <code>Memorizer</code>, <code>StreamDeck</code> y en este repo del diario.",
-          "En <code>Memorizer</code>, <code>python3 -m unittest -q tests.test_yarig_summary</code> paso correctamente y la revision por AST confirmo que <code>src/*.py</code> y <code>memorizer_tray.py</code> parsean sin errores de sintaxis."
+          "<code>data/machines.json</code> se parseo correctamente con Node tras el ajuste de conectividad local del Mac Mini.",
+          "<code>node --check src/server.js</code> y <code>node --check src/ssh-exec.js</code> pasaron sin errores en <code>AdmiraNext-Team-latest</code>.",
+          "<code>git status</code> confirma que el trabajo visible del dia sigue concentrado sobre todo en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code> y este repo <code>diario</code>."
         ]
       },
       {
-        heading: "Bloqueos y riesgos",
+        heading: "Problemas encontrados",
         items: [
-          "<code>StreamDeck</code> sigue usando HTTPS en este repo; falta rematar la preferencia por SSH en la configuracion final si se quiere un flujo uniforme de <code>git push</code>.",
-          "El trabajo principal sigue sin commit en varios repos, asi que el estado real depende todavia de cambios locales.",
+          "Ni <code>AdmiraNext-Team</code> ni <code>AdmiraNext-Team-latest</code> tienen commits de hoy para este bloque; el estado util sigue dependiendo de cambios locales sin cerrar.",
           "<code>AdmiraNext-Team</code> sigue sin <code>build</code> ni tests, por lo que el rediseño arcade y la vista <code>Player Select</code> necesitan revision manual en navegador.",
-          "El archivo nuevo <code>INICIO_Y_CIERRE_DEL_DIA.md</code> en <code>AdmiraNext-Team-latest</code> sigue sin seguimiento en git y puede quedar fuera si no se decide su destino.",
-          "En <code>Memorizer</code> siguen abiertos cambios locales grandes en <code>src/bot.py</code> y <code>src/yarig.py</code>, y no hay <code>pytest</code> instalado en ese entorno, asi que la validacion automatizada todavia es parcial."
+          "<code>AdmiraNext-Team-latest</code> mejora el quoting remoto, pero todavia falta una prueba funcional por SSH para confirmar que corrige los fallos en comandos <code>osascript</code>.",
+          "Mantener dos arboles activos para el mismo problema (<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>) sigue haciendo ambigua la base correcta para publicar."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener una sola entrada para la fecha <code>2026-04-07</code> y fusionar en ella el trabajo ya publicado de <code>StreamDeck</code> con el bloque nuevo de <code>Memorizer</code>.",
-          "Reflejar solo actividad observable por diff y no inferir tareas no trazables.",
-          "Tratar la mejora de quoting remoto en <code>AdmiraNext-Team-latest</code> como avance tecnico, pero no como solucion cerrada hasta probar comandos reales por SSH.",
-          "Mantener la entrada de hoy breve y sincronizada tambien en <code>index.html</code>."
+          "Mantener una sola entrada para <code>2026-04-07</code> y actualizarla con foco en el trabajo verificable del workspace, en vez de seguir acumulando bloques dispersos.",
+          "Priorizar en el diario lo que hoy se puede demostrar por diff, <code>git status</code> y comprobaciones rapidas, sin inferir entregas no cerradas.",
+          "Tratar <code>AdmiraNext-Team</code> como frente principal de UI y <code>AdmiraNext-Team-latest</code> como linea tecnica de endurecimiento hasta decidir una sola base de publicacion.",
+          "Mantener <code>index.html</code> sincronizado con esta version resumida del dia."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Añadir <code>github_ed25519</code> al flujo final de Git si se quiere que <code>StreamDeck</code> use SSH por defecto.",
           "Levantar <code>AdmiraNext-Team</code> en local y revisar el nuevo layout arcade en desktop y movil antes de cerrar commit.",
           "Probar en <code>AdmiraNext-Team-latest</code> un envio remoto real con AppleScript para confirmar que el quoting unificado corrige los fallos.",
-          "Decidir si <code>INICIO_Y_CIERRE_DEL_DIA.md</code> entra en repositorio y si el fallback de <code>ACE-Step</code> requiere dependencia o documentacion adicional.",
-          "Continuar en <code>Memorizer</code> con una pasada funcional de los comandos de Yarig (<code>/yarig</code>, <code>/iniciar</code>, <code>/pausar</code>, <code>/finalizar</code>) y endurecer los casos de error visibles en Telegram."
+          "Decidir si <code>INICIO_Y_CIERRE_DEL_DIA.md</code> entra en git o si debe quedar fuera del repo.",
+          "Separar los commits por bloques coherentes: UI publica, datos/capturas de maquinas y endurecimiento SSH/watchdog."
         ]
       },
       {
         heading: "Publicacion",
         items: [
-          "La entrada unificada del 7 de abril de 2026 queda registrada en <code>2026-04-07.md</code> y sincronizada con <code>index.html</code>.",
+          "La entrada del 7 de abril de 2026 queda actualizada en <code>2026-04-07.md</code> y sincronizada con <code>index.html</code>.",
+          "URL publica esperada: <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>"
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-04-08",
+    title: "8 de abril de 2026",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "En <code>AdmiraNext-Team</code> siguio vivo el rediseño arcade del panel: <code>public/index.html</code>, <code>public/styles.css</code> y <code>public/app.js</code> mantienen el bloque <code>Player Select</code>, la ficha destacada por miembro y la nueva lectura visual tipo torneo.",
+          "En <code>package.json</code> sigue preparado el salto a <code>0.1.3</code>, y <code>data/machines.json</code> deja trazado el acceso local del Mac Mini con <code>ip_local</code> y <code>connect_local</code> junto con capturas actualizadas en <code>data/screenshots/</code>.",
+          "En <code>AdmiraNext-Team-latest</code> se endurecio el backend remoto: <code>src/server.js</code> acepta <code>PORT</code> por entorno, amplia estados validos con <code>idle</code> y <code>src/ssh-exec.js</code> unifica el quoting de <code>osascript</code> por SSH para reducir fallos de comandos remotos.",
+          "En <code>ACE-Step</code> quedo un fallback real para exportacion de audio: <code>acestep/pipeline_ace_step.py</code> intenta <code>torchaudio.save</code> y, si falla, cae a <code>soundfile</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short</code> confirma trabajo local activo hoy en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>ACE-Step</code> y este repo <code>diario</code>.",
+          "<code>git diff</code> deja trazables tres bloques claros: rediseño UI y datos de flota, robustecimiento del control remoto por SSH y fallback de guardado de audio.",
+          "No hay commits fechados hoy en esos repos, asi que el estado real del dia sigue estando en cambios locales sin cerrar."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>AdmiraNext-Team</code> sigue sin <code>build</code> ni tests, por lo que el rediseño arcade necesita validacion manual real en navegador.",
+          "<code>AdmiraNext-Team-latest</code> mejora el quoting remoto, pero sigue pendiente una prueba funcional por SSH que confirme el arreglo sobre <code>osascript</code>.",
+          "<code>INICIO_Y_CIERRE_DEL_DIA.md</code> sigue sin seguimiento en <code>AdmiraNext-Team-latest</code>, asi que el flujo diario todavia no esta fijado como artefacto estable.",
+          "Mantener dos ramas de trabajo paralelas para el mismo panel sigue dejando ambigua la base correcta para publicar."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar hoy solo lo que se puede sostener por <code>git status</code> y <code>git diff</code>, sin asumir entregas no confirmadas.",
+          "Tratar <code>AdmiraNext-Team</code> como frente principal de interfaz y <code>AdmiraNext-Team-latest</code> como linea tecnica de endurecimiento remoto hasta converger en una sola base.",
+          "Mantener la entrada del diario breve y sincronizada tambien en <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Levantar <code>AdmiraNext-Team</code> en local y revisar el layout arcade en desktop y movil antes de cerrar commits.",
+          "Ejecutar una prueba remota real en <code>AdmiraNext-Team-latest</code> para validar el quoting unificado de AppleScript.",
+          "Decidir si <code>INICIO_Y_CIERRE_DEL_DIA.md</code> entra en git o debe quedar fuera.",
+          "Separar commits por bloques coherentes: UI publica, datos/capturas y endurecimiento SSH/audio."
+        ]
+      },
+      {
+        heading: "Publicacion",
+        items: [
+          "La entrada del 8 de abril de 2026 queda creada en <code>2026-04-08.md</code> y sincronizada con <code>index.html</code>.",
           "URL publica esperada: <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>"
         ]
       }
