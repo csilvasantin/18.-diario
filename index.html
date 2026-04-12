@@ -870,46 +870,153 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso el estado real del workspace Admirito para registrar solo actividad verificable del dia.",
-          "Se localizo el diario principal en <code>github-csilvasantin/diario</code> y se preparo una entrada nueva para <code>2026-04-10</code> sin reescribir la del dia anterior.",
-          "Se sincronizo esta entrada con <code>index.html</code> para que hoy quede disponible como ultima fecha visible en la UI del diario."
+          "Se reviso el estado actual del workspace Admirito, con foco en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code> y repos con cambios abiertos.",
+          "En <code>AdmiraNext-Team</code> se identifico trabajo pendiente de producto: rediseño arcade tipo fighter select, version <code>0.1.3</code>, perfiles por miembro, resumen de fighters, estilos renovados, tres screenshots actualizados y datos locales del <code>macmini</code> en <code>data/machines.json</code>.",
+          "En <code>AdmiraNext-Team-latest</code> se identificaron mejoras operativas pendientes: <code>PORT</code> configurable por entorno, soporte de estado <code>idle</code>, lista centralizada de estados validos y construccion mas segura de comandos remotos <code>osascript</code>.",
+          "Tambien aparecen cambios recientes en <code>ACE-Step</code>, <code>onboarding</code>, <code>pulpo</code>, <code>csilvasantin.github.io</code>, <code>xtanco-game</code> y <code>CodexBot</code>, pero el trabajo principal revisado sigue siendo el panel AdmiraNext."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z'</code> situa esta ejecucion en <code>2026-04-10 21:30:12 CEST</code>.",
-          "<code>find /Users/csilvasantin/Documents/Admirito -type f -newermt '2026-04-10 00:00:00' ! -path '*/node_modules/*'</code> solo devolvio metadatos del worktree de <code>diario</code>; no aparecio produccion cerrada hoy en otros repos.",
-          "<code>git status --short</code> en <code>github-csilvasantin/diario</code> confirma cambios locales previos en <code>2026-04-09.md</code> e <code>index.html</code>, asi que hoy habia que sumar una entrada nueva sin pisar ese contexto."
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z'</code> situa esta revision en <code>2026-04-10 23:46:04 CEST</code>.",
+          "<code>git status --short</code> confirma cambios sin commit en <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>; en <code>diario</code> hay dos commits de hoy: <code>d86bc46</code> y <code>1052c6f</code>.",
+          "En <code>AdmiraNext-Team</code>, <code>node --check public/app.js</code>, parseo de <code>data/machines.json</code> y <code>git diff --check</code> pasaron correctamente.",
+          "En <code>AdmiraNext-Team-latest</code>, <code>node --check src/server.js</code>, <code>node --check src/ssh-exec.js</code> y <code>git diff --check</code> pasaron correctamente."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No hay trazabilidad tecnica suficiente para atribuir avances de producto de hoy fuera del propio diario.",
-          "El repo del diario ya tenia cambios abiertos, por lo que convenia editar con cuidado y añadir solo el bloque nuevo del <code>2026-04-10</code>."
+          "El trabajo de <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> esta en el workspace pero no cerrado en commits, asi que queda como avance pendiente de consolidar.",
+          "Hay dos copias activas del panel con cambios relacionados; conviene decidir cual sera la fuente principal antes de seguir acumulando mejoras.",
+          "En <code>AdmiraNext-Team</code>, el selector HTML de estados todavia no muestra <code>idle</code>, aunque la logica nueva ya lo contempla en otros puntos."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar un cierre breve y factual centrado en la actualizacion del diario.",
-          "Tratar cualquier cambio previo no fechado hoy como contexto pendiente y no como avance nuevo del dia."
+          "Actualizar la entrada existente de <code>2026-04-10</code> en vez de crear otra.",
+          "Registrar los cambios del panel como trabajo reciente validado localmente, no como publicacion cerrada.",
+          "Separar la revision del diario de los cambios de producto para no mezclar commits de documentacion con implementacion pendiente."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Esperar a que GitHub Pages publique el commit nuevo y volver a comprobar que la portada sirva <code>2026-04-10</code>.",
-          "Si durante el dia se cierran cambios reales en otros repos, reflejarlos manana con referencia a archivos o commits concretos."
+          "Elegir entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> como linea principal del panel.",
+          "Cerrar en commits pequeños la UI arcade, los datos de maquinas y las mejoras SSH/estado.",
+          "Completar la exposicion de <code>idle</code> en la UI y probar el flujo real de sincronizacion, snapshots y envio remoto antes de publicar."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-04-11",
+    title: "11 de abril de 2026",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso el estado del workspace Admirito con foco en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code> y los repos con cambios locales.",
+          "Se actualizo esta entrada diaria ya existente en vez de crear otra para el 11 de abril.",
+          "En <code>AdmiraNext-Team</code> siguen abiertos los cambios del panel arcade: version <code>0.1.3</code>, datos locales del <code>macmini</code>, UI tipo fighter select, estilos renovados y tres capturas actualizadas.",
+          "En <code>AdmiraNext-Team-latest</code> siguen abiertos los cambios operativos: <code>PORT</code> configurable, estado <code>idle</code>, validacion centralizada de estados y construccion mas segura de comandos remotos <code>osascript</code>.",
+          "Tambien quedan cambios sin commit en <code>csilvasantin.github.io</code>, <code>onboarding</code>, <code>pulpo</code>, <code>CodexBot</code>, <code>xtanco-game</code> y el propio repo <code>diario</code>."
         ]
       },
       {
-        heading: "Publicacion",
+        heading: "Que se valido",
         items: [
-          "El cierre local ha quedado publicado en <code>main</code> con el commit <code>d86bc46</code> (<code>docs: update diary through 2026-04-10</code>) tras rebasar sobre <code>origin/main</code>.",
-          "<code>git push origin main</code> si ha subido ese commit a <code>https://github.com/csilvasantin/diario.git</code>.",
-          "La URL publica <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue siendo la correcta, pero desde este entorno la revalidacion directa ha quedado inconclusa por resolucion DNS intermitente y por posible retardo de despliegue en GitHub Pages."
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z'</code> situa esta revision en <code>2026-04-11 23:46:22 CEST</code>.",
+          "<code>git log --since '2026-04-11 00:00' --all</code> no encontro commits nuevos en los repos revisados.",
+          "<code>find</code> con fecha <code>2026-04-11 00:00:00</code>, excluyendo <code>.git</code> y <code>node_modules</code>, solo encontro cambios de hoy en <code>github-csilvasantin/diario/2026-04-11.md</code> e <code>index.html</code>.",
+          "En <code>AdmiraNext-Team</code>, <code>node --check public/app.js</code>, parseo de <code>data/machines.json</code> y <code>git diff --check</code> pasaron correctamente.",
+          "En <code>AdmiraNext-Team-latest</code>, <code>node --check src/server.js</code>, <code>node --check src/ssh-exec.js</code> y <code>git diff --check</code> pasaron correctamente."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El trabajo principal de AdmiraNext sigue sin consolidarse en commits, por lo que debe tratarse como avance pendiente y no como cierre publicado.",
+          "Persisten dos copias activas del panel con cambios relacionados; esto aumenta el riesgo de divergencia entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>.",
+          "Los cambios de hoy son de documentacion local del diario; no hay evidencia de nuevos cambios de producto fechados hoy.",
+          "La validacion publica del diario queda pendiente porque en esta ejecucion solo se actualizo contenido local."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Actualizar la entrada existente de <code>2026-04-11</code> para evitar duplicados.",
+          "Registrar solo actividad verificable: revision de estado, ausencia de commits nuevos, validaciones locales y cambios pendientes.",
+          "Mantener la estructura numerada del diario y sincronizar el contenido con <code>index.html</code>.",
+          "No atribuir como trabajo de hoy los cambios de producto que ya estaban abiertos antes de esta revision."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Decidir cual sera la linea principal entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>.",
+          "Cerrar en commits pequenos la UI arcade, los datos de maquinas y las mejoras SSH/estado antes de seguir acumulando cambios.",
+          "Completar la exposicion de <code>idle</code> en la UI donde falte y probar el flujo real de sincronizacion, snapshots y envio remoto antes de publicar.",
+          "Publicar o verificar la UI del diario en <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> cuando haya conexion y despliegue disponible."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-04-12",
+    title: "12 de abril de 2026",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso el workspace Admirito para preparar la entrada diaria del 12 de abril.",
+          "Se comprobo la memoria de la automatizacion <code>actualizar-diario-2</code> para no repetir el cierre del 11 de abril.",
+          "Se confirmo que el diario principal sigue en <code>github-csilvasantin/diario</code> y que la UI viva esta en <code>index.html</code>.",
+          "Se mantuvo el foco en registrar actividad verificable: hoy no aparecen cambios nuevos de producto antes de esta actualizacion del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z'</code> situa esta revision en <code>2026-04-12 21:30:37 CEST</code>.",
+          "<code>git log --since '2026-04-12 00:00:00' --all</code> no encontro commits nuevos en los repos revisados.",
+          "<code>git status --short</code> confirma cambios abiertos en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>csilvasantin.github.io</code>, <code>onboarding</code>, <code>pulpo</code>, <code>CodexBot</code>, <code>xtanco-game</code> y <code>diario</code>.",
+          "<code>node</code> pudo parsear el bloque <code>const entries</code> de <code>index.html</code>, asi que la lista de entradas del HTML sigue siendo valida tras sumar el 12 de abril."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda documentada la continuidad del trabajo sin atribuir avances no verificados.",
+          "La entrada nueva se sincroniza con <code>index.html</code> para que el selector del diario abra el 12 de abril como ultima fecha disponible.",
+          "La revision deja claro que el avance real pendiente sigue concentrado en consolidar los cambios ya abiertos, especialmente en AdmiraNext."
+        ]
+      },
+      {
+        heading: "Bloqueos",
+        items: [
+          "No hay evidencia local de trabajo de producto cerrado hoy, asi que no se puede registrar como avance publicado.",
+          "<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> siguen activos a la vez, con riesgo de divergencia mientras no se elija una linea principal.",
+          "El repo <code>diario</code> conservaba cambios locales previos sin commit, incluyendo la entrada del 11 de abril y ajustes en <code>index.html</code>, antes de preparar este cierre."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Crear una entrada nueva para <code>2026-04-12</code> en vez de modificar la del 11 de abril.",
+          "Registrar como hecho principal la revision de estado y no inventar cambios de producto.",
+          "Mantener la estructura numerada del diario y actualizar tambien la UI HTML."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Decidir la linea principal entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>.",
+          "Cerrar en commits pequenos los cambios abiertos del panel AdmiraNext antes de seguir acumulando trabajo.",
+          "Resolver o archivar los cambios locales antiguos en los repos secundarios.",
+          "Publicar o verificar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> cuando el push y GitHub Pages esten disponibles."
         ]
       }
     ]
