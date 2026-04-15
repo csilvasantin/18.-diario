@@ -1130,9 +1130,10 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se creo la skill <code>/update-claude</code> en <code>~/.claude/skills/update-claude/SKILL.md</code> para automatizar el cierre de sesion: resume el trabajo, actualiza el diario y regenera la tabla de repos.",
+          "Se creo la skill <code>/update-claude</code> en <code>~/.claude/skills/update-claude/SKILL.md</code> con 9 pasos: localizar repo, analizar sesion, escribir .md, actualizar index.html, regenerar repos.html, commit+push, verificar publicacion, resumen final y abrir el diario.",
+          "Se anadio como ultimo paso (9) que la skill hace WebFetch del diario publicado y muestra la entrada del dia directamente en el chat, sin necesidad de abrir navegador ni introducir contrasena.",
           "Se regenero <code>repos.html</code> con datos frescos de la API publica de GitHub, actualizando commits, fechas y actividad de los 19 proyectos de csilvasantin.",
-          "Se identifico una limitacion del entorno remoto de Claude Code (web): el servidor de firma GPG no tiene el campo <code>source</code> configurado, lo que impide hacer commits firmados desde sesiones cloud."
+          "Se identifico una limitacion del entorno remoto de Claude Code (web): el servidor de firma GPG no tiene el campo <code>source</code> configurado y el push requiere credenciales GitHub no disponibles en este entorno."
         ]
       },
       {
