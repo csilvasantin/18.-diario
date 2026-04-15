@@ -1112,57 +1112,53 @@ const entries = [
   {
     date: "2026-04-15",
     title: "15 de abril de 2026",
-    author: "Claude Code + Codex",
+    author: "Codex",
     sections: [
       {
         heading: "Que se hizo",
         items: [
-          "Claude Code creo la skill <code>/update-claude</code> en <code>~/.claude/skills/update-claude/SKILL.md</code> para cerrar sesiones del diario con pasos de analisis, regeneracion, publicacion y verificacion.",
-          "Claude Code regenero <code>repos.html</code> con datos frescos de la API publica de GitHub y dejo documentado el flujo de cierre del diario como procedimiento reutilizable.",
-          "Codex reviso <code>git log --since='2026-04-15 00:00' --date=iso-local --pretty=format:'%h|%ad|%s' --all</code> y confirmo ocho commits reales en <code>diario</code> entre las <code>11:58:02 +0200</code> y las <code>13:05:00 +0200</code>, centrados en <code>repos.html</code>, el enlace desde <code>index.html</code> y la tabla publica de repos.",
-          "Codex actualizo esta entrada unica del <code>15 de abril</code> y el bloque equivalente de <code>index.html</code> para integrar en una sola fecha la actividad ya publicada por Claude y el cierre local de hoy sin duplicar el dia.",
-          "Para publicar el cierre, Codex incorporo primero el estado remoto ya presente en <code>origin/main</code> y dejo el diario listo para empuje sin reescribir historial."
+          "Codex cerro la sesion de trabajo de <code>01.-AdmiraXperience-Game</code> y publico en <code>origin/main</code> el commit <code>3d17a0b</code> con las mejoras finales del juego.",
+          "Codex actualizo esta entrada <code>2026-04-15.md</code> y reemplazo la entrada del mismo dia en <code>index.html</code> para dejar constancia explicita de autoria <code>Codex</code>.",
+          "Codex corrigio <code>repos.html</code> para que el repositorio <code>01.-AdmiraXperience-Game</code> y el propio <code>18.-diario</code> queden marcados con <code>LLM = Codex</code>.",
+          "Codex actualizo <code>CURRENT_STATE.md</code> en <code>onboarding</code> con una tabla clara de liderazgo, fecha y situacion de los repos revisados al cierre."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "La API publica de GitHub devolvio correctamente commits, fechas de actualizacion y actividad de push de los <code>19</code> repos de <code>csilvasantin</code> usados para regenerar <code>repos.html</code>.",
-          "<code>git log --since='2026-04-15 00:00' --date=iso-local --pretty=format:'%h|%ad|%s' --all</code> devolvio los commits <code>2cb5aa6</code>, <code>274c117</code>, <code>2165a68</code>, <code>e7e6844</code>, <code>098c347</code>, <code>c1d8158</code>, <code>fdec6b3</code> y <code>0253b9c</code>.",
-          "<code>git show --stat --format=''</code> confirma el alcance de esos cambios: <code>repos.html</code> recibio la mayor parte del trabajo y <code>index.html</code> incorporo al menos el enlace de navegacion y los filtros posteriores por autor.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo esta consolidacion en <code>2026-04-15 21:31:26 CEST +0200</code>."
+          "<code>git -C /Users/csilvasantin/GitHub/01.-AdmiraXperience-Game log -1 --date=iso-local --pretty=format:'%h|%ad|%s'</code> devolvio <code>3d17a0b|2026-04-15 23:00:01 +0200|Actualizacion automatica 2026-04-15 23:00</code>.",
+          "<code>git push origin main</code> en <code>01.-AdmiraXperience-Game</code> publico el avance <code>e55e5d8..3d17a0b</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo este cierre en <code>2026-04-15 23:05:24 CEST +0200</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>repos.html</code> quedo ampliado durante el dia con URLs publicas, actividad <code>push/pull</code>, columna <code>Vista</code>, marcas de ultimo repo actualizado y el ajuste final del timestamp generado.",
-          "El flujo de cierre del diario queda cubierto por dos piezas compatibles: la skill <code>/update-claude</code> para Claude y la automatizacion <code>actualizar-diario-2</code> para Codex.",
-          "El diario mantiene una sola entrada para <code>2026-04-15</code> tanto en Markdown como en el HTML publico, con autoria compartida <code>Claude Code + Codex</code>."
+          "El flujo de cierre queda alineado con la regla pedida: guardar, subir a la nube, actualizar diario y dejar trazado quien lidero el ultimo cambio.",
+          "El diario publico pasa a mostrar la jornada del <code>15 de abril</code> firmada como <code>Codex</code>, sin mezcla con otras autorias en esta entrada.",
+          "<code>onboarding</code> queda preparado como referencia rapida para convivir entre Claude, Codex y Gemini CLI con una tabla unica de repos."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "En el entorno remoto de Claude Code fallo el commit firmado con <code>signing server returned status 400: missing source</code>, asi que la skill <code>/update-claude</code> ya contempla reintentar con <code>git -c commit.gpgsign=false</code>.",
-          "Durante este cierre desde Codex, el primer <code>git push origin HEAD:main</code> fue rechazado por fast-forward porque <code>origin/main</code> ya contenia varios commits nuevos del <code>15 de abril</code>, incluida la entrada previa de Claude.",
-          "El worktree de automatizacion no pudo usar <code>git rebase</code> ni <code>git switch</code> por restricciones de escritura sobre <code>.git/worktrees/...</code>, asi que la publicacion se resolvio construyendo el commit final directamente sobre <code>origin/main</code>."
+          "El clon local de <code>csilvasantin.github.io</code> sigue con cambios sin publicar y muy por detras de <code>origin/main</code>, asi que no se toco para no pisar trabajo pendiente.",
+          "El clon local habitual de <code>onboarding</code> tambien esta sucio y atrasado, por lo que la actualizacion se hizo desde un clon limpio temporal en <code>/tmp/onboarding-codex</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener una sola entrada por fecha y fusionar en el mismo <code>2026-04-15.md</code> la evidencia real de Claude y Codex.",
-          "Tratar <code>repos.html</code> como la novedad visible del dia porque domina el historial comprobado del repositorio.",
-          "Publicar el cierre como fast-forward sobre <code>origin/main</code>, sin forzar push ni sobrescribir la entrada ya existente del <code>15 de abril</code>."
+          "Mantener una sola entrada por fecha en el diario y sustituir la del <code>2026-04-15</code> por una version final firmada por <code>Codex</code>.",
+          "Reflejar <code>Codex</code> solo en los repos verificados y publicados hoy por esta sesion, sin reasignar autorias no comprobadas.",
+          "Usar clones limpios temporales para publicar <code>diario</code> y <code>onboarding</code> cuando los worktrees locales estan sucios."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo tras el push.",
-          "Seguir cerrando cada jornada en una sola fecha, tanto si entra por <code>/update-claude</code> como por <code>actualizar-diario-2</code>.",
-          "Mantener <code>repos.html</code> y <code>index.html</code> sincronizados cada vez que cambie la vista publica de repos."
+          "Esperar la propagacion de GitHub Pages y revisar <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a>.",
+          "En la proxima sesion, partir de la tabla de <code>CURRENT_STATE.md</code> para seguir el estado real de cada repo."
         ]
       }
     ]
