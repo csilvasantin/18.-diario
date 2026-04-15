@@ -56,37 +56,8 @@
     opacity: 0.5;
   }
 
-  #login {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    min-height: 100vh; gap: 16px;
-    position: relative; z-index: 2;
-  }
-  #login h1 {
-    font-size: 1.6rem;
-    color: var(--matrix-bright);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    text-shadow: 0 0 12px rgba(57, 255, 111, 0.35);
-  }
-  #login input {
-    padding: 12px 20px; font-size: 1rem; border: 1px solid var(--matrix-border); border-radius: 10px;
-    background: rgba(1, 16, 7, 0.9); color: var(--matrix-bright-soft); width: 280px; text-align: center;
-    box-shadow: inset 0 0 18px rgba(57, 255, 111, 0.05);
-  }
-  #login input:focus { outline: none; border-color: var(--matrix-bright); box-shadow: 0 0 0 4px rgba(57, 255, 111, 0.08); }
-  #login button {
-    padding: 10px 32px; font-size: 1rem; border: 1px solid rgba(57, 255, 111, 0.35); border-radius: 999px;
-    background: linear-gradient(180deg, rgba(21, 90, 42, 0.9), rgba(6, 44, 18, 0.95)); color: #effff4; cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(57, 255, 111, 0.12);
-  }
-  #login button:hover { filter: brightness(1.08); }
-  #error { color: var(--matrix-danger); font-size: 0.9rem; min-height: 1.2em; }
-
   #diary {
-    display: none;
+    display: block;
     max-width: 920px;
     margin: 0 auto;
     padding: 40px 20px 56px;
@@ -193,13 +164,6 @@
 <body>
 <canvas id="matrix-canvas" aria-hidden="true"></canvas>
 
-<div id="login">
-  <h1>Diario privado</h1>
-  <input type="password" id="pwd" placeholder="Contraseña" autofocus>
-  <button onclick="unlock()">Entrar</button>
-  <div id="error"></div>
-</div>
-
 <div id="diary">
   <nav>
     <h1>Diario</h1>
@@ -209,21 +173,7 @@
   <div id="entries"></div>
 </div>
 
-<!--
-  Entries are stored as encrypted blobs.
-  To add a new entry: encrypt with the same password using AES.
-  The build script handles this automatically.
--->
-<script id="encrypted-data" type="application/json">null</script>
-
 <script>
-// Hash of the password for quick validation
-const HASH = "b0f2c5e8a1d94367b8e2f1a0c3d5e7f9";
-
-function isLocalAccess() {
-  return ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
-}
-
 const entries = [
   {
     date: "2026-03-15",
@@ -1192,28 +1142,7 @@ const entries = [
   }
 ];
 
-function unlock() {
-  const pwd = document.getElementById("pwd").value;
-  if (pwd === atob("Tm9tZWFjdWVyZDA=")) {
-    openDiary();
-  } else {
-    document.getElementById("error").textContent = "Contraseña incorrecta";
-  }
-}
-
-function openDiary() {
-  document.getElementById("login").style.display = "none";
-  document.getElementById("diary").style.display = "block";
-  renderDiary();
-}
-
-document.getElementById("pwd").addEventListener("keydown", function(e) {
-  if (e.key === "Enter") unlock();
-});
-
-if (isLocalAccess()) {
-  openDiary();
-}
+renderDiary();
 
 function renderDiary() {
   const selector = document.getElementById("entry-selector");
