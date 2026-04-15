@@ -75,16 +75,33 @@
   }
   #diary nav h1 {
     font-size: 1.6rem;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     color: var(--matrix-bright);
     text-transform: uppercase;
     letter-spacing: 0.14em;
     text-shadow: 0 0 18px rgba(57, 255, 111, 0.18);
   }
+  .nav-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 6px 16px;
+    font-family: inherit; font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; cursor: pointer;
+    border: 1px solid rgba(0,255,110,0.35); border-radius: 999px;
+    background: transparent; color: var(--matrix-muted);
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { color: var(--matrix-bright); border-color: var(--matrix-bright); }
+  .filter-btn.active {
+    background: var(--matrix-bright); color: #020703;
+    border-color: var(--matrix-bright);
+    box-shadow: 0 0 10px rgba(57,255,111,0.35);
+  }
   #entry-selector {
-    width: min(320px, 100%);
-    padding: 10px 14px;
-    font-size: 0.95rem;
+    width: min(260px, 100%);
+    padding: 7px 12px;
+    font-size: 0.88rem;
     border: 1px solid var(--matrix-border);
     border-radius: 10px;
     background: rgba(0, 16, 8, 0.92);
@@ -167,8 +184,13 @@
 <div id="diary">
   <nav>
     <h1>Diario</h1>
-    <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
-    <a href="repos.html" style="margin-left:auto;color:var(--matrix-muted);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:color 0.15s" onmouseover="this.style.color='var(--matrix-bright)'" onmouseout="this.style.color='var(--matrix-muted)'">repos →</a>
+    <div class="nav-row">
+      <button class="filter-btn active" data-filter="">Todos</button>
+      <button class="filter-btn" data-filter="Claude">Claude</button>
+      <button class="filter-btn" data-filter="Codex">Codex</button>
+      <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
+      <a href="repos.html" style="margin-left:auto;color:var(--matrix-muted);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:color 0.15s" onmouseover="this.style.color='var(--matrix-bright)'" onmouseout="this.style.color='var(--matrix-muted)'">repos →</a>
+    </div>
   </nav>
   <div id="entries"></div>
 </div>
@@ -1142,23 +1164,15 @@ const entries = [
   }
 ];
 
-renderDiary();
+let activeFilter = "";
 
-function renderDiary() {
-  const selector = document.getElementById("entry-selector");
+// Build all entry divs once
+(function buildEntries() {
   const container = document.getElementById("entries");
-
   entries.forEach((entry, i) => {
-    const option = document.createElement("option");
-    option.value = String(i);
-    option.textContent = entry.date;
-    selector.appendChild(option);
-
-    // Entry
     const div = document.createElement("div");
     div.className = "entry";
     div.id = "entry-" + i;
-
     let html = "<h1>Diario - " + entry.title + "</h1>";
     entry.sections.forEach((s, si) => {
       const badge = (si === 0 && entry.author)
@@ -1168,23 +1182,55 @@ function renderDiary() {
       s.items.forEach(item => { html += "<li>" + item + "</li>"; });
       html += "</ul>";
     });
-
     div.innerHTML = html;
     container.appendChild(div);
   });
+})();
 
-  selector.addEventListener("change", (event) => {
-    showEntry(Number(event.target.value));
+function getFiltered() {
+  if (!activeFilter) return entries.map((_, i) => i);
+  return entries.reduce((acc, e, i) => {
+    if (e.author && e.author.toLowerCase().includes(activeFilter.toLowerCase())) acc.push(i);
+    return acc;
+  }, []);
+}
+
+function rebuildSelector(filtered, showIdx) {
+  const selector = document.getElementById("entry-selector");
+  selector.innerHTML = "";
+  filtered.forEach(i => {
+    const opt = document.createElement("option");
+    opt.value = String(i);
+    opt.textContent = entries[i].date;
+    selector.appendChild(opt);
   });
-
-  showEntry(entries.length - 1);
+  const target = filtered.includes(showIdx) ? showIdx : filtered[filtered.length - 1];
+  showEntry(target);
 }
 
 function showEntry(idx) {
   document.querySelectorAll(".entry").forEach(e => e.classList.remove("active"));
-  document.getElementById("entry-" + idx).classList.add("active");
+  const div = document.getElementById("entry-" + idx);
+  if (div) div.classList.add("active");
   document.getElementById("entry-selector").value = String(idx);
 }
+
+document.getElementById("entry-selector").addEventListener("change", e => {
+  showEntry(Number(e.target.value));
+});
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+    const filtered = getFiltered();
+    rebuildSelector(filtered, filtered[filtered.length - 1]);
+  });
+});
+
+// Init: show all, last entry
+rebuildSelector(getFiltered(), entries.length - 1);
 
 (function startMatrixBackground() {
   const canvas = document.getElementById("matrix-canvas");
