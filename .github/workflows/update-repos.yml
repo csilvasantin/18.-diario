@@ -27,12 +27,35 @@ jobs:
 
           def api(url):
               req = urllib.request.Request(url, headers=HEADERS)
-              with urllib.request.urlopen(req) as r:
-                  return json.loads(r.read())
+              try:
+                  with urllib.request.urlopen(req) as r:
+                      return json.loads(r.read()), r.headers.get('Link','')
+              except:
+                  return None, ''
+
+          def api_json(url):
+              d, _ = api(url); return d or []
 
           # Fechas de todos los repos
-          repos = api('https://api.github.com/users/csilvasantin/repos?per_page=100&sort=updated')
+          repos = api_json('https://api.github.com/users/csilvasantin/repos?per_page=100&sort=updated')
           fechas = {r['name']: r['updated_at'][:10] for r in repos}
+
+          def total_commits(repo):
+              import re
+              _, link = api(f'https://api.github.com/repos/csilvasantin/{repo}/commits?per_page=1')
+              if 'rel="last"' in link:
+                  m = re.search(r'page=(\d+)>; rel="last"', link)
+                  return int(m.group(1)) if m else 1
+              return 1
+
+          def recent_pushes(repo):
+              since = (datetime.datetime.utcnow() - datetime.timedelta(days=7)).strftime('%Y-%m-%dT%H:%M:%SZ')
+              d = api_json(f'https://api.github.com/repos/csilvasantin/{repo}/commits?since={since}&per_page=100')
+              return len(d) if isinstance(d, list) else 0
+
+          def get_clones(repo):
+              d, _ = api(f'https://api.github.com/repos/csilvasantin/{repo}/traffic/clones')
+              return d.get('count', 0) if d else 0
 
           # Lista de proyectos: (num, repo, nombre_correcto, url_publica)
           PROYECTOS = [
@@ -68,6 +91,14 @@ jobs:
                   td_url = f'<td class="url"><a href="{url}" target="_blank">{short}</a></td>'
               else:
                   td_url = '<td class="url none">—</td>'
+              commits = total_commits(repo)
+              push7d  = recent_pushes(repo)
+              clones  = get_clones(repo)
+              td_commits  = f'<td class="commits">{commits}</td>'
+              td_activity = (f'<td class="activity">'
+                             f'<span class="push">↑{push7d}</span> '
+                             f'<span class="pull">↓{clones}</span>'
+                             f'</td>')
               return (
                   f'        <tr>'
                   f'<td class="num">{num_fmt}</td>'
@@ -76,6 +107,8 @@ jobs:
                   f'<td class="{cls_fecha}">{fecha}</td>'
                   f'<td class="claude">✅</td>'
                   f'{td_url}'
+                  f'{td_commits}'
+                  f'{td_activity}'
                   f'</tr>'
               )
 
@@ -180,6 +213,9 @@ jobs:
                     <th data-col="2"><div class="th-label">Nombre correcto<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
                     <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
                     <th data-col="4"><div class="th-label">CLAUDE.md<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+                    <th data-col="5"><div class="th-label">URL p&#250;blica<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+                    <th data-col="6"><div class="th-label">Commits<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+                    <th data-col="7"><div class="th-label">&#x2191;7d / &#x2193;14d<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
                   </tr>
                 </thead>
                 <tbody id="tbody">
