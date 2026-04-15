@@ -8,172 +8,77 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
   :root {
-    --bg: #020703;
-    --panel: rgba(6,19,10,0.88);
-    --border: rgba(0,255,110,0.18);
-    --text: #b7f7c7;
-    --muted: #5ca772;
-    --bright: #39ff6f;
-    --dim: rgba(0,255,110,0.06);
+    --bg:#020703; --panel:rgba(6,19,10,0.88); --border:rgba(0,255,110,0.18);
+    --text:#b7f7c7; --muted:#5ca772; --bright:#39ff6f;
   }
   body {
-    font-family: 'Share Tech Mono', ui-monospace, monospace;
-    background:
-      radial-gradient(circle at top, rgba(30,100,45,0.2), transparent 32%),
-      linear-gradient(180deg, #04110a 0%, #020703 100%);
-    color: var(--text);
-    min-height: 100vh;
-    letter-spacing: 0.02em;
-    overflow-x: hidden;
+    font-family:'Share Tech Mono',ui-monospace,monospace;
+    background: radial-gradient(circle at top,rgba(30,100,45,0.2),transparent 32%),
+                linear-gradient(180deg,#04110a 0%,#020703 100%);
+    color:var(--text); min-height:100vh; letter-spacing:0.02em; overflow-x:hidden;
   }
   body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 100% 4px;
-    opacity: 0.08;
-    z-index: 0;
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px);
+    background-size:100% 4px; opacity:0.08; z-index:0;
   }
-  #matrix-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.4;
-  }
-  #app {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 28px 20px 60px;
-  }
+  #matrix-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.4; }
+  #app { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:28px 20px 60px; }
   nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 20px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(8px);
+    display:flex; align-items:center; gap:20px;
+    background:var(--panel); border:1px solid var(--border); border-radius:14px;
+    padding:14px 20px; margin-bottom:20px; backdrop-filter:blur(8px);
   }
-  nav h1 {
-    font-size: 1rem;
-    color: var(--bright);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  nav .sep { color: var(--muted); }
-  nav a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.82rem;
-    transition: color 0.15s;
-  }
-  nav a:hover { color: var(--bright); }
-  .meta {
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-left: auto;
-    white-space: nowrap;
-  }
+  nav h1 { font-size:1rem; color:var(--bright); letter-spacing:3px; text-transform:uppercase; white-space:nowrap; }
+  nav .sep { color:var(--muted); }
+  nav a { color:var(--muted); text-decoration:none; font-size:0.82rem; transition:color 0.15s; }
+  nav a:hover { color:var(--bright); }
+  .meta { font-size:0.72rem; color:var(--muted); margin-left:auto; white-space:nowrap; }
   .table-wrap {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    backdrop-filter: blur(8px);
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:14px; overflow:hidden; backdrop-filter:blur(8px);
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8rem;
-  }
+  table { width:100%; border-collapse:collapse; font-size:0.8rem; }
   thead th {
-    background: rgba(0,0,0,0.3);
-    color: var(--bright);
-    border-bottom: 1px solid var(--border);
-    padding: 0;
-    white-space: nowrap;
-    user-select: none;
+    background:rgba(0,0,0,0.3); color:var(--bright);
+    border-bottom:1px solid var(--border); padding:0; white-space:nowrap; user-select:none;
   }
-  .th-label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 14px 5px;
-    cursor: pointer;
-    transition: color 0.15s;
-  }
-  .th-label:hover { color: #fff; }
-  .sort-icon { font-size: 0.6rem; color: rgba(0,255,110,0.3); }
-  th.asc  .sort-icon::after { content: '▲'; color: var(--bright); }
-  th.desc .sort-icon::after { content: '▼'; color: var(--bright); }
-  th:not(.asc):not(.desc) .sort-icon::after { content: '⇅'; }
+  .th-label { display:flex; align-items:center; gap:6px; padding:10px 14px 5px; cursor:pointer; transition:color 0.15s; }
+  .th-label:hover { color:#fff; }
+  .sort-icon { font-size:0.6rem; color:rgba(0,255,110,0.3); }
+  th.asc  .sort-icon::after { content:'▲'; color:var(--bright); }
+  th.desc .sort-icon::after { content:'▼'; color:var(--bright); }
+  th:not(.asc):not(.desc) .sort-icon::after { content:'⇅'; }
   thead th input {
-    display: block;
-    width: 100%;
-    background: rgba(0,0,0,0.2);
-    border: none;
-    border-top: 1px solid rgba(0,255,110,0.08);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 0.7rem;
-    padding: 4px 14px 6px;
-    outline: none;
-    letter-spacing: 0.02em;
+    display:block; width:100%; background:rgba(0,0,0,0.2);
+    border:none; border-top:1px solid rgba(0,255,110,0.08);
+    color:var(--text); font-family:inherit; font-size:0.7rem;
+    padding:4px 14px 6px; outline:none; letter-spacing:0.02em;
   }
-  thead th input::placeholder { color: rgba(92,167,114,0.4); }
-  thead th input:focus { background: rgba(0,255,110,0.04); }
-  tbody tr {
-    border-bottom: 1px solid rgba(0,255,110,0.06);
-    transition: background 0.1s;
-  }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: rgba(0,255,110,0.04); }
-  tbody td { padding: 8px 14px; vertical-align: middle; }
-  td.num {
-    color: var(--bright);
-    font-size: 0.85rem;
-    font-weight: bold;
-    text-align: center;
-    width: 54px;
-  }
-  td.repo a {
-    color: #88ccff;
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-  td.repo a:hover { color: #fff; text-decoration: underline; }
-  td.nombre { color: var(--muted); font-size: 0.73rem; }
-  td.nombre.ok { color: rgba(92,167,114,0.45); font-style: italic; }
-  td.fecha {
-    color: var(--muted);
-    text-align: center;
-    font-size: 0.75rem;
-    white-space: nowrap;
-  }
-  td.fecha.today { color: var(--bright); }
-  td.claude { text-align: center; font-size: 0.9rem; }
-  .count {
-    font-size: 0.72rem;
-    color: var(--muted);
-    text-align: right;
-    padding: 8px 14px;
-    border-top: 1px solid var(--border);
-  }
-  tr.hidden { display: none; }
-  @media (max-width: 640px) {
-    td.nombre { display: none; }
-    thead th:nth-child(3) { display: none; }
-  }
+  thead th input::placeholder { color:rgba(92,167,114,0.4); }
+  thead th input:focus { background:rgba(0,255,110,0.04); }
+  tbody tr { border-bottom:1px solid rgba(0,255,110,0.06); transition:background 0.1s; }
+  tbody tr:last-child { border-bottom:none; }
+  tbody tr:hover { background:rgba(0,255,110,0.04); }
+  tbody td { padding:8px 14px; vertical-align:middle; }
+  td.num { color:var(--bright); font-size:0.85rem; font-weight:bold; text-align:center; width:54px; }
+  td.repo a { color:#88ccff; text-decoration:none; transition:color 0.15s; }
+  td.repo a:hover { color:#fff; text-decoration:underline; }
+  td.nombre { color:var(--muted); font-size:0.73rem; }
+  td.nombre.ok { color:rgba(92,167,114,0.35); font-style:italic; }
+  td.fecha { color:var(--muted); text-align:center; font-size:0.75rem; white-space:nowrap; }
+  td.fecha.today { color:var(--bright); }
+  td.claude { text-align:center; font-size:0.9rem; }
+  td.url { font-size:0.72rem; }
+  td.url a { color:#aaffcc; text-decoration:none; transition:color 0.15s; }
+  td.url a:hover { color:#fff; text-decoration:underline; }
+  td.url.none { color:rgba(92,167,114,0.3); text-align:center; }
+  .count { font-size:0.72rem; color:var(--muted); text-align:right; padding:8px 14px; border-top:1px solid var(--border); }
+  tr.hidden { display:none; }
+  @media (max-width:900px) { td.nombre, thead th:nth-child(3) { display:none; } }
+  @media (max-width:600px) { td.url, thead th:nth-child(6) { display:none; } }
 </style>
 </head>
 <body>
@@ -190,33 +95,34 @@
     <table id="t">
       <thead>
         <tr id="headers">
-          <th data-col="0"><div class="th-label">#<span class="sort-icon"></span></div><input placeholder="nº" /></th>
-          <th data-col="1"><div class="th-label">Repo<span class="sort-icon"></span></div><input placeholder="filtrar..." /></th>
-          <th data-col="2"><div class="th-label">Nombre correcto<span class="sort-icon"></span></div><input placeholder="filtrar..." /></th>
-          <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div><input placeholder="filtrar..." /></th>
-          <th data-col="4"><div class="th-label">CLAUDE.md<span class="sort-icon"></span></div><input placeholder="filtrar..." /></th>
+          <th data-col="0"><div class="th-label">#<span class="sort-icon"></span></div><input placeholder="nº"/></th>
+          <th data-col="1"><div class="th-label">Repo<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+          <th data-col="2"><div class="th-label">Nombre correcto<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+          <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+          <th data-col="4"><div class="th-label">CLAUDE.md<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+          <th data-col="5"><div class="th-label">URL pública<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
         </tr>
       </thead>
       <tbody id="tbody">
-        <tr><td class="num">00</td><td class="repo"><a href="https://github.com/csilvasantin/EmpezarTrabajo" target="_blank">EmpezarTrabajo</a></td><td class="nombre">00.-EmpezarTrabajo</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
-        <tr><td class="num">01</td><td class="repo"><a href="https://github.com/csilvasantin/01.-AdmiraXperience-Game" target="_blank">01.-AdmiraXperience-Game</a></td><td class="nombre ok">— ya correcto —</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
-        <tr><td class="num">02</td><td class="repo"><a href="https://github.com/csilvasantin/02.-YarigTelegram" target="_blank">02.-YarigTelegram</a></td><td class="nombre ok">— ya correcto —</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
-        <tr><td class="num">03</td><td class="repo"><a href="https://github.com/csilvasantin/03-ControlCodexClaude" target="_blank">03-ControlCodexClaude</a></td><td class="nombre">03.-ControlCodexClaude</td><td class="fecha">2026-04-12</td><td class="claude">✅</td></tr>
-        <tr><td class="num">10</td><td class="repo"><a href="https://github.com/csilvasantin/Yarig.aiTheGame" target="_blank">Yarig.aiTheGame</a></td><td class="nombre">10.-Yarig.aiTheGame</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
-        <tr><td class="num">15</td><td class="repo"><a href="https://github.com/csilvasantin/Control-de-Tienda" target="_blank">Control-de-Tienda</a></td><td class="nombre">15.-Control-de-Tienda</td><td class="fecha">2026-04-11</td><td class="claude">✅</td></tr>
-        <tr><td class="num">16</td><td class="repo"><a href="https://github.com/csilvasantin/pulpo" target="_blank">pulpo</a></td><td class="nombre">16.-pulpo</td><td class="fecha">2026-04-11</td><td class="claude">✅</td></tr>
-        <tr><td class="num">17</td><td class="repo"><a href="https://github.com/csilvasantin/Memorizer" target="_blank">Memorizer</a></td><td class="nombre">17.-Memorizer</td><td class="fecha">2026-04-12</td><td class="claude">✅</td></tr>
-        <tr><td class="num">18</td><td class="repo"><a href="https://github.com/csilvasantin/diario" target="_blank">diario</a></td><td class="nombre">18.-diario</td><td class="fecha">2026-04-14</td><td class="claude">✅</td></tr>
-        <tr><td class="num">20</td><td class="repo"><a href="https://github.com/csilvasantin/ClaudeBot" target="_blank">ClaudeBot</a></td><td class="nombre">20.-ClaudeBot</td><td class="fecha">2026-04-11</td><td class="claude">✅</td></tr>
-        <tr><td class="num">21</td><td class="repo"><a href="https://github.com/csilvasantin/CodexBot" target="_blank">CodexBot</a></td><td class="nombre">21.-CodexBot</td><td class="fecha">2026-04-11</td><td class="claude">✅</td></tr>
-        <tr><td class="num">24</td><td class="repo"><a href="https://github.com/csilvasantin/Emulador-de-Spectrum" target="_blank">Emulador-de-Spectrum</a></td><td class="nombre">24.-Emulador-de-Spectrum</td><td class="fecha">2026-04-11</td><td class="claude">✅</td></tr>
-        <tr><td class="num">29</td><td class="repo"><a href="https://github.com/csilvasantin/AenaJones" target="_blank">AenaJones</a></td><td class="nombre">29.-AenaJones</td><td class="fecha">2026-04-11</td><td class="claude">✅</td></tr>
-        <tr><td class="num">30</td><td class="repo"><a href="https://github.com/csilvasantin/AenaMallorca" target="_blank">AenaMallorca</a></td><td class="nombre">30.-AenaMallorca</td><td class="fecha">2026-04-11</td><td class="claude">✅</td></tr>
-        <tr><td class="num">31</td><td class="repo"><a href="https://github.com/csilvasantin/csilvasantin.github.io" target="_blank">csilvasantin.github.io</a></td><td class="nombre">31.-csilvasantin.github.io</td><td class="fecha">2026-04-13</td><td class="claude">✅</td></tr>
-        <tr><td class="num">32</td><td class="repo"><a href="https://github.com/csilvasantin/ConsejoAdmiraNextGame" target="_blank">ConsejoAdmiraNextGame</a></td><td class="nombre">32.-ConsejoAdmiraNextGame</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
-        <tr><td class="num">33</td><td class="repo"><a href="https://github.com/csilvasantin/AdmiraGrok" target="_blank">AdmiraGrok</a></td><td class="nombre">33.-AdmiraGrok</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
-        <tr><td class="num">34</td><td class="repo"><a href="https://github.com/csilvasantin/signage-editor" target="_blank">signage-editor</a></td><td class="nombre">34.-signage-editor</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
-        <tr><td class="num">35</td><td class="repo"><a href="https://github.com/csilvasantin/signage-editor-final" target="_blank">signage-editor-final</a></td><td class="nombre">35.-signage-editor-final</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td></tr>
+        <tr><td class="num">00</td><td class="repo"><a href="https://github.com/csilvasantin/EmpezarTrabajo" target="_blank">EmpezarTrabajo</a></td><td class="nombre">00.-EmpezarTrabajo</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/EmpezarTrabajo/" target="_blank">csilvasantin.github.io/EmpezarTrabajo/</a></td></tr>
+        <tr><td class="num">01</td><td class="repo"><a href="https://github.com/csilvasantin/01.-AdmiraXperience-Game" target="_blank">01.-AdmiraXperience-Game</a></td><td class="nombre ok">— ya correcto —</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/01.-AdmiraXperience-Game/" target="_blank">csilvasantin.github.io/01.-AdmiraXperience-Game/</a></td></tr>
+        <tr><td class="num">02</td><td class="repo"><a href="https://github.com/csilvasantin/02.-YarigTelegram" target="_blank">02.-YarigTelegram</a></td><td class="nombre ok">— ya correcto —</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url none">—</td></tr>
+        <tr><td class="num">03</td><td class="repo"><a href="https://github.com/csilvasantin/03-ControlCodexClaude" target="_blank">03-ControlCodexClaude</a></td><td class="nombre">03.-ControlCodexClaude</td><td class="fecha">2026-04-12</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/03-ControlCodexClaude/" target="_blank">csilvasantin.github.io/03-ControlCodexClaude/</a></td></tr>
+        <tr><td class="num">10</td><td class="repo"><a href="https://github.com/csilvasantin/Yarig.aiTheGame" target="_blank">Yarig.aiTheGame</a></td><td class="nombre">10.-Yarig.aiTheGame</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url none">—</td></tr>
+        <tr><td class="num">15</td><td class="repo"><a href="https://github.com/csilvasantin/Control-de-Tienda" target="_blank">Control-de-Tienda</a></td><td class="nombre">15.-Control-de-Tienda</td><td class="fecha">2026-04-11</td><td class="claude">✅</td><td class="url none">—</td></tr>
+        <tr><td class="num">16</td><td class="repo"><a href="https://github.com/csilvasantin/pulpo" target="_blank">pulpo</a></td><td class="nombre">16.-pulpo</td><td class="fecha">2026-04-11</td><td class="claude">✅</td><td class="url none">—</td></tr>
+        <tr><td class="num">17</td><td class="repo"><a href="https://github.com/csilvasantin/Memorizer" target="_blank">Memorizer</a></td><td class="nombre">17.-Memorizer</td><td class="fecha">2026-04-12</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/Memorizer/" target="_blank">csilvasantin.github.io/Memorizer/</a></td></tr>
+        <tr><td class="num">18</td><td class="repo"><a href="https://github.com/csilvasantin/diario" target="_blank">diario</a></td><td class="nombre">18.-diario</td><td class="fecha">2026-04-15</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/diario/" target="_blank">csilvasantin.github.io/diario/</a></td></tr>
+        <tr><td class="num">20</td><td class="repo"><a href="https://github.com/csilvasantin/ClaudeBot" target="_blank">ClaudeBot</a></td><td class="nombre">20.-ClaudeBot</td><td class="fecha">2026-04-11</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/ClaudeBot/" target="_blank">csilvasantin.github.io/ClaudeBot/</a></td></tr>
+        <tr><td class="num">21</td><td class="repo"><a href="https://github.com/csilvasantin/CodexBot" target="_blank">CodexBot</a></td><td class="nombre">21.-CodexBot</td><td class="fecha">2026-04-11</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/CodexBot/" target="_blank">csilvasantin.github.io/CodexBot/</a></td></tr>
+        <tr><td class="num">24</td><td class="repo"><a href="https://github.com/csilvasantin/Emulador-de-Spectrum" target="_blank">Emulador-de-Spectrum</a></td><td class="nombre">24.-Emulador-de-Spectrum</td><td class="fecha">2026-04-11</td><td class="claude">✅</td><td class="url none">—</td></tr>
+        <tr><td class="num">29</td><td class="repo"><a href="https://github.com/csilvasantin/AenaJones" target="_blank">AenaJones</a></td><td class="nombre">29.-AenaJones</td><td class="fecha">2026-04-11</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/AenaJones/" target="_blank">csilvasantin.github.io/AenaJones/</a></td></tr>
+        <tr><td class="num">30</td><td class="repo"><a href="https://github.com/csilvasantin/AenaMallorca" target="_blank">AenaMallorca</a></td><td class="nombre">30.-AenaMallorca</td><td class="fecha">2026-04-11</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/AenaMallorca/" target="_blank">csilvasantin.github.io/AenaMallorca/</a></td></tr>
+        <tr><td class="num">31</td><td class="repo"><a href="https://github.com/csilvasantin/csilvasantin.github.io" target="_blank">csilvasantin.github.io</a></td><td class="nombre">31.-csilvasantin.github.io</td><td class="fecha">2026-04-13</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/" target="_blank">csilvasantin.github.io/</a></td></tr>
+        <tr><td class="num">32</td><td class="repo"><a href="https://github.com/csilvasantin/ConsejoAdmiraNextGame" target="_blank">ConsejoAdmiraNextGame</a></td><td class="nombre">32.-ConsejoAdmiraNextGame</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/ConsejoAdmiraNextGame/" target="_blank">csilvasantin.github.io/ConsejoAdmiraNextGame/</a></td></tr>
+        <tr><td class="num">33</td><td class="repo"><a href="https://github.com/csilvasantin/AdmiraGrok" target="_blank">AdmiraGrok</a></td><td class="nombre">33.-AdmiraGrok</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/AdmiraGrok/" target="_blank">csilvasantin.github.io/AdmiraGrok/</a></td></tr>
+        <tr><td class="num">34</td><td class="repo"><a href="https://github.com/csilvasantin/signage-editor" target="_blank">signage-editor</a></td><td class="nombre">34.-signage-editor</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url none">—</td></tr>
+        <tr><td class="num">35</td><td class="repo"><a href="https://github.com/csilvasantin/signage-editor-final" target="_blank">signage-editor-final</a></td><td class="nombre">35.-signage-editor-final</td><td class="fecha today">2026-04-15</td><td class="claude">✅</td><td class="url"><a href="https://csilvasantin.github.io/signage-editor-final/" target="_blank">csilvasantin.github.io/signage-editor-final/</a></td></tr>
       </tbody>
     </table>
     <div class="count" id="count">19 repos</div>
@@ -224,77 +130,40 @@
 </div>
 
 <script>
-  // Matrix rain background
-  (function() {
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-    const glyphs = "01アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]<>/*+-=";
-    const fontSize = 14;
-    let columns = 0, drops = [];
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      columns = Math.floor(canvas.width / fontSize);
-      drops = Array(columns).fill(1);
-    }
-    function draw() {
-      ctx.fillStyle = 'rgba(2,7,3,0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#39ff6f';
-      ctx.font = fontSize + 'px Share Tech Mono, monospace';
-      drops.forEach((y, i) => {
-        const ch = glyphs[Math.floor(Math.random() * glyphs.length)];
-        ctx.fillText(ch, i * fontSize, y * fontSize);
-        if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      });
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    setInterval(draw, 50);
+  (function(){
+    const canvas=document.getElementById('matrix-canvas'),ctx=canvas.getContext('2d');
+    const glyphs="01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]<>/*+-=";
+    const fs=14; let cols=0,drops=[];
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;cols=Math.floor(canvas.width/fs);drops=Array(cols).fill(1);}
+    function draw(){ctx.fillStyle='rgba(2,7,3,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#39ff6f';ctx.font=fs+'px Share Tech Mono,monospace';drops.forEach((y,i)=>{const ch=glyphs[Math.floor(Math.random()*glyphs.length)];ctx.fillText(ch,i*fs,y*fs);if(y*fs>canvas.height&&Math.random()>0.975)drops[i]=0;drops[i]++;});}
+    resize(); window.addEventListener('resize',resize); setInterval(draw,50);
   })();
 
-  // Sort & filter
-  const tbody = document.getElementById('tbody');
-  const headers = document.querySelectorAll('#headers th');
-  let sortCol = -1, sortDir = 1;
-
-  headers.forEach(th => {
-    th.querySelector('.th-label').addEventListener('click', () => {
-      const col = +th.dataset.col;
-      sortDir = (sortCol === col) ? sortDir * -1 : 1;
-      sortCol = col;
-      headers.forEach(h => h.classList.remove('asc','desc'));
-      th.classList.add(sortDir === 1 ? 'asc' : 'desc');
-      [...tbody.querySelectorAll('tr')]
-        .sort((a, b) => a.cells[col].textContent.trim().localeCompare(b.cells[col].textContent.trim(), 'es', {numeric:true}) * sortDir)
-        .forEach(r => tbody.appendChild(r));
+  const tbody=document.getElementById('tbody'),headers=document.querySelectorAll('#headers th');
+  let sCol=-1,sDir=1;
+  headers.forEach(th=>{
+    th.querySelector('.th-label').addEventListener('click',()=>{
+      const col=+th.dataset.col; sDir=(sCol===col)?sDir*-1:1; sCol=col;
+      headers.forEach(h=>h.classList.remove('asc','desc'));
+      th.classList.add(sDir===1?'asc':'desc');
+      [...tbody.querySelectorAll('tr')].sort((a,b)=>a.cells[col].textContent.trim().localeCompare(b.cells[col].textContent.trim(),'es',{numeric:true})*sDir).forEach(r=>tbody.appendChild(r));
       applyFilters();
     });
   });
-
-  document.querySelectorAll('#headers input').forEach((inp, i) => {
-    inp.addEventListener('input', applyFilters);
-    inp.addEventListener('click', e => e.stopPropagation());
+  document.querySelectorAll('#headers input').forEach(inp=>{
+    inp.addEventListener('input',applyFilters);
+    inp.addEventListener('click',e=>e.stopPropagation());
   });
-
-  function applyFilters() {
-    const filters = [...document.querySelectorAll('#headers input')].map(i => i.value.toLowerCase());
-    let visible = 0;
-    tbody.querySelectorAll('tr').forEach(row => {
-      const show = filters.every((f, i) => !f || row.cells[i].textContent.toLowerCase().includes(f));
-      row.classList.toggle('hidden', !show);
-      if (show) visible++;
-    });
-    document.getElementById('count').textContent = visible + ' repos';
+  function applyFilters(){
+    const f=[...document.querySelectorAll('#headers input')].map(i=>i.value.toLowerCase());
+    let v=0; tbody.querySelectorAll('tr').forEach(r=>{const ok=f.every((fi,i)=>!fi||r.cells[i].textContent.toLowerCase().includes(fi));r.classList.toggle('hidden',!ok);if(ok)v++;});
+    document.getElementById('count').textContent=v+' repos';
   }
 
-  // Mark today's date
-  const today = new Date().toISOString().slice(0,10);
-  document.getElementById('gen-date').textContent = 'generado ' + today;
-  document.querySelectorAll('td.fecha').forEach(td => {
-    if (td.textContent.trim() === today) td.classList.add('today');
-    else td.classList.remove('today');
+  const today=new Date().toISOString().slice(0,10);
+  document.getElementById('gen-date').textContent='generado '+today;
+  document.querySelectorAll('td.fecha').forEach(td=>{
+    td.classList.toggle('today', td.textContent.trim()===today);
   });
 </script>
 </body>

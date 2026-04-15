@@ -34,35 +34,40 @@ jobs:
           repos = api('https://api.github.com/users/csilvasantin/repos?per_page=100&sort=updated')
           fechas = {r['name']: r['updated_at'][:10] for r in repos}
 
-          # Lista de proyectos: (num, repo, nombre_correcto)
+          # Lista de proyectos: (num, repo, nombre_correcto, url_publica)
           PROYECTOS = [
-              ( 0, 'EmpezarTrabajo',            '00.-EmpezarTrabajo'),
-              ( 1, '01.-AdmiraXperience-Game',  None),
-              ( 2, '02.-YarigTelegram',          None),
-              ( 3, '03-ControlCodexClaude',      '03.-ControlCodexClaude'),
-              (10, 'Yarig.aiTheGame',             '10.-Yarig.aiTheGame'),
-              (15, 'Control-de-Tienda',           '15.-Control-de-Tienda'),
-              (16, 'pulpo',                       '16.-pulpo'),
-              (17, 'Memorizer',                   '17.-Memorizer'),
-              (18, 'diario',                      '18.-diario'),
-              (20, 'ClaudeBot',                   '20.-ClaudeBot'),
-              (21, 'CodexBot',                    '21.-CodexBot'),
-              (24, 'Emulador-de-Spectrum',        '24.-Emulador-de-Spectrum'),
-              (29, 'AenaJones',                   '29.-AenaJones'),
-              (30, 'AenaMallorca',                '30.-AenaMallorca'),
-              (31, 'csilvasantin.github.io',      '31.-csilvasantin.github.io'),
-              (32, 'ConsejoAdmiraNextGame',        '32.-ConsejoAdmiraNextGame'),
-              (33, 'AdmiraGrok',                  '33.-AdmiraGrok'),
-              (34, 'signage-editor',              '34.-signage-editor'),
-              (35, 'signage-editor-final',        '35.-signage-editor-final'),
+              ( 0, 'EmpezarTrabajo',           '00.-EmpezarTrabajo',          'https://csilvasantin.github.io/EmpezarTrabajo/'),
+              ( 1, '01.-AdmiraXperience-Game', None,                           'https://csilvasantin.github.io/01.-AdmiraXperience-Game/'),
+              ( 2, '02.-YarigTelegram',         None,                           None),
+              ( 3, '03-ControlCodexClaude',     '03.-ControlCodexClaude',      'https://csilvasantin.github.io/03-ControlCodexClaude/'),
+              (10, 'Yarig.aiTheGame',            '10.-Yarig.aiTheGame',         None),
+              (15, 'Control-de-Tienda',          '15.-Control-de-Tienda',       None),
+              (16, 'pulpo',                      '16.-pulpo',                   None),
+              (17, 'Memorizer',                  '17.-Memorizer',               'https://csilvasantin.github.io/Memorizer/'),
+              (18, 'diario',                     '18.-diario',                  'https://csilvasantin.github.io/diario/'),
+              (20, 'ClaudeBot',                  '20.-ClaudeBot',               'https://csilvasantin.github.io/ClaudeBot/'),
+              (21, 'CodexBot',                   '21.-CodexBot',                'https://csilvasantin.github.io/CodexBot/'),
+              (24, 'Emulador-de-Spectrum',       '24.-Emulador-de-Spectrum',    None),
+              (29, 'AenaJones',                  '29.-AenaJones',               'https://csilvasantin.github.io/AenaJones/'),
+              (30, 'AenaMallorca',               '30.-AenaMallorca',            'https://csilvasantin.github.io/AenaMallorca/'),
+              (31, 'csilvasantin.github.io',     '31.-csilvasantin.github.io',  'https://csilvasantin.github.io/'),
+              (32, 'ConsejoAdmiraNextGame',       '32.-ConsejoAdmiraNextGame',   'https://csilvasantin.github.io/ConsejoAdmiraNextGame/'),
+              (33, 'AdmiraGrok',                 '33.-AdmiraGrok',              'https://csilvasantin.github.io/AdmiraGrok/'),
+              (34, 'signage-editor',             '34.-signage-editor',          None),
+              (35, 'signage-editor-final',       '35.-signage-editor-final',    'https://csilvasantin.github.io/signage-editor-final/'),
           ]
 
-          def fila(num, repo, nombre):
+          def fila(num, repo, nombre, url):
               fecha = fechas.get(repo, '—')
               cls_fecha = 'fecha today' if fecha == TODAY else 'fecha'
               cls_nombre = 'nombre ok' if nombre is None else 'nombre'
               txt_nombre = '— ya correcto —' if nombre is None else nombre
               num_fmt = f'{num:02d}'
+              if url:
+                  short = url.replace('https://','')
+                  td_url = f'<td class="url"><a href="{url}" target="_blank">{short}</a></td>'
+              else:
+                  td_url = '<td class="url none">—</td>'
               return (
                   f'        <tr>'
                   f'<td class="num">{num_fmt}</td>'
@@ -70,6 +75,7 @@ jobs:
                   f'<td class="{cls_nombre}">{txt_nombre}</td>'
                   f'<td class="{cls_fecha}">{fecha}</td>'
                   f'<td class="claude">✅</td>'
+                  f'{td_url}'
                   f'</tr>'
               )
 
