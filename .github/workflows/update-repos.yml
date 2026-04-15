@@ -57,40 +57,44 @@ jobs:
               d, _ = api(f'https://api.github.com/repos/csilvasantin/{repo}/traffic/clones')
               return d.get('count', 0) if d else 0
 
-          # Lista de proyectos: (num, repo, nombre_correcto, url_publica)
+          # Lista de proyectos: (num, repo, url_publica)
           PROYECTOS = [
-              ( 0, 'EmpezarTrabajo',           '00.-EmpezarTrabajo',          'https://csilvasantin.github.io/EmpezarTrabajo/'),
-              ( 1, '01.-AdmiraXperience-Game', None,                           'https://csilvasantin.github.io/01.-AdmiraXperience-Game/'),
-              ( 2, '02.-YarigTelegram',         None,                           None),
-              ( 3, '03-ControlCodexClaude',     '03.-ControlCodexClaude',      'https://csilvasantin.github.io/03-ControlCodexClaude/'),
-              (10, 'Yarig.aiTheGame',            '10.-Yarig.aiTheGame',         None),
-              (15, 'Control-de-Tienda',          '15.-Control-de-Tienda',       None),
-              (16, 'pulpo',                      '16.-pulpo',                   None),
-              (17, 'Memorizer',                  '17.-Memorizer',               'https://csilvasantin.github.io/Memorizer/'),
-              (18, 'diario',                     '18.-diario',                  'https://csilvasantin.github.io/diario/'),
-              (20, 'ClaudeBot',                  '20.-ClaudeBot',               'https://csilvasantin.github.io/ClaudeBot/'),
-              (21, 'CodexBot',                   '21.-CodexBot',                'https://csilvasantin.github.io/CodexBot/'),
-              (24, 'Emulador-de-Spectrum',       '24.-Emulador-de-Spectrum',    None),
-              (29, 'AenaJones',                  '29.-AenaJones',               'https://csilvasantin.github.io/AenaJones/'),
-              (30, 'AenaMallorca',               '30.-AenaMallorca',            'https://csilvasantin.github.io/AenaMallorca/'),
-              (31, 'csilvasantin.github.io',     '31.-csilvasantin.github.io',  'https://csilvasantin.github.io/'),
-              (32, 'ConsejoAdmiraNextGame',       '32.-ConsejoAdmiraNextGame',   'https://csilvasantin.github.io/ConsejoAdmiraNextGame/'),
-              (33, 'AdmiraGrok',                 '33.-AdmiraGrok',              'https://csilvasantin.github.io/AdmiraGrok/'),
-              (34, 'signage-editor',             '34.-signage-editor',          None),
-              (35, 'signage-editor-final',       '35.-signage-editor-final',    'https://csilvasantin.github.io/signage-editor-final/'),
+              ( 0, '00.-EmpezarTrabajo',          'https://csilvasantin.github.io/00.-EmpezarTrabajo/'),
+              ( 1, '01.-AdmiraXperience-Game',    'https://csilvasantin.github.io/01.-AdmiraXperience-Game/'),
+              ( 2, '02.-YarigTelegram',           'https://csilvasantin.github.io/02.-YarigTelegram/'),
+              ( 3, '03.-ControlCodexClaude',      'https://csilvasantin.github.io/03.-ControlCodexClaude/'),
+              (10, '10.-Yarig.aiTheGame',         None),
+              (15, '15.-Control-de-Tienda',       'https://csilvasantin.github.io/15.-Control-de-Tienda/'),
+              (16, '16.-pulpo',                   'https://csilvasantin.github.io/16.-pulpo/'),
+              (17, '17.-Memorizer',               'https://csilvasantin.github.io/17.-Memorizer/'),
+              (18, '18.-diario',                  'https://csilvasantin.github.io/18.-diario/'),
+              (20, '20.-ClaudeBot',               'https://csilvasantin.github.io/20.-ClaudeBot/'),
+              (21, '21.-CodexBot',                'https://csilvasantin.github.io/21.-CodexBot/'),
+              (24, '24.-Emulador-de-Spectrum',    'https://csilvasantin.github.io/24.-Emulador-de-Spectrum/'),
+              (29, '29.-AenaJones',               'https://csilvasantin.github.io/29.-AenaJones/'),
+              (30, '30.-AenaMallorca',            'https://csilvasantin.github.io/30.-AenaMallorca/'),
+              (31, 'csilvasantin.github.io',      'https://csilvasantin.github.io/'),
+              (32, '32.-ConsejoAdmiraNextGame',   'https://csilvasantin.github.io/32.-ConsejoAdmiraNextGame/'),
+              (33, '33.-AdmiraGrok',              'https://csilvasantin.github.io/33.-AdmiraGrok/'),
+              (34, '34.-signage-editor',          None),
+              (35, '35.-signage-editor-final',    'https://csilvasantin.github.io/35.-signage-editor-final/'),
           ]
 
-          def fila(num, repo, nombre, url):
+          def fila(num, repo, url):
               fecha = fechas.get(repo, '—')
               cls_fecha = 'fecha today' if fecha == TODAY else 'fecha'
-              cls_nombre = 'nombre ok' if nombre is None else 'nombre'
-              txt_nombre = '— ya correcto —' if nombre is None else nombre
               num_fmt = f'{num:02d}'
               if url:
                   short = url.replace('https://','')
                   td_url = f'<td class="url"><a href="{url}" target="_blank">{short}</a></td>'
+                  td_thumb = (f'<td class="thumb"><a href="{url}" target="_blank">'
+                              f'<img src="https://image.thum.io/get/width/160/crop/100/noanimate/{url}" '
+                              f'alt="{repo}" loading="lazy"/></a></td>')
               else:
                   td_url = '<td class="url none">—</td>'
+                  td_thumb = (f'<td class="thumb"><a href="https://github.com/csilvasantin/{repo}" target="_blank">'
+                              f'<img src="https://opengraph.githubassets.com/1/csilvasantin/{repo}" '
+                              f'alt="{repo}" loading="lazy"/></a></td>')
               commits = total_commits(repo)
               push7d  = recent_pushes(repo)
               clones  = get_clones(repo)
@@ -102,8 +106,8 @@ jobs:
               return (
                   f'        <tr>'
                   f'<td class="num">{num_fmt}</td>'
+                  f'{td_thumb}'
                   f'<td class="repo"><a href="https://github.com/csilvasantin/{repo}" target="_blank">{repo}</a></td>'
-                  f'<td class="{cls_nombre}">{txt_nombre}</td>'
                   f'<td class="{cls_fecha}">{fecha}</td>'
                   f'<td class="claude">✅</td>'
                   f'{td_url}'
@@ -142,7 +146,7 @@ jobs:
               background-size:100% 4px; opacity:0.08; z-index:0;
             }}
             #matrix-canvas {{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.4; }}
-            #app {{ position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:28px 20px 60px; }}
+            #app {{ position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:28px 20px 60px; }}
             nav {{
               display:flex; align-items:center; gap:20px;
               background:var(--panel); border:1px solid var(--border); border-radius:14px;
@@ -183,16 +187,26 @@ jobs:
             td.num {{ color:var(--bright); font-size:0.85rem; font-weight:bold; text-align:center; width:54px; }}
             td.repo a {{ color:#88ccff; text-decoration:none; transition:color 0.15s; }}
             td.repo a:hover {{ color:#fff; text-decoration:underline; }}
-            td.nombre {{ color:var(--muted); font-size:0.73rem; }}
-            td.nombre.ok {{ color:rgba(92,167,114,0.45); font-style:italic; }}
             td.fecha {{ color:var(--muted); text-align:center; font-size:0.75rem; white-space:nowrap; }}
             td.fecha.today {{ color:var(--bright); }}
             td.claude {{ text-align:center; font-size:0.9rem; }}
+            td.url {{ font-size:0.72rem; }}
+            td.url a {{ color:#aaffcc; text-decoration:none; transition:color 0.15s; }}
+            td.url a:hover {{ color:#fff; text-decoration:underline; }}
+            td.url.none {{ color:rgba(92,167,114,0.3); text-align:center; }}
+            td.thumb {{ width:88px; padding:4px 8px; vertical-align:middle; }}
+            td.thumb img {{ width:80px; height:50px; object-fit:cover; object-position:top left; border-radius:5px; border:1px solid rgba(0,255,110,0.15); display:block; background:#031a09; transition:transform 0.15s; }}
+            td.thumb img:hover {{ transform:scale(1.05); border-color:rgba(0,255,110,0.4); }}
+            td.commits {{ color:var(--muted); text-align:center; font-size:0.78rem; font-variant-numeric:tabular-nums; }}
+            td.activity {{ text-align:center; font-size:0.72rem; white-space:nowrap; color:var(--muted); }}
+            td.activity .push {{ color:#88ccff; }}
+            td.activity .pull {{ color:#aaffcc; }}
             .count {{ font-size:0.72rem; color:var(--muted); text-align:right; padding:8px 14px; border-top:1px solid var(--border); }}
             tr.hidden {{ display:none; }}
-            @media (max-width:640px) {{
-              td.nombre, thead th:nth-child(3) {{ display:none; }}
-            }}
+            @media (max-width:700px) {{ td.thumb, thead th:nth-child(2) {{ display:none; }} }}
+            @media (max-width:1100px) {{ td.commits, thead th:nth-child(7) {{ display:none; }} }}
+            @media (max-width:900px) {{ td.activity, thead th:nth-child(8) {{ display:none; }} }}
+            @media (max-width:600px) {{ td.url, thead th:nth-child(6) {{ display:none; }} }}
           </style>
           </head>
           <body>
@@ -209,8 +223,8 @@ jobs:
                 <thead>
                   <tr id="headers">
                     <th data-col="0"><div class="th-label">#<span class="sort-icon"></span></div><input placeholder="nº"/></th>
-                    <th data-col="1"><div class="th-label">Repo<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
-                    <th data-col="2"><div class="th-label">Nombre correcto<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+                    <th data-col="1" style="width:88px"><div class="th-label">Vista<span class="sort-icon"></span></div><input placeholder=""/></th>
+                    <th data-col="2"><div class="th-label">Repo<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
                     <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
                     <th data-col="4"><div class="th-label">CLAUDE.md<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
                     <th data-col="5"><div class="th-label">URL p&#250;blica<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
