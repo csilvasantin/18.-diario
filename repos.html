@@ -51,14 +51,6 @@
   th.asc  .sort-icon::after { content:'▲'; color:var(--bright); }
   th.desc .sort-icon::after { content:'▼'; color:var(--bright); }
   th:not(.asc):not(.desc) .sort-icon::after { content:'⇅'; }
-  thead th input {
-    display:block; width:100%; background:rgba(0,0,0,0.2);
-    border:none; border-top:1px solid rgba(0,255,110,0.08);
-    color:var(--text); font-family:inherit; font-size:0.7rem;
-    padding:4px 14px 6px; outline:none; letter-spacing:0.02em;
-  }
-  thead th input::placeholder { color:rgba(92,167,114,0.4); }
-  thead th input:focus { background:rgba(0,255,110,0.04); }
   tbody tr { border-bottom:1px solid rgba(0,255,110,0.06); transition:background 0.1s; }
   tbody tr:last-child { border-bottom:none; }
   tbody tr:hover { background:rgba(0,255,110,0.04); }
@@ -85,7 +77,6 @@
   td.activity .push { color:#88ccff; }
   td.activity .pull { color:#aaffcc; }
   .count { font-size:0.72rem; color:var(--muted); text-align:right; padding:8px 14px; border-top:1px solid var(--border); }
-  tr.hidden { display:none; }
   @media (max-width:700px) { td.thumb, thead th:nth-child(2) { display:none; } }
   @media (max-width:1100px) { td.commits, thead th:nth-child(7) { display:none; } }
   @media (max-width:900px) { td.activity, thead th:nth-child(8) { display:none; } }
@@ -106,14 +97,14 @@
     <table id="t">
       <thead>
         <tr id="headers">
-          <th data-col="0"><div class="th-label">#<span class="sort-icon"></span></div><input placeholder="nº"/></th>
-          <th data-col="1" style="width:88px"><div class="th-label">Vista<span class="sort-icon"></span></div><input placeholder=""/></th>
-          <th data-col="2"><div class="th-label">Repo<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
-          <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
-          <th data-col="4"><div class="th-label">CLAUDE.md<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
-          <th data-col="5"><div class="th-label">URL pública<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
-          <th data-col="6"><div class="th-label">Commits<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
-          <th data-col="7"><div class="th-label">&#x2191;7d / &#x2193;14d<span class="sort-icon"></span></div><input placeholder="filtrar..."/></th>
+          <th data-col="0"><div class="th-label">#<span class="sort-icon"></span></div></th>
+          <th data-col="1" style="width:88px"><div class="th-label">Vista<span class="sort-icon"></span></div></th>
+          <th data-col="2"><div class="th-label">Repo<span class="sort-icon"></span></div></th>
+          <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div></th>
+          <th data-col="4"><div class="th-label">CLAUDE.md<span class="sort-icon"></span></div></th>
+          <th data-col="5"><div class="th-label">URL pública<span class="sort-icon"></span></div></th>
+          <th data-col="6"><div class="th-label">Commits<span class="sort-icon"></span></div></th>
+          <th data-col="7"><div class="th-label">&#x2191;7d / &#x2193;14d<span class="sort-icon"></span></div></th>
         </tr>
       </thead>
       <tbody id="tbody">
@@ -160,21 +151,13 @@
       headers.forEach(h=>h.classList.remove('asc','desc'));
       th.classList.add(sDir===1?'asc':'desc');
       [...tbody.querySelectorAll('tr')].sort((a,b)=>a.cells[col].textContent.trim().localeCompare(b.cells[col].textContent.trim(),'es',{numeric:true})*sDir).forEach(r=>tbody.appendChild(r));
-      applyFilters();
     });
   });
-  document.querySelectorAll('#headers input').forEach(inp=>{
-    inp.addEventListener('input',applyFilters);
-    inp.addEventListener('click',e=>e.stopPropagation());
-  });
-  function applyFilters(){
-    const f=[...document.querySelectorAll('#headers input')].map(i=>i.value.toLowerCase());
-    let v=0; tbody.querySelectorAll('tr').forEach(r=>{const ok=f.every((fi,i)=>!fi||r.cells[i].textContent.toLowerCase().includes(fi));r.classList.toggle('hidden',!ok);if(ok)v++;});
-    document.getElementById('count').textContent=v+' repos';
-  }
 
-  const today=new Date().toISOString().slice(0,10);
-  document.getElementById('gen-date').textContent='generado '+today;
+  const now=new Date();
+  const today=now.toISOString().slice(0,10);
+  const hhmm=now.toISOString().slice(11,16);
+  document.getElementById('gen-date').textContent='generado '+today+' '+hhmm+' UTC';
   document.querySelectorAll('td.fecha').forEach(td=>{
     td.classList.toggle('today', td.textContent.trim()===today);
   });
