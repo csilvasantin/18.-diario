@@ -323,8 +323,11 @@ jobs:
             let pmCurrentUrl = '';
             let pmFallbackTimer = null;
 
+            let pmIframeLoaded = false;
+
             function openPreview(url, repo){{
               pmCurrentUrl = url;
+              pmIframeLoaded = false;
               pmTitle.textContent = repo || 'Vista previa';
               pmUrl.innerHTML = '<a href="'+url+'" target="_blank" rel="noopener">'+url.replace(/^https?:\/\//,'')+'</a>';
               pmFallback.classList.remove('show');
@@ -332,16 +335,10 @@ jobs:
               pmIframe.src = url;
               pm.classList.remove('hidden');
               document.body.style.overflow = 'hidden';
-              // Si el iframe no carga en 6s (probablemente X-Frame-Options), caer a screenshot
+              // Si el iframe no dispara 'load' en 6s (probablemente X-Frame-Options bloqueó), caer a screenshot
               clearTimeout(pmFallbackTimer);
               pmFallbackTimer = setTimeout(()=>{{
-                try {{
-                  const doc = pmIframe.contentDocument;
-                  // Si podemos acceder pero está vacío, o si no podemos acceder por CSP, caer a screenshot
-                  if (!doc || !doc.body || !doc.body.children.length) showFallback();
-                }} catch(e) {{
-                  // Cross-origin access denied: probablemente OK, el sitio cargó
-                }}
+                if (!pmIframeLoaded) showFallback();
               }}, 6000);
             }}
 
@@ -367,6 +364,10 @@ jobs:
             pmOpen.addEventListener('click', () => {{ if (pmCurrentUrl) window.open(pmCurrentUrl, '_blank', 'noopener'); }});
             pmScreenshot.addEventListener('click', showFallback);
             pmIframe.addEventListener('error', showFallback);
+            pmIframe.addEventListener('load', () => {{
+              pmIframeLoaded = true;
+              clearTimeout(pmFallbackTimer);
+            }});
 
             // Delegación: cualquier .thumb-btn abre la vista previa
             document.getElementById('tbody').addEventListener('click', e => {{
