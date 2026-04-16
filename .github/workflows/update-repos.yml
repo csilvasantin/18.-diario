@@ -87,12 +87,19 @@ jobs:
               if url:
                   short = url.replace('https://','')
                   td_url = f'<td class="url"><a href="{url}" target="_blank">{short}</a></td>'
-                  td_thumb = (f'<td class="thumb"><a href="{url}" target="_blank">'
+                  # Thumbnail abre modal con iframe del Pages en vivo
+                  td_thumb = (f'<td class="thumb"><button type="button" class="thumb-btn" '
+                              f'data-preview-url="{url}" data-preview-repo="{repo}" '
+                              f'title="Abrir vista previa en vivo">'
                               f'<img src="https://image.thum.io/get/width/160/crop/100/noanimate/{url}" '
-                              f'alt="{repo}" loading="lazy"/></a></td>')
+                              f'alt="{repo}" loading="lazy"/>'
+                              f'<span class="thumb-eye">👁</span>'
+                              f'</button></td>')
               else:
                   td_url = '<td class="url none">—</td>'
-                  td_thumb = (f'<td class="thumb"><a href="https://github.com/csilvasantin/{repo}" target="_blank">'
+                  # Sin Pages: el thumbnail solo enlaza a GitHub (nueva pestaña)
+                  td_thumb = (f'<td class="thumb"><a href="https://github.com/csilvasantin/{repo}" target="_blank" '
+                              f'title="Abrir en GitHub (sin GitHub Pages)">'
                               f'<img src="https://opengraph.githubassets.com/1/csilvasantin/{repo}" '
                               f'alt="{repo}" loading="lazy"/></a></td>')
               commits = total_commits(repo)
@@ -197,6 +204,27 @@ jobs:
             td.thumb {{ width:88px; padding:4px 8px; vertical-align:middle; }}
             td.thumb img {{ width:80px; height:50px; object-fit:cover; object-position:top left; border-radius:5px; border:1px solid rgba(0,255,110,0.15); display:block; background:#031a09; transition:transform 0.15s; }}
             td.thumb img:hover {{ transform:scale(1.05); border-color:rgba(0,255,110,0.4); }}
+            td.thumb .thumb-btn {{ position:relative; display:block; background:none; border:0; padding:0; cursor:pointer; width:80px; }}
+            td.thumb .thumb-btn .thumb-eye {{ position:absolute; top:2px; right:2px; background:rgba(0,0,0,0.7); color:var(--bright); font-size:0.65rem; padding:1px 4px; border-radius:3px; opacity:0; transition:opacity 0.15s; pointer-events:none; }}
+            td.thumb .thumb-btn:hover .thumb-eye {{ opacity:1; }}
+            td.thumb a {{ display:block; }}
+
+            /* Modal de vista previa en iframe */
+            .preview-modal {{ position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:999; display:flex; flex-direction:column; padding:16px; backdrop-filter:blur(4px); }}
+            .preview-modal.hidden {{ display:none; }}
+            .preview-modal .pm-head {{ display:flex; align-items:center; gap:12px; background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:10px 14px; margin-bottom:10px; }}
+            .preview-modal .pm-title {{ color:var(--bright); font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; }}
+            .preview-modal .pm-url {{ color:var(--muted); font-size:0.72rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }}
+            .preview-modal .pm-url a {{ color:#aaffcc; text-decoration:none; }}
+            .preview-modal .pm-url a:hover {{ color:#fff; text-decoration:underline; }}
+            .preview-modal .pm-btn {{ background:rgba(0,0,0,0.4); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:6px 12px; font-family:inherit; font-size:0.72rem; cursor:pointer; transition:all 0.15s; white-space:nowrap; }}
+            .preview-modal .pm-btn:hover {{ background:rgba(0,255,110,0.12); color:var(--bright); border-color:var(--bright); }}
+            .preview-modal .pm-body {{ flex:1; background:#000; border:1px solid var(--border); border-radius:10px; overflow:hidden; position:relative; }}
+            .preview-modal iframe {{ width:100%; height:100%; border:0; background:#fff; }}
+            .preview-modal .pm-fallback {{ position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:20px; text-align:center; }}
+            .preview-modal .pm-fallback.show {{ display:flex; }}
+            .preview-modal .pm-fallback img {{ max-width:90%; max-height:70vh; border:1px solid var(--border); border-radius:6px; }}
+            .preview-modal .pm-fallback p {{ color:var(--muted); font-size:0.8rem; }}
             td.commits {{ color:var(--muted); text-align:center; font-size:0.78rem; font-variant-numeric:tabular-nums; }}
             td.activity {{ text-align:center; font-size:0.72rem; white-space:nowrap; color:var(--muted); }}
             td.activity .push {{ color:#88ccff; }}
@@ -239,6 +267,22 @@ jobs:
               <div class="count" id="count">{n} repos</div>
             </div>
           </div>
+          <div id="preview-modal" class="preview-modal hidden" role="dialog" aria-label="Vista previa del repositorio">
+            <div class="pm-head">
+              <span class="pm-title" id="pm-title">Vista previa</span>
+              <span class="pm-url" id="pm-url"></span>
+              <button class="pm-btn" id="pm-open" type="button">↗ Nueva pestaña</button>
+              <button class="pm-btn" id="pm-screenshot" type="button">🖼 Screenshot</button>
+              <button class="pm-btn" id="pm-close" type="button" aria-label="Cerrar">✕ Cerrar</button>
+            </div>
+            <div class="pm-body">
+              <iframe id="pm-iframe" title="Preview" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+              <div class="pm-fallback" id="pm-fallback">
+                <img id="pm-fallback-img" alt="Screenshot"/>
+                <p>Este sitio bloquea la vista previa embebida.<br/>Abriendo screenshot estático. Usa <strong>Nueva pestaña</strong> para verlo en vivo.</p>
+              </div>
+            </div>
+          </div>
           <script>
             (function(){{
               const canvas=document.getElementById('matrix-canvas'),ctx=canvas.getContext('2d');
@@ -265,6 +309,72 @@ jobs:
               let v=0; tbody.querySelectorAll('tr').forEach(r=>{{const ok=f.every((fi,i)=>!fi||r.cells[i].textContent.toLowerCase().includes(fi));r.classList.toggle('hidden',!ok);if(ok)v++;}});
               document.getElementById('count').textContent=v+' repos';
             }}
+
+            // Modal de vista previa
+            const pm = document.getElementById('preview-modal');
+            const pmTitle = document.getElementById('pm-title');
+            const pmUrl = document.getElementById('pm-url');
+            const pmIframe = document.getElementById('pm-iframe');
+            const pmFallback = document.getElementById('pm-fallback');
+            const pmFallbackImg = document.getElementById('pm-fallback-img');
+            const pmOpen = document.getElementById('pm-open');
+            const pmScreenshot = document.getElementById('pm-screenshot');
+            const pmClose = document.getElementById('pm-close');
+            let pmCurrentUrl = '';
+            let pmFallbackTimer = null;
+
+            function openPreview(url, repo){{
+              pmCurrentUrl = url;
+              pmTitle.textContent = repo || 'Vista previa';
+              pmUrl.innerHTML = '<a href="'+url+'" target="_blank" rel="noopener">'+url.replace(/^https?:\/\//,'')+'</a>';
+              pmFallback.classList.remove('show');
+              pmFallbackImg.src = '';
+              pmIframe.src = url;
+              pm.classList.remove('hidden');
+              document.body.style.overflow = 'hidden';
+              // Si el iframe no carga en 6s (probablemente X-Frame-Options), caer a screenshot
+              clearTimeout(pmFallbackTimer);
+              pmFallbackTimer = setTimeout(()=>{{
+                try {{
+                  const doc = pmIframe.contentDocument;
+                  // Si podemos acceder pero está vacío, o si no podemos acceder por CSP, caer a screenshot
+                  if (!doc || !doc.body || !doc.body.children.length) showFallback();
+                }} catch(e) {{
+                  // Cross-origin access denied: probablemente OK, el sitio cargó
+                }}
+              }}, 6000);
+            }}
+
+            function showFallback(){{
+              if (!pmCurrentUrl) return;
+              pmFallbackImg.src = 'https://image.thum.io/get/width/1280/crop/800/noanimate/' + pmCurrentUrl;
+              pmFallback.classList.add('show');
+            }}
+
+            function closePreview(){{
+              pm.classList.add('hidden');
+              pmIframe.src = 'about:blank';
+              pmFallback.classList.remove('show');
+              pmFallbackImg.src = '';
+              document.body.style.overflow = '';
+              clearTimeout(pmFallbackTimer);
+              pmCurrentUrl = '';
+            }}
+
+            pmClose.addEventListener('click', closePreview);
+            pm.addEventListener('click', e => {{ if (e.target === pm) closePreview(); }});
+            document.addEventListener('keydown', e => {{ if (e.key === 'Escape' && !pm.classList.contains('hidden')) closePreview(); }});
+            pmOpen.addEventListener('click', () => {{ if (pmCurrentUrl) window.open(pmCurrentUrl, '_blank', 'noopener'); }});
+            pmScreenshot.addEventListener('click', showFallback);
+            pmIframe.addEventListener('error', showFallback);
+
+            // Delegación: cualquier .thumb-btn abre la vista previa
+            document.getElementById('tbody').addEventListener('click', e => {{
+              const btn = e.target.closest('.thumb-btn');
+              if (!btn) return;
+              e.preventDefault();
+              openPreview(btn.dataset.previewUrl, btn.dataset.previewRepo);
+            }});
           </script>
           </body>
           </html>'''
