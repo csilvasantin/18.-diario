@@ -23,7 +23,11 @@ jobs:
 
           TOKEN = os.environ.get('GH_TOKEN', '')
           HEADERS = {'Authorization': f'token {TOKEN}', 'User-Agent': 'diario-bot'}
-          TODAY = datetime.date.today().isoformat()
+          try:
+              from zoneinfo import ZoneInfo as _TZ_TODAY
+              TODAY = datetime.datetime.now(_TZ_TODAY('Europe/Madrid')).date().isoformat()
+          except Exception:
+              TODAY = datetime.date.today().isoformat()
 
           def api(url):
               req = urllib.request.Request(url, headers=HEADERS)
@@ -104,10 +108,27 @@ jobs:
               (35, '35.-signage-editor-final',    'https://csilvasantin.github.io/35.-signage-editor-final/'),
           ]
 
+          from datetime import datetime as _dt
+          try:
+              from zoneinfo import ZoneInfo as _TZ
+              MADRID = _TZ('Europe/Madrid')
+          except Exception:
+              MADRID = None
+
+          def to_madrid(iso):
+              """Convierte ISO UTC (ej. 2026-04-16T20:51:00Z) a fecha+hora de Madrid."""
+              if not iso: return '', ''
+              try:
+                  dt = _dt.strptime(iso.replace('Z','+0000'), '%Y-%m-%dT%H:%M:%S%z')
+                  if MADRID: dt = dt.astimezone(MADRID)
+                  return dt.strftime('%Y-%m-%d'), dt.strftime('%H:%M')
+              except Exception:
+                  return iso[:10], (iso[11:16] if len(iso) >= 16 else '')
+
           def fila(num, repo, url):
               iso = fechas.get(repo, '')
-              fecha = iso[:10] if iso else '—'
-              hora  = iso[11:16] if len(iso) >= 16 else ''
+              fecha, hora = to_madrid(iso)
+              if not fecha: fecha = '—'
               cls_fecha = 'fecha today' if fecha == TODAY else 'fecha'
               num_fmt = f'{num:02d}'
               if url:
