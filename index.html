@@ -1217,6 +1217,66 @@ const entries = [
         ]
       }
     ]
+  },
+  {
+    date: "2026-04-16",
+    title: "16 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Claude integró <strong>Gemini 2.5 Flash</strong> en el verbo <code>Analizar</code> del menú SCUMM del Consejo AdmiraNext (<code>32.-ConsejoAdmiraNextGame</code>). Al pegar una URL de YouTube, el consejero analiza el vídeo en vez de responder \"no puedo acceder a enlaces externos\".",
+          "Claude migró el backend de <code>gemini-2.0-flash</code> (deprecated, 404 para cuentas nuevas) a <code>gemini-2.5-flash</code>, dejó <code>GOOGLE_API_KEY</code> en <code>GitHub/ConsejoAdmiraNextGame/.env</code> (chmod 600) y recargó el LaunchAgent <code>com.csilvasantin.council-api</code>.",
+          "Claude añadió <code>agent_ask_gemini()</code> con soporte nativo de YouTube via <code>FileData(mime_type=video/youtube)</code> y <code>max_tokens=800</code> cuando detecta vídeo (antes 300 cortaba respuestas a mitad).",
+          "Claude añadió en <code>council-scumm.html</code> auto-selección silenciosa de Gemini al detectar YouTube y loading dinámico <code>📺 Gemini analizando vídeo de YouTube... (10–30s)</code>.",
+          "Claude identificó y paró los <strong>popups infinitos de login.tailscale.com</strong>: dos entradas duplicadas <code>MacBook Air Plata</code> en <code>data/machines.json</code> apuntaban a la IP 100.76.96.50 (Plata offline con Tailscale SSH activo). El health check cada 60s de <code>com.admiranext.control</code> disparaba SSH → Tailscale abría pestañas de auth. Fix: <code>ssh.enabled=false</code> en ambas entradas.",
+          "Claude construyó la <strong>Vista Previa en <code>repos.html</code></strong>: click en thumbnail abre modal con el Pages en iframe en vivo. Header con título, URL, botones <code>↗ Nueva pestaña</code>, <code>🖼 Screenshot</code>, <code>✕ Cerrar</code>. Fallback automático a screenshot estático si el iframe no dispara <code>load</code> en 6s."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>curl .../api/council/models</code> devolvió <code>gemini-flash(✅)</code> tras reiniciar el backend.",
+          "<code>curl -X POST .../ask-one</code> con <code>llm=gemini-flash</code> y URL YouTube devolvió respuesta coherente de 352 chars (antes ~40 cortada).",
+          "Tras el fix de Plata: health check pasó de \"4 online, 5 offline\" (9 máquinas con 2 Plata duplicadas) a \"4 online, 3 offline\" (7 reales).",
+          "<code>gh workflow run update-repos.yml</code> + <code>gh run watch</code> regeneró <code>repos.html</code>; GitHub Pages desplegó; 41 ocurrencias del código nuevo (<code>openPreview</code>, <code>preview-modal</code>, <code>thumb-btn</code>) en la versión live.",
+          "Prueba en preview local: click en <code>35.-signage-editor-final</code> → modal abre, iframe carga, <code>fallbackShown=false</code>, sin breakout."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El Consejo AdmiraNext gana capacidad real de <strong>analizar vídeos de YouTube</strong> a petición — los consejeros ya no mienten, ven el vídeo y responden con contexto.",
+          "Popups de Tailscale en Chrome silenciados (fix temporal; el definitivo es <code>tailscale set --ssh=false</code> en Plata cuando el usuario pueda llegar al portátil).",
+          "<code>repos.html</code> pasa de \"abrir en pestaña nueva\" a \"preview en vivo dentro del Diario\" — dashboard de un vistazo para los 16 repos del usuario."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El backend del Consejo corre desde <code>~/GitHub/ConsejoAdmiraNextGame</code> (LaunchAgent) pero el frontend se editaba desde <code>~/32.-ConsejoAdmiraNextGame</code> (otro clon). Ambos apuntan al mismo repo, pero el desfase causó pérdida de tiempo. Documentado en memoria (<code>reference_consejo_admiranext_repos.md</code>).",
+          "El SDK <code>google.generativeai</code> está marcado como deprecated (migrar a <code>google.genai</code>), pero funciona. Migración pendiente.",
+          "La lógica inicial de fallback del modal de Vista Previa usaba <code>iframe.contentDocument</code>, pero cross-origin devuelve <code>null</code> → falso positivo que activaba el screenshot siempre. Sustituido por escuchar el evento <code>load</code> + bandera <code>pmIframeLoaded</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "<strong>Modelo por defecto para YouTube</strong>: <code>gemini-2.5-flash</code>, auto-seleccionado sin pedir password cuando el usuario pega URL de YouTube (consentimiento implícito al abrir <code>Analizar</code>).",
+          "<strong>Scope del usuario</strong>: los 16 repos del Diario (<code>18.-diario/repos.html</code>) son el ámbito de trabajo oficial. Cualquier repo fuera queda fuera de scope salvo mención explícita.",
+          "<strong>Fix Plata</strong>: workaround menos invasivo (<code>ssh.enabled=false</code> en JSON) en vez de repuntear LaunchAgents o tocar Tailscale central. Plata marcada para revisar cuando el usuario tenga el portátil a mano."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Cuando Plata esté accesible: <code>tailscale set --ssh=false</code> en el portátil (fix definitivo).",
+          "Evaluar migración <code>google.generativeai</code> → <code>google.genai</code> (SDK nuevo oficial).",
+          "Pendientes del Consejo no atacadas hoy: budget tracker con pricing real de Gemini, solapamiento de nameplates en <code>council-scumm.html</code>, opción \"Texto pegado\" en modal <code>Analizar</code>, aviso de coste pre-submit para vídeos largos."
+        ]
+      }
+    ]
   }
 ];
 
