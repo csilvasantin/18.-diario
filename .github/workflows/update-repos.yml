@@ -57,6 +57,30 @@ jobs:
               d, _ = api(f'https://api.github.com/repos/csilvasantin/{repo}/traffic/clones')
               return d.get('count', 0) if d else 0
 
+          def detect_llms(repo):
+              """Escanea últimos 30 commits buscando marcadores de Claude/Codex.
+              Devuelve set con 'Claude', 'Codex', ambos, o vacío."""
+              d = api_json(f'https://api.github.com/repos/csilvasantin/{repo}/commits?per_page=30')
+              if not isinstance(d, list): return set()
+              llms = set()
+              for c in d:
+                  commit = c.get('commit') or {}
+                  msg = (commit.get('message') or '')
+                  msg_low = msg.lower()
+                  author = commit.get('author') or {}
+                  email = (author.get('email') or '').lower()
+                  # Claude: firma Co-Authored-By, email anthropic, marcador [Claude]
+                  if ('co-authored-by: claude' in msg_low
+                      or '[claude]' in msg_low
+                      or 'update claude' in msg_low
+                      or 'noreply@anthropic.com' == email):
+                      llms.add('Claude')
+                  # Codex: marcador [Codex] o docs: Update Codex
+                  if ('[codex]' in msg_low
+                      or 'update codex' in msg_low):
+                      llms.add('Codex')
+              return llms
+
           # Lista de proyectos: (num, repo, url_publica)
           PROYECTOS = [
               ( 0, '00.-EmpezarTrabajo',          'https://csilvasantin.github.io/00.-EmpezarTrabajo/'),
@@ -105,18 +129,24 @@ jobs:
               commits = total_commits(repo)
               push7d  = recent_pushes(repo)
               clones  = get_clones(repo)
+              llms    = detect_llms(repo)
               td_commits  = f'<td class="commits">{commits}</td>'
               td_activity = (f'<td class="activity">'
                              f'<span class="push">↑{push7d}</span> '
                              f'<span class="pull">↓{clones}</span>'
                              f'</td>')
+              badges = []
+              if 'Claude' in llms: badges.append('<span class="llm-badge llm-claude">Claude</span>')
+              if 'Codex'  in llms: badges.append('<span class="llm-badge llm-codex">Codex</span>')
+              td_llm = (f'<td class="llm">{" ".join(badges)}</td>' if badges
+                        else '<td class="llm llm-none">—</td>')
               return (
                   f'        <tr>'
                   f'<td class="num">{num_fmt}</td>'
                   f'{td_thumb}'
                   f'<td class="repo"><a href="https://github.com/csilvasantin/{repo}" target="_blank">{repo}</a></td>'
                   f'<td class="{cls_fecha}">{fecha}</td>'
-                  f'<td class="claude">✅</td>'
+                  f'{td_llm}'
                   f'{td_url}'
                   f'{td_commits}'
                   f'{td_activity}'
@@ -188,7 +218,11 @@ jobs:
             td.repo a:hover {{ color:#fff; text-decoration:underline; }}
             td.fecha {{ color:var(--muted); text-align:center; font-size:0.75rem; white-space:nowrap; }}
             td.fecha.today {{ color:var(--bright); }}
-            td.claude {{ text-align:center; font-size:0.9rem; }}
+            td.llm {{ text-align:center; font-size:0.75rem; white-space:nowrap; line-height:1.6; }}
+            .llm-badge {{ display:inline-block; padding:2px 8px; border-radius:999px; font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; }}
+            .llm-claude {{ background:rgba(57,255,111,0.15); color:var(--bright); border:1px solid rgba(57,255,111,0.3); }}
+            .llm-codex  {{ background:rgba(136,204,255,0.12); color:#88ccff; border:1px solid rgba(136,204,255,0.3); }}
+            td.llm.llm-none {{ color:rgba(92,167,114,0.3); }}
             td.url {{ font-size:0.72rem; }}
             td.url a {{ color:#aaffcc; text-decoration:none; transition:color 0.15s; }}
             td.url a:hover {{ color:#fff; text-decoration:underline; }}
@@ -245,7 +279,7 @@ jobs:
                     <th data-col="1" style="width:88px"><div class="th-label">Vista<span class="sort-icon"></span></div></th>
                     <th data-col="2"><div class="th-label">Repo<span class="sort-icon"></span></div></th>
                     <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div></th>
-                    <th data-col="4"><div class="th-label">CLAUDE.md<span class="sort-icon"></span></div></th>
+                    <th data-col="4"><div class="th-label">LLM<span class="sort-icon"></span></div></th>
                     <th data-col="5"><div class="th-label">URL p&#250;blica<span class="sort-icon"></span></div></th>
                     <th data-col="6"><div class="th-label">Commits<span class="sort-icon"></span></div></th>
                     <th data-col="7"><div class="th-label">&#x2191;7d / &#x2193;14d<span class="sort-icon"></span></div></th>
