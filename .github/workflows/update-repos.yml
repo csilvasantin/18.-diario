@@ -181,7 +181,10 @@ jobs:
                   f'</tr>'
               )
 
-          filas = '\n'.join(fila(*p) for p in PROYECTOS)
+          # Orden inicial: por fecha de actualización DESC (más reciente primero).
+          # El usuario puede re-ordenar clicando cualquier cabecera.
+          PROYECTOS_SORTED = sorted(PROYECTOS, key=lambda p: fechas.get(p[1], ''), reverse=True)
+          filas = '\n'.join(fila(*p) for p in PROYECTOS_SORTED)
           n = len(PROYECTOS)
 
           html = f'''<!DOCTYPE html>
@@ -310,7 +313,7 @@ jobs:
                     <th data-col="0"><div class="th-label">#<span class="sort-icon"></span></div></th>
                     <th data-col="1" style="width:88px"><div class="th-label">Vista<span class="sort-icon"></span></div></th>
                     <th data-col="2"><div class="th-label">Repo<span class="sort-icon"></span></div></th>
-                    <th data-col="3"><div class="th-label">Actualización<span class="sort-icon"></span></div></th>
+                    <th data-col="3" class="desc"><div class="th-label">Actualización<span class="sort-icon"></span></div></th>
                     <th data-col="4"><div class="th-label">LLM<span class="sort-icon"></span></div></th>
                     <th data-col="5"><div class="th-label">URL p&#250;blica<span class="sort-icon"></span></div></th>
                     <th data-col="6"><div class="th-label">Commits<span class="sort-icon"></span></div></th>
@@ -350,7 +353,7 @@ jobs:
               resize(); window.addEventListener('resize',resize); setInterval(draw,50);
             }})();
             const tbody=document.getElementById('tbody'),headers=document.querySelectorAll('#headers th');
-            let sCol=-1,sDir=1;
+            let sCol=3,sDir=-1; // Orden inicial: Actualización DESC (reciente primero)
             headers.forEach(th=>{{
               th.querySelector('.th-label').addEventListener('click',()=>{{
                 const col=+th.dataset.col; sDir=(sCol===col)?sDir*-1:1; sCol=col;
