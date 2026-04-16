@@ -36,9 +36,9 @@ jobs:
           def api_json(url):
               d, _ = api(url); return d or []
 
-          # Fechas de todos los repos
+          # Fechas de todos los repos (ISO completo: 2026-04-16T21:22:15Z)
           repos = api_json('https://api.github.com/users/csilvasantin/repos?per_page=100&sort=updated')
-          fechas = {r['name']: r['updated_at'][:10] for r in repos}
+          fechas = {r['name']: r['updated_at'] for r in repos}
 
           def total_commits(repo):
               import re
@@ -105,7 +105,9 @@ jobs:
           ]
 
           def fila(num, repo, url):
-              fecha = fechas.get(repo, '—')
+              iso = fechas.get(repo, '')
+              fecha = iso[:10] if iso else '—'
+              hora  = iso[11:16] if len(iso) >= 16 else ''
               cls_fecha = 'fecha today' if fecha == TODAY else 'fecha'
               num_fmt = f'{num:02d}'
               if url:
@@ -142,12 +144,15 @@ jobs:
               if 'Codex'      in llms: badges.append('<span class="llm-badge llm-codex">Codex</span>')
               if 'Gemini CLI' in llms: badges.append('<span class="llm-badge llm-gemini">Gemini CLI</span>')
               td_llm = f'<td class="llm">{" ".join(badges)}</td>'
+              td_fecha = (f'<td class="{cls_fecha}">{fecha}'
+                          + (f'<span class="hora">{hora}</span>' if hora else '')
+                          + '</td>')
               return (
                   f'        <tr>'
                   f'<td class="num">{num_fmt}</td>'
                   f'{td_thumb}'
                   f'<td class="repo"><a href="https://github.com/csilvasantin/{repo}" target="_blank">{repo}</a></td>'
-                  f'<td class="{cls_fecha}">{fecha}</td>'
+                  f'{td_fecha}'
                   f'{td_llm}'
                   f'{td_url}'
                   f'{td_commits}'
@@ -213,13 +218,16 @@ jobs:
             th:not(.asc):not(.desc) .sort-icon::after {{ content:'⇅'; }}
             tbody tr {{ border-bottom:1px solid rgba(0,255,110,0.06); transition:background 0.1s; }}
             tbody tr:last-child {{ border-bottom:none; }}
-            tbody tr:hover {{ background:rgba(0,255,110,0.04); }}
+            tbody tr:nth-child(even) {{ background:rgba(0,255,110,0.025); }}
+            tbody tr:hover {{ background:rgba(0,255,110,0.08) !important; }}
             tbody td {{ padding:8px 14px; vertical-align:middle; }}
             td.num {{ color:var(--bright); font-size:0.85rem; font-weight:bold; text-align:center; width:54px; }}
             td.repo a {{ color:#88ccff; text-decoration:none; transition:color 0.15s; }}
             td.repo a:hover {{ color:#fff; text-decoration:underline; }}
-            td.fecha {{ color:var(--muted); text-align:center; font-size:0.75rem; white-space:nowrap; }}
+            td.fecha {{ color:var(--muted); text-align:center; font-size:0.75rem; white-space:nowrap; line-height:1.4; }}
             td.fecha.today {{ color:var(--bright); }}
+            td.fecha .hora {{ display:block; font-size:0.65rem; color:rgba(92,167,114,0.6); letter-spacing:0.04em; }}
+            td.fecha.today .hora {{ color:rgba(57,255,111,0.7); }}
             td.llm {{ text-align:center; font-size:0.75rem; white-space:nowrap; line-height:1.6; }}
             th[data-col="4"] .th-label {{ justify-content:center; }}
             .llm-badge {{ display:inline-block; padding:2px 8px; border-radius:999px; font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; }}
