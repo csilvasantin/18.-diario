@@ -1162,6 +1162,61 @@ const entries = [
         ]
       }
     ]
+  },
+  {
+    date: "2026-04-16",
+    title: "16 de abril de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Codex rehizo la actualizacion del diario con el criterio correcto: trabajar sobre un clon limpio temporal de <code>csilvasantin/diario</code> en <code>/tmp/diario-repo-cloud</code> para publicar en la nube y no dejar el cierre solo en local.",
+          "Codex añadió esta entrada <code>2026-04-16.md</code> y actualizo <code>index.html</code> del diario publico para que el <code>16 de abril</code> aparezca en la UI con filtro de autoria <code>Codex</code>.",
+          "Codex conservo el trabajo local previo sin tocar el checkout sucio de <code>github-csilvasantin/diario</code>, evitando mezclar el cierre de hoy con cambios no reconciliados del repositorio local.",
+          "La jornada queda documentada como correccion de flujo: la automatizacion <code>Actualizar diario</code> pasa a cerrarse en la nube o a reportar bloqueo explicito si no puede publicar."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git clone https://github.com/csilvasantin/diario.git /tmp/diario-repo-cloud</code> obtuvo un checkout limpio del diario publicado, alineado con <code>origin/main</code>.",
+          "<code>git -C /tmp/diario-repo-cloud log --oneline -n 10</code> confirmo que la UI activa del diario ya incluye filtros <code>Todos / Claude / Codex</code> y que el ultimo commit remoto previo era <code>41703b3 chore: actualizar repos.html 2026-04-16 [skip ci]</code>.",
+          "<code>git -C /tmp/diario-repo-cloud status --short</code> quedo limitado a los cambios de esta entrada antes del commit.",
+          "El push de esta actualizacion deja el diario preparado para verse en <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> tras la propagacion de GitHub Pages."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La automatizacion vuelve a tener sentido operativo: actualizar el diario pasa a equivaler a actualizar la version visible en la web.",
+          "El diario publico mantiene la separacion por fecha y por autoria, sin mezclar esta correccion con la entrada del <code>15 de abril</code>.",
+          "El problema detectado por el usuario queda trazado dentro del propio diario para que no se repita el mismo falso positivo de \"actualizado\" cuando solo existe un borrador local."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El clon local de <code>github-csilvasantin/diario</code> sigue atrasado respecto a <code>origin/main</code> y con trabajo sin reconciliar, asi que no era una base fiable para publicar.",
+          "El sandbox no resolvia <code>github.com</code>, por lo que hubo que rehacer el trabajo con acceso de red fuera del sandbox para poder clonar y publicar."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Publicar desde un clon limpio temporal en vez de tocar el repo local sucio.",
+          "Mantener una entrada nueva para el <code>2026-04-16</code>, centrada en la correccion del flujo y en la publicacion real.",
+          "Considerar incorrecto cualquier cierre futuro de <code>Actualizar diario</code> que no termine en la nube o en un bloqueo explicado."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> cuando GitHub Pages termine de propagar el commit.",
+          "Reconciliar mas adelante el checkout local de <code>github-csilvasantin/diario</code> con <code>origin/main</code> para que vuelva a ser usable sin clones temporales."
+        ]
+      }
+    ]
   }
 ];
 
