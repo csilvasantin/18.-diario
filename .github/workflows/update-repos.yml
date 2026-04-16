@@ -135,11 +135,13 @@ jobs:
                              f'<span class="push">↑{push7d}</span> '
                              f'<span class="pull">↓{clones}</span>'
                              f'</td>')
+              # Si no se detecta Claude ni Codex, asumimos Gemini CLI
+              if not llms: llms.add('Gemini CLI')
               badges = []
-              if 'Claude' in llms: badges.append('<span class="llm-badge llm-claude">Claude</span>')
-              if 'Codex'  in llms: badges.append('<span class="llm-badge llm-codex">Codex</span>')
-              td_llm = (f'<td class="llm">{" ".join(badges)}</td>' if badges
-                        else '<td class="llm llm-none">—</td>')
+              if 'Claude'     in llms: badges.append('<span class="llm-badge llm-claude">Claude</span>')
+              if 'Codex'      in llms: badges.append('<span class="llm-badge llm-codex">Codex</span>')
+              if 'Gemini CLI' in llms: badges.append('<span class="llm-badge llm-gemini">Gemini CLI</span>')
+              td_llm = f'<td class="llm">{" ".join(badges)}</td>'
               return (
                   f'        <tr>'
                   f'<td class="num">{num_fmt}</td>'
@@ -219,10 +221,11 @@ jobs:
             td.fecha {{ color:var(--muted); text-align:center; font-size:0.75rem; white-space:nowrap; }}
             td.fecha.today {{ color:var(--bright); }}
             td.llm {{ text-align:center; font-size:0.75rem; white-space:nowrap; line-height:1.6; }}
+            th[data-col="4"] .th-label {{ justify-content:center; }}
             .llm-badge {{ display:inline-block; padding:2px 8px; border-radius:999px; font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; }}
             .llm-claude {{ background:rgba(57,255,111,0.15); color:var(--bright); border:1px solid rgba(57,255,111,0.3); }}
             .llm-codex  {{ background:rgba(136,204,255,0.12); color:#88ccff; border:1px solid rgba(136,204,255,0.3); }}
-            td.llm.llm-none {{ color:rgba(92,167,114,0.3); }}
+            .llm-gemini {{ background:rgba(236,201,75,0.14); color:#ecc94b; border:1px solid rgba(236,201,75,0.3); }}
             td.url {{ font-size:0.72rem; }}
             td.url a {{ color:#aaffcc; text-decoration:none; transition:color 0.15s; }}
             td.url a:hover {{ color:#fff; text-decoration:underline; }}
