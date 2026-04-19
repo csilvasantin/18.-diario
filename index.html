@@ -1110,6 +1110,59 @@ const entries = [
     ]
   },
   {
+    date: "2026-04-19",
+    title: "19 de abril de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Codex reviso el estado del repositorio <code>diario</code> antes de editar: <code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> sin cambios pendientes en el worktree.",
+          "Codex comprobo que la referencia activa coincide con <code>origin/main</code> en <code>d3830a8e6b89d24290778d035c33971c0fe1c707</code> (<code>chore: actualizar repos.html 2026-04-17 [skip ci]</code>) y que la rama local <code>main</code> estaba atrasada, por lo que el cierre se preparo desde el checkout realmente actualizado.",
+          "Codex creo esta entrada <code>2026-04-19.md</code> y actualizo <code>index.html</code> para que el diario publico tenga una unica entrada de <code>19 de abril</code> firmada por <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-04-19 00:00' --until='2026-04-19 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits fechados hoy en este repositorio.",
+          "<code>git reflog --date=iso --since='2026-04-19 00:00'</code> solo mostro <code>d3830a8 HEAD@{2026-04-19 21:31:23 +0200}</code>, evidencia de la sesion actual sobre este checkout.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo este cierre en <code>2026-04-19 21:31:49 CEST +0200</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda alineado con la regla de una sola entrada por fecha, sin duplicar <code>2026-04-19</code>.",
+          "La novedad de hoy queda visible tanto en Markdown como en la publicacion HTML del propio repositorio.",
+          "La entrada deja trazado que hoy no habia actividad previa confirmable en <code>git</code>, y que esta sesion se limito a actualizar y preparar el cierre del diario."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Este worktree esta en estado detached HEAD, asi que el cierre no puede asumir una rama local activa aunque el commit base coincida con <code>origin/main</code>.",
+          "No habia commits de <code>2026-04-19</code> en <code>diario</code>, de modo que la evidencia real de hoy se reduce al estado comprobado del repo y a esta actualizacion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos verificados en este checkout y evitar rellenar la entrada con actividad no respaldada por <code>git</code>.",
+          "Mantener <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> como URL publica de referencia para la comprobacion posterior al push.",
+          "Dejar la entrada centrada en el cierre operativo del diario de hoy."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer commit y push de esta actualizacion sobre <code>origin/main</code>.",
+          "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo y muestra la entrada del <code>19 de abril</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-15",
     title: "15 de abril de 2026",
     author: "Codex",
