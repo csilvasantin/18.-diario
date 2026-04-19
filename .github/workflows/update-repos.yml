@@ -134,14 +134,13 @@ jobs:
               if url:
                   short = url.replace('https://','')
                   td_url = f'<td class="url"><a href="{url}" target="_blank">{short}</a></td>'
-                  # Thumbnail: mshots (espera a que la pagina renderice) con thum.io como fallback
-                  mshots_src = f'https://s.wordpress.com/mshots/v1/{url}?w=320&h=200'
-                  thumio_fb  = f'https://image.thum.io/get/width/320/viewportWidth/1280/wait/3/{url}'
+                  # Thumbnail: thum.io renderizado a 1280 de ancho con 3s de espera
+                  # (sin noanimate para que los canvas pinten, crop 200 para ver mas contenido)
+                  thumb_src = f'https://image.thum.io/get/width/320/crop/200/viewportWidth/1280/wait/3/{url}'
                   td_thumb = (f'<td class="thumb"><button type="button" class="thumb-btn" '
                               f'data-preview-url="{url}" data-preview-repo="{repo}" '
                               f'title="Abrir vista previa en vivo">'
-                              f'<img src="{mshots_src}" '
-                              f'onerror="this.onerror=null;this.src=\'{thumio_fb}\'" '
+                              f'<img src="{thumb_src}" '
                               f'alt="{repo}" loading="lazy"/>'
                               f'<span class="thumb-eye">👁</span>'
                               f'</button></td>')
