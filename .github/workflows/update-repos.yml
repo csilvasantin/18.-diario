@@ -134,16 +134,17 @@ jobs:
               if url:
                   short = url.replace('https://','')
                   td_url = f'<td class="url"><a href="{url}" target="_blank">{short}</a></td>'
-                  # Thumbnail: thum.io renderizado a 1280 de ancho con 3s de espera
-                  # (sin noanimate para que los canvas pinten, crop 200 para ver mas contenido)
-                  thumb_src = f'https://image.thum.io/get/width/320/crop/200/viewportWidth/1280/wait/3/{url}'
-                  td_thumb = (f'<td class="thumb"><button type="button" class="thumb-btn" '
+                  # Thumbnail: thum.io captura el viewport 1280x720 entero y lo escala a 320
+                  # (sin crop: para verlo completo; sin noanimate: para que canvas pinten; wait/3: render)
+                  thumb_src = f'https://image.thum.io/get/width/320/viewportWidth/1280/wait/3/{url}'
+                  td_thumb = (f'<td class="thumb"><div class="thumb-btn" role="button" tabindex="0" '
                               f'data-preview-url="{url}" data-preview-repo="{repo}" '
                               f'title="Abrir vista previa en vivo">'
                               f'<img src="{thumb_src}" '
                               f'alt="{repo}" loading="lazy"/>'
-                              f'<span class="thumb-eye">👁</span>'
-                              f'</button></td>')
+                              f'<button type="button" class="thumb-refresh" '
+                              f'title="Refrescar captura" aria-label="Refrescar">⟳</button>'
+                              f'</div></td>')
               else:
                   td_url = '<td class="url none">—</td>'
                   # Sin Pages: el thumbnail solo enlaza a GitHub (nueva pestaña)
@@ -264,12 +265,15 @@ jobs:
             td.url a {{ color:#aaffcc; text-decoration:none; transition:color 0.15s; }}
             td.url a:hover {{ color:#fff; text-decoration:underline; }}
             td.url.none {{ color:rgba(92,167,114,0.3); text-align:center; }}
-            td.thumb {{ width:88px; padding:4px 8px; vertical-align:middle; }}
-            td.thumb img {{ width:80px; height:50px; object-fit:cover; object-position:top left; border-radius:5px; border:1px solid rgba(0,255,110,0.15); display:block; background:#031a09; transition:transform 0.15s; }}
+            td.thumb {{ width:104px; padding:4px 8px; vertical-align:middle; }}
+            td.thumb img {{ width:96px; height:54px; object-fit:contain; object-position:center; border-radius:5px; border:1px solid rgba(0,255,110,0.15); display:block; background:#031a09; transition:transform 0.15s; }}
             td.thumb img:hover {{ transform:scale(1.05); border-color:rgba(0,255,110,0.4); }}
-            td.thumb .thumb-btn {{ position:relative; display:block; background:none; border:0; padding:0; cursor:pointer; width:80px; }}
-            td.thumb .thumb-btn .thumb-eye {{ position:absolute; top:2px; right:2px; background:rgba(0,0,0,0.7); color:var(--bright); font-size:0.65rem; padding:1px 4px; border-radius:3px; opacity:0; transition:opacity 0.15s; pointer-events:none; }}
-            td.thumb .thumb-btn:hover .thumb-eye {{ opacity:1; }}
+            td.thumb .thumb-btn {{ position:relative; display:block; background:none; border:0; padding:0; cursor:pointer; width:96px; }}
+            td.thumb .thumb-btn .thumb-refresh {{ position:absolute; top:3px; right:3px; background:rgba(0,0,0,0.72); color:var(--bright); font-family:inherit; font-size:0.75rem; line-height:1; padding:2px 5px; border:1px solid rgba(0,255,110,0.25); border-radius:4px; cursor:pointer; opacity:0.75; transition:opacity 0.15s, background 0.15s, transform 0.3s; }}
+            td.thumb .thumb-btn:hover .thumb-refresh {{ opacity:1; }}
+            td.thumb .thumb-btn .thumb-refresh:hover {{ background:rgba(0,255,110,0.3); transform:rotate(180deg); }}
+            td.thumb .thumb-btn .thumb-refresh.spinning {{ animation:thumb-spin 0.8s linear infinite; }}
+            @keyframes thumb-spin {{ from {{ transform:rotate(0deg); }} to {{ transform:rotate(360deg); }} }}
             td.thumb a {{ display:block; }}
 
             /* Modal de vista previa en iframe */
@@ -313,7 +317,7 @@ jobs:
                 <thead>
                   <tr id="headers">
                     <th data-col="0"><div class="th-label">#<span class="sort-icon"></span></div></th>
-                    <th data-col="1" style="width:88px"><div class="th-label">Vista<span class="sort-icon"></span></div></th>
+                    <th data-col="1" style="width:104px"><div class="th-label">Vista<span class="sort-icon"></span></div></th>
                     <th data-col="2"><div class="th-label">Repo<span class="sort-icon"></span></div></th>
                     <th data-col="3" class="desc"><div class="th-label">Actualización<span class="sort-icon"></span></div></th>
                     <th data-col="4"><div class="th-label">LLM<span class="sort-icon"></span></div></th>
@@ -424,8 +428,24 @@ jobs:
               clearTimeout(pmFallbackTimer);
             }});
 
-            // Delegación: cualquier .thumb-btn abre la vista previa
+            // Delegación: refrescar captura, o abrir vista previa
             document.getElementById('tbody').addEventListener('click', e => {{
+              const refresh = e.target.closest('.thumb-refresh');
+              if (refresh) {{
+                e.preventDefault(); e.stopPropagation();
+                const wrap = refresh.closest('.thumb-btn');
+                const img = wrap && wrap.querySelector('img');
+                const pageUrl = wrap && wrap.dataset.previewUrl;
+                if (img && pageUrl) {{
+                  refresh.classList.add('spinning');
+                  const sep = pageUrl.includes('?') ? '&' : '?';
+                  const fresh = pageUrl + sep + '_cb=' + Date.now();
+                  img.src = 'https://image.thum.io/get/width/320/viewportWidth/1280/wait/3/' + fresh;
+                  img.addEventListener('load', () => refresh.classList.remove('spinning'), {{ once:true }});
+                  img.addEventListener('error', () => refresh.classList.remove('spinning'), {{ once:true }});
+                }}
+                return;
+              }}
               const btn = e.target.closest('.thumb-btn');
               if (!btn) return;
               e.preventDefault();
