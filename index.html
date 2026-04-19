@@ -99,7 +99,7 @@
     box-shadow: 0 0 10px rgba(57,255,111,0.35);
   }
   #entry-selector {
-    width: min(260px, 100%);
+    width: min(440px, 100%);
     padding: 7px 12px;
     font-size: 0.88rem;
     border: 1px solid var(--matrix-border);
@@ -1358,10 +1358,9 @@ let activeFilter = "";
 entries.sort((a, b) => b.date.localeCompare(a.date));
 
 function formatEntryTimes(entry) {
-  const parts = [];
-  if (entry.startTime) parts.push("Inicio " + entry.startTime);
-  if (entry.updateTime) parts.push("Update " + entry.updateTime);
-  return parts.length ? parts.join(" · ") : "";
+  const start = entry.startTime || "--:--";
+  const update = entry.updateTime || "--:--";
+  return "Inicio " + start + " · Update " + update;
 }
 
 // Build all entry divs once
@@ -1372,7 +1371,7 @@ function formatEntryTimes(entry) {
     div.className = "entry";
     div.id = "entry-" + i;
     const times = formatEntryTimes(entry);
-    const timesHtml = times ? " <span class=\"entry-times\">" + times + "</span>" : "";
+    const timesHtml = " <span class=\"entry-times\">" + times + "</span>";
     let html = "<h1>Diario - " + entry.title + timesHtml + "</h1>";
     entry.sections.forEach((s, si) => {
       const badge = (si === 0 && entry.author)
@@ -1401,8 +1400,7 @@ function rebuildSelector(filtered, showIdx) {
   filtered.forEach(i => {
     const opt = document.createElement("option");
     opt.value = String(i);
-    const times = formatEntryTimes(entries[i]);
-    opt.textContent = entries[i].date + (times ? "  —  " + times : "");
+    opt.textContent = entries[i].date + "  —  " + formatEntryTimes(entries[i]);
     selector.appendChild(opt);
   });
   const target = filtered.includes(showIdx) ? showIdx : filtered[0];
