@@ -134,11 +134,14 @@ jobs:
               if url:
                   short = url.replace('https://','')
                   td_url = f'<td class="url"><a href="{url}" target="_blank">{short}</a></td>'
-                  # Thumbnail abre modal con iframe del Pages en vivo
+                  # Thumbnail: mshots (espera a que la pagina renderice) con thum.io como fallback
+                  mshots_src = f'https://s.wordpress.com/mshots/v1/{url}?w=320&h=200'
+                  thumio_fb  = f'https://image.thum.io/get/width/320/viewportWidth/1280/wait/3/{url}'
                   td_thumb = (f'<td class="thumb"><button type="button" class="thumb-btn" '
                               f'data-preview-url="{url}" data-preview-repo="{repo}" '
                               f'title="Abrir vista previa en vivo">'
-                              f'<img src="https://image.thum.io/get/width/160/crop/100/noanimate/{url}" '
+                              f'<img src="{mshots_src}" '
+                              f'onerror="this.onerror=null;this.src=\'{thumio_fb}\'" '
                               f'alt="{repo}" loading="lazy"/>'
                               f'<span class="thumb-eye">👁</span>'
                               f'</button></td>')
@@ -397,7 +400,7 @@ jobs:
 
             function showFallback(){{
               if (!pmCurrentUrl) return;
-              pmFallbackImg.src = 'https://image.thum.io/get/width/1280/crop/800/noanimate/' + pmCurrentUrl;
+              pmFallbackImg.src = 'https://image.thum.io/get/width/1280/viewportWidth/1280/wait/3/' + pmCurrentUrl;
               pmFallback.classList.add('show');
             }}
 
