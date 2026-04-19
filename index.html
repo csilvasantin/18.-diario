@@ -1122,61 +1122,55 @@ const entries = [
     date: "2026-04-19",
     title: "19 de abril de 2026",
     author: "Codex",
-    startTime: "21:31",
-    updateTime: "22:42",
+    startTime: "23:33",
+    updateTime: "23:33",
     sections: [
       {
         heading: "Que se hizo",
         items: [
-          "Codex reviso el estado del repositorio <code>diario</code> antes de editar: <code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> sin cambios pendientes en el worktree.",
-          "Codex comprobo que la referencia activa coincide con <code>origin/main</code> en <code>d3830a8e6b89d24290778d035c33971c0fe1c707</code> (<code>chore: actualizar repos.html 2026-04-17 [skip ci]</code>) y que la rama local <code>main</code> estaba atrasada, por lo que el cierre se preparo desde el checkout realmente actualizado.",
-          "Codex creo esta entrada <code>2026-04-19.md</code> y actualizo <code>index.html</code> para que el diario publico tenga una unica entrada de <code>19 de abril</code> firmada por <code>Codex</code>."
+          "Codex leyo la rutina local <code>CERRAR-EL-DIA.md</code>, intento contrastarla con la fuente canonica online y ejecuto el pre-check en <code>/Users/csilvasantin/Claude/diario/</code>.",
+          "<code>git status --short --branch</code> confirmo un checkout limpio en <code>main</code>, y <code>git rev-parse HEAD</code> / <code>git rev-parse origin/main</code> devolvieron el mismo commit <code>85db56eb0e5d9dc37a2368809ff7ebd064e61b73</code>.",
+          "Codex corrigio esta entrada <code>2026-04-19.md</code> y el bloque correspondiente de <code>index.html</code> para que el cierre de hoy refleje los datos verificados en esta sesion."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log --since='2026-04-19 00:00' --until='2026-04-19 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits fechados hoy en este repositorio.",
-          "<code>git reflog --date=iso --since='2026-04-19 00:00'</code> solo mostro <code>d3830a8 HEAD@{2026-04-19 21:31:23 +0200}</code>, evidencia de la sesion actual sobre este checkout.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo este cierre en <code>2026-04-19 21:31:49 CEST +0200</code>."
+          "<code>git log --since='2026-04-19 00:00' --until='2026-04-19 23:59:59' --date=iso --stat --oneline --all</code> si mostro actividad de hoy en <code>diario</code>, incluidos los commits <code>5e82a33</code>, <code>65a13cd</code>, <code>ef1a666</code>, <code>0e5eb36</code>, <code>34ef51a</code>, <code>c0a60a2</code> y <code>85db56e</code>.",
+          "<code>git reflog --date=iso --since='2026-04-19 00:00'</code> confirmo la secuencia de trabajo de hoy en este checkout, con commits locales y un <code>pull --rebase</code> abortado antes de continuar en <code>main</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo el momento del pre-check en <code>2026-04-19 23:33:57 CEST +0200</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario queda alineado con la regla de una sola entrada por fecha, sin duplicar <code>2026-04-19</code>.",
-          "La novedad de hoy queda visible tanto en Markdown como en la publicacion HTML del propio repositorio.",
-          "La entrada deja trazado que hoy no habia actividad previa confirmable en <code>git</code>, y que esta sesion se limito a actualizar y preparar el cierre del diario."
+          "La entrada de <code>2026-04-19</code> queda ajustada a la evidencia real del repositorio y del trabajo hecho en esta sesion.",
+          "<code>index.html</code> mantiene visible el <code>19 de abril de 2026</code> con autoria <code>Codex</code> dentro de la UI publica del diario.",
+          "El cierre deja preparado el repositorio para hacer <code>git add</code>, <code>git commit</code>, <code>git push origin main</code> y verificar la publicacion final."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Este worktree esta en estado detached HEAD, asi que el cierre no puede asumir una rama local activa aunque el commit base coincida con <code>origin/main</code>.",
-          "No habia commits de <code>2026-04-19</code> en <code>diario</code>, de modo que la evidencia real de hoy se reduce al estado comprobado del repo y a esta actualizacion."
+          "La entrada previa de <code>2026-04-19</code> contenia afirmaciones que ya no coincidian con el estado real del checkout y hubo que corregirlas antes de publicar.",
+          "El acceso directo a la fuente canonica online no se resolvio desde esta sesion, asi que la rutina se ejecuto apoyandose en la copia local verificada del repositorio.",
+          "La verificacion de GitHub Pages todavia depende de completar el <code>push</code> y comprobar despues la URL publica."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo hechos verificados en este checkout y evitar rellenar la entrada con actividad no respaldada por <code>git</code>.",
-          "Mantener <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> como URL publica de referencia para la comprobacion posterior al push.",
-          "Dejar la entrada centrada en el cierre operativo del diario de hoy."
+          "Registrar solo hechos comprobados con <code>git</code> y con el trabajo real de esta sesion, sin reutilizar datos desactualizados de la entrada previa.",
+          "Mantener un unico fichero <code>2026-04-19.md</code> para la fecha de hoy y actualizar su contenido en lugar de duplicar la jornada.",
+          "Conservar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> como URL publica final de verificacion y reporte."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer commit y push de esta actualizacion sobre <code>origin/main</code>.",
-          "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo y muestra la entrada del <code>19 de abril</code>."
-        ]
-      },
-      {
-        heading: "Diario — ordenacion y horas (Claude 22:42)",
-        items: [
-          "Ordenamos las entradas del diario de forma descendente: la mas reciente (hoy) aparece primero en el selector y se muestra por defecto.",
-          "Añadimos campos opcionales <code>startTime</code> y <code>updateTime</code> por entrada.",
-          "Las horas se renderizan al lado de la fecha tanto en el selector como en el titulo de la entrada."
+          "Hacer <code>git add 2026-04-19.md index.html</code> y crear el commit <code>Diario 2026-04-19 [Codex]</code>.",
+          "Publicar con <code>git push origin main</code> desde <code>/Users/csilvasantin/Claude/diario/</code>.",
+          "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada actualizada del <code>19 de abril de 2026</code>."
         ]
       }
     ]
