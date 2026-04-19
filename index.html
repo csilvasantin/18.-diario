@@ -1123,22 +1123,22 @@ const entries = [
     title: "19 de abril de 2026",
     author: "Codex",
     startTime: "23:56",
-    updateTime: "23:56",
+    updateTime: "23:58",
     sections: [
       {
         heading: "Que se hizo",
         items: [
           "Codex leyo la rutina local <code>CERRAR-EL-DIA.md</code> y ejecuto el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code>.",
           "<code>git status --short --branch</code> confirmo un checkout limpio en <code>main</code>, y <code>git rev-parse HEAD</code> / <code>git rev-parse origin/main</code> devolvieron el mismo commit <code>b7025e998145f90d5854e50574b4e3e1788b76cf</code> antes de editar.",
-          "Codex actualizo esta entrada <code>2026-04-19.md</code> y el bloque correspondiente de <code>index.html</code> para dejar el cierre de hoy alineado con los hechos verificados en este run."
+          "Codex actualizo esta entrada <code>2026-04-19.md</code> y el bloque correspondiente de <code>index.html</code>, creo el commit <code>6e87e58</code> (<code>Diario 2026-04-19 [Codex]</code>) y lo publico en <code>origin/main</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
           "<code>git log --since='2026-04-19 00:00' --until='2026-04-19 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad de hoy en <code>diario</code>, incluidos los commits <code>5e82a33</code>, <code>65a13cd</code>, <code>ef1a666</code>, <code>0e5eb36</code>, <code>34ef51a</code>, <code>c0a60a2</code>, <code>85db56e</code> y <code>b7025e9</code>.",
-          "<code>git reflog --date=iso --since='2026-04-19 00:00'</code> confirmo la secuencia de trabajo de hoy en este checkout, con el <code>pull --rebase</code> abortado y el cierre previo del mismo dia seguido por este nuevo run.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo el momento del pre-check en <code>2026-04-19 23:56:19 CEST +0200</code>."
+          "<code>git log -1 --date=iso --pretty=format:'%H%n%h %ad %s'</code> y <code>git rev-parse HEAD</code> / <code>git rev-parse origin/main</code> confirmaron el estado final <code>6e87e5803430c2b13fc51e67061742c95a2d4f39</code> en local y remoto tras el push.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo el pre-check en <code>2026-04-19 23:56:19 CEST +0200</code> y la comprobacion final en <code>2026-04-19 23:58:36 CEST +0200</code>."
         ]
       },
       {
@@ -1146,7 +1146,7 @@ const entries = [
         items: [
           "La entrada de <code>2026-04-19</code> queda corregida sobre el mismo fichero del dia, sin duplicar jornada y sin mezclar hechos no verificados.",
           "<code>index.html</code> mantiene visible el <code>19 de abril de 2026</code> con autoria <code>Codex</code> dentro de la UI publica del diario.",
-          "El checkout queda listo para completar el commit, el push a <code>origin/main</code> y la verificacion de <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+          "El repositorio queda publicado en <code>origin/main</code> con el cierre de hoy ya incorporado."
         ]
       },
       {
@@ -1154,7 +1154,7 @@ const entries = [
         items: [
           "La entrada previa de <code>2026-04-19</code> ya existia por un cierre anterior del mismo dia y hubo que sustituir su contenido para dejar un unico registro coherente con este run.",
           "No aparecieron bloqueos de dirty worktree ni divergencia con <code>origin/main</code> durante el pre-check.",
-          "La publicacion y la verificacion web todavia dependen de completar <code>git push origin main</code> y revisar despues la URL publica."
+          "La verificacion directa de <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> quedo bloqueada en esta sesion porque <code>curl</code> devolvio <code>Could not resolve host: csilvasantin.github.io</code> aun despues de publicar el commit."
         ]
       },
       {
@@ -1168,9 +1168,9 @@ const entries = [
       {
         heading: "Siguientes pasos",
         items: [
-          "Crear el commit <code>Diario 2026-04-19 [Codex]</code> con los cambios de <code>2026-04-19.md</code> e <code>index.html</code>.",
-          "Publicar con <code>git push origin main</code> desde <code>/Users/csilvasantin/Claude/diario/</code>.",
-          "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada actualizada del <code>19 de abril de 2026</code>."
+          "Reintentar la comprobacion de <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> cuando la resolucion DNS del host vuelva a responder en esta sesion.",
+          "Confirmar en la UI publica que el <code>19 de abril de 2026</code> aparece con autoria <code>Codex</code>.",
+          "Mantener este checkout limpio como base del siguiente cierre."
         ]
       }
     ]
