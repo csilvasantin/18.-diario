@@ -151,6 +151,15 @@
     box-shadow: 0 0 8px rgba(57,255,111,0.3);
     flex-shrink: 0;
   }
+  .entry-times {
+    font-size: 0.55em;
+    font-weight: 400;
+    color: var(--matrix-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: 14px;
+    white-space: nowrap;
+  }
   .entry ul { padding-left: 24px; margin-bottom: 12px; }
   .entry li { margin-bottom: 10px; line-height: 1.7; color: var(--matrix-text); }
   .entry li::marker { color: var(--matrix-bright); }
@@ -1113,6 +1122,8 @@ const entries = [
     date: "2026-04-19",
     title: "19 de abril de 2026",
     author: "Codex",
+    startTime: "21:31",
+    updateTime: "22:42",
     sections: [
       {
         heading: "Que se hizo",
@@ -1158,6 +1169,14 @@ const entries = [
         items: [
           "Hacer commit y push de esta actualizacion sobre <code>origin/main</code>.",
           "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo y muestra la entrada del <code>19 de abril</code>."
+        ]
+      },
+      {
+        heading: "Diario — ordenacion y horas (Claude 22:42)",
+        items: [
+          "Ordenamos las entradas del diario de forma descendente: la mas reciente (hoy) aparece primero en el selector y se muestra por defecto.",
+          "Añadimos campos opcionales <code>startTime</code> y <code>updateTime</code> por entrada.",
+          "Las horas se renderizan al lado de la fecha tanto en el selector como en el titulo de la entrada."
         ]
       }
     ]
@@ -1335,6 +1354,16 @@ const entries = [
 
 let activeFilter = "";
 
+// Sort entries by date descending (most recent first)
+entries.sort((a, b) => b.date.localeCompare(a.date));
+
+function formatEntryTimes(entry) {
+  const parts = [];
+  if (entry.startTime) parts.push("Inicio " + entry.startTime);
+  if (entry.updateTime) parts.push("Update " + entry.updateTime);
+  return parts.length ? parts.join(" · ") : "";
+}
+
 // Build all entry divs once
 (function buildEntries() {
   const container = document.getElementById("entries");
@@ -1342,7 +1371,9 @@ let activeFilter = "";
     const div = document.createElement("div");
     div.className = "entry";
     div.id = "entry-" + i;
-    let html = "<h1>Diario - " + entry.title + "</h1>";
+    const times = formatEntryTimes(entry);
+    const timesHtml = times ? " <span class=\"entry-times\">" + times + "</span>" : "";
+    let html = "<h1>Diario - " + entry.title + timesHtml + "</h1>";
     entry.sections.forEach((s, si) => {
       const badge = (si === 0 && entry.author)
         ? " <span class=\"author-badge\">" + entry.author + "</span>"
@@ -1370,10 +1401,11 @@ function rebuildSelector(filtered, showIdx) {
   filtered.forEach(i => {
     const opt = document.createElement("option");
     opt.value = String(i);
-    opt.textContent = entries[i].date;
+    const times = formatEntryTimes(entries[i]);
+    opt.textContent = entries[i].date + (times ? "  —  " + times : "");
     selector.appendChild(opt);
   });
-  const target = filtered.includes(showIdx) ? showIdx : filtered[filtered.length - 1];
+  const target = filtered.includes(showIdx) ? showIdx : filtered[0];
   showEntry(target);
 }
 
@@ -1394,12 +1426,12 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.classList.add("active");
     activeFilter = btn.dataset.filter;
     const filtered = getFiltered();
-    rebuildSelector(filtered, filtered[filtered.length - 1]);
+    rebuildSelector(filtered, filtered[0]);
   });
 });
 
-// Init: show all, last entry
-rebuildSelector(getFiltered(), entries.length - 1);
+// Init: show all, most recent entry (entries are sorted descending)
+rebuildSelector(getFiltered(), 0);
 
 (function startMatrixBackground() {
   const canvas = document.getElementById("matrix-canvas");
