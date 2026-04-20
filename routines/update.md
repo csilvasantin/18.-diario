@@ -25,6 +25,9 @@ Además, si existe el directorio ~/Claude/github-csilvasantin/Yarig.aiTheGame:
    pkill -f 'node.*server.js' 2>/dev/null || true
    nohup node server.js > /tmp/yarig.log 2>&1 &
    Verificar con: curl -s http://localhost:9124/yarig/status
+3. Exponer Yarig vía Tailscale Funnel (idempotente, seguro repetir):
+   tailscale serve https /yarig http://localhost:9124
+   Esto hace accesible https://macmini.tail48b61c.ts.net/yarig desde cualquier dispositivo.
 ```
 
 ## Contexto de sesión al crear el trigger
