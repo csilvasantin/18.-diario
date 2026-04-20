@@ -162,6 +162,18 @@
     color: #1a0800;
     box-shadow: 0 0 10px rgba(255,183,0,0.4);
   }
+  #yarig-sync {
+    padding: 5px 13px;
+    font-family: inherit; font-size: 0.72rem; letter-spacing: 0.08em;
+    text-transform: uppercase; cursor: pointer;
+    border: 1px solid rgba(255,183,0,0.45); border-radius: 999px;
+    background: transparent; color: #ffb700;
+    transition: all 0.18s; white-space: nowrap;
+  }
+  #yarig-sync:hover:not(:disabled) { background: rgba(255,183,0,0.1); border-color: #ffb700; }
+  #yarig-sync:disabled { opacity: 0.55; cursor: default; }
+  #yarig-sync.ok  { color: var(--matrix-bright); border-color: var(--matrix-bright); }
+  #yarig-sync.err { color: var(--matrix-danger);  border-color: var(--matrix-danger); }
   .entry-times {
     font-size: 0.55em;
     font-weight: 400;
@@ -209,6 +221,7 @@
       <button class="filter-btn" data-filter="Claude">Claude</button>
       <button class="filter-btn" data-filter="Codex">Codex</button>
       <button class="filter-btn" data-filter="Yarig.ai">Yarig.ai</button>
+      <button id="yarig-sync" title="Importar tareas de hoy desde Yarig.ai">⟳ importar</button>
       <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
       <a href="repos.html" style="margin-left:auto;color:var(--matrix-muted);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:color 0.15s" onmouseover="this.style.color='var(--matrix-bright)'" onmouseout="this.style.color='var(--matrix-muted)'">repos →</a>
     </div>
@@ -1389,9 +1402,10 @@ function formatEntryTimes(entry) {
   return "Inicio " + start + " · Update " + update;
 }
 
-// Build all entry divs once
-(function buildEntries() {
+// Build all entry divs
+function buildEntries() {
   const container = document.getElementById("entries");
+  container.innerHTML = "";
   entries.forEach((entry, i) => {
     const div = document.createElement("div");
     div.className = "entry";
@@ -1411,7 +1425,8 @@ function formatEntryTimes(entry) {
     div.innerHTML = html;
     container.appendChild(div);
   });
-})();
+}
+buildEntries();
 
 function getFiltered() {
   if (!activeFilter) return entries.map((_, i) => i);
@@ -1457,6 +1472,99 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
 
 // Init: show all, most recent entry (entries are sorted descending)
 rebuildSelector(getFiltered(), 0);
+
+// ── Yarig.ai import ──────────────────────────────────────────
+(function initYarigSync() {
+  const btn = document.getElementById("yarig-sync");
+  const MONTHS = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+
+  function todayMadrid() {
+    return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" });
+  }
+
+  function taskText(t) {
+    return t.description || t.name || t.text || t.title || "";
+  }
+
+  function getYarigUrl() {
+    return localStorage.getItem("yarig_url") || "http://localhost:9124";
+  }
+
+  function setBtnState(text, cls, disabled) {
+    btn.textContent = text;
+    btn.className = cls || "";
+    btn.disabled = !!disabled;
+  }
+
+  async function syncYarig() {
+    const yarigUrl = getYarigUrl();
+    setBtnState("⟳ importando…", "", true);
+
+    let rawTasks = [];
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 12000);
+      const res = await fetch(yarigUrl + "/yarig/today", { signal: ctrl.signal });
+      clearTimeout(t);
+      const data = await res.json();
+      rawTasks = Array.isArray(data?.tasks) ? data.tasks : Array.isArray(data) ? data : [];
+    } catch (e) {
+      const change = confirm(
+        "No se pudo conectar con " + yarigUrl + ".\n\n¿Cambiar la URL del servidor Yarig?"
+      );
+      if (change) {
+        const url = prompt("URL del servidor Yarig (ej: http://localhost:9124):", yarigUrl);
+        if (url) localStorage.setItem("yarig_url", url.replace(/\/$/, ""));
+      }
+      setBtnState("⟳ importar", "err", false);
+      setTimeout(() => setBtnState("⟳ importar", "", false), 2000);
+      return;
+    }
+
+    // Build entry
+    const date = todayMadrid();
+    const [y, m, d] = date.split("-");
+    const title = parseInt(d) + " de " + MONTHS[parseInt(m) - 1] + " de " + y;
+    const completed = rawTasks.filter(t => t.finished || t.completed || t.done);
+    const pending   = rawTasks.filter(t => !t.finished && !t.completed && !t.done);
+    const sections  = [];
+    if (completed.length) sections.push({ heading: "Tareas completadas", items: completed.map(taskText) });
+    if (pending.length)   sections.push({ heading: "Tareas pendientes",  items: pending.map(taskText) });
+    if (!sections.length) sections.push({ heading: "Actividad",          items: ["Sin tareas registradas hoy"] });
+
+    // Update entries array (replace today or prepend)
+    const now = new Date().toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Madrid" });
+    const newEntry = { date, title, author: "Yarig.ai", startTime: now, sections };
+    const todayIdx = entries.findIndex(e => e.date === date);
+    if (todayIdx !== -1) entries[todayIdx] = newEntry;
+    else entries.unshift(newEntry);
+    entries.sort((a, b) => b.date.localeCompare(a.date));
+
+    // Re-render and switch to Yarig filter
+    buildEntries();
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    document.querySelector('[data-filter="Yarig.ai"]').classList.add("active");
+    activeFilter = "Yarig.ai";
+    const filtered = getFiltered();
+    const newIdx = entries.findIndex(e => e.date === date);
+    rebuildSelector(filtered, filtered.includes(newIdx) ? newIdx : filtered[0]);
+
+    setBtnState("✓ importado", "ok", true);
+
+    // Background push to GitHub via Yarig server
+    fetch(yarigUrl + "/yarig/diary/push", { method: "POST" })
+      .catch(() => {});
+
+    setTimeout(() => setBtnState("⟳ importar", "", false), 3000);
+  }
+
+  btn.addEventListener("click", syncYarig);
+  btn.addEventListener("contextmenu", e => {
+    e.preventDefault();
+    const url = prompt("URL del servidor Yarig:", getYarigUrl());
+    if (url) localStorage.setItem("yarig_url", url.replace(/\/$/, ""));
+  });
+})();
 
 (function startMatrixBackground() {
   const canvas = document.getElementById("matrix-canvas");
