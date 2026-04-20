@@ -1437,7 +1437,7 @@ entries.sort((a, b) => b.date.localeCompare(a.date));
 function formatEntryTimes(entry) {
   const start = entry.startTime || "--:--";
   const update = entry.updateTime || "--:--";
-  const endLabel = entry.author === "Yarig.ai" ? "Fin" : "Update";
+  const endLabel = entry.author === "Yarig.ai" ? "Cierre" : "Update";
   return "Inicio " + start + " · " + endLabel + " " + update;
 }
 
