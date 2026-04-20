@@ -17,7 +17,14 @@ tabla de proyectos.
 
 ```
 Subir todos los cambios realizados en este máquina en local a la nube de github
-de csilvasantin y actualizar la tabla de proyectos
+de csilvasantin y actualizar la tabla de proyectos.
+
+Además, si existe el directorio ~/Claude/github-csilvasantin/Yarig.aiTheGame:
+1. Hacer git pull origin main
+2. Si server.js ha cambiado en el pull, reiniciar el servidor:
+   pkill -f 'node.*server.js' 2>/dev/null || true
+   nohup node server.js > /tmp/yarig.log 2>&1 &
+   Verificar con: curl -s http://localhost:9124/yarig/status
 ```
 
 ## Contexto de sesión al crear el trigger
