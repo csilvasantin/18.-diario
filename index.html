@@ -174,6 +174,23 @@
   #yarig-sync:disabled { opacity: 0.55; cursor: default; }
   #yarig-sync.ok  { color: var(--matrix-bright); border-color: var(--matrix-bright); }
   #yarig-sync.err { color: var(--matrix-danger);  border-color: var(--matrix-danger); }
+  .yarig-task-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; margin-left: 8px; padding: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(0,255,110,0.35);
+    background: rgba(0,255,110,0.08);
+    color: var(--matrix-bright);
+    font-family: inherit; font-size: 0.85rem; line-height: 1;
+    cursor: pointer; vertical-align: middle;
+    transition: all 0.15s ease;
+  }
+  .yarig-task-btn:hover:not(:disabled) {
+    background: rgba(0,255,110,0.22); border-color: var(--matrix-bright);
+    box-shadow: 0 0 8px rgba(0,255,110,0.25);
+  }
+  .yarig-task-btn:disabled { opacity: 0.5; cursor: default; }
+  .yarig-task-btn.err { color: var(--matrix-danger); border-color: var(--matrix-danger); background: rgba(255,107,107,0.1); }
   .entry-times {
     font-size: 0.55em;
     font-weight: 400;
@@ -1423,7 +1440,19 @@ function buildEntries() {
         ? " <span class=\"" + badgeClass + "\">" + entry.author + "</span>"
         : "";
       html += "<h2>" + s.heading + badge + "</h2><ul>";
-      s.items.forEach(item => { html += "<li>" + item + "</li>"; });
+      const isPending = /pendiente/i.test(s.heading);
+      s.items.forEach(item => {
+        if (typeof item === "string") {
+          html += "<li>" + item + "</li>";
+        } else {
+          const text = item.text || "";
+          const canClose = isPending && entry.author === "Yarig.ai" && item.id;
+          const btn = canClose
+            ? ' <button class="yarig-task-btn" data-tid="' + item.id + '" title="Completar tarea">✓</button>'
+            : "";
+          html += "<li>" + text + btn + "</li>";
+        }
+      });
       html += "</ul>";
     });
     div.innerHTML = html;
@@ -1538,11 +1567,17 @@ rebuildSelector(getFiltered(), 0);
     const date = todayMadrid();
     const [y, m, d] = date.split("-");
     const title = parseInt(d) + " de " + MONTHS[parseInt(m) - 1] + " de " + y;
-    const completed = rawTasks.filter(t => t.finished || t.completed || t.done);
-    const pending   = rawTasks.filter(t => !t.finished && !t.completed && !t.done);
+    const isDone = t => {
+      const v = t.finished ?? t.completed ?? t.done;
+      return v === true || v === 1 || v === "1";
+    };
+    const completed = rawTasks.filter(isDone);
+    const pending   = rawTasks.filter(t => !isDone(t));
+    const toItem    = t => ({ id: String(t.id), text: taskText(t) });
+    const total     = completed.length + pending.length;
     const sections  = [];
-    if (completed.length) sections.push({ heading: "Tareas completadas", items: completed.map(taskText) });
-    if (pending.length)   sections.push({ heading: "Tareas pendientes",  items: pending.map(taskText) });
+    if (completed.length) sections.push({ heading: "Tareas completadas (" + completed.length + "/" + total + ")", items: completed.map(toItem) });
+    if (pending.length)   sections.push({ heading: "Tareas pendientes",  items: pending.map(toItem) });
     if (!sections.length) sections.push({ heading: "Actividad",          items: ["Sin tareas registradas hoy"] });
 
     const now = new Date().toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Madrid" });
@@ -1566,6 +1601,37 @@ rebuildSelector(getFiltered(), 0);
   }
 
   btn.addEventListener("click", syncYarig);
+
+  // Bidirectional: clicking the "Completar" button on a pending Yarig task
+  // calls /yarig/task/close and re-syncs.
+  document.getElementById("entries").addEventListener("click", async (e) => {
+    const taskBtn = e.target.closest(".yarig-task-btn");
+    if (!taskBtn) return;
+    e.preventDefault();
+    const tid = taskBtn.dataset.tid;
+    if (!tid || taskBtn.disabled) return;
+    taskBtn.disabled = true;
+    const origText = taskBtn.textContent;
+    taskBtn.textContent = "…";
+    try {
+      const res = await fetch(getYarigUrl() + "/yarig/task/close", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tid, finished: 1 }),
+        signal: AbortSignal.timeout(10000),
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      await syncYarig();
+    } catch (err) {
+      taskBtn.classList.add("err");
+      taskBtn.textContent = "✗";
+      setTimeout(() => {
+        taskBtn.classList.remove("err");
+        taskBtn.textContent = origText;
+        taskBtn.disabled = false;
+      }, 2500);
+    }
+  });
 })();
 
 (function startMatrixBackground() {
