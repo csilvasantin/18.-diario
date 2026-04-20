@@ -1539,7 +1539,36 @@ rebuildSelector(getFiltered(), 0);
   function todayMadrid() {
     return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" });
   }
-  function taskText(t) { return t.description || t.name || t.text || t.title || ""; }
+  function taskDuration(t) {
+    if (!t.start_time || !t.end_time) return null;
+    const s = new Date(String(t.start_time).replace(" ", "T"));
+    const e = new Date(String(t.end_time).replace(" ", "T"));
+    if (isNaN(s) || isNaN(e)) return null;
+    let sec = Math.max(0, Math.round((e - s) / 1000));
+    if (Array.isArray(t.interruptions)) {
+      for (const i of t.interruptions) {
+        const d = parseInt(i.duration ?? i.seconds ?? 0, 10);
+        if (Number.isFinite(d) && d > 0) sec -= d;
+      }
+    }
+    if (sec <= 0) return null;
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60);
+    const s2 = sec % 60;
+    const pad = n => String(n).padStart(2, "0");
+    return h ? (h + "h " + pad(m) + "m " + pad(s2) + "s") : (pad(m) + "m " + pad(s2) + "s");
+  }
+  function taskText(t) {
+    const base = t.description || t.name || t.text || t.title || "";
+    const dur = taskDuration(t);
+    return dur ? (base + " (" + dur + ")") : base;
+  }
+  function parseScore(s) {
+    if (typeof s === "number") return s;
+    if (typeof s === "string") { const n = parseInt(s, 10); return Number.isFinite(n) ? n : null; }
+    if (s && typeof s === "object") return s.score ?? s.points ?? null;
+    return null;
+  }
   function getYarigUrl() { return localStorage.getItem("yarig_url") || DEFAULT_URL; }
   function setBtnState(text, cls, disabled) {
     btn.textContent = text; btn.className = cls || ""; btn.disabled = !!disabled;
@@ -1551,11 +1580,16 @@ rebuildSelector(getFiltered(), 0);
     setBtnState("⟳ importando…", "", true);
 
     let rawTasks = [];
+    let score = null;
     try {
-      const res = await fetch(yarigUrl + "/yarig/today", { signal: AbortSignal.timeout(10000) });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const data = await res.json();
+      const [todayRes, scoreRes] = await Promise.all([
+        fetch(yarigUrl + "/yarig/today",  { signal: AbortSignal.timeout(10000) }),
+        fetch(yarigUrl + "/yarig/score",  { signal: AbortSignal.timeout(10000) }).catch(() => null),
+      ]);
+      if (!todayRes.ok) throw new Error("HTTP " + todayRes.status);
+      const data = await todayRes.json();
       rawTasks = Array.isArray(data?.tasks) ? data.tasks : Array.isArray(data) ? data : [];
+      if (scoreRes && scoreRes.ok) { try { score = parseScore(await scoreRes.json()); } catch {} }
     } catch (e) {
       setBtnState("✗ sin conexión", "err", false);
       showCfg("No se pudo conectar con " + yarigUrl + " — cambia la URL si es necesario:");
@@ -1575,8 +1609,9 @@ rebuildSelector(getFiltered(), 0);
     const pending   = rawTasks.filter(t => !isDone(t));
     const toItem    = t => ({ id: String(t.id), text: taskText(t) });
     const total     = completed.length + pending.length;
+    const ptsSuffix = Number.isFinite(score) ? " · " + score + " puntos" : "";
     const sections  = [];
-    if (completed.length) sections.push({ heading: "Tareas completadas (" + completed.length + "/" + total + ")", items: completed.map(toItem) });
+    if (completed.length) sections.push({ heading: "Tareas completadas (" + completed.length + "/" + total + ")" + ptsSuffix, items: completed.map(toItem) });
     if (pending.length)   sections.push({ heading: "Tareas pendientes",  items: pending.map(toItem) });
     if (!sections.length) sections.push({ heading: "Actividad",          items: ["Sin tareas registradas hoy"] });
 
