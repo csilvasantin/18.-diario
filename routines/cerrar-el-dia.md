@@ -25,12 +25,10 @@ concreto no se ha hecho nada se documenta y ya esta
 ## Contexto de sesión al crear el trigger
 
 - `session_context.sources`: repo donde se empuja el diario.
-  En la cuenta original es `https://github.com/carlossilvasantin/diario` con
+  En la cuenta original es `https://github.com/csilvasantin/18.-diario` con
   `allow_unrestricted_git_push: true`. Cámbialo por el tuyo si tu diario vive
   en otro repo.
-- `session_context.outcomes.git_repository`: mismo repo, rama de trabajo
-  (en la original `claude/quirky-albattani`, pero Claude puede elegir una nueva
-  cada vez — no es obligatorio fijarla).
+- `session_context.outcomes.git_repository`: mismo repo, branch `main`.
 
 ## Referencia de la instancia original (Carlos)
 
