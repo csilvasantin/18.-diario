@@ -1435,7 +1435,8 @@ entries.sort((a, b) => b.date.localeCompare(a.date));
 function formatEntryTimes(entry) {
   const start = entry.startTime || "--:--";
   const update = entry.updateTime || "--:--";
-  return "Inicio " + start + " · Update " + update;
+  const endLabel = entry.author === "Yarig.ai" ? "Fin" : "Update";
+  return "Inicio " + start + " · " + endLabel + " " + update;
 }
 
 // Build all entry divs
@@ -1642,8 +1643,14 @@ rebuildSelector(getFiltered(), 0);
     if (pending.length)   sections.push({ heading: "Tareas pendientes",  items: pending.map(toItem) });
     if (!sections.length) sections.push({ heading: "Actividad",          items: ["Sin tareas registradas hoy"] });
 
-    const now = new Date().toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Madrid" });
-    const newEntry = { date, title, author: "Yarig.ai", startTime: now, sections };
+    const journey = computeJourney(clocking);
+    const nowHHMM = new Date().toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Madrid" });
+    const newEntry = {
+      date, title, author: "Yarig.ai",
+      startTime: journey.startTime || nowHHMM,
+      updateTime: journey.endTime || undefined,
+      sections,
+    };
     const todayIdx = entries.findIndex(e => e.date === date);
     if (todayIdx !== -1) entries[todayIdx] = newEntry;
     else entries.unshift(newEntry);
@@ -1668,13 +1675,27 @@ rebuildSelector(getFiltered(), 0);
   const journeyBtn = document.getElementById("yarig-journey");
   let journeyOpen = null; // null=unknown, true=open, false=closed
 
-  function updateJourneyButton(clocking) {
+  function computeJourney(clocking) {
     const list = Array.isArray(clocking) ? clocking.slice() : [];
-    // Sort by datetime ascending and look at the last one.
     list.sort((a, b) => String(a.datetime || "").localeCompare(String(b.datetime || "")));
     const last = list[list.length - 1];
-    // No clockings → closed. Last type=0 → open. Last type=1 → closed.
-    journeyOpen = last ? String(last.type) === "0" : false;
+    const open = last ? String(last.type) === "0" : false;
+    const hhmm = dt => {
+      const m = String(dt || "").match(/(\d{2}):(\d{2})/);
+      return m ? m[1] + ":" + m[2] : null;
+    };
+    const firstIn = list.find(c => String(c.type) === "0");
+    const lastOut = [...list].reverse().find(c => String(c.type) === "1");
+    return {
+      open,
+      startTime: hhmm(firstIn?.datetime),
+      endTime:   open ? null : hhmm(lastOut?.datetime),
+    };
+  }
+
+  function updateJourneyButton(clocking) {
+    const j = computeJourney(clocking);
+    journeyOpen = j.open;
     journeyBtn.style.display = "";
     journeyBtn.disabled = false;
     journeyBtn.classList.remove("err");
