@@ -1598,7 +1598,16 @@ rebuildSelector(getFiltered(), 0);
     const title = parseInt(d) + " de " + MONTHS[parseInt(m) - 1] + " de " + y;
     const isDone = t => {
       const v = t.finished ?? t.completed ?? t.done;
-      return v === true || v === 1 || v === "1";
+      const finishedFlag = v === true || v === 1 || v === "1";
+      if (!finishedFlag) return false;
+      // Yarig mantiene finished='1' al reabrir una tarea (play de nuevo).
+      // Cuando eso pasa start_time > end_time → tratarla como en proceso.
+      if (t.start_time && t.end_time) {
+        const s = new Date(String(t.start_time).replace(" ", "T"));
+        const e = new Date(String(t.end_time).replace(" ", "T"));
+        if (!isNaN(s) && !isNaN(e) && s > e) return false;
+      }
+      return true;
     };
     const completed = rawTasks.filter(isDone);
     const pending   = rawTasks.filter(t => !isDone(t));
