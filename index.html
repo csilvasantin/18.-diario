@@ -290,6 +290,46 @@ const entries = [
     ]
   },
   {
+    date: "2026-04-20",
+    title: "20 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Integración Yarig.ai ↔ Diario",
+        items: [
+          "Arreglado \"Sin conexión\": server Yarig no corría, Funnel sin ruta /yarig, clon local divergido de origin.",
+          "Merge Yarig.aiTheGame preservando Grok Coach v5.6 + módulo pushDiaryEntry; .env creado desde Yarig.Telegram.",
+          "Tailscale Funnel <code>/yarig → 127.0.0.1:9124</code> con normalizador de prefijo en server.js."
+        ]
+      },
+      {
+        heading: "Botones bidireccionales",
+        items: [
+          "<code>✓</code> por tarea pendiente → POST /yarig/task/close y re-sync.",
+          "<code>▶ abrir / ⏹ cerrar jornada</code> → POST /yarig/clocking con estado derivado del último fichaje.",
+          "Heading \"Tareas completadas (N/Total) · X puntos\" con score dinámico desde /score/json_user_score."
+        ]
+      },
+      {
+        heading: "Mejoras de datos y tiempos",
+        items: [
+          "Duración por tarea completada (<code>Xh Ym Zs</code>) calculada desde start/end.",
+          "Hora de apertura (Inicio) y cierre (Cierre) en H1 y selector, parseadas UTC → Europe/Madrid.",
+          "Tareas reabiertas (<code>start_time &gt; end_time</code>) tratadas como pendientes aunque finished='1'."
+        ]
+      },
+      {
+        heading: "Bugs cazados",
+        items: [
+          "pushDiaryEntry cortaba index.html: <code>indexOf('  },')</code> matcheaba cierre de sección (<code>      },</code>) dentro del cierre de entrada; anclado con newlines.",
+          "Yarig mantiene finished='1' al reabrir una tarea; solo bumpea start_time. Detectado.",
+          "<code>finished=\"0\"</code> llega como string truthy en JS; comparado explícitamente.",
+          "datetime de Yarig en UTC sin sufijo TZ; reformateado a Europe/Madrid (17:16 → 19:16)."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-03-15",
     title: "15 de marzo de 2026",
     sections: [
