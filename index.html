@@ -1475,49 +1475,58 @@ rebuildSelector(getFiltered(), 0);
 
 // ── Yarig.ai import ──────────────────────────────────────────
 (function initYarigSync() {
-  const btn = document.getElementById("yarig-sync");
+  const btn   = document.getElementById("yarig-sync");
   const MONTHS = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const DEFAULT_URL = "https://macmini.tail48b61c.ts.net";
+
+  // ── inline config bar (aparece bajo la nav cuando hay error) ──
+  const cfgBar = document.createElement("div");
+  cfgBar.id = "yarig-cfg";
+  cfgBar.style.cssText = "display:none;padding:10px 18px;background:rgba(255,60,60,0.08);border:1px solid rgba(255,107,107,0.3);border-radius:12px;margin-top:10px;font-size:0.78rem;color:var(--matrix-danger);display:none;align-items:center;gap:10px;flex-wrap:wrap;";
+  cfgBar.innerHTML =
+    '<span id="yarig-cfg-msg"></span>' +
+    '<input id="yarig-cfg-input" style="flex:1;min-width:200px;padding:4px 8px;background:rgba(0,16,8,0.9);border:1px solid rgba(255,107,107,0.4);border-radius:6px;color:#ffb7b7;font-family:inherit;font-size:0.78rem;" />' +
+    '<button id="yarig-cfg-save" style="padding:4px 12px;border:1px solid rgba(255,107,107,0.5);border-radius:999px;background:transparent;color:var(--matrix-danger);font-family:inherit;font-size:0.72rem;cursor:pointer;">Guardar</button>' +
+    '<button id="yarig-cfg-close" style="padding:4px 10px;border:1px solid rgba(0,255,110,0.2);border-radius:999px;background:transparent;color:var(--matrix-muted);font-family:inherit;font-size:0.72rem;cursor:pointer;">✕</button>';
+  document.getElementById("diary").querySelector("nav").appendChild(cfgBar);
+
+  function showCfg(msg) {
+    document.getElementById("yarig-cfg-msg").textContent = msg;
+    document.getElementById("yarig-cfg-input").value = getYarigUrl();
+    cfgBar.style.display = "flex";
+  }
+  function hideCfg() { cfgBar.style.display = "none"; }
+
+  document.getElementById("yarig-cfg-save").addEventListener("click", () => {
+    const v = document.getElementById("yarig-cfg-input").value.trim().replace(/\/$/, "");
+    if (v) { localStorage.setItem("yarig_url", v); hideCfg(); }
+  });
+  document.getElementById("yarig-cfg-close").addEventListener("click", hideCfg);
 
   function todayMadrid() {
     return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" });
   }
-
-  function taskText(t) {
-    return t.description || t.name || t.text || t.title || "";
-  }
-
-  function getYarigUrl() {
-    return localStorage.getItem("yarig_url") || "http://localhost:9124";
-  }
-
+  function taskText(t) { return t.description || t.name || t.text || t.title || ""; }
+  function getYarigUrl() { return localStorage.getItem("yarig_url") || DEFAULT_URL; }
   function setBtnState(text, cls, disabled) {
-    btn.textContent = text;
-    btn.className = cls || "";
-    btn.disabled = !!disabled;
+    btn.textContent = text; btn.className = cls || ""; btn.disabled = !!disabled;
   }
 
   async function syncYarig() {
+    hideCfg();
     const yarigUrl = getYarigUrl();
     setBtnState("⟳ importando…", "", true);
 
     let rawTasks = [];
     try {
-      const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 12000);
-      const res = await fetch(yarigUrl + "/yarig/today", { signal: ctrl.signal });
-      clearTimeout(t);
+      const res = await fetch(yarigUrl + "/yarig/today", { signal: AbortSignal.timeout(10000) });
+      if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
       rawTasks = Array.isArray(data?.tasks) ? data.tasks : Array.isArray(data) ? data : [];
     } catch (e) {
-      const change = confirm(
-        "No se pudo conectar con " + yarigUrl + ".\n\n¿Cambiar la URL del servidor Yarig?"
-      );
-      if (change) {
-        const url = prompt("URL del servidor Yarig (ej: http://localhost:9124):", yarigUrl);
-        if (url) localStorage.setItem("yarig_url", url.replace(/\/$/, ""));
-      }
-      setBtnState("⟳ importar", "err", false);
-      setTimeout(() => setBtnState("⟳ importar", "", false), 2000);
+      setBtnState("✗ sin conexión", "err", false);
+      showCfg("No se pudo conectar con " + yarigUrl + " — cambia la URL si es necesario:");
+      setTimeout(() => setBtnState("⟳ importar", "", false), 4000);
       return;
     }
 
@@ -1532,7 +1541,6 @@ rebuildSelector(getFiltered(), 0);
     if (pending.length)   sections.push({ heading: "Tareas pendientes",  items: pending.map(taskText) });
     if (!sections.length) sections.push({ heading: "Actividad",          items: ["Sin tareas registradas hoy"] });
 
-    // Update entries array (replace today or prepend)
     const now = new Date().toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Madrid" });
     const newEntry = { date, title, author: "Yarig.ai", startTime: now, sections };
     const todayIdx = entries.findIndex(e => e.date === date);
@@ -1540,7 +1548,6 @@ rebuildSelector(getFiltered(), 0);
     else entries.unshift(newEntry);
     entries.sort((a, b) => b.date.localeCompare(a.date));
 
-    // Re-render and switch to Yarig filter
     buildEntries();
     document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
     document.querySelector('[data-filter="Yarig.ai"]').classList.add("active");
@@ -1550,20 +1557,11 @@ rebuildSelector(getFiltered(), 0);
     rebuildSelector(filtered, filtered.includes(newIdx) ? newIdx : filtered[0]);
 
     setBtnState("✓ importado", "ok", true);
-
-    // Background push to GitHub via Yarig server
-    fetch(yarigUrl + "/yarig/diary/push", { method: "POST" })
-      .catch(() => {});
-
+    fetch(yarigUrl + "/yarig/diary/push", { method: "POST" }).catch(() => {});
     setTimeout(() => setBtnState("⟳ importar", "", false), 3000);
   }
 
   btn.addEventListener("click", syncYarig);
-  btn.addEventListener("contextmenu", e => {
-    e.preventDefault();
-    const url = prompt("URL del servidor Yarig:", getYarigUrl());
-    if (url) localStorage.setItem("yarig_url", url.replace(/\/$/, ""));
-  });
 })();
 
 (function startMatrixBackground() {
