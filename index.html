@@ -339,6 +339,57 @@ const entries = [
     ]
   },
   {
+    date: "2026-04-21",
+    title: "21 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se anadio soporte al bot de Telegram <code>AdmiraBot</code> (<code>super_hue_bot3.py</code>) para el sensor de contacto Philips Hue Secure (modelo <code>9290035639</code>), que detecta si la puerta del despacho esta abierta o cerrada.",
+          "Se implementaron <code>discover_contact_sensor()</code> (consulta <code>/sensors</code> en el bridge Hue y localiza el sensor por <code>modelid</code> o tipo <code>ZLLOpenClose</code>), <code>get_door_state()</code> y <code>send_door_notification()</code> para avisar al grupo de Telegram cuando cambia el estado.",
+          "<code>state_poller</code> comprueba el sensor cada 3 s, notifica cambios y redibuja el panel; nueva fila de teclado con el estado en tiempo real y render de la puerta (azul abierta / tirador dorado cerrada) junto al tubo derecho del panel Mario.",
+          "Creado repo publico <a href='https://github.com/csilvasantin/admirabot' target='_blank'>csilvasantin/admirabot</a> con el primer commit que incluye <code>super_hue_bot3.py</code> completo."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log -1</code> en <code>18.-diario</code> confirma el commit <code>ef60a3f</code> (<code>Entrada 21 de abril: sensor de puerta AdmiraBot</code>) como registro previo del trabajo del dia.",
+          "Sesion activa de Claude Code en <code>main-CbRf5</code> con <code>git status</code> limpio antes del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "AdmiraBot deja de ser solo control de luces e integra senalizacion fisica de la puerta, ampliando la superficie domotica del despacho.",
+          "El panel Mario muestra el estado de la puerta como ciudadano de primera clase (fila de teclado + render en el tubo) en lugar de esconderlo en logs."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El commit inicial del sensor (<code>ef60a3f</code>) se publico sin marcador <code>[Claude]</code>, por lo que <code>repos.html</code> no lo detectaba como trabajo del agente.",
+          "La seccion AdmiraBot en <code>2026-04-21.md</code> quedo sin firma <code>[Claude]</code>, mezclada entre la entrada automatica de Yarig.ai y la de Codex."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Restructurar la entrada del dia con el encabezado canonico <code># Diario - 21 de abril de 2026 [Claude]</code> y las 6 secciones numeradas, como pide el README.",
+          "Incluir el tag <code>[Claude]</code> en el commit de cierre para que el detector de LLM de <code>repos.html</code> etiquete correctamente el repo en la proxima regeneracion automatica."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Probar el sensor de puerta en vivo con aperturas y cierres reales y verificar que no se duplican las notificaciones cuando <code>state_poller</code> ve rebotes.",
+          "Decidir si <code>admirabot</code> entra en la lista <code>PROYECTOS</code> de <code>.github/workflows/update-repos.yml</code> para aparecer en <code>repos.html</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-20",
     title: "20 de abril de 2026",
     author: "Yarig.ai",
