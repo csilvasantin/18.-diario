@@ -1438,7 +1438,9 @@ function formatEntryTimes(entry) {
   const start = entry.startTime || "--:--";
   const update = entry.updateTime || "--:--";
   const endLabel = entry.author === "Yarig.ai" ? "Cierre" : "Update";
-  return "Inicio " + start + " · " + endLabel + " " + update;
+  const pts = (entry.author === "Yarig.ai" && Number.isFinite(entry.points))
+    ? " · " + entry.points + " puntos" : "";
+  return "Inicio " + start + " · " + endLabel + " " + update + pts;
 }
 
 // Build all entry divs
@@ -1651,6 +1653,7 @@ rebuildSelector(getFiltered(), 0);
       date, title, author: "Yarig.ai",
       startTime: journey.startTime || nowHHMM,
       updateTime: journey.endTime || undefined,
+      points: Number.isFinite(score) ? score : undefined,
       sections,
     };
     const todayIdx = entries.findIndex(e => e.date === date);
