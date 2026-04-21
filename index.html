@@ -263,6 +263,21 @@
 <script>
 const entries = [
   {
+    date: "2026-04-21",
+    title: "21 de abril de 2026",
+    author: "Yarig.ai",
+    startTime: "07:59",
+    points: -5,
+    sections: [
+      {
+        heading: "Actividad",
+        items: [
+          "Sin tareas registradas por csilvasantin@gmail.com"
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-20",
     title: "20 de abril de 2026",
     author: "Yarig.ai",
@@ -285,6 +300,88 @@ const entries = [
         heading: "Tareas pendientes",
         items: [
           {"id":"541997","text":"Conectar Yarig.ai con el diario2"}
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-04-20",
+    title: "20 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Integración Yarig.ai ↔ Diario",
+        items: [
+          "Arreglado \"Sin conexión\": server Yarig no corría, Funnel sin ruta /yarig, clon local divergido de origin.",
+          "Merge Yarig.aiTheGame preservando Grok Coach v5.6 + módulo pushDiaryEntry; .env creado desde Yarig.Telegram.",
+          "Tailscale Funnel <code>/yarig → 127.0.0.1:9124</code> con normalizador de prefijo en server.js."
+        ]
+      },
+      {
+        heading: "Botones bidireccionales",
+        items: [
+          "<code>✓</code> por tarea pendiente → POST /yarig/task/close y re-sync.",
+          "<code>▶ abrir / ⏹ cerrar jornada</code> → POST /yarig/clocking con estado derivado del último fichaje.",
+          "Heading \"Tareas completadas (N/Total) · X puntos\" con score dinámico desde /score/json_user_score."
+        ]
+      },
+      {
+        heading: "Mejoras de datos y tiempos",
+        items: [
+          "Duración por tarea completada (<code>Xh Ym Zs</code>) calculada desde start/end.",
+          "Hora de apertura (Inicio) y cierre (Cierre) en H1 y selector, parseadas UTC → Europe/Madrid.",
+          "Tareas reabiertas (<code>start_time &gt; end_time</code>) tratadas como pendientes aunque finished='1'."
+        ]
+      },
+      {
+        heading: "Bugs cazados",
+        items: [
+          "pushDiaryEntry cortaba index.html: <code>indexOf('  },')</code> matcheaba cierre de sección (<code>      },</code>) dentro del cierre de entrada; anclado con newlines.",
+          "Yarig mantiene finished='1' al reabrir una tarea; solo bumpea start_time. Detectado.",
+          "<code>finished=\"0\"</code> llega como string truthy en JS; comparado explícitamente.",
+          "datetime de Yarig en UTC sin sufijo TZ; reformateado a Europe/Madrid (17:16 → 19:16)."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-04-20",
+    title: "20 de abril de 2026",
+    author: "Codex",
+    startTime: "22:32",
+    updateTime: "22:34",
+    sections: [
+      {
+        heading: "AdmiraNext XP",
+        items: [
+          "Selector de idioma movido a la pantalla de era, intro reordenada y capa baja del gameplay más traducida al inglés.",
+          "HUD operativo mejorado con focos de tienda y overlay interno <code>Codex Map</code> con diagrama del juego.",
+          "Proxy local corregido para servir <code>/</code> y <code>game.html</code> sin <code>Forbidden</code>."
+        ]
+      },
+      {
+        heading: "Validaciones",
+        items: [
+          "<code>node -e ... new Function(script)</code> devolvió <code>syntax ok</code> tras editar <code>game.html</code>.",
+          "<code>curl -sI 'http://127.0.0.1:9132/game.html?v=20260420-2228'</code> respondió <code>HTTP/1.1 200 OK</code>.",
+          "<code>xtanco-version.js</code> servido con <code>AdmiraNext v.26.20.04.5</code> y build <code>20260420-2228</code>.",
+          "Pre-check de cierre rehecho en <code>/Users/csilvasantin/Claude/diario</code>: <code>git status</code> limpio y <code>git log/reflog</code> confirmando <code>03ff0a9</code> y <code>3803b40</code> el 2026-04-20."
+        ]
+      },
+      {
+        heading: "Repositorio",
+        items: [
+          "Publicado <code>01.-AdmiraXperience-Game</code> en <code>origin/main</code> con el commit <code>de8fccd</code>.",
+          "La entrada <code>[Codex]</code> del diario se actualizó sin duplicar el día, dejando un único bloque firmado para <code>2026-04-20</code>.",
+          "La página de repos debería recoger este movimiento en la siguiente regeneración automática.",
+          "Mañana queda una pasada final de traducción y pulido visual."
+        ]
+      },
+      {
+        heading: "Bloqueo actual",
+        items: [
+          "La shell de esta automatización no pudo resolver <code>csilvasantin.github.io</code>: <code>curl</code> falló con <code>Could not resolve host</code> al intentar verificar la URL pública.",
+          "Si el bloqueo persiste, el <code>push</code> a <code>origin main</code> y la comprobación de GitHub Pages dependen de restaurar DNS/red en este entorno."
         ]
       }
     ]
