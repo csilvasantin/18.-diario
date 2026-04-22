@@ -337,6 +337,60 @@ const entries = [
     ]
   },
   {
+    date: "2026-04-22",
+    title: "22 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto el cierre del dia desde una sesion de Claude Code sobre la rama <code>main-c9Dwu</code> del repo <code>18.-diario</code>.",
+          "Se reviso el estado del repositorio: <code>git status</code> limpio y <code>git log</code> de hoy con los commits de Yarig.ai (<code>0ba8e63</code>, <code>4cb6829</code>) y Codex (<code>208e9b9</code>, <code>1366f7d</code>), mas el update automatico de <code>repos.html</code> (<code>604d36f</code>).",
+          "Se constato que <code>2026-04-22.md</code> e <code>index.html</code> ya contenian los bloques <code>[Yarig.ai]</code> y <code>[Codex]</code> del dia.",
+          "Se anadio este bloque <code>[Claude]</code> al markdown del dia y la entrada equivalente en <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Checkout en <code>/home/user/18.-diario</code> en rama <code>main-c9Dwu</code>, working tree limpio antes de editar.",
+          "<code>git log --since='2026-04-22 00:00'</code> confirmo cinco commits de hoy (Yarig.ai, Codex y el bot de Actions).",
+          "Lectura cruzada de <code>CLAUDE.md</code>, <code>README.md</code> y <code>CERRAR-EL-DIA.md</code> para seguir la rutina canonica."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda con las tres firmas del dia (<code>Yarig.ai</code>, <code>Codex</code>, <code>Claude</code>) consolidadas en un unico <code>2026-04-22.md</code>, siguiendo la regla 1-2-3.",
+          "<code>index.html</code> refleja tambien la entrada de Claude para que el filtro publico <code>Claude</code> muestre actividad de hoy."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No se detecto trabajo tecnico concreto de Claude Code hoy mas alla de la propia rutina de cierre; la entrada se limita a documentar ese hecho.",
+          "La rutina canonica apunta a <code>/Users/csilvasantin/Claude/diario/</code>; esta sesion trabaja desde el entorno Linux del agente web sobre <code>/home/user/18.-diario</code> y publica en la rama asignada <code>main-c9Dwu</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia aunque el trabajo de Claude Code se limite al cierre, conforme a \"si un dia en concreto no se ha hecho nada se documenta y ya esta\".",
+          "No tocar <code>repos.html</code> manualmente: la GitHub Action <code>update-repos.yml</code> lo regenera tras el push.",
+          "Empujar a <code>main-c9Dwu</code> y abrir un pull request en borrador, segun las reglas de la sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Verificar tras el merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>csilvasantin.github.io/18.-diario</a> muestra la entrada <code>[Claude]</code> del 22 de abril.",
+          "Comprobar que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>repos.html</a> se regenera tras el merge del PR.",
+          "En futuras sesiones de Claude Code, registrar cambios tecnicos reales cuando existan, no solo la ejecucion del cierre."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-21",
     title: "21 de abril de 2026",
     author: "Yarig.ai",
