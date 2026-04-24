@@ -318,6 +318,60 @@ const entries = [
     ]
   },
   {
+    date: "2026-04-24",
+    title: "24 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso el estado del repo <code>18.-diario</code> en la rama <code>main-9adHf</code>: ya existia una entrada <code>[Codex]</code> del 24 de abril y el commit automatico <code>chore: actualizar repos.html 2026-04-24 [skip ci]</code> estaba presente.",
+          "Se anadio un bloque <code>[Claude]</code> al fichero <code>2026-04-24.md</code> para dejar constancia del cierre firmado por Claude Code sobre la jornada, siguiendo la regla 1-2-3 (una entrada por fecha con firmas separadas por <code>---</code>).",
+          "Se actualizo <code>index.html</code> para que la UI publica incluya tambien la entrada <code>[Claude]</code> del 24 de abril bajo el filtro <code>Claude</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> sobre <code>main-9adHf</code> estaba limpio antes de empezar, con el arbol alineado con <code>origin/main-9adHf</code>.",
+          "<code>git log --oneline</code> confirmo que los ultimos commits del dia eran <code>68f5d64 Diario 2026-04-24 [Codex]</code> y <code>4cbf455 chore: actualizar repos.html 2026-04-24 [skip ci]</code>.",
+          "<code>repos.html</code> ya reflejaba <code>2026-04-24</code> como fecha de <code>today</code> para el repo <code>18.-diario</code> con los badges <code>Claude</code> y <code>Codex</code>, por lo que no requeria edicion manual."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La jornada del 24 de abril queda tambien firmada por Claude en Markdown y en la UI publica, complementando la entrada de Codex sin duplicar el dia.",
+          "Se confirma que la automatizacion de <code>repos.html</code> via GitHub Actions esta operativa y no requiere intervencion en este cierre.",
+          "El trabajo hecho con Claude Code hoy queda registrado conforme a la norma \"si un dia no se ha hecho nada se documenta y ya esta\": el unico hecho del dia en este repo es el propio cierre."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No hay actividad tecnica externa adicional que documentar desde esta sesion; el pre-check no muestra commits de Claude previos al cierre hoy.",
+          "La verificacion publica de <code>https://csilvasantin.github.io/18.-diario/</code> queda condicionada a completar <code>git push</code> y a que GitHub Pages sirva la build nueva."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Cerrar el dia con una entrada Claude minima y honesta, sin inventar trabajo no reflejado en git.",
+          "Publicar sobre la rama <code>main-9adHf</code> tal como indican las instrucciones de sesion y abrir una Pull Request en borrador hacia <code>main</code>.",
+          "No tocar <code>repos.html</code> manualmente; dejar que el workflow <code>update-repos.yml</code> lo regenere si corresponde."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-04-24.md index.html</code>, commit <code>Diario 2026-04-24 [Claude]</code> y push a <code>origin main-9adHf</code>.",
+          "Crear Pull Request en borrador desde <code>main-9adHf</code> hacia <code>main</code>.",
+          "Verificar que la URL publica muestra la nueva entrada una vez GitHub Pages haya rebuildeado."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-22",
     title: "22 de abril de 2026",
     author: "Yarig.ai",
