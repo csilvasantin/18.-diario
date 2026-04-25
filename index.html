@@ -263,6 +263,57 @@
 <script>
 const entries = [
   {
+    date: "2026-04-25",
+    title: "25 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto el pre-check sobre el checkout <code>/home/user/18.-diario/</code> en la rama <code>main-sigL6</code> con <code>git status</code>, <code>git log</code> del dia y <code>git branch -a</code>.",
+          "Se reviso <code>CERRAR-EL-DIA.md</code> y <code>README.md</code> para seguir la rutina canonica de cierre del diario.",
+          "Se creo la entrada <code>2026-04-25.md</code> y se actualizo <code>index.html</code> para publicar la fecha en la UI."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> devolvio <code>On branch main-sigL6 / nothing to commit, working tree clean</code> antes de empezar.",
+          "<code>git log --since='2026-04-25 00:00' --until='2026-04-25 23:59:59'</code> solo devolvio el commit automatico <code>c4e8767 chore: actualizar repos.html 2026-04-25 [skip ci]</code> ejecutado por <code>github-actions[bot]</code>.",
+          "La rama de trabajo <code>main-sigL6</code> esta por delante de <code>main</code> con las entradas pendientes de los dias 20, 21, 22 y 24 de abril, mas esta misma del 25."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda con una entrada fechada para <code>2026-04-25</code> firmada por <code>Claude</code>, aunque el dia no haya tenido actividad humana relevante mas alla de la automatizacion de <code>repos.html</code>.",
+          "La UI publica del diario queda preparada para mostrar la jornada en el selector de fechas y en el filtro de autoria <code>Claude</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No hubo trabajo humano en el repo durante el 25 de abril; el unico movimiento es la actualizacion automatica de <code>repos.html</code> por GitHub Actions."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar el dia tal cual: una entrada minima que documenta la ausencia de actividad, en linea con la regla \"si un dia no se ha hecho nada, se documenta y ya esta\".",
+          "Mantener el cierre en la rama <code>main-sigL6</code> segun las instrucciones de desarrollo, sin tocar <code>main</code> directamente."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-04-25.md index.html</code>, commit <code>Diario 2026-04-25 [Claude]</code> y push a <code>origin/main-sigL6</code>.",
+          "Abrir pull request draft de <code>main-sigL6</code> a <code>main</code> para consolidar las entradas pendientes (20, 21, 22, 24, 25 de abril).",
+          "Verificar que <code>https://csilvasantin.github.io/18.-diario/</code> muestra la entrada del 25 de abril una vez fusionada a <code>main</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-24",
     title: "24 de abril de 2026",
     author: "Codex",
