@@ -263,6 +263,69 @@
 <script>
 const entries = [
   {
+    date: "2026-04-26",
+    title: "26 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion larga en MacBook Pro Negro 14 sobre <code>32.-ConsejoAdmiraNextGame</code> que sustituye dos verbos del SCUMM del Consejo: <strong>Sintetizar -> Entrenar</strong> y <strong>Mirar -> Crear</strong>.",
+          "Verbo <strong>Entrenar</strong> (v26.26.04.1 -> .10): pegas URLs de videos o libros en la action-line y se archivan en <code>localStorage['entrenar:&lt;gen&gt;:&lt;persona&gt;']</code>; ventanas espejo izquierda/derecha en el retrato (videos/libros) con scrollbar SCUMM y orden inverso.",
+          "Auto-deteccion de destinatario via oEmbed (YouTube/Vimeo) o microlink, con picker manual cuando no hay match.",
+          "Magic link Telegram <code>?train=&amp;target=</code> (v26.26.04.11 / .51): IIFE en <code>&lt;head&gt;</code> preserva params; <code>_resolveTrainTarget</code> acepta persona, rol abreviado, substring o <code>todos</code>.",
+          "Memorizer2Bot extendido con <code>/entrenar &lt;url&gt; [destinatario]</code> que construye el magic link al Consejo (PID 25377 en MacMini).",
+          "Verbo <strong>Crear</strong> (v26.26.04.12 -> .15): table-viewer 32%/65%/36%/26% sobre la mesa con dos modos: <code>.mode-mac</code> (leyendas, marco beige Apple II + scanlines) y <code>.mode-hologram</code> (coetaneos, ciano translucido).",
+          "Backend Render <code>council-api.py</code> con cola in-memory TTL 1h y endpoints <code>POST /api/council/crear</code>, <code>GET /api/council/crear/&lt;id&gt;</code>, <code>GET /api/council/crear-pending</code>, <code>POST /api/council/crear/&lt;id&gt;/result|error</code>.",
+          "Tag de cierre cross-ordenador <code>v26.26.04.50</code> y release siguiente <code>v26.26.04.51</code> para reanudar desde MacMini con Codex."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Token <code>COUNCIL_API_TOKEN=admira2026</code> verificado contra Render con <code>curl</code> directo tras el fix v26.26.04.17.",
+          "Loop manual end-to-end: prompt en Crear -> ChatGPT via MCP -> imagen guardada -> <code>sips -Z 1024</code> -> upload a catbox.moe (<code>https://files.catbox.moe/dz01va.jpg</code>) -> <code>localStorage['crear:lastJob']</code> -> render sobre la mesa.",
+          "GH Pages live en <code>v26.26.04.51</code> tras push a <code>main</code>.",
+          "Memorizer2Bot operativo en MacMini desde <code>~/Claude/repos/Memorizer</code> con logs en <code>data/bot.log</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Dos verbos nuevos del SCUMM cerrados con UI completa, persistencia local y handshake con backend Render.",
+          "Magic link de Telegram al Consejo con asignacion de destinatario por persona, rol o todos.",
+          "Convencion <code>vYY.DD.MM.50</code> establecida como punto estable de cierre cross-ordenador.",
+          "Diario <code>2026-04-26-sesion-entrenar-crear-y-handoff-codex.md</code> (224 lineas) con commits clave, archivos criticos y receta para reanudar desde MacMini."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Frontend tenia hardcoded el token antiguo <code>G3ADHakf...</code> que devolvia 403 contra Render; corregido a <code>admira2026</code>.",
+          "Hover y <code>mouseleave</code> sobre <code>.council-image</code> producian parpadeo en la seleccion del corpus; sustituidos por seleccion solo desde panel.",
+          "El IIFE redirect del <code>&lt;head&gt;</code> machacaba los query params al anadir <code>_v=</code>; reescrito para preservarlos."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Saltar a <code>.50</code> independientemente del <code>.N</code> actual cada vez que se cierra version para sincronizar con otro Mac (memoria <code>feedback_release_50_convention.md</code>).",
+          "Migrar el handshake Crear de <code>localStorage</code> al backend Render para permitir un agente autonomo de generacion en MacMini.",
+          "Mantener el bot Memorizer corriendo con <code>nohup</code> de momento; valorar volver al tray app mas adelante."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Loop autonomo del agente Crear: leer <code>crear-pending</code>, automatizar ChatGPT (Playwright + cookies Plus o Claude in Chrome), subir a catbox y postear <code>/result</code>.",
+          "Cleanup del stash <code>macmini-pre-pull</code> en <code>~/Claude/repos/Memorizer</code>.",
+          "Verificar token Tailscale Funnel del Council API cuando el MacMini vuelva a estar disponible.",
+          "Reanudar trabajo desde <code>v26.26.04.50</code> en MacMini con Codex."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-24",
     title: "24 de abril de 2026",
     author: "Codex",
