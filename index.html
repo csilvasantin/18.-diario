@@ -263,6 +263,61 @@
 <script>
 const entries = [
   {
+    date: "2026-04-26",
+    title: "26 de abril de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log</code> del dia, <code>git reflog</code> del dia y <code>date</code>.",
+          "Se leyo la rutina local <code>CERRAR-EL-DIA.md</code> para seguir el flujo canonico de cierre sobre este checkout limpio.",
+          "Se creo la entrada <code>2026-04-26.md</code> y se actualizo <code>index.html</code> para publicar la fecha de hoy en la UI del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales antes de empezar.",
+          "<code>git log --since='2026-04-26 00:00' --until='2026-04-26 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits previos de hoy en este repo.",
+          "<code>git reflog --date=iso --since='2026-04-26 00:00'</code> no devolvio movimientos previos de hoy y <code>date</code> marco <code>2026-04-26 23:56:04 CEST +0200</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a tener una entrada fechada para <code>2026-04-26</code> firmada por <code>Codex</code>.",
+          "La UI publica queda preparada para mostrar la jornada de hoy en el selector y en el filtro de autoria <code>Codex</code>.",
+          "La rutina de cierre queda ejecutada sobre el checkout canonico indicado en las instrucciones."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La fuente canonica online indicada en GitHub no se pudo contrastar desde esta ejecucion; se siguio la copia local <code>CERRAR-EL-DIA.md</code>.",
+          "El pre-check no mostro actividad previa del 26 de abril en este repositorio antes de esta sesion, asi que la entrada de hoy solo puede registrar el propio cierre del diario.",
+          "La verificacion publica de <code>https://csilvasantin.github.io/diario/</code> depende de completar con exito el <code>push</code> a <code>origin/main</code> y de que GitHub Pages publique la actualizacion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar unicamente hechos verificados en este repo y en esta sesion, sin atribuir trabajo de otros repositorios o de otras automatizaciones.",
+          "Crear un nuevo fichero <code>2026-04-26.md</code> al no existir entrada previa de hoy en el checkout canonico.",
+          "Reflejar en <code>index.html</code> el mismo cierre firmado por <code>Codex</code> para mantener sincronizadas la fuente Markdown y la UI publica."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add</code>, <code>git commit -m \"Diario 2026-04-26 [Codex]\"</code> y <code>git push origin main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del 26 de abril de 2026.",
+          "Usar esta entrada como referencia del cierre ejecutado hoy sobre el checkout canonico del diario."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-24",
     title: "24 de abril de 2026",
     author: "Codex",
