@@ -263,6 +263,69 @@
 <script>
 const entries = [
   {
+    date: "2026-04-27",
+    title: "27 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion larga sobre <code>01.-AdmiraXperience-Game</code>: 13 commits cruzando medianoche (de <code>742c641</code> el 26 a las 23:12 hasta <code>f5121c5</code> el 27 a las 00:33), todos relacionados con el subsistema de Digital Signage y un nuevo flujo <code>/importTube</code>.",
+          "Backend (<code>elgato-proxy.js</code>): nuevos endpoints <code>GET /tube/health</code> y <code>POST /tube/download</code> que ejecutan <code>yt-dlp</code> localmente y devuelven el MP4 con cabeceras <code>X-Tube-Title</code>; whitelist de hosts YouTube y watchdog de 180 s.",
+          "Tailscale Funnel <code>/admira → 127.0.0.1:9126</code> para que la pagina publica de GitHub Pages alcance el proxy del Mac Mini sin chocar con el <code>/yarig</code> existente. Script <code>start-admira-tube.sh</code> automatiza arranque.",
+          "Frontend (<code>game.html</code>): panel \"📺 Digital Signage\" con thumbnails reales, modo fullwidth con icono CRT, retry de fotograma negro hasta marcar Error, drag-and-drop con multi-seleccion (boton \"Todas las pantallas\") y tap-to-select coexistentes.",
+          "Memoria personal: nuevas fichas <code>admira_tube_funnel.md</code> y <code>feedback_telegram_url_each_deploy.md</code> (enviar URL publica por Telegram tras cada deploy)."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> en <code>/Users/csilvasantin/Claude/diario/</code> devolvio <code>## main...origin/main</code>, sin cambios pendientes antes de empezar.",
+          "<code>curl -sS https://csilvasantin.github.io/01.-AdmiraXperience-Game/xtanco-version.js</code> devolvio <code>version:'AdmiraNext v26.27.04.5'</code> y <code>build:'20260427-1000'</code>.",
+          "<code>curl https://macmini.tail48b61c.ts.net/admira/tube/health</code> devolvio <code>{ok:true,available:true,version:'2026.02.21'}</code>; descarga real de <code>jNQXAC9IVRw</code> (Me at the zoo) → 533 KB MP4 valido en 2.7 s, importado en las 3 pantallas en simultaneo.",
+          "Pruebas sinteticas: dragstart desde img con <code>draggable=false</code> se eleva a la fila y permite pin; multi-seleccion DS1+DS2 + click Wham! pinea ambas dejando Escaparate intacto; \"Todas\" + click Rick Astley pinea las 3.",
+          "Whitelist anti-SSRF rechaza <code>192.168.0.1</code>, <code>example.com</code> y body sin <code>url</code> en <code>/tube/download</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>/importTube &lt;youtube-url&gt;</code> funciona desde la URL publica de GitHub Pages, no solo en local, gracias a la Funnel.",
+          "La distribucion de contenidos al digital signage admite cuatro UX coexistentes: drag externo desde escritorio, drag interno entre rows (reorden), tap-to-select de pantallas + click en row, y drag-drop de row sobre cards con multi-seleccion incluida.",
+          "El cache de thumbnails reintenta hasta 40 veces a +3 s cada uno antes de marcar \"Error\", solucionando el caso de videos con intro en negro.",
+          "La memoria personal queda con dos nuevas fichas que documentan la topologia y el habito de Telegram para futuras sesiones."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El <code>&lt;img&gt;</code> nativo dentro del thumbnail capturaba el dragstart como si fuera un drag de imagen, rompiendo el modo drag-to-pin. Resuelto en <code>ce22a51</code> con <code>draggable=\"false\"</code> en cada img + CSS <code>user-drag:none</code> defensivo.",
+          "El primer fix con un solo render path no atajaba el caso <code>cached</code> (path sincrono); requirio una segunda pasada con <code>replace_all</code> mas un Edit explicito en <code>dsApplyPanelThumbs</code>.",
+          "Conflicto de puerto entre Yarig (<code>:9124</code> via Funnel <code>/yarig</code>) y elgato-proxy (default <code>:9124</code>). Resuelto eligiendo <code>XTANCO_PORT=9126</code> para Admira y mapeando <code>/admira → :9126</code>.",
+          "El usuario reporto que la URL no llegaba por Telegram: comprobado que el worker <code>admira-telegram-bridge</code> la entregaba al chat 8663681; pendiente verificar con el usuario que ese chat es el correcto."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "No bajar el thumbnail de imagen por canvas: para imagenes el blob URL se inserta directamente en <code>&lt;img&gt;</code>; el canvas solo se usa para poster frames de video.",
+          "La seleccion de pantallas persiste tras cada pin para permitir rafagas; se vacia con Cancelar o tocando \"Todas\" cuando ya estan las 3 activas.",
+          "Soltar un thumbnail en un card con seleccion activa pinea a TODAS las pantallas seleccionadas, no solo a la card bajo el cursor; unifica las dos UX (click vs drag).",
+          "Mover el icono CRT de pantalla completa a la derecha junto a \"Cerrar\" en vez de a la izquierda del titulo, para que la cabecera lea de izquierda a derecha como un breadcrumb."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Confirmar con el usuario que el chat 8663681 (<code>@AdmiraXPBot</code>) es el destino correcto; si no, cambiar <code>TELEGRAM_CHAT_ID</code> en el secret del worker.",
+          "Revisar el caso <code>/importTube</code> con videos que YouTube sirve solo via DASH/HLS y <code>yt-dlp</code> no consigue remuxear a MP4 con <code>--max-filesize 300M</code>.",
+          "Considerar drag-drop multi-thumb (seleccionar varios contenidos primero y arrastrar uno tira a todos a la pantalla destino).",
+          "Empezar nueva sesion sobre el editor visual del panel de Digital Signage si el usuario quiere reordenar o etiquetar imports masivamente."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-26",
     title: "26 de abril de 2026",
     author: "Codex",
