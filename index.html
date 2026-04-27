@@ -326,6 +326,63 @@ const entries = [
     ]
   },
   {
+    date: "2026-04-27",
+    title: "27 de abril de 2026",
+    author: "Codex",
+    startTime: "00:16",
+    updateTime: "00:36",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log</code> del dia, <code>git reflog</code> del dia y <code>date</code>.",
+          "Se alineo <code>32.-ConsejoAdmiraNextGame</code> con <code>main</code>, integrando el trabajo local que venia desde <code>v26.26.04.50</code> y publicando dos commits nuevos: <code>9cc599b</code> (<code>v26.27.04.1 sync council shared training + preview</code>) y <code>a1eaae3</code> (<code>v26.27.04.2 harden entrenar persistence sync</code>).",
+          "Se actualizo el Consejo en GitHub Pages y se envio por Telegram la referencia final con URL, version visible y commit publicado."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> en <code>/Users/csilvasantin/Claude/diario/</code> devolvio <code>## main...origin/main</code>, sin cambios locales antes de empezar.",
+          "<code>git -C /Users/csilvasantin/Documents/Admirito/32.-ConsejoAdmiraNextGame log --since='2026-04-27 00:00' --until='2026-04-27 23:59:59' --date=iso --stat --oneline --all</code> confirmo los commits <code>9cc599b</code> y <code>a1eaae3</code> del dia en el repo del Consejo, y <code>git reflog --date=iso --since='2026-04-27 00:00'</code> fijo el checkout a <code>main</code> y ambos commits.",
+          "<code>curl -sL https://csilvasantin.github.io/32.-ConsejoAdmiraNextGame/council-scumm.html</code> devolvio la version visible <code>AdmiraNext Consejo v26.27.04.2</code>, y <code>git status --short --branch</code> en el repo del Consejo quedo en <code>## main...origin/main</code> con solo <code>node_modules/</code> sin versionar."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El Consejo queda unificado en la build publica <code>v26.27.04.2</code>, con <code>public/council-scumm.html</code> y <code>council-scumm.html</code> sincronizados.",
+          "El flujo <code>Entrenar</code> pasa a priorizar el backend del MacMini, combinar snapshots entre backends y reconciliar el corpus compartido cuando un backend vuelve a estar disponible.",
+          "El diario incorpora la jornada de hoy firmada por <code>Codex</code> y preparada para publicarse en la UI publica."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout del Consejo estaba arrancado en <code>detached HEAD</code> sobre <code>v26.26.04.50</code>, mientras la URL publica ya mostraba <code>v26.26.04.51</code>, lo que provocaba desalineacion entre lo local y lo publicado.",
+          "La primera implementacion del corpus compartido de <code>Entrenar</code> mostraba solo <code>total: 1</code> en la API publica de Render, evidenciando que el backend compartido no retenia todo el corpus esperado.",
+          "GitHub Pages tardo unos segundos en pasar de <code>AdmiraNext Consejo v26.27.04.1</code> a <code>AdmiraNext Consejo v26.27.04.2</code>, asi que hubo que esperar a la propagacion antes de dar por buena la URL final."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mover todo el trabajo del Consejo a <code>main</code> antes de seguir iterando, para no continuar desarrollando sobre una release vieja distinta de la publicada.",
+          "Publicar una version nueva visible (<code>v26.27.04.2</code>) en lugar de reutilizar la <code>.51</code>, de modo que URL, Telegram y pantalla mostrasen la misma referencia exacta.",
+          "Tratar el MacMini como backend prioritario del corpus de <code>Entrenar</code> y reforzar el guardado con reconciliacion entre backends y backup de fichero en la API."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-04-27.md index.html</code>, <code>git commit -m \"Diario 2026-04-27 [Codex]\"</code> y <code>git push origin main</code> desde <code>/Users/csilvasantin/Claude/diario/</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del 27 de abril de 2026 en la UI publica.",
+          "En el Consejo, comprobar con mas entrenos reales que la reconciliacion entre MacMini y Render mantiene el total estable al recargar y al cambiar de dispositivo."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-26",
     title: "26 de abril de 2026",
     author: "Codex",
