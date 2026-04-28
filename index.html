@@ -265,6 +265,63 @@ const entries = [
   {
     date: "2026-04-28",
     title: "28 de abril de 2026",
+    author: "Claude",
+    startTime: "21:07",
+    updateTime: "21:07",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion de cierre con Claude Code en <code>/home/user/18.-diario</code> sobre la rama <code>main-VEdBk</code> (instruccion de la sesion).",
+          "Pre-check: <code>git status --short --branch</code> -> <code>## main-VEdBk</code>; <code>git log --since='2026-04-28 00:00' --until='2026-04-28 23:59:59'</code> listo <code>56240cf chore: actualizar repos.html 2026-04-28 [skip ci]</code> y <code>8a65f80 Diario 2026-04-28 [Codex]</code>; <code>date</code> devolvio <code>2026-04-28 21:07:09 UTC +0000</code>.",
+          "Anadida entrada <code>[Claude]</code> a <code>2026-04-28.md</code> separada por <code>---</code> de la entrada <code>[Codex]</code> previa, conforme a <code>CERRAR-EL-DIA.md</code>.",
+          "Anadida esta entrada Claude del 2026-04-28 al array <code>entries</code> de <code>index.html</code> sin tocar la entrada Codex existente."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "El fichero <code>2026-04-28.md</code> ya existia con cierre Codex (commit <code>8a65f80</code>) y <code>repos.html</code> ya estaba regenerado hoy (<code>56240cf</code>), asi que este cierre solo anade la firma Claude.",
+          "La rama activa <code>main-VEdBk</code> existe en <code>origin</code>; se respeta la instruccion de sesion de desarrollar y empujar a esa rama en vez de a <code>main</code>.",
+          "Se mantienen los headings sin tildes (<code>Que se hizo</code>, <code>Que se valido</code>, <code>Avances</code>, <code>Problemas encontrados</code>, <code>Decisiones tomadas</code>, <code>Siguientes pasos</code>) para evitar problemas de encoding."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda firmado por las dos IAs activas hoy: Codex (00:11) y Claude (21:07 UTC) en el mismo <code>2026-04-28.md</code>.",
+          "<code>index.html</code> queda con dos entradas para 2026-04-28 visibles desde los filtros <code>Todos</code>, <code>Claude</code> y <code>Codex</code>.",
+          "La rama <code>main-VEdBk</code> queda lista para ser publicada como PR draft hacia <code>main</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Hoy no hubo trabajo de codigo de Claude fuera de la propia rutina de cierre en este repo; se documenta el cierre como tal y no se rellena con actividad inventada (\"si un dia no se ha hecho nada se documenta y ya esta\").",
+          "<code>CERRAR-EL-DIA.md</code> apunta a <code>git push origin main</code>, pero la instruccion de sesion exige trabajar en <code>main-VEdBk</code> y abrir PR draft; se respeta la instruccion de sesion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener la entrada <code>[Codex]</code> intacta y anadir el cierre <code>[Claude]</code> debajo separados por <code>---</code>, sin reescribir el cierre de Codex.",
+          "Empujar a <code>main-VEdBk</code> (no a <code>main</code>) y abrir PR draft, segun la instruccion explicita de la sesion.",
+          "No regenerar <code>repos.html</code> manualmente: ya esta al dia (<code>56240cf</code>) y el workflow <code>update-repos.yml</code> lo regenera tras el merge."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-04-28.md index.html</code> y <code>git commit -m \"Diario 2026-04-28 [Claude]\"</code> en <code>main-VEdBk</code>.",
+          "<code>git push -u origin main-VEdBk</code> y abrir PR draft contra <code>main</code>.",
+          "Tras merge a <code>main</code>, verificar <code>https://csilvasantin.github.io/18.-diario/</code> y <code>https://csilvasantin.github.io/18.-diario/repos.html</code> muestran la entrada Claude del 2026-04-28."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-04-28",
+    title: "28 de abril de 2026",
     author: "Codex",
     startTime: "00:11",
     updateTime: "00:11",
