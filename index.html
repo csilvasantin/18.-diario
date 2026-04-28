@@ -267,48 +267,51 @@ const entries = [
     title: "28 de abril de 2026",
     author: "Codex",
     startTime: "00:11",
-    updateTime: "00:11",
+    updateTime: "23:57",
     sections: [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto la rutina literal de cierre en <code>/Users/csilvasantin/Claude/diario/</code>, releyendo la memoria de la automatizacion y contrastando <code>CERRAR-EL-DIA.md</code> tanto en el checkout local como en <code>origin/main</code>.",
+          "Se reejecuto la rutina literal de cierre en <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la memoria de la automatizacion y contrastando <code>CERRAR-EL-DIA.md</code> tanto en la copia local como en <code>origin/main</code>.",
           "Se hizo el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-04-28 00:00' --until='2026-04-28 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-04-28 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se creo esta entrada <code>2026-04-28.md</code> con firma <code>[Codex]</code> y se actualizo <code>index.html</code> para incorporarla a la UI publica."
+          "Se revisaron <code>2026-04-28.md</code> e <code>index.html</code>, se corrigio el bloque <code>[Codex]</code> para reflejar la actividad real ya existente del dia y se mantuvo la firma <code>[Claude]</code> separada por <code>---</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
           "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando el checkout limpio antes de editar.",
-          "<code>git log</code> y <code>git reflog</code> del 2026-04-28 en este repo no devolvieron actividad previa, asi que esta pasada constituye el primer cierre registrado de hoy en <code>diario</code>.",
-          "<code>git show origin/main:CERRAR-EL-DIA.md</code> devolvio el mismo procedimiento operativo que la copia local usada en esta sesion."
+          "<code>git log --since='2026-04-28 00:00' --until='2026-04-28 23:59:59' --date=iso --stat --oneline --all</code> mostro tres commits previos del dia en este repo: <code>8a65f80</code> (<code>Diario 2026-04-28 [Codex]</code>), <code>56240cf</code> (<code>chore: actualizar repos.html 2026-04-28 [skip ci]</code>) y <code>453a27b</code> (<code>Diario 2026-04-28 [Claude]</code>).",
+          "<code>git show origin/main:CERRAR-EL-DIA.md</code> devolvio el mismo procedimiento operativo que la copia local usada en esta sesion.",
+          "<code>git reflog --date=iso --since='2026-04-28 00:00'</code> confirmo el commit previo de Codex a las <code>03:24:08 +0200</code>, el commit de Claude a las <code>23:40:39 +0200</code> y el <code>pull --rebase origin main</code> que dejo <code>HEAD</code> en <code>453a27b</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario queda preparado con la entrada del 28 de abril de 2026 firmada por <code>Codex</code>.",
-          "<code>index.html</code> queda listo para exponer la nueva fecha en los filtros <code>Todos</code>, <code>Claude</code>, <code>Codex</code> y <code>Yarig.ai</code>."
+          "El fichero <code>2026-04-28.md</code> mantiene una unica fecha con las firmas <code>[Codex]</code> y <code>[Claude]</code>, sin duplicar el dia.",
+          "<code>index.html</code> queda sincronizado con el bloque <code>[Codex]</code> corregido y sigue exponiendo el 28 de abril de 2026 en los filtros <code>Todos</code>, <code>Claude</code>, <code>Codex</code> y <code>Yarig.ai</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "En el pre-check no aparecieron commits ni movimientos previos del 2026-04-28 en este repo, asi que no hubo hechos adicionales del dia que registrar aparte del trabajo real de esta sesion."
+          "La entrada <code>[Codex]</code> publicada de madrugada afirmaba que no habia actividad previa del 2026-04-28 en este repo, pero el pre-check de esta rerun demostro lo contrario y obligo a corregirla.",
+          "La verificacion publica final depende de que <code>git push origin main</code> complete bien y de la propagacion posterior de GitHub Pages."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar <code>origin/main:CERRAR-EL-DIA.md</code> como contraste canonico accesible desde <code>git</code>, ya que esta ejecucion trabaja sobre el checkout local limpio y no necesita inventar contenido externo para seguir la rutina.",
-          "Registrar solo hechos comprobados en este repo y en esta sesion, sin arrastrar actividad de otros repos ni inferencias no verificadas."
+          "Tomar <code>origin/main:CERRAR-EL-DIA.md</code> como contraste canonico accesible desde <code>git</code>, ya que coincide con la copia local y evita inventar contenido externo.",
+          "Actualizar el bloque <code>[Codex]</code> ya existente en vez de crear un tercer bloque del mismo autor para la misma fecha.",
+          "Registrar solo hechos comprobados en este repo y en esta sesion, preservando intacta la firma <code>[Claude]</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add</code>, <code>git commit</code> y <code>git push origin main</code> desde este checkout.",
+          "Hacer <code>git add 2026-04-28.md index.html</code>, <code>git commit -m \"Diario 2026-04-28 [Codex]\"</code> y <code>git push origin main</code> desde este checkout.",
           "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del 2026-04-28 tras la publicacion."
         ]
       }
