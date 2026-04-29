@@ -263,6 +263,58 @@
 <script>
 const entries = [
   {
+    date: "2026-04-29",
+    title: "29 de abril de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso la memoria local de la automatizacion <code>actualizar-diario-2</code>, la rutina <code>CERRAR-EL-DIA.md</code> y la guia de <code>README.md</code>.",
+          "Se comprobo el estado del repo con <code>git status --short --branch</code>: este checkout estaba en <code>detached HEAD</code> sobre <code>68c7a78</code>, alineado con <code>origin/main</code>.",
+          "Se verifico con <code>git log</code>, <code>git reflog</code> y busqueda en archivos que no existia aun ninguna entrada <code>2026-04-29</code> en Markdown ni en <code>index.html</code>.",
+          "Se actualizo esta entrada diaria y la publicacion HTML del diario para reflejar unicamente la actividad real de esta automatizacion."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-04-29 00:00' --until='2026-04-29 23:59:59' --all</code> no devolvio commits fechados hoy en este checkout.",
+          "<code>git reflog --date=iso --since='2026-04-29 00:00'</code> solo mostro el estado actual de <code>HEAD</code>.",
+          "La fecha y hora de cierre quedaron verificadas con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a tener una entrada unica para la fecha <code>2026-04-29</code>.",
+          "<code>index.html</code> queda alineado con el Markdown para que la novedad sea visible en la UI publica."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout canonico indicado por la rutina, <code>/Users/csilvasantin/Claude/diario/</code>, no esta dentro de las rutas editables de esta sesion.",
+          "La rama local <code>main</code> ya esta ocupada por otro worktree, asi que este cierre se prepara desde <code>detached HEAD</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Usar este worktree del mismo repo como sustituto operativo para poder editar, commitear y preparar el push.",
+          "Registrar solo hechos comprobados en esta sesion, sin inventar actividad tecnica adicional para hoy."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Validar sintaxis de <code>index.html</code>, hacer commit y empujar <code>HEAD</code> a <code>origin/main</code>.",
+          "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo tras la publicacion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-28",
     title: "28 de abril de 2026",
     author: "Codex",
