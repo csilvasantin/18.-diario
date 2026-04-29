@@ -263,6 +263,109 @@
 <script>
 const entries = [
   {
+    date: "2026-04-29",
+    title: "29 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion en Claude Code (web) sobre el repositorio <code>18.-diario</code>, checkout en <code>/home/user/18.-diario</code> y rama de trabajo <code>main-6hHOB</code>.",
+          "Pre-check del cierre: <code>git status --short --branch</code>, <code>git log --since='2026-04-28 00:00' --until='2026-04-29 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-04-28 00:00'</code>.",
+          "Lectura de la rutina canonica <code>CERRAR-EL-DIA.md</code> y de <code>CLAUDE.md</code> del repo para alinear el cierre con la regla 1-2-3.",
+          "Documentacion del dia anterior <code>2026-04-28</code> como entrada vacia (dia sin trabajo registrado) para no romper la continuidad del diario.",
+          "Creacion de <code>2026-04-29.md</code> con el cierre de hoy firmado por <code>[Claude]</code>.",
+          "Actualizacion de <code>index.html</code> para publicar en la UI las dos fechas nuevas (28 y 29) con sus filtros de autoria."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-6hHOB...origin/main-6hHOB</code> sin cambios pendientes antes de empezar.",
+          "<code>git log</code> y <code>git reflog</code> confirmaron que no habia commits previos para <code>2026-04-28</code> ni <code>2026-04-29</code>: el ultimo era <code>b36df82 Diario 2026-04-27 [Codex] update Consejo</code>.",
+          "<code>repos.html</code> se regenera automaticamente via <code>.github/workflows/update-repos.yml</code> (cron diario a las 5:00 UTC y <code>workflow_dispatch</code>), por lo que no hace falta editarlo a mano."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario recupera continuidad temporal: <code>2026-04-27</code> → <code>2026-04-28</code> (sin trabajo) → <code>2026-04-29</code> (cierre Claude).",
+          "La UI publica <code>https://csilvasantin.github.io/18.-diario/</code> queda preparada para mostrar la entrada del 29 bajo el filtro <code>Claude</code>.",
+          "La pagina <code>https://csilvasantin.github.io/18.-diario/repos.html</code> reflejara la actividad agregada en la siguiente ejecucion del workflow."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>CERRAR-EL-DIA.md</code> esta escrita para el repo canonico <code>diario</code> con checkout en Mac Mini, pero esta sesion ocurre en Claude Code web sobre <code>18.-diario</code> y rama <code>main-6hHOB</code>: se adapta el flujo respetando la regla 1-2-3 y la firma <code>[Claude]</code>.",
+          "El cierre se publica primero a <code>main-6hHOB</code> por la directiva del entorno; GitHub Pages sirve desde <code>main</code>, asi que la entrada solo sera visible publicamente al mergear a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar <code>2026-04-28</code> como entrada de \"dia sin trabajo registrado\" en lugar de saltar la fecha, siguiendo la indicacion explicita del usuario.",
+          "No tocar <code>repos.html</code> manualmente para evitar divergencias con el script <code>update-repos.yml</code>.",
+          "Mantener la convencion del repo: una entrada por fecha en Markdown, replicada en <code>index.html</code> como objeto del array <code>entries</code>.",
+          "Empujar los cambios a la rama de trabajo <code>main-6hHOB</code> y abrir un Pull Request en draft."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Crear el commit <code>Diario 2026-04-29 [Claude]</code> con <code>2026-04-28.md</code>, <code>2026-04-29.md</code> y <code>index.html</code> y empujarlo a <code>origin/main-6hHOB</code>.",
+          "Abrir Pull Request en draft para que el usuario lo revise y, tras merge a <code>main</code>, GitHub Pages publique la entrada en <code>https://csilvasantin.github.io/18.-diario/</code>.",
+          "Dejar que <code>update-repos.yml</code> regenere <code>repos.html</code> en la siguiente ejecucion programada o lanzarlo manualmente desde Actions para verlo reflejado al instante."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-04-28",
+    title: "28 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "No se registra actividad propia en el repositorio <code>18.-diario</code> en la fecha <code>2026-04-28</code>. La entrada se documenta a posteriori desde la sesion del <code>2026-04-29</code> para mantener el historico continuo segun la regla 1-2-3 del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-04-28 00:00' --until='2026-04-28 23:59:59' --date=iso --stat --oneline --all</code> en este checkout no devolvio commits del dia.",
+          "<code>git reflog --date=iso --since='2026-04-28 00:00'</code> no registro movimientos del dia.",
+          "El ultimo commit previo es <code>b36df82</code> (<code>Diario 2026-04-27 [Codex] update Consejo</code>) y el siguiente movimiento del repo se produce ya en <code>2026-04-29</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Ninguno en el ambito del propio diario."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno: el dia se documenta como dia sin trabajo registrado."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar la fecha como entrada vacia para que el calendario no salte de <code>2026-04-27</code> a <code>2026-04-29</code> sin explicacion, conforme indica el usuario: \"si un dia en concreto no se ha hecho nada se documenta y ya esta\"."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Continuar con el cierre del <code>2026-04-29</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-27",
     title: "27 de abril de 2026",
     author: "Claude",
