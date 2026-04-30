@@ -86,26 +86,45 @@ ABCDEFGHJKMNPQRSTUVWXYZ23456789
    git commit -m "Handoff CODE — TÍTULO CORTO"
    git push origin main
    ```
-8. **Verificar URL pública**:
+8. **Verificar URL pública** (esperar a que GitHub Pages haya servido el `.md` antes de enviar a Telegram):
    ```bash
-   until curl -sS https://csilvasantin.github.io/diario/handoff/YYYY-MM-DD-CODE.md 2>/dev/null | grep -q "Handoff CODE"; do sleep 5; done
+   until curl -sS -o /dev/null -w '%{http_code}\n' \
+     https://csilvasantin.github.io/diario/handoff/YYYY-MM-DD-CODE.md \
+     | grep -q '^200$'; do sleep 8; done
    ```
-9. **Avisar por Telegram** vía `admira-telegram-bridge`:
+9. **Entregar el handoff por Telegram** con el script canónico — esto es el paso crítico para que el usuario pueda copy-pegar en cualquier máquina sin abrir nada:
    ```bash
-   curl -sS -X POST https://admira-telegram-bridge.csilvasantin.workers.dev/telegram/send \
-     -H 'Content-Type: application/json' \
-     -d '{"text":"📦 Handoff HX-XXXX listo · TÍTULO CORTO\nhttps://csilvasantin.github.io/diario/handoff/YYYY-MM-DD-CODE.md"}'
+   /Users/csilvasantin/Claude/diario/scripts/send-handoff-telegram.py \
+     /Users/csilvasantin/Claude/diario/handoff/YYYY-MM-DD-CODE.md
    ```
+   El script envía, por orden:
+   - Un mensaje cabecera `📦 Handoff HX-XXXX · TÍTULO` con la URL pública.
+   - El contenido completo del Markdown troceado en mensajes ≤3500 chars con el prefijo `[HX-XXXX · i/N]`. Cada chunk se rompe en límite de sección (`#`/`##`) cuando es posible. Long-press en cada uno para copiar.
+   - El mismo `.md` como documento adjunto descargable (`sendDocument` del bridge tira de la URL pública).
 10. **Reportar** al usuario el código + URL pública. NO captura.
 
 ## Cómo retomar (lado receptor)
 
-En el otro Mac / iPad / Linux:
+Tres caminos posibles, todos válidos:
 
-1. `gh repo clone csilvasantin/diario` o `git pull` si ya estaba clonado.
-2. Abrir `handoff/YYYY-MM-DD-CODE.md` o copiar la URL `https://csilvasantin.github.io/diario/handoff/YYYY-MM-DD-CODE.md`.
-3. La IA lee el handoff y reproduce los pasos de la sección 7.
-4. Para "encadenar" sesión: tras retomar, generar otro handoff cuando se quiera saltar de máquina otra vez. La cadena queda en `handoff/`.
+**A) Copy-paste desde Telegram** (camino canónico cuando estás de viaje):
+- Abre el chat con @AdmiraXPBot y busca el mensaje `📦 Handoff HX-XXXX`.
+- Long-press → Copiar sobre los chunks `[HX-XXXX · i/N]`.
+- Pega el contenido en la nueva máquina (consola IA, nota, lo que sea).
+- Alternativa: pulsa el adjunto `.md` para descargar el archivo entero.
+
+**B) Vía URL pública**:
+- Abre la URL del mensaje cabecera de Telegram, es la canónica:
+  `https://csilvasantin.github.io/diario/handoff/YYYY-MM-DD-CODE.md`.
+- Cualquier IA puede leer ese URL directamente.
+
+**C) Vía git en la nueva máquina**:
+```bash
+gh repo clone csilvasantin/diario && cd diario
+cat handoff/YYYY-MM-DD-CODE.md
+```
+
+En cualquiera de los tres caminos, la IA lee el handoff y reproduce los comandos de la sección 7. Para "encadenar" sesión: tras retomar, generar otro handoff cuando se quiera saltar de máquina otra vez. La cadena queda en `handoff/`.
 
 ## Lo que NO hace esta rutina
 
