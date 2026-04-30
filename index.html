@@ -271,48 +271,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la memoria local de la automatizacion <code>actualizar-diario-2</code>, la rutina <code>CERRAR-EL-DIA.md</code> y la guia de <code>README.md</code>.",
-          "Se comprobo el estado del repo con <code>git status --short --branch</code>: este checkout estaba limpio en <code>detached HEAD</code> sobre <code>9a1f29d</code>, alineado con <code>origin/main</code>.",
-          "Se verifico con <code>git log</code>, <code>git reflog</code> y revision de archivos que no existia aun ninguna entrada <code>2026-04-30</code> en Markdown ni en <code>index.html</code>.",
-          "Se actualizo esta entrada diaria y la publicacion HTML del diario para reflejar unicamente la actividad real de esta automatizacion."
+          "Se leyo la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> y la copia local de <code>CERRAR-EL-DIA.md</code> para seguir la rutina literal en este checkout.",
+          "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-04-30 00:00' --until='2026-04-30 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-04-30 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se comprobo con <code>git diff --no-index -- /Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md &lt;(git show origin/main:CERRAR-EL-DIA.md)</code> que la copia local de la rutina coincide con <code>origin/main:CERRAR-EL-DIA.md</code>.",
+          "Se consolido la entrada <code>2026-04-30.md</code> y su espejo en <code>index.html</code> para dejar una unica firma <code>[Codex]</code> del dia con solo hechos verificables de este repo y de esta sesion."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log --since='2026-04-30 00:00' --until='2026-04-30 23:59:59' --all --decorate --oneline</code> no devolvio commits fechados hoy en este checkout.",
-          "<code>git reflog --date=iso --since='2026-04-30 00:00'</code> solo mostro el estado actual de <code>HEAD</code> a las <code>2026-04-30 21:30:19 +0200</code>.",
-          "La fecha y hora de cierre quedaron verificadas con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>."
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout indicado estaba limpio al empezar.",
+          "<code>git log --since='2026-04-30 00:00' --until='2026-04-30 23:59:59' --date=iso --stat --oneline --all</code> mostro tres commits previos de hoy en este repo: <code>b5f9f8c</code> (<code>HANDOFF: entrega por Telegram con copy-paste y documento adjunto</code>), <code>8d77af3</code> (<code>Handoff HX-GPMZ — Studio + Suno gating</code>) y <code>0905307</code> (<code>Diario 2026-04-29 [Codex]</code>).",
+          "<code>git reflog --date=iso --since='2026-04-30 00:00'</code> confirmo esos mismos movimientos en <code>HEAD</code>: <code>0905307</code> a las <code>00:01:13 +0200</code>, <code>8d77af3</code> a las <code>08:10:12 +0200</code> y <code>b5f9f8c</code> a las <code>08:18:47 +0200</code>.",
+          "La hora real de este cierre quedo verificada con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, que devolvio <code>2026-04-30 23:57:16 CEST +0200</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario vuelve a tener una entrada unica para la fecha <code>2026-04-30</code>.",
-          "<code>index.html</code> queda alineado con el Markdown para que la novedad sea visible en la UI publica."
+          "El diario mantiene una unica entrada para <code>2026-04-30</code> firmada por <code>Codex</code>, sin duplicar fecha ni autor.",
+          "<code>index.html</code> queda alineado con <code>2026-04-30.md</code> para que la jornada de hoy aparezca en <code>Todos</code> y en el filtro <code>Codex</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La memoria local de la automatizacion aun no existia en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code>.",
-          "El checkout canonico indicado por la rutina, <code>/Users/csilvasantin/Claude/diario/</code>, no esta dentro de las rutas editables de esta sesion.",
-          "La rama local <code>main</code> ya esta ocupada por otro worktree, asi que este cierre se prepara desde <code>detached HEAD</code>."
+          "<code>CODEX_HOME</code> no estaba exportado en esta sesion, asi que la memoria no pudo leerse por variable de entorno y hubo que usar la ruta explicita de la automatizacion.",
+          "<code>git push origin main</code> fue rechazado porque <code>origin/main</code> avanzo durante esta ejecucion y el <code>git pull --rebase origin main</code> posterior revelo una entrada concurrente del mismo dia que hubo que consolidar.",
+          "La apertura de la fuente canonica online en GitHub no respondio desde el navegador embebido de esta sesion; se trabajo con la copia local y con <code>origin/main:CERRAR-EL-DIA.md</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Usar este worktree del mismo repo como sustituto operativo para poder editar, commitear y preparar el push.",
-          "Crear la memoria de la automatizacion en esta ejecucion para dejar trazabilidad de lo hecho hoy.",
-          "Registrar solo hechos comprobados en esta sesion, sin inventar actividad tecnica adicional para hoy."
+          "Tomar <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> como memoria efectiva de esta automatizacion al no venir definido <code>CODEX_HOME</code>.",
+          "Resolver el conflicto conservando una unica entrada <code>[Codex]</code> del 30 de abril basada en el pre-check real de este checkout limpio.",
+          "Registrar exclusivamente hechos comprobados con <code>git</code> en este repo y con el trabajo real de esta sesion."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Validar sintaxis de <code>index.html</code>, hacer commit y empujar <code>HEAD</code> a <code>origin/main</code>.",
-          "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo tras la publicacion."
+          "Completar el rebase, hacer <code>git push origin main</code> y verificar la publicacion en <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>.",
+          "Actualizar la memoria de la automatizacion con el resultado final de este cierre."
         ]
       }
     ]
