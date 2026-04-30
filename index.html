@@ -318,6 +318,73 @@ const entries = [
     ]
   },
   {
+    date: "2026-04-30",
+    title: "30 de abril de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "<strong>AdmiraTunes Studio</strong> en <code>01.-AdmiraXperience-Game</code>: nueva pieza standalone <code>studio/</code> con generacion de letra IA (Gemini via <code>admira-grok-proxy</code>) y beat sintetizado en navegador con Web Audio (drums + bass + lead + pad + vocal stab). Upsell videoclip canvas con MediaRecorder+WebM.",
+          "<strong>Selector de motor + modal de coste para Suno</strong>: worker <code>admira-tunes</code> desplegado en <code>https://admira-tunes.csilvasantin.workers.dev</code> con <code>/health</code> que devuelve <code>configured:false</code> hasta que se anada <code>SUNO_API_KEY</code>. Suno opt-in con aviso doble (selector visual + modal que verifica <code>/health</code> en directo); el worker bloquea con 503 <code>not_configured</code> mientras la API key no este puesta. Targeting <code>apibox.erweima.ai/api/v1</code> (sunoapi.org), modelo <code>V4_5</code>.",
+          "<strong>Programmatic Ads + activos no digitales</strong>: worker <code>admira-marketplace</code> con D1 (<code>admira-marketplace-db</code>, 9 slots seedeados), pagina publica <code>marketplace/</code>, bridge <code>xtanco-marketplace-client.js</code> y posters fisicos pintados en <code>drawHUD</code> con banner de mancha de marca (slot <code>takeover</code>) prioritaria sobre slots individuales.",
+          "<strong>Fix urgente del parser</strong> cuando Gemini devolvia JSON con comillas tipograficas / trailing commas: <code>repairJson</code>, <code>parseTuneJson</code> con 5 estrategias y <code>rescueFromFreeText</code> como fallback.",
+          "<strong>Sistema de Handoff</strong>: nueva rutina canonica <code>HANDOFF.md</code> con codigo corto <code>HX-XXXX</code> (alfabeto base32 sin confusiones), publica <code>handoff/YYYY-MM-DD-CODE.md</code> con foco, repo activo, otros repos con actividad, servicios, decisiones, pendientes y comandos para retomar (sin secretos). <code>CLAUDE.md</code> referencia las dos rutinas (CERRAR-EL-DIA + HANDOFF). Primer handoff <code>handoff/2026-04-30-HX-GPMZ.md</code> y enlace destacado en la cabecera de <code>index.html</code>.",
+          "<strong>Entrega del handoff por Telegram</strong>: nuevo paso 9 con <code>scripts/send-handoff-telegram.py</code> (stdlib + UA browser-like para evitar bloqueo Cloudflare 1010 sobre workers.dev) que envia el handoff troceado en mensajes &lt;=3500 chars con prefijo <code>[CODE · i/N]</code> (long press para copiar) + el <code>.md</code> como documento adjunto. Tres caminos para retomar: Telegram copy-paste, URL publica, git clone."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-04-30 00:00' --until='2026-04-30 23:59:59' --pretty=format:'%h %an %s' --all</code> en <code>18.-diario</code> devuelve cuatro commits hoy: <code>768c2ff</code> (<code>docs: Update Codex 2026-04-30 [skip ci]</code>), <code>4d7cbca</code> (<code>chore: actualizar repos.html 2026-04-30 [skip ci]</code>, github-actions[bot]), <code>b5f9f8c</code> (<code>HANDOFF: entrega por Telegram con copy-paste y documento adjunto</code>) y <code>8d77af3</code> (<code>Handoff HX-GPMZ — Studio + Suno gating</code>).",
+          "<code>git show 8d77af3 --stat</code> confirma 4 ficheros tocados (<code>CLAUDE.md</code>, <code>HANDOFF.md</code>, <code>handoff/2026-04-30-HX-GPMZ.md</code>, <code>index.html</code>, +243 lineas) y <code>git show b5f9f8c --stat</code> confirma <code>HANDOFF.md</code> + nuevo <code>scripts/send-handoff-telegram.py</code> (+198 lineas).",
+          "El handoff <code>HX-GPMZ</code> registra version del juego <code>AdmiraNext v26.30.04.4</code> (build <code>20260430-0755</code>) tras 4 bumps consecutivos hoy en <code>01.-AdmiraXperience-Game</code>: <code>8bef2f5</code> Suno con aviso, <code>9c04770</code> parser tolerante, <code>530e3da</code> Studio, <code>2162238</code> programmatic ads + marketplace.",
+          "Workers desplegados al cierre: <code>admira-grok-proxy</code>, <code>admira-telegram-bridge</code>, <code>admira-loyalty</code>, <code>admira-marketplace</code> (D1 con 9 slots) y <code>admira-tunes</code> (<code>/health</code> → <code>configured:false</code>).",
+          "<code>repos.html</code> ya muestra entradas <code>2026-04-30</code> para <code>01.-AdmiraXperience-Game</code> (↑39 commits, badge Claude), <code>18.-diario</code> (↑20, badges Claude+Codex) y <code>32.-ConsejoAdmiraNextGame</code> (↑78, badge Gemini CLI, actualizacion automatica via launchd <code>bbab48d</code>).",
+          "La fecha y hora de este cierre se verifico con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> (<code>2026-04-30 21:03:40 UTC +0000</code>)."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Admira XP gana una pieza completa de generacion musical (Studio + worker <code>admira-tunes</code>) con dos motores opt-in (sintesis local gratis + Suno AI de pago con aviso explicito) y una capa de programmatic ads con subasta inglesa lazy y posters fisicos en HUD.",
+          "El diario incorpora un sistema de continuidad reproducible entre maquinas: rutina <code>HANDOFF.md</code>, codigos <code>HX-XXXX</code> dictables, entrega por Telegram troceada y documento adjunto, y trazabilidad publica via <code>handoff/YYYY-MM-DD-CODE.md</code> enlazado desde <code>index.html</code>.",
+          "La entrada <code>2026-04-30</code> del diario pasa a tener doble firma <code>[Codex]</code> + <code>[Claude]</code> separadas por <code>---</code>, manteniendo la regla 1-2-3 de un fichero unico por fecha sin duplicar firmas del mismo autor."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La autenticacion de <code>/shop/visit</code> en <code>admira-loyalty</code> sigue siendo \"shopJoinCode publico\" (no seguro frente a atacante deliberado, mitigado con check-in activo + rate-limit 20s); aceptable para Fase 1, conviene reforzarlo si se conecta a tienda real.",
+          "Cloudflare devuelve 1010 sobre <code>workers.dev</code> desde <code>urllib</code> sin User-Agent: el script Python necesito UA browser-like para que Telegram pudiera traer el documento adjunto.",
+          "Suno requiere <code>SUNO_API_KEY</code> en el worker <code>admira-tunes</code>; sin ella, el modal y <code>/health</code> lo dejan claro y el flujo nunca llama al provider (503 not_configured). Coste estimado declarado: ~0,10 €/cancion.",
+          "Esta sesion de cierre se ejecuta sobre la rama <code>main-WnmFK</code> del worktree <code>/home/user/18.-diario</code>, no sobre el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> indicado por la rutina, asi que el push final va a <code>origin main-WnmFK</code> y se abre PR en draft hacia <code>main</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "<strong>Suno opt-in con aviso doble</strong> (selector + modal que consulta <code>/health</code> en directo) y bloqueo en el worker mientras no haya API key, en vez de fallback silencioso a sintesis local: el coste de un servicio de pago debe ser explicito antes de cada generacion.",
+          "<strong>Studio como pieza standalone</strong> sin worker propio para letras (reusa <code>admira-grok-proxy</code>); el worker <code>admira-tunes</code> solo orquesta Suno cuando este activo.",
+          "<strong>D1 desde el principio</strong> en <code>admira-marketplace</code> (no KV), preparando Fase 2 con rankings y queries historicas. Subasta inglesa con cierre lazy al consultar <code>/inventory</code> o <code>/active-campaigns</code>, anti-snipe automatico (+60s si hay puja en ultimos 60s), min increment +5 €.",
+          "<strong>Posters fisicos en <code>drawHUD</code></strong> (no en el grid iso) para evitar reescribir layout; slots vacios visibles como placeholder ambar punteado \"subastable\".",
+          "<strong>Codigos <code>HX-XXXX</code></strong> del handoff con alfabeto base32 sin <code>0</code>, <code>O</code>, <code>1</code>, <code>I</code>, <code>L</code> para que se puedan dictar por telefono.",
+          "<strong>Entrega Telegram</strong> del handoff troceada con prefijo <code>[CODE · i/N]</code> (long press para copiar) + documento adjunto, en lugar de empujar al usuario a abrir la URL publica: tres caminos abiertos para retomar."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Activar Suno (opcional): <code>wrangler secret put SUNO_API_KEY</code> en <code>workers/admira-tunes</code> y <code>wrangler deploy</code>.",
+          "Persistencia de tunes en marketplace: migracion 0002 con <code>tune_metadata TEXT</code> en <code>bids</code>, propagacion en <code>/inventory</code> y <code>/active-campaigns</code>, consumo en <code>xtanco-marketplace-client.js</code> para que el HUD del hilo musical muestre el titulo.",
+          "Persistencia de tunes en <code>admira-tunes</code>: tabla <code>tunes</code> por brand/seed para reutilizar generaciones identicas.",
+          "Mejoras Web Audio del Studio (reverb con ConvolverNode + IR sintetico, compresion multibanda en kick, hi-hat mas nitido) si Suno se queda como opcion de pago real.",
+          "Push de esta entrada <code>[Claude]</code> a <code>origin main-WnmFK</code> y apertura de PR draft hacia <code>main</code>. Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> sigan respondiendo tras el merge."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-04-29",
     title: "29 de abril de 2026",
     author: "Codex",
