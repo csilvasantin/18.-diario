@@ -271,51 +271,60 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso el workspace de Admirito con foco en <code>AdmiraNext-Team</code> y se localizaron cambios locales grandes en <code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>package.json</code> y <code>data/machines.json</code>.",
-          "En <code>AdmiraNext-Team</code> se detecto una conversion de la home hacia una estetica arcade tipo \"fighter select\", con nueva seccion destacada por miembro, perfiles jugables, estadisticas visuales y versionado subido a <code>0.1.3</code>.",
-          "Tambien se anadieron datos de conexion local del Mac Mini en <code>data/machines.json</code> (<code>ip_local</code> y <code>connect_local</code>) y se renovaron tres capturas de pantalla del inventario.",
-          "En <code>AdmiraNext-Team-latest</code> se vio trabajo de backend para aceptar <code>PORT</code> por entorno, incluir el estado <code>idle</code> y endurecer la ejecucion remota de AppleScript por SSH con quoting reutilizable.",
-          "Como contexto del resto del dia, se registraron cambios locales en <code>csilvasantin.github.io</code>, <code>onboarding</code> y <code>pulpo</code>, sobre todo documentacion de Yarig/Telegram, contexto fisico del Mac Mini con tres pantallas y aterrizaje del concepto visual \"Boardroom Arcade\"."
+          "Se reviso la memoria de <code>diario-admirito</code> y la entrada ya creada para <code>2026-05-01</code> para actualizarla sin duplicar fecha.",
+          "Se inspeccionaron los cambios locales de <code>github-csilvasantin/AdmiraNext-Team</code>, <code>04.- AdmiraGemini</code>, <code>32.-ConsejoAdmiraNextGame</code> y <code>ACE-Step</code> con <code>git status --short</code>, <code>git diff --stat</code> y lectura puntual de los diffs.",
+          "Se rehizo el resumen del dia con foco principal en <code>AdmiraNext-Team</code>, que era el repo con el cambio funcional mas claro del workspace y con tres capturas de inventario actualizadas."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, confirmando que este checkout del diario sigue en detached HEAD.",
-          "No aparecieron commits fechados hoy (<code>2026-05-01</code>) en los repos inspeccionados de Admirito, asi que la evidencia de jornada queda apoyada sobre cambios locales sin commit.",
-          "<code>AdmiraNext-Team</code> sigue en <code>main...origin/main [behind 286]</code> y conserva ocho ficheros modificados; el diff visible suma <code>1112</code> inserciones y <code>73</code> borrados, dominados por el rediseño de UI.",
-          "En <code>AdmiraNext-Team-latest</code> se confirmo la introduccion de <code>VALID_STATUSES = [\"online\", \"busy\", \"offline\", \"maintenance\", \"idle\"]</code> y la extraccion de <code>buildRemoteOsascriptCommand(...)</code> para evitar comandos SSH montados a mano."
+          "<code>AdmiraNext-Team</code>: <code>node --check public/app.js</code> y parseo OK de <code>data/machines.json</code> y <code>package.json</code>.",
+          "<code>04.- AdmiraGemini</code>: <code>PYTHONPATH=src python3 -m unittest tests.test_web</code> devolvio <code>Ran 5 tests ... OK</code>.",
+          "<code>ACE-Step</code>: <code>PYTHONPYCACHEPREFIX=/tmp/ace-pyc python3 -m py_compile acestep/pipeline_ace_step.py</code> compilo sin errores.",
+          "En los repos revisados no aparecieron commits fechados hoy (<code>2026-05-01</code>), asi que la evidencia del diario se apoya sobre diffs locales y chequeos ejecutados en esta sesion."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario mantiene una unica entrada Markdown para la fecha <code>2026-05-01</code>, ahora ajustada al trabajo real detectado en el workspace.",
-          "Queda resumido que el frente principal del dia ha sido evolucionar <code>AdmiraNext-Team</code> hacia una interfaz mas expresiva y preparar mejor la operativa remota de maquinas.",
-          "El resto del workspace tambien queda contextualizado: Yarig gana narrativa de estado y tiempo, <code>onboarding</code> fija mejor el entorno fisico real y <code>pulpo</code> consolida su primera direccion visual."
+          "<code>AdmiraNext-Team</code> avanza en un rediseño tipo arcade/fighter select: gran expansion de <code>public/styles.css</code>, nueva logica en <code>public/app.js</code>, ajuste de <code>public/index.html</code>, bump a version <code>0.1.3</code>, datos SSH/IP local del Mac Mini en <code>data/machines.json</code> y tres capturas renovadas en <code>data/screenshots/</code>.",
+          "<code>04.- AdmiraGemini</code> incorpora una UI local con <code>admira-gemini-ui</code>, documentacion de arranque en <code>README.md</code> y assets estaticos para servir el panel en <code>http://127.0.0.1:8765/</code>.",
+          "<code>32.-ConsejoAdmiraNextGame</code> y <code>ACE-Step</code> cierran iteraciones tecnicas utiles: overlay y controles Yarig en la UI SCUMM, y fallback a <code>soundfile</code> cuando <code>torchaudio.save(...)</code> falle al exportar audio."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La mayor parte del trabajo de hoy no esta confirmada en git, asi que no se puede atribuir una secuencia exacta de commits ni dar por hecho que nada este publicado.",
-          "<code>AdmiraNext-Team</code> acumula una divergencia importante respecto a <code>origin/main</code> (<code>behind 286</code>), lo que vuelve arriesgado mezclar estos cambios locales sin una estrategia previa de sincronizacion.",
-          "Las capturas binarias actualizadas en <code>data/screenshots/</code> se detectan como cambio, pero desde esta sesion no se valida visualmente si reflejan el estado final deseado."
+          "<code>AdmiraNext-Team</code> no tiene <code>build</code> ni tests de interfaz, asi que el rediseño fuerte sigue pendiente de validacion real en navegador.",
+          "<code>32.-ConsejoAdmiraNextGame</code> mantiene <code>council-scumm.html</code> y <code>public/council-scumm.html</code> duplicados y editados en paralelo, con riesgo alto de divergencia.",
+          "<code>AdmiraGemini</code> sigue dependiendo de autenticar Gemini CLI para comprobar el flujo completo, en <code>ACE-Step</code> el fallback solo esta validado por compilacion y las nuevas capturas de <code>AdmiraNext-Team</code> no se comprobaron visualmente desde esta sesion."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo hechos observables en diffs locales y estado de repositorio, sin inventar pruebas funcionales ni despliegues que no constan en esta maquina.",
-          "Dar prioridad narrativa a <code>AdmiraNext-Team</code> y usar <code>AdmiraNext-Team-latest</code>, <code>csilvasantin.github.io</code>, <code>onboarding</code> y <code>pulpo</code> como apoyo para explicar el resto del foco del workspace."
+          "Basar la entrada en diffs locales y validaciones ejecutadas hoy, no en commits inexistentes o no fechados en <code>2026-05-01</code>.",
+          "Tratar el bloque de <code>AdmiraNext-Team</code> como el avance principal del dia y resumir las capturas nuevas y el bump de version como parte de una sola iteracion de producto.",
+          "Actualizar la entrada existente del <code>1 de mayo</code> tanto en Markdown como en <code>index.html</code>, manteniendo una unica firma <code>[Codex]</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
+<<<<<<< HEAD
           "Probar el rediseño de <code>AdmiraNext-Team</code> en navegador antes de publicarlo y decidir si debe vivir en ese repo o migrarse desde <code>AdmiraNext-Team-latest</code>.",
           "Ordenar la sincronizacion de <code>AdmiraNext-Team</code> con <code>origin/main</code> antes de mezclar o empujar nada, porque la distancia actual del remoto es grande.",
           "Confirmar con commit los cambios del workspace que ya esten validados para que el diario de manana no dependa otra vez de diffs sueltos."
+=======
+<<<<<<< HEAD
+          "Hacer <code>git add 2026-05-01.md index.html</code>, commit con <code>Codex</code> en el mensaje, push a <code>origin/main</code> y comprobar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+=======
+          "Lanzar y autenticar <code>admira-gemini-ui</code> en una sesion real para validar arranque, control del proceso y escritura del log antes de consolidar commit.",
+          "Reducir la duplicacion en <code>32.-ConsejoAdmiraNextGame</code> o, como minimo, cerrar commit limpio de ambos HTML mas los artefactos realmente necesarios.",
+          "Ejecutar una prueba de exportacion en <code>ACE-Step</code> que fuerce el fallback y confirme que el archivo resultante queda bien escrito."
+>>>>>>> d575851 (Diario 2026-05-01 [Codex])
+>>>>>>> 0a95f4b (Diario 2026-05-01 [Codex])
         ]
       }
     ]
