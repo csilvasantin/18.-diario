@@ -266,6 +266,59 @@ const entries = [
   {
     date: "2026-05-01",
     title: "1 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo <code>CLAUDE.md</code> y la rutina <code>CERRAR-EL-DIA.md</code> para seguir literal el cierre del dia desde este checkout en <code>/home/user/18.-diario/</code> (rama <code>main-2fW4a</code>).",
+          "Se inspecciono el estado real del repo con <code>git status</code>, <code>git branch --show-current</code>, <code>git remote -v</code>, <code>git log --oneline -20</code> y <code>git log --since='2026-05-01 00:00' --until='2026-05-01 23:59:59' --all --pretty=format:'%h %ad %s' --date=iso</code>.",
+          "Se reviso la entrada <code>2026-05-01.md</code> (firma <code>[Codex]</code> ya publicada) y el bloque correspondiente en <code>index.html</code> para no duplicar fecha ni autor.",
+          "Se anadio esta firma <code>[Claude]</code> separada por <code>---</code> y su espejo en el array <code>entries</code> de <code>index.html</code> para que aparezca en el filtro <code>Claude</code> de la web publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> en <code>/home/user/18.-diario/</code> devolvio working tree clean en la rama <code>main-2fW4a</code> antes de empezar.",
+          "<code>git log --since='2026-05-01 00:00' --until='2026-05-01 23:59:59' --all</code> mostro dos commits previos de hoy: <code>2d195b6</code> (<code>chore: actualizar repos.html 2026-05-01 [skip ci]</code>) y <code>2d1cf7a</code> (<code>docs: Update Codex 2026-05-01 [skip ci]</code>).",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-01 21:17:40 UTC +0000</code> durante esta ejecucion.",
+          "La entrada <code>[Codex]</code> ya estaba publicada en <code>2026-05-01.md</code> e <code>index.html</code>; esta pasada solo anade la firma <code>[Claude]</code> sin tocar el bloque previo."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>2026-05-01.md</code> queda con dos firmas separadas por <code>---</code>: <code>[Codex]</code> y <code>[Claude]</code>, manteniendo la regla de un unico fichero por fecha.",
+          "<code>index.html</code> queda alineado con el Markdown para que la jornada del 1 de mayo aparezca tambien en el filtro <code>Claude</code> de la UI publica."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "En esta sesion de Claude Code no se realizo trabajo de desarrollo adicional fuera del propio cierre; siguiendo <code>CLAUDE.md</code> (\"si un dia en concreto no se ha hecho nada se documenta y ya esta\") se registra solo lo realmente hecho.",
+          "El checkout opera sobre una rama de feature (<code>main-2fW4a</code>) en lugar de <code>main</code>, asi que el push va a <code>origin/main-2fW4a</code> y la verificacion final de la URL publica depende de que esa rama llegue a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "No inventar actividad: registrar solo el cierre del diario y la actualizacion del HTML, que son los unicos artefactos tocados hoy en este repo desde la sesion de Claude Code.",
+          "Mantener intacta la entrada <code>[Codex]</code> ya publicada y anadir solo el bloque <code>[Claude]</code> para respetar la regla 1-2-3 del diario."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-05-01.md index.html</code>, commit con <code>Diario 2026-05-01 [Claude]</code> y push a <code>origin main-2fW4a</code>.",
+          "Crear pull request draft hacia <code>main</code> para que la entrada llegue a la publicacion en <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <code>repos.html</code> se regenere por la GitHub Action."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-01",
+    title: "1 de mayo de 2026",
     author: "Codex",
     sections: [
       {
