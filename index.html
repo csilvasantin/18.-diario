@@ -271,45 +271,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la memoria local de la automatizacion <code>actualizar-diario-2</code>; no habia contenido previo registrado para esta tarea.",
-          "Se inspecciono el estado real del repo con <code>git status --short --branch</code>, <code>git log --oneline --decorate -5</code>, <code>git branch -a --contains HEAD</code>, <code>git remote -v</code> y <code>rg --files</code>.",
-          "Se comprobo que no existia <code>2026-05-01.md</code> y se revisaron <code>README.md</code>, <code>2026-04-29.md</code> e <code>index.html</code> para seguir el formato real del diario.",
-          "Se creo esta entrada de hoy y se anadio su representacion al array <code>entries</code> de <code>index.html</code> para que quede visible en la publicacion HTML."
+          "Se reviso el workspace de Admirito con foco en <code>AdmiraNext-Team</code> y se localizaron cambios locales grandes en <code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>package.json</code> y <code>data/machines.json</code>.",
+          "En <code>AdmiraNext-Team</code> se detecto una conversion de la home hacia una estetica arcade tipo \"fighter select\", con nueva seccion destacada por miembro, perfiles jugables, estadisticas visuales y versionado subido a <code>0.1.3</code>.",
+          "Tambien se anadieron datos de conexion local del Mac Mini en <code>data/machines.json</code> (<code>ip_local</code> y <code>connect_local</code>) y se renovaron tres capturas de pantalla del inventario.",
+          "En <code>AdmiraNext-Team-latest</code> se vio trabajo de backend para aceptar <code>PORT</code> por entorno, incluir el estado <code>idle</code> y endurecer la ejecucion remota de AppleScript por SSH con quoting reutilizable.",
+          "Como contexto del resto del dia, se registraron cambios locales en <code>csilvasantin.github.io</code>, <code>onboarding</code> y <code>pulpo</code>, sobre todo documentacion de Yarig/Telegram, contexto fisico del Mac Mini con tres pantallas y aterrizaje del concepto visual \"Boardroom Arcade\"."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, confirmando que este checkout arrancaba en detached HEAD.",
-          "<code>git log --oneline --decorate -5</code> mostro como ultimo commit <code>4d7cbca</code> (<code>chore: actualizar repos.html 2026-04-30 [skip ci]</code>), que coincide con <code>origin/main</code>.",
-          "<code>git branch -a --contains HEAD</code> devolvio solo <code>remotes/origin/main</code> y <code>remotes/origin/HEAD -&gt; origin/main</code>.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z'</code> devolvio <code>2026-05-01 21:32:18 CEST</code> durante esta ejecucion."
+          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, confirmando que este checkout del diario sigue en detached HEAD.",
+          "No aparecieron commits fechados hoy (<code>2026-05-01</code>) en los repos inspeccionados de Admirito, asi que la evidencia de jornada queda apoyada sobre cambios locales sin commit.",
+          "<code>AdmiraNext-Team</code> sigue en <code>main...origin/main [behind 286]</code> y conserva ocho ficheros modificados; el diff visible suma <code>1112</code> inserciones y <code>73</code> borrados, dominados por el rediseño de UI.",
+          "En <code>AdmiraNext-Team-latest</code> se confirmo la introduccion de <code>VALID_STATUSES = [\"online\", \"busy\", \"offline\", \"maintenance\", \"idle\"]</code> y la extraccion de <code>buildRemoteOsascriptCommand(...)</code> para evitar comandos SSH montados a mano."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario vuelve a tener una unica entrada Markdown para la fecha <code>2026-05-01</code>.",
-          "<code>index.html</code> queda sincronizado con esta entrada para que el filtro <code>Codex</code> y el selector de fechas puedan mostrarla en la web publica."
+          "El diario mantiene una unica entrada Markdown para la fecha <code>2026-05-01</code>, ahora ajustada al trabajo real detectado en el workspace.",
+          "Queda resumido que el frente principal del dia ha sido evolucionar <code>AdmiraNext-Team</code> hacia una interfaz mas expresiva y preparar mejor la operativa remota de maquinas.",
+          "El resto del workspace tambien queda contextualizado: Yarig gana narrativa de estado y tiempo, <code>onboarding</code> fija mejor el entorno fisico real y <code>pulpo</code> consolida su primera direccion visual."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El checkout operativo de esta automatizacion no estaba en una rama local, asi que el cierre en git requiere publicar desde <code>HEAD</code> hacia <code>origin/main</code>."
+          "La mayor parte del trabajo de hoy no esta confirmada en git, asi que no se puede atribuir una secuencia exacta de commits ni dar por hecho que nada este publicado.",
+          "<code>AdmiraNext-Team</code> acumula una divergencia importante respecto a <code>origin/main</code> (<code>behind 286</code>), lo que vuelve arriesgado mezclar estos cambios locales sin una estrategia previa de sincronizacion.",
+          "Las capturas binarias actualizadas en <code>data/screenshots/</code> se detectan como cambio, pero desde esta sesion no se valida visualmente si reflejan el estado final deseado."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo el trabajo realmente realizado por Codex en este repo hoy, sin inferir actividad externa no demostrable desde esta sesion.",
-          "Mantener el alcance de la publicacion en <code>2026-05-01.md</code> e <code>index.html</code>, que son los dos artefactos que hacen visible la novedad del diario."
+          "Registrar solo hechos observables en diffs locales y estado de repositorio, sin inventar pruebas funcionales ni despliegues que no constan en esta maquina.",
+          "Dar prioridad narrativa a <code>AdmiraNext-Team</code> y usar <code>AdmiraNext-Team-latest</code>, <code>csilvasantin.github.io</code>, <code>onboarding</code> y <code>pulpo</code> como apoyo para explicar el resto del foco del workspace."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add 2026-05-01.md index.html</code>, commit con <code>Codex</code> en el mensaje, push a <code>origin/main</code> y comprobar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+          "Probar el rediseño de <code>AdmiraNext-Team</code> en navegador antes de publicarlo y decidir si debe vivir en ese repo o migrarse desde <code>AdmiraNext-Team-latest</code>.",
+          "Ordenar la sincronizacion de <code>AdmiraNext-Team</code> con <code>origin/main</code> antes de mezclar o empujar nada, porque la distancia actual del remoto es grande.",
+          "Confirmar con commit los cambios del workspace que ya esten validados para que el diario de manana no dependa otra vez de diffs sueltos."
         ]
       }
     ]
