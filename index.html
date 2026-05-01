@@ -271,50 +271,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la memoria de <code>diario-admirito</code> y la entrada ya creada para <code>2026-05-01</code> para actualizarla sin duplicar fecha.",
-          "Se inspeccionaron los cambios locales de <code>github-csilvasantin/AdmiraNext-Team</code>, <code>04.- AdmiraGemini</code>, <code>32.-ConsejoAdmiraNextGame</code> y <code>ACE-Step</code> con <code>git status --short</code>, <code>git diff --stat</code> y lectura puntual de los diffs.",
-          "Se rehizo el resumen del dia con foco principal en <code>AdmiraNext-Team</code>, que era el repo con el cambio funcional mas claro del workspace y con tres capturas de inventario actualizadas."
+          "Se leyo la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> y la copia local de <code>CERRAR-EL-DIA.md</code> para seguir la rutina en este checkout.",
+          "Se contrasto la copia local con <code>origin/main:CERRAR-EL-DIA.md</code> mediante <code>git diff --no-index -- /Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md &lt;(git show origin/main:CERRAR-EL-DIA.md)</code> y no hubo diferencias.",
+          "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-05-01 00:00' --until='2026-05-01 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-01 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-05-01.md</code>, se actualizo <code>index.html</code> y, durante el intento de <code>git push</code>, se consolido una entrada concurrente del mismo dia aparecida en <code>origin/main</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>AdmiraNext-Team</code>: <code>node --check public/app.js</code> y parseo OK de <code>data/machines.json</code> y <code>package.json</code>.",
-          "<code>04.- AdmiraGemini</code>: <code>PYTHONPATH=src python3 -m unittest tests.test_web</code> devolvio <code>Ran 5 tests ... OK</code>.",
-          "<code>ACE-Step</code>: <code>PYTHONPYCACHEPREFIX=/tmp/ace-pyc python3 -m py_compile acestep/pipeline_ace_step.py</code> compilo sin errores.",
-          "En los repos revisados no aparecieron commits fechados hoy (<code>2026-05-01</code>), asi que la evidencia del diario se apoya sobre diffs locales y chequeos ejecutados en esta sesion."
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout indicado estaba limpio al empezar.",
+          "<code>git log --since='2026-05-01 00:00' --until='2026-05-01 23:59:59' --date=iso --stat --oneline --all</code> mostro un unico commit del dia en este repo: <code>4459124</code> (<code>Diario 2026-04-30 [Codex]</code>), fechado a las <code>2026-05-01 00:00:21 +0200</code>.",
+          "<code>git reflog --date=iso --since='2026-05-01 00:00'</code> confirmo dos movimientos de <code>HEAD</code> a las <code>2026-05-01 00:00:21 +0200</code>, ambos asociados al cierre del dia anterior durante un <code>rebase</code>.",
+          "<code>origin/main</code> avanzo durante esta ejecucion hasta el commit <code>d72dfee</code> (<code>Diario 2026-05-01 [Codex]</code>), fechado a las <code>2026-05-01 23:54:39 +0200</code>, y obligo a resolver un conflicto <code>add/add</code> en <code>2026-05-01.md</code> y otro de contenido en <code>index.html</code>.",
+          "La hora real de este cierre quedo verificada con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, que devolvio <code>2026-05-01 23:58:02 CEST +0200</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>AdmiraNext-Team</code> avanza en un rediseño tipo arcade/fighter select: gran expansion de <code>public/styles.css</code>, nueva logica en <code>public/app.js</code>, ajuste de <code>public/index.html</code>, bump a version <code>0.1.3</code>, datos SSH/IP local del Mac Mini en <code>data/machines.json</code> y tres capturas renovadas en <code>data/screenshots/</code>.",
-          "<code>04.- AdmiraGemini</code> incorpora una UI local con <code>admira-gemini-ui</code>, documentacion de arranque en <code>README.md</code> y assets estaticos para servir el panel en <code>http://127.0.0.1:8765/</code>.",
-          "<code>32.-ConsejoAdmiraNextGame</code> y <code>ACE-Step</code> cierran iteraciones tecnicas utiles: overlay y controles Yarig en la UI SCUMM, y fallback a <code>soundfile</code> cuando <code>torchaudio.save(...)</code> falle al exportar audio."
+          "El diario incorpora una unica entrada <code>2026-05-01</code> firmada por <code>Codex</code>, sin duplicar fecha ni autor pese a la colision remota.",
+          "<code>index.html</code> queda preparado para mostrar la jornada de hoy en <code>Todos</code> y en el filtro <code>Codex</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>AdmiraNext-Team</code> no tiene <code>build</code> ni tests de interfaz, asi que el rediseño fuerte sigue pendiente de validacion real en navegador.",
-          "<code>32.-ConsejoAdmiraNextGame</code> mantiene <code>council-scumm.html</code> y <code>public/council-scumm.html</code> duplicados y editados en paralelo, con riesgo alto de divergencia.",
-          "<code>AdmiraGemini</code> sigue dependiendo de autenticar Gemini CLI para comprobar el flujo completo, en <code>ACE-Step</code> el fallback solo esta validado por compilacion y las nuevas capturas de <code>AdmiraNext-Team</code> no se comprobaron visualmente desde esta sesion."
+          "<code>CODEX_HOME</code> no estaba exportado en esta sesion, asi que la memoria no pudo leerse por variable de entorno y hubo que usar la ruta explicita de la automatizacion.",
+          "<code>git push origin main</code> fue rechazado porque <code>origin/main</code> avanzo durante esta ejecucion y hubo que abrir un <code>git pull --rebase origin main</code>.",
+          "Ese <code>pull --rebase</code> destapo una entrada concurrente del mismo dia firmada tambien por <code>Codex</code>, que obligo a consolidar una unica version del <code>2026-05-01</code>.",
+          "La apertura directa de la fuente canonica online en GitHub no devolvio contenido util desde las herramientas web de esta sesion, asi que se trabajo con la copia local y con <code>origin/main:CERRAR-EL-DIA.md</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Basar la entrada en diffs locales y validaciones ejecutadas hoy, no en commits inexistentes o no fechados en <code>2026-05-01</code>.",
-          "Tratar el bloque de <code>AdmiraNext-Team</code> como el avance principal del dia y resumir las capturas nuevas y el bump de version como parte de una sola iteracion de producto.",
-          "Actualizar la entrada existente del <code>1 de mayo</code> tanto en Markdown como en <code>index.html</code>, manteniendo una unica firma <code>[Codex]</code>."
+          "Tomar <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> como memoria efectiva de esta automatizacion al no venir definido <code>CODEX_HOME</code>.",
+          "Mantener una sola entrada <code>[Codex]</code> para <code>2026-05-01</code>, rehaciendola segun la rutina literal del diario y consolidando el choque con <code>origin/main</code>.",
+          "Registrar exclusivamente hechos comprobados con <code>git</code> en este repo y con el trabajo real de esta sesion."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Abrir <code>AdmiraNext-Team</code> y <code>admira-gemini-ui</code> en navegador para validar la UX real antes de consolidar commits.",
-          "Separar o sincronizar mejor las dos copias HTML de <code>32.-ConsejoAdmiraNextGame</code> antes del siguiente ajuste grande.",
-          "Forzar una exportacion real en <code>ACE-Step</code> para confirmar que el fallback a <code>soundfile</code> escribe audio correcto."
+          "Hacer <code>git add 2026-05-01.md index.html</code>, <code>git commit -m \"Diario 2026-05-01 [Codex]\"</code> y <code>git push origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada del dia."
         ]
       }
     ]
