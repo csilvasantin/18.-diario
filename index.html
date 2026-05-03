@@ -264,6 +264,79 @@
 <script>
 const entries = [
   {
+    date: "2026-05-03",
+    title: "3 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se publicaron 12 versiones consecutivas de Pixer.ai en <code>csilvasantin.github.io/pixer-ai-content/</code> (de <code>v.2026.05.02-r24</code> a <code>v.2026.05.02-r35</code>).",
+          "Se integro Lyria 2 (Vertex AI) en r24, Gemini 2.5 Flash para letras en r25, Lyria 3 Clip + Pro (Gemini API) en r26, Imagen 4 + Veo 3 (Gemini API) en r27, comparador 'TODAS' de 5 motores en r28.",
+          "Se monto bridge Pixer → AdmiraXP en r29-r33: KV namespace <code>SIGNAGE_KV</code> en el worker, endpoints <code>/signage/{push,feed,asset,ack,heartbeat,screens,clear}</code>, panel de progreso con preview thumb en Pixer, <code>signage.html</code> standalone Matrix-style en URL estable, badge <code>XTORE 🟢/🟡/🔴</code> en topnav que muestra version del game.",
+          "Se inyecto snippet de ~80 lineas al final de <code>game.html</code> del repo <code>01.-AdmiraXperience-Game</code> (commits <code>8e0a092</code> y <code>e1dc6f0</code>) para que la Xtore se anuncie como <code>xtore-game</code> y muestre el feed de Pixer en overlay.",
+          "Se anadio boton 📥 IMPORTAR en r34 con modal que llama a <code>localhost:3777/yt/import</code>, extendiendo <code>suno-local</code> con un endpoint que ejecuta <code>yt-dlp</code> via <code>child_process.spawn</code>.",
+          "Se publico r35 con fix del <code>TypeError: Failed to fetch</code> cambiando hostname <code>localhost</code> → <code>127.0.0.1</code> (HSTS upgrade) y añadiendo header <code>Access-Control-Allow-Private-Network: true</code> al CORS de <code>suno-local</code> (Chrome PNA)."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>curl https://pixer-eleven.csilvasantin.workers.dev/healthz</code> devuelve <code>{ok:true,hasElevenKey:true,hasXaiKey:true,hasGcpKey:true,hasGeminiKey:true}</code> — 4 secrets cargadas.",
+          "<code>curl /lyria/generate</code> con prompt abstracto devolvio WAV 48kHz estereo 60s real, decodificado a <code>/tmp/lyria_test.wav</code> y reproducido con <code>afplay</code>.",
+          "<code>curl /lyria3/generate</code> con lyrics devolvio MP3 con <code>[0.0:5.2] We code in the night</code> cantado por voz real, header ID3 valido.",
+          "<code>curl /imagen/generate</code> con <code>imagen-4.0-generate-001</code> devolvio PNG en base64.",
+          "<code>curl /veo/generate</code> + <code>/veo/status/{op}</code> + <code>/veo/download</code> produjo MP4 4.4 MB con audio nativo.",
+          "<code>curl /signage/push</code> + <code>GET /signage/feed</code> cierra round-trip; <code>/signage/ack/{id}</code> actualiza <code>acked_at</code>.",
+          "<code>curl /signage/heartbeat</code> con <code>xtore-real01</code> + version <code>v26.03.05.4</code> aparece en <code>/signage/screens</code> con <code>online:true, age_seconds:0</code>.",
+          "<code>curl /yt/import</code> con video corto bajo MP3 384KB en ~3s, <code>file</code> devolvio <code>Audio file with ID3 version 2.4.0</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Worker <code>pixer-eleven</code> pasa de tener 5 endpoints a tener 22 (incluye <code>llm/lyrics</code>, <code>lyria/generate</code>, <code>lyria3/generate</code>, <code>imagen/generate</code>, <code>veo/*</code> asincrono con polling, <code>signage/*</code> completo).",
+          "Pixer ahora tiene los 4 motores (Audio, Musica, Imagenes, Video) conectados a APIs reales en lo que es posible sin captcha.",
+          "Bridge Pixer ⇄ AdmiraXP funciona end-to-end: <code>▶ REPRODUCIENDO en pantalla</code> con <code>screen-id</code> real cuando el game o <code>signage.html</code> muestra el item.",
+          "Badge <code>XTORE v26.03.05.4 · LIVE</code> en Pixer detecta automaticamente el game corriendo y su version desde <code>window.XTANCO_APP</code>.",
+          "Generador de letras + Lyria 3 = pipeline completo de cancion (letra IA + voz cantando) en menos de 30s."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "ElevenLabs Free Tier marcado <code>detected_unusual_activity</code> por su sistema antifraude desde la primera llamada — bloqueado, requiere upgrade a Starter $5/mes o contactar soporte.",
+          "Suno bloqueado por Cloudflare Turnstile en <code>/api/generate/v2-web/</code> — el JWT de <code>__session</code> caduca cada ~15 min y el captcha es por peticion, requiere integrar 2Captcha.",
+          "Gemini API en Free Tier devolvio <code>limit:0</code> en Lyria 3 — el usuario activo billing del proyecto GCP y se desbloqueo.",
+          "xAI renombro modelos: <code>grok-2-image</code> no existe, hay que usar <code>grok-imagine-image</code> y <code>grok-imagine-image-pro</code>.",
+          "<code>IMPORTAR</code> desde el browser dio <code>TypeError: Failed to fetch</code> por dos razones combinadas: HSTS upgrade de github.io que convertia <code>http://localhost</code> en <code>https://localhost</code>, y Chrome Private Network Access que bloquea <code>https publico → IP privada</code> sin header <code>Access-Control-Allow-Private-Network</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mover todas las API keys server-side al worker <code>pixer-eleven</code> y borrar los inputs de keys del modal de Pixer (excepto el Voice ID opcional de ElevenLabs).",
+          "Crear KV namespace <code>SIGNAGE_KV</code> con TTL 7 dias por item para no acumular basura.",
+          "Inyectar el snippet de heartbeat + feed render en el <code>game.html</code> del AdmiraXP (vs crear una pantalla aparte) para que el game se reconozca a si mismo como Xtore sin necesidad de abrir signage.html en otra ventana.",
+          "Usar <code>127.0.0.1</code> en lugar de <code>localhost</code> en los fetches para evitar HSTS upgrade.",
+          "Postergar Suno hasta proxima sesion (requiere $3 setup 2Captcha + cookie refresh dance) y centrarse en alternativas oficiales (Lyria 2/3).",
+          "Usar <code>signage.html</code> como pantalla standalone (URL estable fuera de carpetas versionadas) para casos en que no se quiera meter el snippet en una app concreta."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Verificar IMPORTAR end-to-end con <code>Cmd+Shift+R</code> tras el fix de PNA. Si Chrome sigue bloqueando: tocar <code>chrome://flags/#block-insecure-private-network-requests</code> o cambiar de browser.",
+          "Re-extraer cookie de Suno + integrar 2Captcha si se quiere desbloquear ese motor de musica.",
+          "ElevenLabs: decidir entre upgrade a Starter $5/mes o contactar soporte para desbloquear Free Tier.",
+          "Anadir mute total en game AdmiraXP (peticion del usuario que se quedo a medias por pivot a fix de badge XTORE).",
+          "Mejora futura: integrar el feed de Pixer en una pantalla dentro del game (VAPES, VINOS) en vez de overlay flotante — requiere meter en canvas.",
+          "Handoff completo: <a href='handoff/2026-05-03-HX-HQ7E.md' target='_blank'>handoff/2026-05-03-HX-HQ7E.md</a>"
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-02",
     title: "2 de mayo de 2026",
     author: "Codex",
