@@ -264,6 +264,71 @@
 <script>
 const entries = [
   {
+    date: "2026-05-04",
+    title: "4 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se actualizo el checkout limpio del diario en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git pull --ff-only origin main</code>, trayendo el commit remoto <code>66de21c</code> (<code>chore: actualizar repos.html 2026-05-04 [skip ci]</code>).",
+          "Se continuo el trabajo del Consejo AdmiraNext desde <code>/Users/csilvasantin/Downloads/Consejo AdmiraNext</code>, que estaba alineado con <code>origin/main</code>.",
+          "Se publico <code>AdmiraNext Consejo v.26.05.04.r1</code> con el commit <code>e6c1e21</code> (<code>Add Yarig health status and local sync target</code>).",
+          "Se anadio estado operativo de Yarig con <code>GET /api/council/yar-status</code> y comando <code>/yarig estado</code>.",
+          "Se corrigio el worker de Yarig para sincronizar contra <code>http://127.0.0.1:8420</code> en el Mac Mini, en vez de usar Render como destino por defecto.",
+          "Se reabrio la sesion persistente de Yarig desde el backend vivo con <code>/api/council/yar-login</code>, quedando el watcher activo con PID <code>9003</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En el diario, <code>git status --short --branch</code> confirmo el repo en <code>## main...origin/main</code> tras el fast-forward.",
+          "En el diario, el pre-check del dia mostro <code>66de21c</code> y <code>b29c711</code> dentro de la ventana de <code>2026-05-04</code>, y el reflog registro el fast-forward a las <code>2026-05-04 20:51:35 +0200</code>.",
+          "En Consejo AdmiraNext, <code>git log --since='2026-05-04 00:00' --until='2026-05-04 23:59:59' --date=iso --stat --oneline --all</code> mostro el commit <code>e6c1e21</code> con cambios en <code>HANDOFF.md</code>, <code>council-api.py</code>, <code>council-scumm.html</code>, <code>public/council-scumm.html</code> y <code>tools/yarig-tasks-sync.mjs</code>.",
+          "Se verifico que <code>http://localhost:8420/</code> respondia con <code>Admira v.26.05.04.r1</code>.",
+          "Se verifico que <a href='https://csilvasantin.github.io/32.-ConsejoAdmiraNextGame/council-scumm.html?_v=e6c1e21' target='_blank'>la URL publica del Consejo</a> servia la version publicada y contenia <code>/api/council/yar-status</code>.",
+          "Se envio Telegram de publicacion del Consejo via bridge, con <code>messageId 8224</code>.",
+          "Tras el login de Yarig, <code>/api/council/yar-status</code> confirmo watcher vivo con PID <code>9003</code> y una tarea en proceso (<code>Inbox 0</code>)."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El Consejo ya puede distinguir si Yarig esta fresco, caducado, con watcher vivo o con watcher parado.",
+          "La UI publica del Consejo incorpora el comando <code>/yarig estado</code> y un boton <code>ESTADO YARIG</code> dentro del panel de Yarig.",
+          "El flujo de Yarig queda mejor preparado para diagnosticar sesiones caducadas sin confundirlas con errores del Consejo.",
+          "Queda fijada la convencion de nombre para siguientes releases del proyecto: <code>AdmiraNext Consejo v.AA.MM.DD.rN</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Al empezar, el contexto de Yarig del Consejo estaba caducado y procedia de un snapshot antiguo.",
+          "El watcher persistente de Yarig estaba parado y el PID guardado en <code>yarig-login.pid</code> ya no correspondia a un proceso vivo.",
+          "Se detecto que el worker de Yarig apuntaba por defecto a Render, no al backend local del Mac Mini.",
+          "La rutina canonica del diario indica que normalmente no se envia Telegram ni se usa version, pero el usuario pidio explicitamente hacerlo tambien para este cierre."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener el trabajo del diario en <code>/Users/csilvasantin/Claude/diario/</code>, como indica la rutina, y no tocar otros checkouts del repo.",
+          "Usar <code>Diario v.26.05.04.r1</code> como version de este cierre para el aviso por Telegram, manteniendo la URL publica canonica del diario.",
+          "No gestionar contrasenas de Yarig desde Codex; se valido la sesion tras el login hecho por el usuario.",
+          "Dejar como siguiente mejora del Consejo la fusion de historico Yarig, para preservar finalizadas utiles cuando Yarig devuelva una lista actual limpia."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Publicar esta entrada del diario y verificar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>.",
+          "Enviar Telegram con la URL publica del diario y la version <code>Diario v.26.05.04.r1</code>.",
+          "En Consejo AdmiraNext, implementar la fusion de historico Yarig separando estado vivo actual de historico preservado."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-03",
     title: "3 de mayo de 2026",
     author: "Claude",
