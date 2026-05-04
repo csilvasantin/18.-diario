@@ -266,6 +266,63 @@ const entries = [
   {
     date: "2026-05-04",
     title: "4 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto el cierre del dia desde el checkout <code>/home/user/18.-diario/</code> (sesion Claude Code en la web), trabajando sobre la rama <code>main-tI2ja</code> segun la instruccion de la sesion.",
+          "Se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-05-04 00:00' --until='2026-05-04 23:59:59' --oneline --all</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se anadio este bloque <code>[Claude]</code> a <code>2026-05-04.md</code> separado por <code>---</code> para convivir con la entrada previa firmada por Codex.",
+          "Se actualizo <code>index.html</code> para que la fecha aparezca tambien en el filtro <code>Claude</code>, ademas de en <code>Codex</code> y <code>Todos</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> confirmo el repo en <code>## main-tI2ja...origin/main-tI2ja</code> con working tree limpio antes de empezar.",
+          "<code>git log --since='2026-05-04 00:00' --until='2026-05-04 23:59:59' --oneline --all</code> mostro dos commits del dia: <code>00b0454</code> (<code>Diario 2026-05-04 [Codex]</code>) y <code>66de21c</code> (<code>chore: actualizar repos.html 2026-05-04 [skip ci]</code>).",
+          "<code>git log --all --oneline --since='2026-05-04 00:00' --author='Claude'</code> no devolvio ninguna linea, confirmando que no habia trabajo previo de Claude registrado en este repo el dia de hoy.",
+          "La hora real del cierre quedo verificada con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, que devolvio <code>2026-05-04 21:12:18 UTC +0000</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada del 4 de mayo queda firmada tanto por Codex como por Claude en un unico fichero <code>2026-05-04.md</code>, respetando la regla 1-2-3 del diario.",
+          "<code>index.html</code> queda preparado para servir la fecha <code>2026-05-04</code> desde el filtro <code>Claude</code> ademas de los filtros <code>Todos</code> y <code>Codex</code> existentes.",
+          "La sesion de Claude Code en la web queda registrada explicitamente como parte del trabajo del dia, aunque no haya generado commits previos al cierre."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La sesion arranco sin trabajo previo de Claude Code commiteado en <code>main-tI2ja</code>, por lo que el unico trabajo nuevo a documentar era el propio cierre del dia.",
+          "La rutina canonica trabaja sobre <code>/Users/csilvasantin/Claude/diario/</code> y rama <code>main</code>, pero la sesion en la web usa <code>/home/user/18.-diario/</code> y la rama de desarrollo <code>main-tI2ja</code>; se siguio la instruccion de la sesion sin saltarse la rama designada."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia aunque no hubiera otro trabajo de Claude Code, segun la directriz del usuario: \"si un dia en concreto no se ha hecho nada se documenta y ya esta\".",
+          "Insertar la entrada <code>[Claude]</code> antes de la entrada <code>[Codex]</code> en <code>index.html</code>, manteniendo la convencion observada el 3 de mayo (Claude primero, Codex despues).",
+          "No tocar <code>repos.html</code> manualmente: lo regenera el workflow <code>update-repos.yml</code> tras el push.",
+          "Mantener el push contra <code>origin/main-tI2ja</code> y abrir la PR como draft, sin tocar <code>main</code> directamente."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer commit + push de <code>2026-05-04.md</code> e <code>index.html</code> sobre <code>main-tI2ja</code> y abrir la pull request en draft.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra la entrada del dia firmada por Claude tras el merge a <code>main</code>.",
+          "Confirmar que el workflow <code>update-repos.yml</code> regenera <code>repos.html</code> para reflejar el commit de hoy."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-04",
+    title: "4 de mayo de 2026",
     author: "Codex",
     sections: [
       {
