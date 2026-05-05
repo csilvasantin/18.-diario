@@ -271,97 +271,54 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso el trabajo de hoy en los repositorios de Admirito con foco en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code> y el estado reciente del workspace del diario.",
-          "En <code>AdmiraNext-Team</code> quedo preparado un redisenyo fuerte del dashboard: UI arcade \"player select\", resumen por miembro, ficha destacada, soporte visual para <code>idle</code>, version <code>0.1.3</code> y datos de conexion local para <code>macmini</code>.",
-          "En <code>AdmiraNext-Team-latest</code> se reforzo la capa operativa: <code>PORT</code> configurable por entorno, lista unica de estados validos y quoting reusable para <code>osascript</code> remoto sobre SSH.",
-          "En paralelo, la entrada larga existente del dia recoge despliegues y validaciones amplias en Admira XP, Pixer.ia, OmniPublicity, <code>suno-local</code> y CI; esta actualizacion deja el resumen corto de seguimiento que faltaba."
-        ]
-      },
-      {
-        heading: "Que se valido",
-        items: [
-          "<code>AdmiraNext-Team</code> no tiene commits de hoy, pero si un diff local muy grande en <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code> y <code>data/machines.json</code>, ademas de nuevas capturas de maquinas.",
-          "Ese diff incorpora IP local y comando de acceso directo por LAN para <code>macmini</code>, lo que mejora el camino corto de soporte y control remoto.",
-          "<code>AdmiraNext-Team-latest</code> mantiene cambios locales centrados en robustez: aceptacion de <code>idle</code>, construccion segura de AppleScript remoto y limpieza del refresco de snapshots.",
-          "<code>origin/main</code> ya tenia una entrada de <code>2026-05-05</code>, pero la web estaba mostrando solo la version <code>Claude</code>; esta revision deja reflejado tambien el resumen <code>Codex</code>."
-        ]
-      },
-      {
-        heading: "Problemas encontrados",
-        items: [
-          "Hay varios repositorios del workspace por detras de <code>origin</code> y con cambios sin commit, lo que mezcla trabajo validado con trabajo aun no publicado.",
-          "El repo del diario tenia actividad concurrente entre checkouts: existia ya contenido para <code>2026-05-05</code>, pero no estaba alineado ni resumido con el foco pedido hoy."
-        ]
-      },
-      {
-        heading: "Decisiones tomadas",
-        items: [
-          "Tomar como fuente principal de esta actualizacion los diffs locales y el estado real de los worktrees, no solo los commits ya publicados.",
-          "Mantener este bloque <code>Codex</code> corto y orientado a seguimiento operativo: que se movio, que se comprobo, que riesgo queda y que toca despues."
-        ]
-      },
-      {
-        heading: "Siguientes pasos",
-        items: [
-          "Publicar o consolidar los cambios de <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> cuando se confirme que version pasa a ser la buena.",
-          "Alinear el diario entre checkouts antes del siguiente cierre para evitar otra divergencia sobre <code>2026-05-05</code>."
-        ]
-      }
-    ]
-  },
-  {
-    date: "2026-05-05",
-    title: "5 de mayo de 2026",
-    author: "Codex",
-    sections: [
-      {
-        heading: "Que se hizo",
-        items: [
-          "Se leyo la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> y la copia local de <code>CERRAR-EL-DIA.md</code> para ejecutar la rutina en este checkout.",
-          "Se contrasto la copia local de <code>CERRAR-EL-DIA.md</code> con <code>origin/main:CERRAR-EL-DIA.md</code> y no hubo diferencias en la rutina.",
+          "Se leyo la copia local de <code>CERRAR-EL-DIA.md</code>, la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> y <code>origin/main:CERRAR-EL-DIA.md</code> para ejecutar el cierre sobre <code>/Users/csilvasantin/Claude/diario/</code>.",
           "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-05-05 00:00' --until='2026-05-05 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-05 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se sincronizo el checkout canonico de <code>/Users/csilvasantin/Claude/diario/</code> con <code>git pull --ff-only origin main</code>, que devolvio <code>Already up to date.</code>.",
-          "Se creo <code>2026-05-05.md</code> con la firma <code>[Codex]</code> y se actualizo <code>index.html</code> para exponer esta fecha en la UI publica."
+          "Se sincronizo el checkout canonico con <code>git pull --ff-only origin main</code>, que incorporo el commit remoto <code>3aed4b1</code> (<code>docs: Update Codex 2026-05-05 [skip ci]</code>).",
+          "Se actualizo este bloque <code>Codex</code> de <code>2026-05-05.md</code> para dejarlo alineado con el estado real del repo al cierre y cumplir la estructura literal de seis secciones.",
+          "Se limpio <code>index.html</code> para dejar una sola entrada <code>Codex</code> y una sola entrada <code>Claude</code> para <code>2026-05-05</code> en la UI publica."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout indicado estaba limpio al empezar.",
-          "<code>git log --since='2026-05-05 00:00' --until='2026-05-05 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits para este repo en la ventana de hoy.",
-          "<code>git reflog --date=iso --since='2026-05-05 00:00'</code> no devolvio movimientos de <code>HEAD</code> dentro de la ventana de hoy.",
-          "La hora real del cierre quedo verificada con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, que devolvio <code>2026-05-05 00:03:19 CEST +0200</code>.",
-          "<code>git pull --ff-only origin main</code> confirmo que este checkout ya estaba alineado con <code>origin/main</code>."
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout estaba limpio al iniciar el cierre.",
+          "<code>git log --since='2026-05-05 00:00' --until='2026-05-05 23:59:59' --date=iso --stat --oneline --all</code> devolvio actividad previa en este repo hoy: <code>3aed4b1</code> (<code>docs: Update Codex 2026-05-05 [skip ci]</code>), <code>3d51787</code> (<code>Diario 2026-05-05 [Claude]</code>), <code>a3e8193</code> (<code>chore: actualizar repos.html 2026-05-05 [skip ci]</code>) y <code>7f20eee</code> (<code>Diario 2026-05-05 [Codex]</code>).",
+          "<code>git reflog --date=iso --since='2026-05-05 00:00'</code> devolvio movimientos de <code>HEAD</code> dentro de hoy, incluido el commit <code>7f20eee</code> a las <code>2026-05-05 00:05:01 +0200</code> y el <code>pull --rebase origin main</code> de las <code>2026-05-05 22:49:55 +0200</code>.",
+          "La hora real del cierre quedo verificada con <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, que devolvio <code>2026-05-05 23:56:24 CEST +0200</code>.",
+          "<code>git pull --ff-only origin main</code> hizo fast-forward de <code>3d51787</code> a <code>3aed4b1</code>, confirmando que habia cambios remotos adicionales durante esta jornada.",
+          "<code>git show origin/main:CERRAR-EL-DIA.md</code> coincide con la copia local de <code>CERRAR-EL-DIA.md</code>, asi que la rutina seguida en este checkout no tenia diferencias con la guia versionada."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "Queda creada la entrada del dia <code>2026-05-05</code> en el checkout canonico del diario.",
-          "<code>index.html</code> queda actualizado para mostrar <code>2026-05-05</code> en <code>Todos</code> y en el filtro <code>Codex</code>.",
-          "La rutina vuelve a quedar apoyada en la memoria local de la automatizacion y en la guia versionada del repo."
+          "<code>2026-05-05.md</code> queda consolidado en un solo fichero de fecha con bloque <code>Codex</code> y bloque <code>Claude</code>, sin duplicar la fecha.",
+          "El bloque <code>Codex</code> vuelve a recoger solo hechos verificables del propio repo del diario y del trabajo real de este cierre.",
+          "<code>index.html</code> queda preparado para mostrar una sola entrada <code>Codex</code> de <code>2026-05-05</code> junto a la entrada <code>Claude</code> del mismo dia."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No se detectaron conflictos de git, worktree sucio ni divergencia con <code>origin/main</code> durante este cierre.",
-          "El pre-check del dia no mostro actividad previa en este repo para <code>2026-05-05</code>, asi que esta entrada solo recoge el trabajo real de esta sesion de cierre."
+          "El repo recibio un cambio remoto durante este cierre, lo que obligo a rehacer la base local con <code>git pull --ff-only origin main</code> antes de editar.",
+          "El estado remoto de <code>2026-05-05</code> mezclaba un bloque <code>Codex</code> en Markdown con dos entradas <code>Codex</code> distintas en <code>index.html</code>, y una de ellas arrastraba validaciones ya desfasadas.",
+          "El bloque <code>Codex</code> remoto de <code>2026-05-05.md</code> no mantenia las seis secciones numeradas que exige la rutina."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener todo el trabajo del diario en <code>/Users/csilvasantin/Claude/diario/</code>, como marca la rutina, sin tocar otros checkouts.",
-          "Registrar exclusivamente hechos comprobados con <code>git</code> en este repo y con las acciones reales ejecutadas en esta sesion.",
-          "Publicar la jornada mediante la URL publica canonica del diario, no mediante capturas."
+          "Tomar <code>origin/main</code> actualizado como base obligatoria antes de escribir la entrada final del dia.",
+          "Corregir el bloque <code>Codex</code> existente de <code>2026-05-05</code> en lugar de anadir un tercer bloque del mismo autor para la misma fecha.",
+          "Eliminar la duplicidad <code>Codex</code> en <code>index.html</code> para que la UI publica refleje fielmente el contenido del fichero diario.",
+          "Tomar la copia local y <code>origin/main:CERRAR-EL-DIA.md</code> como fuente de verdad suficiente para la rutina, ya que ambas coinciden."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
           "Hacer <code>git add 2026-05-05.md index.html</code>, <code>git commit -m \"Diario 2026-05-05 [Codex]\"</code> y <code>git push origin main</code>.",
-          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada del dia."
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada del dia ya consolidada."
         ]
       }
     ]
