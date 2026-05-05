@@ -324,6 +324,90 @@ const entries = [
     ]
   },
   {
+    date: "2026-05-05",
+    title: "5 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "<strong>Admira XP — Pixer Feed overlay</strong> (v26.05.05.1 → .4 + .17): visibilidad gateada al estado isometrico (S.GAME/S.EDITOR), ventana arrastrable con persistencia en localStorage, ancho reducido 10%, kind movido al header, baseline silenciado al arrancar para que el overlay solo aparezca cuando Pixer.ia empuje contenido nuevo de la sesion actual. Caratula encima del audio cuando llega cover_url.",
+          "<strong>suno-local</strong> — proxy Node nativo en <code>01.-AdmiraXperience-Game/suno-local/</code> con auth Clerk via cookie en <code>.env</code>, refresh JWT cada 50s, endpoints <code>/healthz</code>, <code>/generate</code>, <code>/status?ids=...</code>, gating Origin allowlist + rate-limit. Migrado a <code>auth.suno.com</code> (Clerk v5) y <code>studio-api-prod.suno.com</code>. <code>start-suno-local.sh</code> levanta proceso + Tailscale Funnel <code>/suno</code>. Verificado con cookie real: 2570 creditos.",
+          "<strong>elgato-proxy.js extendido</strong> — <code>/tube/download</code> acepta <code>format=audio|video</code>, whitelist multi-host (YouTube, Vimeo, Twitter/X, TikTok, Instagram), audio mp3 via ffmpeg. Verificado: YouTube short → mp3 1MB.",
+          "<strong>Pixer.ia r36 → r48</strong> (12 versiones): boton KEYS quitado, fix Failed-to-fetch en IMPORTAR via admira-tube Funnel, marca <code>Pixer.ai</code> → <code>Pixer.ia</code>, cliente default <code>AdmiraNext</code> con separador <code>//</code>, hero imagenes a <code>Creacion de contenido Multimedia</code>, cliente bar 3 columnas (cliente · ENVIAR A ADMIRA XP · VER PANTALLA), MOTORES.musica/imagenes/video reducidos a 3 cada uno con badges Good/Better/Best, multi-select por click en imagenes con grid comparativa selectable, footer convertido en una sola linea linkando a Admira XP, titulo del item enviado a Pixer Feed traducido es/en con kind <code>// imagen</code>/<code>// image</code>. Caratula auto-Pollinations cuando el motor no devuelve image_url propia.",
+          "<strong>Audio mute master</strong> (v26.05.05.5 → .6): <code>/audio mute</code> amplia cobertura a beep Elgato, playSaveBeep, ANNOUNCE_AUDIO ElevenLabs y audio del overlay Pixer Feed. Bug raiz de las \"3 gotas residuales\" diagnosticado: el ambient engine seguia sonando porque setMasterMute no llamaba a <code>AMBIENT.update()</code>. Defensa anyadida en <code>assets/js/sfx.js</code>.",
+          "<strong>/audio probe</strong> (v26.05.05.7) — diagnostico exhaustivo de fuentes audio (lista <code>&lt;audio&gt;</code>/<code>&lt;video&gt;</code> en reproduccion + flags globales). Util porque no tengo herramienta de captura de audio.",
+          "<strong>/people store &lt;N&gt;</strong> (v26.05.05.8 → .10) — fija el numero de clientes (G.custs). <code>/people store 0</code> cierra puerta a clientes; gateado tambien spawnCust con <code>G.peopleOverride</code> para bloquear wantToJoin y sponsor recurrente que pasaban con force=true. Salida instantanea (no espera el trim natural).",
+          "<strong>/store close|open</strong> (v26.05.05.11 + .16) — apagado total reversible. Snapshot del estado, saca clientes, hide staff, apaga sistemas. Fuerza a idle G.thief, G.unitreeBot, G.saca, G.guardiaCivil + cap auto-spawn condicional para que ladron, robot Unitree y \"La Saca\" (proveedor de tabaco) no entren con la tienda cerrada.",
+          "<strong>Bocadillo Store Manager + CLI</strong> (v26.05.05.12 → .15) — echo del comando ejecutado en el bocadillo del Store Manager, traducido es/en sin barras (<code>/store close</code> → \"Tienda cerrada\", <code>/audio mute</code> → \"Audio silenciado\", etc.). Bot Telegram delega <code>/store /people /gente /clientes</code> a <code>api.command()</code>. Respuesta inline del bot en el panel del composer.",
+          "<strong>OmniPublicity v2 + v3</strong> — sustituido contenido conceptual por vista globo MapLibre GL JS sobre OpenFreeMap. Buscador <code>Xtanco</code> → fly-to a Calle Santa Rosa 4 Madrid con tilt 60° y panel lateral con 6 surfaces. v3 anyade controles tipo Google Maps (compass + 3D + locate + zoom) y selector Mapa/Relieve/Trafico (Trafico DEMO). Concepto RTB anterior preservado en <code>about.html</code>.",
+          "<strong>xpace-os/</strong> — nuevo site de resumen de las 3 capas AdmiraNext (Pixer.ia + Admira XP + OmniPublicity) con tabla comparativa vs Advertima y fetch live de metricas a los workers. URL: <code>https://csilvasantin.github.io/xpace-os/</code>.",
+          "<strong>CI smoke + manifest workflows</strong> — fix smoke.mjs ignorando errores CORS/red de los workers externos. Fix <code>update-pixer-manifest.yml</code>: heredoc bash <code>&lt;&lt;JSON</code> rompia indentacion del bloque YAML; reemplazado por <code>jq -n --arg ...</code>. Workflow paso de 16 runs failed consecutivos a verde en <code>5fe076b</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Cada deploy verificado en URL publica via <code>curl</code> al <code>xtanco-version.js</code> o <code>manifest.json</code>. 16 deploys de Admira XP (v26.05.05.1 → .17) y 13 de Pixer.ia (r36 → r48), todos LIVE.",
+          "Telegram enviado tras cada deploy con URL <code>?v=&lt;build&gt;&fresh=1</code>. Mensajes 8321 (primero) → 8479 (ultimo).",
+          "<code>suno-local</code>: cookie probada con <code>curl /healthz</code> → <code>{\"ok\":true,\"total_credits_left\":2570}</code>. Discovery del host correcto via traza Network del usuario (<code>https://studio-api-prod.suno.com/api/project/me?...</code>).",
+          "<code>elgato-proxy /tube/download</code>: probado con YouTube short, devuelve mp3 1MB con headers <code>Content-Type: audio/mpeg</code>, <code>X-Tube-Format: audio</code>.",
+          "CI: <code>pages-loads</code> failure → success en <code>ce463bf</code>. <code>update-pixer-manifest</code> 16 failures consecutivos → success en <code>5fe076b</code>.",
+          "Pre-check git diario: <code>## main...origin/main</code> limpio, <code>2026-05-05.md</code> ya existia con la entrada de Codex (<code>7f20eee</code>), fecha local <code>2026-05-05 22:42 CEST</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Las 3 capas del Xpace OS quedan presentadas en <a href='https://csilvasantin.github.io/xpace-os/' target='_blank'>https://csilvasantin.github.io/xpace-os/</a> con tabla diferencial vs Advertima.",
+          "Pixer.ia con marca correcta (<code>Pixer.ia</code>), cliente default AdmiraNext, catalogo de motores reducido por seccion (3 con badges Good/Better/Best en imagenes/video) y multi-select para comparativa side-by-side.",
+          "Comandos CLI nuevos en Admira XP: <code>/people store &lt;N&gt;</code>, <code>/store close|open</code>, <code>/audio probe</code>. Bocadillo Store Manager refleja la accion en lenguaje natural traducido.",
+          "<code>suno-local</code> funcionando como subcarpeta de Admira XP, expuesto en <code>https://macmini.tail48b61c.ts.net/suno</code>. Pixer.ia r38 ya apunta al Funnel cuando vive en HTTPS.",
+          "CI completamente verde tras dos bugs preexistentes resueltos."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Pages-build fallaba desde dias por <code>assets/actualizacion.log</code> interpretado como YAML front matter por Jekyll. Resuelto con <code>.nojekyll</code>.",
+          "<code>update-pixer-manifest.yml</code>: indentacion del heredoc bash <code>&lt;&lt;JSON</code> rompia el bloque YAML del <code>run: |</code>. PyYAML lo confirmo: <code>ScannerError line 57 column 1</code>. GitHub interpretaba el workflow como invalido (\"No jobs were run\").",
+          "<code>studio-api.suno.ai</code> y <code>studio-api.prod.suno.com</code> apagados. Backend real esta en <code>studio-api-prod.suno.com</code> con prefijo <code>/api/...</code>.",
+          "Clerk en Suno migro de <code>clerk.suno.com</code> a <code>auth.suno.com</code> y de v4 a v5.",
+          "<code>/people store 0</code> no bloqueaba 3 NPCs especiales con auto-spawn (G.thief, G.unitreeBot, G.saca). Solucionado con <code>&& !G.storeClosed</code> en sus 3 condiciones de entry y forzando phase=idle en el handler de cierre.",
+          "Las \"3 gotas\" residuales tras <code>/audio mute</code>: ambient engine (rumor + lluvia + cafetera) cuyo master gain no se actualizaba. No tengo herramienta de captura de audio asi que el debug definitivo vino del fichero <code>ruiditos.ogg</code> que el usuario grabo: ffmpeg + analisis FFT delataron 660+784Hz (SFX.voteHappy) y 220Hz (voteSad).",
+          "CORS estricto en los Cloudflare Workers (admira-telegram-bridge, admira-loyalty, pixer-eleven, admira-marketplace) — solo permiten origin <code>csilvasantin.github.io</code>; smoke en CI desde <code>127.0.0.1:5050</code> los ve como errores. Ignorados con <code>isEnvironmentalNoise</code>.",
+          "Bot Telegram tiene su propio dispatcher separado del CLI in-game; comandos nuevos no llegaban automaticamente. Anyadida delegacion fallback antes del \"No entiendo\".",
+          "La cookie de Suno se pego por chat — el usuario asume el riesgo, recomendado rotar tras tests via Settings → Sign out of all devices."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "<strong>MapLibre GL JS sobre OpenFreeMap</strong> para OmniPublicity en lugar de Google Maps JS — vista globo nativa, sin API key, sin billing.",
+          "<strong>suno-local como subcarpeta de Admira XP</strong> en vez de repo aparte — el ecosistema esta acoplado en runtime via Funnel y pasa por el mismo Mac Mini.",
+          "<strong>Tres motores por seccion</strong> en Pixer.ia (Good/Better/Best) — UI mas legible y multi-select via checkboxes en imagenes para comparar side-by-side.",
+          "<strong>Marca <code>AdmiraNext //</code></strong> sustituye <code>Demo Pixer.ai</code> como cliente default; separador <code>//</code> mismo lenguaje que el header del overlay del game.",
+          "<strong>Pixer Feed solo en vista isometrica</strong> (S.GAME/S.EDITOR), no en era-select / menu / intro — separa contexto IA del chrome del juego.",
+          "<strong>/audio probe</strong> como diagnostico permanente — preferible a anyadir capturas de audio externas que no podemos automatizar.",
+          "<strong>Bocadillo del manager con frases naturales</strong> en vez del comando raw con barra — mas legible para usuarios no tecnicos.",
+          "<strong>Trafico real fuera de scope</strong> en OmniPublicity (TomTom/HERE/Google de pago); decoracion DEMO con badge explicito.",
+          "<strong>Runway \"Better\" sin enchufar todavia</strong> — el badge es por calidad/posicionamiento. Se enchufa cuando haya API key Runway."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Rotar la cookie de Suno (Settings → Sign out of all devices → relogin → pegar nueva en <code>suno-local/.env</code>) ya que se compartio por chat.",
+          "Probar <code>/generate</code> real desde Pixer.ia → pestaña Musica → motor Suno v4.5 (gasta ~10 creditos) para validar el path E2E completo.",
+          "Enchufar Runway Gen-3 al worker <code>pixer-eleven</code> cuando el usuario aporte API key Runway, para que el badge \"Better\" en video funcione real.",
+          "Si las metricas live de xpace-os son utiles, anyadir el contador de creditos Suno via fetch al Funnel <code>/suno/healthz</code> (ya esta esquematizado).",
+          "Considerar TomTom/HERE traffic API si el usuario quiere que la capa \"Trafico\" deje de ser DEMO.",
+          "Limpieza diferida: motores eliminados de la UI (Lyria 2, Imagen 4 estandar, Grok Imagine, Sora, Veo 3 Fast) siguen con su logica en <code>app.js</code>. Se pueden borrar tambien si confirma el usuario."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-04",
     title: "4 de mayo de 2026",
     author: "Codex",
