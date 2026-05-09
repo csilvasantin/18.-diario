@@ -505,7 +505,7 @@ const entries = [
           "<strong>/store close|open</strong> (v26.05.05.11 + .16) — apagado total reversible. Snapshot del estado, saca clientes, hide staff, apaga sistemas. Fuerza a idle G.thief, G.unitreeBot, G.saca, G.guardiaCivil + cap auto-spawn condicional para que ladron, robot Unitree y \"La Saca\" (proveedor de tabaco) no entren con la tienda cerrada.",
           "<strong>Bocadillo Store Manager + CLI</strong> (v26.05.05.12 → .15) — echo del comando ejecutado en el bocadillo del Store Manager, traducido es/en sin barras (<code>/store close</code> → \"Tienda cerrada\", <code>/audio mute</code> → \"Audio silenciado\", etc.). Bot Telegram delega <code>/store /people /gente /clientes</code> a <code>api.command()</code>. Respuesta inline del bot en el panel del composer.",
           "<strong>OmniPublicity v2 + v3</strong> — sustituido contenido conceptual por vista globo MapLibre GL JS sobre OpenFreeMap. Buscador <code>Xtanco</code> → fly-to a Calle Santa Rosa 4 Madrid con tilt 60° y panel lateral con 6 surfaces. v3 anyade controles tipo Google Maps (compass + 3D + locate + zoom) y selector Mapa/Relieve/Trafico (Trafico DEMO). Concepto RTB anterior preservado en <code>about.html</code>.",
-          "<strong>xpace-os/</strong> — nuevo site de resumen de las 3 capas AdmiraNext (Pixer.ia + Admira XP + OmniPublicity) con tabla comparativa vs Advertima y fetch live de metricas a los workers. URL: <code>https://csilvasantin.github.io/xpace-os/</code>.",
+          "<strong>xpace-os/</strong> — nuevo site de resumen de las 3 capas AdmiraNext (Pixer.ia + Admira XP + OmniPublicity) con stack inspeccionable y fetch live de metricas a los workers. URL: <code>https://csilvasantin.github.io/xpace-os/</code>.",
           "<strong>CI smoke + manifest workflows</strong> — fix smoke.mjs ignorando errores CORS/red de los workers externos. Fix <code>update-pixer-manifest.yml</code>: heredoc bash <code>&lt;&lt;JSON</code> rompia indentacion del bloque YAML; reemplazado por <code>jq -n --arg ...</code>. Workflow paso de 16 runs failed consecutivos a verde en <code>5fe076b</code>."
         ]
       },
@@ -523,7 +523,7 @@ const entries = [
       {
         heading: "Avances",
         items: [
-          "Las 3 capas del Xpace OS quedan presentadas en <a href='https://csilvasantin.github.io/xpace-os/' target='_blank'>https://csilvasantin.github.io/xpace-os/</a> con tabla diferencial vs Advertima.",
+          "Las 3 capas del Xpace OS quedan presentadas en <a href='https://csilvasantin.github.io/xpace-os/' target='_blank'>https://csilvasantin.github.io/xpace-os/</a> con stack inspeccionable y URLs vivas por capa.",
           "Pixer.ia con marca correcta (<code>Pixer.ia</code>), cliente default AdmiraNext, catalogo de motores reducido por seccion (3 con badges Good/Better/Best en imagenes/video) y multi-select para comparativa side-by-side.",
           "Comandos CLI nuevos en Admira XP: <code>/people store &lt;N&gt;</code>, <code>/store close|open</code>, <code>/audio probe</code>. Bocadillo Store Manager refleja la accion en lenguaje natural traducido.",
           "<code>suno-local</code> funcionando como subcarpeta de Admira XP, expuesto en <code>https://macmini.tail48b61c.ts.net/suno</code>. Pixer.ia r38 ya apunta al Funnel cuando vive en HTTPS.",
