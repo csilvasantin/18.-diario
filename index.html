@@ -264,6 +264,73 @@
 <script>
 const entries = [
   {
+    date: "2026-05-10",
+    title: "10 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se desplegaron tres webs <code>admira.*</code> en GitHub Pages con dominio personalizado y DNS en GoDaddy: <code>admira.store</code> (Unitree-only fork de <code>admira-bots</code>, repo nuevo <code>csilvasantin/admira-store</code>), <code>admira.tv</code> (fork de <code>pixer-ai-content</code>, repo nuevo <code>csilvasantin/admira-tv</code>) y <code>admira.app</code> (extracci&oacute;n de la subcarpeta <code>omnipublicity/</code> de <code>csilvasantin.github.io</code>, repo nuevo <code>csilvasantin/admira-app</code>).",
+          "Se instalo y autentico <code>gh</code> CLI v2.92.0 en este equipo Windows (<code>winget install --id GitHub.cli</code> + <code>gh auth login --web</code>), token con scopes <code>gist, read:org, repo, workflow</code>.",
+          "Para <code>admira.store</code>: se clono <code>admira-bots</code>, se borro la carpeta <code>agibot/</code> y <code>home-agibot.css/js</code>, se reemplazo masivamente <code>admira.shop &rarr; admira.store</code> en 24 ficheros, se reescribio la home <code>index.html</code> y se edito <code>catalogo.html</code> para dejar solo modelos Unitree (Go2, B2, G1, H1, R1, H2), se inyecto Google Analytics 4 con placeholder <code>G-XXXXXXXXXX</code> en los 22 HTML.",
+          "Para <code>admira.tv</code>: se copio <code>pixer-ai-content</code> sin <code>.git</code> (456 archivos, 6.38 MB, 47 versiones), se cambio <code>CNAME</code> de <code>ainimation.studio</code> a <code>admira.tv</code> y la <code>&lt;link rel=\"canonical\"&gt;</code> a <code>https://admira.tv/</code>.",
+          "Para <code>admira.app</code>: se copiaron solo los 4 ficheros de <code>omnipublicity/</code> (<code>index.html</code>, <code>about.html</code>, <code>backoffice.html</code>, <code>locations.js</code>) al nuevo repo, se creo <code>CNAME</code> con <code>admira.app</code>. La carpeta original en <code>csilvasantin.github.io/omnipublicity/</code> se mantuvo intacta.",
+          "Se libero el dominio <code>admira.store</code> que estaba reservado por <code>csilvasantin.github.io</code> con <code>'{\"cname\":null}' | gh api -X PUT repos/csilvasantin/csilvasantin.github.io/pages --input -</code>.",
+          "Para <code>admira.tv</code>, el cert HTTPS se quedo atascado &gt;1h con <code>cert_state</code> vacio. Se desbloqueo con un nudge: limpiar cname, esperar 30s, volverlo a poner. Tras el nudge <code>cert_state</code> paso a <code>authorization_created</code> y luego a <code>approved</code>.",
+          "Se forzo HTTPS en <code>admira.app</code> y <code>admira.tv</code> con <code>gh api -X PUT repos/.../pages -F https_enforced=true</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>Resolve-DnsName admira.store -Type A</code> devolvio las 4 IPs oficiales de GitHub Pages (<code>185.199.108-111.153</code>). Idem <code>admira.tv</code> y <code>admira.app</code>. <code>www.admira.tv</code> y <code>www.admira.app</code> resolvieron correctamente via CNAME a <code>csilvasantin.github.io</code>.",
+          "<code>Resolve-DnsName www.admira.store</code> siguio devolviendo <code>3.33.251.168, 15.197.225.128</code> (IPs de AWS gestionadas por el reenvio de GoDaddy), bloqueando la emision del cert con SAN para <code>www.admira.store</code>.",
+          "<code>Invoke-WebRequest https://admira.app/</code> &rarr; 200; <code>https://admira.tv/</code> y <code>https://www.admira.tv/</code> &rarr; 200 tras el nudge; <code>http://admira.store/</code> &rarr; 200 (apex sirve sin HTTPS); <code>http://www.admira.store/</code> &rarr; 404.",
+          "<code>gh api repos/csilvasantin/admira-app/pages</code> devolvio <code>cert_state: approved</code>, <code>https_enforced: True</code>, <code>cert_domains: admira.app, www.admira.app</code>. Idem <code>admira-tv</code> tras el nudge.",
+          "Consulta de CAA con <code>https://dns.google/resolve?name=&lt;dominio&gt;&type=CAA</code> confirmo que los tres dominios no tienen CAA (descarta bloqueo de Let's Encrypt)."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>https://admira.store</code> (apex), <code>https://admira.tv</code> y <code>https://admira.app</code> en produccion con HTTPS forzado en los dos ultimos.",
+          "<code>csilvasantin/admira-store</code> queda como repo limpio Unitree-only, <code>admira-bots</code> intacto para que Codex lo deje Agibot-only.",
+          "<code>csilvasantin/admira-tv</code> queda como fork operativo de <code>pixer-ai-content</code> sin tocar el master. <code>ainimation.studio</code> sigue funcionando.",
+          "<code>csilvasantin/admira-app</code> queda como repo limpio del portal OmniPublicity, sin tocar <code>csilvasantin.github.io/omnipublicity/</code>.",
+          "Memoria de Claude actualizada con 6 ficheros en <code>~/.claude/projects/C--Users-Carlos-Silva/memory/</code> (identidad GitHub, mapping dominio&rarr;repo, pitfalls de GoDaddy y patron del nudge de Pages)."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "GoDaddy bloquea registros A en <code>www</code> con leyenda \"No se puede eliminar / editar\" cuando hay reenvio de dominio activo. Hay que desactivar el reenvio desde <code>?tab=forwarding</code>, no desde el panel DNS. Para <code>admira.store</code> el usuario aun no libero el reenvio.",
+          "<code>csilvasantin.github.io</code> no se puede deactivar Pages (es el repo <code>&lt;user&gt;.github.io</code>) &mdash; <code>DELETE repos/.../pages</code> da HTTP 422. La salida fue limpiar solo el cname con body JSON <code>{\"cname\":null}</code> via <code>--input -</code> (con <code>-f</code> no permite null).",
+          "El cert HTTPS de <code>admira.tv</code> se quedo atascado &gt;1h pese a tener DNS correcto y sin CAA. Se desbloqueo con el patron nudge.",
+          "El sitio OmniPublicity llama a <code>https://omnipublicity-api.csilvasantin.workers.dev</code>. Si el worker tiene <code>Access-Control-Allow-Origin</code> hardcoded a <code>csilvasantin.github.io</code>, el portal en <code>admira.app</code> cargara el mapa MapLibre pero no las pujas en vivo. Verificacion pendiente."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Para cada dominio se creo un repo nuevo en lugar de mover el repo existente, manteniendo intactos los repos master (<code>admira-bots</code>, <code>pixer-ai-content</code>, <code>csilvasantin.github.io</code>). Asi se evita romper los dominios actuales.",
+          "Se mantuvo el apex como dominio canonico (<code>admira.store</code>, <code>admira.tv</code>, <code>admira.app</code>) y se hizo CNAME del <code>www</code> a <code>csilvasantin.github.io</code> para que GitHub Pages redirija <code>www &rarr; apex</code> automaticamente.",
+          "Se metio Google Analytics 4 con placeholder en <code>admira.store</code> para que el usuario solo tenga que reemplazar <code>G-XXXXXXXXXX</code> cuando tenga el Measurement ID.",
+          "Se priorizo tener los 3 sitios en produccion con HTTPS antes que el resto (CORS, Analytics ID real, EN/ES toggle)."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Cuando el usuario libere el reenvio de <code>admira.store</code> en GoDaddy y borre los A ghost de <code>www</code>, nudge del cert y forzar HTTPS.",
+          "Verificar CORS del worker <code>omnipublicity-api.csilvasantin.workers.dev</code> desde <code>https://admira.app</code>. Si bloquea, anyadir <code>admira.app</code> al <code>Access-Control-Allow-Origin</code> del worker.",
+          "Cuando el usuario tenga el Measurement ID de Google Analytics, reemplazar <code>G-XXXXXXXXXX</code> en los 22 HTML de <code>admira-store</code>.",
+          "Si se quiere bilingue ES/EN en <code>admira.store</code>, reescribir un nuevo <code>home-unitree.js</code> con el i18n adaptado a Unitree y devolver el toggle EN/ES al header."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-09",
     title: "9 de mayo de 2026",
     author: "Codex",
