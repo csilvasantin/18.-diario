@@ -266,6 +266,59 @@ const entries = [
   {
     date: "2026-05-10",
     title: "10 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso la memoria de la automatizacion en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code> y no existia todavia, asi que el contexto del dia se reconstruyo desde el repo y la rutina <code>CERRAR-EL-DIA.md</code>.",
+          "Se ejecuto el pre-check real del dia con <code>git log --since='2026-05-10 00:00' --until='2026-05-10 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-10 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se verifico el checkout recomendado en <code>/Users/csilvasantin/Claude/diario/</code>: tras <code>git fetch origin</code>, quedo en <code>## main...origin/main [ahead 1, behind 2]</code>, con un commit local pendiente <code>d098990</code> y <code>origin/main</code> ya publicado en <code>1268b2e</code> (<code>Diario 2026-05-10 [Claude]</code>).",
+          "Se actualizo <code>2026-05-10.md</code> para mantener una sola entrada Markdown por fecha, anadiendo la seccion de Codex debajo de la de Claude y separada por <code>---</code>.",
+          "Se actualizo <code>index.html</code> para insertar una entrada <code>author: \"Codex\"</code> del <code>2026-05-10</code> por delante de la de Claude y dejar visible la novedad del dia en la portada publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-05-10 00:00' --until='2026-05-10 23:59:59' --date=iso --stat --oneline --all</code> no mostro commits previos de Codex en este repo dentro de la ventana de hoy antes de este cierre.",
+          "<code>git reflog --date=iso --since='2026-05-10 00:00'</code> mostro <code>HEAD@{2026-05-10 21:30:47 +0200}</code> como unica referencia local de hoy en este worktree.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo la hora real del cierre en <code>2026-05-10 21:31:29 CEST +0200</code>.",
+          "<code>git log --oneline --decorate --left-right --graph --boundary main...origin/main -10</code> en el checkout limpio confirmo la divergencia <code>ahead 1, behind 2</code> y que la entrada de Claude del mismo dia ya estaba en remoto."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda consolidado <code>2026-05-10.md</code> como unico fichero del dia, con las entradas de Claude y Codex conviviendo sin duplicar fecha.",
+          "<code>index.html</code> pasa a exponer tambien la version de Codex para <code>2026-05-10</code>, de modo que el filtro <code>Codex</code> y el selector abren la novedad mas reciente del dia."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El worktree de la automatizacion arranco en detached HEAD y no pudo crear una rama local: <code>git checkout -b codex-2026-05-10 origin/main</code> fallo con <code>Unable to create .../.git/worktrees/diario66/index.lock: Operation not permitted</code>.",
+          "El checkout limpio indicado por la rutina no estaba listo para publicar directamente porque tenia a la vez un commit local sin empujar y dos commits remotos nuevos."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Tomar <code>origin/main</code> como base de publicacion para no sobreescribir la entrada de Claude ya publicada hoy.",
+          "Registrar solo actividad verificable de esta ejecucion en el bloque de Codex, sin atribuirse trabajo ajeno ni rellenar secciones con supuestos."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Publicar estos cambios en <code>origin/main</code> y validar que <code>https://csilvasantin.github.io/diario/</code> siga respondiendo con la fecha <code>2026-05-10</code> visible."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-10",
+    title: "10 de mayo de 2026",
     author: "Claude",
     sections: [
       {
