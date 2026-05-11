@@ -264,6 +264,148 @@
 <script>
 const entries = [
   {
+    date: "2026-05-11",
+    title: "11 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se implementó el bridge Stream Deck para el teclado Corsair Galleon 100 SD (módulo <code>assets/js/streamdeck.js</code> + página <code>admira-events</code> con 12 acciones cableadas al dispatcher Telegram + comando <code>/sd</code>) en v26.05.11.1, .2, .3 de <code>01.-AdmiraXperience-Game</code>.",
+          "Se completó el Xpace Creator (XP-05) con paletas MOBILIARIO/TRABAJADORES en el dock HTML derecho, categorías CONECTADOS (7 items) / NO CONECTADOS (11 items, puerta añadida hoy) y 5 roles de trabajadores con add por click + chips + borrar (v26.05.11.5, .6, .10).",
+          "Se añadieron 2 entidades nuevas seleccionables (EXTERIOR y FONDO) con paletas de 9 colores y TRANSPARENT primera opción; el FONDO usa un pentágono real que sigue el slant de las paredes y EXTERIOR es un anillo iso de tiles (v26.05.11.4, .8, .9).",
+          "Modelo de mount wall/floor por item del catálogo: wall (5: LED, TFT, Mupi, Tablet, Aroma) + Door añadida hoy; floor (12: Mesa DJ, Gestor Turnos + 10 no conectados). Click handler bloquea movimientos ilegales solo en <code>isBlankXpace()</code> (v26.05.12.4, .6).",
+          "Items wall-mounted con render real respetando <code>item.col</code> (horizontal) e <code>item.wallY</code> (vertical px desde top wall): <code>drawAltadisTFT(centerCol, yPx)</code>, <code>drawAromatizer(col, row, yPx)</code> y nueva <code>drawCreatorDoor(col, yPx)</code> para puerta corredera (v26.05.12.5, .8, .9, .10).",
+          "Sistema de plantillas Creator->Xpacio: <code>saveLayout()</code> en Creator escribe a <code>xpace_creator_template</code> en localStorage; <code>loadLayout()</code> en Shoptalk EU 2026 hace fallback automático a esa plantilla si no tiene layout propio (v26.05.12.5).",
+          "Highlight de selección ajustado al render real con <code>getWallItemRenderPoly(item)</code>: TFT 160x90 (4cols x 9/16), LED banner thin, aroma device pequeño, door 2-cols x 75% wallH (v26.05.11.10, v26.05.12.7, .8, .9).",
+          "Mapa de navegación <code>docs/navigation-map.html</code> con 9 secciones, 51 tarjetas, 20 destinos clicables (14 estados, 5 verticales, 4 tabs UI, 6 docks HTML, sub-apps, workers). Sección 12 nueva en <code>help.html</code> + comando <code>/mapa</code> (v26.05.12.2, .3)."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Pre-checks: <code>git status --short --branch</code> = <code>## main...origin/main</code>, <code>git log --since='2026-05-11 00:00' --oneline</code> mostró 21 commits en <code>01.-AdmiraXperience-Game</code> (de <code>fcee0e4 v26.05.11.1</code> a <code>cf60461 v26.05.12.10</code>), <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> = <code>2026-05-11 23:19:30 CEST +0200</code>.",
+          "Stream Deck bridge: tests <code>SD.press('admira-events', N)</code> confirman dispatch al <code>executeTelegramText</code>; manifest público en <code>https://csilvasantin.github.io/01.-AdmiraXperience-Game/streamdeck-manifest.json</code> devuelve 200.",
+          "Polígonos reales del Creator: FONDO verde sampleó RGB <code>[109,169,6]</code> tanto en triángulo izquierdo (80,40) como derecho (750,40); suelo azul <code>#1f2540</code> sampleó <code>[31,37,64]</code> uniforme en 6 filas; pico inferior del suelo a <code>tCR=(510,493)</code> no recortado.",
+          "Wall items con vertical positioning: con TFT en <code>col=7</code> y <code>wallY=80</code>, el poly va de <code>y=184</code> a <code>y=258</code> (vs default <code>y=107..181</code>). Clicks reales en <code>my=140/200/240</code> setean <code>wallY=0/38/69</code>. Highlight wrappea screen exacto 160x90.",
+          "Plantilla Creator->Shoptalk: tras <code>saveLayout</code> en Creator con TFT+LED, <code>localStorage.xpace_creator_template</code> contiene <code>{schema:1, config, layout, staffPos}</code>. <code>getCreatorTemplate()</code> lo devuelve intacto.",
+          "Xtanco intacto: en <code>isBlankXpace()</code> false, click sobre suelo con TFT seleccionado mueve <code>col/row</code> libremente; en Creator/Shoptalk el mismo click es no-op (wall-block gateado)."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>https://csilvasantin.github.io/01.-AdmiraXperience-Game/game.html?vertical=creator</code> funciona end-to-end: paletas con badges PARED/SUELO, 5 selectores de entidad, FONDO+EXTERIOR con polígonos reales, items wall con movimiento horizontal+vertical, plantilla persistente, mapa de navegación accesible.",
+          "Galleon 100 SD bridge listo para Codex: spec en <code>docs/streamdeck-bridge.md</code>, manifest público, 3 caminos de integración (postMessage, JS directo, HTTP local pendiente).",
+          "Stand Shoptalk EU 2026 (XP-04) recibe automáticamente la plantilla del Creator vía <code>loadLayout()</code> fallback.",
+          "Xtanco sigue intacto: las nuevas reglas solo aplican en <code>isBlankXpace()</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Worker <code>admira-telegram-bridge.csilvasantin.workers.dev</code> cayó a media tarde con Cloudflare 1027/429 (probable cuota diaria del plan free). Se mitigó con bridge local del Mac Mini vía Tailscale Funnel.",
+          "Highlight de items wall pintaba 1 cell aunque el item ocupara más cols (TFT=4 cols). Corregido con <code>getWallItemFootprintCols</code> + <code>getWallItemRenderPoly</code>.",
+          "Altura del TFT usaba <code>wallH*0.45</code>=74px vs el render real <code>screenW*9/16</code>=90px, causando offset de 16px en el borde inferior. Fix: altura derivada del footprint real.",
+          "Click handler del canvas hacía <code>return</code> antes de llegar a la lógica de move-wall-item. Añadida prioridad al inicio: si hay item wall-mounted seleccionado y click en <code>longWall</code>, se mueve primero.",
+          "La SHORT WALL en <code>drawShop</code> extendía su polígono hasta <code>y=0</code> en Xtanco; en Creator pintaba sobre el triángulo izquierdo del FONDO. Se gateó solo a no-blank Xpace.",
+          "Stream Deck overlay v26.05.11.1 aparecía sobre el canvas del PC; renombrado <code>?streamdeck=preview</code> -> <code>?streamdeck=devpreview</code> (v26.05.11.2)."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "La paleta del Creator vive en el dock HTML derecho (<code>#characterDock</code> repurposed) y NO sobre el canvas, para dejar la zona central limpia.",
+          "<code>mount</code> field por item del catálogo es la única fuente de verdad.",
+          "Items wall-mounted con 2 grados de libertad: <code>item.col</code> e <code>item.wallY</code>. <code>item.row</code> siempre 0 para back wall.",
+          "<code>xpace_creator_template</code> es slot único compartido, no slots numerados.",
+          "Wall-block solo aplica en <code>isBlankXpace()</code> (Creator + Shoptalk). Xtanco/Supermercado/Loterías mantienen el editor legacy.",
+          "Stream Deck bridge expone 3 caminos para Codex (postMessage, JS directo, HTTP local).",
+          "Puerta (Door) clasificada en NO CONECTADOS pero con <code>mount:'wall'</code> (vertical, anclada a pared)."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Refactor <code>drawLED</code> / <code>drawTFTScreen</code> / <code>drawIsoMetahuman</code> / <code>drawIsoTabletKiosk</code> para que respeten <code>item.col</code> y rendericen wall-mounted donde toque.",
+          "HTTP local en <code>elgato-proxy.js</code> (<code>/sd/manifest</code>, <code>/sd/press</code>) cuando Codex confirme daemon nativo.",
+          "Items wall-mounted en pared corta (shortWall via <code>item.row</code>).",
+          "Botón explícito en Shoptalk 'Aplicar plantilla del Creator' bajo demanda.",
+          "Verificar reset diario del worker <code>admira-telegram-bridge</code>.",
+          "Refactor menor de <code>helpSections()</code> in-game con orden por uso real.",
+          "Eliminar residuo cremoso en esquina cuando <code>shortWall='transparent'</code> en Creator."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-11",
+    title: "11 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se trabajo principalmente en <code>csilvasantin/admira-next-web</code>, convirtiendo la pagina 0 de ADmiraNeXT en una entrada limpia con navegacion superior <code>About us / Robots / Platform / Contact</code> y su version en castellano <code>Acerca de / Robots / Plataforma / Contacto</code>.",
+          "Se sustituyo la antigua opcion <code>Better</code> por una vista <code>Robots</code> dentro de la experiencia terminal, con ruta <code>/robots</code>, filtros <code>All Robots / Humanoid / Quadruped / Cleaning</code> y traducciones castellanas <code>Todos / Humanoides / Cuadrupedos / Limpieza</code>.",
+          "Se incorporo un catalogo inicial de 8 robots AgiBot: <code>AgiBot A2 Ultra</code>, <code>AgiBot A2</code>, <code>AgiBot X2 Ultra</code>, <code>AgiBot X2 Lite</code>, <code>AgiBot D1 MaxPro</code>, <code>AgiBot D1 Ultra</code>, <code>AgiBot D1 Ultra-W</code> y <code>AgiBot C5</code>.",
+          "Se refino el panel de contacto para que se comportara como drawer elegante del sitio, con textos i18n (<code>Contact us</code> / <code>Contactanos</code>) y tipografia mas proporcionada frente al resto de la interfaz.",
+          "Se conecto <code>Platform / Plataforma</code> con la zona protegida: al pulsar el menu se ejecuta el flujo equivalente a <code>/intranet</code> o <code>/plataforma</code> y aparece el gate CRT de password.",
+          "Se hicieron varios ajustes finos de alineacion de la barra superior y del terminal maximizado para que <code>ADmiraNeXT</code>, el menu y <code>user@admiranext ~ /portfolio</code> compartan la misma linea visual sin pisar las bolas de colores.",
+          "Se mantuvo la rutina de deploy autonoma: cada cambio de la web se commiteo, se pusheo a <code>main</code> y se verifico en GitHub Pages."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En el diario, el pre-check devolvio <code>git status --short --branch</code> = <code>## main...origin/main</code>, <code>git reflog --date=iso --since='2026-05-11 00:00'</code> con el cierre anterior de <code>2026-05-10</code>, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> = <code>2026-05-11 23:18:54 CEST +0200</code>.",
+          "En <code>admira-next-web</code>, <code>git log --since='2026-05-11 00:00' --until='2026-05-11 23:59:59' --date=iso --stat --oneline --all</code> mostro la serie de commits de la web, incluyendo <code>2eaef36 Add robots catalog terminal view</code>, <code>e41d44c Refine contact panel and platform gate</code> y <code>76c3d27 Fine tune terminal nav position</code>.",
+          "Se valido el JavaScript con <code>node --check assets/app.js</code> y los diffs con <code>git diff --check</code> antes de publicar los cambios.",
+          "Se verifico en navegador local que <code>Robots</code> renderizaba el catalogo, que los filtros funcionaban, que el panel de contacto traducido se abria correctamente y que <code>Plataforma</code> mostraba el gate de password en <code>/plataforma</code>.",
+          "Se verifico en produccion que GitHub Pages completaba los builds con exito y que <a href='https://www.admiranext.com/' target='_blank'>https://www.admiranext.com/</a> servia las versiones nuevas de assets (<code>app.css</code> y <code>app.js</code>) tras cada cache busting."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La web <a href='https://www.admiranext.com/' target='_blank'>https://www.admiranext.com/</a> queda practicamente acabada en su estructura principal: entrada editorial, robots, plataforma protegida y contacto.",
+          "La vista <code>Robots</code> ya funciona como experiencia integrada dentro del terminal, no como pagina blanca desconectada del look and feel.",
+          "El contacto ya no abre clientes de correo y queda como formulario/drawer integrado con opcion de videoconferencia.",
+          "La navegacion superior queda conceptualizada como <code>Acerca de</code>, <code>Robots</code>, <code>Plataforma</code> y <code>Contacto</code>, alineada con la propuesta de ADmiraNeXT.",
+          "El despliegue de la web queda documentado por commits pequenos y verificables en <code>main</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El navegador seguia mostrando versiones antiguas por cache; se resolvio subiendo version de assets (<code>app.css?v=26.05.11.10</code> hasta <code>26.05.11.14</code> y <code>app.js?v=26.05.11.3</code>).",
+          "En modo terminal/maximizado, las bolas de colores pisaban el logo <code>ADmiraNeXT</code>; se corrigio con reglas especificas para <code>body:has(.entry-screen.hidden) .entry-nav</code>.",
+          "El panel de contacto tenia inicialmente una escala demasiado grande y una voz visual demasiado terminal; se redujo la escala y se homogeneizo con el metaestilo del sitio.",
+          "La ruta local <code>/robots</code> bajo <code>python3 -m http.server</code> devolvia 404 por limitacion normal de static server sin fallback; en GitHub Pages se resolvio con <code>404.html</code> y <code>sessionStorage.autoCommand</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener <code>Robots</code> dentro del terminal como experiencia diferenciada, con tarjetas claras pero apoyadas sobre el fondo azul del terminal.",
+          "Renombrar <code>Good</code> a <code>About us / Acerca de</code> y <code>Best</code> a <code>Platform / Plataforma</code>, dejando <code>Robots</code> igual en ambos idiomas.",
+          "Hacer que <code>Platform / Plataforma</code> sea la puerta a la zona protegida, no solo un alias visual del terminal.",
+          "Usar cache busting explicito en los assets cada vez que un ajuste visual debia verse inmediatamente en produccion.",
+          "Priorizar ajustes finos de alineacion y consistencia visual antes de dar la web por cerrada."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer una ultima pasada de QA visual en desktop y movil para confirmar que el menu no se solapa en anchos pequenos.",
+          "Sustituir telefono/email placeholders del contacto por datos definitivos si Carlos quiere publicar datos reales.",
+          "Revisar si las imagenes de robots deben descargarse a assets locales para depender menos de dominios externos.",
+          "Completar el contenido real de la intranet/plataforma protegida cuando se cierre la estructura publica."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-10",
     title: "10 de mayo de 2026",
     author: "Codex",
