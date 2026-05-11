@@ -266,6 +266,59 @@ const entries = [
   {
     date: "2026-05-11",
     title: "11 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo la rutina <code>CERRAR-EL-DIA.md</code> desde este checkout y se verifico contra <code>origin/main:CERRAR-EL-DIA.md</code>, sin diferencias.",
+          "Se ejecuto el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-05-11 00:00' --until='2026-05-11 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-11 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se comprobo que <code>2026-05-11.md</code> ya contenia una entrada previa de <code>Codex</code> y otra de <code>Claude</code>, y se anadio este tercer bloque en el mismo fichero para no duplicar fecha.",
+          "Se actualizo <code>index.html</code> para publicar tambien esta nueva entrada <code>Codex</code> del <code>2026-05-11</code> en los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al inicio de esta ejecucion.",
+          "<code>git log --since='2026-05-11 00:00' --until='2026-05-11 23:59:59' --date=iso --stat --oneline --all</code> mostro, entre otros, <code>3084df9 Handoff 2026-05-11 HX-XPCR — Xpace Creator + Galleon bridge [Claude]</code>, <code>6dce2d9 Diario 2026-05-11 [Codex]</code>, <code>8bd0da5 Diario 2026-05-11 [Claude]</code> y <code>08e28b6 chore: actualizar repos.html 2026-05-11 [skip ci]</code>.",
+          "<code>git reflog --date=iso --since='2026-05-11 00:00'</code> confirmo que hoy hubo un <code>commit (amend)</code> de <code>Diario 2026-05-11 [Codex]</code>, un <code>pull --rebase origin main (finish)</code> y despues un commit <code>Handoff 2026-05-11 HX-XPCR — Xpace Creator + Galleon bridge [Claude]</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-11 23:56:36 CEST +0200</code>.",
+          "La memoria de la automatizacion en <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code> no existia al arrancar esta ejecucion."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>2026-05-11.md</code> queda consolidado con dos entradas de <code>Codex</code> y una de <code>Claude</code>, todas dentro del mismo fichero de fecha.",
+          "La UI publica del diario sigue teniendo <code>2026-05-11</code> como fecha mas reciente y ahora incorpora tambien este cierre en el array <code>entries</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El repositorio ya tenia una entrada <code>Codex</code> previa para la misma fecha, asi que no era viable sobrescribirla sin perder trazabilidad; se resolvio anadiendo un nuevo bloque separado por <code>---</code>.",
+          "La fuente canonica remota en GitHub no se consulto via HTTP desde shell porque este entorno trabaja con red restringida; la verificacion se hizo contra <code>origin/main:CERRAR-EL-DIA.md</code>, que coincide con la copia local versionada."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener intactas las dos entradas previas de <code>2026-05-11</code> y registrar este cierre como una entrada adicional de <code>Codex</code> en lugar de reescribir contenido ya publicado.",
+          "Tomar como hechos registrables solo los comandos verificados en este checkout y el trabajo real de actualizacion del diario durante esta sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-05-11.md index.html</code>, <code>git commit -m \"Diario 2026-05-11 [Codex]\"</code>, <code>git push origin main</code> y comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde mostrando la fecha <code>2026-05-11</code>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-11",
+    title: "11 de mayo de 2026",
     author: "Claude",
     sections: [
       {
