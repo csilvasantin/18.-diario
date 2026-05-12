@@ -254,7 +254,7 @@
       <button id="yarig-sync" title="Importar tareas de hoy desde Yarig.ai">⟳ importar</button>
       <button id="yarig-journey" title="Abrir o cerrar jornada en Yarig.ai" style="display:none">⏱ jornada</button>
       <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
-      <a href="handoff/2026-05-12-HX-5KPJ.md" style="margin-left:auto;color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:opacity 0.15s" title="Último handoff: HX-5KPJ" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">📦 handoff HX-5KPJ →</a>
+      <a href="handoff/2026-05-12-HX-Z5HF.md" style="margin-left:auto;color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:opacity 0.15s" title="Último handoff: HX-Z5HF" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">📦 handoff HX-Z5HF →</a>
       <a href="repos.html" style="color:var(--matrix-muted);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:color 0.15s" onmouseover="this.style.color='var(--matrix-bright)'" onmouseout="this.style.color='var(--matrix-muted)'">repos →</a>
     </div>
   </nav>
@@ -263,6 +263,78 @@
 
 <script>
 const entries = [
+  {
+    date: "2026-05-12",
+    title: "12 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se cerro una sesion larga sobre <code>csilvasantin/admira-next-web</code>, dejando la web publica de ADmiraNeXT mas madura: pagina 0 con fondo robotico, terminal, menu superior, contacto integrado, robots, plataforma protegida e intranet.",
+          "Se sustituyo la entrada basada en Cortocircuito por la entrada actual con fondo robotico y terminal central; el logo <code>ADmiraNeXT</code> vuelve a pagina 0 cuando la ventana esta maximizada.",
+          "Se anadio <code>/XpaceOS</code> a la intranet y se hicieron clicables los comandos del terminal en navegacion y proyectos.",
+          "Se actualizo <code>/skills</code> / <code>/habilidades</code> con las <code>10 Experiencias y Capacidades Criticas</code> y el stack de herramientas de IA fisica.",
+          "Se tradujo la salida de <code>/intranet</code> al ingles: titulo, categorias, labels de proyectos, mensaje de acceso restringido y ayuda inferior.",
+          "Se trabajo en <code>csilvasantin/xpaceos</code>: ingles por defecto, ruta <code>/lenovo/</code>, logo, starfield sutil, live demo protegida, analitica y mejoras visuales.",
+          "Se dejo <a href='https://admira.studio/' target='_blank'>https://admira.studio/</a> sirviendo la web desde raiz, sin carpeta versionada visible.",
+          "Se creo el handoff <a href='handoff/2026-05-12-HX-Z5HF.md' target='_blank'>HX-Z5HF</a> para retomar manana."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Pre-check del diario: <code>git status --short --branch</code> = <code>## main...origin/main</code>; <code>git log --since='2026-05-12 00:00' --until='2026-05-12 23:59:59' --date=iso --stat --oneline --all</code> mostro <code>c4dfbe2 chore: actualizar repos.html 2026-05-12 [skip ci]</code>; <code>git reflog</code> mostro <code>pull --rebase origin main: Fast-forward</code>; <code>date</code> = <code>2026-05-12 23:34:33 CEST +0200</code>.",
+          "En <code>admira-next-web</code>, el log de hoy mostro commits como <code>352fad8 Add XpaceOS intranet launch</code>, <code>7fdd7ae Make intranet project commands clickable</code>, <code>a031ef7 Make terminal navigation commands clickable</code>, <code>0dfc6d4 Update critical capabilities section</code>, <code>c048685 Update physical AI tools stack</code> y <code>177507f Localize intranet project listing</code>.",
+          "En <code>xpaceos</code>, el log de hoy mostro <code>a60cfdd</code>, <code>49b9bf1</code>, <code>fafc62b</code>, <code>a916678</code>, <code>7b1287a</code>, <code>804fe1a</code> y <code>f505818</code>.",
+          "En <code>admira-studio</code>, el log de hoy mostro <code>9abd27c Initial Admira Studio Pages site</code> y <code>562ed44 Serve latest Studio at root</code>.",
+          "Se verifico que <a href='https://www.admiranext.com/' target='_blank'>www.admiranext.com</a>, <a href='https://www.xpaceos.com/' target='_blank'>www.xpaceos.com</a> y <a href='https://admira.studio/' target='_blank'>admira.studio</a> responden 200.",
+          "En ADmiraNeXT se valido con <code>node --check assets/app.js</code>, <code>git diff --check</code>, pruebas en Chrome/local y comprobaciones de produccion con <code>curl</code> sobre assets versionados."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>https://www.admiranext.com/</code> queda muy cerca de cierre: pagina 0, terminal, robots, plataforma/intranet, contacto, idiomas y capacidades tienen una base coherente.",
+          "La intranet ya no depende de escribir comandos: los comandos se pueden pulsar sin cambiar el look terminal.",
+          "<code>/skills</code> y <code>/habilidades</code> hablan ya de capacidades reales de Physical AI.",
+          "<code>https://www.xpaceos.com/</code> y <code>/lenovo/</code> quedan alineadas como base para Lenovo/Shoptalk.",
+          "<code>https://admira.studio/</code> queda con estructura de GitHub Pages mas limpia."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El servidor local <code>python3 -m http.server</code> no resuelve rutas SPA como <code>/skills</code> o <code>/intranet</code>; para pruebas locales hubo que entrar por <code>/</code> y ejecutar comandos.",
+          "Chrome y GitHub Pages servian assets cacheados si no se subia el querystring de version; se resolvio con bumps hasta <code>26.05.12.6</code>.",
+          "La herramienta de navegador no pudo escribir en el password CRT por una limitacion de portapapeles virtual; se valido el mensaje de acceso restringido en ingles y el contenido publicado de <code>app.js</code>.",
+          "En GoDaddy/GitHub Pages para <code>admira.studio</code>, el CNAME y los A records estaban bien, pero quedaba revisar el TXT de verificacion de dominio.",
+          "En XpaceOS, la primera version seguia demasiado textual; se decidio mejorar con imagenes y starfield sutil."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener <code>ADmiraNeXT</code> con casing exacto: <code>AD</code> en mayuscula, <code>mira</code> en minuscula, <code>NeXT</code> estilo NeXT.",
+          "En ADmiraNeXT, <code>Platform / Plataforma</code> apunta al mismo flujo protegido que <code>/intranet</code> / <code>/plataforma</code>.",
+          "En XpaceOS, ingles por defecto y <code>/lenovo/</code> como copia equivalente a raiz para compartir con Lenovo.",
+          "La lista de capacidades debe hablar de edge, vision, privacidad, orquestacion, Sim2Real y despliegue fisico.",
+          "Para <code>admira.studio</code>, servir la version activa desde raiz es mejor que exponer carpetas versionadas.",
+          "Mantener la preferencia operativa: publicar sin pedir confirmacion cuando la intencion esta clara, y verificar visuales en Google Chrome de <code>csilvasantin@gmail.com</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "QA final de ADmiraNeXT en desktop y movil: <code>/</code>, <code>/robots</code>, <code>/skills</code>, <code>/intranet</code>, contacto y selector de idioma.",
+          "Revisar si <code>admira.studio</code> termina de resolver tambien con dominio verificado en GitHub Pages; comprobar TXT <code>_github-pages-challenge-csilvasantin</code>.",
+          "Completar en XpaceOS una capa mas visual y revisar la experiencia de <code>Live demo</code>.",
+          "Preparar el siguiente bloque de contenido real de la plataforma/intranet de ADmiraNeXT.",
+          "Si se continua con el teclado Corsair Galleon 100 SD, retomar perfiles Stream Deck, screensaver/logo XpaceOS y overlay de volumen sin tapar letras."
+        ]
+      }
+    ]
+  },
   {
     date: "2026-05-12",
     title: "12 de mayo de 2026",
