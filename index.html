@@ -264,6 +264,81 @@
 <script>
 const entries = [
   {
+    date: "2026-05-12",
+    title: "12 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Telemetria de sesion: <code>assets/js/session-ping.js</code> (UA, screen, viewport, IP+geo+colo via Cloudflare trace) y <code>assets/js/session-log.js</code> (tiempo+clicks+comandos+estados, flush via <code>navigator.sendBeacon</code>). Endpoints worker + fallback Mac Mini Tailscale Funnel (v26.05.12.12, .13).",
+          "Kill-switch en <code>kill-switch.json</code> con poll cada 30s + overlay full-screen al cargar (v26.05.12.11).",
+          "Entradas directas <code>?play=&lt;verticalId&gt;</code> (xtanco/supermercado/shoptalk/creator/loterias) saltan menus de era/lang/client/model via <code>autoEnterVertical()</code> (v26.05.12.15).",
+          "Atajo bookmarkable <code>/creator.html</code> (splash + redirect, Open Graph para Telegram preview) (v26.05.12.16).",
+          "Anillo exterior ampliado para tapar la franja oscura: frontD 3->10, sideW 3->6 (v26.05.12.14).",
+          "Hueco canvas<->dock fundido con body bg <code>#02080d</code> + drop-shadow eliminada (v26.05.12.17).",
+          "<strong>Canvas adaptativo al viewport</strong>: <code>W/H</code> pasan de <code>const</code> a <code>let</code>, helper <code>setCanvasResolution()</code>. <code>applyAdaptiveCreatorCanvas()</code> ajusta a <code>viewport_w x (viewport_h - dock)</code>. <code>recenterIsoForCanvas()</code> aplica <code>ox = W/2 - (cols-rows)*tileW/4</code>, <code>oy = H/2 - (cols+rows-2)*tileH/4 + wallH/2</code>. Listener resize. Salir revierte a 800x500 (v26.05.12.18, .19).",
+          "<strong>Altura de pared configurable</strong>: <code>wallHeightTiles</code> (default 6, range 2..16) persistido en localStorage. Top bar muestra <code>ALTO [- N +]</code> al seleccionar PARED-L/PARED-C (v26.05.12.20).",
+          "<strong>Teclado vertical en wall items</strong>: <code>↑/↓</code> ajustan <code>wallY</code> en pasos de 8px clampeado (v26.05.12.21).",
+          "<strong>FONDO y EXTERIOR clipados al poligono real</strong>: <code>drawCityBg</code> usa <code>beginPath()/fill()</code> con pentagono y complemento, no rectangulos. La diagonal sigue el slant de las paredes (v26.05.12.22, .23, .24).",
+          "<strong>LED banner adaptativo</strong>: <code>getLedBannerHeightPx()</code> devuelve <code>max(12, round(ISO.wallH * 0.10))</code> (v26.05.12.25)."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Pre-checks: <code>git status --short --branch</code> = <code>## main...origin/main</code>, <code>git log --since='2026-05-12 00:00' --until='2026-05-12 23:59:59' --oneline</code> mostro 18 commits en <code>01.-AdmiraXperience-Game</code> de <code>c20b629 v26.05.12.11</code> a <code>0d290d3 v26.05.12.25</code>. <code>date</code> = <code>2026-05-12 23:34:19 CEST +0200</code>.",
+          "Canvas adaptativo: con viewport 923x1216, <code>setCanvasResolution(923, 924)</code> arroja <code>W=923, H=924, ISO.ox=342, ISO.oy=405, leftGap=0, rightGap=0, bottomGap=292</code>.",
+          "Wall height: <code>wallHeightTiles=10</code> -> <code>ISO.wallH=280</code>, <code>ISO.oy</code> recentrado de 406 a 462. UI cambio a <code>ALTO [- 10 +]</code> con PARED-L seleccionada.",
+          "Teclado vertical: TFT en <code>col=5, wallY=20</code>, <code>ArrowDown × 3</code> -> <code>wallY=44</code>, <code>ArrowUp × 5</code> -> <code>wallY=4</code> (clamp), <code>ArrowRight × 2</code> -> <code>col=7</code>.",
+          "FONDO/EXTERIOR poligono: pentagono FONDO con vertices <code>[(0,0),(923,0),(923,385),(342,182),(0,302)]</code>. La diagonal de transicion sigue <code>yAtRight=385</code>, <code>longTopL=(342,182)</code>, <code>yAtLeft=302</code>.",
+          "LED banner: con <code>wallHeightTiles=10</code>, <code>getLedBannerHeightPx()=28</code> (ratio 0.10 exacto)."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Telemetria end-to-end: cualquier visita a <code>game.html</code> (no localhost, no <code>?nolog=1</code>) envia start ping + end log por Telegram.",
+          "Kill-switch listo para emergencia visual: <code>kill-switch.json</code> + <code>enabled:true</code> -> todos los clientes activos lo ven en &lt;30s.",
+          "URLs publicas para linkar a clientes: <code>game.html?play=xtanco|shoptalk|creator</code> y <code>creator.html</code> (bookmark).",
+          "Creator visualmente terminado para Shoptalk EU 2026: canvas full-viewport sin bandas negras, paredes ajustables, FONDO/EXTERIOR/SUELO/PARED-L/PARED-C editables con poligonos reales, LED escala con la pared, items wall movibles por click + teclado horizontal+vertical."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Primer intento de 'mas espacio': estire canvas via CSS y distorsiono el iso (aspect 1.6 baked). Volvi atras y opte por resolucion interna dinamica.",
+          "FONDO inicialmente rectangulo full-canvas + EXTERIOR rect inferior solapaba los triangulos diagonales del pentagono. Fix: ambos clipados a su poligono real.",
+          "<code>?play=creator</code> no llegaba a EDITOR en preview porque la pestaña estaba <code>hidden</code> y rAF no tickeaba. No es bug real — verificado con ticks manuales del loop.",
+          "Worker <code>admira-telegram-bridge</code> sigue con timeouts intermitentes. Fallback Mac Mini Tailscale funciona consistentemente."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Canvas del Creator usa resolucion adaptativa (<code>W=viewport_w</code>, <code>H=viewport_h - dock</code>). Otros modos mantienen 800x500.",
+          "Altura de pared en cuadrantes (unidades de <code>ISO.tileH=28px</code>), no pixeles brutos.",
+          "PARED-L y PARED-C comparten <code>wallHeightTiles</code>. Si hace falta independencia, separar a <code>longWallHeightTiles</code>/<code>shortWallHeightTiles</code>.",
+          "LED escala 10% de wallH automaticamente, sin slider de tamaño manual. El usuario sigue pudiendo Shift+Arrows para <code>sy</code>.",
+          "FONDO y EXTERIOR con <code>beginPath()+fill()</code> sobre el poligono real, no rectangulos.",
+          "Al seleccionar PARED-L/PARED-C, UI cambia de <code>TAMAÑO C × R</code> a <code>ALTO N</code> (semantica mas clara)."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Items wall-mounted en pared corta (shortWall via <code>item.row</code> o <code>item.wall='short'</code>).",
+          "Refactor <code>drawIsoMetahuman</code>/<code>drawIsoTabletKiosk</code> para wall render (hoy <code>mount:'wall'</code> en catalogo pero render floor).",
+          "Slot multiple de plantillas Creator (hoy es un solo <code>xpace_creator_template</code>).",
+          "Endpoint stats que recoja los pings/logs en un dashboard simple en lugar de inundar Telegram.",
+          "Verificar si la cuota del worker <code>admira-telegram-bridge</code> se restaura. Si no, migrar al Mac Mini.",
+          "Boton explicito 'Aplicar plantilla del Creator' en Shoptalk para resync sin borrar layout.",
+          "Persistir <code>wallHeightTiles</code> por vertical (hoy global)."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-11",
     title: "11 de mayo de 2026",
     author: "Codex",
