@@ -271,6 +271,56 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout limpio <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la copia local <code>CERRAR-EL-DIA.md</code> y preparando un cierre adicional del mismo dia sin reescribir las entradas ya publicadas.",
+          "Se verifico que la copia local de la rutina coincide con <code>origin/main:CERRAR-EL-DIA.md</code> usando <code>git show origin/main:CERRAR-EL-DIA.md</code> y <code>diff -q</code>, sin diferencias.",
+          "Se revisaron <code>2026-05-12.md</code> e <code>index.html</code> y se anadio esta nueva entrada <code>[Codex]</code> separada por <code>---</code>, reflejada tambien en el array <code>entries</code> de la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "El pre-check literal devolvio <code>git status --short --branch</code> = <code>## main...origin/main</code>.",
+          "<code>git log --since='2026-05-12 00:00' --until='2026-05-12 23:59:59' --date=iso --stat --oneline --all</code> mostro, entre otros, <code>769df5e Diario 2026-05-12 [Codex] + Handoff HX-Z5HF</code>, <code>d0fbdd6 Handoff HX-5KPJ — Creator Day 2: viewport adaptativo, paredes ajustables, FONDO/EXTERIOR poligonales</code>, <code>8a5598f Diario 2026-05-12 [Claude]</code> y <code>c4dfbe2 chore: actualizar repos.html 2026-05-12 [skip ci]</code>.",
+          "<code>git reflog --date=iso --since='2026-05-12 00:00'</code> mostro <code>c4dfbe2 HEAD@{2026-05-12 23:34:24 +0200}: pull --rebase origin main: Fast-forward</code>, seguido de los commits <code>8a5598f</code>, <code>d0fbdd6</code> y <code>769df5e</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-12 23:57:37 CEST +0200</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El fichero unico del dia <code>2026-05-12.md</code> conserva las entradas previas y suma este cierre adicional de Codex sin duplicar archivo ni perder historial.",
+          "<code>index.html</code> queda preparado para mostrar tambien este tercer bloque del <code>2026-05-12</code> dentro de los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La fuente canonica remota en GitHub no se consulto por HTTP desde shell porque este entorno trabaja con red restringida; la comprobacion remota se resolvio contra la referencia git <code>origin/main</code>, suficiente para verificar que la rutina versionada coincide con la copia local."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener intactas las entradas previas de <code>2026-05-12</code> y registrar este cierre como un bloque adicional de <code>Codex</code> en lugar de sobrescribir contenido ya publicado.",
+          "Registrar unicamente hechos verificados con <code>git</code> y con el trabajo real de esta sesion de cierre del diario."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-05-12.md index.html</code>, <code>git commit -m \"Diario 2026-05-12 [Codex]\"</code>, <code>git push origin main</code> y verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde mostrando la fecha <code>2026-05-12</code>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-12",
+    title: "12 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
           "Se cerro una sesion larga sobre <code>csilvasantin/admira-next-web</code>, dejando la web publica de ADmiraNeXT mas madura: pagina 0 con fondo robotico, terminal, menu superior, contacto integrado, robots, plataforma protegida e intranet.",
           "Se sustituyo la entrada basada en Cortocircuito por la entrada actual con fondo robotico y terminal central; el logo <code>ADmiraNeXT</code> vuelve a pagina 0 cuando la ventana esta maximizada.",
           "Se anadio <code>/XpaceOS</code> a la intranet y se hicieron clicables los comandos del terminal en navegacion y proyectos.",
