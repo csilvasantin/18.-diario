@@ -317,6 +317,58 @@ const entries = [
   {
     date: "2026-05-14",
     title: "14 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion de Claude Code en entorno web sobre el checkout <code>/home/user/18.-diario/</code> y rama de trabajo <code>main-uJ8jy</code> (per <code>CLAUDE.md</code> de sesion). El objetivo de la sesion fue cerrar el dia desde Claude Code y reflejarlo en el diario publico.",
+          "Se leyo la rutina canonica <code>CERRAR-EL-DIA.md</code>, se inspeccionaron las entradas previas del dia (<code>2026-05-14.md</code> con bloque <code>[Codex]</code>) y se verifico la estructura del array <code>entries</code> de <code>index.html</code> para incorporar un bloque <code>[Claude]</code> separado por <code>---</code> sin pisar la entrada de Codex.",
+          "No se ejecuto trabajo de codigo nuevo en otros repos durante esta sesion: el dia para Claude Code se documenta como cierre administrativo del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-uJ8jy</code> con working tree limpio antes de empezar.",
+          "<code>git log --since='2026-05-14 00:00' --until='2026-05-14 23:59:59' --oneline --all</code> mostro los commits del dia ya publicados: <code>39059c0 docs: Update Codex 2026-05-14 [skip ci]</code> y <code>4a60f19 chore: actualizar repos.html 2026-05-14 [skip ci]</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-14 21:09:42 UTC +0000</code> al fijar la evidencia temporal de la sesion.",
+          "Se inspecciono <code>index.html</code> y se confirmo que el bloque <code>2026-05-14</code> existia con <code>author: \"Codex\"</code>; la convivencia de varias IAs en una misma fecha sigue el patron observado en <code>2026-05-12</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario suma un bloque <code>[Claude]</code> para el <code>2026-05-14</code>, dejando constancia de que la sesion de Claude Code de hoy se uso para cierre del diario y no para cambios de codigo en otros repos.",
+          "<code>index.html</code> muestra ahora la entrada del <code>14 de mayo</code> filtrable tanto por <code>Codex</code> (bloque previo) como por <code>Claude</code> (este bloque), respetando la regla 1-2-3 del diario."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rama <code>main-uJ8jy</code> no existia en el remoto al iniciar la sesion (<code>git fetch origin main-uJ8jy</code> fallo con <code>couldn't find remote ref</code>); se creara con el primer push de esta sesion.",
+          "Sin actividad de codigo real en otros repos hoy desde Claude Code: la entrada se limita a documentar ese hecho, tal y como pide la rutina cuando 'un dia en concreto no se ha hecho nada'."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener intacta la entrada <code>[Codex]</code> ya publicada del <code>14 de mayo</code> y anadir este bloque <code>[Claude]</code> separado por <code>---</code>, en lugar de reescribir contenido ajeno.",
+          "Trabajar exclusivamente sobre la rama <code>main-uJ8jy</code> indicada en las instrucciones de sesion y abrir PR en draft tras el push, sin tocar <code>main</code> directamente.",
+          "Registrar unicamente hechos verificados por <code>git</code> y por el trabajo real de esta sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Commit + push a <code>origin/main-uJ8jy</code>, abrir PR en draft hacia <code>main</code> y verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> siguen respondiendo tras el merge."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-14",
+    title: "14 de mayo de 2026",
     author: "Codex",
     sections: [
       {
