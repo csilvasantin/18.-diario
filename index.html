@@ -322,50 +322,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "A primera hora se ejecuto la rutina <code>Cerrar el dia</code> en el checkout limpio <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la copia local <code>CERRAR-EL-DIA.md</code>, y se publico la primera version de <code>2026-05-14.md</code> con su reflejo en <code>index.html</code>.",
-          "En esta segunda pasada se reviso la memoria declarada de la automatizacion en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code> y no existia todavia ningun fichero previo.",
-          "Se inventario este worktree con <code>rg --files</code>, <code>git branch -a --contains HEAD</code>, <code>git log --graph --decorate --oneline --all --boundary -20</code> y <code>git show --stat --summary --format=fuller --no-patch</code> sobre <code>4726e07</code>, <code>b78bfd0</code>, <code>e673fb8</code>, <code>50e311b</code> y <code>4a60f19</code>.",
-          "Tras detectar que <code>origin/main</code> ya habia avanzado hoy con <code>chore: actualizar repos.html 2026-05-14 [skip ci]</code>, se restauraron <code>2026-05-11.md</code>, <code>2026-05-12.md</code>, <code>2026-05-13.md</code>, <code>2026-05-14.md</code> e <code>index.html</code> al contenido exacto de <code>origin/main</code> antes de actualizar solo la entrada del <code>14 de mayo</code>.",
-          "Se reescribio esta entrada y el bloque correspondiente de <code>index.html</code> para que el diario publique una sola version consolidada del <code>14 de mayo</code> sin pisar las entradas ya visibles de los dias 11, 12 y 13."
+          "En <code>/Users/csilvasantin/Documents/Admirito/admira-next-web</code> se registraron 8 commits hoy centrados en la cabecera del portfolio: mover idioma e identidad a la titlebar, anadir el logo <code>ADmiraNeXT</code> y ajustar la alineacion del menu en modo maximizado.",
+          "En <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> quedaron cambios locales amplios sin commit: rediseno visual del dashboard hacia una UI tipo arcade \"World Warrior Ops\", nueva seccion <code>Player Select</code>, logica para agrupar maquinas por miembro y actualizacion de <code>machines.json</code> con IP local y comando SSH local para el Mac Mini.",
+          "En <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team-latest</code> quedaron cambios sin cerrar en <code>src/server.js</code> y <code>src/ssh-exec.js</code> sobre discovery/API de teamwork, mas un fichero nuevo <code>INICIO_Y_CIERRE_DEL_DIA.md</code>.",
+          "Se actualizo esta entrada existente del diario en vez de crear otra nueva para la misma fecha."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> al arrancar este worktree, y <code>git branch -a --contains HEAD</code> confirmo que <code>HEAD</code> coincidia con <code>origin/main</code> en ese punto.",
-          "<code>git reflog --date=iso --since='2026-05-14 00:00'</code> devolvio <code>08e28b6 HEAD@{2026-05-14 21:30:44 +0200}</code>, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-14 21:31:18 CEST +0200</code> al fijar la evidencia temporal de esta pasada.",
-          "<code>git fetch origin main</code> mostro el avance remoto <code>08e28b6..4a60f19</code>, y <code>git show --stat --summary --format=fuller --no-patch 4a60f19</code> confirmo que ese commit de <code>github-actions[bot]</code> habia anadido <code>2026-05-11.md</code>, <code>2026-05-12.md</code>, <code>2026-05-13.md</code>, <code>2026-05-14.md</code> y actualizado <code>index.html</code> y <code>repos.html</code>.",
-          "<code>git push origin HEAD:main</code> desde el commit local <code>87689ad</code> fue rechazado con <code>fetch first</code>, y despues <code>git diff --unified=3 origin/main -- 2026-05-14.md index.html</code> confirmo que la punta remota ya contenia una version distinta de la entrada del <code>14 de mayo</code>.",
-          "La copia local de <code>CERRAR-EL-DIA.md</code> ya habia quedado validada por la pasada anterior contra <code>origin/main:CERRAR-EL-DIA.md</code>, y <code>node -e \"...\"</code> siguio devolviendo <code>OK</code> al validar el array <code>entries</code> tras esta consolidacion."
+          "<code>git log --since='2026-05-14 00:00' --until='2026-05-14 23:59:59' --oneline --all</code> en <code>admira-next-web</code> confirmo 8 commits publicados hoy, culminando en <code>06ac6c9 Raise maximized menu alignment</code>.",
+          "<code>git status --short --branch</code> y <code>git diff --stat</code> en <code>AdmiraNext-Team</code> confirmaron 8 ficheros modificados, con peso principal en <code>public/styles.css</code>, <code>public/app.js</code> y las capturas de <code>data/screenshots/</code>.",
+          "<code>git diff</code> en <code>AdmiraNext-Team</code> verifico hechos concretos del cambio: version <code>0.1.3</code>, nuevo layout arcade, nuevas fichas de miembros y soporte de conexion local al Mac Mini.",
+          "<code>git status --short --branch</code> en <code>AdmiraNext-Team-latest</code> confirmo que la rama <code>codex/fix-teamwork-api-discovery</code> sigue abierta con dos ficheros modificados y un documento nuevo sin trackear."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>2026-05-14.md</code> queda consolidado como una unica entrada Markdown del dia para <code>Codex</code>, incorporando tanto la publicacion inicial como esta pasada de reconciliacion.",
-          "<code>index.html</code> mantiene visibles las entradas ya publicadas de <code>2026-05-11</code>, <code>2026-05-12</code>, <code>2026-05-13</code> y <code>2026-05-14</code>, sin volver a degradar el handoff ni el bloque <code>entries</code> que ya estaba en <code>origin/main</code>."
+          "El portfolio <code>admira-next-web</code> si avanzo hoy con iteraciones pequenas y publicables sobre la experiencia de cabecera.",
+          "<code>AdmiraNext-Team</code> acumula ya una propuesta visual y funcional mucho mas ambiciosa para el panel del equipo, aunque aun esta en working tree.",
+          "El estado del workspace queda reflejado en el diario sin duplicar la fecha y separando claramente lo ya committeado de lo que sigue local."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Este worktree no puede crear <code>index.lock</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario/.git/worktrees/diario74/</code>, asi que <code>git rebase origin/main</code>, <code>git checkout --detach origin/main</code> y <code>git restore --source=origin/main ...</code> fallaron con <code>Operation not permitted</code>.",
-          "La punta remota ya habia avanzado hoy con contenido real del diario, de modo que no era correcto empujar tal cual la reconstruccion local amplia que habia preparado esta sesion.",
-          "La memoria especifica de la automatizacion no existia todavia, asi que el contexto del dia se reconstruyo integramente a partir del repositorio y de los comandos ejecutados."
+          "<code>AdmiraNext-Team</code> no tiene commits ni reflog de hoy, asi que el trabajo visible esta sin encapsular y el repo aparece <code>behind 286</code> respecto a <code>origin/main</code>.",
+          "<code>AdmiraNext-Team-latest</code> tambien mantiene cambios sin cerrar en la rama de fix de teamwork, lo que sugiere trabajo tecnico aun a medio integrar.",
+          "Parte del trabajo de hoy en el workspace solo se pudo verificar por diff y estado local, no por historial publicado."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar <code>origin/main</code> como fuente canonica para esta publicacion tardia y limitar el cambio final a la consolidacion de <code>2026-05-14.md</code> y su bloque correspondiente en <code>index.html</code>.",
-          "Registrar unicamente hechos verificados por <code>git</code> y por el trabajo real de las dos pasadas del dia, sin inventar actividad adicional.",
-          "Mantener una unica entrada Markdown por fecha y no reescribir las entradas ya publicadas de <code>2026-05-11</code>, <code>2026-05-12</code> y <code>2026-05-13</code>."
+          "Dar prioridad en la entrada a <code>AdmiraNext-Team</code> y a los cambios recientes del workspace, pero distinguiendo entre commits reales (<code>admira-next-web</code>) y trabajo aun sin commit (<code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>).",
+          "Actualizar la entrada ya existente de <code>2026-05-14</code> en lugar de crear otra, para mantener la regla de un solo fichero por fecha.",
+          "No atribuir validaciones visuales finales ni despliegues a <code>AdmiraNext-Team</code> porque no aparecen verificados en el historial inspeccionado."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Crear un commit final con <code>Codex</code> en el mensaje, empujarlo a <code>origin/main</code>, verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo y dejar escrita la memoria de esta automatizacion."
+          "Cerrar <code>AdmiraNext-Team</code> con commit(s) pequenos que separen el rediseno arcade de los cambios de datos y screenshots.",
+          "Decidir si <code>AdmiraNext-Team-latest</code> absorbe o descarta el trabajo en <code>src/server.js</code> y <code>src/ssh-exec.js</code> antes de que siga divergiendo la rama.",
+          "Verificar visualmente el nuevo panel del equipo en Chrome cuando se publique o se levante localmente, especialmente responsive y legibilidad del tema arcade."
         ]
       }
     ]
