@@ -3406,6 +3406,59 @@ const entries = [
         ]
       }
     ]
+  },
+  {
+    date: "2026-05-15",
+    title: "15 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la memoria local de la automatizacion y la copia local <code>CERRAR-EL-DIA.md</code>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-05-15 00:00' --until='2026-05-15 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-15 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo una actualizacion local de <code>2026-05-15.md</code> e <code>index.html</code>, se intento <code>git push origin main</code>, el remoto rechazo por no fast-forward, y se hizo <code>git fetch origin main</code> seguido de <code>git rebase --onto origin/main c5d38dc main</code> para re-aplicar este cierre sobre la punta remota."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main [ahead 1]</code> al arrancar esta pasada en el checkout canonico.",
+          "<code>git log --since='2026-05-15 00:00' --until='2026-05-15 23:59:59' --date=iso --stat --oneline --all</code> mostro <code>c5d38dc Diario 2026-05-14 [Codex]</code>.",
+          "<code>git reflog --date=iso --since='2026-05-15 00:00'</code> mostro <code>c5d38dc HEAD@{2026-05-15 00:19:58 +0200}: commit: Diario 2026-05-14 [Codex]</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-15 23:57:39 CEST +0200</code>.",
+          "<code>git show --stat --summary --oneline 6193938</code> confirmo que <code>origin/main</code> ya contenia <code>docs: Update Codex 2026-05-15 [skip ci]</code> con <code>2026-05-15.md</code> e <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada de hoy queda preparada como segundo bloque de <code>Codex</code> en <code>2026-05-15.md</code>, respetando la regla de un solo fichero por fecha.",
+          "El conflicto de publicacion quedo acotado a <code>2026-05-15.md</code> e <code>index.html</code> y se resolvio re-aplicando este cierre sobre la punta remota."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La fuente canonica remota <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> no se pudo leer por HTTP desde este entorno; la ejecucion se baso en la copia local.",
+          "<code>git push origin main</code> fue rechazado con <code>fetch first</code> porque el remoto habia avanzado y ya existia una entrada remota para <code>2026-05-15</code>.",
+          "<code>curl -I --max-time 15 https://csilvasantin.github.io/diario/</code> fallo por DNS con <code>curl: (6) Could not resolve host: csilvasantin.github.io</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos verificados con <code>git</code> y con el trabajo real de esta sesion, sin anadir actividad no comprobada.",
+          "Mantener ambos cierres de <code>2026-05-15</code> en el mismo fichero, separados por <code>---</code>, y rebasar esta sesion sobre <code>origin/main</code> en vez de sobrescribir el estado remoto."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Completar el rebase, hacer <code>git push origin main</code> y reintentar la verificacion de <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>, reportando con precision si persiste algun bloqueo de DNS o publicacion."
+        ]
+      }
+    ]
   }
 ];
 
