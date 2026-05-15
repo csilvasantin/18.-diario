@@ -3406,6 +3406,58 @@ const entries = [
         ]
       }
     ]
+  },
+  {
+    date: "2026-05-15",
+    title: "15 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion de cierre del dia ejecutada desde Claude Code en entorno remoto (contenedor efimero), trabajando sobre el checkout <code>/home/user/18.-diario</code> y la rama <code>main-CJwVA</code> segun la instruccion del entorno.",
+          "Lectura de la rutina canonica <code>CERRAR-EL-DIA.md</code> y aplicacion de la regla de convivencia: la entrada de hoy ya existia firmada por Codex, asi que se anade la firma <code>[Claude]</code> debajo separada por <code>---</code> en el mismo fichero <code>2026-05-15.md</code>, sin crear duplicados.",
+          "Reflejo de esta entrada en el array <code>entries</code> de <code>index.html</code> con autor <code>Claude</code> y la misma fecha <code>2026-05-15</code>, para que los filtros Todos/Claude/Codex muestren ambas firmas del dia.",
+          "Confirmacion de que <code>repos.html</code> no se toca a mano: el workflow <code>update-repos.yml</code> lo regenera tras el push."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-CJwVA</code> y <code>git log --oneline -1</code> mostro <code>6193938 docs: Update Codex 2026-05-15 [skip ci]</code> como punta de la rama.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-15 21:06:12 UTC +0000</code> al fijar la marca temporal de esta pasada.",
+          "<code>grep -n \"2026-05-15\" index.html</code> confirmo que el array <code>entries</code> ya contenia el bloque de Codex en la linea 3359 y que no habia colision con la nueva entrada <code>[Claude]</code>.",
+          "Inspeccion del checkout (<code>ls -la</code>, <code>git branch -a</code>) verifico que existen las ramas locales <code>main</code>, <code>main-CJwVA</code> y los remotos <code>origin/main</code>, <code>origin/main-CJwVA</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El 15 de mayo queda firmado tambien por Claude, cumpliendo la regla 1-2-3 (una fecha = un fichero, varias IAs separadas por <code>---</code>).",
+          "La rama <code>main-CJwVA</code> queda preparada para abrir el PR draft que pide la integracion de Claude Code en web."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno relevante en esta sesion: no hubo trabajo de codigo de producto, solo el cierre del diario y el reflejo en el HTML publico."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar la sesion aun siendo ligera, siguiendo la indicacion del usuario: \"si un dia en concreto no se ha hecho nada, se documenta y ya esta\".",
+          "Publicar a traves de la rama <code>main-CJwVA</code> y abrir un PR draft, en lugar de empujar directamente a <code>main</code>, respetando las reglas del entorno remoto."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Crear PR draft de <code>main-CJwVA</code> a <code>main</code>, esperar revision/merge y verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestre la doble firma del dia.",
+          "Dejar que el workflow <code>update-repos.yml</code> regenere <code>repos.html</code> automaticamente tras el merge."
+        ]
+      }
+    ]
   }
 ];
 
