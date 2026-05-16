@@ -3356,6 +3356,61 @@ const entries = [
     ]
   },
   {
+    date: "2026-05-16",
+    title: "16 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la copia local <code>CERRAR-EL-DIA.md</code>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-05-16 00:00' --until='2026-05-16 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-16 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo una actualizacion local de <code>2026-05-16.md</code> e <code>index.html</code>, <code>git push origin main</code> fue rechazado con <code>fetch first</code>, y se hizo <code>git fetch origin main</code> seguido de <code>git rebase origin/main</code> para re-aplicar este cierre sobre la punta remota."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al arrancar, confirmando un worktree limpio.",
+          "<code>git log --since='2026-05-16 00:00' --until='2026-05-16 23:59:59' --date=iso --stat --oneline --all</code> mostro <code>c891747 Diario 2026-05-15 [Codex]</code>.",
+          "<code>git reflog --date=iso --since='2026-05-16 00:00'</code> mostro <code>c891747 HEAD@{2026-05-16 00:01:59 +0200}: rebase (finish): returning to refs/heads/main</code> y <code>c891747 HEAD@{2026-05-16 00:01:59 +0200}: rebase (continue): Diario 2026-05-15 [Codex]</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-16 23:56:00 CEST +0200</code>.",
+          "<code>git show --stat --summary --oneline origin/main</code> confirmo despues del fetch la punta remota <code>5fede75 Diario 2026-05-16 [Codex]</code>, ya con <code>2026-05-16.md</code> e <code>index.html</code> publicados."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-05-16</code> queda consolidada en un unico fichero Markdown con dos bloques de <code>Codex</code>, separados por <code>---</code>.",
+          "<code>index.html</code> queda preparado para reflejar tambien esta segunda pasada de cierre del 16 de mayo sin perder la entrada remota previa."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>curl -I --max-time 20 https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code> fallo con <code>curl: (6) Could not resolve host: github.com</code>, asi que la fuente canonica remota no fue accesible por DNS desde este entorno.",
+          "<code>curl -I --max-time 20 https://csilvasantin.github.io/diario/</code> fallo con <code>curl: (6) Could not resolve host: csilvasantin.github.io</code>, de modo que la verificacion HTTP publica quedo bloqueada por DNS en esta sesion.",
+          "<code>git push origin main</code> fue rechazado inicialmente con <code>fetch first</code> porque el remoto avanzo hasta <code>5fede75</code> mientras esta pasada seguia en local."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Basar la ejecucion en la copia local <code>CERRAR-EL-DIA.md</code> cuando la fuente canonica remota no resolvio por DNS.",
+          "Mantener la regla de un solo fichero por fecha, anadiendo este cierre como segundo bloque de <code>2026-05-16.md</code> en vez de sobrescribir la entrada remota previa.",
+          "Registrar solo hechos comprobados en este checkout y en los comandos ejecutados durante esta sesion, sin anadir actividad no verificada."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Completar el rebase, hacer <code>git push origin main</code> y reintentar la verificacion de <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>.",
+          "Si la URL publica sigue sin responder desde este entorno, reportar el bloqueo exacto de DNS aunque el push haya quedado publicado."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-15",
     title: "15 de mayo de 2026",
     author: "Codex",
