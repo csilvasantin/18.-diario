@@ -3415,45 +3415,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso el estado de este checkout de <code>diario</code> con <code>pwd</code>, <code>git status --short --branch</code>, <code>rg --files</code> y la memoria de la automatizacion en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code>, confirmando que el trabajo arrancaba en <code>/Users/csilvasantin/.codex/worktrees/6b58/diario</code>, en <code>HEAD</code> desacoplado y sin memoria previa.",
-          "Se actualizo la referencia remota con <code>git fetch origin main</code>, que movio <code>origin/main</code> de <code>6193938</code> a <code>7c07243</code>, y se inspecciono el desfase con <code>git rev-parse HEAD origin/main FETCH_HEAD</code>, <code>git log --decorate=short --oneline --graph --max-count=8 --all</code> y <code>git diff --stat HEAD..FETCH_HEAD</code>.",
-          "Se preparo la entrada de hoy en <code>2026-05-16.md</code>, se anadio su reflejo al array <code>entries</code> de <code>index.html</code> y se alineo <code>repos.html</code> con la punta remota para no reintroducir datos viejos al publicar."
+          "Se reviso el estado real del workspace y se localizaron tres lineas de trabajo activas hoy: una UI local para <code>AdmiraGemini</code>, una integracion amplia de <code>Yarig.AI</code> en <code>ConsejoAdmiraNextGame</code> y un refuerzo del guardado de audio en <code>ACE-Step</code>.",
+          "En <code>04.- AdmiraGemini</code> aparecieron <code>src/admira_gemini/web.py</code>, los assets <code>src/admira_gemini/static/index.html</code>, <code>styles.css</code> y <code>app.js</code>, <code>tests/test_web.py</code> y cambios en <code>README.md</code> y <code>pyproject.toml</code> para exponer el comando <code>admira-gemini-ui</code>.",
+          "En <code>32.-ConsejoAdmiraNextGame</code> quedaron cambios grandes en <code>council-scumm.html</code> y <code>public/council-scumm.html</code> para anadir overlay/modal de <code>Yarig.AI</code>, refresco de contexto y acciones de tarea (<code>finalize</code>, <code>pause</code>, <code>cancel</code>).",
+          "En <code>ACE-Step</code> se cambio <code>acestep/pipeline_ace_step.py</code> para intentar <code>torchaudio.save</code> y caer a <code>soundfile</code> cuando falle la exportacion."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-16 21:32:05 CEST +0200</code> al fijar la evidencia temporal de esta ejecucion.",
-          "<code>rg -n 'date: \"2026-05-(14|15|16)\"|const entries = \\\\\\\\[' index.html</code> confirmo que <code>index.html</code> cerraba en <code>2026-05-15</code> y no contenia todavia <code>2026-05-16</code>.",
-          "<code>ls 2026-05-16.md 2&gt;/dev/null || true</code> no devolvio nada, confirmando que faltaba el fichero del dia.",
-          "<code>git rev-parse HEAD origin/main FETCH_HEAD</code> devolvio <code>6193938eeaaa2ee870e15ad611f0c651aab69f0b</code> para <code>HEAD</code> y <code>7c0724378723a5b1354634deaf6f6d09e55234ef</code> para <code>origin/main</code> y <code>FETCH_HEAD</code>."
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-16 21:32:34 CEST +0200</code> al fijar la evidencia temporal de esta pasada.",
+          "<code>PYTHONPATH=src python3 -m unittest tests.test_web</code> paso en <code>04.- AdmiraGemini</code> con <code>Ran 5 tests</code> y <code>OK</code>.",
+          "<code>PYTHONPYCACHEPREFIX=/private/tmp/codex-pycache python3 -m py_compile acestep/pipeline_ace_step.py</code> completo sin salida, asi que el parche de <code>ACE-Step</code> al menos parsea correctamente.",
+          "<code>git diff --stat</code> en <code>32.-ConsejoAdmiraNextGame</code> confirmo <code>2442 insertions(+), 136 deletions(-)</code> entre <code>council-scumm.html</code> y <code>public/council-scumm.html</code>, y <code>rg</code> localizo funciones nuevas como <code>openYarOverlay</code>, <code>loadYarContext</code>, <code>performYarigTaskAction</code>, <code>prepareYarigLoginSession</code>, <code>logoutYarigSession</code> y <code>syncYarigFromLoggedSession</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario vuelve a mantener una unica entrada Markdown para la fecha de hoy, separada del resto de dias.",
-          "La publicacion HTML queda preparada para mostrar el 16 de mayo de 2026 como la entrada mas reciente del diario."
+          "<code>AdmiraGemini</code> deja de depender solo del CLI y queda preparado para lanzarse tambien desde una interfaz local con estado, log y configuracion de automatizacion.",
+          "<code>ConsejoAdmiraNextGame</code> avanza hacia una mesa con contexto operativo de <code>Yarig.AI</code> dentro de la propia interfaz, no solo como comando externo.",
+          "<code>ACE-Step</code> reduce el riesgo de fallo al exportar audio cuando <code>torchaudio</code> no pueda guardar el fichero final."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Este worktree seguia por detras de <code>origin/main</code>, asi que no era seguro publicar directamente sobre el estado local anterior.",
-          "<code>git checkout --detach FETCH_HEAD</code> fallo con <code>fatal: Unable to create '/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario/.git/worktrees/diario78/index.lock': Operation not permitted</code>, bloqueando un cambio limpio de base dentro de este worktree compartido."
+          "El trabajo de hoy sigue sin commit en los tres repos inspeccionados, asi que la evidencia disponible esta en el estado local, el diff y las validaciones puntuales, no en historial publicado.",
+          "<code>32.-ConsejoAdmiraNextGame</code> mantiene <code>council-api.py.new</code> vacio y <code>node_modules/</code> sin trackear, asi que la integracion de <code>Yarig.AI</code> todavia no esta cerrada de extremo a extremo.",
+          "En esta pasada no se hizo QA visual final en navegador sobre <code>AdmiraGemini</code> ni sobre el overlay de <code>Yarig.AI</code>; lo validado aqui es estado local, diff y chequeos puntuales."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar <code>FETCH_HEAD</code> como base canonica de publicacion y construir el cierre de hoy encima de esa punta remota.",
-          "Registrar unicamente hechos verificables de esta ejecucion en <code>diario</code>, sin inventar actividad externa al repositorio."
+          "Registrar solo cambios verificables por diff, tests y chequeos locales, sin atribuir despliegues ni QA visual que hoy no constan.",
+          "Priorizar en la entrada los tres bloques con mas evidencia actual y dejar fuera ruido de worktrees antiguos del propio diario.",
+          "Sustituir la version automatica previa del 16 de mayo por un resumen de trabajo real del dia, manteniendo una sola entrada <code>Codex</code> para la fecha."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Validar el diff final, crear el commit con <code>Codex</code> en el mensaje, empujarlo a <code>origin/main</code> y comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo."
+          "Hacer commit y push de <code>AdmiraGemini</code> cuando se quiera consolidar la UI y probarla en navegador local.",
+          "Terminar la ruta API real de <code>Yarig.AI</code> en <code>ConsejoAdmiraNextGame</code> y validar las acciones de tarea contra datos vivos.",
+          "Confirmar que la pagina publica del diario muestra este resumen actualizado del 16 de mayo tras la publicacion."
         ]
       }
     ]
