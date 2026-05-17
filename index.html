@@ -264,6 +264,57 @@
 <script>
 const entries = [
   {
+    date: "2026-05-17",
+    title: "17 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo <code>CERRAR-EL-DIA.md</code> y contrastandolo con <code>origin/main:CERRAR-EL-DIA.md</code>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-05-17 00:00' --until='2026-05-17 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-17 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-05-17.md</code> y se anadio su reflejo en <code>index.html</code> para publicar el cierre de hoy en la UI del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando worktree limpio al arrancar.",
+          "<code>git log --since='2026-05-17 00:00' --until='2026-05-17 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits para la ventana de hoy en este repo.",
+          "<code>git reflog --date=iso --since='2026-05-17 00:00'</code> no devolvio movimientos de <code>HEAD</code> para la ventana de hoy antes de esta edicion.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-17 23:56:34 CEST +0200</code>.",
+          "<code>git show origin/main:CERRAR-EL-DIA.md</code> coincide con la copia local leida al inicio de la sesion."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a tener una entrada propia para <code>2026-05-17</code>, separada del contenido de dias anteriores.",
+          "<code>index.html</code> queda preparado para mostrar la fecha de hoy en los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "En la evidencia git del propio repo no aparecen commits ni reflog previos del <code>17 de mayo</code>, asi que esta entrada solo puede registrar el trabajo real de cierre del diario."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar unicamente hechos verificados en este checkout y en los comandos ejecutados durante la sesion, sin inferir actividad externa al repo.",
+          "Basar la comprobacion de la rutina canonica en la copia local y en <code>origin/main:CERRAR-EL-DIA.md</code>, ya que ambas versiones coinciden dentro del repositorio."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-05-17.md index.html</code>, <code>git commit -m \"Diario 2026-05-17 [Codex]\"</code>, <code>git push origin main</code> y verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde mostrando la fecha <code>2026-05-17</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-13",
     title: "13 de mayo de 2026",
     author: "Codex",
