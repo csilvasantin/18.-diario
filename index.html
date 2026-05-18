@@ -264,6 +264,63 @@
 <script>
 const entries = [
   {
+    date: "2026-05-18",
+    title: "18 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se registro trabajo publicado real en <code>ainimation</code>: ocho commits del dia centrados en <code>studio.html</code>, <code>assets/styles.css</code> y <code>assets/app.js</code> para convertir el estudio en una interfaz de direccion neon con ventanas interactivas, menus de colaboracion/importacion, controles fullscreen y canvas/timeline mas afinados.",
+          "En <code>pixer-worker</code> se publico el commit <code>634010e</code> (<code>feat(notify): POST /notify endpoint para rutina \"actualizacion\"</code>), anadiendo un endpoint nuevo en <code>src/index.js</code> para la automatizacion.",
+          "Siguen abiertos cambios grandes sin commit en <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>: el primero mantiene el rediseño arcade del panel del equipo con screenshots y datos locales, y el segundo sigue ajustando <code>src/server.js</code> y <code>src/ssh-exec.js</code> junto al borrador <code>INICIO_Y_CIERRE_DEL_DIA.md</code>.",
+          "En este repo <code>diario</code> se creo la entrada unica de <code>2026-05-18</code> y se actualizo <code>index.html</code> para reflejar la novedad en la publicacion publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-18 21:32:39 CEST +0200</code>.",
+          "<code>git log --since='2026-05-18 00:00' --until='2026-05-18 23:59:59' --oneline --stat</code> en <code>ainimation</code> devolvio ocho commits reales, desde <code>ecf89b5 Make studio windows interactive</code> hasta <code>556c6c6 Refine studio canvas and timeline score</code>.",
+          "<code>git status --short --branch</code> confirmo que <code>ainimation</code> y <code>pixer-worker</code> quedaron limpios en <code>main...origin/main</code> tras publicar sus cambios de hoy.",
+          "<code>git status --short --branch</code> y <code>git diff --stat</code> en <code>AdmiraNext-Team</code> devolvieron <code>behind 286</code> y <code>1112 insertions(+), 73 deletions(-)</code> en 8 ficheros; en <code>AdmiraNext-Team-latest</code> siguen 2 ficheros modificados con <code>35 insertions(+), 24 deletions(-)</code> y un fichero nuevo sin trackear."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>ainimation</code> si deja hoy una cadena publicada y coherente de mejoras visibles sobre el estudio, no solo trabajo local.",
+          "<code>pixer-worker</code> gana una pieza concreta de infraestructura para la rutina de actualizacion.",
+          "El diario vuelve a quedar al dia con una unica entrada Markdown para la fecha y con la UI publica preparada para mostrarla."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>AdmiraNext-Team</code> sigue acumulando una mezcla grande de UI, datos y binarios sin commit, lo que complica revisar y publicar por partes.",
+          "<code>AdmiraNext-Team-latest</code> mantiene cambios tecnicos abiertos fuera de cierre, asi que la integracion de teamwork/discovery sigue a medio consolidar.",
+          "Este checkout de <code>diario</code> arranco en <code>HEAD (no branch)</code>, aunque apuntando al mismo commit que <code>origin/main</code>, por lo que la publicacion debe hacerse con cuidado."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Priorizar en la entrada los repos con evidencia fuerte de hoy: commits publicados en <code>ainimation</code> y <code>pixer-worker</code>, y diffs abiertos verificables en los repos de equipo.",
+          "Mantener la regla de un solo fichero por fecha creando <code>2026-05-18.md</code> en vez de reutilizar o mezclar contenido de <code>2026-05-17.md</code>.",
+          "Reflejar tambien la propia actualizacion del diario porque forma parte del trabajo real y comprobable de esta sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Partir <code>AdmiraNext-Team</code> en commits pequenos para separar rediseno arcade, <code>machines.json</code> y screenshots.",
+          "Cerrar o descartar explicitamente los cambios de <code>AdmiraNext-Team-latest</code> antes de que sigan divergiendo sin contexto.",
+          "Publicar este diario con commit y push a <code>origin/main</code> y comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo con la fecha <code>2026-05-18</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-17",
     title: "17 de mayo de 2026",
     author: "Codex",
