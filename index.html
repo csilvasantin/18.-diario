@@ -264,6 +264,42 @@
 <script>
 const entries = [
   {
+    date: "2026-05-19",
+    title: "19 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se creo la entrada diaria <code>2026-05-19.md</code> en este repo <code>diario</code> para dejar una unica nota del dia en Markdown.",
+          "Se actualizo <code>index.html</code> para que la UI publica del diario muestre tambien la entrada del 19 de mayo de 2026."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> mostro este checkout en <code>detached HEAD</code>, sin cambios locales previos al arranque.",
+          "<code>git log --since='2026-05-19 00:00' --until='2026-05-19 23:59:59' --decorate=short --stat --oneline --all</code> no devolvio commits anteriores de hoy en este repo.",
+          "<code>rg -n '2026-05-19|date: \"2026-05-19\"' index.html</code> y la ausencia inicial de <code>2026-05-19.md</code> confirmaron que hoy todavia no existia entrada publicada."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener una entrada minima y verificable centrada solo en actividad real de este repo, sin inferir trabajo externo no demostrado aqui.",
+          "Anadir la fecha nueva al final del array <code>entries</code> para preservar la logica del selector que abre por defecto la ultima entrada disponible."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer commit y push con <code>Codex</code> en el mensaje para que la actualizacion quede reflejada tambien en la publicacion y en la tabla de repos cuando corresponda.",
+          "Comprobar despues la URL publica <a href='https://csilvasantin.github.io/diario/' target='_blank' rel='noreferrer'>https://csilvasantin.github.io/diario/</a> para verificar que la entrada sigue accesible."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-18",
     title: "18 de mayo de 2026",
     author: "Codex",
