@@ -300,6 +300,58 @@ const entries = [
     ]
   },
   {
+    date: "2026-05-19",
+    title: "19 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>CERRAR-EL-DIA.md</code> desde Claude Code en la web sobre el repo <code>18.-diario</code> en la branch <code>main-ZABd7</code>.",
+          "Se reviso la entrada existente <code>2026-05-19.md</code> firmada por Codex y se anadio un bloque <code>[Claude]</code> separado por <code>---</code>, manteniendo la regla 1-2-3 de un unico fichero por fecha.",
+          "Se actualizo <code>index.html</code> para registrar tambien la firma de Claude en la UI publica del diario para el 19 de mayo de 2026."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> confirmo el checkout en <code>main-ZABd7</code>, sin cambios pendientes antes de empezar.",
+          "<code>git log --since='2026-05-19 00:00' --until='2026-05-19 23:59:59' --date=iso --oneline --all</code> mostro los commits previos del dia: <code>8f791ab</code> (Codex 19/05), <code>f707ca8</code> (regeneracion automatica de <code>repos.html</code>) y <code>2a5d73c</code> (Diario 18/05).",
+          "<code>git ls-remote --heads origin</code> confirmo que la rama <code>main-ZABd7</code> aun no existia en <code>origin</code> y que el push de esta sesion la creara."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El dia 19 de mayo queda firmado por las dos IAs (Codex y Claude) en un unico fichero Markdown y reflejado en <code>index.html</code>.",
+          "El flujo <em>web -&gt; branch <code>main-ZABd7</code> -&gt; push -&gt; PR</em> queda registrado como vehiculo para subir el trabajo hecho con Claude Code al diario."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rama de desarrollo asignada (<code>main-ZABd7</code>) no existia previamente en <code>origin</code>, lo que obligo a crearla en el push con <code>-u origin main-ZABd7</code>.",
+          "La rutina canonica habla del checkout local del Mac Mini; aqui se trabaja desde el entorno remoto efimero de Claude Code, por lo que la verificacion final de la URL publica queda pendiente de que GitHub Pages republique tras el merge a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Respetar la entrada de Codex y anadir la firma de Claude debajo, sin reescribir contenido ajeno.",
+          "No regenerar manualmente <code>repos.html</code>: lo hace el workflow <code>update-repos.yml</code> automaticamente tras el merge a <code>main</code>.",
+          "Hacer commit y push a <code>main-ZABd7</code> y abrir Pull Request en draft, en lugar de tocar <code>main</code> directamente desde el entorno remoto."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Crear el Pull Request en draft contra <code>main</code> y dejarlo listo para mergear cuando el usuario lo apruebe.",
+          "Tras el merge, comprobar <a href='https://csilvasantin.github.io/18.-diario/' target='_blank' rel='noreferrer'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank' rel='noreferrer'>https://csilvasantin.github.io/18.-diario/repos.html</a> para confirmar que la entrada del 19 aparece con ambas firmas."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-18",
     title: "18 de mayo de 2026",
     author: "Codex",
