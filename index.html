@@ -271,30 +271,44 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se creo la entrada diaria <code>2026-05-19.md</code> en este repo <code>diario</code> para dejar una unica nota del dia en Markdown.",
-          "Se actualizo <code>index.html</code> para que la UI publica del diario muestre tambien la entrada del 19 de mayo de 2026."
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la copia local de <code>CERRAR-EL-DIA.md</code> y confirmando que coincide con <code>origin/main:CERRAR-EL-DIA.md</code>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-05-19 00:00' --until='2026-05-19 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-19 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-05-19.md</code> y se preparo su reflejo en <code>index.html</code> para publicar este cierre en la UI del diario."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> mostro este checkout en <code>detached HEAD</code>, sin cambios locales previos al arranque.",
-          "<code>git log --since='2026-05-19 00:00' --until='2026-05-19 23:59:59' --decorate=short --stat --oneline --all</code> no devolvio commits anteriores de hoy en este repo.",
-          "<code>rg -n '2026-05-19|date: \"2026-05-19\"' index.html</code> y la ausencia inicial de <code>2026-05-19.md</code> confirmaron que hoy todavia no existia entrada publicada."
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando worktree limpio al arrancar.",
+          "<code>git log --since='2026-05-19 00:00' --until='2026-05-19 23:59:59' --date=iso --stat --oneline --all</code> mostro <code>2a5d73c Diario 2026-05-18 [Codex]</code> y <code>8797f55 Diario 2026-05-18 [Codex]</code>, ambos con cambios sobre <code>2026-05-18.md</code> e <code>index.html</code>.",
+          "<code>git reflog --date=iso --since='2026-05-19 00:00'</code> mostro <code>2a5d73c HEAD@{2026-05-19 08:40:34 +0200}: commit: Diario 2026-05-18 [Codex]</code>, <code>8797f55 HEAD@{2026-05-19 00:00:59 +0200}: rebase (finish): returning to refs/heads/main</code> y <code>8797f55 HEAD@{2026-05-19 00:00:59 +0200}: rebase (continue): Diario 2026-05-18 [Codex]</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-19 23:56:55 CEST +0200</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario suma una entrada propia para <code>2026-05-19</code>, firmada por <code>Codex</code> y separada de las fechas anteriores.",
+          "<code>index.html</code> queda preparado para mostrar la fecha de hoy en los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "En la evidencia git del propio repo para <code>2026-05-19</code> solo aparecen cierres previos del <code>2026-05-18</code>, asi que esta entrada queda acotada al trabajo verificable de esta sesion."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener una entrada minima y verificable centrada solo en actividad real de este repo, sin inferir trabajo externo no demostrado aqui.",
-          "Anadir la fecha nueva al final del array <code>entries</code> para preservar la logica del selector que abre por defecto la ultima entrada disponible."
+          "Registrar unicamente hechos verificados en este checkout y en los comandos ejecutados durante la sesion, sin inferir actividad externa al repo.",
+          "Basar la comprobacion de la rutina canonica en la copia local y en <code>origin/main:CERRAR-EL-DIA.md</code>, ya que ambas versiones coinciden dentro del repositorio."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer commit y push con <code>Codex</code> en el mensaje para que la actualizacion quede reflejada tambien en la publicacion y en la tabla de repos cuando corresponda.",
-          "Comprobar despues la URL publica <a href='https://csilvasantin.github.io/diario/' target='_blank' rel='noreferrer'>https://csilvasantin.github.io/diario/</a> para verificar que la entrada sigue accesible."
+          "Hacer <code>git add 2026-05-19.md index.html</code>, <code>git commit -m \"Diario 2026-05-19 [Codex]\"</code>, <code>git push origin main</code> y verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde mostrando la fecha <code>2026-05-19</code>."
         ]
       }
     ]
