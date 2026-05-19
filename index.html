@@ -376,6 +376,67 @@ const entries = [
     ]
   },
   {
+    date: "2026-05-18",
+    title: "18 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se continuo el trabajo de AInimation Studio como una reinterpretacion de Director con IA, ya bajo la marca <code>ADMIRA Director v.1.0</code>.",
+          "Se transformo el workspace en una interfaz de ventanas movibles, redimensionables, minimizables, maximizables, cerrables y reabribles desde el menu superior.",
+          "Se trabajo a fondo en Timeline/Score: apertura desde menu, cabeceras editables, playhead rojo arrastrable frame a frame y aspecto inspirado en el Score de Director.",
+          "Se sustituyeron las referencias heredadas de Macromedia Director por <code>Admira Director</code> y se simplificaron los nombres de ventanas: Stage, Cast, Timeline, Behaviour, Score y AI Director."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Se verifico que <code>https://ainimation.studio/studio.html?enter=1&v=405d9bf</code> responde <code>HTTP/2 200</code>.",
+          "Se valido localmente el dock de Timeline con <code>leftGap: 0</code>, <code>rightGap: 0</code>, <code>topGap: 0</code> y <code>bottomGap: 0</code>.",
+          "Se abrieron versiones locales y publicas en Google Chrome durante la validacion visual, siguiendo la preferencia del Mac Mini.",
+          "El historial de <code>github-csilvasantin/ainimation</code> mostro la serie de commits del dia, culminando en <code>405d9bf Fix timeline docking outside grid</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Timeline quedo desacoplado del problema de CSS Grid que lo empujaba desde la izquierda.",
+          "El modo dock de Timeline usa el rectangulo real del workbench para ocupar todo el canvas disponible.",
+          "El canvas del estudio, la barra inferior y la barra Collaborate quedaron mas estables en modo pantalla completa.",
+          "La linea roja del Timeline ya funciona como playhead arrastrable frame a frame."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Timeline heredaba reglas antiguas de <code>.score-panel</code> y CSS Grid, creando limites falsos que no afectaban al resto de ventanas.",
+          "Los tiradores de resize en esquinas podian interferir con los controles de ventana.",
+          "Al ocultar Collaborate, parte del layout podia colapsar y dejar espacio negro en vez de canvas.",
+          "El navegador local podia quedarse en URLs cacheadas, por lo que se usaron cache-busters y comprobaciones de Pages."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Tratar Timeline como una ventana especial cuando se abre o maximiza: modo dock contra el workbench real.",
+          "Mantener el modelo de ventanas para el resto de paneles, pero endurecer los limites y el snap a bordes.",
+          "Guardar nombres editables de filas del Timeline en el navegador para permitir nomenclatura propia.",
+          "Priorizar que la interfaz ocupe todo el espacio util del canvas antes de seguir ampliando funciones."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar en el Mac Mini con la disposicion real de pantallas que Timeline se comporta igual en el Chrome principal de <code>csilvasantin@gmail.com</code>.",
+          "Seguir puliendo la ergonomia de Score: edicion de duraciones, filas y actores.",
+          "Avanzar hacia importacion real de assets y conexion de Cast con Timeline.",
+          "Definir el siguiente bloque funcional de AI Director para generar escenas y score desde prompts."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-17",
     title: "17 de mayo de 2026",
     author: "Codex",
