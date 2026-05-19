@@ -264,6 +264,63 @@
 <script>
 const entries = [
   {
+    date: "2026-05-20",
+    title: "20 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la copia local de <code>CERRAR-EL-DIA.md</code> y comprobando tambien <code>origin/main:CERRAR-EL-DIA.md</code>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-05-20 00:00' --until='2026-05-20 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-20 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se cerro la sesion de trabajo de <code>ainimation</code> inmediatamente despues de publicar el commit <code>5efbb23 Add stage keyframes for cast members</code>, que anade keyframes de Stage para los cast members importados."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En el repo <code>diario</code>, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando el worktree limpio al arrancar.",
+          "En el repo <code>diario</code>, <code>git log --since='2026-05-20 00:00' --until='2026-05-20 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-05-20 00:00'</code> no devolvieron actividad previa del dia antes de esta entrada.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-20 00:00:53 CEST +0200</code>, asi que el fichero correcto para este cierre es <code>2026-05-20.md</code>.",
+          "En <code>ainimation</code>, <code>git show --stat --summary --format=fuller 5efbb23</code> confirmo que el commit fue creado el <code>2026-05-19 23:55:00 +0200</code> y modifico <code>assets/app.js</code>, <code>index.html</code> y <code>studio.html</code> con <code>99 insertions(+)</code> y <code>10 deletions(-)</code>.",
+          "Antes de publicar ese commit de <code>ainimation</code> se validaron <code>node --check assets/app.js</code>, <code>git diff --check</code>, respuesta publica <code>200 OK</code> de <a href='https://ainimation.studio/studio.html?v=stage-keyframes-1' target='_blank'>https://ainimation.studio/studio.html?v=stage-keyframes-1</a> y apertura en Google Chrome."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>ainimation.studio</code> ya crea un keyframe inicial cuando se selecciona/importa un cast al Stage.",
+          "Al mover o escalar un cast member en el Stage, la app crea o actualiza un keyframe en el fotograma actual del playhead.",
+          "El Stage interpola posicion y tamano entre keyframes, y mantiene la visibilidad vinculada al tramo activo del Timeline.",
+          "El diario suma esta entrada de cierre para <code>2026-05-20</code>, firmada por <code>Codex</code>, y queda preparada para mostrarse en la UI publica."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La peticion de cierre entro justo despues de medianoche; por trazabilidad se registra como <code>2026-05-20</code>, aunque el trabajo funcional cerrado pertenece al bloque publicado a las 23:55 del <code>2026-05-19</code>.",
+          "En <code>diario</code> no habia commits ni reflog previos dentro de la ventana del <code>2026-05-20</code>, asi que la entrada se apoya en la evidencia del cierre y en el commit verificable de <code>ainimation</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener la fecha real del sistema para el diario (<code>2026-05-20</code>) y explicar explicitamente el cruce de medianoche.",
+          "Registrar solo hechos comprobados por comandos locales y por el commit publicado, sin inventar actividad no trazable.",
+          "Dejar fuera cualquier envio por Telegram o rutina externa, porque <code>CERRAR-EL-DIA.md</code> indica que este cierre solo actualiza el repositorio del diario y verifica la URL publica."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Probar en la web publica el flujo completo de animacion: importar cast, seleccionarlo para Stage, mover el playhead, cambiar posicion/tamano y reproducir la interpolacion.",
+          "Extender el mismo modelo de keyframes a textos y dibujos creados desde Tools, para que no solo los cast members importados puedan animarse.",
+          "Anadir una vista visual de keyframes en el Timeline para que cada cambio de posicion sea editable y no quede solo almacenado en datos internos."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-19",
     title: "19 de mayo de 2026",
     author: "Codex",
