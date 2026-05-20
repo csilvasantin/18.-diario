@@ -254,7 +254,7 @@
       <button id="yarig-sync" title="Importar tareas de hoy desde Yarig.ai">⟳ importar</button>
       <button id="yarig-journey" title="Abrir o cerrar jornada en Yarig.ai" style="display:none">⏱ jornada</button>
       <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
-      <a href="handoff/2026-05-12-HX-Z5HF.md" style="margin-left:auto;color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:opacity 0.15s" title="Último handoff: HX-Z5HF" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">📦 handoff HX-Z5HF →</a>
+      <a href="handoff/2026-05-20-HX-R46C.md" style="margin-left:auto;color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:opacity 0.15s" title="Último handoff: HX-R46C" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">📦 handoff HX-R46C →</a>
       <a href="repos.html" style="color:var(--matrix-muted);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:color 0.15s" onmouseover="this.style.color='var(--matrix-bright)'" onmouseout="this.style.color='var(--matrix-muted)'">repos →</a>
     </div>
   </nav>
@@ -316,6 +316,66 @@ const entries = [
           "Probar en la web publica el flujo completo de animacion: importar cast, seleccionarlo para Stage, mover el playhead, cambiar posicion/tamano y reproducir la interpolacion.",
           "Extender el mismo modelo de keyframes a textos y dibujos creados desde Tools, para que no solo los cast members importados puedan animarse.",
           "Anadir una vista visual de keyframes en el Timeline para que cada cambio de posicion sea editable y no quede solo almacenado en datos internos."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-20",
+    title: "20 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se cerro el bloque largo de trabajo sobre <code>www.ainimation.studio</code>, centrado en importacion desde <code>admira.studio Stock</code>, Cast, Stage, Timeline, filtros, controles y comportamiento de medios importados.",
+          "Se publicaron y empujaron a GitHub todos los cambios del repo <code>csilvasantin/ainimation</code>; el ultimo commit del dia quedo en <code>4f646b7 Preserve Cast media aspect on Stage</code>.",
+          "Se preparo un handoff de continuidad para manana en <code>handoff/2026-05-20-HX-R46C.md</code>, con foco en retomar AInimation Studio desde el estado <code>r46</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En <code>ainimation</code>, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code> y <code>git log @{u}..HEAD --oneline</code> no mostro commits pendientes de push.",
+          "GitHub Pages para <code>csilvasantin/ainimation</code> quedo en estado <code>built</code> con actualizacion <code>2026-05-20T19:32:19Z</code>.",
+          "<a href='https://ainimation.studio/studio.html?v=r46-cast-stage-ratio-4f646b7' target='_blank'>https://ainimation.studio/studio.html?v=r46-cast-stage-ratio-4f646b7</a> respondio <code>HTTP/2 200</code> y sirvio cache key <code>aidirector-20260520-r46</code>.",
+          "La verificacion <code>npm run verify:stage</code> paso completa tras el ultimo cambio, incluyendo el caso de video vertical con <code>aspectRatio</code> original <code>0.5625</code> y caja de Stage <code>0.5625</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La importacion desde Stock carga activos al Cast como biblioteca, no al Stage ni al Timeline por defecto.",
+          "El Cast tiene filtros por icono para imagen, video, audio y musica, mas selector de vista lista/iconos en la barra del propio panel.",
+          "El Stage y el Timeline ya permiten activar miembros desde Cast de forma explicita, eliminar miembros desde Stage o Timeline y conservar proporciones originales al colocarlos.",
+          "El Timeline gano controles en titlebar, zoom de 50 a 900, marcas editables, handles de clip y barra de reproduccion redimensionable."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>www.ainimation.studio</code> siguio teniendo problemas de certificado/HSTS en Chrome; la alternativa operativa verificada fue usar el dominio raiz <code>https://ainimation.studio/studio.html</code>.",
+          "El toolbar antiguo del Cast quedaba oculto logicamente pero visible por CSS, generando una franja gris y scroll en estado vacio; se corrigio en <code>0f38e84</code>.",
+          "Al importar miembros al Cast se estaba componiendo automaticamente en Stage; se corrigio en <code>3041901</code> para evitar efectos no deseados.",
+          "Los videos sin dimensiones en el JSON asumian 16:9; se corrigio en <code>4f646b7</code> para no inventar proporcion y usar metadatos o dimensiones reales."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Usar siempre Atlas para las comprobaciones visuales de esta linea de trabajo salvo instruccion contraria.",
+          "Tratar Cast como biblioteca: importar primero, colocar despues por accion explicita.",
+          "Mantener la regla de que AInimation no reimporta animaciones creadas por AInimation como assets de trabajo.",
+          "Publicar cada bloque validado con commit y cache key visible (<code>r42</code> a <code>r46</code>) para evitar dudas con GitHub Pages."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Manana retomar desde el handoff <a href='handoff/2026-05-20-HX-R46C.md' target='_blank'>HX-R46C</a> y revisar primero el flujo real: importar 10 ultimos assets por categoria, seleccionar varios, enviarlos del Cast al Stage y ajustar Timeline.",
+          "Mejorar la ergonomia de seleccion en Cast/Stage/Timeline: seleccion multiple, estado visual claro y acciones consistentes entre click, drag y handles.",
+          "Revisar exportacion de composiciones como animaciones, asegurando que audio/video/imagenes importados quedan sincronizados y que el resultado publicado en Stock se etiqueta como <code>animation</code>.",
+          "Continuar usando <code>https://ainimation.studio/studio.html</code> como URL publica principal mientras se resuelve definitivamente el certificado de <code>www</code>."
         ]
       }
     ]
