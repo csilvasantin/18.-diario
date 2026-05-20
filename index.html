@@ -266,6 +266,51 @@ const entries = [
   {
     date: "2026-05-20",
     title: "20 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se abrio una sesion de Claude Code en la web sobre el repo <code>csilvasantin/18.-diario</code>, trabajando en la rama <code>main-X7EBV</code>.",
+          "Se leyo la rutina canonica <code>CERRAR-EL-DIA.md</code>, el <code>README.md</code> y <code>CLAUDE.md</code> para aplicar el cierre del dia tal cual.",
+          "Por parte de Claude no hubo trabajo de codigo en otros repos hoy; la actividad registrable fue ejecutar el cierre del diario desde Claude Code en la web."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> devolvio arbol limpio en la rama <code>main-X7EBV</code>.",
+          "<code>git log</code> confirmo que el trabajo sustantivo del 2026-05-20 (AInimation Studio, hasta el commit <code>4f646b7</code>) ya estaba commiteado y firmado por Codex, junto al handoff <code>handoff/2026-05-20-HX-R46C.md</code>.",
+          "<code>repos.html</code> se regenera de forma automatica via GitHub Actions (<code>update-repos.yml</code>, cron diario), por lo que no se edita a mano en este cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El cierre del diario queda demostrado tambien desde Claude Code en la web, no solo desde el checkout local del Mac Mini.",
+          "Esta entrada firmada por <code>Claude</code> para <code>2026-05-20</code> queda lista para mostrarse bajo el filtro Claude de la UI publica."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "No inventar actividad: registrar unicamente el cierre verificable hecho con Claude Code en la web.",
+          "Dejar <code>repos.html</code> a cargo de la Action automatica en vez de regenerarlo a mano sin acceso al resto de repos.",
+          "Publicar el cambio en la rama <code>main-X7EBV</code> y abrir un Pull Request en borrador hacia <code>main</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Usar Claude Code en la web para los proximos cierres del diario y para subir trabajo de otros repos cuando lo haya.",
+          "Cuando exista trabajo concreto hecho con Claude Code en un repo, anadirlo a la entrada del dia con sus commits verificables."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-20",
+    title: "20 de mayo de 2026",
     author: "Codex",
     sections: [
       {
