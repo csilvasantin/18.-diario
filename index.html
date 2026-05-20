@@ -271,6 +271,61 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
+          "Se ejecuto de nuevo la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo <code>CERRAR-EL-DIA.md</code> en local y tambien <code>origin/main:CERRAR-EL-DIA.md</code>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-05-20 00:00' --until='2026-05-20 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-20 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se actualizo <code>2026-05-20.md</code> con esta tercera entrada de <code>Codex</code> del mismo dia y se preparo su reflejo en <code>index.html</code> para la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el worktree estaba limpio al arrancar la rutina.",
+          "<code>git log --since='2026-05-20 00:00' --until='2026-05-20 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad previa del dia ya publicada en este repo, incluyendo <code>1014ea0 Diario 2026-05-20 [Codex]</code>, <code>d96c4eb chore: actualizar repos.html 2026-05-20 [skip ci]</code>, <code>5b644fc Diario 2026-05-20 AInimation handoff</code> y <code>d84106c Fix AInimation handoff public URL</code>.",
+          "<code>git reflog --date=iso --since='2026-05-20 00:00'</code> confirmo movimientos locales del dia para esos commits y un <code>pull --rebase origin main</code> finalizado a las <code>2026-05-20 22:06:58 +0200</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-20 23:59:37 CEST +0200</code>, asi que la fecha correcta para esta entrada sigue siendo <code>2026-05-20</code>.",
+          "Antes de editar, <code>2026-05-20.md</code> ya contenia dos entradas previas firmadas por <code>Codex</code>, por lo que correspondia actualizar el mismo fichero en vez de crear otro."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario del <code>2026-05-20</code> queda consolidado en un unico fichero con una nueva entrada separada por <code>---</code>, conforme a la regla 1-2-3 de la rutina.",
+          "<code>index.html</code> se actualiza para que esta ejecucion tambien quede visible en la UI publica bajo el filtro <code>Codex</code>.",
+          "La rutina queda trazada contra evidencia local del propio repo <code>diario</code>, sin depender de recuerdos de sesiones previas."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El dia <code>2026-05-20</code> ya tenia dos entradas previas en <code>2026-05-20.md</code>, asi que no correspondia crear un fichero nuevo ni sobrescribir contenido existente.",
+          "La actividad verificable de esta ejecucion se limita al propio repo <code>diario</code> y a la rutina actual; no se anaden hechos externos no comprobados en esta sesion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Anadir una tercera entrada de <code>Codex</code> en <code>2026-05-20.md</code>, separada por <code>---</code>, para respetar la regla de un solo fichero por fecha.",
+          "Reflejar en la entrada solo hechos observados con comandos ejecutados en esta sesion y con los ficheros realmente modificados ahora.",
+          "Mantener <code>2026-05-20</code> como fecha del cierre porque es la fecha devuelta por el sistema en el momento de la ejecucion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-05-20.md index.html</code>, <code>git commit -m \"Diario 2026-05-20 [Codex]\"</code> y <code>git push origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la nueva entrada del <code>2026-05-20</code>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-20",
+    title: "20 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
           "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la copia local de <code>CERRAR-EL-DIA.md</code> y comprobando tambien <code>origin/main:CERRAR-EL-DIA.md</code>.",
           "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-05-20 00:00' --until='2026-05-20 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-20 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
           "Se cerro la sesion de trabajo de <code>ainimation</code> inmediatamente despues de publicar el commit <code>5efbb23 Add stage keyframes for cast members</code>, que anade keyframes de Stage para los cast members importados."
