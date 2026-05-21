@@ -266,6 +266,63 @@ const entries = [
   {
     date: "2026-05-21",
     title: "21 de mayo de 2026",
+    author: "Claude",
+    startTime: "23:06",
+    updateTime: "23:06",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> desde una sesion de Claude Code en el entorno de ejecucion remoto (cloud), trabajando sobre la rama <code>main-7Vwme</code> del repo <code>csilvasantin/18.-diario</code>.",
+          "Se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-05-21 00:00' --until='2026-05-21 23:59:59' --date=iso --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-21 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se anadio esta entrada de <code>Claude</code> a <code>2026-05-21.md</code>, conviviendo con la entrada previa de <code>Codex</code> y separada por <code>---</code>, y se reflejo en <code>index.html</code> para la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-7Vwme</code> con el arbol de trabajo limpio al arrancar.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-21 21:06:51 UTC +0000</code>, asi que el fichero correcto para este cierre es <code>2026-05-21.md</code>.",
+          "<code>git log</code> confirmo que la actividad del dia en este repo es <code>547ad9a docs: Update Codex 2026-05-21 [skip ci]</code>, <code>4942bb9 Diario 2026-05-20 [Claude] + Handoff HX-TMUR</code> y <code>665a16a chore: actualizar repos.html 2026-05-21 [skip ci]</code>.",
+          "<code>main</code>, <code>main-7Vwme</code>, <code>origin/main</code> y <code>origin/main-7Vwme</code> apuntan al mismo commit <code>547ad9a</code>.",
+          "<code>2026-05-21.md</code> ya contenia una entrada firmada por <code>Codex</code>, por lo que correspondia anadir y no crear un fichero nuevo, conforme a la regla 1-2-3."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El dia <code>2026-05-21</code> queda con doble firma (<code>Codex</code> + <code>Claude</code>) en un unico fichero, respetando un fichero por fecha.",
+          "La UI publica del diario suma la entrada de <code>Claude</code>, visible en el filtro <code>Claude</code> y en el selector de fechas."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La sesion corre en un contenedor remoto efimero y sin <code>GH_TOKEN</code>, asi que <code>repos.html</code> no se puede regenerar localmente; depende del workflow <code>update-repos.yml</code> (cron 05:00 UTC o <code>workflow_dispatch</code> manual).",
+          "El trabajo funcional verificable del dia ya estaba publicado antes de esta sesion, por lo que esta entrada documenta principalmente el cierre del dia."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos comprobados por <code>git</code> y por la propia sesion, sin inventar actividad no trazable.",
+          "Publicar en la rama <code>main-7Vwme</code> y abrir un Pull Request en borrador, sin tocar <code>main</code> directamente.",
+          "Dejar la regeneracion de <code>repos.html</code> al workflow programado, ya que requiere credenciales de la API de GitHub no disponibles en este entorno."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Fusionar el Pull Request hacia <code>main</code> para que GitHub Pages publique la entrada.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde y muestra la entrada de hoy en el filtro <code>Claude</code>.",
+          "Confirmar que <code>repos.html</code> se actualiza en la siguiente ejecucion del workflow programado o lanzarlo manualmente desde GitHub Actions."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-21",
+    title: "21 de mayo de 2026",
     author: "Codex",
     sections: [
       {
