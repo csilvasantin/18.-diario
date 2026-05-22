@@ -264,6 +264,62 @@
 <script>
 const entries = [
   {
+    date: "2026-05-22",
+    title: "22 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo la memoria existente en <code>/Users/csilvasantin/.codex/automations/actualizar-diario-2/memory.md</code> para partir del estado publicado el <code>2026-05-21</code>.",
+          "Se revisaron <code>git status --short --branch</code>, <code>git log --since='2026-05-22 00:00' --until='2026-05-22 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-22 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> para fijar la evidencia real del dia.",
+          "Se compararon el worktree de la automatizacion en <code>/Users/csilvasantin/.codex/worktrees/01fb/diario/</code> y el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>; al no poder escribir en el segundo ni cambiar el <code>HEAD</code> del primero, se clono <code>origin/main</code> en <code>/private/tmp/diario-actualizar-diario-2.njFuXe</code> para preparar y publicar esta actualizacion.",
+          "Se creo <code>2026-05-22.md</code> y se actualizo <code>index.html</code> para que la nueva entrada quede visible en la publicacion HTML del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En el clon limpio de publicacion, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando base sincronizada con <code>origin/main</code>.",
+          "<code>git log --since='2026-05-22 00:00' --until='2026-05-22 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad previa del dia en este repo: <code>45d4ac8 chore: actualizar repos.html 2026-05-22 [skip ci]</code> y <code>a1820f3 Diario 2026-05-21 [Codex]</code>.",
+          "<code>git reflog --date=iso --since='2026-05-22 00:00'</code> solo mostro el <code>clone</code> de esta sesion a las <code>2026-05-22 21:32:50 +0200</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-22 21:31:50 CEST +0200</code>, asi que la fecha correcta para esta entrada es <code>2026-05-22</code>.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code>, <code>test -w .</code> y <code>test -w index.html</code> devolvieron <code>NOT_WRITABLE</code> e <code>INDEX_NOT_WRITABLE</code>, confirmando que este entorno no podia publicar desde el checkout canonico."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a tener una unica entrada Markdown para <code>2026-05-22</code>, firmada por <code>Codex</code>.",
+          "<code>index.html</code> queda alineado con la fecha de hoy para que la UI publica pueda mostrar la novedad sin depender de pasos manuales posteriores.",
+          "La memoria de la automatizacion se reutiliza como contexto operativo y queda lista para actualizarse otra vez al final de esta corrida."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El worktree original de la automatizacion estaba en detached HEAD y un <code>git checkout --detach origin/main</code> fallo con <code>Unable to create ... index.lock: Operation not permitted</code>, asi que no era fiable para publicar directamente.",
+          "El checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> estaba sincronizado, pero este entorno no tenia permisos de escritura sobre sus ficheros."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Publicar desde un clon temporal limpio basado en <code>origin/main</code> para evitar mezclar esta entrada con estados locales incoherentes.",
+          "Registrar solo hechos observados con comandos ejecutados hoy y dejar fuera cualquier actividad externa no trazable en esta sesion.",
+          "Mantener la regla de una sola entrada Markdown por fecha, creando <code>2026-05-22.md</code> en vez de reutilizar un fichero anterior."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-05-22.md index.html</code>, <code>git commit -m &quot;Diario 2026-05-22 [Codex]&quot;</code> y <code>git push origin main</code> desde el clon temporal.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo y que la entrada <code>2026-05-22</code> quede visible en la web publica."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-21",
     title: "21 de mayo de 2026",
     author: "Codex",
