@@ -264,6 +264,68 @@
 <script>
 const entries = [
   {
+    date: "2026-05-24",
+    title: "24 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se preparo el Mac (Apple M5 Max, 48 GB) como estacion local de IA: <code>ollama</code> (v0.24.0) y descarga de <code>gemma4:31b</code> (19 GB), el mejor Gemma 4 Dense que corre con holgura en 48 GB.",
+          "Se instalo <code>Hermes Agent</code> v0.14.0 (instalador oficial revisado antes de ejecutarlo) y se apunto a la Gemma 4 local via Ollama (<code>http://localhost:11434/v1</code>) editando <code>~/.hermes/config.yaml</code>.",
+          "Se conecto Hermes a Telegram: token en <code>~/.hermes/.env</code> (600), allowlist solo al user id <code>8663681</code> y gateway como servicio launchd <code>ai.hermes.gateway</code>.",
+          "Se anadio Grok (xAI) como alias manual <code>/model grok</code>, dejando Gemma local por defecto para no gastar dinero sin permiso.",
+          "Se clonaron los 41 repos publicos de <code>csilvasantin</code> en <code>~/Projects/csilvasantin</code> (869 MB) con catalogo <code>PROJECTS.md</code> y resumen en la memoria de Hermes.",
+          "Se instalo <code>Xcode</code> completo para Unreal Engine 5 / MetaHumans."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>ollama list</code> mostro <code>gemma4:31b</code> y <code>/v1/chat/completions</code> devolvio respuesta correcta.",
+          "<code>hermes config show</code> confirmo <code>provider=ollama</code> y <code>Telegram: configured</code>; <code>hermes chat -q</code> respondio con la Gemma local sin nube.",
+          "<code>hermes gateway status</code> activo y el log registro <code>Telegram connected (polling mode)</code>; el bot respondio al usuario autorizado.",
+          "La API de GitHub (<code>public_repos: 41</code>) coincidio con las 41 carpetas clonadas (0 fallos).",
+          "<code>xcode-select -p</code> apunta a <code>/Applications/Xcode.app/Contents/Developer</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La maquina queda con un asistente agentico local (Hermes + Gemma 4) por terminal y Telegram, offline por defecto.",
+          "Todo el portfolio queda en local para trabajar, documentado y compartido con el agente.",
+          "La cadena de herramientas para Unreal/MetaHumans queda a un paso (Xcode instalado)."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La primera respuesta de <code>gemma4:31b</code> es lenta (carga + razonamiento); <code>gemma4:26b</code> MoE es alternativa mas rapida.",
+          "Tras instalar Xcode, el dev dir cambio a <code>Xcode.app</code> y sin aceptar la licencia quedaron bloqueados <code>git</code> y <code>python3</code> (requiere <code>sudo xcodebuild -license accept</code>).",
+          "Sin <code>Homebrew</code> ni <code>gh</code>, la clonacion se hizo via API + <code>git clone</code>; solo repos publicos."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Gemma 4 local por defecto y Grok solo bajo seleccion manual, priorizando coste cero.",
+          "Restringir el bot de Telegram a un unico user id por seguridad.",
+          "Descargar y leer el instalador de Hermes antes de ejecutarlo, en vez de <code>curl | bash</code> directo.",
+          "Clonar el portfolio bajo <code>~/Projects/csilvasantin</code> como carpeta de trabajo canonica."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Aceptar la licencia de Xcode y ejecutar <code>xcodebuild -runFirstLaunch</code> para desbloquear las herramientas.",
+          "Instalar Epic Games Launcher + Unreal Engine 5 y activar el plugin MetaHuman.",
+          "Anadir <code>XAI_API_KEY</code> para habilitar <code>/model grok</code> cuando se quieran respuestas online.",
+          "Con git desbloqueado, publicar el cierre y comprobar <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-23",
     title: "23 de mayo de 2026",
     author: "Codex",
