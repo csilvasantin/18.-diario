@@ -264,6 +264,60 @@
 <script>
 const entries = [
   {
+    date: "2026-05-23",
+    title: "23 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo la memoria de la automatizacion en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code> y no existia todavia, asi que esta corrida arranco sin contexto acumulado.",
+          "Se revisaron <code>git status --short --branch</code>, <code>git branch -a --verbose --no-abbrev</code>, <code>git log --since='2026-05-23 00:00' --until='2026-05-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-23 00:00'</code>, <code>git show --stat --summary --format=fuller 49332a7</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> para fijar la evidencia real del dia.",
+          "Se creo <code>2026-05-23.md</code> y se actualizo <code>index.html</code> para publicar la fecha de hoy en la UI del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, y <code>git branch -a --verbose --no-abbrev</code> mostro que este worktree sigue desprendido sobre <code>45d4ac8834a46e5bcda5ae7db8ba92307f4b3db8</code>, el mismo commit que <code>origin/main</code>.",
+          "<code>git log --since='2026-05-23 00:00' --until='2026-05-23 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad previa del dia en este repo: <code>49332a7 Codex worktree snapshot: archive-cleanup</code>, con cambios en <code>2026-05-22.md</code> e <code>index.html</code>.",
+          "<code>git show --stat --summary --format=fuller 49332a7</code> confirmo que ese commit fue creado el <code>2026-05-23 12:17:47 +0200</code>, anadio <code>2026-05-22.md</code> y dejo <code>Co-authored-by: Codex</code>.",
+          "<code>git reflog --date=iso --since='2026-05-23 00:00'</code> solo mostro <code>45d4ac8 HEAD@{2026-05-23 21:31:50 +0200}</code>, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-23 21:33:05 CEST +0200</code>.",
+          "Ni el worktree local ni <code>origin/main</code> contenian aun <code>2026-05-23.md</code> antes de esta actualizacion."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a quedar alineado con la fecha actual del sistema, con un fichero Markdown propio para <code>2026-05-23</code>.",
+          "<code>index.html</code> queda preparado para mostrar la fecha de hoy en los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Este checkout de automatizacion no esta en una rama local sino en detached HEAD, asi que la publicacion requiere empujar explicitamente desde <code>HEAD</code> hacia <code>origin/main</code>.",
+          "La evidencia previa del <code>2026-05-23</code> en este repo es muy corta y se limita al commit <code>49332a7</code>, asi que la entrada de hoy debe cenirse a esa traza y a esta sesion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos observables por comandos locales y por el historial git verificable del propio repo.",
+          "Mantener <code>2026-05-23</code> como unica fecha canonica del cierre porque es la fecha devuelta por el sistema en esta ejecucion.",
+          "Actualizar la publicacion HTML en el mismo cambio que el Markdown para que la novedad quede visible en la web publica."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Validar <code>index.html</code>, crear el commit con <code>Codex</code> en el mensaje y empujar desde este <code>HEAD</code> a <code>origin/main</code>.",
+          "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo con la entrada de <code>2026-05-23</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-22",
     title: "22 de mayo de 2026",
     author: "Codex",
