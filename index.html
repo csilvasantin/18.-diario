@@ -264,6 +264,59 @@
 <script>
 const entries = [
   {
+    date: "2026-05-25",
+    title: "25 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina canonica \"Cerrar el dia\" con Claude Code desde el entorno de ejecucion remoto (contenedor efimero en la nube), trabajando sobre la rama <code>main-vfqET</code>.",
+          "Se reviso la actividad del repositorio <code>18.-diario</code> para el <code>2026-05-25</code> con <code>git status</code>, <code>git log --since='2026-05-25 00:00' --until='2026-05-25 23:59:59' --all</code>, <code>git reflog --since='2026-05-25 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Al no encontrar trabajo sustantivo nuevo en el dia, se documenta el cierre como jornada sin actividad relevante (solo mantenimiento automatico): si un dia no se ha hecho nada, se documenta y ya esta.",
+          "Se creo <code>2026-05-25.md</code> y se inserto esta entrada en <code>index.html</code> para que la fecha aparezca en la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-05-25 00:00' --until='2026-05-25 23:59:59' --date=iso --stat --oneline --all</code> mostro como unica actividad del dia el commit <code>0810197 chore: actualizar repos.html 2026-05-25 [skip ci]</code>.",
+          "<code>git show --stat --format=fuller 0810197</code> confirmo que ese commit lo creo <code>github-actions[bot]</code> (AuthorDate <code>Mon May 25 08:59:05 2026 +0000</code>) y solo cambio <code>repos.html</code> (3 inserciones, 3 eliminaciones).",
+          "<code>git reflog --since='2026-05-25 00:00'</code> solo registro el <code>checkout</code> a la rama de trabajo <code>main-vfqET</code> en <code>HEAD@{2026-05-25 21:10:03 +0000}</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-25 21:10:23 UTC +0000</code>, fijando <code>2026-05-25</code> como fecha correcta del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda alineado con la fecha actual del sistema, con un fichero Markdown propio para <code>2026-05-25</code>.",
+          "<code>repos.html</code> sigue actualizado por el workflow automatico <code>update-repos.yml</code> (cron diario + ejecucion manual), sin intervencion en este cierre."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno. La jornada no registro trabajo sustantivo nuevo en el repositorio mas alla del mantenimiento automatico de <code>repos.html</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar el dia como cierre sin actividad relevante, ciniendo la entrada a los hechos verificables por <code>git</code> sin rellenar contenido inventado.",
+          "No editar <code>repos.html</code> a mano: su regeneracion la gestiona GitHub Actions y la version del dia ya estaba al dia.",
+          "Publicar el cierre desde la rama <code>main-vfqET</code> y abrir un Pull Request en borrador hacia <code>main</code>, respetando el flujo de ramas de esta sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Mezclar el PR de cierre a <code>main</code> para que el diario publico recoja la entrada del <code>2026-05-25</code>.",
+          "Comprobar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> responden con la informacion actualizada."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-24",
     title: "24 de mayo de 2026",
     author: "Codex",
