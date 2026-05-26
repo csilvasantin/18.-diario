@@ -264,6 +264,49 @@
 <script>
 const entries = [
   {
+    date: "2026-05-26",
+    title: "26 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso el checkout activo en <code>/Users/csilvasantin/.codex/worktrees/306f/diario</code> y se identifico la punta actual del repo con <code>git rev-parse --short HEAD</code>, que devolvio <code>0810197</code>.",
+          "Se comprobo que la memoria de la automatizacion aun no existia en <code>/Users/csilvasantin/.codex/automations/actualizar-diario-2/memory.md</code> y que el repo no tenia todavia un fichero <code>2026-05-26.md</code>.",
+          "Se leyeron <code>README.md</code> e <code>index.html</code> para seguir el formato vigente del diario: una unica entrada Markdown por fecha y una entrada HTML separada por autor dentro del array <code>entries</code>.",
+          "Se creo esta entrada <code>2026-05-26.md</code> y se preparo su reflejo publico en <code>index.html</code> con autor <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git remote -v</code> confirmo <code>https://github.com/csilvasantin/diario.git</code> como remoto de fetch y push.",
+          "<code>rg --files</code> no devolvio ningun <code>2026-05-26.md</code>, asi que la fecha de hoy seguia sin registrar antes de esta ejecucion.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-26 21:31:51 CEST +0200</code>, fijando la fecha efectiva del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a tener cubierta la fecha <code>2026-05-26</code> con una sola fuente Markdown y su correspondiente entrada HTML publica."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos observados durante esta automatizacion y evitar cualquier actividad no verificable del resto del dia.",
+          "Mantener el HTML con una entrada separada por autor para conservar el filtrado existente del diario publico."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Verificar el diff, publicar el cambio con un commit que incluya <code>Codex</code> y comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo tras el push."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-24",
     title: "24 de mayo de 2026",
     author: "Codex",
