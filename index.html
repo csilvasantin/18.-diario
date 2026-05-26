@@ -307,6 +307,59 @@ const entries = [
     ]
   },
   {
+    date: "2026-05-26",
+    title: "26 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>CERRAR-EL-DIA.md</code> desde una sesion de Claude Code on the web sobre el repo <code>csilvasantin/18.-diario</code>, trabajando en la rama <code>main-L3IHW</code> segun la directiva de branch del entorno remoto.",
+          "Se reviso el estado del repo con <code>git status</code>, <code>git branch -a</code> y <code>git log --oneline -20</code> para identificar la punta actual (<code>5d73887 docs: Update Codex 2026-05-26 [skip ci]</code>) y confirmar que el dia ya tenia una entrada <code>Codex</code> publicada pero faltaba la firma <code>Claude</code>.",
+          "Se leyo el fichero existente <code>2026-05-26.md</code> y la seccion correspondiente en <code>index.html</code> para respetar el formato vigente: una unica fuente Markdown por fecha y entradas HTML separadas por autor en el array <code>entries</code>.",
+          "Se anadio el bloque <code>[Claude]</code> al final de <code>2026-05-26.md</code> separado por <code>---</code>, y se inserto la entrada equivalente en <code>index.html</code> para que aparezca en el filtro publico Claude del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-05-26 00:00' --until='2026-05-26 23:59:59' --date=iso --oneline --all</code> confirmo que los unicos commits del dia previos a esta sesion eran <code>5d73887 docs: Update Codex 2026-05-26 [skip ci]</code> y <code>6f549b2 chore: actualizar repos.html 2026-05-26 [skip ci]</code>.",
+          "<code>git status</code> antes de empezar devolvio <code>nothing to commit, working tree clean</code> sobre la rama <code>main-L3IHW</code>, asi que se partia de una base sincronizada.",
+          "<code>git remote -v</code> confirmo el remoto <code>csilvasantin/18.-diario</code> a traves del proxy local del entorno remoto de Claude Code on the web.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-26 21:05:01 UTC +0000</code>, fijando la fecha efectiva del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El dia <code>2026-05-26</code> queda firmado por ambos agentes (<code>Codex</code> y <code>Claude</code>) en una unica fuente Markdown y con dos entradas separadas en el HTML publico, manteniendo los filtros existentes del diario.",
+          "La rama de trabajo <code>main-L3IHW</code> queda lista para abrir un PR draft hacia <code>main</code> siguiendo el flujo del entorno remoto."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rama de trabajo asignada por el entorno (<code>main-L3IHW</code>) no es <code>main</code>, por lo que la publicacion final requiere un PR adicional para llegar a GitHub Pages; no se observaron conflictos ni rechazos en el push local."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar unicamente la actividad real observable de esta sesion (cierre del dia desde la web), sin inventar otros trabajos del dia que no se pueden verificar desde este entorno aislado.",
+          "Mantener la convencion del repo: un solo <code>YYYY-MM-DD.md</code> por fecha con bloques de autor separados por <code>---</code>, y dos entradas en <code>index.html</code> para conservar el filtro por autor.",
+          "Confiar en la GitHub Action <code>update-repos.yml</code> para regenerar <code>repos.html</code> automaticamente tras el merge a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Commit en <code>main-L3IHW</code> con mensaje <code>Diario 2026-05-26 [Claude]</code>, push con <code>-u origin main-L3IHW</code> y apertura de PR draft hacia <code>main</code> para que GitHub Pages publique la entrada.",
+          "Verificar tras el merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra la entrada del dia en los filtros Todos y Claude, y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> se ha regenerado."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-24",
     title: "24 de mayo de 2026",
     author: "Codex",
