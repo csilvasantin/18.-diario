@@ -264,6 +264,50 @@
 <script>
 const entries = [
   {
+    date: "2026-05-27",
+    title: "27 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina de cierre del dia desde un entorno remoto de Claude Code sobre la rama <code>main-xvGrQ</code> del repo <code>csilvasantin/18.-diario</code>, clonado en <code>/home/user/18.-diario/</code>.",
+          "Se reviso el estado del repo (<code>git status</code>, <code>git log --oneline -20</code>, <code>git branch -a</code>) para confirmar que la unica actividad de hoy era el commit automatico de <code>repos.html</code> generado por GitHub Actions.",
+          "Se creo el fichero <code>2026-05-27.md</code> siguiendo el formato canonico de <code>CERRAR-EL-DIA.md</code> y se anadio esta entrada al array <code>entries</code> de <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-27 21:06:24 UTC +0000</code>, fijando la fecha efectiva del cierre.",
+          "<code>git log --since='2026-05-27 00:00' --until='2026-05-27 23:59:59' --date=iso --stat --oneline --all</code> solo mostro <code>6700962 chore: actualizar repos.html 2026-05-27 [skip ci]</code> firmado por <code>github-actions[bot]</code>, con cambios unicamente en <code>repos.html</code>.",
+          "<code>ls 2026-05-27*</code> confirmo que no existia entrada previa para hoy antes de esta ejecucion."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda con la fecha <code>2026-05-27</code> cubierta como dia sin actividad sustantiva mas alla del auto-update de <code>repos.html</code>, en linea con la regla de \"si un dia no se ha hecho nada se documenta y ya esta\".",
+          "<code>index.html</code> recibe una entrada nueva con autor <code>Claude</code> para que la fecha de hoy aparezca en los filtros publicos."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar el dia aunque no haya habido actividad funcional, manteniendo continuidad del historico segun la rutina <code>CERRAR-EL-DIA.md</code>.",
+          "Publicar el cierre desde la rama de desarrollo <code>main-xvGrQ</code> (asignada a esta sesion remota) y abrir/actualizar un PR draft hacia <code>main</code> en lugar de pushear directo a la rama principal."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer commit + push de <code>2026-05-27.md</code> e <code>index.html</code> a <code>origin/main-xvGrQ</code> y crear/actualizar el PR draft contra <code>main</code>.",
+          "Verificar tras el merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra la entrada del 27 y que <code>repos.html</code> sigue sirviendose correctamente."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-26",
     title: "26 de mayo de 2026",
     author: "Codex",
