@@ -264,6 +264,57 @@
 <script>
 const entries = [
   {
+    date: "2026-05-27",
+    title: "27 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo la memoria de la automatizacion en <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code>, que seguia sin existir, y se contrasto la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> con <code>origin/main:CERRAR-EL-DIA.md</code>.",
+          "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-05-27 00:00' --until='2026-05-27 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-27 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se confirmo que no existia todavia <code>2026-05-27.md</code>, se creo esta entrada y se actualizo <code>index.html</code> para anadirla a la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main [ahead 2]</code>, confirmando worktree limpio sobre <code>main</code> pero con dos commits locales pendientes de publicar al inicio.",
+          "<code>git log --since='2026-05-27 00:00' --until='2026-05-27 23:59:59' --date=iso --stat --oneline --all</code> mostro <code>18549c9 Diario 2026-05-26 [Codex]</code> con cambios en <code>2026-05-26.md</code> e <code>index.html</code>, y <code>git reflog --date=iso --since='2026-05-27 00:00'</code> reflejo el cierre del rebase a las <code>2026-05-27 00:01:46 +0200</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-27 23:56:37 CEST +0200</code>, fijando la fecha efectiva de este cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda actualizado tambien para <code>2026-05-27</code> con su fichero Markdown dedicado y su entrada correspondiente en <code>index.html</code>.",
+          "La publicacion pendiente acumula ahora los cierres locales de <code>2026-05-25</code>, <code>2026-05-26</code> y esta sesion del <code>2026-05-27</code> en el checkout canonico."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La memoria de la automatizacion seguia ausente al inicio, asi que esta corrida arranco sin contexto persistido local.",
+          "El checkout no estaba sincronizado con <code>origin/main</code> al arrancar, sino <code>ahead 2</code>, por lo que el <code>push</code> de hoy debe publicar tambien trabajo pendiente de los dos cierres anteriores."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos comprobados por los comandos ejecutados hoy y por los cambios reales realizados en esta sesion.",
+          "Mantener el checkout canonico en <code>/Users/csilvasantin/Claude/diario/</code> y sumar la entrada de hoy sobre la rama local existente, sin reescribir los commits pendientes previos."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-05-27.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-05-27 [Codex]</code> y ejecutar <code>git push origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la entrada del <code>2026-05-27</code> tras la publicacion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-26",
     title: "26 de mayo de 2026",
     author: "Codex",
