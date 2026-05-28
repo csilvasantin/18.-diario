@@ -266,6 +266,48 @@ const entries = [
   {
     date: "2026-05-28",
     title: "28 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso el repositorio <code>18.-diario</code> en la rama de trabajo <code>main-O95JE</code> y se leyeron las rutinas canonicas <code>CERRAR-EL-DIA.md</code>, <code>README.md</code> y <code>CLAUDE.md</code>.",
+          "Se confirmo que Codex ya habia cubierto la fecha <code>2026-05-28</code> (commits <code>ab02667</code> de <code>repos.html</code> y <code>82dd5a7</code> de la entrada Codex), por lo que no habia desarrollo de codigo adicional de Claude Code que subir hoy.",
+          "Se anadio esta entrada <code>Claude</code> a <code>2026-05-28.md</code>, conviviendo con el bloque de Codex separado por <code>---</code>, y se reflejo en <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> mostro el arbol limpio en <code>main-O95JE</code> antes de editar.",
+          "<code>git log --since='2026-05-28 00:00' --until='2026-05-28 23:59:59' --all</code> solo listo los dos commits de la automatizacion de Codex del dia (<code>ab02667</code>, <code>82dd5a7</code>).",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-28 21:06:36 UTC +0000</code>, fijando la fecha del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-05-28</code> queda firmada tambien por <code>Claude</code>, manteniendo una unica fuente Markdown por dia y su reflejo en el diario publico."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Aplicar la regla del usuario: si en un dia no hay codigo nuevo que subir, documentarlo y cerrar; registrar solo hechos verificables y no rellenar.",
+          "Dejar la regeneracion de <code>repos.html</code> al workflow <code>update-repos.yml</code> (programado a las 5am UTC o manual), que es quien la reconstruye con la API de GitHub."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Push de la rama <code>main-O95JE</code>, apertura de un PR en draft y verificacion de que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde tras la publicacion."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-28",
+    title: "28 de mayo de 2026",
     author: "Codex",
     sections: [
       {
