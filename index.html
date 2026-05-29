@@ -274,6 +274,61 @@
 <script>
 const entries = [
   {
+    date: "2026-05-29",
+    title: "29 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se subio a GitHub el trabajo de la sesion con Claude Code en la rama <code>main-yZsnl</code> y se cerro el dia creando <code>2026-05-29.md</code> y su reflejo publico en <code>index.html</code>.",
+          "Se construyo la galeria de capturas de las gafas Ray-Ban Meta por dia, alimentada desde <code>media/glasses/manifest.json</code> (commit <code>3466b45</code>).",
+          "Se hicieron reproducibles los videos de las gafas y se anadio el enlace <code>← Consejo</code> en la nav (commit <code>4543aa0</code>).",
+          "Se anadio el filtro <code>👓 Meta</code> en la nav (commit <code>e724899</code>) y un deep-link <code>#latest</code> que abre la ultima entrada del diario (commit <code>c8e01c3</code>).",
+          "Se cargaron 7 dias de capturas (<code>2026-05-23</code> a <code>2026-05-29</code>) en <code>media/glasses/</code> y se regenero <code>manifest.json</code> (commits <code>41a4a67</code>..<code>7abd3db</code> y <code>20e2237</code>)."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> devolvio worktree limpio sobre la rama <code>main-yZsnl</code>.",
+          "<code>git rev-list --left-right --count origin/main...main-yZsnl</code> devolvio <code>0 28</code>, confirmando que <code>main-yZsnl</code> va 28 commits por delante de <code>origin/main</code> con todo el trabajo de la galeria.",
+          "<code>ls media/glasses/2026-05-29/</code> devolvio 32 capturas para hoy y <code>media/glasses/</code> contiene las carpetas de los 7 dias mas el <code>manifest.json</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-29 21:07:15 UTC +0000</code>, fijando la fecha efectiva del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda cubierto para <code>2026-05-29</code> con su fichero Markdown dedicado, firmado por <code>Claude</code>, y su entrada en la UI publica bajo <code>Todos</code> y <code>Claude</code>.",
+          "La galeria de gafas Meta queda operativa: capturas y videos por dia desde <code>manifest.json</code>, con filtro <code>👓 Meta</code> y deep-link <code>#latest</code> en la nav.",
+          "<code>repos.html</code> ya quedo actualizado para <code>2026-05-29</code> (commit <code>90da685</code>, generado por GitHub Actions)."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El cierre se ejecuta desde Claude Code en remoto sobre <code>main-yZsnl</code>, no desde el checkout canonico del Mac Mini, por lo que los pasos de <code>CERRAR-EL-DIA.md</code> que asumen ese checkout se adaptaron a la rama de trabajo."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos comprobados con <code>git</code> y con el trabajo real de la sesion, sin rellenar.",
+          "Desarrollar y publicar en la rama <code>main-yZsnl</code> y abrir un Pull Request en borrador hacia <code>main</code> en vez de empujar directamente a <code>main</code>.",
+          "Mantener la regla 1-2-3 del diario: un unico fichero por fecha y una entrada HTML por autor para conservar el filtrado publico."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-05-29.md</code> e <code>index.html</code>, commitear y empujar a <code>origin/main-yZsnl</code>.",
+          "Crear el Pull Request en borrador para que, al integrarse en <code>main</code>, la entrada del <code>2026-05-29</code> y la galeria aparezcan en <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y en <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>repos.html</a>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-28",
     title: "28 de mayo de 2026",
     author: "Codex",
