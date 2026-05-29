@@ -4751,8 +4751,21 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
   });
 });
 
+// Deep-link: /#latest (o ?latest=1) → resetea filtro y salta a la entrada más reciente
+function wantsLatest() {
+  return location.hash === "#latest" || /[?&]latest=1\b/.test(location.search);
+}
+function goToLatest() {
+  activeFilter = "";
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b.dataset.filter === ""));
+  const filtered = getFiltered();           // entries ya están ordenadas descendente
+  rebuildSelector(filtered, filtered[0]);   // filtered[0] = entrada más reciente
+}
+window.addEventListener("hashchange", () => { if (location.hash === "#latest") goToLatest(); });
+
 // Init: show all, most recent entry (entries are sorted descending)
 rebuildSelector(getFiltered(), 0);
+if (wantsLatest()) goToLatest();
 
 // ── Galería de las gafas (Ray-Ban Meta) ──────────────────────
 // Lee media/glasses/manifest.json (escrito por glasses_sync.sh) y añade una
@@ -4809,6 +4822,7 @@ rebuildSelector(getFiltered(), 0);
       const cur = Number(document.getElementById("entry-selector").value) || 0;
       buildEntries();
       rebuildSelector(getFiltered(), cur);
+      if (wantsLatest()) goToLatest();
       installGlassesVideoLightbox();
     })
     .catch(() => {});
