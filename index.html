@@ -4670,6 +4670,10 @@ function buildEntries() {
       const badge = (si === 0 && entry.author)
         ? " <span class=\"" + badgeClass + "\">" + entry.author + "</span>"
         : "";
+      if (s.raw) {
+        html += "<h2>" + s.heading + badge + "</h2>" + s.items.join("");
+        return;
+      }
       html += "<h2>" + s.heading + badge + "</h2><ul>";
       const isPending = /pendiente/i.test(s.heading);
       s.items.forEach(item => {
@@ -4736,6 +4740,55 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
 
 // Init: show all, most recent entry (entries are sorted descending)
 rebuildSelector(getFiltered(), 0);
+
+// ── Galería de las gafas (Ray-Ban Meta) ──────────────────────
+// Lee media/glasses/manifest.json (escrito por glasses_sync.sh) y añade una
+// sección "Gafas" a la entrada de cada día (o crea la entrada si no existe).
+(function initGlassesGallery() {
+  fetch("media/glasses/manifest.json?_=" + Date.now())
+    .then(r => r.ok ? r.json() : null)
+    .then(m => {
+      if (!m || !m.days) return;
+      const days = Object.keys(m.days).filter(d => (m.days[d].items || []).length);
+      if (!days.length) return;
+      days.forEach(date => {
+        const items = m.days[date].items.slice().sort((a, b) => (b.id || "").localeCompare(a.id || ""));
+        const nP = items.filter(x => x.type === "photo").length;
+        const nV = items.filter(x => x.type === "video").length;
+        const cells = items.map(it => {
+          const t = (it.id || "").slice(9, 15).replace(/(..)(..)(..)/, "$1:$2:$3");
+          const badge = it.type === "video"
+            ? '<span style="position:absolute;left:6px;bottom:6px;background:rgba(0,0,0,.65);color:#9effc4;font-size:.62rem;padding:2px 6px;border-radius:999px;">▶ vídeo</span>'
+            : '';
+          return '<a href="' + it.file + '" target="_blank" rel="noopener" '
+            + 'style="position:relative;display:block;border-radius:10px;overflow:hidden;border:1px solid rgba(0,255,110,.18);aspect-ratio:1/1;" '
+            + 'title="' + (it.type === "video" ? "Vídeo (original en el Mac) · " : "") + (t || it.id) + '">'
+            + '<img src="' + it.file + '" loading="lazy" alt="' + (it.id || "") + '" '
+            + 'style="width:100%;height:100%;object-fit:cover;display:block;"/>'
+            + badge + '</a>';
+        }).join("");
+        const gallery = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-top:6px;">' + cells + '</div>'
+          + '<p style="font-size:.72rem;color:var(--matrix-muted);margin-top:8px;">'
+          + '👓 ' + nP + ' foto' + (nP === 1 ? '' : 's') + (nV ? ' · ' + nV + ' vídeo' + (nV === 1 ? '' : 's') + ' (póster; original completo en el Mac)' : '') + '</p>';
+        const heading = "👓 Gafas — " + items.length + " captura" + (items.length === 1 ? "" : "s");
+        const existing = entries.find(e => e.date === date);
+        if (existing) {
+          existing.sections.push({ heading: heading, raw: true, items: [gallery] });
+        } else {
+          entries.push({
+            date: date, title: date, author: "Gafas",
+            startTime: "", updateTime: "",
+            sections: [{ heading: heading, raw: true, items: [gallery] }]
+          });
+        }
+      });
+      entries.sort((a, b) => b.date.localeCompare(a.date));
+      const cur = Number(document.getElementById("entry-selector").value) || 0;
+      buildEntries();
+      rebuildSelector(getFiltered(), cur);
+    })
+    .catch(() => {});
+})();
 
 // ── Yarig.ai import ──────────────────────────────────────────
 (function initYarigSync() {
