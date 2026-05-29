@@ -162,6 +162,12 @@
     color: #1a0800;
     box-shadow: 0 0 10px rgba(255,183,0,0.4);
   }
+  .filter-btn[data-filter="Meta"].active {
+    background: #4a9eff;
+    border-color: #4a9eff;
+    color: #001022;
+    box-shadow: 0 0 10px rgba(74,158,255,0.4);
+  }
   #yarig-sync {
     padding: 5px 13px;
     font-family: inherit; font-size: 0.72rem; letter-spacing: 0.08em;
@@ -251,6 +257,7 @@
       <button class="filter-btn" data-filter="Claude">Claude</button>
       <button class="filter-btn" data-filter="Codex">Codex</button>
       <button class="filter-btn" data-filter="Yarig.ai">Yarig.ai</button>
+      <button class="filter-btn" data-filter="Meta" title="Capturas de las gafas Meta">👓 Meta</button>
       <button id="yarig-sync" title="Importar tareas de hoy desde Yarig.ai">⟳ importar</button>
       <button id="yarig-journey" title="Abrir o cerrar jornada en Yarig.ai" style="display:none">⏱ jornada</button>
       <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
@@ -4701,6 +4708,9 @@ buildEntries();
 
 function getFiltered() {
   if (!activeFilter) return entries.map((_, i) => i);
+  if (activeFilter === "Meta") {
+    return entries.reduce((acc, e, i) => { if (e.hasGlasses) acc.push(i); return acc; }, []);
+  }
   return entries.reduce((acc, e, i) => {
     if (e.author && e.author.toLowerCase().includes(activeFilter.toLowerCase())) acc.push(i);
     return acc;
@@ -4786,9 +4796,10 @@ rebuildSelector(getFiltered(), 0);
         const existing = entries.find(e => e.date === date);
         if (existing) {
           existing.sections.push({ heading: heading, raw: true, items: [gallery] });
+          existing.hasGlasses = true;
         } else {
           entries.push({
-            date: date, title: date, author: "Gafas",
+            date: date, title: date, author: "Meta", hasGlasses: true,
             startTime: "", updateTime: "",
             sections: [{ heading: heading, raw: true, items: [gallery] }]
           });
