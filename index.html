@@ -274,6 +274,57 @@
 <script>
 const entries = [
   {
+    date: "2026-05-29",
+    title: "29 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo la memoria de la automatizacion en <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code>, que no existia al inicio de esta corrida, y se reviso la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+          "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-05-29 00:00' --until='2026-05-29 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-29 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se confirmo que no existia todavia <code>2026-05-29.md</code>, se creo esta entrada y se actualizo <code>index.html</code> para anadirla a la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando un worktree limpio sobre <code>main</code> al inicio de la sesion.",
+          "<code>git log --since='2026-05-29 00:00' --until='2026-05-29 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-05-29 00:00'</code> no devolvieron actividad previa del <code>2026-05-29</code> en este checkout antes de editar.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-29 23:56:54 CEST +0200</code>, fijando la fecha efectiva de este cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda actualizado para <code>2026-05-29</code> con su fichero Markdown dedicado, firmado por <code>Codex</code>.",
+          "<code>index.html</code> queda preparado para mostrar la nueva entrada del dia en la UI publica bajo los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La memoria de la automatizacion seguia ausente al inicio, asi que esta corrida arranco sin contexto persistido local.",
+          "<code>git remote -v</code> devolvio <code>https://github.com/csilvasantin/18.-diario.git</code> para <code>origin</code>, distinto de la URL de repositorio indicada en la rutina local."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos comprobados por los comandos ejecutados hoy y por los cambios reales realizados en esta sesion.",
+          "Tomar la copia local de <code>CERRAR-EL-DIA.md</code> como referencia operativa disponible cuando la consulta web directa a la fuente canónica no devolvio contenido en esta sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-05-29.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-05-29 [Codex]</code> y ejecutar <code>git push origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la entrada del <code>2026-05-29</code> tras la publicacion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-28",
     title: "28 de mayo de 2026",
     author: "Codex",
