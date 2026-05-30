@@ -321,6 +321,61 @@
 <script>
 const entries = [
   {
+    date: "2026-05-30",
+    title: "30 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo la copia local de la rutina en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y se intento consultar la fuente canónica en GitHub durante esta sesion.",
+          "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-05-30 00:00' --until='2026-05-30 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-30 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se actualizo <code>2026-05-30.md</code> para anadir la entrada firmada por <code>Codex</code> y se sincronizo <code>index.html</code> para publicar la fecha en la UI del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout estaba limpio sobre <code>main</code> antes de editar.",
+          "<code>git log --since='2026-05-30 00:00' --until='2026-05-30 23:59:59' --date=iso --stat --oneline --all</code> devolvio los commits <code>fdef778</code>, <code>6662f04</code> y <code>cb4c611</code>, verificando actividad previa real del dia en este repositorio.",
+          "<code>git reflog --date=iso --since='2026-05-30 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvieron trazas de hoy hasta <code>2026-05-30 23:55:44 CEST +0200</code>, fijando la fecha efectiva del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>2026-05-30.md</code> queda con una entrada de cierre estructurada en seis secciones numeradas y firmada por <code>Codex</code>.",
+          "<code>index.html</code> queda actualizado para mostrar <code>2026-05-30</code> bajo los filtros <code>Todos</code> y <code>Codex</code>.",
+          "La corrida deja trazado en el diario que este checkout ya contenia una entrada previa del mismo dia y que se conservo la regla de un fichero por fecha."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La lectura directa de la fuente canónica online no devolvio contenido util en esta sesion, asi que la ejecucion se apoyo en la copia local verificada.",
+          "<code>git remote -v</code> devolvio <code>https://github.com/csilvasantin/18.-diario.git</code> para <code>origin</code>, distinto del URL de repositorio descrito en la rutina local.",
+          "Esta corrida depende de que <code>git push origin main</code> y la publicacion de GitHub Pages funcionen desde este entorno; cualquier fallo quedara reflejado al verificar los pasos finales."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "No reescribir el contenido anterior de <code>2026-05-30.md</code> y anadir la entrada de <code>Codex</code> separada por <code>---</code>, tal como indica la rutina para varios cierres en la misma fecha.",
+          "Registrar solo hechos comprobados por comandos de <code>git</code>, por la hora local obtenida con <code>date</code> y por cambios realizados en esta sesion.",
+          "Tomar <code>index.html</code> como fuente operativa de la UI publica porque la portada embebe las entradas en <code>const entries</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-05-30.md</code> e <code>index.html</code> para confirmar que la nueva entrada de <code>Codex</code> quedo consistente.",
+          "Crear el commit <code>Diario 2026-05-30 [Codex]</code> y ejecutar <code>git push origin main</code> desde este checkout.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la entrada del <code>2026-05-30</code> tras la publicacion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-29",
     title: "29 de mayo de 2026",
     author: "Codex",
