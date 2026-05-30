@@ -260,6 +260,8 @@
       <button class="filter-btn" data-filter="Meta" title="Capturas de las gafas Meta">👓 Meta</button>
       <button id="yarig-sync" title="Importar tareas de hoy desde Yarig.ai">⟳ importar</button>
       <button id="yarig-journey" title="Abrir o cerrar jornada en Yarig.ai" style="display:none">⏱ jornada</button>
+      <button id="glasses-import" title="Forzar la importación de las gafas Meta ahora (corre glasses_daily.sh en el Mac)">👓 importar</button>
+      <button id="glasses-live" title="Ver en directo la pantalla del teléfono (la vista de las gafas cuando Meta View está en vivo)">🔴 directo</button>
       <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
       <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px">
         <a href="https://www.admira.live/council-scumm.html" style="color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;font-weight:600;transition:opacity 0.15s" title="Volver al Consejo (admira.live)" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">← Consejo</a>
@@ -4899,6 +4901,142 @@ if (wantsLatest()) goToLatest();
       document.body.appendChild(ov);
     });
   }
+})();
+
+// ── Gafas Meta: importar + directo ───────────────────────────
+(function initGlassesControls() {
+  const importBtn = document.getElementById("glasses-import");
+  const liveBtn   = document.getElementById("glasses-live");
+  if (!importBtn || !liveBtn) return;
+
+  // Funnel de Tailscale del MBP16 (HTTPS público pero protegido por token).
+  const DEFAULT_URL = "https://macbook-pro-16.tail48b61c.ts.net/glasses";
+  const getUrl   = () => (localStorage.getItem("glasses_url") || DEFAULT_URL).replace(/\/$/, "");
+  const getToken = () => localStorage.getItem("glasses_token") || "";
+
+  // ── barra de configuración (URL + token), reutilizada por ambos botones ──
+  const cfgBar = document.createElement("div");
+  cfgBar.id = "glasses-cfg";
+  cfgBar.style.cssText = "display:none;padding:10px 18px;background:rgba(0,200,255,0.06);border:1px solid rgba(0,200,255,0.3);border-radius:12px;margin-top:10px;font-size:0.78rem;color:#8fe9ff;align-items:center;gap:10px;flex-wrap:wrap;";
+  cfgBar.innerHTML =
+    '<span id="glasses-cfg-msg" style="flex-basis:100%"></span>' +
+    '<input id="glasses-cfg-url"  placeholder="URL del servicio" style="flex:1;min-width:200px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
+    '<input id="glasses-cfg-token" placeholder="token" style="flex:1;min-width:140px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
+    '<button id="glasses-cfg-save"  style="padding:4px 12px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.72rem;cursor:pointer;">Guardar</button>' +
+    '<button id="glasses-cfg-close" style="padding:4px 10px;border:1px solid rgba(0,255,110,0.2);border-radius:999px;background:transparent;color:var(--matrix-muted);font-family:inherit;font-size:0.72rem;cursor:pointer;">✕</button>';
+  document.getElementById("diary").querySelector("nav").appendChild(cfgBar);
+
+  function showCfg(msg) {
+    cfgBar.querySelector("#glasses-cfg-msg").textContent = msg;
+    cfgBar.querySelector("#glasses-cfg-url").value   = getUrl();
+    cfgBar.querySelector("#glasses-cfg-token").value = getToken();
+    cfgBar.style.display = "flex";
+  }
+  function hideCfg() { cfgBar.style.display = "none"; }
+  cfgBar.querySelector("#glasses-cfg-save").addEventListener("click", () => {
+    const u = cfgBar.querySelector("#glasses-cfg-url").value.trim().replace(/\/$/, "");
+    const t = cfgBar.querySelector("#glasses-cfg-token").value.trim();
+    if (u) localStorage.setItem("glasses_url", u);
+    if (t) localStorage.setItem("glasses_token", t);
+    hideCfg();
+  });
+  cfgBar.querySelector("#glasses-cfg-close").addEventListener("click", hideCfg);
+
+  function setState(btn, text, cls, disabled) {
+    btn.textContent = text; btn.className = cls || ""; btn.disabled = !!disabled;
+  }
+
+  // ── botón IMPORTAR ───────────────────────────────────────────
+  importBtn.addEventListener("click", async () => {
+    hideCfg();
+    const token = getToken();
+    if (!token) { showCfg("Introduce el token del servicio de gafas (lo encuentras en ~/.glasses-sync/token):"); return; }
+    setState(importBtn, "👓 importando…", "", true);
+    try {
+      const res = await fetch(getUrl() + "/import?k=" + encodeURIComponent(token), {
+        method: "POST", signal: AbortSignal.timeout(600000),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 401) {
+        setState(importBtn, "✗ token", "err", false);
+        showCfg("Token rechazado. Corrígelo:");
+        setTimeout(() => setState(importBtn, "👓 importar", "", false), 4000);
+        return;
+      }
+      if (!res.ok || !data.ok) throw new Error(data.summary || ("HTTP " + res.status));
+      setState(importBtn, "✓ importado", "ok", true);
+      // Recargar la galería de gafas tras un margen para que GitHub Pages publique.
+      if (typeof initGlassesGallery === "function") setTimeout(initGlassesGallery, 60000);
+      setTimeout(() => setState(importBtn, "👓 importar", "", false), 5000);
+    } catch (e) {
+      setState(importBtn, "✗ sin conexión", "err", false);
+      showCfg("No se pudo importar (" + getUrl() + "). Revisa que el Mac esté encendido y el token sea correcto:");
+      setTimeout(() => setState(importBtn, "👓 importar", "", false), 5000);
+    }
+  });
+
+  // ── botón DIRECTO ────────────────────────────────────────────
+  // Las gafas Ray-Ban Meta NO exponen un feed de vídeo a terceros: lo que
+  // muestran fluye por el teléfono (app Meta View). Esto refleja la PANTALLA
+  // del teléfono ~1-1.5 fps; cuando la app está en vista en vivo de las gafas,
+  // esto es "lo que ven las gafas", como una webcam.
+  let liveTimer = null, liveImg = null, liveOverlay = null;
+
+  function stopLive() {
+    if (liveTimer) { clearInterval(liveTimer); liveTimer = null; }
+    if (liveOverlay) { liveOverlay.remove(); liveOverlay = null; liveImg = null; }
+    document.removeEventListener("keydown", onEsc);
+  }
+  function onEsc(e) { if (e.key === "Escape") stopLive(); }
+
+  liveBtn.addEventListener("click", () => {
+    hideCfg();
+    const token = getToken();
+    if (!token) { showCfg("Introduce el token del servicio de gafas (lo encuentras en ~/.glasses-sync/token):"); return; }
+    if (liveOverlay) { stopLive(); return; }
+
+    liveOverlay = document.createElement("div");
+    liveOverlay.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,4,2,0.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;";
+    liveOverlay.innerHTML =
+      '<div style="color:#8fe9ff;font-size:0.85rem;display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff4040;box-shadow:0 0 8px #ff4040;animation:glsPulse 1.2s infinite"></span> DIRECTO — pantalla del teléfono (vista de las gafas en Meta View)</div>' +
+      '<img id="glasses-live-img" style="max-width:92vw;max-height:74vh;border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;object-fit:contain;" />' +
+      '<div id="glasses-live-status" style="color:var(--matrix-muted);font-size:0.72rem;">conectando…</div>' +
+      '<button id="glasses-live-close" style="padding:6px 16px;border:1px solid rgba(0,255,110,0.3);border-radius:999px;background:transparent;color:var(--matrix-bright);font-family:inherit;font-size:0.8rem;cursor:pointer;">✕ cerrar (Esc)</button>';
+    document.body.appendChild(liveOverlay);
+    if (!document.getElementById("gls-pulse-style")) {
+      const st = document.createElement("style"); st.id = "gls-pulse-style";
+      st.textContent = "@keyframes glsPulse{0%,100%{opacity:1}50%{opacity:0.25}}";
+      document.head.appendChild(st);
+    }
+    liveImg = liveOverlay.querySelector("#glasses-live-img");
+    const statusEl = liveOverlay.querySelector("#glasses-live-status");
+    liveOverlay.querySelector("#glasses-live-close").addEventListener("click", stopLive);
+    liveOverlay.addEventListener("click", (e) => { if (e.target === liveOverlay) stopLive(); });
+    document.addEventListener("keydown", onEsc);
+
+    let inflight = false, fails = 0;
+    const tick = async () => {
+      if (inflight) return;
+      inflight = true;
+      try {
+        const r = await fetch(getUrl() + "/snapshot.jpg?k=" + encodeURIComponent(token) + "&_=" + Date.now(),
+                              { signal: AbortSignal.timeout(8000) });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const blob = await r.blob();
+        const old = liveImg.src;
+        liveImg.src = URL.createObjectURL(blob);
+        if (old && old.startsWith("blob:")) URL.revokeObjectURL(old);
+        statusEl.textContent = "en directo · " + new Date().toLocaleTimeString("es-ES");
+        fails = 0;
+      } catch (e) {
+        fails++;
+        statusEl.textContent = "sin señal (" + fails + ")… ¿teléfono conectado?";
+        if (fails >= 8) { statusEl.textContent = "sin señal — cerrado"; stopLive(); }
+      } finally { inflight = false; }
+    };
+    tick();
+    liveTimer = setInterval(tick, 900);
+  });
 })();
 
 // ── Yarig.ai import ──────────────────────────────────────────
