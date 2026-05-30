@@ -5010,7 +5010,10 @@ if (wantsLatest()) goToLatest();
   //    de las gafas embebido (latencia ~10-30 s, lo normal de un livestream).
   // 2) ESPEJO: refleja la PANTALLA del teléfono ~1 fps (Meta View en vivo).
   //    Baja calidad pero baja latencia; requiere el teléfono conectado.
-  const DEFAULT_FB_URL = "https://www.facebook.com/profile.php?id=61590695872880";
+  // Por defecto NO se incrusta ninguna página de Facebook: las pruebas internas
+  // van por «Espejo» (privado, vía Tailscale+token, no publica nada en Facebook).
+  // El modo Live sólo se usa cuando el usuario pega a propósito una URL pública.
+  const DEFAULT_FB_URL = "";
   const getFbUrl = () => localStorage.getItem("glasses_fb_url") || DEFAULT_FB_URL;
   let liveTimer = null, liveOverlay = null, liveMode = null;
 
@@ -5124,7 +5127,8 @@ if (wantsLatest()) goToLatest();
       t.addEventListener("click", () => renderMode(t.dataset.mode)));
     document.addEventListener("keydown", onEsc);
 
-    // Modo por defecto: Live si ya hay Facebook configurado; si no, espejo.
+    // Modo por defecto: Espejo (privado). Las pruebas internas no publican nada
+    // en Facebook; el Live sólo si el usuario ya configuró una URL a propósito.
     renderMode(getFbUrl() ? "live" : "espejo");
   });
 })();
