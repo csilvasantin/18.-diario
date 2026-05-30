@@ -4967,6 +4967,7 @@ if (wantsLatest()) goToLatest();
     '<span id="glasses-cfg-msg" style="flex-basis:100%"></span>' +
     '<input id="glasses-cfg-url"  placeholder="URL del servicio" style="flex:1;min-width:200px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
     '<input id="glasses-cfg-token" placeholder="token" style="flex:1;min-width:140px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
+    '<button id="glasses-cfg-tg"    style="padding:4px 12px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.72rem;cursor:pointer;">🔑 token→Telegram</button>' +
     '<button id="glasses-cfg-save"  style="padding:4px 12px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.72rem;cursor:pointer;">Guardar</button>' +
     '<button id="glasses-cfg-close" style="padding:4px 10px;border:1px solid rgba(0,255,110,0.2);border-radius:999px;background:transparent;color:var(--matrix-muted);font-family:inherit;font-size:0.72rem;cursor:pointer;">✕</button>';
   document.getElementById("diary").querySelector("nav").appendChild(cfgBar);
@@ -4986,6 +4987,18 @@ if (wantsLatest()) goToLatest();
     hideCfg();
   });
   cfgBar.querySelector("#glasses-cfg-close").addEventListener("click", hideCfg);
+  cfgBar.querySelector("#glasses-cfg-tg").addEventListener("click", async () => {
+    const msgEl = cfgBar.querySelector("#glasses-cfg-msg");
+    msgEl.textContent = "Enviando token por Telegram…";
+    try {
+      const r = await fetch(getUrl() + "/token-telegram", { method: "POST", signal: AbortSignal.timeout(15000) });
+      const d = await r.json().catch(() => ({}));
+      msgEl.textContent = d.ok ? "📲 Token enviado a tu Telegram. Pégalo abajo y pulsa Guardar:"
+                               : "No pude enviarlo (" + (d.msg || "?") + "). Mira ~/.glasses-sync/token.";
+    } catch (e) {
+      msgEl.textContent = "No se pudo contactar con el servicio (" + getUrl() + ").";
+    }
+  });
 
   function setState(btn, text, cls, disabled) {
     btn.textContent = text; btn.className = cls || ""; btn.disabled = !!disabled;
@@ -4995,7 +5008,20 @@ if (wantsLatest()) goToLatest();
   importBtn.addEventListener("click", async () => {
     hideCfg();
     const token = getToken();
-    if (!token) { showCfg("Introduce el token del servicio de gafas (lo encuentras en ~/.glasses-sync/token):"); return; }
+    if (!token) {
+      // Sin token: pedírselo al servicio para que lo mande a Telegram y pegarlo aquí.
+      showCfg("Sin token. Te lo estoy enviando por Telegram…");
+      try {
+        const r = await fetch(getUrl() + "/token-telegram", { method: "POST", signal: AbortSignal.timeout(15000) });
+        const d = await r.json().catch(() => ({}));
+        if (d.ok) showCfg("📲 Token enviado a tu Telegram. Pégalo en el campo «token» y pulsa Guardar:");
+        else showCfg("No pude enviarlo por Telegram (" + (d.msg || "?") + "). Introdúcelo a mano (~/.glasses-sync/token):");
+      } catch (e) {
+        showCfg("No se pudo contactar con el servicio (" + getUrl() + "). Introduce el token a mano (~/.glasses-sync/token):");
+      }
+      cfgBar.querySelector("#glasses-cfg-token").focus();
+      return;
+    }
     setState(importBtn, "👓 importando…", "", true);
     try {
       const res = await fetch(getUrl() + "/import?k=" + encodeURIComponent(token), {
