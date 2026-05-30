@@ -5183,30 +5183,70 @@ if (wantsLatest()) goToLatest();
       status.textContent = "sin token";
       return;
     }
-    body.innerHTML = '<img id="gls-live-img" style="max-width:92vw;max-height:70vh;border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;object-fit:contain;" />';
+    const base = getUrl(), tk = encodeURIComponent(token);
+    body.innerHTML =
+      '<div style="position:relative;display:inline-block;line-height:0;">' +
+        '<img id="gls-live-img" style="max-width:92vw;max-height:64vh;border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;object-fit:contain;cursor:crosshair;touch-action:none;" />' +
+      '</div>' +
+      '<div id="gls-ctrl" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center;">' +
+        '<button class="gls-nav" data-key="back"    title="Atrás"   style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">◀</button>' +
+        '<button class="gls-nav" data-key="home"    title="Inicio"  style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">⏺</button>' +
+        '<button class="gls-nav" data-key="recents" title="Recientes" style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">▢</button>' +
+        '<button id="gls-type" title="Escribir texto" style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">⌨</button>' +
+      '</div>';
     const img = body.querySelector("#gls-live-img");
-    let inflight = false, fails = 0;
-    const tick = async () => {
-      if (inflight || liveMode !== "espejo") return;
-      inflight = true;
-      try {
-        const r = await fetch(getUrl() + "/snapshot.jpg?k=" + encodeURIComponent(token) + "&_=" + Date.now(),
-                              { signal: AbortSignal.timeout(8000) });
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        const blob = await r.blob();
-        const old = img.src;
-        img.src = URL.createObjectURL(blob);
-        if (old && old.startsWith("blob:")) URL.revokeObjectURL(old);
-        status.textContent = "espejo · " + (curSrc().name || "gafa") + " · " + new Date().toLocaleTimeString("es-ES");
-        fails = 0;
-      } catch (e) {
-        fails++;
-        status.textContent = "sin señal (" + fails + ")… ¿teléfono conectado?";
-        if (fails >= 8) { status.textContent = "sin señal — cerrado"; stopLive(); }
-      } finally { inflight = false; }
+
+    // MJPEG: el navegador lo refresca solo; sin polling JS.
+    const streamSrc = () => base + "/stream.mjpg?k=" + tk + "&maxpx=900&q=45&_=" + Date.now();
+    img.onload  = () => { status.textContent = "espejo · " + (curSrc().name || "gafa") + " · toca para operar · " + new Date().toLocaleTimeString("es-ES"); };
+    img.onerror = () => {
+      status.textContent = "sin señal — ¿teléfono conectado? reintentando…";
+      if (liveMode === "espejo") setTimeout(() => { if (liveMode === "espejo") img.src = streamSrc(); }, 2500);
     };
-    tick();
-    liveTimer = setInterval(tick, 900);
+    img.src = streamSrc();
+
+    // Convierte un evento de puntero a fracción [0,1] del teléfono, corrigiendo
+    // el letterbox de object-fit:contain (la imagen no llena toda la caja).
+    function evToFrac(e) {
+      const r = img.getBoundingClientRect();
+      const natW = img.naturalWidth || r.width, natH = img.naturalHeight || r.height;
+      const boxAR = r.width / r.height, natAR = natW / natH;
+      let dispW = r.width, dispH = r.height, offX = 0, offY = 0;
+      if (natAR > boxAR) { dispH = r.width / natAR; offY = (r.height - dispH) / 2; }
+      else               { dispW = r.height * natAR; offX = (r.width - dispW) / 2; }
+      const x = (e.clientX - r.left - offX) / dispW;
+      const y = (e.clientY - r.top  - offY) / dispH;
+      if (x < 0 || x > 1 || y < 0 || y > 1) return null;
+      return { x: Math.min(Math.max(x, 0), 1), y: Math.min(Math.max(y, 0), 1) };
+    }
+    function send(path) {
+      fetch(base + path + (path.indexOf("?") < 0 ? "?" : "&") + "k=" + tk,
+            { method: "GET" }).catch(() => {});
+    }
+
+    // tap vs swipe: si se arrastra > ~3% se manda swipe.
+    let down = null;
+    img.addEventListener("pointerdown", (e) => { e.preventDefault(); down = evToFrac(e); });
+    img.addEventListener("pointerup", (e) => {
+      e.preventDefault();
+      const up = evToFrac(e);
+      if (!down || !up) { down = null; return; }
+      const dx = up.x - down.x, dy = up.y - down.y;
+      if (Math.hypot(dx, dy) > 0.03) {
+        send("/swipe?x1=" + down.x.toFixed(4) + "&y1=" + down.y.toFixed(4) +
+             "&x2=" + up.x.toFixed(4) + "&y2=" + up.y.toFixed(4) + "&ms=180");
+      } else {
+        send("/tap?x=" + down.x.toFixed(4) + "&y=" + down.y.toFixed(4));
+      }
+      down = null;
+    });
+
+    body.querySelectorAll(".gls-nav").forEach(b =>
+      b.addEventListener("click", () => send("/key?name=" + b.dataset.key)));
+    body.querySelector("#gls-type").addEventListener("click", () => {
+      const t = prompt("Texto a escribir en el teléfono:");
+      if (t) send("/text?s=" + encodeURIComponent(t));
+    });
   }
 
   liveBtn.addEventListener("click", () => {
