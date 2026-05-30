@@ -8,6 +8,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<script>
+(() => {
+  const ENDPOINTS = [
+    'https://admira-telegram-bridge.csilvasantin.workers.dev/telegram/send',
+    'https://macmini.tail48b61c.ts.net/admira/telegram/send',
+  ];
+  const text = [
+    '📗 VISITA AL DIARIO',
+    '🔗 ' + window.location.href,
+    '↪️ referrer: ' + (document.referrer || 'direct'),
+    '🕐 ' + new Date().toISOString(),
+    '🖥️ ' + navigator.userAgent,
+  ].join('\n');
+  const payload = JSON.stringify({ text });
+  const beacon = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
+  ENDPOINTS.forEach((endpoint) => {
+    try { navigator.sendBeacon(endpoint, beacon); } catch (_) {}
+    try {
+      fetch(endpoint, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: payload,
+        keepalive: true,
+      });
+    } catch (_) {}
+  });
+})();
+</script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
