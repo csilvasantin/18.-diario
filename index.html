@@ -4955,9 +4955,38 @@ if (wantsLatest()) goToLatest();
   if (!importBtn || !liveBtn) return;
 
   // Funnel de Tailscale del MBP16 (HTTPS público pero protegido por token).
-  const DEFAULT_URL = "https://macbook-pro-16.tail48b61c.ts.net/glasses";
-  const getUrl   = () => (localStorage.getItem("glasses_url") || DEFAULT_URL).replace(/\/$/, "");
-  const getToken = () => localStorage.getItem("glasses_token") || "";
+  const DEFAULT_URL    = "https://macbook-pro-16.tail48b61c.ts.net/glasses";
+  // Live preconfigurado con la Página AdmiraNext (0 seguidores → no avisa a nadie).
+  const DEFAULT_FB_URL = "https://www.facebook.com/profile.php?id=61590695872880";
+
+  // ── Fuentes (varias gafas) ───────────────────────────────────
+  // Cada gafa guarda su servidor+token (Espejo/importar) y su URL de Facebook
+  // Live. Se persisten como JSON; migra desde las claves antiguas de fuente única.
+  function saveSources(a) { localStorage.setItem("glasses_sources", JSON.stringify(a)); }
+  function loadSources() {
+    let arr = null;
+    try { arr = JSON.parse(localStorage.getItem("glasses_sources") || "null"); } catch (e) {}
+    if (!Array.isArray(arr) || !arr.length) {
+      arr = [
+        { name: "Gafa 1",
+          url:   localStorage.getItem("glasses_url")    || DEFAULT_URL,
+          token: localStorage.getItem("glasses_token")  || "",
+          fb:    localStorage.getItem("glasses_fb_url") || DEFAULT_FB_URL },
+        { name: "Gafa 2", url: DEFAULT_URL, token: "", fb: "" },
+      ];
+      saveSources(arr);
+    }
+    return arr;
+  }
+  let sources = loadSources();
+  let srcIdx = Math.min(Math.max(0, parseInt(localStorage.getItem("glasses_src") || "0", 10) || 0), sources.length - 1);
+  function curSrc()  { return sources[srcIdx] || sources[0]; }
+  function setSrc(i) { srcIdx = Math.min(Math.max(0, i), sources.length - 1); localStorage.setItem("glasses_src", String(srcIdx)); }
+  function addSrc()  { sources.push({ name: "Gafa " + (sources.length + 1), url: DEFAULT_URL, token: "", fb: "" }); saveSources(sources); setSrc(sources.length - 1); }
+
+  const getUrl   = () => (curSrc().url || DEFAULT_URL).replace(/\/$/, "");
+  const getToken = () => curSrc().token || "";
+  const getFbUrl = () => curSrc().fb || "";
 
   // ── barra de configuración (URL + token), reutilizada por ambos botones ──
   const cfgBar = document.createElement("div");
@@ -4965,25 +4994,49 @@ if (wantsLatest()) goToLatest();
   cfgBar.style.cssText = "display:none;padding:10px 18px;background:rgba(0,200,255,0.06);border:1px solid rgba(0,200,255,0.3);border-radius:12px;margin-top:10px;font-size:0.78rem;color:#8fe9ff;align-items:center;gap:10px;flex-wrap:wrap;";
   cfgBar.innerHTML =
     '<span id="glasses-cfg-msg" style="flex-basis:100%"></span>' +
-    '<input id="glasses-cfg-url"  placeholder="URL del servicio" style="flex:1;min-width:200px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
-    '<input id="glasses-cfg-token" placeholder="token" style="flex:1;min-width:140px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
+    '<select id="glasses-cfg-src" title="gafa" style="padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;"></select>' +
+    '<input id="glasses-cfg-name" placeholder="nombre" style="width:88px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
+    '<input id="glasses-cfg-url"  placeholder="URL del servicio" style="flex:1;min-width:170px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
+    '<input id="glasses-cfg-token" placeholder="token" style="flex:1;min-width:120px;padding:4px 8px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:6px;color:#b7f0ff;font-family:inherit;font-size:0.78rem;" />' +
+    '<button id="glasses-cfg-add"   style="padding:4px 10px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.72rem;cursor:pointer;">➕ gafa</button>' +
     '<button id="glasses-cfg-tg"    style="padding:4px 12px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.72rem;cursor:pointer;">🔑 token→Telegram</button>' +
     '<button id="glasses-cfg-save"  style="padding:4px 12px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.72rem;cursor:pointer;">Guardar</button>' +
     '<button id="glasses-cfg-close" style="padding:4px 10px;border:1px solid rgba(0,255,110,0.2);border-radius:999px;background:transparent;color:var(--matrix-muted);font-family:inherit;font-size:0.72rem;cursor:pointer;">✕</button>';
   document.getElementById("diary").querySelector("nav").appendChild(cfgBar);
 
+  function fillSrcSelect() {
+    const sel = cfgBar.querySelector("#glasses-cfg-src");
+    sel.innerHTML = sources.map((s, i) =>
+      '<option value="' + i + '"' + (i === srcIdx ? " selected" : "") + '>' +
+      (s.name || ("Gafa " + (i + 1))) + '</option>').join("");
+  }
   function showCfg(msg) {
     cfgBar.querySelector("#glasses-cfg-msg").textContent = msg;
+    fillSrcSelect();
+    const s = curSrc();
+    cfgBar.querySelector("#glasses-cfg-name").value  = s.name || "";
     cfgBar.querySelector("#glasses-cfg-url").value   = getUrl();
-    cfgBar.querySelector("#glasses-cfg-token").value = getToken();
+    cfgBar.querySelector("#glasses-cfg-token").value = s.token || "";
     cfgBar.style.display = "flex";
   }
   function hideCfg() { cfgBar.style.display = "none"; }
+  cfgBar.querySelector("#glasses-cfg-src").addEventListener("change", (e) => {
+    setSrc(parseInt(e.target.value, 10) || 0);
+    showCfg("Editando «" + (curSrc().name || "gafa") + "»:");
+  });
+  cfgBar.querySelector("#glasses-cfg-add").addEventListener("click", () => {
+    addSrc();
+    showCfg("Nueva gafa. Pon nombre, URL del servicio y token (y su Live en 🔴 directo):");
+  });
   cfgBar.querySelector("#glasses-cfg-save").addEventListener("click", () => {
-    const u = cfgBar.querySelector("#glasses-cfg-url").value.trim().replace(/\/$/, "");
-    const t = cfgBar.querySelector("#glasses-cfg-token").value.trim();
-    if (u) localStorage.setItem("glasses_url", u);
-    if (t) localStorage.setItem("glasses_token", t);
+    const s = curSrc();
+    const nm = cfgBar.querySelector("#glasses-cfg-name").value.trim();
+    const u  = cfgBar.querySelector("#glasses-cfg-url").value.trim().replace(/\/$/, "");
+    const t  = cfgBar.querySelector("#glasses-cfg-token").value.trim();
+    if (nm) s.name = nm;
+    if (u)  s.url  = u;
+    s.token = t;            // permitir vaciarlo
+    saveSources(sources);
     hideCfg();
   });
   cfgBar.querySelector("#glasses-cfg-close").addEventListener("click", hideCfg);
@@ -5052,11 +5105,8 @@ if (wantsLatest()) goToLatest();
   //    de las gafas embebido (latencia ~10-30 s, lo normal de un livestream).
   // 2) ESPEJO: refleja la PANTALLA del teléfono ~1 fps (Meta View en vivo).
   //    Baja calidad pero baja latencia; requiere el teléfono conectado.
-  // Live preconfigurado con la Página AdmiraNext (0 seguidores → no avisa a nadie):
-  // al pulsar la pestaña «Live» se incrusta sin tener que pegar nada. Aun así el
-  // overlay arranca en «Espejo» (privado), así que no se publica nada al abrirlo.
-  const DEFAULT_FB_URL = "https://www.facebook.com/profile.php?id=61590695872880";
-  const getFbUrl = () => localStorage.getItem("glasses_fb_url") || DEFAULT_FB_URL;
+  // Tanto el Live (URL de Facebook) como el Espejo (servidor+token) salen de la
+  // gafa activa (curSrc); el selector del overlay permite cambiar de gafa.
   let liveTimer = null, liveOverlay = null, liveMode = null;
 
   function stopLive() {
@@ -5073,6 +5123,23 @@ if (wantsLatest()) goToLatest();
     return "https://www.facebook.com/plugins/video.php?href=" +
            encodeURIComponent(href) +
            "&show_text=false&autoplay=true&width=720&height=405";
+  }
+
+  // Pinta los botones de gafa (Gafa 1 / Gafa 2 / …) dentro del overlay.
+  function renderSrcRow() {
+    const row = liveOverlay && liveOverlay.querySelector("#gls-src-row");
+    if (!row) return;
+    row.innerHTML = sources.map((s, i) =>
+      '<button class="gls-src" data-i="' + i + '" style="padding:3px 11px;border:1px solid rgba(0,200,255,0.35);border-radius:999px;background:' +
+      (i === srcIdx ? "rgba(0,200,255,0.18)" : "transparent") +
+      ';color:#8fe9ff;font-family:inherit;font-size:0.72rem;cursor:pointer;">👓 ' +
+      (s.name || ("Gafa " + (i + 1))) + '</button>').join("");
+    row.querySelectorAll(".gls-src").forEach(b =>
+      b.addEventListener("click", () => {
+        setSrc(parseInt(b.dataset.i, 10) || 0);
+        renderSrcRow();
+        renderMode(liveMode || "espejo");
+      }));
   }
 
   function renderMode(mode) {
@@ -5094,7 +5161,7 @@ if (wantsLatest()) goToLatest();
           '<button id="gls-fb-save" style="padding:7px 14px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.8rem;cursor:pointer;align-self:center;">Guardar y ver directo</button></div>';
         body.querySelector("#gls-fb-save").addEventListener("click", () => {
           const v = body.querySelector("#gls-fb-input").value.trim();
-          if (v) { localStorage.setItem("glasses_fb_url", v); renderMode("live"); }
+          if (v) { curSrc().fb = v; saveSources(sources); renderMode("live"); }
         });
         status.textContent = "configura tu Facebook Live una vez";
         return;
@@ -5103,7 +5170,7 @@ if (wantsLatest()) goToLatest();
         '<iframe src="' + fbEmbedSrc(fb) + '" style="width:min(92vw,720px);height:min(52vw,405px);border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen scrolling="no" frameborder="0"></iframe>' +
         '<button id="gls-fb-edit" style="margin-top:8px;padding:4px 12px;border:1px solid rgba(0,255,110,0.2);border-radius:999px;background:transparent;color:var(--matrix-muted);font-family:inherit;font-size:0.72rem;cursor:pointer;">cambiar enlace de Facebook</button>';
       body.querySelector("#gls-fb-edit").addEventListener("click", () => {
-        localStorage.removeItem("glasses_fb_url"); renderMode("live");
+        curSrc().fb = ""; saveSources(sources); renderMode("live");
       });
       status.textContent = "Facebook Live · si no se ve, asegúrate de estar emitiendo desde las gafas";
       return;
@@ -5130,7 +5197,7 @@ if (wantsLatest()) goToLatest();
         const old = img.src;
         img.src = URL.createObjectURL(blob);
         if (old && old.startsWith("blob:")) URL.revokeObjectURL(old);
-        status.textContent = "espejo del teléfono · " + new Date().toLocaleTimeString("es-ES");
+        status.textContent = "espejo · " + (curSrc().name || "gafa") + " · " + new Date().toLocaleTimeString("es-ES");
         fails = 0;
       } catch (e) {
         fails++;
@@ -5150,6 +5217,7 @@ if (wantsLatest()) goToLatest();
     liveOverlay.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,4,2,0.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;";
     liveOverlay.innerHTML =
       '<div style="display:flex;align-items:center;gap:8px;color:#8fe9ff;font-size:0.85rem;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff4040;box-shadow:0 0 8px #ff4040;animation:glsPulse 1.2s infinite"></span> DIRECTO — gafas Meta</div>' +
+      '<div id="gls-src-row" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>' +
       '<div style="display:flex;gap:8px;">' +
         '<button class="gls-tab" data-mode="live"   style="padding:5px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.78rem;cursor:pointer;">🔴 Live (Facebook)</button>' +
         '<button class="gls-tab" data-mode="espejo" style="padding:5px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.78rem;cursor:pointer;">🖥 Espejo (teléfono)</button>' +
@@ -5167,6 +5235,7 @@ if (wantsLatest()) goToLatest();
     liveOverlay.addEventListener("click", (e) => { if (e.target === liveOverlay) stopLive(); });
     liveOverlay.querySelectorAll(".gls-tab").forEach(t =>
       t.addEventListener("click", () => renderMode(t.dataset.mode)));
+    renderSrcRow();
     document.addEventListener("keydown", onEsc);
 
     // Modo por defecto: SIEMPRE Espejo (privado), aunque el Live esté
