@@ -14,26 +14,42 @@
     'https://admira-telegram-bridge.csilvasantin.workers.dev/telegram/send',
     'https://macmini.tail48b61c.ts.net/admira/telegram/send',
   ];
-  const text = [
-    '📗 VISITA AL DIARIO',
-    '🔗 ' + window.location.href,
-    '↪️ referrer: ' + (document.referrer || 'direct'),
-    '🕐 ' + new Date().toISOString(),
-    '🖥️ ' + navigator.userAgent,
-  ].join('\n');
-  const payload = JSON.stringify({ text });
-  const beacon = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
-  ENDPOINTS.forEach((endpoint) => {
-    try { navigator.sendBeacon(endpoint, beacon); } catch (_) {}
+  const buildText = async () => {
+    let trace = {};
     try {
-      fetch(endpoint, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-        body: payload,
-        keepalive: true,
+      const r = await fetch('https://www.cloudflare.com/cdn-cgi/trace', { cache: 'no-store' });
+      const t = await r.text();
+      t.split(/\r?\n/).forEach((line) => {
+        const i = line.indexOf('=');
+        if (i > 0) trace[line.slice(0, i)] = line.slice(i + 1);
       });
     } catch (_) {}
+    return [
+      '📗 VISITA AL DIARIO',
+      '🔗 ' + window.location.href,
+      '↪️ referrer: ' + (document.referrer || 'direct'),
+      '🌍 ip: ' + (trace.ip || 'n/a') + ' · ' + (trace.loc || 'n/a') + ' · ' + (trace.colo || 'n/a'),
+      '🖥️ ' + navigator.userAgent,
+      '📐 viewport: ' + window.innerWidth + 'x' + window.innerHeight,
+      '🗣️ lang: ' + (navigator.language || 'n/a'),
+      '🕐 ' + new Date().toISOString(),
+    ].join('\n');
+  };
+  buildText().then((text) => {
+    const payload = JSON.stringify({ text });
+    const beacon = new Blob([payload], { type: 'application/json' });
+    ENDPOINTS.forEach((endpoint) => {
+      try { navigator.sendBeacon(endpoint, beacon); } catch (_) {}
+      try {
+        fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+          keepalive: true,
+        });
+      } catch (_) {}
+    });
   });
 })();
 </script>
