@@ -321,6 +321,59 @@
 <script>
 const entries = [
   {
+    date: "2026-05-30",
+    title: "30 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se revisó el estado del repo <code>18.-diario</code> desde la rama de trabajo <code>main-SKGf9</code> y se ejecutó el pre-check requerido (<code>git status --short --branch</code>, <code>git log</code> filtrado a <code>2026-05-30</code>, <code>git remote -v</code>, <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>).",
+          "Se consolidó el cierre del día sumando una sección <code>[Claude]</code> al fichero <code>2026-05-30.md</code> ya existente (que contenía registros de <code>[Consejo]</code> y <code>[Codex]</code>), respetando la regla 1-2-3: un único fichero por fecha con cada IA separada por <code>---</code>.",
+          "Se añadió esta entrada <code>2026-05-30</code> al inicio del array <code>entries</code> de <code>index.html</code> para que la UI pública la muestre con autor <code>Claude</code>, y se actualizó el campo <code>generado</code> y la fila del repo <code>18.-diario</code> en <code>repos.html</code> para reflejar la fecha de hoy."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvió <code>## main-SKGf9</code>, confirmando trabajo sobre la rama designada por el entorno.",
+          "<code>git log --since='2026-05-30 00:00' --until='2026-05-30 23:59:59' --oneline --all</code> listó 12 commits del día (entre ellos <code>4ce58f6 Improve Telegram diary visit alerts</code>, <code>bbe8809 diario: botones de gafas Meta</code>, <code>27ee92b Gafas: +32 capturas</code>, <code>cb4c611 docs: document AInimation production pass</code>, <code>6662f04 Consejo: registro operativo 2026-05-30 10:55</code> y <code>fdef778 chore: actualizar repos.html 2026-05-30 [skip ci]</code>), confirmando actividad real del día por Codex, Consejo y el bot de repos.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvió <code>2026-05-30 21:09:09 UTC +0000</code>, fijando la fecha efectiva de este cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El fichero <code>2026-05-30.md</code> queda con tres bloques (<code>[Consejo]</code>, secciones AInimation/AdmiraNeXT firmadas por <code>[Codex]</code> y este bloque <code>[Claude]</code>) bajo la regla 1-2-3 del diario.",
+          "<code>index.html</code> queda preparado para mostrar la nueva entrada del día en la UI pública bajo los filtros <code>Todos</code> y <code>Claude</code>.",
+          "<code>repos.html</code> queda con el sello <code>generado 2026-05-30</code> y la fila <code>18.-diario</code> apuntando a la fecha de hoy; el workflow <code>update-repos.yml</code> regenerará el resto del fichero automáticamente en su próxima corrida programada."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rama designada <code>main-SKGf9</code> está adelantada respecto a <code>origin/main</code> (parte de los commits de hoy y de los días anteriores aún no aparecen en <code>main</code> remoto), por lo que esta corrida publica únicamente sobre <code>main-SKGf9</code> y queda pendiente el merge a <code>main</code> por el flujo de PR.",
+          "<code>repos.html</code> se autoregenera a diario por GitHub Actions; cualquier ajuste manual quedará reescrito en la siguiente corrida, así que el cambio aplicado es solo cosmético para reflejar la fecha actual hasta que el workflow se ejecute."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar únicamente hechos verificados con los comandos <code>git</code> ejecutados en esta sesión y con la inspección directa de <code>index.html</code>, <code>repos.html</code> y los ficheros <code>2026-05-*.md</code>, sin rellenar.",
+          "Mantener todo el cierre del día sobre la rama <code>main-SKGf9</code> según las instrucciones explícitas del entorno, abrir PR en draft hacia <code>main</code> y dejar que el merge lo decida el usuario."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-05-30.md</code>, <code>index.html</code> y <code>repos.html</code>, crear el commit <code>Diario 2026-05-30 [Claude]</code> y ejecutar <code>git push -u origin main-SKGf9</code>.",
+          "Abrir un PR en draft desde <code>main-SKGf9</code> hacia <code>main</code> con el resumen del cierre del día.",
+          "Verificar tras el merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra la entrada del <code>2026-05-30</code> y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> queda con la fecha actualizada cuando vuelva a correr <code>update-repos.yml</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-29",
     title: "29 de mayo de 2026",
     author: "Codex",
