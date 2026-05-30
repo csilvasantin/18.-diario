@@ -4975,67 +4975,127 @@ if (wantsLatest()) goToLatest();
     }
   });
 
-  // ── botón DIRECTO ────────────────────────────────────────────
-  // Las gafas Ray-Ban Meta NO exponen un feed de vídeo a terceros: lo que
-  // muestran fluye por el teléfono (app Meta View). Esto refleja la PANTALLA
-  // del teléfono ~1-1.5 fps; cuando la app está en vista en vivo de las gafas,
-  // esto es "lo que ven las gafas", como una webcam.
-  let liveTimer = null, liveImg = null, liveOverlay = null;
+  // ── botón DIRECTO (dos modos) ────────────────────────────────
+  // 1) LIVE (Facebook): las gafas Ray-Ban Meta solo emiten a IG/FB/WhatsApp.
+  //    Facebook sí permite incrustar el directo, así que muestra el POV real
+  //    de las gafas embebido (latencia ~10-30 s, lo normal de un livestream).
+  // 2) ESPEJO: refleja la PANTALLA del teléfono ~1 fps (Meta View en vivo).
+  //    Baja calidad pero baja latencia; requiere el teléfono conectado.
+  const getFbUrl = () => localStorage.getItem("glasses_fb_url") || "";
+  let liveTimer = null, liveOverlay = null, liveMode = null;
 
   function stopLive() {
     if (liveTimer) { clearInterval(liveTimer); liveTimer = null; }
-    if (liveOverlay) { liveOverlay.remove(); liveOverlay = null; liveImg = null; }
+    if (liveOverlay) { liveOverlay.remove(); liveOverlay = null; }
+    liveMode = null;
     document.removeEventListener("keydown", onEsc);
   }
   function onEsc(e) { if (e.key === "Escape") stopLive(); }
 
-  liveBtn.addEventListener("click", () => {
-    hideCfg();
-    const token = getToken();
-    if (!token) { showCfg("Introduce el token del servicio de gafas (lo encuentras en ~/.glasses-sync/token):"); return; }
-    if (liveOverlay) { stopLive(); return; }
+  // Construye la URL del reproductor incrustado de Facebook a partir de la
+  // URL de la página o del vídeo en directo que guarde el usuario.
+  function fbEmbedSrc(href) {
+    return "https://www.facebook.com/plugins/video.php?href=" +
+           encodeURIComponent(href) +
+           "&show_text=false&autoplay=true&width=720&height=405";
+  }
 
-    liveOverlay = document.createElement("div");
-    liveOverlay.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,4,2,0.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;";
-    liveOverlay.innerHTML =
-      '<div style="color:#8fe9ff;font-size:0.85rem;display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff4040;box-shadow:0 0 8px #ff4040;animation:glsPulse 1.2s infinite"></span> DIRECTO — pantalla del teléfono (vista de las gafas en Meta View)</div>' +
-      '<img id="glasses-live-img" style="max-width:92vw;max-height:74vh;border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;object-fit:contain;" />' +
-      '<div id="glasses-live-status" style="color:var(--matrix-muted);font-size:0.72rem;">conectando…</div>' +
-      '<button id="glasses-live-close" style="padding:6px 16px;border:1px solid rgba(0,255,110,0.3);border-radius:999px;background:transparent;color:var(--matrix-bright);font-family:inherit;font-size:0.8rem;cursor:pointer;">✕ cerrar (Esc)</button>';
-    document.body.appendChild(liveOverlay);
-    if (!document.getElementById("gls-pulse-style")) {
-      const st = document.createElement("style"); st.id = "gls-pulse-style";
-      st.textContent = "@keyframes glsPulse{0%,100%{opacity:1}50%{opacity:0.25}}";
-      document.head.appendChild(st);
+  function renderMode(mode) {
+    if (liveTimer) { clearInterval(liveTimer); liveTimer = null; }
+    liveMode = mode;
+    const body = liveOverlay.querySelector("#gls-live-body");
+    const status = liveOverlay.querySelector("#gls-live-status");
+    // marcar pestaña activa
+    liveOverlay.querySelectorAll(".gls-tab").forEach(t =>
+      t.style.background = t.dataset.mode === mode ? "rgba(0,200,255,0.18)" : "transparent");
+
+    if (mode === "live") {
+      const fb = getFbUrl();
+      if (!fb) {
+        body.innerHTML =
+          '<div style="display:flex;flex-direction:column;gap:10px;max-width:560px;color:#8fe9ff;font-size:0.82rem;text-align:center;">' +
+          '<p style="margin:0">Pega la URL de tu <b>página o vídeo en directo de Facebook</b>. Para emitir desde las gafas di: <i>«Hey Meta, empieza un vídeo en directo en Facebook»</i>.</p>' +
+          '<input id="gls-fb-input" placeholder="https://www.facebook.com/TuPagina  (o el enlace del directo)" style="padding:7px 10px;background:rgba(0,16,24,0.9);border:1px solid rgba(0,200,255,0.4);border-radius:8px;color:#b7f0ff;font-family:inherit;font-size:0.82rem;" />' +
+          '<button id="gls-fb-save" style="padding:7px 14px;border:1px solid rgba(0,200,255,0.5);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.8rem;cursor:pointer;align-self:center;">Guardar y ver directo</button></div>';
+        body.querySelector("#gls-fb-save").addEventListener("click", () => {
+          const v = body.querySelector("#gls-fb-input").value.trim();
+          if (v) { localStorage.setItem("glasses_fb_url", v); renderMode("live"); }
+        });
+        status.textContent = "configura tu Facebook Live una vez";
+        return;
+      }
+      body.innerHTML =
+        '<iframe src="' + fbEmbedSrc(fb) + '" style="width:min(92vw,720px);height:min(52vw,405px);border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen scrolling="no" frameborder="0"></iframe>' +
+        '<button id="gls-fb-edit" style="margin-top:8px;padding:4px 12px;border:1px solid rgba(0,255,110,0.2);border-radius:999px;background:transparent;color:var(--matrix-muted);font-family:inherit;font-size:0.72rem;cursor:pointer;">cambiar enlace de Facebook</button>';
+      body.querySelector("#gls-fb-edit").addEventListener("click", () => {
+        localStorage.removeItem("glasses_fb_url"); renderMode("live");
+      });
+      status.textContent = "Facebook Live · si no se ve, asegúrate de estar emitiendo desde las gafas";
+      return;
     }
-    liveImg = liveOverlay.querySelector("#glasses-live-img");
-    const statusEl = liveOverlay.querySelector("#glasses-live-status");
-    liveOverlay.querySelector("#glasses-live-close").addEventListener("click", stopLive);
-    liveOverlay.addEventListener("click", (e) => { if (e.target === liveOverlay) stopLive(); });
-    document.addEventListener("keydown", onEsc);
 
+    // ── modo ESPEJO ──
+    const token = getToken();
+    if (!token) {
+      body.innerHTML = '<div style="color:#8fe9ff;font-size:0.82rem;max-width:480px;text-align:center;">Falta el token del servicio de gafas. Ciérralo y pulsa 👓 importar para introducirlo, o configúralo en la barra azul.</div>';
+      status.textContent = "sin token";
+      return;
+    }
+    body.innerHTML = '<img id="gls-live-img" style="max-width:92vw;max-height:70vh;border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;object-fit:contain;" />';
+    const img = body.querySelector("#gls-live-img");
     let inflight = false, fails = 0;
     const tick = async () => {
-      if (inflight) return;
+      if (inflight || liveMode !== "espejo") return;
       inflight = true;
       try {
         const r = await fetch(getUrl() + "/snapshot.jpg?k=" + encodeURIComponent(token) + "&_=" + Date.now(),
                               { signal: AbortSignal.timeout(8000) });
         if (!r.ok) throw new Error("HTTP " + r.status);
         const blob = await r.blob();
-        const old = liveImg.src;
-        liveImg.src = URL.createObjectURL(blob);
+        const old = img.src;
+        img.src = URL.createObjectURL(blob);
         if (old && old.startsWith("blob:")) URL.revokeObjectURL(old);
-        statusEl.textContent = "en directo · " + new Date().toLocaleTimeString("es-ES");
+        status.textContent = "espejo del teléfono · " + new Date().toLocaleTimeString("es-ES");
         fails = 0;
       } catch (e) {
         fails++;
-        statusEl.textContent = "sin señal (" + fails + ")… ¿teléfono conectado?";
-        if (fails >= 8) { statusEl.textContent = "sin señal — cerrado"; stopLive(); }
+        status.textContent = "sin señal (" + fails + ")… ¿teléfono conectado?";
+        if (fails >= 8) { status.textContent = "sin señal — cerrado"; stopLive(); }
       } finally { inflight = false; }
     };
     tick();
     liveTimer = setInterval(tick, 900);
+  }
+
+  liveBtn.addEventListener("click", () => {
+    hideCfg();
+    if (liveOverlay) { stopLive(); return; }
+
+    liveOverlay = document.createElement("div");
+    liveOverlay.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,4,2,0.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;";
+    liveOverlay.innerHTML =
+      '<div style="display:flex;align-items:center;gap:8px;color:#8fe9ff;font-size:0.85rem;"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff4040;box-shadow:0 0 8px #ff4040;animation:glsPulse 1.2s infinite"></span> DIRECTO — gafas Meta</div>' +
+      '<div style="display:flex;gap:8px;">' +
+        '<button class="gls-tab" data-mode="live"   style="padding:5px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.78rem;cursor:pointer;">🔴 Live (Facebook)</button>' +
+        '<button class="gls-tab" data-mode="espejo" style="padding:5px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:999px;background:transparent;color:#8fe9ff;font-family:inherit;font-size:0.78rem;cursor:pointer;">🖥 Espejo (teléfono)</button>' +
+      '</div>' +
+      '<div id="gls-live-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;"></div>' +
+      '<div id="gls-live-status" style="color:var(--matrix-muted);font-size:0.72rem;text-align:center;">conectando…</div>' +
+      '<button id="gls-live-close" style="padding:6px 16px;border:1px solid rgba(0,255,110,0.3);border-radius:999px;background:transparent;color:var(--matrix-bright);font-family:inherit;font-size:0.8rem;cursor:pointer;">✕ cerrar (Esc)</button>';
+    document.body.appendChild(liveOverlay);
+    if (!document.getElementById("gls-pulse-style")) {
+      const st = document.createElement("style"); st.id = "gls-pulse-style";
+      st.textContent = "@keyframes glsPulse{0%,100%{opacity:1}50%{opacity:0.25}}";
+      document.head.appendChild(st);
+    }
+    liveOverlay.querySelector("#gls-live-close").addEventListener("click", stopLive);
+    liveOverlay.addEventListener("click", (e) => { if (e.target === liveOverlay) stopLive(); });
+    liveOverlay.querySelectorAll(".gls-tab").forEach(t =>
+      t.addEventListener("click", () => renderMode(t.dataset.mode)));
+    document.addEventListener("keydown", onEsc);
+
+    // Modo por defecto: Live si ya hay Facebook configurado; si no, espejo.
+    renderMode(getFbUrl() ? "live" : "espejo");
   });
 })();
 
