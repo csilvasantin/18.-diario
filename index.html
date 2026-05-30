@@ -5163,9 +5163,18 @@ if (wantsLatest()) goToLatest();
   // Tanto el Live (URL de Facebook) como el Espejo (servidor+token) salen de la
   // gafa activa (curSrc); el selector del overlay permite cambiar de gafa.
   let liveTimer = null, liveOverlay = null, liveMode = null;
+  // URL+token del stream scrcpy activo, para pedir su parada al servidor
+  // (libera scrcpy/ffmpeg en el Mac en cuanto salimos del Espejo).
+  let streamStop = null;
+  function signalStreamStop() {
+    if (!streamStop) return;
+    const u = streamStop; streamStop = null;
+    try { fetch(u, { method: "GET", keepalive: true }).catch(() => {}); } catch (e) {}
+  }
 
   function stopLive() {
     if (liveTimer) { clearInterval(liveTimer); liveTimer = null; }
+    signalStreamStop();
     if (liveOverlay) { liveOverlay.remove(); liveOverlay = null; }
     liveMode = null;
     document.removeEventListener("keydown", onEsc);
@@ -5199,6 +5208,8 @@ if (wantsLatest()) goToLatest();
 
   function renderMode(mode) {
     if (liveTimer) { clearInterval(liveTimer); liveTimer = null; }
+    // Al cambiar de modo o de gafa, paramos cualquier stream scrcpy anterior.
+    signalStreamStop();
     liveMode = mode;
     const body = liveOverlay.querySelector("#gls-live-body");
     const status = liveOverlay.querySelector("#gls-live-status");
@@ -5252,7 +5263,8 @@ if (wantsLatest()) goToLatest();
     const img = body.querySelector("#gls-live-img");
 
     // MJPEG: el navegador lo refresca solo; sin polling JS.
-    const streamSrc = () => base + "/stream.mjpg?k=" + tk + "&maxpx=900&q=45&_=" + Date.now();
+    streamStop = base + "/stream-stop?k=" + tk;
+    const streamSrc = () => base + "/stream.mjpg?k=" + tk + "&maxpx=1088&fps=20&_=" + Date.now();
     img.onload  = () => { status.textContent = "espejo · " + (curSrc().name || "gafa") + " · toca para operar · " + new Date().toLocaleTimeString("es-ES"); };
     img.onerror = () => {
       status.textContent = "sin señal — ¿teléfono conectado? reintentando…";
