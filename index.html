@@ -5166,6 +5166,9 @@ if (wantsLatest()) goToLatest();
   // URL+token del stream scrcpy activo, para pedir su parada al servidor
   // (libera scrcpy/ffmpeg en el Mac en cuanto salimos del Espejo).
   let streamStop = null;
+  // Manejador del teclado físico del Espejo (se quita al salir).
+  let glsKbHandler = null;
+  function removeKbHandler() { if (glsKbHandler) { document.removeEventListener("keydown", glsKbHandler); glsKbHandler = null; } }
   function signalStreamStop() {
     if (!streamStop) return;
     const u = streamStop; streamStop = null;
@@ -5174,6 +5177,7 @@ if (wantsLatest()) goToLatest();
 
   function stopLive() {
     if (liveTimer) { clearInterval(liveTimer); liveTimer = null; }
+    removeKbHandler();
     signalStreamStop();
     if (liveOverlay) { liveOverlay.remove(); liveOverlay = null; }
     liveMode = null;
@@ -5208,7 +5212,8 @@ if (wantsLatest()) goToLatest();
 
   function renderMode(mode) {
     if (liveTimer) { clearInterval(liveTimer); liveTimer = null; }
-    // Al cambiar de modo o de gafa, paramos cualquier stream scrcpy anterior.
+    // Al cambiar de modo o de gafa, paramos el stream y soltamos el teclado.
+    removeKbHandler();
     signalStreamStop();
     liveMode = mode;
     const body = liveOverlay.querySelector("#gls-live-body");
@@ -5250,30 +5255,69 @@ if (wantsLatest()) goToLatest();
       return;
     }
     const base = getUrl(), tk = encodeURIComponent(token);
+    // Presets de calidad: 'fluido' (ligero, más fps; ideal remoto por el Funnel)
+    // y 'nítido' (más resolución, menos fps). Se recuerda la elección.
+    const QPRESETS = { fluido: { maxpx: 720, fps: 25, label: "fluido ~25fps" },
+                       nitido: { maxpx: 1288, fps: 15, label: "nítido ~15fps" } };
+    let qual = localStorage.getItem("glasses_quality") || "nitido";
+    if (!QPRESETS[qual]) qual = "nitido";
+
     body.innerHTML =
       '<div style="position:relative;display:inline-block;line-height:0;">' +
-        '<img id="gls-live-img" style="max-width:92vw;max-height:64vh;border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;object-fit:contain;cursor:crosshair;touch-action:none;" />' +
+        '<img id="gls-live-img" tabindex="0" style="max-width:92vw;max-height:62vh;border:1px solid rgba(0,200,255,0.35);border-radius:14px;background:#000;object-fit:contain;cursor:crosshair;touch-action:none;outline:none;" />' +
+        '<div id="gls-pill" style="position:absolute;top:8px;left:8px;display:flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;background:rgba(0,8,12,0.72);font-size:0.66rem;color:#cfeffd;pointer-events:none;"><span id="gls-dot" style="width:8px;height:8px;border-radius:50%;background:#e0b000;box-shadow:0 0 6px #e0b000;"></span><span id="gls-pill-txt">conectando…</span></div>' +
       '</div>' +
       '<div id="gls-ctrl" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center;">' +
-        '<button class="gls-nav" data-key="back"    title="Atrás"   style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">◀</button>' +
-        '<button class="gls-nav" data-key="home"    title="Inicio"  style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">⏺</button>' +
+        '<button class="gls-nav" data-key="back"    title="Atrás"     style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">◀</button>' +
+        '<button class="gls-nav" data-key="home"    title="Inicio"    style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">⏺</button>' +
         '<button class="gls-nav" data-key="recents" title="Recientes" style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">▢</button>' +
-        '<button id="gls-type" title="Escribir texto" style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">⌨</button>' +
-      '</div>';
+        '<button id="gls-type"  title="Pegar texto largo" style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">⌨</button>' +
+        '<button id="gls-qual"  title="Calidad" style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.78rem;cursor:pointer;">⚙ ' + QPRESETS[qual].label + '</button>' +
+        '<button id="gls-recon" title="Reconectar" style="padding:6px 14px;border:1px solid rgba(0,200,255,0.4);border-radius:10px;background:rgba(0,16,24,0.6);color:#8fe9ff;font-family:inherit;font-size:0.95rem;cursor:pointer;">⟳</button>' +
+      '</div>' +
+      '<div style="margin-top:6px;font-size:0.66rem;color:var(--matrix-muted);text-align:center;">teclea para escribir en el teléfono · mantén pulsado = pulsación larga · arrastra = deslizar</div>';
     const img = body.querySelector("#gls-live-img");
+    const dot = body.querySelector("#gls-dot");
+    const pill = body.querySelector("#gls-pill-txt");
+    function setState(color, txt) { dot.style.background = color; dot.style.boxShadow = "0 0 6px " + color; pill.textContent = txt; }
 
-    // MJPEG: el navegador lo refresca solo; sin polling JS.
     streamStop = base + "/stream-stop?k=" + tk;
-    const streamSrc = () => base + "/stream.mjpg?k=" + tk + "&maxpx=1088&fps=20&_=" + Date.now();
-    img.onload  = () => { status.textContent = "espejo · " + (curSrc().name || "gafa") + " · toca para operar · " + new Date().toLocaleTimeString("es-ES"); };
-    img.onerror = () => {
-      status.textContent = "sin señal — ¿teléfono conectado? reintentando…";
-      if (liveMode === "espejo") setTimeout(() => { if (liveMode === "espejo") img.src = streamSrc(); }, 2500);
-    };
-    img.src = streamSrc();
+    function streamSrc() {
+      const p = QPRESETS[qual];
+      return base + "/stream.mjpg?k=" + tk + "&maxpx=" + p.maxpx + "&fps=" + p.fps + "&_=" + Date.now();
+    }
 
-    // Convierte un evento de puntero a fracción [0,1] del teléfono, corrigiendo
-    // el letterbox de object-fit:contain (la imagen no llena toda la caja).
+    // ── Reconexión + estado ──
+    let attempts = 0, reconTimer = null, watchTimer = null;
+    function clearTimers() { if (reconTimer) { clearTimeout(reconTimer); reconTimer = null; } if (watchTimer) { clearTimeout(watchTimer); watchTimer = null; } }
+    function armWatchdog() {
+      // Si en 9 s no ha cargado el primer fotograma, reintenta.
+      if (watchTimer) clearTimeout(watchTimer);
+      watchTimer = setTimeout(() => { if (liveMode === "espejo" && (!img.complete || !img.naturalWidth)) reconnect("sin respuesta"); }, 9000);
+    }
+    function connect() {
+      if (liveMode !== "espejo") return;
+      setState("#e0b000", attempts ? ("reconectando (" + attempts + ")…") : "conectando…");
+      // Pedir parada del stream previo antes de reabrir (evita scrcpy duplicado).
+      fetch(base + "/stream-stop?k=" + tk, { method: "GET" }).catch(() => {});
+      img.src = streamSrc();
+      armWatchdog();
+    }
+    function reconnect(why) {
+      if (liveMode !== "espejo") return;
+      attempts++;
+      setState("#ff5050", "sin señal · " + (why || "") + " reintentando…");
+      clearTimers();
+      reconTimer = setTimeout(connect, Math.min(1500 + attempts * 800, 6000));
+    }
+    img.onload = () => {
+      attempts = 0;
+      setState("#21d07a", "en vivo · " + (curSrc().name || "gafa") + " · " + QPRESETS[qual].label);
+      armWatchdog(); // re-armar: si el stream se congela y al final falla, lo cazaremos
+    };
+    img.onerror = () => reconnect("¿teléfono conectado?");
+
+    // ── Mapeo puntero → fracción [0,1] (corrige letterbox object-fit:contain) ──
     function evToFrac(e) {
       const r = img.getBoundingClientRect();
       const natW = img.naturalWidth || r.width, natH = img.naturalHeight || r.height;
@@ -5287,26 +5331,49 @@ if (wantsLatest()) goToLatest();
       return { x: Math.min(Math.max(x, 0), 1), y: Math.min(Math.max(y, 0), 1) };
     }
     function send(path) {
-      fetch(base + path + (path.indexOf("?") < 0 ? "?" : "&") + "k=" + tk,
-            { method: "GET" }).catch(() => {});
+      fetch(base + path + (path.indexOf("?") < 0 ? "?" : "&") + "k=" + tk, { method: "GET" }).catch(() => {});
     }
 
-    // tap vs swipe: si se arrastra > ~3% se manda swipe.
-    let down = null;
-    img.addEventListener("pointerdown", (e) => { e.preventDefault(); down = evToFrac(e); });
+    // ── tap / pulsación larga / swipe ──
+    let down = null, downT = 0, longTimer = null, longFired = false;
+    img.addEventListener("pointerdown", (e) => {
+      e.preventDefault(); img.focus();
+      down = evToFrac(e); downT = Date.now(); longFired = false;
+      if (longTimer) clearTimeout(longTimer);
+      // Pulsación larga si sigue pulsado y casi quieto a los 480 ms.
+      longTimer = setTimeout(() => {
+        if (down) { longFired = true; send("/longpress?x=" + down.x.toFixed(4) + "&y=" + down.y.toFixed(4) + "&ms=600"); }
+      }, 480);
+    });
     img.addEventListener("pointerup", (e) => {
       e.preventDefault();
+      if (longTimer) { clearTimeout(longTimer); longTimer = null; }
       const up = evToFrac(e);
       if (!down || !up) { down = null; return; }
-      const dx = up.x - down.x, dy = up.y - down.y;
-      if (Math.hypot(dx, dy) > 0.03) {
+      const dx = up.x - down.x, dy = up.y - down.y, dist = Math.hypot(dx, dy);
+      if (dist > 0.03) {
         send("/swipe?x1=" + down.x.toFixed(4) + "&y1=" + down.y.toFixed(4) +
              "&x2=" + up.x.toFixed(4) + "&y2=" + up.y.toFixed(4) + "&ms=180");
-      } else {
+      } else if (!longFired) {
         send("/tap?x=" + down.x.toFixed(4) + "&y=" + down.y.toFixed(4));
       }
       down = null;
     });
+    img.addEventListener("pointercancel", () => { if (longTimer) { clearTimeout(longTimer); longTimer = null; } down = null; });
+
+    // ── Teclado físico: lo que tecleas va al teléfono mientras el Espejo está enfocado ──
+    const SPECIAL = { Enter: "enter", Backspace: "del", Tab: "tab",
+                      ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" };
+    glsKbHandler = (e) => {
+      if (liveMode !== "espejo") return;
+      // No robar teclas a inputs de configuración u otros campos de texto.
+      const ae = document.activeElement;
+      if (ae && (ae.tagName === "INPUT" || ae.tagName === "TEXTAREA" || ae.tagName === "SELECT")) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return; // dejar atajos del navegador
+      if (SPECIAL[e.key]) { e.preventDefault(); send("/key?name=" + SPECIAL[e.key]); return; }
+      if (e.key.length === 1) { e.preventDefault(); send("/text?s=" + encodeURIComponent(e.key)); }
+    };
+    document.addEventListener("keydown", glsKbHandler);
 
     body.querySelectorAll(".gls-nav").forEach(b =>
       b.addEventListener("click", () => send("/key?name=" + b.dataset.key)));
@@ -5314,6 +5381,16 @@ if (wantsLatest()) goToLatest();
       const t = prompt("Texto a escribir en el teléfono:");
       if (t) send("/text?s=" + encodeURIComponent(t));
     });
+    body.querySelector("#gls-recon").addEventListener("click", () => { attempts = 0; connect(); });
+    body.querySelector("#gls-qual").addEventListener("click", (ev) => {
+      qual = (qual === "nitido") ? "fluido" : "nitido";
+      localStorage.setItem("glasses_quality", qual);
+      ev.target.textContent = "⚙ " + QPRESETS[qual].label;
+      attempts = 0; connect(); // reabrir stream con la nueva calidad
+    });
+
+    connect();
+    setTimeout(() => img.focus(), 100); // foco para el teclado físico
   }
 
   liveBtn.addEventListener("click", () => {
