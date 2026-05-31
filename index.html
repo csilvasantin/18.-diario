@@ -321,6 +321,52 @@
 <script>
 const entries = [
   {
+    date: "2026-05-31",
+    title: "31 de mayo de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se reviso la memoria de la automatizacion en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code> y no existia todavia, asi que esta corrida arranco sin contexto persistido local.",
+          "Se hizo el pre-check del checkout actual con <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git log --since='2026-05-31 00:00' --until='2026-05-31 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-31 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se confirmo con <code>rg -n '2026-05-31' index.html *.md</code> que no existia todavia ninguna entrada para la fecha de hoy.",
+          "Se creo esta entrada <code>2026-05-31.md</code> y se actualizo <code>index.html</code> para que la fecha de hoy quede visible en la publicacion web con autoria <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, confirmando que el worktree de automatizacion sigue en detached HEAD.",
+          "<code>git remote -v</code> confirmo <code>https://github.com/csilvasantin/diario.git</code> como remoto de fetch y push.",
+          "<code>git log --since='2026-05-31 00:00' --until='2026-05-31 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits del dia en este checkout antes de editar.",
+          "<code>git reflog --date=iso --since='2026-05-31 00:00'</code> solo mostro <code>20e2237 HEAD@{2026-05-31 21:30:40 +0200}</code>, consistente con la activacion del worktree.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-31 21:31:24 CEST +0200</code>, fijando la fecha efectiva de esta actualizacion."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a tener cubierta la fecha <code>2026-05-31</code> con un unico fichero Markdown dedicado.",
+          "<code>index.html</code> queda sincronizado con esta entrada para que la novedad de hoy aparezca en la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos comprobables de esta automatizacion y no inferir actividad no observada del resto del dia.",
+          "Mantener una sola entrada Markdown por fecha y reflejarla tambien en la vista HTML publica del repo."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-05-31.md</code> e <code>index.html</code>, crear un commit con <code>Codex</code> en el mensaje, hacer <code>git push origin HEAD:main</code> y comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-30",
     title: "30 de mayo de 2026",
     author: "Codex",
