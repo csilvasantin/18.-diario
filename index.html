@@ -323,6 +323,51 @@ const entries = [
   {
     date: "2026-05-31",
     title: "31 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion de Claude Code sobre <code>18.-diario</code> para mejorar el modo Espejo del directo dentro de <code>index.html</code>: teclado fisico Mac->telefono (letras a <code>text</code>, Enter/Borrar/flechas a <code>keyevent</code>, liberacion al salir), pulsacion larga &gt;480ms via <code>/longpress</code>, alternancia de calidad <code>fluido</code> (720px/25fps) / <code>nitido</code> (1288px/15fps) recordada en <code>localStorage</code>, e indicador de estado con punto de color, watchdog de 9s y reintento con backoff mas boton manual de reconexion.",
+          "Cierre del dia con la rutina canonica <code>CERRAR-EL-DIA.md</code>: pre-check de <code>git status</code>, <code>git log --since='2026-05-31 00:00' --until='2026-05-31 23:59:59'</code>, <code>git remote -v</code> y <code>date</code>, edicion de <code>2026-05-31.md</code> para anadir esta seccion <code>[Claude]</code> separada por <code>---</code>, y sincronizacion de <code>index.html</code> para que la entrada aparezca bajo el filtro <code>Claude</code> de la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-05-31 00:00' --until='2026-05-31 23:59:59' --date=iso --stat --oneline --all</code> confirmo el commit <code>df9c2e5 Espejo: teclado fisico, pulsacion larga, calidad y reconexion</code> con <code>Co-Authored-By: Claude Opus 4.7</code> y 100 inserciones / 23 borrados sobre <code>index.html</code>.",
+          "El mismo <code>git log</code> mostro tambien los commits del dia <code>9586a57 docs: Update Codex 2026-05-31 [skip ci]</code>, <code>ac17669 Gafas: +2 capturas 2026-05-31 12:19</code> y <code>beaab10 chore: actualizar repos.html 2026-05-31 [skip ci]</code>, dejando registrada toda la actividad del repositorio en la fecha.",
+          "<code>git remote -v</code> devolvio el remoto activo <code>csilvasantin/18.-diario</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo la hora efectiva del cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El modo Espejo del directo en <code>index.html</code> queda operable con teclado fisico, gesto de pulsacion larga, calidad ajustable persistida y feedback visual del estado del stream con reconexion automatica.",
+          "<code>2026-05-31.md</code> queda con la entrada <code>[Claude]</code> consolidada junto a la entrada previa <code>[Codex]</code>, respetando la regla 1-2-3 de un unico fichero por fecha con varias autorias separadas por <code>---</code>.",
+          "<code>index.html</code> queda actualizado con la nueva entrada <code>Claude</code> del <code>2026-05-31</code> para que aparezca en los filtros <code>Todos</code> y <code>Claude</code> de la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar solo los commits del dia comprobables con <code>git log</code> en este checkout y no inferir trabajo de otras maquinas o sesiones no atribuidas.",
+          "Mantener una unica entrada Markdown por fecha y reflejar la firma de cada IA como bloque <code>[Claude]</code> / <code>[Codex]</code> separado por <code>---</code>, segun la rutina <code>CERRAR-EL-DIA.md</code>.",
+          "Trabajar el cierre sobre la rama de desarrollo asignada <code>main-RHICp</code> y dejar la integracion a <code>main</code> a la PR / merge posterior."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-05-31.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-05-31 [Claude]</code>, hacer <code>git push -u origin main-RHICp</code> y abrir la PR en borrador.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestre la nueva entrada bajo el filtro <code>Claude</code> y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> quede regenerado por GitHub Actions tras el merge a <code>main</code>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-31",
+    title: "31 de mayo de 2026",
     author: "Codex",
     sections: [
       {
