@@ -321,6 +321,61 @@
 <script>
 const entries = [
   {
+    date: "2026-06-01",
+    title: "1 de junio de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyo la rutina local <code>CERRAR-EL-DIA.md</code> y el <code>CLAUDE.md</code> del repo para alinear el cierre del dia con la regla 1-2-3 del diario.",
+          "Se ejecuto el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-06-01 00:00' --until='2026-06-01 23:59:59' --date=iso --stat --oneline --all</code>, <code>git log --oneline -20</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se confirmo con <code>grep -rn '2026-06-01' index.html *.md</code> que no existia todavia ninguna entrada Markdown para la fecha de hoy.",
+          "Se creo esta entrada <code>2026-06-01.md</code> firmada por <code>Claude</code> y se actualizo <code>index.html</code> para que la fecha aparezca en la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-edRDy</code> con worktree limpio antes de editar.",
+          "<code>git log --since='2026-06-01 00:00' --until='2026-06-01 23:59:59' --date=iso --stat --oneline --all</code> solo devolvio el commit automatico <code>67d2cc5 chore: actualizar repos.html 2026-06-01 [skip ci]</code> generado por GitHub Actions; no hubo trabajo manual previo en el repo hoy.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-01 21:06:14 UTC +0000</code>, fijando la fecha efectiva de este cierre.",
+          "<code>repos.html</code> ya muestra <code>generado 2026-06-01</code> y la tabla de actividad reciente no registra commits nuevos en otros repos para hoy: la fecha mas reciente en los espejos es <code>2026-05-31</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda con cobertura formal de la fecha <code>2026-06-01</code> mediante su propio fichero Markdown dedicado, firmado por <code>Claude</code>.",
+          "<code>index.html</code> queda sincronizado con la nueva entrada para que aparezca bajo los filtros <code>Todos</code> y <code>Claude</code> en la publicacion web.",
+          "Se documenta explicitamente que hoy no hubo trabajo sustantivo nuevo: el unico cambio del dia es el <code>repos.html</code> regenerado automaticamente por el workflow <code>update-repos.yml</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno: el dia se cierra sin trabajo nuevo en los repos rastreados; segun la instruccion del usuario \"si un dia en concreto no se ha hecho nada se documenta y ya esta\"."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos verificables por <code>git</code> y por la inspeccion de <code>repos.html</code>, sin inferir actividad que no se observa.",
+          "Mantener la regla de un unico fichero Markdown por fecha y reflejar la entrada tambien en la UI publica via <code>index.html</code>.",
+          "No tocar <code>repos.html</code>: lo regenera automaticamente el workflow tras el push."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-06-01.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-06-01 [Claude]</code> y hacer <code>git push origin main-edRDy</code>.",
+          "Abrir un PR draft de <code>main-edRDy</code> a <code>main</code> para que el cierre llegue al canal publico tras revision.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responda y muestre la entrada del <code>2026-06-01</code> tras la publicacion, y comprobar que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> siga generandose."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-31",
     title: "31 de mayo de 2026",
     author: "Codex",
