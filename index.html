@@ -321,6 +321,65 @@
 <script>
 const entries = [
   {
+    date: "2026-06-01",
+    title: "1 de junio de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se leyeron la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> y la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>, y se intento contrastar la fuente canonica online durante esta sesion.",
+          "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-06-01 00:00' --until='2026-06-01 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-01 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se inspeccionaron <code>2026-05-31.md</code>, <code>index.html</code>, <code>git remote -v</code>, <code>git show --stat --summary --format=fuller origin/main</code> y <code>git show origin/main:2026-06-01.md</code> para confirmar el estado real antes de editar.",
+          "Se hizo <code>git push origin main</code>, que fue rechazado por <code>fetch first</code>; despues se ejecuto <code>git fetch origin main</code> y <code>git rebase origin/main</code> para integrar el avance remoto antes de preparar la entrada de hoy.",
+          "Se creo esta entrada <code>2026-06-01.md</code> y se actualizo <code>index.html</code> para publicarla en la UI del diario con autoria <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main [ahead 1]</code> al inicio, confirmando que el checkout no estaba limpio porque ya habia un commit local pendiente de publicar.",
+          "<code>git log --since='2026-06-01 00:00' --until='2026-06-01 23:59:59' --date=iso --stat --oneline --all</code> devolvio <code>f9d5a4b Diario 2026-05-31 [Codex]</code>, y <code>git reflog --date=iso --since='2026-06-01 00:00'</code> mostro el final del rebase previo sobre ese commit.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-01 23:55:25 CEST +0200</code>, fijando la fecha efectiva de esta corrida.",
+          "<code>git push origin main</code> fue rechazado contra <code>https://github.com/csilvasantin/18.-diario.git</code> con <code>fetch first</code>, y <code>git fetch origin main</code> confirmo que <code>origin/main</code> habia avanzado de <code>9586a57</code> a <code>67d2cc5</code>.",
+          "<code>git show --stat --summary --format=fuller origin/main</code> confirmo que <code>67d2cc5</code> fue un commit de <code>github-actions[bot]</code> que solo actualizo <code>repos.html</code>, y <code>git show origin/main:2026-06-01.md</code> fallo con <code>fatal: path '2026-06-01.md' does not exist in 'origin/main'</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El checkout local queda rebasado sobre la punta remota actual antes de anadir el cierre del <code>2026-06-01</code>.",
+          "El diario vuelve a tener un fichero Markdown dedicado para <code>2026-06-01</code>, firmado por <code>Codex</code>.",
+          "<code>index.html</code> queda preparado para mostrar la nueva entrada del dia bajo los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rutina pedia trabajar sobre un checkout limpio, pero el pre-check encontro <code>main</code> con <code>ahead 1</code> por el commit local pendiente <code>f9d5a4b Diario 2026-05-31 [Codex]</code>.",
+          "La lectura directa de la fuente canonica online no devolvio contenido util en esta sesion, asi que la ejecucion se apoyo en la copia local verificada.",
+          "El remoto configurado sigue siendo <code>https://github.com/csilvasantin/18.-diario.git</code>, distinto del URL de repositorio descrito en la rutina local.",
+          "El primer intento de publicacion fallo por <code>non-fast-forward</code> hasta integrar el avance remoto."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Conservar el commit local pendiente de <code>2026-05-31</code> y rebasarlo sobre <code>origin/main</code> en lugar de descartarlo.",
+          "Registrar solo hechos verificados con comandos de <code>git</code>, la hora local obtenida con <code>date</code> y el trabajo real realizado en esta sesion.",
+          "Tomar <code>index.html</code> como fuente operativa de la UI publica porque la portada embebe las entradas en <code>const entries</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-06-01.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-06-01 [Codex]</code> y ejecutar <code>git push origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la entrada del <code>2026-06-01</code> tras la publicacion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-05-31",
     title: "31 de mayo de 2026",
     author: "Codex",
