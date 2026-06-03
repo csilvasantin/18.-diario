@@ -321,6 +321,61 @@
 <script>
 const entries = [
   {
+    date: "2026-06-03",
+    title: "3 de junio de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Actualizado PowerShell 7 de <code>7.6.1</code> a <code>7.6.2</code> con <code>winget</code>, forzando <code>--source winget</code> porque la fuente <code>msstore</code> fallaba.",
+          "Arreglado Codex en el equipo Windows: el binario CLI funcionaba pero no habia forma de invocarlo (sin PATH, sin acceso directo, sin App Paths).",
+          "Creado un lanzador robusto <code>codex.cmd</code> que siempre localiza el <code>codex.exe</code> de la version mas reciente (la carpeta <code>bin\\&lt;hash&gt;</code> cambia en cada actualizacion).",
+          "Recreados los accesos directos de Codex (escritorio y menu Inicio) apuntando al lanzador via Windows Terminal, y anadido <code>codex</code> al PATH de usuario.",
+          "Diagnosticado el icono de la barra: la app MSIX <code>OpenAI.Codex</code> estaba corrupta tras una autoactualizacion fallida a <code>26.519</code>, le faltaba el ejecutable principal <code>app\\Codex.exe</code>.",
+          "Eliminado el paquete corrupto (conservando los datos en <code>.codex</code>), reinstalado limpio desde la Tienda y borrados los <code>Codex Installer.exe</code> de Descargas."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "Un <code>pwsh</code> recien lanzado reporta <code>7.6.2</code> y <code>codex.cmd --version</code> devuelve <code>codex-cli 0.133.0-alpha.1</code>.",
+          "El acceso directo del escritorio lanzo Codex (procesos confirmados) y se cerro la prueba.",
+          "Tras reinstalar, el paquete quedo en <code>26.601.2237.0</code> con <code>Status: Ok</code> y <code>app\\Codex.exe</code> presente; la app arranca por su identificador <code>OpenAI.Codex_2p2nqsd0c76g0!App</code>, el mismo que usa el icono de la barra."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Codex queda operativo de tres formas: icono de la barra (GUI), accesos directos en escritorio/Inicio (TUI) y el comando <code>codex</code> en terminal.",
+          "El lanzador es a prueba de futuras autoactualizaciones porque resuelve dinamicamente la version mas nueva."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La fuente <code>msstore</code> de winget fallaba con el error de certificado <code>0x8a15005e</code>; se evito forzando <code>--source winget</code>.",
+          "El paquete MSIX de Codex se quedo sin su ejecutable principal tras una actualizacion automatica incompleta, por lo que el icono no abria nada.",
+          "El tool de PowerShell de la sesion se degrado tras actualizar <code>pwsh</code> en caliente; se continuo via Bash invocando un PowerShell nuevo."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Ante archivos fisicamente ausentes en el paquete, reinstalar en vez de re-registrar (el re-registro no restaura ficheros que faltan).",
+          "Usar un lanzador dinamico en lugar de fijar en el acceso directo la ruta con hash de version, que se rompe en cada actualizacion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Si el icono de la barra vuelve a fallar, repetir el arreglo: quitar el paquete <code>OpenAI.Codex</code> y reinstalar desde la Tienda.",
+          "Reiniciar las terminales abiertas para que tomen el PATH actualizado y la nueva version de <code>pwsh</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-02",
     title: "2 de junio de 2026",
     author: "Codex",
