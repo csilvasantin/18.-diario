@@ -147,7 +147,7 @@ git push -u origin main
 
 - Diario: https://csilvasantin.github.io/18.-diario/
 - Tabla de repos: https://csilvasantin.github.io/18.-diario/repos.html
-- Skill Diario IA: https://csilvasantin.github.io/18.-diario/skills/diario-ia/
+- Skill Diario IA: https://www.carlossilva.info/18.-diario/skills/diario-ia/index.html
 
 ---
 
