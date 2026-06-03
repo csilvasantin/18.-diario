@@ -338,7 +338,9 @@ const entries = [
           "Creado un lanzador robusto <code>codex.cmd</code> que siempre localiza el <code>codex.exe</code> de la version mas reciente (la carpeta <code>bin\\&lt;hash&gt;</code> cambia en cada actualizacion).",
           "Recreados los accesos directos de Codex (escritorio y menu Inicio) apuntando al lanzador via Windows Terminal, y anadido <code>codex</code> al PATH de usuario.",
           "Diagnosticado el icono de la barra: la app MSIX <code>OpenAI.Codex</code> estaba corrupta tras una autoactualizacion fallida a <code>26.519</code>, le faltaba el ejecutable principal <code>app\\Codex.exe</code>.",
-          "Eliminado el paquete corrupto (conservando los datos en <code>.codex</code>), reinstalado limpio desde la Tienda y borrados los <code>Codex Installer.exe</code> de Descargas."
+          "Eliminado el paquete corrupto (conservando los datos en <code>.codex</code>), reinstalado limpio desde la Tienda y borrados los <code>Codex Installer.exe</code> de Descargas.",
+          "Creada la skill <code>diario-ia</code> para Claude Code (cierre automatico del dia): instalada en <code>~/.claude/skills/diario-ia/</code> y publicada en el repo en <code>skills/diario-ia-claude-code/</code> con <code>diario-ia.zip</code> descargable.",
+          "Anadidos los comandos <code>/actualizardiario</code> y <code>/cerrardia</code> al CLI <code>xtAPI</code> del digital twin (<code>10.-Yarig.aiTheGame/game.html</code>), que fuerzan el push del diario via el endpoint <code>/yarig/diary/push</code>, mas un dispatcher <code>cli()</code> para sintaxis slash."
         ]
       },
       {
@@ -346,14 +348,16 @@ const entries = [
         items: [
           "Un <code>pwsh</code> recien lanzado reporta <code>7.6.2</code> y <code>codex.cmd --version</code> devuelve <code>codex-cli 0.133.0-alpha.1</code>.",
           "El acceso directo del escritorio lanzo Codex (procesos confirmados) y se cerro la prueba.",
-          "Tras reinstalar, el paquete quedo en <code>26.601.2237.0</code> con <code>Status: Ok</code> y <code>app\\Codex.exe</code> presente; la app arranca por su identificador <code>OpenAI.Codex_2p2nqsd0c76g0!App</code>, el mismo que usa el icono de la barra."
+          "Tras reinstalar, el paquete quedo en <code>26.601.2237.0</code> con <code>Status: Ok</code> y <code>app\\Codex.exe</code> presente; la app arranca por su identificador <code>OpenAI.Codex_2p2nqsd0c76g0!App</code>, el mismo que usa el icono de la barra.",
+          "Validado el JavaScript de <code>game.html</code> (0 errores de sintaxis en sus bloques script) y el array <code>entries</code> de <code>index.html</code> tras cada edicion."
         ]
       },
       {
         heading: "Avances",
         items: [
           "Codex queda operativo de tres formas: icono de la barra (GUI), accesos directos en escritorio/Inicio (TUI) y el comando <code>codex</code> en terminal.",
-          "El lanzador es a prueba de futuras autoactualizaciones porque resuelve dinamicamente la version mas nueva."
+          "El lanzador es a prueba de futuras autoactualizaciones porque resuelve dinamicamente la version mas nueva.",
+          "El cierre del diario se puede disparar ahora de tres formas: la skill <code>diario-ia</code> de Claude Code, el comando <code>/actualizardiario</code> dentro del juego, y el push automatico del servidor Yarig."
         ]
       },
       {
