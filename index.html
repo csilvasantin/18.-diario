@@ -356,7 +356,9 @@ const entries = [
           "Diagnosticado el icono de la barra: la app MSIX <code>OpenAI.Codex</code> estaba corrupta tras una autoactualizacion fallida a <code>26.519</code>, le faltaba el ejecutable principal <code>app\\Codex.exe</code>.",
           "Eliminado el paquete corrupto (conservando los datos en <code>.codex</code>), reinstalado limpio desde la Tienda y borrados los <code>Codex Installer.exe</code> de Descargas.",
           "Creada la skill <code>diario-ia</code> para Claude Code (cierre automatico del dia): instalada en <code>~/.claude/skills/diario-ia/</code> y publicada en el repo en <code>skills/diario-ia-claude-code/</code> con <code>diario-ia.zip</code> descargable.",
-          "Anadidos los comandos <code>/actualizardiario</code> y <code>/cerrardia</code> al CLI <code>xtAPI</code> del digital twin (<code>10.-Yarig.aiTheGame/game.html</code>), que fuerzan el push del diario via el endpoint <code>/yarig/diary/push</code>, mas un dispatcher <code>cli()</code> para sintaxis slash."
+          "Anadidos los comandos <code>/actualizardiario</code> y <code>/cerrardia</code> al CLI <code>xtAPI</code> del digital twin (<code>10.-Yarig.aiTheGame/game.html</code>), que fuerzan el push del diario via el endpoint <code>/yarig/diary/push</code>, mas un dispatcher <code>cli()</code> para sintaxis slash.",
+          "Creado el <strong>Xtanco Barcelona</strong> en el gemelo digital: modelo de tienda que arranca vacio, con roster por ubicacion (<code>members.json</code> con <code>location</code>); las altas del CLI (<code>/altamiembro</code>) se asignan a la ubicacion activa y aparecen como personajes contratables.",
+          "Acceso al Xtanco Barcelona desde el badge <code>XpaceOS v.2026.06.02.r3</code> del menu y desde <a href='https://www.admira.app/' target='_blank'>admira.app</a> buscando 'Xtanco Barcelona' (campo <code>twin</code> -> <code>game.html?loc=barcelona</code>). Anadidas reflexiones (animo/feedback del personal) conectadas a la moral y al estado de mision de Yarig."
         ]
       },
       {
@@ -373,7 +375,8 @@ const entries = [
         items: [
           "Codex queda operativo de tres formas: icono de la barra (GUI), accesos directos en escritorio/Inicio (TUI) y el comando <code>codex</code> en terminal.",
           "El lanzador es a prueba de futuras autoactualizaciones porque resuelve dinamicamente la version mas nueva.",
-          "El cierre del diario se puede disparar ahora de tres formas: la skill <code>diario-ia</code> de Claude Code, el comando <code>/actualizardiario</code> dentro del juego, y el push automatico del servidor Yarig."
+          "El cierre del diario se puede disparar ahora de tres formas: la skill <code>diario-ia</code> de Claude Code, el comando <code>/actualizardiario</code> dentro del juego, y el push automatico del servidor Yarig.",
+          "El gemelo digital ya es multi-ubicacion: cada Xtanco tiene su propio equipo, gestionado en conexion con Yarig (misiones, acciones y reflexiones)."
         ]
       },
       {
@@ -395,7 +398,8 @@ const entries = [
         heading: "Siguientes pasos",
         items: [
           "Si el icono de la barra vuelve a fallar, repetir el arreglo: quitar el paquete <code>OpenAI.Codex</code> y reinstalar desde la Tienda.",
-          "Reiniciar las terminales abiertas para que tomen el PATH actualizado y la nueva version de <code>pwsh</code>."
+          "Reiniciar las terminales abiertas para que tomen el PATH actualizado y la nueva version de <code>pwsh</code>.",
+          "Publicar la ubicacion 'Xtanco Barcelona' al worker KV de OmniPublicity desde el backoffice (token Bearer) para que aparezca en el buscador de admira.app en produccion."
         ]
       }
     ]
