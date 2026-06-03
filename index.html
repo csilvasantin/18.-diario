@@ -5143,9 +5143,37 @@ function getEntryXpacio(entry) {
   return idx !== -1 ? a.slice(idx + 3).trim() : "";
 }
 
+// Roster de cada Xpacio leído del KV de OmniPublicity (misma fuente que admira.app
+// y el gemelo). Así los miembros dados de alta con /nuevoMiembro aparecen en el
+// selector aunque todavía no hayan escrito ninguna entrada en el diario.
+window.OMNIP_ROSTER = window.OMNIP_ROSTER || {};      // nombreXpacio -> [nombreMiembro]
+window.OMNIP_XPACIO_LIST = window.OMNIP_XPACIO_LIST || [];
+function loadOmnipRoster() {
+  fetch("https://omnipublicity-api.csilvasantin.workers.dev/locations", { cache: "no-store" })
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      const list = (d && Array.isArray(d.locations)) ? d.locations : [];
+      const roster = {}, xpacios = [];
+      list.forEach(l => {
+        const name = (l && (l.name || l.id)) ? String(l.name || l.id).trim() : "";
+        if (!name) return;
+        if (xpacios.indexOf(name) === -1) xpacios.push(name);
+        const emp = Array.isArray(l.employees) ? l.employees : [];
+        roster[name] = emp.map(e => (e && (e.name || e)) ? String(e.name || e).trim() : "").filter(Boolean);
+      });
+      window.OMNIP_ROSTER = roster;
+      window.OMNIP_XPACIO_LIST = xpacios;
+      if (typeof rebuildXpacioSelector === "function") rebuildXpacioSelector();
+      if (typeof rebuildMemberSelector === "function") rebuildMemberSelector();
+    })
+    .catch(() => {});
+}
+
 function getXpacios() {
   const seen = new Set(), list = [];
   entries.forEach(e => { const x = getEntryXpacio(e); if (x && !seen.has(x)) { seen.add(x); list.push(x); } });
+  // Xpacios del KV (puntos con equipo aunque aún no tengan entradas en el diario).
+  (window.OMNIP_XPACIO_LIST || []).forEach(x => { if (x && !seen.has(x)) { seen.add(x); list.push(x); } });
   return list.sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
 }
 
@@ -5167,15 +5195,19 @@ function rebuildXpacioSelector() {
 function getMembers() {
   const seen = new Set();
   const members = [];
+  const add = m => { if (m && !seen.has(m)) { seen.add(m); members.push(m); } };
   entries.forEach(entry => {
     // Si hay un Xpacio seleccionado, solo sus miembros entran al desplegable.
     if (activeXpacio && getEntryXpacio(entry) !== activeXpacio) return;
-    const member = getEntryMember(entry);
-    if (!seen.has(member)) {
-      seen.add(member);
-      members.push(member);
-    }
+    add(getEntryMember(entry));
   });
+  // Roster del KV: miembros dados de alta en el punto (aunque no hayan reportado).
+  const roster = window.OMNIP_ROSTER || {};
+  if (activeXpacio) {
+    (roster[activeXpacio] || []).forEach(add);
+  } else {
+    Object.keys(roster).forEach(x => (roster[x] || []).forEach(add));
+  }
   return members.sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
 }
 
@@ -5331,6 +5363,7 @@ rebuildMemberSelector();
 rebuildXpacioSelector();
 rebuildSelector(getFiltered(), 0);
 if (wantsLatest()) goToLatest();
+loadOmnipRoster();   // trae el roster del KV y refresca los selectores cuando llega
 
 // ── Galería de las gafas (Ray-Ban Meta) ──────────────────────
 // Lee media/glasses/manifest.json (escrito por glasses_sync.sh) y añade una
