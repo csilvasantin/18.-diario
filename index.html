@@ -144,6 +144,7 @@
     box-shadow: 0 0 10px rgba(57,255,111,0.35);
   }
   #member-selector,
+  #xpacio-selector,
   #entry-selector {
     width: min(440px, 100%);
     padding: 7px 12px;
@@ -155,7 +156,9 @@
     box-shadow: inset 0 0 20px rgba(57, 255, 111, 0.05);
   }
   #member-selector { width: min(260px, 100%); }
+  #xpacio-selector { width: min(240px, 100%); }
   #member-selector:focus,
+  #xpacio-selector:focus,
   #entry-selector:focus { outline: none; border-color: var(--matrix-bright); box-shadow: 0 0 0 4px rgba(57, 255, 111, 0.08); }
 
   .entry { display: none; }
@@ -204,6 +207,20 @@
     color: #1a0800;
     box-shadow: 0 0 8px rgba(255,183,0,0.35);
   }
+  .xpacio-badge {
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #00121c;
+    background: #5fd0ff;
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
+    box-shadow: 0 0 8px rgba(95,208,255,0.35);
+    flex-shrink: 0;
+  }
+  .xpacio-line { margin: 4px 0 2px; display: flex; align-items: center; gap: 8px; }
   .filter-btn[data-filter="Yarig.ai"].active {
     background: #ffb700;
     border-color: #ffb700;
@@ -311,6 +328,7 @@
       <button id="glasses-import" title="Forzar la importación de las gafas Meta ahora (corre glasses_daily.sh en el Mac)">👓 importar</button>
       <button id="glasses-live" title="Ver en directo la pantalla del teléfono (la vista de las gafas cuando Meta View está en vivo)">🔴 directo</button>
       <select id="member-selector" aria-label="Seleccionar miembro de AdmiraNeXT"></select>
+      <select id="xpacio-selector" aria-label="Filtrar por Xpacio (punto de Admira.app)"></select>
       <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
       <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px">
         <a href="https://www.admira.live/council-scumm.html" style="color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;font-weight:600;transition:opacity 0.15s" title="Volver al Consejo (admira.live)" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">← Consejo</a>
@@ -5073,6 +5091,7 @@ const entries = [
 
 let activeFilter = "";
 let activeMember = "";
+let activeXpacio = "";
 const defaultMember = "Carlos Silva";
 
 // Sort entries by date descending (most recent first)
@@ -5089,6 +5108,38 @@ function formatEntryTimes(entry) {
 
 function getEntryMember(entry) {
   return entry.member || entry.teamMember || entry.person || entry.owner || defaultMember;
+}
+
+// Xpacio = el punto de Admira.app (un Xtanco, súper, etc.) al que pertenece la
+// entrada. Lo escribe /report; las entradas de Claude/Codex/Yarig no lo tienen.
+function getEntryXpacio(entry) {
+  if (!entry) return "";
+  if (entry.xpacio || entry.store || entry.punto) return entry.xpacio || entry.store || entry.punto;
+  // Compat: las entradas de /report llevan author "Miembro · Xpacio".
+  const a = entry.author || "";
+  const idx = a.indexOf(" · ");
+  return idx !== -1 ? a.slice(idx + 3).trim() : "";
+}
+
+function getXpacios() {
+  const seen = new Set(), list = [];
+  entries.forEach(e => { const x = getEntryXpacio(e); if (x && !seen.has(x)) { seen.add(x); list.push(x); } });
+  return list.sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
+}
+
+function rebuildXpacioSelector() {
+  const selector = document.getElementById("xpacio-selector");
+  if (!selector) return;
+  const xpacios = getXpacios();
+  selector.innerHTML = "<option value=\"\">Todos los Xpacios</option>";
+  xpacios.forEach(x => {
+    const opt = document.createElement("option");
+    opt.value = x; opt.textContent = "📍 " + x;
+    selector.appendChild(opt);
+  });
+  if (!xpacios.includes(activeXpacio)) activeXpacio = "";
+  selector.value = activeXpacio;
+  selector.style.display = xpacios.length ? "" : "none";
 }
 
 function getMembers() {
@@ -5114,7 +5165,9 @@ function buildEntries() {
     div.id = "entry-" + i;
     const times = formatEntryTimes(entry);
     const timesHtml = " <span class=\"entry-times\">" + times + "</span>";
-    let html = "<h1>Diario - " + entry.title + timesHtml + "</h1>";
+    const xp = getEntryXpacio(entry);
+    const xpHtml = xp ? "<div class=\"xpacio-line\"><span class=\"xpacio-badge\">📍 Xpacio: " + xp + "</span></div>" : "";
+    let html = "<h1>Diario - " + entry.title + timesHtml + "</h1>" + xpHtml;
     entry.sections.forEach((s, si) => {
       const badgeClass = "author-badge" + (entry.author === "Yarig.ai" ? " yarig" : "");
       const badge = (si === 0 && entry.author)
@@ -5149,9 +5202,10 @@ buildEntries();
 function getFiltered() {
   return entries.reduce((acc, e, i) => {
     const matchesMember = !activeMember || getEntryMember(e) === activeMember;
+    const matchesXpacio = !activeXpacio || getEntryXpacio(e) === activeXpacio;
     const matchesFilter = !activeFilter
       || (activeFilter === "Meta" ? e.hasGlasses : e.author && e.author.toLowerCase().includes(activeFilter.toLowerCase()));
-    if (matchesMember && matchesFilter) acc.push(i);
+    if (matchesMember && matchesXpacio && matchesFilter) acc.push(i);
     return acc;
   }, []);
 }
@@ -5212,6 +5266,15 @@ document.getElementById("member-selector").addEventListener("change", e => {
   rebuildSelector(filtered, filtered[0]);
 });
 
+(function () {
+  const xs = document.getElementById("xpacio-selector");
+  if (xs) xs.addEventListener("change", e => {
+    activeXpacio = e.target.value;
+    const filtered = getFiltered();
+    rebuildSelector(filtered, filtered[0]);
+  });
+})();
+
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
@@ -5229,8 +5292,10 @@ function wantsLatest() {
 function goToLatest() {
   activeFilter = "";
   activeMember = "";
+  activeXpacio = "";
   document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b.dataset.filter === ""));
   rebuildMemberSelector();
+  rebuildXpacioSelector();
   const filtered = getFiltered();           // entries ya están ordenadas descendente
   rebuildSelector(filtered, filtered[0]);   // filtered[0] = entrada más reciente
 }
@@ -5238,6 +5303,7 @@ window.addEventListener("hashchange", () => { if (location.hash === "#latest") g
 
 // Init: show all, most recent entry (entries are sorted descending)
 rebuildMemberSelector();
+rebuildXpacioSelector();
 rebuildSelector(getFiltered(), 0);
 if (wantsLatest()) goToLatest();
 
@@ -5296,6 +5362,7 @@ if (wantsLatest()) goToLatest();
       const cur = Number(document.getElementById("entry-selector").value) || 0;
       buildEntries();
       rebuildMemberSelector();
+      rebuildXpacioSelector();
       rebuildSelector(getFiltered(), cur);
       if (wantsLatest()) goToLatest();
       installGlassesVideoLightbox();
@@ -5888,6 +5955,7 @@ if (wantsLatest()) goToLatest();
 
     buildEntries();
     rebuildMemberSelector();
+    rebuildXpacioSelector();
     document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
     document.querySelector('[data-filter="Yarig.ai"]').classList.add("active");
     activeFilter = "Yarig.ai";
