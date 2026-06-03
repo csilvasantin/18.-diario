@@ -5123,7 +5123,13 @@ function formatEntryTimes(entry) {
 }
 
 function getEntryMember(entry) {
-  return entry.member || entry.teamMember || entry.person || entry.owner || defaultMember;
+  if (entry.member || entry.teamMember || entry.person || entry.owner)
+    return entry.member || entry.teamMember || entry.person || entry.owner;
+  // /report: author "Miembro · Xpacio" → el miembro es lo de antes de " · ".
+  const a = entry.author || "";
+  const idx = a.indexOf(" · ");
+  if (idx !== -1) return a.slice(0, idx).trim();
+  return defaultMember;
 }
 
 // Xpacio = el punto de Admira.app (un Xtanco, súper, etc.) al que pertenece la
@@ -5162,6 +5168,8 @@ function getMembers() {
   const seen = new Set();
   const members = [];
   entries.forEach(entry => {
+    // Si hay un Xpacio seleccionado, solo sus miembros entran al desplegable.
+    if (activeXpacio && getEntryXpacio(entry) !== activeXpacio) return;
     const member = getEntryMember(entry);
     if (!seen.has(member)) {
       seen.add(member);
@@ -5286,6 +5294,7 @@ document.getElementById("member-selector").addEventListener("change", e => {
   const xs = document.getElementById("xpacio-selector");
   if (xs) xs.addEventListener("change", e => {
     activeXpacio = e.target.value;
+    rebuildMemberSelector();   // el desplegable de miembros pasa a mostrar solo los de este Xpacio
     const filtered = getFiltered();
     rebuildSelector(filtered, filtered[0]);
   });
