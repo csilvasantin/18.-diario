@@ -44,6 +44,7 @@ Codex participa en este diario exactamente igual que Claude, pero identificandos
 | `index.html` | Diario web. Lee las entradas del array JS `const entries`. |
 | `repos.html` | Tabla de proyectos con commits, fechas y ultimo LLM que actualizo cada repo. |
 | `YYYY-MM-DD.md` | Entrada del diario del dia en Markdown (una por dia). |
+| `skills/diario-ia/` | Skill descargable para que el equipo cierre el dia con el formato del diario. |
 
 ---
 
@@ -146,6 +147,7 @@ git push -u origin main
 
 - Diario: https://csilvasantin.github.io/18.-diario/
 - Tabla de repos: https://csilvasantin.github.io/18.-diario/repos.html
+- Skill Diario IA: https://csilvasantin.github.io/18.-diario/skills/diario-ia/
 
 ---
 

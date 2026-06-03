@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Diario IA - AdmiraNeXT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #020703;
+    --panel: rgba(5, 15, 8, 0.92);
+    --border: rgba(0, 255, 110, 0.24);
+    --text: #b7f7c7;
+    --muted: #72b985;
+    --bright: #39ff6f;
+    --soft: #88ffad;
+    --code: #04110a;
+  }
+  body {
+    min-height: 100vh;
+    font-family: 'Share Tech Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--text);
+    background:
+      radial-gradient(circle at top left, rgba(57, 255, 111, 0.16), transparent 30%),
+      linear-gradient(180deg, #04110a 0%, var(--bg) 100%);
+    letter-spacing: 0.02em;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 100% 4px;
+    opacity: 0.08;
+  }
+  main {
+    width: min(960px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 40px 0 56px;
+    position: relative;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 26px;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  a { color: var(--bright); }
+  nav a { text-decoration: none; white-space: nowrap; }
+  .panel {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--panel);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45), 0 0 32px rgba(57, 255, 111, 0.08);
+    padding: 28px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    color: var(--bright);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: clamp(1.6rem, 4vw, 2.65rem);
+    line-height: 1.08;
+    margin-bottom: 14px;
+  }
+  h2 {
+    color: var(--soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1rem;
+    margin: 0 0 12px;
+  }
+  p, li {
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .lead {
+    max-width: 760px;
+    color: #d8ffe3;
+    font-size: 1rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 16px;
+    border: 1px solid rgba(0, 255, 110, 0.42);
+    border-radius: 999px;
+    background: var(--bright);
+    color: #020703;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .button.secondary {
+    background: transparent;
+    color: var(--bright);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .step {
+    border: 1px solid rgba(0, 255, 110, 0.16);
+    border-radius: 10px;
+    padding: 16px;
+    background: rgba(0, 16, 8, 0.52);
+  }
+  .step strong {
+    display: block;
+    color: #ecfff0;
+    margin-bottom: 8px;
+  }
+  pre {
+    overflow-x: auto;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 110, 0.16);
+    background: var(--code);
+    color: var(--soft);
+    line-height: 1.55;
+    margin-top: 12px;
+  }
+  code {
+    color: var(--bright);
+    background: var(--code);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+  ul { padding-left: 22px; }
+  .note { color: var(--muted); font-size: 0.86rem; margin-top: 12px; }
+  @media (max-width: 760px) {
+    main { width: min(100% - 24px, 960px); padding-top: 24px; }
+    .panel { padding: 20px 16px; border-radius: 14px; }
+    .grid { grid-template-columns: 1fr; }
+    nav { align-items: flex-start; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <nav>
+    <a href="../../">Diario</a>
+    <span>AdmiraNeXT / Codex skills</span>
+  </nav>
+
+  <section class="panel">
+    <h1>Skill Diario IA</h1>
+    <p class="lead">
+      Skill compartible para que cualquier miembro de AdmiraNeXT pueda pedir al final del dia:
+      "cierra mi diario" y obtener una entrada en el mismo formato factual del Diario.
+    </p>
+    <div class="actions">
+      <a class="button" href="./diario-ia.zip" download>Descargar ZIP</a>
+      <a class="button secondary" href="./SKILL.md">Ver SKILL.md</a>
+      <a class="button secondary" href="./example-entry.md">Ver ejemplo</a>
+    </div>
+    <p class="note">Version inicial publicada para equipo. Contiene <code>SKILL.md</code> y <code>example-entry.md</code>.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Instalacion</h2>
+    <div class="grid">
+      <div class="step">
+        <strong>1. Descargar</strong>
+        <p>Baja <code>diario-ia.zip</code> y descomprimelo.</p>
+      </div>
+      <div class="step">
+        <strong>2. Copiar</strong>
+        <p>Coloca la carpeta <code>diario-ia</code> dentro de <code>.codex/skills/</code>.</p>
+      </div>
+      <div class="step">
+        <strong>3. Usar</strong>
+        <p>Abre Codex y pide: <code>usa diario-ia para cerrar mi dia</code>.</p>
+      </div>
+    </div>
+    <pre><code>Windows:
+C:\Users\TU_USUARIO\.codex\skills\diario-ia\
+
+macOS / Linux:
+~/.codex/skills/diario-ia/</code></pre>
+  </section>
+
+  <section class="panel">
+    <h2>Que produce</h2>
+    <ul>
+      <li>Una entrada Markdown lista para pegar en el diario.</li>
+      <li>Secciones: <code>Que se hizo</code>, <code>Que se valido</code>, <code>Avances</code>, <code>Decisiones tomadas</code> y <code>Siguientes pasos</code>.</li>
+      <li>Solo hechos verificables: conversaciones, commits, diffs, documentos, PRs, tareas o notas de la persona.</li>
+      <li>Opcionalmente, un bloque JS compatible con el array <code>entries</code> de la web del Diario.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
