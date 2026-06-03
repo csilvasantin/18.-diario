@@ -86,6 +86,7 @@ Dentro del archivo hay un array JavaScript `const entries = [ ... ]`. Cada entra
 {
   date: "2026-04-15",
   title: "15 de abril de 2026",
+  member: "Carlos Silva",
   author: "Codex",
   sections: [
     { heading: "Que se hizo",      items: ["item 1", "item 2"] },
@@ -98,6 +99,7 @@ Dentro del archivo hay un array JavaScript `const entries = [ ... ]`. Cada entra
 
 Reglas:
 - **`author` debe ser siempre `"Codex"`** en las entradas escritas por Codex.
+- **`member` identifica al miembro de AdmiraNeXT** y alimenta el combo de miembros. Si se omite, la UI usa `Carlos Silva` como valor por defecto para el historico.
 - Si ya existe una entrada para ese dia, reemplazala entera.
 - Si no existe, anadela al final del array antes del `];` de cierre.
 - Los `items` son strings. Se permite HTML inline: `<code>`, `<a href='' target='_blank'>`, `<strong>`.
@@ -155,5 +157,5 @@ git push -u origin main
 
 - El diario no tiene proteccion por contrasena; el HTML es publico.
 - El repo con el indicador `◉` parpadeante en la tabla es el que se actualizo mas recientemente.
-- Los botones de filtro del diario (`Todos` / `Claude` / `Codex`) filtran entradas por el campo `author`.
+- Los botones de filtro del diario (`Todos` / `Claude` / `Codex`) filtran entradas por el campo `author`; el combo de miembros filtra por `member`.
 - Claude tiene el skill `/update-claude` que hace todo esto automaticamente. Codex sigue este README de forma manual o implementa su propio equivalente.

@@ -143,6 +143,7 @@
     border-color: var(--matrix-bright);
     box-shadow: 0 0 10px rgba(57,255,111,0.35);
   }
+  #member-selector,
   #entry-selector {
     width: min(440px, 100%);
     padding: 7px 12px;
@@ -153,6 +154,8 @@
     color: var(--matrix-bright-soft);
     box-shadow: inset 0 0 20px rgba(57, 255, 111, 0.05);
   }
+  #member-selector { width: min(260px, 100%); }
+  #member-selector:focus,
   #entry-selector:focus { outline: none; border-color: var(--matrix-bright); box-shadow: 0 0 0 4px rgba(57, 255, 111, 0.08); }
 
   .entry { display: none; }
@@ -307,6 +310,7 @@
       <button id="yarig-journey" title="Abrir o cerrar jornada en Yarig.ai" style="display:none">⏱ jornada</button>
       <button id="glasses-import" title="Forzar la importación de las gafas Meta ahora (corre glasses_daily.sh en el Mac)">👓 importar</button>
       <button id="glasses-live" title="Ver en directo la pantalla del teléfono (la vista de las gafas cuando Meta View está en vivo)">🔴 directo</button>
+      <select id="member-selector" aria-label="Seleccionar miembro de AdmiraNeXT"></select>
       <select id="entry-selector" aria-label="Seleccionar fecha del diario"></select>
       <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px">
         <a href="https://www.admira.live/council-scumm.html" style="color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;font-weight:600;transition:opacity 0.15s" title="Volver al Consejo (admira.live)" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">← Consejo</a>
@@ -5010,6 +5014,8 @@ const entries = [
 ];
 
 let activeFilter = "";
+let activeMember = "";
+const defaultMember = "Carlos Silva";
 
 // Sort entries by date descending (most recent first)
 entries.sort((a, b) => b.date.localeCompare(a.date));
@@ -5021,6 +5027,23 @@ function formatEntryTimes(entry) {
   const pts = (entry.author === "Yarig.ai" && Number.isFinite(entry.points))
     ? " · " + entry.points + " puntos" : "";
   return "Inicio " + start + " · " + endLabel + " " + update + pts;
+}
+
+function getEntryMember(entry) {
+  return entry.member || entry.teamMember || entry.person || entry.owner || defaultMember;
+}
+
+function getMembers() {
+  const seen = new Set();
+  const members = [];
+  entries.forEach(entry => {
+    const member = getEntryMember(entry);
+    if (!seen.has(member)) {
+      seen.add(member);
+      members.push(member);
+    }
+  });
+  return members.sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
 }
 
 // Build all entry divs
@@ -5066,23 +5089,44 @@ function buildEntries() {
 buildEntries();
 
 function getFiltered() {
-  if (!activeFilter) return entries.map((_, i) => i);
-  if (activeFilter === "Meta") {
-    return entries.reduce((acc, e, i) => { if (e.hasGlasses) acc.push(i); return acc; }, []);
-  }
   return entries.reduce((acc, e, i) => {
-    if (e.author && e.author.toLowerCase().includes(activeFilter.toLowerCase())) acc.push(i);
+    const matchesMember = !activeMember || getEntryMember(e) === activeMember;
+    const matchesFilter = !activeFilter
+      || (activeFilter === "Meta" ? e.hasGlasses : e.author && e.author.toLowerCase().includes(activeFilter.toLowerCase()));
+    if (matchesMember && matchesFilter) acc.push(i);
     return acc;
   }, []);
+}
+
+function rebuildMemberSelector() {
+  const selector = document.getElementById("member-selector");
+  const members = getMembers();
+  selector.innerHTML = "<option value=\"\">Todos los miembros</option>";
+  members.forEach(member => {
+    const opt = document.createElement("option");
+    opt.value = member;
+    opt.textContent = member;
+    selector.appendChild(opt);
+  });
+  if (!members.includes(activeMember)) activeMember = "";
+  selector.value = activeMember;
 }
 
 function rebuildSelector(filtered, showIdx) {
   const selector = document.getElementById("entry-selector");
   selector.innerHTML = "";
+  if (!filtered.length) {
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = "Sin entradas";
+    selector.appendChild(opt);
+    showEntry(null);
+    return;
+  }
   filtered.forEach(i => {
     const opt = document.createElement("option");
     opt.value = String(i);
-    opt.textContent = entries[i].date + "  —  " + formatEntryTimes(entries[i]);
+    opt.textContent = entries[i].date + "  —  " + getEntryMember(entries[i]) + "  —  " + formatEntryTimes(entries[i]);
     selector.appendChild(opt);
   });
   const target = filtered.includes(showIdx) ? showIdx : filtered[0];
@@ -5091,13 +5135,23 @@ function rebuildSelector(filtered, showIdx) {
 
 function showEntry(idx) {
   document.querySelectorAll(".entry").forEach(e => e.classList.remove("active"));
+  if (idx === null || idx === undefined || Number.isNaN(idx)) {
+    document.getElementById("entry-selector").value = "";
+    return;
+  }
   const div = document.getElementById("entry-" + idx);
   if (div) div.classList.add("active");
   document.getElementById("entry-selector").value = String(idx);
 }
 
 document.getElementById("entry-selector").addEventListener("change", e => {
-  showEntry(Number(e.target.value));
+  showEntry(e.target.value === "" ? null : Number(e.target.value));
+});
+
+document.getElementById("member-selector").addEventListener("change", e => {
+  activeMember = e.target.value;
+  const filtered = getFiltered();
+  rebuildSelector(filtered, filtered[0]);
 });
 
 document.querySelectorAll(".filter-btn").forEach(btn => {
@@ -5116,13 +5170,16 @@ function wantsLatest() {
 }
 function goToLatest() {
   activeFilter = "";
+  activeMember = "";
   document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b.dataset.filter === ""));
+  rebuildMemberSelector();
   const filtered = getFiltered();           // entries ya están ordenadas descendente
   rebuildSelector(filtered, filtered[0]);   // filtered[0] = entrada más reciente
 }
 window.addEventListener("hashchange", () => { if (location.hash === "#latest") goToLatest(); });
 
 // Init: show all, most recent entry (entries are sorted descending)
+rebuildMemberSelector();
 rebuildSelector(getFiltered(), 0);
 if (wantsLatest()) goToLatest();
 
@@ -5180,6 +5237,7 @@ if (wantsLatest()) goToLatest();
       entries.sort((a, b) => b.date.localeCompare(a.date));
       const cur = Number(document.getElementById("entry-selector").value) || 0;
       buildEntries();
+      rebuildMemberSelector();
       rebuildSelector(getFiltered(), cur);
       if (wantsLatest()) goToLatest();
       installGlassesVideoLightbox();
@@ -5771,6 +5829,7 @@ if (wantsLatest()) goToLatest();
     entries.sort((a, b) => b.date.localeCompare(a.date));
 
     buildEntries();
+    rebuildMemberSelector();
     document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
     document.querySelector('[data-filter="Yarig.ai"]').classList.add("active");
     activeFilter = "Yarig.ai";

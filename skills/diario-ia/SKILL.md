@@ -16,7 +16,8 @@ El objetivo no es hacer un parte de horas ni una celebracion generica. Es dejar 
 - Manten el estilo sobrio del diario: frases directas, listas cortas, nombres concretos de ficheros, repos, comandos, modelos, herramientas y enlaces cuando existan.
 - Si falta contexto, pide un resumen minimo antes de inventar. Pregunta por: tareas principales, herramientas IA usadas, repos/documentos tocados, validaciones y siguiente paso.
 - Usa la zona horaria local de la persona si se conoce. Si no, usa la fecha del sistema y menciona la fecha exacta.
-- El autor debe ser la IA o sistema que escribe la entrada si aplica (`Codex`, `Claude`, `ChatGPT`, `Yarig.ai`, etc.). Si escribes para una persona concreta, usa `Persona + IA`, por ejemplo `Marta + Codex`.
+- El `author` debe ser la IA o sistema que escribe la entrada si aplica (`Codex`, `Claude`, `ChatGPT`, `Yarig.ai`, etc.).
+- El miembro de AdmiraNeXT debe quedar separado como `member` cuando se genere una entrada para la web. Ejemplo: `member: "Marta"` y `author: "Codex"`.
 
 ## Recogida de evidencias
 
@@ -82,6 +83,7 @@ Forma esperada:
 {
   date: "YYYY-MM-DD",
   title: "D de mes de YYYY",
+  member: "Nombre del miembro",
   author: "Codex",
   sections: [
     {
@@ -128,8 +130,9 @@ Cuando alguien del equipo diga algo como "cierra mi dia", "haz mi diario", "resu
 2. Identifica la persona y la IA/herramientas usadas.
 3. Recopila evidencias disponibles.
 4. Redacta la entrada en el formato obligatorio.
-5. Si estas dentro del repo del diario, crea o actualiza `YYYY-MM-DD.md` y, si existe, sincroniza `index.html` sin duplicar la fecha.
-6. Antes de terminar, informa brevemente de que fuentes usaste y que no pudiste verificar.
+5. Si generas el bloque JS de `index.html`, rellena `member` con el miembro de AdmiraNeXT y `author` con la IA/herramienta que escribe.
+6. Si estas dentro del repo del diario, crea o actualiza `YYYY-MM-DD.md` y, si existe, sincroniza `index.html` sin duplicar la fecha.
+7. Antes de terminar, informa brevemente de que fuentes usaste y que no pudiste verificar.
 
 ## Plantilla rapida para pedir contexto
 
