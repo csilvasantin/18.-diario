@@ -484,7 +484,9 @@ const entries = [
           "Se creo la skill local en <code>.codex/skills/diario-ia/</code> con <code>SKILL.md</code> y <code>example-entry.md</code>, incluyendo reglas de evidencia, formato Markdown y version JS para el array <code>entries</code>.",
           "Se publico la skill en el repo del diario bajo <code>skills/diario-ia/</code>, con una landing <code>index.html</code>, los fuentes <code>SKILL.md</code> y <code>example-entry.md</code>, y el descargable <code>diario-ia.zip</code>.",
           "Se enlazo la skill desde la cabecera del diario como <code>skill Diario IA</code>, conservando la cabecera remota actual con Consejo, handoff <code>HX-TMUR</code>, Meta y <code>repos.html</code>.",
-          "Se hizo rebase sobre <code>origin/main</code> cuando el remoto avanzo durante la publicacion y se resolvio el conflicto de <code>index.html</code> conservando la version remota reciente y anadiendo el enlace de la skill."
+          "Se hizo rebase sobre <code>origin/main</code> cuando el remoto avanzo durante la publicacion y se resolvio el conflicto de <code>index.html</code> conservando la version remota reciente y anadiendo el enlace de la skill.",
+          "En esta corrida de automatizacion del diario se revisaron <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git log --since='2026-06-03 00:00' --until='2026-06-03 23:59:59' --date=iso --stat --oneline --all</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> para cerrar la fecha con evidencia adicional real.",
+          "Se detecto que el worktree de automatizacion estaba en detached HEAD y desfasado respecto a <code>origin/main</code>, asi que la publicacion final del diario se rehizo desde un clon temporal limpio para no pisar entradas remotas del mismo dia."
         ]
       },
       {
@@ -494,7 +496,8 @@ const entries = [
           "<code>rg -n '2026-06-03|3 de junio de 2026|Skill Diario IA|diario-ia|38adf54|9ef259e' 2026-06-03.md index.html README.md</code> confirmo que ya existia una entrada de Claude para hoy y que la skill estaba enlazada en <code>README.md</code> e <code>index.html</code>.",
           "<code>git log --since='2026-06-03 00:00' --until='2026-06-03 23:59:59' --date=iso --stat --oneline --all</code> mostro los commits <code>38adf54</code> (<code>Publicar skill Diario IA para AdmiraNeXT [Codex]</code>) y <code>9ef259e</code> (<code>Corregir enlace publico de skill Diario IA [Codex]</code>).",
           "Se comprobaron con peticiones publicas que <a href='https://www.carlossilva.info/18.-diario/skills/diario-ia/index.html' target='_blank'>la landing de Diario IA</a> y <a href='https://www.carlossilva.info/18.-diario/skills/diario-ia/diario-ia.zip' target='_blank'>el ZIP descargable</a> responden <code>200</code>.",
-          "La portada <a href='https://www.carlossilva.info/18.-diario/' target='_blank'>del diario</a> ya mostraba el texto <code>skill Diario IA</code>, aunque durante la propagacion seguia cacheando temporalmente el href anterior <code>skills/diario-ia/</code>."
+          "La portada <a href='https://www.carlossilva.info/18.-diario/' target='_blank'>del diario</a> ya mostraba el texto <code>skill Diario IA</code>, aunque durante la propagacion seguia cacheando temporalmente el href anterior <code>skills/diario-ia/</code>.",
+          "<code>git remote -v</code> en el worktree de automatizacion confirmo <code>https://github.com/csilvasantin/diario.git</code> como remoto de fetch y push, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-03 21:31:43 CEST +0200</code> al iniciar este cierre."
         ]
       },
       {
@@ -510,7 +513,8 @@ const entries = [
         items: [
           "El primer <code>git push origin main</code> fue rechazado porque <code>origin/main</code> habia avanzado; se integro con <code>git pull --rebase origin main</code>.",
           "Durante el rebase hubo conflicto en <code>index.html</code> porque la cabecera remota habia cambiado; se resolvio sin perder los enlaces nuevos del diario.",
-          "La URL de carpeta <code>skills/diario-ia/</code> devolvia <code>404</code> en GitHub Pages, mientras <code>skills/diario-ia/index.html</code> respondia correctamente; por eso se corrigio el enlace publico a la ruta explicita."
+          "La URL de carpeta <code>skills/diario-ia/</code> devolvia <code>404</code> en GitHub Pages, mientras <code>skills/diario-ia/index.html</code> respondia correctamente; por eso se corrigio el enlace publico a la ruta explicita.",
+          "El <code>git push origin HEAD:main</code> intentado desde el worktree de automatizacion fue rechazado porque <code>origin/main</code> habia avanzado y ese worktree no podia hacer <code>rebase</code> por permisos sobre su metadata enlazada."
         ]
       },
       {
@@ -518,7 +522,8 @@ const entries = [
         items: [
           "Publicar la skill dentro del propio diario para que el lugar donde se escribe el formato sea tambien el lugar donde se descarga la herramienta.",
           "Mantener el ZIP minimo con <code>SKILL.md</code> y <code>example-entry.md</code>, evitando meter la landing de publicacion dentro de la carpeta que el equipo instala.",
-          "Usar la URL de <code>www.carlossilva.info</code> como referencia publica principal, porque fue la ruta real comprobada para la landing y el ZIP."
+          "Usar la URL de <code>www.carlossilva.info</code> como referencia publica principal, porque fue la ruta real comprobada para la landing y el ZIP.",
+          "Para este cierre, publicar desde un clon temporal limpio en <code>/tmp</code> en vez de reutilizar el checkout escribible de <code>Documents</code>, porque ese repo local contenia cambios ajenos muy atrasados respecto a <code>origin/main</code>."
         ]
       },
       {
