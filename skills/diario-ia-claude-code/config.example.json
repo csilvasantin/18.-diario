@@ -1,0 +1,10 @@
+{
+  "repo": "https://github.com/USUARIO/REPO-DIARIO.git",
+  "branch": "main",
+  "publicUrl": "https://tu-dominio/diario/",
+  "pagesApi": "USUARIO/REPO-DIARIO",
+  "author": "Claude",
+  "git": { "name": "Tu Nombre", "email": "tu@correo" },
+  "locale": "es",
+  "timezone": "Europe/Madrid"
+}
