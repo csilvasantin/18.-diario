@@ -351,6 +351,60 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
+          "Se leyo la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y se comprobo la memoria de la automatizacion en <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code>, que seguia sin notas previas para esta corrida.",
+          "Se ejecuto el pre-check requerido en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-05 00:00' --until='2026-06-05 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-05 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se inspeccionaron <code>git log HEAD..origin/main</code>, <code>git show origin/main:2026-06-05.md</code>, <code>git show origin/main:index.html</code> y <code>git merge --ff-only origin/main</code> para sincronizar este checkout con la punta remota real antes de seguir editando.",
+          "Se actualizo <code>2026-06-05.md</code> con este segundo bloque <code>[Codex]</code> y se anadio una segunda entrada <code>Codex</code> del <code>2026-06-05</code> al array <code>entries</code> de <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio inicialmente <code>## main...origin/main</code>, confirmando que el checkout estaba limpio antes de editar.",
+          "<code>git log --since='2026-06-05 00:00' --until='2026-06-05 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-05 00:00'</code> no devolvieron actividad del <code>2026-06-05</code> en este checkout local antes de esta sesion.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-05 23:56:45 CEST +0200</code>, fijando la fecha efectiva de este cierre.",
+          "<code>git log --oneline HEAD..origin/main</code> mostro los commits <code>89d4f7b chore: actualizar repos.html 2026-06-05 [skip ci]</code> y <code>f25c28f Diario 2026-06-05 [Codex]</code>, y <code>git merge --ff-only origin/main</code> avanzo este checkout de <code>f6d356d</code> a <code>f25c28f</code>.",
+          "Ese fast-forward elimino <code>2026-06-04.md</code>, creo <code>2026-06-05.md</code> y reescribio <code>index.html</code> y <code>repos.html</code>, dejando este checkout alineado con el estado publicado en remoto antes de anadir este bloque."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-06-05</code> queda actualizada en el mismo fichero del dia, conservando la entrada <code>Codex</code> ya publicada en remoto y sumando el cierre real de esta corrida.",
+          "<code>index.html</code> queda preparado para mostrar dos entradas <code>Codex</code> del <code>2026-06-05</code>, ambas visibles en la UI publica bajo los filtros <code>Todos</code> y <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El remoto <code>origin</code> configurado en este checkout sigue siendo <code>https://github.com/csilvasantin/18.-diario.git</code>, distinto del repositorio <code>https://github.com/csilvasantin/diario.git</code> documentado en la rutina local.",
+          "Este checkout local estaba desfasado dos commits respecto a <code>origin/main</code>, asi que no era seguro publicar sin sincronizar primero sobre la punta remota real.",
+          "La fuente canonica online no se pudo contrastar desde esta sesion, asi que la ejecucion se apoyo en la copia local verificada."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Editar sobre el estado real de <code>origin/main</code> en lugar de intentar publicar desde el snapshot local anterior a <code>f25c28f</code>.",
+          "Mantener la regla de un unico fichero por fecha, anadiendo este segundo cierre <code>Codex</code> en <code>2026-06-05.md</code> separado por <code>---</code> en vez de sobrescribir la entrada ya existente del mismo dia."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-06-05.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-06-05 [Codex]</code>, hacer <code>git push origin main</code> y verificar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-06-05",
+    title: "5 de junio de 2026",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
           "Se reviso el worktree de automatizacion del diario en <code>/Users/csilvasantin/.codex/worktrees/5710/diario</code> y se confirmo que arrancaba limpio en <code>HEAD (no branch)</code>, sin memoria previa en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code>.",
           "Se inspeccionaron <code>2026-06-03.md</code>, <code>index.html</code> y el historial del dia para seguir el formato vigente de una sola entrada Markdown por fecha y reflejo separado por autor dentro de <code>const entries</code>.",
           "Se tomo como evidencia previa del dia el commit <code>6ed45bc</code> (<code>Codex worktree snapshot: startup-cleanup</code>), fechado a las <code>21:32:29 CEST</code>, que habia anadido una entrada retrospectiva de <code>2026-05-28.md</code> y su bloque publico correspondiente en <code>index.html</code>.",
