@@ -344,107 +344,53 @@
 <script>
 const entries = [
   {
-    date: "2026-06-04",
-    title: "4 de junio de 2026",
-    author: "Charlie Brown · Xtanco Barcelona",
-    xpacio: "Xtanco Barcelona",
-    updateTime: "09:16",
-    sections: [
-      {
-        heading: "Jornada · cajero · Xtanco Barcelona",
-        items: [
-          "Atención en caja, cobros y atención al cliente.",
-          "Tienda: Xtanco Barcelona · jornada hasta las 09:12.",
-          "Balance del día: 0 ventas · 4 clientes atendidos · satisfacción 97%.",
-          "Antigüedad en el equipo desde 04/06/26 09:16."
-        ]
-      }
-    ]
-  },
-  {
-    date: "2026-06-04",
-    title: "4 de junio de 2026",
+    date: "2026-06-05",
+    title: "5 de junio de 2026",
     author: "Codex",
     sections: [
       {
         heading: "Que se hizo",
         items: [
-          "Se leyo la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y se reviso la memoria de la automatizacion en <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code>, que no contenia contexto previo util en esta corrida.",
-          "Se ejecuto el pre-check requerido en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-04 00:00' --until='2026-06-04 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-04 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se inspeccionaron <code>2026-06-03.md</code>, <code>index.html</code> y <code>git remote -v</code> para seguir el formato vigente del diario y contrastar el remoto configurado con la rutina local.",
-          "Se creo esta entrada <code>2026-06-04.md</code> y se anadio su reflejo al array <code>entries</code> de <code>index.html</code> para que la fecha de hoy aparezca en la UI publica bajo el filtro <code>Codex</code>."
+          "Se reviso el worktree de automatizacion del diario en <code>/Users/csilvasantin/.codex/worktrees/5710/diario</code> y se confirmo que arrancaba limpio en <code>HEAD (no branch)</code>, sin memoria previa en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code>.",
+          "Se inspeccionaron <code>2026-06-03.md</code>, <code>index.html</code> y el historial del dia para seguir el formato vigente de una sola entrada Markdown por fecha y reflejo separado por autor dentro de <code>const entries</code>.",
+          "Se tomo como evidencia previa del dia el commit <code>6ed45bc</code> (<code>Codex worktree snapshot: startup-cleanup</code>), fechado a las <code>21:32:29 CEST</code>, que habia anadido una entrada retrospectiva de <code>2026-05-28.md</code> y su bloque publico correspondiente en <code>index.html</code>.",
+          "Se creo <code>2026-06-05.md</code> y se actualizo <code>index.html</code> para que la portada publica muestre el cierre de hoy bajo el filtro <code>Codex</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout estaba limpio y situado en <code>main</code> antes de editar.",
-          "<code>git log --since='2026-06-04 00:00' --until='2026-06-04 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-04 00:00'</code> no devolvieron actividad del <code>2026-06-04</code> en este checkout antes de esta sesion.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-04 23:58:06 CEST +0200</code>, fijando la fecha efectiva de este cierre.",
-          "<code>git remote -v</code> devolvio <code>https://github.com/csilvasantin/18.-diario.git</code> para <code>origin</code>, mientras la rutina local documenta <code>https://github.com/csilvasantin/diario.git</code> como remoto esperado."
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-05 21:33:18 CEST +0200</code>, fijando la fecha efectiva de esta actualizacion.",
+          "<code>git log --since='2026-06-05 00:00' --until='2026-06-05 23:59:59' --date=iso --stat --oneline --all</code> mostro el commit <code>6ed45bc Codex worktree snapshot: startup-cleanup</code>.",
+          "<code>git show --stat --format=fuller 6ed45bc</code> y <code>git show --format=medium --unified=0 6ed45bc -- 2026-05-28.md index.html</code> confirmaron que ese snapshot introdujo <code>23</code> lineas en <code>2026-05-28.md</code> y <code>44</code> en <code>index.html</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-04</code> queda cubierta con su fichero Markdown dedicado y con entrada visible en la portada publica del diario una vez se publique <code>main</code>.",
-          "El cierre de hoy queda registrado siguiendo la regla de un unico fichero por fecha y con firma explicita <code>[Codex]</code> en el titulo."
+          "El diario vuelve a quedar cubierto para la fecha <code>2026-06-05</code> con un unico fichero Markdown y una entrada visible en la interfaz HTML publica.",
+          "La automatizacion recupera memoria persistente a partir de hoy para no repetir contexto innecesario en siguientes ejecuciones."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El remoto <code>origin</code> configurado en este checkout no coincide con la URL de repositorio descrita en la rutina local.",
-          "La fuente canonica online no se pudo contrastar desde esta sesion, asi que la ejecucion se apoyo en la copia local verificada."
+          "El worktree de automatizacion sigue en detached HEAD, asi que la publicacion requiere empujar explicitamente <code>HEAD</code> contra <code>origin/main</code> en lugar de hacer un push de rama convencional.",
+          "La memoria de <code>actualizar-diario-2</code> no existia al inicio de la sesion, por lo que no habia contexto acumulado de ejecuciones anteriores."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo hechos observables en esta sesion y en el historial real del checkout, sin atribuir trabajo no verificado a la fecha.",
-          "Seguir la copia local <code>CERRAR-EL-DIA.md</code> como referencia operativa directa para esta corrida."
+          "Registrar solo actividad verificable del 5 de junio dentro de este repositorio y de esta sesion, sin inferir trabajo externo no trazado en git.",
+          "Tratar el commit <code>6ed45bc</code> y esta actualizacion del diario como las dos evidencias reales del trabajo de Codex de hoy en <code>diario</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff de <code>2026-06-04.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-06-04 [Codex]</code>, hacer <code>git push origin main</code> y verificar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
-        ]
-      }
-    ]
-  },
-  {
-    date: "2026-06-03",
-    title: "3 de junio de 2026",
-    author: "Pedrito · Súper Santa Rosa",
-    xpacio: "Súper Santa Rosa",
-    updateTime: "21:44",
-    sections: [
-      {
-        heading: "Jornada · cajero · Súper Santa Rosa",
-        items: [
-          "Atención en caja, cobros y atención al cliente.",
-          "Tienda: Súper Santa Rosa · jornada hasta las 08:21.",
-          "Balance del día: 0 ventas · 3 clientes atendidos · satisfacción 68%.",
-          "Antigüedad en el equipo desde 03/06/26 19:17."
-        ]
-      }
-    ]
-  },
-  {
-    date: "2026-06-03",
-    title: "3 de junio de 2026",
-    author: "Pedrete · Súper Santa Rosa",
-    xpacio: "Súper Santa Rosa",
-    updateTime: "21:39",
-    sections: [
-      {
-        heading: "Jornada · cajero · Súper Santa Rosa",
-        items: [
-          "Atención en caja, cobros y atención al cliente.",
-          "Tienda: Súper Santa Rosa · jornada hasta las 08:00.",
-          "Balance del día: 0 ventas · 0 clientes atendidos · satisfacción 65%.",
-          "Antigüedad en el equipo desde 03/06/26 19:17."
+          "Validar el diff de <code>2026-06-05.md</code> e <code>index.html</code>, crear el commit de publicacion y empujarlo a <code>origin/main</code>.",
+          "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo y deje visible la fecha <code>2026-06-05</code>."
         ]
       }
     ]
@@ -590,9 +536,7 @@ const entries = [
           "Se creo la skill local en <code>.codex/skills/diario-ia/</code> con <code>SKILL.md</code> y <code>example-entry.md</code>, incluyendo reglas de evidencia, formato Markdown y version JS para el array <code>entries</code>.",
           "Se publico la skill en el repo del diario bajo <code>skills/diario-ia/</code>, con una landing <code>index.html</code>, los fuentes <code>SKILL.md</code> y <code>example-entry.md</code>, y el descargable <code>diario-ia.zip</code>.",
           "Se enlazo la skill desde la cabecera del diario como <code>skill Diario IA</code>, conservando la cabecera remota actual con Consejo, handoff <code>HX-TMUR</code>, Meta y <code>repos.html</code>.",
-          "Se hizo rebase sobre <code>origin/main</code> cuando el remoto avanzo durante la publicacion y se resolvio el conflicto de <code>index.html</code> conservando la version remota reciente y anadiendo el enlace de la skill.",
-          "En esta corrida de automatizacion del diario se revisaron <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git log --since='2026-06-03 00:00' --until='2026-06-03 23:59:59' --date=iso --stat --oneline --all</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> para cerrar la fecha con evidencia adicional real.",
-          "Se detecto que el worktree de automatizacion estaba en detached HEAD y desfasado respecto a <code>origin/main</code>, asi que la publicacion final del diario se rehizo desde un clon temporal limpio para no pisar entradas remotas del mismo dia."
+          "Se hizo rebase sobre <code>origin/main</code> cuando el remoto avanzo durante la publicacion y se resolvio el conflicto de <code>index.html</code> conservando la version remota reciente y anadiendo el enlace de la skill."
         ]
       },
       {
@@ -602,8 +546,7 @@ const entries = [
           "<code>rg -n '2026-06-03|3 de junio de 2026|Skill Diario IA|diario-ia|38adf54|9ef259e' 2026-06-03.md index.html README.md</code> confirmo que ya existia una entrada de Claude para hoy y que la skill estaba enlazada en <code>README.md</code> e <code>index.html</code>.",
           "<code>git log --since='2026-06-03 00:00' --until='2026-06-03 23:59:59' --date=iso --stat --oneline --all</code> mostro los commits <code>38adf54</code> (<code>Publicar skill Diario IA para AdmiraNeXT [Codex]</code>) y <code>9ef259e</code> (<code>Corregir enlace publico de skill Diario IA [Codex]</code>).",
           "Se comprobaron con peticiones publicas que <a href='https://www.carlossilva.info/18.-diario/skills/diario-ia/index.html' target='_blank'>la landing de Diario IA</a> y <a href='https://www.carlossilva.info/18.-diario/skills/diario-ia/diario-ia.zip' target='_blank'>el ZIP descargable</a> responden <code>200</code>.",
-          "La portada <a href='https://www.carlossilva.info/18.-diario/' target='_blank'>del diario</a> ya mostraba el texto <code>skill Diario IA</code>, aunque durante la propagacion seguia cacheando temporalmente el href anterior <code>skills/diario-ia/</code>.",
-          "<code>git remote -v</code> en el worktree de automatizacion confirmo <code>https://github.com/csilvasantin/diario.git</code> como remoto de fetch y push, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-03 21:31:43 CEST +0200</code> al iniciar este cierre."
+          "La portada <a href='https://www.carlossilva.info/18.-diario/' target='_blank'>del diario</a> ya mostraba el texto <code>skill Diario IA</code>, aunque durante la propagacion seguia cacheando temporalmente el href anterior <code>skills/diario-ia/</code>."
         ]
       },
       {
@@ -619,8 +562,7 @@ const entries = [
         items: [
           "El primer <code>git push origin main</code> fue rechazado porque <code>origin/main</code> habia avanzado; se integro con <code>git pull --rebase origin main</code>.",
           "Durante el rebase hubo conflicto en <code>index.html</code> porque la cabecera remota habia cambiado; se resolvio sin perder los enlaces nuevos del diario.",
-          "La URL de carpeta <code>skills/diario-ia/</code> devolvia <code>404</code> en GitHub Pages, mientras <code>skills/diario-ia/index.html</code> respondia correctamente; por eso se corrigio el enlace publico a la ruta explicita.",
-          "El <code>git push origin HEAD:main</code> intentado desde el worktree de automatizacion fue rechazado porque <code>origin/main</code> habia avanzado y ese worktree no podia hacer <code>rebase</code> por permisos sobre su metadata enlazada."
+          "La URL de carpeta <code>skills/diario-ia/</code> devolvia <code>404</code> en GitHub Pages, mientras <code>skills/diario-ia/index.html</code> respondia correctamente; por eso se corrigio el enlace publico a la ruta explicita."
         ]
       },
       {
@@ -628,8 +570,7 @@ const entries = [
         items: [
           "Publicar la skill dentro del propio diario para que el lugar donde se escribe el formato sea tambien el lugar donde se descarga la herramienta.",
           "Mantener el ZIP minimo con <code>SKILL.md</code> y <code>example-entry.md</code>, evitando meter la landing de publicacion dentro de la carpeta que el equipo instala.",
-          "Usar la URL de <code>www.carlossilva.info</code> como referencia publica principal, porque fue la ruta real comprobada para la landing y el ZIP.",
-          "Para este cierre, publicar desde un clon temporal limpio en <code>/tmp</code> en vez de reutilizar el checkout escribible de <code>Documents</code>, porque ese repo local contenia cambios ajenos muy atrasados respecto a <code>origin/main</code>."
+          "Usar la URL de <code>www.carlossilva.info</code> como referencia publica principal, porque fue la ruta real comprobada para la landing y el ZIP."
         ]
       },
       {
@@ -638,65 +579,6 @@ const entries = [
           "Compartir <a href='https://www.carlossilva.info/18.-diario/skills/diario-ia/index.html' target='_blank'>la pagina de descarga</a> con el equipo de AdmiraNeXT.",
           "Cuando alguien del equipo la instale, pedirle que pruebe: <code>usa diario-ia para cerrar mi dia</code> y revisar si necesita ejemplos especificos por rol.",
           "Revisar en unas horas que la portada del diario ya no sirve el href cacheado <code>skills/diario-ia/</code> y apunta directamente a <code>skills/diario-ia/index.html</code>."
-        ]
-      }
-    ]
-  },
-  {
-    date: "2026-06-03",
-    title: "3 de junio de 2026",
-    author: "Codex",
-    sections: [
-      {
-        heading: "Que se hizo",
-        items: [
-          "Se leyo la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>, se comprobo que la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> no existia todavia y se intento contrastar la fuente canonica online durante esta sesion.",
-          "Se ejecuto el pre-check requerido con <code>git status --short --branch</code>, <code>git log --since='2026-06-03 00:00' --until='2026-06-03 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-03 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se inspeccionaron <code>index.html</code>, <code>git remote -v</code> y la ausencia inicial de <code>2026-06-03.md</code> en este checkout para confirmar el estado real antes de editar.",
-          "Se creo un commit local <code>64d65ad</code> (<code>Diario 2026-06-03 [Codex]</code>), se intento <code>git push origin main</code>, el remoto lo rechazo con <code>fetch first</code>, y se hizo <code>git fetch origin main</code> seguido de <code>git rebase origin/main</code> para integrar la punta remota.",
-          "Durante el rebase se resolvieron conflictos en <code>2026-06-03.md</code> e <code>index.html</code>, conservando el contenido remoto ya publicado del <code>2026-06-03</code> y anadiendo este bloque <code>Codex</code> junto con su reflejo en la UI publica."
-        ]
-      },
-      {
-        heading: "Que se valido",
-        items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout estaba limpio sobre <code>main</code> antes de editar.",
-          "<code>git log --since='2026-06-03 00:00' --until='2026-06-03 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-03 00:00'</code> no devolvieron actividad previa del <code>2026-06-03</code> en este checkout antes de esta sesion.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-03 23:56:29 CEST +0200</code>, fijando la fecha efectiva de este cierre.",
-          "<code>git remote -v</code> devolvio <code>https://github.com/csilvasantin/18.-diario.git</code> para <code>origin</code>, distinto del URL de repositorio descrito en la rutina local.",
-          "<code>git push origin main</code> fue rechazado con <code>! [rejected] main -&gt; main (fetch first)</code>, y <code>git fetch origin main</code> actualizo <code>origin/main</code> de <code>644c113</code> a <code>0f61e96</code>.",
-          "<code>git show --stat --summary --format=fuller origin/main</code> confirmo que <code>0f61e96</code> fue <code>Diario 2026-06-03 [Pedrito · Súper Santa Rosa]</code>, y <code>git show origin/main:2026-06-03.md</code> mostro que la fecha ya existia en remoto con varias entradas previas del mismo dia."
-        ]
-      },
-      {
-        heading: "Avances",
-        items: [
-          "<code>2026-06-03.md</code> queda consolidado como fichero unico de la fecha, conservando las entradas remotas ya publicadas y sumando este cierre <code>Codex</code>.",
-          "<code>index.html</code> queda preparado para mostrar tambien esta entrada del <code>2026-06-03</code> bajo los filtros <code>Todos</code> y <code>Codex</code>, sin perder los selectores ni las entradas remotas actuales."
-        ]
-      },
-      {
-        heading: "Problemas encontrados",
-        items: [
-          "La lectura directa de la fuente canonica online no devolvio el documento durante esta sesion, asi que la ejecucion se apoyo en la copia local verificada.",
-          "La memoria de la automatizacion todavia no existia al inicio de esta corrida.",
-          "El remoto configurado sigue siendo <code>https://github.com/csilvasantin/18.-diario.git</code>, distinto del URL de repositorio descrito en la rutina local.",
-          "El primer intento de publicacion fallo por <code>non-fast-forward</code> porque <code>origin/main</code> avanzo durante esta sesion.",
-          "El remoto ya tenia <code>2026-06-03.md</code> e <code>index.html</code> modificados por otras publicaciones del mismo dia, lo que obligo a resolver conflictos durante el rebase."
-        ]
-      },
-      {
-        heading: "Decisiones tomadas",
-        items: [
-          "Registrar solo hechos verificados con comandos de <code>git</code>, la hora local obtenida con <code>date</code> y el trabajo real realizado en esta sesion.",
-          "Mantener la regla de un unico fichero por fecha, anadiendo este cierre <code>Codex</code> al <code>2026-06-03.md</code> remoto en lugar de sobrescribir el contenido ya publicado.",
-          "Tomar <code>index.html</code> como fuente operativa de la UI publica y resolver el conflicto conservando la version remota actual para anadir solo el bloque necesario de esta sesion."
-        ]
-      },
-      {
-        heading: "Siguientes pasos",
-        items: [
-          "Terminar el rebase, repetir <code>git push origin main</code> y verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la entrada <code>Codex</code> del <code>2026-06-03</code>."
         ]
       }
     ]
