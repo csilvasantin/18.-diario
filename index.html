@@ -346,6 +346,57 @@ const entries = [
   {
     date: "2026-06-05",
     title: "5 de junio de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion remota de Claude Code (Opus 4.7) sobre el repo <code>18.-diario</code> en la rama <code>main-e74gh</code> para ejecutar la rutina <code>CERRAR-EL-DIA.md</code> del 5 de junio.",
+          "Se reviso el estado del repo (<code>git status</code>, <code>git log</code> del dia, listado de ficheros) y se confirmo que la entrada [Codex] del 5 de junio ya estaba publicada en <code>2026-06-05.md</code> e <code>index.html</code> (commit <code>f25c28f</code>).",
+          "Se anadio esta seccion [Claude] al fichero <code>2026-06-05.md</code> (mismo dia, autor distinto, separados por <code>---</code> segun la regla 1-2-3) y este bloque <code>Claude</code> al array <code>entries</code> de <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-05 21:06:15 UTC +0000</code>, fijando la fecha efectiva del cierre.",
+          "<code>git log --since='2026-06-05 00:00' --until='2026-06-05 23:59:59' --date=iso --stat --oneline --all</code> mostro como unica actividad previa del 5 de junio en este repo los commits <code>f25c28f Diario 2026-06-05 [Codex]</code> y <code>89d4f7b chore: actualizar repos.html 2026-06-05 [skip ci]</code>.",
+          "La rama activa es <code>main-e74gh</code> (politica del entorno remoto), por lo que el push se hara contra <code>origin/main-e74gh</code> y la integracion a <code>main</code> se hara via Pull Request."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha 5 de junio queda cubierta por dos firmas que conviven en el mismo <code>2026-06-05.md</code>: [Codex] (ya existente) y [Claude] (esta sesion), conforme a la regla 1-2-3 del diario.",
+          "Tras el push y el merge del PR, la interfaz publica <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> mostrara el nuevo bloque [Claude] del 5 de junio."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No hubo trabajo previo de Claude en otros repos durante el 5 de junio que registrar, asi que la entrada se limita a la propia rutina de cierre, conforme a la regla \"si un dia no se ha hecho nada se documenta y ya esta\" (<code>CLAUDE.md</code>).",
+          "El entorno remoto fuerza desarrollar en la rama <code>main-e74gh</code> y prohibe push directo a <code>main</code>, lo que cambia el paso 4 del <code>CERRAR-EL-DIA.md</code> (push a <code>origin/main</code>) por un push a <code>origin/main-e74gh</code> + PR draft."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia con una entrada minima [Claude] en lugar de saltarsela, para que el histogramico del diario quede continuo y verificable.",
+          "No tocar <code>repos.html</code>: el workflow <code>update-repos.yml</code> lo regenera automaticamente tras el merge a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Commit + push de <code>2026-06-05.md</code> e <code>index.html</code> a <code>origin/main-e74gh</code> y apertura de PR draft hacia <code>main</code>.",
+          "Tras el merge del PR, verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra el bloque [Claude] del 5 de junio y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> se ha regenerado."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-06-05",
+    title: "5 de junio de 2026",
     author: "Codex",
     sections: [
       {
