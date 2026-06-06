@@ -395,6 +395,58 @@ const entries = [
     ]
   },
   {
+    date: "2026-06-06",
+    title: "6 de junio de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se abrio una sesion de Claude Code en el entorno remoto sobre el repo <code>csilvasantin/18.-diario</code>, rama de trabajo <code>main-49cjW</code>, con <code>working tree clean</code> y el remoto <code>origin</code> apuntando a <code>https://github.com/csilvasantin/18.-diario.git</code>.",
+          "Se reviso el estado del dia: el cierre del <code>2026-06-06</code> ya estaba publicado por Codex (commit <code>ac0dcf5 docs: Update Codex 2026-06-06 [skip ci]</code>) junto al regenerado automatico <code>fe4ed22 chore: actualizar repos.html 2026-06-06 [skip ci]</code>.",
+          "Se anadio este bloque <code>[Claude]</code> a <code>2026-06-06.md</code> y esta nueva entrada <code>Claude</code> del <code>2026-06-06</code> al array <code>entries</code> de <code>index.html</code>, para registrar el cierre del dia desde Claude Code."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-06 21:04:38 UTC +0000</code>, fijando la fecha efectiva de este cierre.",
+          "<code>git status</code> devolvio <code>On branch main-49cjW</code> con <code>nothing to commit, working tree clean</code> antes de empezar a editar.",
+          "<code>git log --since='2026-06-06 00:00' --until='2026-06-06 23:59:59' --date=iso --stat --oneline --all</code> mostro unicamente los dos commits de Codex/CI del dia (<code>ac0dcf5</code> y <code>fe4ed22</code>), confirmando que no habia trabajo previo de Claude pendiente de registrar en este repo hoy."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El <code>2026-06-06</code> queda cubierto en el mismo fichero del dia con dos bloques (<code>[Codex]</code> y <code>[Claude]</code>), respetando la regla de un unico fichero por fecha.",
+          "<code>index.html</code> queda preparado para mostrar la entrada de Claude del <code>2026-06-06</code> bajo los filtros <code>Todos</code> y <code>Claude</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Esta sesion corre en un entorno remoto efimero (no en el Mac Mini canonico), por lo que el push se hace a la rama de trabajo <code>main-49cjW</code> y la integracion a <code>main</code> se gestiona por PR, en vez de empujar directo a <code>origin/main</code> como describe la rutina local.",
+          "No habia trabajo de codigo previo realizado con Claude Code durante el dia en este repositorio: el unico contenido que aporta Claude hoy es este propio cierre del diario."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar honestamente que el unico trabajo de Claude del <code>2026-06-06</code> ha sido cerrar el dia, sin inventar actividad adicional (siguiendo la regla del proyecto: si un dia no se ha hecho nada, se documenta y ya esta).",
+          "Mantener intacto el bloque previo de Codex y sumar el bloque Claude separado por <code>---</code>, conservando la regla 1-2-3 del diario.",
+          "No tocar <code>repos.html</code> manualmente: la regeneracion la hace el workflow de GitHub Actions del repositorio."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Commit y push de <code>2026-06-06.md</code> e <code>index.html</code> a <code>origin/main-49cjW</code> y apertura del pull request en draft contra <code>main</code>.",
+          "Verificar tras el merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestre la entrada <code>Claude</code> del <code>2026-06-06</code> y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> quede regenerado por el workflow."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-05",
     title: "5 de junio de 2026",
     author: "Codex",
