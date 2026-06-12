@@ -364,7 +364,7 @@ const entries = [
           "Antes de sincronizar, <code>git status --short --branch</code> devolvio <code>## main...origin/main [behind 2]</code>; despues del fast-forward devolvio <code>## main...origin/main</code>, dejando este checkout alineado con remoto.",
           "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code> mostro los commits <code>aeb0c12 Skills portables /handoff y /handon + bootstrap install-skills.sh</code> y <code>4bad7ab chore: actualizar repos.html 2026-06-12 [skip ci]</code>, mientras que <code>git reflog --date=iso --since='2026-06-12 00:00'</code> no devolvio lineas antes de esta actualizacion.",
           "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-12 21:32:33 CEST +0200</code>, fijando la fecha efectiva del pre-check de esta entrada.",
-          "Tras el push, se comprobo con <code>curl</code> que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo y que el HTML publicado contiene <code>2026-06-12</code>."
+          "Tras el push, se comprobo con <code>curl</code> que <code>origin/main</code> ya sirve <code>index.html</code> con <code>2026-06-12</code> en <code>raw.githubusercontent.com</code>, mientras que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> seguia respondiendo <code>HTTP 200</code> pero todavia sin reflejar esa fecha en el HTML servido durante esta sesion."
         ]
       },
       {
