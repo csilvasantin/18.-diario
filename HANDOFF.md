@@ -1,5 +1,14 @@
 # Rutina "Handoff"
 
+> **Forma portable (recomendada):** esta rutina ya está empaquetada como skill de
+> Claude Code en [`skills/handoff/`](skills/handoff/SKILL.md) (y el reverso en
+> [`skills/handon/`](skills/handon/SKILL.md)). En un Mac nuevo: clona este repo y
+> ejecuta `bash install-skills.sh`. Luego basta decir "handoff" / "handon".
+> Este documento es la referencia del procedimiento.
+>
+> **Repo canónico: `csilvasantin/18.-diario`** → `https://csilvasantin.github.io/18.-diario/`.
+> (NO el viejo `csilvasantin/diario`.)
+
 Snapshot de continuidad: la IA captura el estado de trabajo del usuario en el Mac actual, le asigna un código corto y lo publica en el diario para que cualquier IA en cualquier otra máquina pueda retomar exactamente donde se dejó.
 
 ## Cuándo se invoca
@@ -43,7 +52,7 @@ ABCDEFGHJKMNPQRSTUVWXYZ23456789
 4. **Pre-check de repos**:
    - En el repo principal de la sesión (el que se ha tocado más): `git status --short --branch`, `git log -5 --oneline`, `git log @{u}..HEAD --oneline` (commits sin push).
    - En el resto de los 16 repos: solo si `git log --since='hoy 00:00' --oneline` devuelve algo, anota brevemente.
-5. **Crear `/Users/csilvasantin/Claude/diario/handoff/YYYY-MM-DD-CODE.md`** con esta plantilla:
+5. **Crear `"$REPO"/handoff/YYYY-MM-DD-CODE.md`** con esta plantilla:
 
    ```markdown
    # Handoff CODE — TÍTULO CORTO
@@ -72,7 +81,7 @@ ABCDEFGHJKMNPQRSTUVWXYZ23456789
    
    ## 7. Cómo retomar en la otra máquina
    ```bash
-   gh repo clone csilvasantin/diario && cd diario
+   gh repo clone csilvasantin/18.-diario && cd 18.-diario
    cat handoff/YYYY-MM-DD-CODE.md
    # luego clonar el repo activo y seguir desde ahí
    ```
@@ -81,7 +90,7 @@ ABCDEFGHJKMNPQRSTUVWXYZ23456789
 6. **Actualizar `index.html`** — añadir un atajo en la cabecera "Último handoff: HX-XXXX → handoff/YYYY-MM-DD-CODE.md". Si ya existe el atajo, sustituir.
 7. **Commit + push**:
    ```bash
-   cd /Users/csilvasantin/Claude/diario
+   cd "$REPO"
    git add handoff/YYYY-MM-DD-CODE.md index.html
    git commit -m "Handoff CODE — TÍTULO CORTO"
    git push origin main
@@ -89,13 +98,13 @@ ABCDEFGHJKMNPQRSTUVWXYZ23456789
 8. **Verificar URL pública** (esperar a que GitHub Pages haya servido el `.md` antes de enviar a Telegram):
    ```bash
    until curl -sS -o /dev/null -w '%{http_code}\n' \
-     https://csilvasantin.github.io/diario/handoff/YYYY-MM-DD-CODE.md \
+     https://csilvasantin.github.io/18.-diario/handoff/YYYY-MM-DD-CODE.md \
      | grep -q '^200$'; do sleep 8; done
    ```
 9. **Entregar el handoff por Telegram** con el script canónico — esto es el paso crítico para que el usuario pueda copy-pegar en cualquier máquina sin abrir nada:
    ```bash
-   /Users/csilvasantin/Claude/diario/scripts/send-handoff-telegram.py \
-     /Users/csilvasantin/Claude/diario/handoff/YYYY-MM-DD-CODE.md
+   "$REPO"/scripts/send-handoff-telegram.py \
+     "$REPO"/handoff/YYYY-MM-DD-CODE.md
    ```
    El script envía, por orden:
    - Un mensaje cabecera `📦 Handoff HX-XXXX · TÍTULO` con la URL pública.
@@ -115,12 +124,12 @@ Tres caminos posibles, todos válidos:
 
 **B) Vía URL pública**:
 - Abre la URL del mensaje cabecera de Telegram, es la canónica:
-  `https://csilvasantin.github.io/diario/handoff/YYYY-MM-DD-CODE.md`.
+  `https://csilvasantin.github.io/18.-diario/handoff/YYYY-MM-DD-CODE.md`.
 - Cualquier IA puede leer ese URL directamente.
 
 **C) Vía git en la nueva máquina**:
 ```bash
-gh repo clone csilvasantin/diario && cd diario
+gh repo clone csilvasantin/18.-diario && cd 18.-diario
 cat handoff/YYYY-MM-DD-CODE.md
 ```
 

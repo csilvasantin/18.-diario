@@ -27,7 +27,11 @@ import urllib.error
 from pathlib import Path
 
 BRIDGE = "https://admira-telegram-bridge.csilvasantin.workers.dev"
-PAGES_BASE = "https://csilvasantin.github.io/diario"
+# Repo raíz y URL pública se derivan de la ubicación del script (este fichero vive
+# en <repo>/scripts/), de modo que funcionen en cualquier máquina y con cualquier
+# nombre de repo (canónico: 18.-diario → github.io/18.-diario), sin rutas hardcoded.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+PAGES_BASE = f"https://csilvasantin.github.io/{REPO_ROOT.name}"
 CHUNK_LIMIT = 3500  # leave 596 chars of headroom under Telegram's 4096 limit
 HEADER_FMT = "[{code} · {i}/{n}]\n"
 
@@ -109,9 +113,8 @@ def parse_handoff(path: Path) -> tuple[str, str, str]:
 
 
 def relative_pages_url(path: Path) -> str:
-    """Convert /Users/.../diario/handoff/foo.md into the public Pages URL."""
-    repo_root = Path("/Users/csilvasantin/Claude/diario").resolve()
-    rel = path.resolve().relative_to(repo_root).as_posix()
+    """Convert <repo>/handoff/foo.md into the public Pages URL."""
+    rel = path.resolve().relative_to(REPO_ROOT).as_posix()
     return f"{PAGES_BASE}/{rel}"
 
 
@@ -121,7 +124,7 @@ def main() -> None:
         sys.exit(1)
     path = Path(sys.argv[1])
     if not path.is_file():
-        path = Path("/Users/csilvasantin/Claude/diario") / sys.argv[1]
+        path = REPO_ROOT / sys.argv[1]
     if not path.is_file():
         raise SystemExit(f"No existe el handoff: {sys.argv[1]}")
 

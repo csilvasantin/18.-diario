@@ -1,5 +1,20 @@
 # Diario
 
+## Arranque en un Mac nuevo (handoff / handon)
+
+Las rutinas de continuidad están empaquetadas como skills de Claude Code. Para que
+`/handoff` y `/handon` funcionen en cualquier máquina, una sola vez por Mac:
+
+```bash
+gh repo clone csilvasantin/18.-diario
+cd 18.-diario
+bash install-skills.sh   # crea symlinks en ~/.claude/skills/
+```
+
+Después basta decir "handoff" (generar snapshot) o "handon" (retomar). Si el repo no
+está clonado, el propio skill lo clona. Ver [`skills/handoff/`](skills/handoff/SKILL.md)
+y [`skills/handon/`](skills/handon/SKILL.md).
+
 ## 1 2 3 basico
 
 1. registrar lo importante por fecha;
