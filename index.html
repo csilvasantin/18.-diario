@@ -347,6 +347,62 @@ const entries = [
     date: "2026-06-12",
     title: "12 de junio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se abrio sesion de Claude Code en el remote execution environment sobre el checkout <code>/home/user/18.-diario/</code>, branch <code>main-6yt646</code>, working tree limpio respecto a <code>origin/main-6yt646</code>.",
+          "Se leyo <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> y se hizo el pre-check con <code>git status</code>, <code>git branch -a</code>, <code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se confirmo que la entrada del dia ya existia firmada por <code>[Codex]</code> (commits <code>d910bf8</code>, <code>1a9880d</code>, <code>d66d947</code>), por lo que se anadio un bloque <code>[Claude]</code> separado por <code>---</code> en el mismo fichero <code>2026-06-12.md</code> siguiendo la regla 1-2-3 del diario.",
+          "Se anadio la entrada correspondiente en <code>index.html</code> para que el filtro <code>Claude</code> muestre tambien <code>12 de junio de 2026</code>.",
+          "Se preparo commit y push a la rama de desarrollo <code>main-6yt646</code> (instruccion de sesion) y apertura de PR draft contra <code>main</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> antes de editar devolvio <code>On branch main-6yt646 / nothing to commit, working tree clean</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-12 21:02:44 UTC +0000</code>, fijando la hora efectiva del cierre en este entorno remoto.",
+          "<code>git log --since='2026-06-12 00:00' --all --pretty=format:'%H %ad %s' --date=iso</code> mostro los cinco commits del dia: <code>aeb0c12</code> (skills handoff/handon), <code>4bad7ab</code> (regeneracion automatica de <code>repos.html</code>), y los tres de Codex sobre la entrada del diario.",
+          "<code>repos.html</code> ya esta regenerado automaticamente con <code>generado 2026-06-12</code> por el workflow <code>update-repos.yml</code>, asi que esa pagina no requiere edicion manual."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada del dia queda firmada tambien por Claude, conviviendo con el bloque de Codex en un unico fichero <code>2026-06-12.md</code>.",
+          "La UI publica del diario tendra el filtro <code>Claude</code> poblado para <code>12 de junio de 2026</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rutina canonica <code>CERRAR-EL-DIA.md</code> indica push a <code>origin/main</code>, pero las instrucciones de esta sesion fijan la rama de desarrollo en <code>main-6yt646</code>. Se respeta la instruccion de sesion: push a <code>main-6yt646</code> y PR draft.",
+          "No se detecto trabajo externo del dia que registrar en este repo mas alla de los commits ya listados; conforme a 'si un dia no se ha hecho nada se documenta y ya esta', se registra esa observacion explicitamente."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Anadir el bloque <code>[Claude]</code> al fichero existente en vez de crear otro fichero, manteniendo una entrada por fecha.",
+          "No tocar <code>repos.html</code> porque su generacion es automatica via GitHub Actions.",
+          "Push a <code>main-6yt646</code> y abrir PR draft contra <code>main</code> para que el usuario revise antes de mezclar."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Que el usuario revise el PR draft y lo mezcle si procede.",
+          "Verificar despues del merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestre <code>12 de junio de 2026</code> bajo los filtros <code>Todos</code>, <code>Codex</code> y <code>Claude</code>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-06-12",
+    title: "12 de junio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       {
