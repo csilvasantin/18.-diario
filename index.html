@@ -344,6 +344,59 @@
 <script>
 const entries = [
   {
+    date: "2026-06-12",
+    title: "12 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>tail -n 20 ~/.agents-comms/dispatch/Oraculo.jsonl</code> para arrancar la sesion con contexto real de AgoraMatrix.",
+          "Se hizo <code>git fetch origin main</code> en <code>/Users/csilvasantin/Claude/diario</code> y se inspeccionaron los commits remotos <code>aeb0c12</code> (<code>Skills portables /handoff y /handon + bootstrap install-skills.sh</code>) y <code>4bad7ab</code> (<code>chore: actualizar repos.html 2026-06-12 [skip ci]</code>) como actividad verificable del dia.",
+          "Se reviso la actividad visible del dia en <code>00.-csilvasantin.github.io</code>, donde quedaron registradas actualizaciones horarias automaticas sobre <code>assets/actualizacion.log</code> y <code>assets/ultima-actualizacion.json</code>.",
+          "Se creo <code>2026-06-12.md</code> y se actualizo <code>index.html</code> para publicar este resumen del dia bajo el filtro <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-12 21:32:01 CEST +0200</code> durante el pre-check.",
+          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --pretty=format:'%h %ad %s' origin/main</code> mostro actividad remota del dia, pero <code>git grep -n \"2026-06-12\" origin/main -- .</code> solo encontro coincidencias en <code>repos.html</code>, asi que esta entrada aun no existia en remoto.",
+          "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> no devolvieron trabajo nuevo para Oraculo, y la bandeja local mostro mensajes previos de handoff y coordinacion SSH de la manana."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario queda cubierto para la fecha <code>2026-06-12</code> con un unico fichero Markdown firmado como <code>[Codex]</code>.",
+          "<code>index.html</code> queda preparado para mostrar un resumen breve del dia centrado en el handoff portable de AgoraMatrix y en la cadencia de actualizacion automatica visible en la web principal."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No aparecieron bloqueos funcionales en esta corrida; la limitacion principal fue que parte del contexto del dia solo estaba disponible a traves de trazas publicadas o commits ya visibles."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Tomar <code>origin/main</code> y AgoraMatrix como fuentes canonicas de hoy, en vez de inferir trabajo no documentado.",
+          "Resumir solo hechos verificables del <code>2026-06-12</code>, priorizando cambios publicados, coordinacion entre maquinas y estado operativo observable."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-06-12.md</code> e <code>index.html</code>.",
+          "Crear el commit <code>Diario 2026-06-12 [Codex]</code> y hacer <code>git push origin main</code>.",
+          "Verificar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la fecha <code>2026-06-12</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-11",
     title: "11 de junio de 2026",
     member: "Carlos Silva",
