@@ -352,19 +352,17 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se leyo <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code>, se reviso <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y se contrasto su contenido con la version canonica publicada en GitHub.",
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y se verifico la fuente canonica en <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que redirige al repo publico <code>csilvasantin/18.-diario</code>.",
           "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-12 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se detecto que la entrada existente <code>2026-06-12.md</code> y su bloque equivalente en <code>index.html</code> no seguian literalmente la plantilla porque faltaba la seccion <code>3. Avances</code> y la numeracion completa hasta <code>6</code>.",
-          "Se actualizan <code>2026-06-12.md</code> e <code>index.html</code> para dejar una unica entrada firmada <code>[Codex]</code> con las seis secciones numeradas exigidas por la rutina."
+          "Se revisaron la entrada existente <code>2026-06-12.md</code> y el bloque <code>const entries</code> de <code>index.html</code>, y se reescribieron ambos para dejar una sola entrada del dia firmada como <code>[Codex]</code> con las seis secciones requeridas."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "Antes de editar, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, y despues de <code>git fetch origin main</code> <code>HEAD</code> siguio alineado con <code>origin/main</code> en <code>87d7271</code>.",
-          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code> confirma actividad real hoy en este repo: <code>4bad7ab</code>, <code>aeb0c12</code>, <code>d910bf8</code>, <code>1a9880d</code>, <code>d66d947</code>, <code>1bf8ac6</code> y <code>87d7271</code>.",
-          "<code>git reflog --date=iso --since='2026-06-12 00:00'</code> confirma la secuencia local de commits del dia y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo esta pasada en <code>2026-06-12 23:57:28 CEST +0200</code>.",
-          "La copia local de <code>CERRAR-EL-DIA.md</code> coincide con la version canonica publicada en GitHub en el momento de esta revision."
+          "Antes de editar, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que este checkout estaba limpio y alineado con <code>origin/main</code>.",
+          "<code>git log</code> y <code>git reflog</code> del <code>2026-06-12</code> confirmaron actividad previa real en este repo: <code>4bad7ab</code>, <code>aeb0c12</code>, <code>d910bf8</code>, <code>1a9880d</code>, <code>d66d947</code>, <code>1bf8ac6</code> y <code>87d7271</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-12 23:57:28 CEST +0200</code>, y <code>git remote -v</code> confirmo que <code>origin</code> apunta a <code>https://github.com/csilvasantin/18.-diario.git</code>."
         ]
       },
       {
@@ -378,25 +376,25 @@ const entries = [
       {
         heading: "Problemas encontrados",
         items: [
-          "La entrada publicada del <code>2026-06-12</code> no cumplia literalmente la rutina: tenia cinco secciones efectivas y omitia <code>3. Avances</code>.",
-          "El bloque <code>entries</code> de <code>index.html</code> replicaba esa misma omision, asi que la interfaz publica tambien quedaba inconsistente respecto a la plantilla canonica.",
-          "En esta pasada no aparecieron bloqueos de dirty worktree, auth ni sincronizacion remota en el checkout canonico; el problema real fue de consistencia editorial."
+          "La entrada existente de <code>2026-06-12.md</code> no cumplia la estructura requerida porque faltaba la seccion <code>3. Avances</code>.",
+          "La version previa de la entrada y su reflejo en <code>index.html</code> mezclaban hechos de otros repos que no forman parte de este cierre en <code>/Users/csilvasantin/Claude/diario/</code>.",
+          "La URL canonica declarada en la instruccion publica redirige hoy a <code>https://github.com/csilvasantin/18.-diario/blob/main/CERRAR-EL-DIA.md</code>, asi que hubo que validar la rutina sobre la pagina redirigida."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Actualizar la entrada existente del <code>2026-06-12</code> en vez de crear otra, usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico.",
-          "Reescribir el resumen del dia para dejar solo hechos sostenidos por <code>git</code>, la lectura de la rutina y el trabajo ejecutado en esta sesion.",
-          "Mantener <code>origin/main</code> como base de trabajo y cerrar esta pasada con un commit final <code>Diario 2026-06-12 [Codex]</code>."
+          "Actualizar la entrada existente del <code>2026-06-12</code> en vez de crear otro fichero, siguiendo la regla de una fecha por archivo.",
+          "Reescribir el contenido de hoy para dejar solo hechos comprobados por comandos ejecutados en este repo y por el trabajo real de esta pasada.",
+          "Mantener <code>index.html</code> como espejo literal de la entrada del dia porque la portada publica consume el bloque embebido de <code>const entries</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff de <code>2026-06-12.md</code> e <code>index.html</code> para confirmar que ambos reflejan exactamente las seis secciones.",
+          "Revisar el diff final de <code>2026-06-12.md</code> e <code>index.html</code> antes del commit.",
           "Crear el commit <code>Diario 2026-06-12 [Codex]</code> y hacer <code>git push origin main</code>.",
-          "Verificar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la fecha <code>2026-06-12</code>."
+          "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responda y muestre la fecha <code>2026-06-12</code>."
         ]
       }
     ]
