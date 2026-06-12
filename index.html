@@ -352,41 +352,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "En <code>AdmiraNext-Team/AdmiraNext-Team</code> quedo preparado control de energia desde dashboard: nuevo <code>POST /api/machines/:id/power</code>, funciones <code>sleepMachine</code> y <code>wakeMachine</code> en <code>src/ssh-exec.js</code>, tabla WoL y refresco de <code>data/machines.json</code> con estados y notas mas recientes.",
-          "En el repo padre <code>AdmiraNext-Team</code> quedaron visibles los cambios de inventario en <code>data/machines.json</code> y dos capturas OCR nuevas sin commit en <code>src/ocr_admira-macmini_1776258845015.jpg</code> y <code>src/ocr_admira-macmini_1776258855252.jpg</code>.",
-          "En <code>diario</code> se publicaron hoy <code>repos.html</code>, las skills <code>/handoff</code> y <code>/handon</code>, <code>install-skills.sh</code> y la entrada del <code>2026-06-12</code>; esta pasada deja la nota del dia resumida y sin duplicados."
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code>, se reviso <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y se contrasto su contenido con la version canonica publicada en GitHub.",
+          "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-12 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se detecto que la entrada existente <code>2026-06-12.md</code> y su bloque equivalente en <code>index.html</code> no seguian literalmente la plantilla porque faltaba la seccion <code>3. Avances</code> y la numeracion completa hasta <code>6</code>.",
+          "Se actualizan <code>2026-06-12.md</code> e <code>index.html</code> para dejar una unica entrada firmada <code>[Codex]</code> con las seis secciones numeradas exigidas por la rutina."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log</code> en <code>/Users/csilvasantin/Claude/diario/</code> confirma actividad real hoy: <code>4bad7ab</code>, <code>aeb0c12</code>, <code>d910bf8</code>, <code>1a9880d</code> y <code>d66d947</code>.",
-          "<code>git status</code> en <code>/Users/csilvasantin/AdmiraNext-Team/</code> y en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team/</code> confirma que no hubo commits hoy alli, pero si cambios locales pendientes en <code>data/machines.json</code>, <code>src/server.js</code>, <code>src/ssh-exec.js</code> y material OCR.",
-          "<code>git diff</code> confirma que el control de energia combina <code>pmset displaysleepnow</code>, Wake-on-LAN y actualizaciones de estado, pero sigue sin validacion extremo a extremo registrada en git."
+          "Antes de editar, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, y despues de <code>git fetch origin main</code> <code>HEAD</code> siguio alineado con <code>origin/main</code> en <code>87d7271</code>.",
+          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code> confirma actividad real hoy en este repo: <code>4bad7ab</code>, <code>aeb0c12</code>, <code>d910bf8</code>, <code>1a9880d</code>, <code>d66d947</code>, <code>1bf8ac6</code> y <code>87d7271</code>.",
+          "<code>git reflog --date=iso --since='2026-06-12 00:00'</code> confirma la secuencia local de commits del dia y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> fijo esta pasada en <code>2026-06-12 23:57:28 CEST +0200</code>.",
+          "La copia local de <code>CERRAR-EL-DIA.md</code> coincide con la version canonica publicada en GitHub en el momento de esta revision."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El fichero <code>2026-06-12.md</code> queda normalizado con una sola entrada del dia y la firma <code>[Codex]</code>, respetando la regla de un fichero por fecha.",
+          "<code>index.html</code> queda alineado con ese contenido para que la UI publica siga mostrando <code>12 de junio de 2026</code> bajo <code>Todos</code> y <code>Codex</code>.",
+          "El cierre del dia queda reducido a hechos verificables de este repo y de esta sesion, sin arrastrar afirmaciones no comprobadas en comandos locales."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>src/server.js</code> en <code>AdmiraNext-Team/AdmiraNext-Team</code> tiene dos handlers para <code>/api/machines/:id/power</code>; el primero responde y hace <code>return</code> antes de que corra el segundo, dejando inalcanzable la proteccion especifica para <code>admira-macmini</code>.",
-          "<code>wakeMachine</code> depende de MACs cargadas a mano y todavia hay equipos sin MAC en la tabla, asi que el despertar remoto no esta cubierto para toda la flota.",
-          "Los cambios visibles en <code>AdmiraNext-Team</code> arrastran timestamps de abril y mayo, senal de workspace activo pero no cerrado ni limpiado hoy."
+          "La entrada publicada del <code>2026-06-12</code> no cumplia literalmente la rutina: tenia cinco secciones efectivas y omitia <code>3. Avances</code>.",
+          "El bloque <code>entries</code> de <code>index.html</code> replicaba esa misma omision, asi que la interfaz publica tambien quedaba inconsistente respecto a la plantilla canonica.",
+          "En esta pasada no aparecieron bloqueos de dirty worktree, auth ni sincronizacion remota en el checkout canonico; el problema real fue de consistencia editorial."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Actualizar la entrada existente del <code>2026-06-12</code> en vez de abrir otra, usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico.",
-          "Registrar como hecho solo lo verificable por <code>git</code> y <code>diff</code>; en <code>AdmiraNext-Team</code> se deja constancia de cambios presentes en workspace, no de una entrega finalizada.",
-          "Tratar el control de energia como avance parcial hasta unificar el endpoint y probar <code>sleep</code> y <code>wake</code> sobre una maquina no critica."
+          "Actualizar la entrada existente del <code>2026-06-12</code> en vez de crear otra, usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico.",
+          "Reescribir el resumen del dia para dejar solo hechos sostenidos por <code>git</code>, la lectura de la rutina y el trabajo ejecutado en esta sesion.",
+          "Mantener <code>origin/main</code> como base de trabajo y cerrar esta pasada con un commit final <code>Diario 2026-06-12 [Codex]</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Unificar <code>src/server.js</code> a un solo handler de <code>/power</code> y mantener la proteccion del Mac Mini antes de nuevas pruebas.",
-          "Completar las MACs faltantes y validar <code>sleep</code> y <code>wake</code> desde dashboard en una maquina distinta del servidor central.",
-          "Limpiar o commitar <code>data/machines.json</code> y las capturas OCR para que el repo no mezcle trabajo viejo con cambios actuales."
+          "Revisar el diff de <code>2026-06-12.md</code> e <code>index.html</code> para confirmar que ambos reflejan exactamente las seis secciones.",
+          "Crear el commit <code>Diario 2026-06-12 [Codex]</code> y hacer <code>git push origin main</code>.",
+          "Verificar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la fecha <code>2026-06-12</code>."
         ]
       }
     ]
