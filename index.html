@@ -352,48 +352,41 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "En <code>github-csilvasantin/AdmiraNext-Team</code> se rehizo la portada del panel con un tema arcade tipo <code>fighter select</code>: hero nuevo, selector de miembros, ficha destacada por persona, barras de stats y grid visual de maquinas; tambien se subio la version a <code>0.1.3</code>.",
-          "En ese mismo repo se amplio <code>data/machines.json</code> para el Mac Mini con <code>ip_local</code> y <code>connect_local</code>, y se refrescaron las capturas <code>snap-admira-macmini.jpg</code>, <code>snap-admira-macbookpronegro14.jpg</code> y <code>snap-admira-macbookair16.jpg</code>.",
-          "En el resto del workspace se registraron commits hoy en <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code>, <code>admira-app</code> y <code>xpaceos</code>, centrados en corregir el flujo Suno/PRO, exponer mejor letra y estilos, y sincronizar builds del gemelo.",
-          "Se actualizo esta misma entrada del <code>2026-06-12</code> en vez de crear otra, para dejar el diario alineado con el trabajo real del dia en Admirito."
+          "En <code>AdmiraNext-Team/AdmiraNext-Team</code> quedo preparado control de energia desde dashboard: nuevo <code>POST /api/machines/:id/power</code>, funciones <code>sleepMachine</code> y <code>wakeMachine</code> en <code>src/ssh-exec.js</code>, tabla WoL y refresco de <code>data/machines.json</code> con estados y notas mas recientes.",
+          "En el repo padre <code>AdmiraNext-Team</code> quedaron visibles los cambios de inventario en <code>data/machines.json</code> y dos capturas OCR nuevas sin commit en <code>src/ocr_admira-macmini_1776258845015.jpg</code> y <code>src/ocr_admira-macmini_1776258855252.jpg</code>.",
+          "En <code>diario</code> se publicaron hoy <code>repos.html</code>, las skills <code>/handoff</code> y <code>/handon</code>, <code>install-skills.sh</code> y la entrada del <code>2026-06-12</code>; esta pasada deja la nota del dia resumida y sin duplicados."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short</code> en <code>AdmiraNext-Team</code> devolvio 8 ficheros modificados coherentes con el rediseño: <code>data/machines.json</code>, tres capturas, <code>package.json</code>, <code>public/app.js</code>, <code>public/index.html</code> y <code>public/styles.css</code>.",
-          "<code>node src/server.js</code> arranco correctamente en <code>http://0.0.0.0:3030</code> y <code>curl http://127.0.0.1:3030/</code> respondio <code>HTTP 200</code>, confirmando que el panel sigue sirviendo HTML tras el cambio visual.",
-          "<code>curl http://127.0.0.1:3030/api/machines</code> devolvio el JSON esperado con la metadata SSH nueva del Mac Mini, incluida <code>ip_local: 192.168.0.118</code> y <code>connect_local</code>.",
-          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --oneline --all</code> confirmo actividad real hoy en <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code>, <code>admira-app</code> y <code>xpaceos</code>."
-        ]
-      },
-      {
-        heading: "Avances",
-        items: [
-          "<code>AdmiraNext-Team</code> ya no es solo un panel funcional: queda encaminado como dashboard visual del equipo, con foco en personas, maquinas y estado operativo.",
-          "El diario del <code>2026-06-12</code> queda corregido para reflejar trabajo de producto y de repos, no solo la automatizacion que lo publico antes."
+          "<code>git log</code> en <code>/Users/csilvasantin/Claude/diario/</code> confirma actividad real hoy: <code>4bad7ab</code>, <code>aeb0c12</code>, <code>d910bf8</code>, <code>1a9880d</code> y <code>d66d947</code>.",
+          "<code>git status</code> en <code>/Users/csilvasantin/AdmiraNext-Team/</code> y en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team/</code> confirma que no hubo commits hoy alli, pero si cambios locales pendientes en <code>data/machines.json</code>, <code>src/server.js</code>, <code>src/ssh-exec.js</code> y material OCR.",
+          "<code>git diff</code> confirma que el control de energia combina <code>pmset displaysleepnow</code>, Wake-on-LAN y actualizaciones de estado, pero sigue sin validacion extremo a extremo registrada en git."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>AdmiraNext-Team</code> no tiene commits de hoy en este checkout: el rediseño y las capturas siguen como cambios locales sin publicar.",
-          "El backend de <code>AdmiraNext-Team</code> sigue validando solo <code>online|busy|offline|maintenance</code> en <code>/api/machines/:id/status</code> y <code>/sync</code>, pero el dataset y el frontend ya usan tambien <code>idle</code>; ahora mismo ese estado no se puede escribir por API.",
-          "La inspeccion global del workspace saca mucho ruido de ficheros efimeros en <code>01.-AdmiraXperience-Game/suno-local/.suno-chrome-profile</code>, lo que dificulta separar cambios reales de artefactos de ejecucion."
+          "<code>src/server.js</code> en <code>AdmiraNext-Team/AdmiraNext-Team</code> tiene dos handlers para <code>/api/machines/:id/power</code>; el primero responde y hace <code>return</code> antes de que corra el segundo, dejando inalcanzable la proteccion especifica para <code>admira-macmini</code>.",
+          "<code>wakeMachine</code> depende de MACs cargadas a mano y todavia hay equipos sin MAC en la tabla, asi que el despertar remoto no esta cubierto para toda la flota.",
+          "Los cambios visibles en <code>AdmiraNext-Team</code> arrastran timestamps de abril y mayo, senal de workspace activo pero no cerrado ni limpiado hoy."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener una unica entrada para <code>2026-06-12</code> y reescribirla con hechos verificables en vez de duplicar fecha.",
-          "Separar en el diario los cambios locales de <code>AdmiraNext-Team</code> del trabajo ya committeado en otros repos, para no mezclar WIP con entregas publicadas."
+          "Actualizar la entrada existente del <code>2026-06-12</code> en vez de abrir otra, usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico.",
+          "Registrar como hecho solo lo verificable por <code>git</code> y <code>diff</code>; en <code>AdmiraNext-Team</code> se deja constancia de cambios presentes en workspace, no de una entrega finalizada.",
+          "Tratar el control de energia como avance parcial hasta unificar el endpoint y probar <code>sleep</code> y <code>wake</code> sobre una maquina no critica."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar visualmente <code>AdmiraNext-Team</code>, corregir el backend para aceptar <code>idle</code> y despues hacer commit/push del build <code>0.1.3</code>.",
-          "Decidir si el perfil Chrome de <code>suno-local</code> debe seguir ensuciando el workspace o si conviene reforzar <code>.gitignore</code> para reducir ruido operativo."
+          "Unificar <code>src/server.js</code> a un solo handler de <code>/power</code> y mantener la proteccion del Mac Mini antes de nuevas pruebas.",
+          "Completar las MACs faltantes y validar <code>sleep</code> y <code>wake</code> desde dashboard en una maquina distinta del servidor central.",
+          "Limpiar o commitar <code>data/machines.json</code> y las capturas OCR para que el repo no mezcle trabajo viejo con cambios actuales."
         ]
       }
     ]
