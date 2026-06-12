@@ -352,47 +352,48 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se comprobo que <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code> no tenia contenido, se leyeron <code>routines/update.md</code> y <code>CERRAR-EL-DIA.md</code>, y se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-12 00:00'</code>, <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> y la revision de <code>2026-06-11.md</code>.",
-          "Se hizo <code>git fetch origin main</code> y <code>git merge --ff-only origin/main</code>, avanzando este checkout limpio de <code>388ef2d</code> a <code>aeb0c12</code> antes de editar el diario y confirmando despues que todavia no existia <code>2026-06-12.md</code>.",
-          "Se actualizo la entrada <code>2026-06-12.md</code> y <code>index.html</code> para publicar la fecha <code>2026-06-12</code> bajo el filtro <code>Codex</code>.",
-          "Se preparo el cierre completo con <code>git add 2026-06-12.md index.html</code>, <code>git commit -m \"Diario 2026-06-12 [Codex]\"</code> y <code>git push origin main</code>."
+          "En <code>github-csilvasantin/AdmiraNext-Team</code> se rehizo la portada del panel con un tema arcade tipo <code>fighter select</code>: hero nuevo, selector de miembros, ficha destacada por persona, barras de stats y grid visual de maquinas; tambien se subio la version a <code>0.1.3</code>.",
+          "En ese mismo repo se amplio <code>data/machines.json</code> para el Mac Mini con <code>ip_local</code> y <code>connect_local</code>, y se refrescaron las capturas <code>snap-admira-macmini.jpg</code>, <code>snap-admira-macbookpronegro14.jpg</code> y <code>snap-admira-macbookair16.jpg</code>.",
+          "En el resto del workspace se registraron commits hoy en <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code>, <code>admira-app</code> y <code>xpaceos</code>, centrados en corregir el flujo Suno/PRO, exponer mejor letra y estilos, y sincronizar builds del gemelo.",
+          "Se actualizo esta misma entrada del <code>2026-06-12</code> en vez de crear otra, para dejar el diario alineado con el trabajo real del dia en Admirito."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "Antes de sincronizar, <code>git status --short --branch</code> devolvio <code>## main...origin/main [behind 2]</code>; despues del fast-forward devolvio <code>## main...origin/main</code>, dejando este checkout alineado con remoto.",
-          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code> mostro los commits <code>aeb0c12 Skills portables /handoff y /handon + bootstrap install-skills.sh</code> y <code>4bad7ab chore: actualizar repos.html 2026-06-12 [skip ci]</code>, mientras que <code>git reflog --date=iso --since='2026-06-12 00:00'</code> no devolvio lineas antes de esta actualizacion.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-12 21:32:33 CEST +0200</code>, fijando la fecha efectiva del pre-check de esta entrada.",
-          "Tras el push, se comprobo con <code>curl</code> que <code>origin/main</code> ya sirve <code>index.html</code> con <code>2026-06-12</code> en <code>raw.githubusercontent.com</code>, mientras que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> seguia respondiendo <code>HTTP 200</code> pero todavia sin reflejar esa fecha en el HTML servido durante esta sesion."
+          "<code>git status --short</code> en <code>AdmiraNext-Team</code> devolvio 8 ficheros modificados coherentes con el rediseño: <code>data/machines.json</code>, tres capturas, <code>package.json</code>, <code>public/app.js</code>, <code>public/index.html</code> y <code>public/styles.css</code>.",
+          "<code>node src/server.js</code> arranco correctamente en <code>http://0.0.0.0:3030</code> y <code>curl http://127.0.0.1:3030/</code> respondio <code>HTTP 200</code>, confirmando que el panel sigue sirviendo HTML tras el cambio visual.",
+          "<code>curl http://127.0.0.1:3030/api/machines</code> devolvio el JSON esperado con la metadata SSH nueva del Mac Mini, incluida <code>ip_local: 192.168.0.118</code> y <code>connect_local</code>.",
+          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --oneline --all</code> confirmo actividad real hoy en <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code>, <code>admira-app</code> y <code>xpaceos</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario queda cubierto para la fecha <code>2026-06-12</code> con un unico fichero Markdown firmado como <code>[Codex]</code>.",
-          "<code>index.html</code> queda alineado para mostrar <code>12 de junio de 2026</code> en la UI publica bajo <code>Todos</code> y <code>Codex</code>."
+          "<code>AdmiraNext-Team</code> ya no es solo un panel funcional: queda encaminado como dashboard visual del equipo, con foco en personas, maquinas y estado operativo.",
+          "El diario del <code>2026-06-12</code> queda corregido para reflejar trabajo de producto y de repos, no solo la automatizacion que lo publico antes."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No se detectaron conflictos de merge ni cambios locales pendientes en <code>/Users/csilvasantin/Claude/diario/</code> despues del fast-forward.",
-          "La visibilidad publica en GitHub Pages puede depender de la propagacion del deploy despues del push, aunque la URL siguio respondiendo durante la comprobacion."
+          "<code>AdmiraNext-Team</code> no tiene commits de hoy en este checkout: el rediseño y las capturas siguen como cambios locales sin publicar.",
+          "El backend de <code>AdmiraNext-Team</code> sigue validando solo <code>online|busy|offline|maintenance</code> en <code>/api/machines/:id/status</code> y <code>/sync</code>, pero el dataset y el frontend ya usan tambien <code>idle</code>; ahora mismo ese estado no se puede escribir por API.",
+          "La inspeccion global del workspace saca mucho ruido de ficheros efimeros en <code>01.-AdmiraXperience-Game/suno-local/.suno-chrome-profile</code>, lo que dificulta separar cambios reales de artefactos de ejecucion."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Usar <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico para esta actualizacion, en lugar del worktree en <code>detached HEAD</code>.",
-          "Registrar solo hechos verificables de esta sesion y de la evidencia visible por <code>git</code>, sin atribuir al cierre trabajo externo no inspeccionado en este repo."
+          "Mantener una unica entrada para <code>2026-06-12</code> y reescribirla con hechos verificables en vez de duplicar fecha.",
+          "Separar en el diario los cambios locales de <code>AdmiraNext-Team</code> del trabajo ya committeado en otros repos, para no mezclar WIP con entregas publicadas."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Si otra automatizacion de Codex vuelve a escribir el <code>2026-06-12</code>, anadir el nuevo bloque en este mismo fichero en vez de crear otra fecha.",
-          "Vigilar que la portada publica siga mostrando la fecha <code>2026-06-12</code> una vez termine de asentarse el despliegue de GitHub Pages."
+          "Revisar visualmente <code>AdmiraNext-Team</code>, corregir el backend para aceptar <code>idle</code> y despues hacer commit/push del build <code>0.1.3</code>.",
+          "Decidir si el perfil Chrome de <code>suno-local</code> debe seguir ensuciando el workspace o si conviene reforzar <code>.gitignore</code> para reducir ruido operativo."
         ]
       }
     ]
