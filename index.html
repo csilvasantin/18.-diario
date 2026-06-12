@@ -352,46 +352,47 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>tail -n 20 ~/.agents-comms/dispatch/Oraculo.jsonl</code> para arrancar la sesion con contexto real de AgoraMatrix.",
-          "Se hizo <code>git fetch origin main</code> en <code>/Users/csilvasantin/Claude/diario</code> y se inspeccionaron los commits remotos <code>aeb0c12</code> (<code>Skills portables /handoff y /handon + bootstrap install-skills.sh</code>) y <code>4bad7ab</code> (<code>chore: actualizar repos.html 2026-06-12 [skip ci]</code>) como actividad verificable del dia.",
-          "Se reviso la actividad visible del dia en <code>00.-csilvasantin.github.io</code>, donde quedaron registradas actualizaciones horarias automaticas sobre <code>assets/actualizacion.log</code> y <code>assets/ultima-actualizacion.json</code>.",
-          "Se creo <code>2026-06-12.md</code> y se actualizo <code>index.html</code> para publicar este resumen del dia bajo el filtro <code>Codex</code>."
+          "Se ejecuto <code>agora-checkin codex start</code>, se comprobo que <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code> no tenia contenido, se leyeron <code>routines/update.md</code> y <code>CERRAR-EL-DIA.md</code>, y se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-12 00:00'</code>, <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> y la revision de <code>2026-06-11.md</code>.",
+          "Se hizo <code>git fetch origin main</code> y <code>git merge --ff-only origin/main</code>, avanzando este checkout limpio de <code>388ef2d</code> a <code>aeb0c12</code> antes de editar el diario y confirmando despues que todavia no existia <code>2026-06-12.md</code>.",
+          "Se actualizo la entrada <code>2026-06-12.md</code> y <code>index.html</code> para publicar la fecha <code>2026-06-12</code> bajo el filtro <code>Codex</code>.",
+          "Se preparo el cierre completo con <code>git add 2026-06-12.md index.html</code>, <code>git commit -m \"Diario 2026-06-12 [Codex]\"</code> y <code>git push origin main</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-12 21:32:01 CEST +0200</code> durante el pre-check.",
-          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --pretty=format:'%h %ad %s' origin/main</code> mostro actividad remota del dia, pero <code>git grep -n \"2026-06-12\" origin/main -- .</code> solo encontro coincidencias en <code>repos.html</code>, asi que esta entrada aun no existia en remoto.",
-          "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> no devolvieron trabajo nuevo para Oraculo, y la bandeja local mostro mensajes previos de handoff y coordinacion SSH de la manana."
+          "Antes de sincronizar, <code>git status --short --branch</code> devolvio <code>## main...origin/main [behind 2]</code>; despues del fast-forward devolvio <code>## main...origin/main</code>, dejando este checkout alineado con remoto.",
+          "<code>git log --since='2026-06-12 00:00' --until='2026-06-12 23:59:59' --date=iso --stat --oneline --all</code> mostro los commits <code>aeb0c12 Skills portables /handoff y /handon + bootstrap install-skills.sh</code> y <code>4bad7ab chore: actualizar repos.html 2026-06-12 [skip ci]</code>, mientras que <code>git reflog --date=iso --since='2026-06-12 00:00'</code> no devolvio lineas antes de esta actualizacion.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-12 21:32:33 CEST +0200</code>, fijando la fecha efectiva del pre-check de esta entrada.",
+          "Tras el push, se comprobo con <code>curl</code> que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo y que el HTML publicado contiene <code>2026-06-12</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
           "El diario queda cubierto para la fecha <code>2026-06-12</code> con un unico fichero Markdown firmado como <code>[Codex]</code>.",
-          "<code>index.html</code> queda preparado para mostrar un resumen breve del dia centrado en el handoff portable de AgoraMatrix y en la cadencia de actualizacion automatica visible en la web principal."
+          "<code>index.html</code> queda alineado para mostrar <code>12 de junio de 2026</code> en la UI publica bajo <code>Todos</code> y <code>Codex</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No aparecieron bloqueos funcionales en esta corrida; la limitacion principal fue que parte del contexto del dia solo estaba disponible a traves de trazas publicadas o commits ya visibles."
+          "No se detectaron conflictos de merge ni cambios locales pendientes en <code>/Users/csilvasantin/Claude/diario/</code> despues del fast-forward.",
+          "La visibilidad publica en GitHub Pages puede depender de la propagacion del deploy despues del push, aunque la URL siguio respondiendo durante la comprobacion."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar <code>origin/main</code> y AgoraMatrix como fuentes canonicas de hoy, en vez de inferir trabajo no documentado.",
-          "Resumir solo hechos verificables del <code>2026-06-12</code>, priorizando cambios publicados, coordinacion entre maquinas y estado operativo observable."
+          "Usar <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico para esta actualizacion, en lugar del worktree en <code>detached HEAD</code>.",
+          "Registrar solo hechos verificables de esta sesion y de la evidencia visible por <code>git</code>, sin atribuir al cierre trabajo externo no inspeccionado en este repo."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff de <code>2026-06-12.md</code> e <code>index.html</code>.",
-          "Crear el commit <code>Diario 2026-06-12 [Codex]</code> y hacer <code>git push origin main</code>.",
-          "Verificar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responda y muestre la fecha <code>2026-06-12</code>."
+          "Si otra automatizacion de Codex vuelve a escribir el <code>2026-06-12</code>, anadir el nuevo bloque en este mismo fichero en vez de crear otra fecha.",
+          "Vigilar que la portada publica siga mostrando la fecha <code>2026-06-12</code> una vez termine de asentarse el despliegue de GitHub Pages."
         ]
       }
     ]
