@@ -352,54 +352,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se publicaron tres cambios en <code>/Users/csilvasantin/32.-ConsejoAdmiraNextGame</code> para el puente entre Consejo y AgoraMatrix: <code>01a7478</code> (<code>fix(control): allow private-network preflight</code>), <code>33c6314</code> (<code>fix(council): refresh coetaneos image switch</code>) y <code>0df69fc</code> (<code>feat(council): bridge coetaneos to matrix agents</code>).",
-          "Se actualizaron los handoff de agentes en <code>/Users/csilvasantin/Claude/repos/ai-workspace</code> con <code>88e1884</code> (<code>Update AgoraMatrix handoff</code>) y <code>b82dbac</code> (<code>Make handON announce agent start</code>).",
-          "Se ajustaron los flujos de signage y Pixeria con <code>d447db7</code> y <code>8d2c4bb</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/pixer-worker</code>, y con <code>d13201e</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/pixeria</code>.",
-          "En este repo <code>diario</code> se reviso la entrada ya publicada del <code>2026-06-13</code>, se confirmo la actividad concurrente sobre <code>origin/main</code> con <code>96dcc6c</code>, <code>96e6972</code>, <code>16cfa01</code> y <code>105c6a6</code>, y se actualizan <code>2026-06-13.md</code> e <code>index.html</code> manteniendo una sola entrada publica para la fecha."
+          "Se reviso la actividad ya publicada hoy en repos de Admirito: <code>01a7478</code>, <code>33c6314</code> y <code>0df69fc</code> en <code>/Users/csilvasantin/Documents/Admirito/32.-ConsejoAdmiraNextGame</code>; <code>88e1884</code> y <code>b82dbac</code> en <code>/Users/csilvasantin/Claude/repos/ai-workspace</code>; <code>d447db7</code> y <code>8d2c4bb</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/pixer-worker</code>; y <code>d13201e</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/pixeria</code>.",
+          "En <code>AdmiraNext-Team</code> se detectaron dos lineas de trabajo recientes sin commit: un backend de control remoto en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> (<code>data/machines.json</code>, <code>src/server.js</code>, <code>src/ssh-exec.js</code>) y un rediseño frontend tipo arcade en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> (<code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>package.json</code>, capturas y metadata).",
+          "Se actualizo esta misma entrada existente y su reflejo en <code>index.html</code> para incorporar el estado real de <code>AdmiraNext-Team</code> sin duplicar la fecha."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log --since='2026-06-13 00:00' --until='2026-06-13 23:59:59' --oneline</code> confirmo todos esos commits en los repos implicados.",
-          "<code>curl -I -s https://www.admira.live/control</code> y <code>curl -I -s 'https://www.admira.live/council-scumm.html?_v=0df69fc'</code> devolvieron <code>HTTP/2 200</code>.",
-          "<code>curl -I -s https://www.pixeria.com/crear</code> devolvio <code>HTTP/2 301</code> hacia <code>/crear/</code>, confirmando la ruta publica base.",
-          "En <code>diario</code>, <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-13 21:36:37 CEST +0200</code>, y <code>git log --since='2026-06-13 00:00' --until='2026-06-13 23:59:59' --date=iso --stat --oneline --all</code> mostro <code>96e6972</code>, <code>96dcc6c</code>, <code>16cfa01</code> y <code>105c6a6</code> como evidencia real de la actividad del dia alrededor de esta publicacion."
+          "<code>git log --since='2026-06-13 00:00'</code> confirmo los commits publicados en Consejo, <code>ai-workspace</code>, <code>pixer-worker</code> y <code>pixeria</code>, pero no mostro commits de hoy en ninguno de los checkouts inspeccionados de <code>AdmiraNext-Team</code>.",
+          "<code>git diff --stat</code> en <code>AdmiraNext-Team</code> mostro <code>169 insertions</code> en el backend de power control y <code>1112 insertions</code> en el rediseño frontend arcade, dejando claro que el trabajo existe pero sigue sin publicar.",
+          "<code>curl -I -s https://www.admira.live/control</code>, <code>curl -I -s 'https://www.admira.live/council-scumm.html?_v=0df69fc'</code> y <code>curl -I -s https://www.pixeria.com/crear</code> devolvieron <code>HTTP/2 200</code>, <code>HTTP/2 200</code> y <code>HTTP/2 301</code> hacia <code>/crear/</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
           "El Consejo de Admira ya queda enlazado con agentes de Matrix y con el flujo de AgoraMatrix publicado hoy.",
-          "El handoff entre sesiones de Codex queda mas explicito y reutilizable en <code>ai-workspace</code>.",
-          "El flujo de signage gana trazabilidad de origen en Pixeria y reduce ruido heredado de Grok.",
-          "La fecha <code>2026-06-13</code> queda consolidada en <code>diario</code> con un unico Markdown y un unico bloque visible en <code>index.html</code>, pese a las publicaciones concurrentes del mismo dia."
+          "<code>AdmiraNext-Team</code> avanza en dos frentes concretos: control de sleep/wake por maquina en backend y una UI publica mucho mas intencional en frontend, con concepto &quot;fighter select&quot; y version <code>0.1.3</code>.",
+          "El handoff entre sesiones de Codex queda mas explicito en <code>ai-workspace</code>, mientras signage y Pixeria mejoran trazabilidad de origen."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "En esta pasada, <code>curl -i -s https://pixer-worker.csilvasantin.workers.dev/grok/latest.json</code> devolvio <code>HTTP/2 404</code>, asi que la verificacion de ese endpoint queda pendiente pese al despliegue reportado hoy.",
-          "<code>git status --short --branch</code> sigue mostrando cambios locales en <code>pixer-worker</code> (<code>src/index.js</code>) y <code>pixeria</code> (<code>crear/index.html</code>), por lo que conviene revisar esos diffs antes de la siguiente publicacion.",
-          "<code>origin/main</code> recibio pushes mientras se preparaba esta actualizacion del diario, lo que obliga a resincronizar antes de publicar para no duplicar la fecha ni pisar trabajo ajeno."
+          "En esta pasada, <code>curl -i -s https://pixer-worker.csilvasantin.workers.dev/grok/latest.json</code> devolvio <code>HTTP/2 404</code>, asi que la verificacion de ese endpoint sigue pendiente pese al despliegue reportado hoy.",
+          "El trabajo de <code>AdmiraNext-Team</code> esta repartido entre varios clones (<code>/Users/csilvasantin/AdmiraNext-Team</code>, <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>), lo que complica saber cual es el checkout canonico para publicar.",
+          "En <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team/src/server.js</code> hay dos handlers distintos para <code>POST /api/machines/:id/power</code>, con riesgo real de comportamiento inconsistente o codigo muerto si se publica tal cual."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Priorizar integraciones reversibles y visibles: primero puente web-&gt;AgoraMatrix y despues capas de lectura/operacion.",
-          "Dejar el estado de handoff en <code>ai-workspace</code> para que el relevo entre equipos no dependa solo del chat.",
-          "Incluir metadata de origen en signage para poder atribuir mejor cada push desde Pixeria.",
-          "Actualizar la entrada existente del <code>2026-06-13</code> en vez de crear otra, manteniendo la regla de una sola entrada Markdown por fecha."
+          "Reflejar en el diario <code>AdmiraNext-Team</code> como trabajo en curso validado por diff, no como despliegue realizado, porque hoy no hay commit verificable en esos clones.",
+          "Mantener una sola entrada <code>2026-06-13</code> firmada por <code>[Codex]</code> y actualizarla en lugar de crear otro bloque para la misma fecha.",
+          "Priorizar la consolidacion en un unico checkout de <code>AdmiraNext-Team</code> antes de probar o publicar sleep/wake y antes de dar por buena la nueva UI arcade."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revalidar el endpoint desplegado de <code>grok/latest.json</code> y corregirlo si el <code>404</code> persiste.",
-          "Terminar la parte de lectura en vivo de AgoraMatrix dentro del Consejo, alineada con el trabajo paralelo anunciado por Neo.",
-          "Revisar y publicar, si procede, los cambios locales pendientes en <code>pixer-worker</code> y <code>pixeria</code>.",
-          "Verificar tras este cierre que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> siga respondiendo y deje visible la fecha <code>2026-06-13</code>."
+          "Elegir un checkout canonico de <code>AdmiraNext-Team</code>, mover ahi los cambios utiles y crear un commit trazable antes de seguir.",
+          "Unificar el backend de power control, eliminar la ruta duplicada y validar sleep/wake contra una maquina no critica antes de desplegar.",
+          "Revalidar <code>grok/latest.json</code> y revisar tambien los cambios locales pendientes en <code>pixer-worker</code> y <code>pixeria</code> antes de la siguiente publicacion."
         ]
       }
     ]
