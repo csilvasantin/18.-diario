@@ -344,6 +344,61 @@
 <script>
 const entries = [
   {
+    date: "2026-06-13",
+    title: "13 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se publicaron tres cambios en <code>/Users/csilvasantin/32.-ConsejoAdmiraNextGame</code> para el puente entre Consejo y AgoraMatrix: <code>01a7478</code> (<code>fix(control): allow private-network preflight</code>), <code>33c6314</code> (<code>fix(council): refresh coetaneos image switch</code>) y <code>0df69fc</code> (<code>feat(council): bridge coetaneos to matrix agents</code>).",
+          "Se actualizaron los handoff de agentes en <code>/Users/csilvasantin/Claude/repos/ai-workspace</code> con <code>88e1884</code> (<code>Update AgoraMatrix handoff</code>) y <code>b82dbac</code> (<code>Make handON announce agent start</code>).",
+          "Se ajustaron los flujos de signage y Pixeria con <code>d447db7</code> y <code>8d2c4bb</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/pixer-worker</code>, y con <code>d13201e</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/pixeria</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-06-13 00:00' --until='2026-06-13 23:59:59' --oneline</code> confirmo todos esos commits en los repos implicados.",
+          "<code>curl -I -s https://www.admira.live/control</code> y <code>curl -I -s 'https://www.admira.live/council-scumm.html?_v=0df69fc'</code> devolvieron <code>HTTP/2 200</code>.",
+          "<code>curl -I -s https://www.pixeria.com/crear</code> devolvio <code>HTTP/2 301</code> hacia <code>/crear/</code>, confirmando la ruta publica base."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El Consejo de Admira ya queda enlazado con agentes de Matrix y con el flujo de AgoraMatrix publicado hoy.",
+          "El handoff entre sesiones de Codex queda mas explicito y reutilizable en <code>ai-workspace</code>.",
+          "El flujo de signage gana trazabilidad de origen en Pixeria y reduce ruido heredado de Grok."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "En esta pasada, <code>curl -i -s https://pixer-worker.csilvasantin.workers.dev/grok/latest.json</code> devolvio <code>HTTP/2 404</code>, asi que la verificacion de ese endpoint queda pendiente pese al despliegue reportado hoy.",
+          "<code>git status --short --branch</code> sigue mostrando cambios locales en <code>pixer-worker</code> (<code>src/index.js</code>) y <code>pixeria</code> (<code>crear/index.html</code>), por lo que conviene revisar esos diffs antes de la siguiente publicacion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Priorizar integraciones reversibles y visibles: primero puente web-&gt;AgoraMatrix y despues capas de lectura/operacion.",
+          "Dejar el estado de handoff en <code>ai-workspace</code> para que el relevo entre equipos no dependa solo del chat.",
+          "Incluir metadata de origen en signage para poder atribuir mejor cada push desde Pixeria."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revalidar el endpoint desplegado de <code>grok/latest.json</code> y corregirlo si el <code>404</code> persiste.",
+          "Terminar la parte de lectura en vivo de AgoraMatrix dentro del Consejo, alineada con el trabajo paralelo anunciado por Neo.",
+          "Revisar y publicar, si procede, los cambios locales pendientes en <code>pixer-worker</code> y <code>pixeria</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-12",
     title: "12 de junio de 2026",
     member: "Carlos Silva",
