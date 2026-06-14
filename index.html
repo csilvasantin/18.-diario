@@ -347,6 +347,60 @@ const entries = [
     date: "2026-06-14",
     title: "14 de junio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto el cierre del dia desde <strong>Claude Code on the web</strong> sobre el checkout efimero <code>/home/user/18.-diario/</code> en la rama <code>main-s5uu71</code>, leyendo <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> para aplicar la rutina vigente.",
+          "Se reviso el historial del dia con <code>git status</code>, <code>git log --oneline -10</code> y <code>git log --since='2026-06-14 00:00' --until='2026-06-14 23:59:59'</code>, identificando los commits ya publicados por Codex (<code>322e25c</code>, <code>0c732b8</code>) y la regeneracion remota de <code>repos.html</code> (<code>a80d54e</code>).",
+          "Se anadio un bloque <code>[Claude]</code> al fichero existente <code>2026-06-14.md</code> respetando la regla de un unico fichero por fecha con bloques separados por <code>---</code>, y se sumo la entrada equivalente al array <code>entries</code> de <code>index.html</code> para los filtros publicos <code>Todos</code> y <code>Claude</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> antes de editar devolvio <code>On branch main-s5uu71</code> con <code>nothing to commit, working tree clean</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-14 21:01:56 UTC +0000</code>, fijando la referencia temporal del cierre desde el entorno remoto.",
+          "La inspeccion previa de <code>index.html</code> confirmo que solo existia el bloque <code>Codex</code> del <code>2026-06-14</code>, sin entrada <code>Claude</code> para hoy."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-06-14</code> queda firmada tambien por <code>Claude</code> en el Markdown y en la portada publica, sin duplicar ficheros.",
+          "El cierre se ejecuta integramente desde Claude Code on the web, demostrando que la rutina funciona tambien sobre un checkout efimero en contenedor, no solo desde el Mac Mini."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout efimero esta en la rama <code>main-s5uu71</code> y no en <code>main</code>: el push debe ir a esa rama y la fusion a <code>main</code> la hace el pull request en lugar del <code>git push origin main</code> literal descrito en la rutina.",
+          "No hay acceso a <code>agora-checkin</code> ni a la memoria de automatizacion en <code>~/.codex/automations/</code>, asi que el pre-check se redujo a los comandos <code>git</code> y <code>date</code> ejecutables dentro del contenedor."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Conservar intacta la entrada <code>[Codex]</code> ya publicada y solo anadir el bloque <code>[Claude]</code> separado por <code>---</code>.",
+          "No regenerar <code>repos.html</code> a mano: la action <code>update-repos.yml</code> lo regenera tras el push, como hizo hoy con <code>a80d54e</code>.",
+          "Publicar contra la rama <code>main-s5uu71</code> segun las instrucciones de sesion, dejando el merge a <code>main</code> para el PR posterior."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Commit <code>Diario 2026-06-14 [Claude]</code> y <code>git push -u origin main-s5uu71</code>.",
+          "Abrir o actualizar el pull request en draft desde <code>main-s5uu71</code> hacia <code>main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/18.-diario/</code> y <code>https://csilvasantin.github.io/18.-diario/repos.html</code> siguen respondiendo y reflejan la fecha <code>2026-06-14</code>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-06-14",
+    title: "14 de junio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       {
