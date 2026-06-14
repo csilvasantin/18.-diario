@@ -352,52 +352,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la actividad real de hoy en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>admira-app</code>, <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code> y otros repos recientes del workspace para actualizar esta entrada sin duplicarla.",
-          "En <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code> se cerro el loop de campanas RTB con CPM por segmento, creatividades PixerIA por campana, lectura de <code>/campaign/list</code>, presupuesto multi-dia y burn en vivo del presupuesto contra impactos reales, culminando en la build <code>20260614-0039</code>.",
-          "En <code>pixeria</code> se pulio el flujo de locucion y stock: portada de Suno, guardado del motor gratis en Stock, etiqueta de calidad por motor, limpieza de barras, mute global de videos en Stock y fichas mas ricas en <code>crear/Redistribucion</code>.",
-          "<code>AdmiraNext-Team</code> queda como frente local abierto: rediseño grande de la home publica a modo arcade <code>Player Select</code>, version <code>0.1.3</code>, agregacion por miembro, perfiles visuales tipo fighter, capturas renovadas y datos locales del Mac Mini en <code>data/machines.json</code>."
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyo la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>, se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> y se revisaron <code>2026-06-14.md</code> e <code>index.html</code>.",
+          "Se reescribio la entrada de hoy y su bloque equivalente en <code>index.html</code> para dejar este cierre basado solo en hechos verificados del repo <code>diario</code> y de esta ejecucion."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log --since='2026-06-14 00:00'</code> mostro hoy <code>43</code> commits en <code>admira-app</code>, <code>53</code> en <code>01.-AdmiraXperience-Game</code> y <code>19</code> en <code>pixeria</code>, con referencias visibles como <code>7001aa0</code>, <code>dba6ac0</code>, <code>630b33f</code>, <code>655711f</code> y <code>b6c7619</code>.",
-          "<code>node --check /Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team/public/app.js</code> termino sin errores, dejando al menos validada la sintaxis del rediseño local de <code>AdmiraNext-Team</code>.",
-          "<code>curl -I -s https://admira.app/help</code> devolvio <code>HTTP/2 301</code> hacia <code>/help/</code>, y <code>curl -I -s https://www.admira.live/control</code> devolvio <code>HTTP/2 200</code>, confirmando que los dos frentes publicos consultados hoy responden.",
-          "<code>AdmiraNext-Team</code> no tiene commits de hoy, pero <code>git status --short --branch</code> confirma un bloque local importante sin publicar: ocho ficheros modificados y el repo <code>behind 286</code>, lo que deja claro que hoy ahi hubo trabajo de workspace, no cierre publicado.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-14 23:47:30 CEST +0200</code>, fijando la referencia temporal de esta actualizacion."
+          "Antes de editar, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, y <code>git rev-parse HEAD &amp;&amp; git rev-parse origin/main</code> devolvio el mismo SHA <code>ff916f802b83799d960d1d639ae30ec61ea4cbc4</code>, confirmando checkout limpio y alineado.",
+          "<code>git log --since='2026-06-14 00:00' --until='2026-06-14 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-14 00:00'</code> confirmaron actividad real previa de hoy en este repo: <code>0c732b8</code>, <code>322e25c</code>, <code>4d06f85</code>, <code>111a9de</code> y <code>ff916f8</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-14 23:56:56 CEST +0200</code>, <code>git remote -v</code> confirmo <code>origin https://github.com/csilvasantin/18.-diario.git</code> y <code>curl -I -s https://csilvasantin.github.io/diario/</code> devolvio <code>HTTP/2 301</code> hacia <code>https://www.carlossilva.info/diario/</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El frente mas maduro del dia es la demo agéntica: campana comprada en <code>admira.app</code>, creatividad segmentada mostrada por el gemelo, impactos acumulados y presupuesto bajando en tiempo real.",
-          "<code>pixeria</code> avanza hacia un flujo mas util para demo y stock, con menos ruido visual y mejor trazabilidad de salida segun motor.",
-          "El diario del dia queda actualizado en una sola entrada breve con estado publicado frente a trabajo local pendiente."
+          "<code>2026-06-14.md</code> vuelve a quedar como un unico fichero por fecha, con titulo firmado <code>[Codex]</code> y las seis secciones numeradas exigidas por la rutina.",
+          "<code>index.html</code> queda sincronizado con la misma version resumida de la entrada del dia en el bloque <code>const entries</code>, manteniendo visible <code>2026-06-14</code> en la UI publica.",
+          "Este rerun deja el cierre del dia centrado en el estado verificable del repo <code>diario</code>, sin arrastrar afirmaciones de otros workspaces no revalidadas aqui."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "En el ensayo aparecio un bug de alineacion entre worker, CPM y gemelo porque la clave de impactos exteriores no coincidia; se corrigio pasando a <code>age_gender</code>.",
-          "<code>AdmiraNext-Team</code> mezcla rediseño visual, datos locales de red y capturas actualizadas en el mismo bloque sin commit, y ademas va <code>behind 286</code>, asi que el estado todavia no es seguro para publicar tal cual.",
-          "Ese repo sigue sin <code>build</code> ni tests visibles, de modo que la validacion del rediseño arcade depende de revision manual real en navegador."
+          "La version previa de <code>2026-06-14.md</code> y su reflejo en <code>index.html</code> mezclaban trabajo de otros repos que no formaba parte de este cierre ejecutado en <code>/Users/csilvasantin/Claude/diario/</code>.",
+          "La URL publica a verificar no responde con contenido final en <code>github.io</code>, sino que redirige a <code>https://www.carlossilva.info/diario/</code>, asi que la comprobacion publica tiene que seguir esa redireccion.",
+          "El archivo local <code>~/.agents-comms/dispatch/Oráculo.jsonl</code> contiene mensajes antiguos de Telegram, pero <code>agora tasks --from Codex --peek</code> devolvio <code>(sin tareas para Codex·gmail)</code> en esta sesion."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Actualizar la entrada ya existente del <code>2026-06-14</code> en vez de crear otra, manteniendo una sola entrada por fecha.",
-          "Separar explicitamente lo que hoy ya quedo validado y publicado (<code>admira-app</code>, <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code>) de lo que sigue como trabajo local abierto (<code>AdmiraNext-Team</code>).",
-          "Mantener el cierre breve y util, centrado en hechos comprobables de git y del workspace de hoy."
+          "Actualizar la entrada existente del <code>2026-06-14</code> en vez de crear otro bloque para la misma fecha, siguiendo la regla de un solo fichero por dia.",
+          "Reescribir el contenido de hoy para dejar solo hechos comprobados por <code>git</code>, por comandos ejecutados en este repo y por la verificacion publica real del diario.",
+          "Mantener <code>index.html</code> como espejo literal de la entrada del dia porque la portada publica consume el bloque embebido de <code>const entries</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar <code>AdmiraNext-Team</code> en navegador y decidir si el rediseño arcade se publica en un commit limpio separado de los datos locales del Mac Mini.",
-          "Mantener el foco de demo en el loop completo <code>admira.app &lt;-&gt; gemelo &lt;-&gt; PixerIA</code>, porque hoy ya quedo la cadena funcional mas clara.",
-          "Publicar esta actualizacion del diario y verificar despues que <code>https://csilvasantin.github.io/diario/</code> siga respondiendo con la entrada del <code>2026-06-14</code>."
+          "Revisar el diff final de <code>2026-06-14.md</code> e <code>index.html</code>.",
+          "Crear el commit <code>Diario 2026-06-14 [Codex]</code> y hacer <code>git push origin main</code>.",
+          "Verificar despues del push que <code>https://www.carlossilva.info/diario/</code> responda y muestre la fecha <code>2026-06-14</code> en el filtro <code>Codex</code>."
         ]
       }
     ]
