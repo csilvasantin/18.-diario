@@ -352,46 +352,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y se dejo presencia activa con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se leyo la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/actualizar-diario/memory.md</code>, junto con <code>CERRAR-EL-DIA.md</code> y <code>README.md</code>, para seguir el flujo vigente del diario.",
-          "Se sincronizo <code>/Users/csilvasantin/Claude/diario/</code> con <code>origin/main</code>, se revisaron <code>2026-06-13.md</code>, <code>index.html</code>, <code>git log</code> y <code>git reflog</code> del dia, y con esa evidencia se creo <code>2026-06-14.md</code> y se actualizo el HTML publico del diario."
+          "Se reviso la actividad real de hoy en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>admira-app</code>, <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code> y otros repos recientes del workspace para actualizar esta entrada sin duplicarla.",
+          "En <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code> se cerro el loop de campanas RTB con CPM por segmento, creatividades PixerIA por campana, lectura de <code>/campaign/list</code>, presupuesto multi-dia y burn en vivo del presupuesto contra impactos reales, culminando en la build <code>20260614-0039</code>.",
+          "En <code>pixeria</code> se pulio el flujo de locucion y stock: portada de Suno, guardado del motor gratis en Stock, etiqueta de calidad por motor, limpieza de barras, mute global de videos en Stock y fichas mas ricas en <code>crear/Redistribucion</code>.",
+          "<code>AdmiraNext-Team</code> queda como frente local abierto: rediseño grande de la home publica a modo arcade <code>Player Select</code>, version <code>0.1.3</code>, agregacion por miembro, perfiles visuales tipo fighter, capturas renovadas y datos locales del Mac Mini en <code>data/machines.json</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> quedo en <code>## main...origin/main</code> despues de <code>git pull --ff-only origin main</code>, confirmando el checkout limpio y alineado.",
-          "<code>git log --since='2026-06-14 00:00' --until='2026-06-14 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-14 00:00'</code> confirmaron actividad real de hoy en este repo: el cierre <code>12790c0</code> de ayer visible en reflog y la regeneracion remota <code>a80d54e</code> de <code>repos.html</code>.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-14 21:32:46 CEST +0200</code>, fijando la referencia temporal de esta actualizacion."
+          "<code>git log --since='2026-06-14 00:00'</code> mostro hoy <code>43</code> commits en <code>admira-app</code>, <code>53</code> en <code>01.-AdmiraXperience-Game</code> y <code>19</code> en <code>pixeria</code>, con referencias visibles como <code>7001aa0</code>, <code>dba6ac0</code>, <code>630b33f</code>, <code>655711f</code> y <code>b6c7619</code>.",
+          "Los commits de ensayo y produccion confirman que se detecto y corrigio el desfase de clave de segmento <code>age_gender</code>, y despues se valido el consumo del presupuesto de campana en vivo tanto en <code>admira-app</code> como en el gemelo.",
+          "<code>AdmiraNext-Team</code> no tiene commits de hoy, pero <code>git status --short --branch</code> confirma un bloque local importante sin publicar: ocho ficheros modificados y el repo <code>behind 286</code>, lo que deja claro que hoy ahi hubo trabajo de workspace, no cierre publicado.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-14 23:47:30 CEST +0200</code>, fijando la referencia temporal de esta actualizacion."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario vuelve a tener una entrada propia para <code>2026-06-14</code> en Markdown siguiendo la estructura numerada del proyecto.",
-          "<code>index.html</code> queda preparado para mostrar la fecha <code>2026-06-14</code> en la portada publica y en el filtro de entradas de <code>Codex</code>."
+          "El frente mas maduro del dia es la demo agéntica: campana comprada en <code>admira.app</code>, creatividad segmentada mostrada por el gemelo, impactos acumulados y presupuesto bajando en tiempo real.",
+          "<code>pixeria</code> avanza hacia un flujo mas util para demo y stock, con menos ruido visual y mejor trazabilidad de salida segun motor.",
+          "El diario del dia queda actualizado en una sola entrada breve con estado publicado frente a trabajo local pendiente."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>$CODEX_HOME</code> estaba vacio en este entorno, asi que la memoria se tuvo que leer y actualizar usando la ruta efectiva <code>/Users/csilvasantin/.codex/automations/actualizar-diario/memory.md</code>.",
-          "El repo aparecio inicialmente <code>behind 1</code>, y hubo que revalidar con <code>git pull --ff-only origin main</code> para distinguir entre desfase local y estado ya sincronizado."
+          "En el ensayo aparecio un bug de alineacion entre worker, CPM y gemelo porque la clave de impactos exteriores no coincidia; se corrigio pasando a <code>age_gender</code>.",
+          "<code>AdmiraNext-Team</code> mezcla rediseño visual, datos locales de red y capturas actualizadas en el mismo bloque sin commit, y ademas va <code>behind 286</code>, asi que el estado todavia no es seguro para publicar tal cual.",
+          "Ese repo sigue sin <code>build</code> ni tests visibles, de modo que la validacion del rediseño arcade depende de revision manual real en navegador."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Crear una entrada nueva para <code>2026-06-14</code> en vez de editar la de <code>2026-06-13</code>, manteniendo la regla de un fichero por fecha.",
-          "Dejar el resumen centrado en hechos comprobados dentro del repo <code>diario</code> y de esta sesion, sin mezclar trabajo de otros proyectos."
+          "Actualizar la entrada ya existente del <code>2026-06-14</code> en vez de crear otra, manteniendo una sola entrada por fecha.",
+          "Separar explicitamente lo que hoy ya quedo validado y publicado (<code>admira-app</code>, <code>01.-AdmiraXperience-Game</code>, <code>pixeria</code>) de lo que sigue como trabajo local abierto (<code>AdmiraNext-Team</code>).",
+          "Mantener el cierre breve y util, centrado en hechos comprobables de git y del workspace de hoy."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff final de <code>2026-06-14.md</code> e <code>index.html</code>.",
-          "Crear el commit <code>Diario 2026-06-14 [Codex]</code> y hacer <code>git push origin main</code>.",
-          "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> siga respondiendo y muestre la fecha <code>2026-06-14</code>."
+          "Revisar <code>AdmiraNext-Team</code> en navegador y decidir si el rediseño arcade se publica en un commit limpio separado de los datos locales del Mac Mini.",
+          "Mantener el foco de demo en el loop completo <code>admira.app &lt;-&gt; gemelo &lt;-&gt; PixerIA</code>, porque hoy ya quedo la cadena funcional mas clara.",
+          "Publicar esta actualizacion del diario y verificar despues que <code>https://csilvasantin.github.io/diario/</code> siga respondiendo con la entrada del <code>2026-06-14</code>."
         ]
       }
     ]
