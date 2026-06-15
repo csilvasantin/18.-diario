@@ -352,50 +352,50 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "La entrada ya publicada hoy en <code>origin/main</code> bajo el commit <code>333eb20</code> dejo trazado un trabajo previo real: clon limpio en <code>/tmp/diario</code>, barrido de <code>41</code> repos activos desde <code>github-csilvasantin/onboarding/CURRENT_STATE.md</code> y actualizacion de la tabla viva de liderazgo en ese archivo.",
-          "En esta pasada se ejecuto <code>agora-checkin codex start</code> al inicio de la sesion y se revisaron <code>README.md</code>, <code>2026-06-15.md</code>, <code>index.html</code>, <code>git status --short --branch</code>, <code>git log --since='2026-06-15 00:00' --until='2026-06-15 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-15 00:00'</code>.",
-          "Se reescribieron <code>2026-06-15.md</code> e <code>index.html</code> para consolidar en una sola entrada diaria tanto el barrido de repos ya publicado como la validacion final de esta noche."
+          "Se tomo como base la entrada ya publicada hoy en el diario y se contrasto con evidencia local adicional del workspace para dejar una version mas util y menos mecanica.",
+          "Se revisaron los clones canonicos de <code>AdmiraNext-Team</code> en <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/admirito/AdmiraNext-Team</code>, junto con el workspace <code>/Users/csilvasantin/Claude/</code>.",
+          "Se actualizo esta misma entrada del <code>2026-06-15</code> y su reflejo en <code>index.html</code>, sin crear una fecha duplicada."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "La propia entrada ya existente del <code>15</code> en <code>origin/main</code> documenta con detalle el barrido previo del dia: <code>41</code> repos revisados, <code>40</code> con remote <code>origin</code>, <code>5</code> fast-forward aplicados, <code>23</code> ya al dia y <code>13</code> con worktree sucio.",
-          "<code>git log</code> confirmo actividad real adicional de hoy en este repo con los commits <code>3b67af6</code> (<code>chore: actualizar repos.html 2026-06-15 [skip ci]</code>) y <code>93dc10f</code> (<code>Codex worktree snapshot: startup-cleanup</code>).",
-          "<code>git remote -v</code> confirmo que <code>origin</code> apunta a <code>https://github.com/csilvasantin/diario.git</code>, y <code>curl -I -s https://csilvasantin.github.io/diario/</code> devolvio <code>HTTP/2 301</code> hacia <code>https://www.carlossilva.info/diario/</code>.",
-          "El primer <code>git push origin HEAD:main</code> de esta sesion fue rechazado porque <code>origin/main</code> ya habia avanzado con <code>333eb20</code>, lo que confirmo que existia otra pasada real del mismo dia que habia que integrar."
+          "Los dos clones canonicos de <code>AdmiraNext-Team</code> apuntan a <code>https://github.com/csilvasantin/AdmiraNext-Team.git</code>, estan limpios y no muestran commits nuevos del <code>2026-06-15</code>.",
+          "El path <code>/Users/csilvasantin/AdmiraNext-Team</code> no corresponde al repo canonico de <code>AdmiraNext-Team</code>: su <code>origin</code> apunta a <code>03-ControlCodexClaude</code> y contiene cambios locales arrastrados en <code>data/machines.json</code> y capturas OCR antiguas, no trabajo nuevo de hoy.",
+          "Los cambios visibles de hoy en el workspace revisado estan concentrados en <code>/Users/csilvasantin/Claude/diario/2026-06-15.md</code>, <code>/Users/csilvasantin/Claude/diario/index.html</code> y <code>/Users/csilvasantin/Claude/diario/repos.html</code>.",
+          "La pasada anterior del dia sigue siendo valida: quedaron <code>41</code> repos revisados, <code>5</code> fast-forward seguros aplicados y <code>13</code> worktrees sucios pendientes de limpieza manual."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>2026-06-15.md</code> queda como unica entrada Markdown del dia, firmada como <code>[Codex]</code> y sin duplicar fechas.",
-          "<code>index.html</code> queda sincronizado con una sola version resumida del <code>15 de junio de 2026</code>, manteniendo la fecha al principio del array para que la UI la abra por defecto.",
-          "El cierre de hoy conserva tanto el barrido previo de repos como la verificacion final del diario publico sin perder evidencia intermedia."
+          "La entrada de hoy queda corregida para reflejar mejor el trabajo real de Admirito: barrido general previo, validacion especifica de <code>AdmiraNext-Team</code> y estado reciente del workspace.",
+          "Queda aclarado que hoy no hubo entrega nueva en el repo canonico de <code>AdmiraNext-Team</code>, sino verificacion de estado y separacion entre clones buenos y paths confusos.",
+          "El diario mantiene una sola entrada para el dia, con informacion accionable para una siguiente pasada."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La primera version local de esta actualizacion se hizo en detached HEAD (<code>## HEAD (no branch)</code>), y por eso el intento inicial de push no podia avanzar limpiamente cuando <code>origin/main</code> cambio durante la sesion.",
-          "La automatizacion no tenia memoria previa en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code>, asi que hubo que crearla al final de esta ejecucion.",
-          "La URL publica pedida en <code>github.io</code> no sirve el contenido final directamente, sino que redirige a <code>https://www.carlossilva.info/diario/</code>."
+          "Hay ambiguedad de paths: <code>/Users/csilvasantin/AdmiraNext-Team</code> parece el repo buscado por nombre, pero en realidad esta conectado a <code>03-ControlCodexClaude</code>.",
+          "Ese path ambiguo conserva cambios sin commitear y ficheros OCR sueltos, lo que puede inducir a leer como trabajo actual algo que realmente viene de <code>2026-05-05</code> y <code>2026-04-15</code>.",
+          "Siguen existiendo worktrees sucios en varios repos de Admirito detectados en la pasada anterior, asi que el barrido de hoy no equivale a una sincronizacion completa del entorno."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Conservar como validos los datos ya publicados en <code>333eb20</code> en vez de sobrescribirlos con una entrada nueva incompatible para la misma fecha.",
-          "Fusionar en una sola entrada los hechos comprobados de ambas pasadas del <code>15 de junio</code>, manteniendo la regla de un unico bloque por fecha.",
-          "Continuar el cierre final desde una rama basada en <code>origin/main</code> para evitar volver a empujar desde detached HEAD."
+          "Mantener la entrada existente del <code>15</code> y actualizarla en vez de crear otra.",
+          "Tomar como canonicos para <code>AdmiraNext-Team</code> los clones que apuntan al remoto correcto, no el directorio homonimo con <code>origin</code> distinto.",
+          "Registrar como trabajo de hoy solo lo que tiene evidencia temporal y de remoto consistente."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Crear el commit consolidado del <code>2026-06-15</code> y empujarlo a <code>origin/main</code>.",
-          "Verificar despues del push que <code>https://www.carlossilva.info/diario/</code> siga respondiendo y deje visible la fecha <code>2026-06-15</code>.",
-          "Dejar registrada esta fusion en la memoria de la automatizacion para que un rerun posterior no repita el mismo conflicto."
+          "Limpiar o archivar el contenido local de <code>/Users/csilvasantin/AdmiraNext-Team</code> para evitar futuras lecturas equivocadas.",
+          "Revisar en una pasada separada los worktrees sucios con mas riesgo operativo, empezando por <code>AdmiraNext-Team</code>, <code>diario</code>, <code>pulpo</code> y <code>xtanco-game</code>.",
+          "Mantener el diario de Admirito como punto de control breve: que cambio de verdad, que se valido y que sigue bloqueado."
         ]
       }
     ]
