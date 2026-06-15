@@ -344,6 +344,64 @@
 <script>
 const entries = [
   {
+    date: "2026-06-15",
+    title: "15 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se clono <code>https://github.com/csilvasantin/18.-diario.git</code> en <code>/tmp/diario</code> y se confirmo que el checkout quedo limpio con <code>git status --short --branch</code>.",
+          "Se hizo un barrido de los 41 repos activos listados en <code>github-csilvasantin/onboarding/CURRENT_STATE.md</code>, ejecutando <code>git status</code>, <code>git fetch origin --prune</code> y <code>pull --ff-only</code> solo cuando el repo estaba limpio y detras de su upstream.",
+          "Se actualizo la tabla viva de liderazgo en <code>github-csilvasantin/onboarding/CURRENT_STATE.md</code> con datos reales de esta pasada.",
+          "Se creo esta entrada <code>2026-06-15.md</code> y se actualizo <code>index.html</code> para anadir la fecha <code>2026-06-15</code> bajo el autor <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "El barrido confirmo <code>41</code> repos revisados, <code>40</code> con remote <code>origin</code>, <code>5</code> fast-forward aplicados, <code>23</code> ya al dia y <code>13</code> con worktree sucio.",
+          "Los fast-forward seguros se aplicaron en <code>xpaceos</code>, <code>github-csilvasantin/10.-Yarig.aiTheGame</code>, <code>github-csilvasantin/admira-studio</code>, <code>github-csilvasantin/digitalavatar.ai</code> y <code>github-csilvasantin/pixer-ai-content</code>.",
+          "<code>git -C /tmp/diario log -1 --date=short --pretty='%ad %an %s'</code> devolvio <code>2026-06-15 github-actions[bot] chore: actualizar repos.html 2026-06-15 [skip ci]</code>, fijando la punta remota previa del diario antes de editar.",
+          "<code>git -C /Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io status --short --branch</code> devolvio <code>## main...origin/main [behind 3]</code> con cambios locales y ficheros nuevos, asi que ese repo no es seguro para publicar sin limpieza manual."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>CURRENT_STATE.md</code> queda refrescado con el estado real de fetch, behind y evidencia local repo por repo.",
+          "La entrada de hoy queda incorporada al diario web en <code>const entries</code>, manteniendo el filtro <code>Codex</code> y el orden visual mas reciente primero.",
+          "El flujo del diario se hace desde un clon limpio en <code>/tmp/diario</code>, evitando el worktree sucio de <code>github-csilvasantin/diario</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>github-csilvasantin/csilvasantin.github.io</code> tiene cambios locales en <code>codex/index.html</code>, <code>codex/yarig-ai/index.html</code>, <code>yarig-ai/index.html</code> y dos ficheros nuevos <code>telegram-consejeros.html</code>; ademas esta <code>behind 3</code>, por lo que la publicacion desde ese repo queda bloqueada.",
+          "Siguen con actualizacion pendiente por worktree sucio y commits remotos nuevos, entre otros, <code>32.-ConsejoAdmiraNextGame</code>, <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/diario</code>, <code>github-csilvasantin/pulpo</code> y <code>github-csilvasantin/xtanco-game</code>.",
+          "<code>04.- AdmiraGemini</code> no tiene remote <code>origin</code>, asi que no puede comprobarse ni sincronizarse contra un remoto canonico."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Tomar la tabla viva de <code>CURRENT_STATE.md</code> como lista canonica de repos activos para esta automatizacion.",
+          "No hacer <code>pull</code> en ningun repo con worktree sucio, aunque existan commits remotos nuevos.",
+          "Marcar <code>github-csilvasantin/onboarding</code> como <code>Codex Update</code> porque la actualizacion visible de esta sesion la lidera esta automatizacion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Empujar este update del diario y verificar <code>https://csilvasantin.github.io/18.-diario/</code>.",
+          "Limpiar o apartar los cambios locales de <code>github-csilvasantin/csilvasantin.github.io</code> antes de intentar publicar nada desde ese repo.",
+          "Revisar manualmente los repos sucios con mayor desfase remoto, especialmente <code>github-csilvasantin/xtanco-game</code>, <code>github-csilvasantin/diario</code> y <code>github-csilvasantin/AdmiraNext-Team</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-14",
     title: "14 de junio de 2026",
     member: "Carlos Silva",
