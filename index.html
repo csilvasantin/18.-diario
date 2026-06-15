@@ -352,50 +352,41 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se tomo como base la entrada ya publicada hoy en el diario y se contrasto con evidencia local adicional del workspace para dejar una version mas util y menos mecanica.",
-          "Se revisaron los clones canonicos de <code>AdmiraNext-Team</code> en <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/admirito/AdmiraNext-Team</code>, junto con el workspace <code>/Users/csilvasantin/Claude/</code>.",
-          "Se actualizo esta misma entrada del <code>2026-06-15</code> y su reflejo en <code>index.html</code>, sin crear una fecha duplicada."
+          "<code>AdmiraNext-Team</code> concentro el WIP local mas visible del workspace: rediseño fuerte de <code>public/index.html</code>, <code>public/styles.css</code> y <code>public/app.js</code> hacia una UI arcade tipo <code>Player Select</code>, subida de <code>package.json</code> a <code>v0.1.3</code>, nuevas capturas y datos SSH/locales del Mac Mini en <code>data/machines.json</code>.",
+          "El trabajo publicado hoy se movio sobre todo en el gemelo y su cadena: <code>01.-AdmiraXperience-Game</code> y <code>xpaceos</code> iteraron NPCs, overlay de fin de dia, <code>sync-twin.sh</code>, badge/autostart y una PLV inteligente con targeting por aforo; <code>admira-app</code> acompaño con diez bumps de <code>TWIN_BASE</code> para propagar esas versiones.",
+          "El resto del workspace tambien tuvo avance operativo real: <code>pixeria</code> añadio control de PLV por pantalla y mejoras de redistribucion, <code>pixer-worker</code> persistio fallos de importacion de Telegram, y <code>admira-studio</code> reemplazo el filtro de animaciones de stock por enlaces."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "Los dos clones canonicos de <code>AdmiraNext-Team</code> apuntan a <code>https://github.com/csilvasantin/AdmiraNext-Team.git</code>, estan limpios y no muestran commits nuevos del <code>2026-06-15</code>.",
-          "El path <code>/Users/csilvasantin/AdmiraNext-Team</code> no corresponde al repo canonico de <code>AdmiraNext-Team</code>: su <code>origin</code> apunta a <code>03-ControlCodexClaude</code> y contiene cambios locales arrastrados en <code>data/machines.json</code> y capturas OCR antiguas, no trabajo nuevo de hoy.",
-          "Los cambios visibles de hoy en el workspace revisado estan concentrados en <code>/Users/csilvasantin/Claude/diario/2026-06-15.md</code>, <code>/Users/csilvasantin/Claude/diario/index.html</code> y <code>/Users/csilvasantin/Claude/diario/repos.html</code>.",
-          "La pasada anterior del dia sigue siendo valida: quedaron <code>41</code> repos revisados, <code>5</code> fast-forward seguros aplicados y <code>13</code> worktrees sucios pendientes de limpieza manual."
-        ]
-      },
-      {
-        heading: "Avances",
-        items: [
-          "La entrada de hoy queda corregida para reflejar mejor el trabajo real de Admirito: barrido general previo, validacion especifica de <code>AdmiraNext-Team</code> y estado reciente del workspace.",
-          "Queda aclarado que hoy no hubo entrega nueva en el repo canonico de <code>AdmiraNext-Team</code>, sino verificacion de estado y separacion entre clones buenos y paths confusos.",
-          "El diario mantiene una sola entrada para el dia, con informacion accionable para una siguiente pasada."
+          "<code>git log --since='2026-06-15 00:00'</code> confirma actividad intensa hoy en <code>01.-AdmiraXperience-Game</code>, <code>xpaceos</code>, <code>admira-app</code>, <code>pixeria</code>, <code>pixer-worker</code> y <code>admira-studio</code>, con el gemelo y la PLV como hilo comun del dia.",
+          "<code>git status --short</code> y <code>git diff --stat</code> en <code>AdmiraNext-Team</code> dejan un cambio local grande pero aun no publicado: <code>8</code> ficheros tocados y mas de <code>1100</code> lineas movidas, suficiente para tratarlo como WIP serio pero no como entrega cerrada.",
+          "<code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> dejaron validada la identidad <code>Oraculo (Codex·gmail)</code> y que no habia nuevas tareas dirigidas al arrancar."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Hay ambiguedad de paths: <code>/Users/csilvasantin/AdmiraNext-Team</code> parece el repo buscado por nombre, pero en realidad esta conectado a <code>03-ControlCodexClaude</code>.",
-          "Ese path ambiguo conserva cambios sin commitear y ficheros OCR sueltos, lo que puede inducir a leer como trabajo actual algo que realmente viene de <code>2026-05-05</code> y <code>2026-04-15</code>.",
-          "Siguen existiendo worktrees sucios en varios repos de Admirito detectados en la pasada anterior, asi que el barrido de hoy no equivale a una sincronizacion completa del entorno."
+          "<code>AdmiraNext-Team</code> sigue mezclando rediseño visual, datos y screenshots en un mismo diff; publicar asi elevaria el riesgo de colar regresiones o de dejar cambios poco revisables.",
+          "No hay evidencia en este workspace de pruebas automatizadas ni de pasada visual ejecutada hoy sobre <code>AdmiraNext-Team</code>; en <code>admira-app</code> solo queda trazado el ritmo de bumps, no una validacion funcional completa desde aqui.",
+          "El checkout local habitual de <code>diario</code> sigue muy por detras de remoto y con ficheros sucios, asi que la actualizacion tuvo que hacerse sobre un clon limpio para no contaminar la entrada."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener la entrada existente del <code>15</code> y actualizarla en vez de crear otra.",
-          "Tomar como canonicos para <code>AdmiraNext-Team</code> los clones que apuntan al remoto correcto, no el directorio homonimo con <code>origin</code> distinto.",
-          "Registrar como trabajo de hoy solo lo que tiene evidencia temporal y de remoto consistente."
+          "Tratar <code>AdmiraNext-Team</code> como foco principal del dia por volumen y direccion del cambio, pero describirlo explicitamente como WIP local mientras no haya commit ni validacion visual registrada.",
+          "Priorizar en la entrada los cambios publicados que si tienen evidencia fuerte en Git: gemelo/XpaceOS, bumps de <code>admira-app</code>, PLV por pantalla en <code>pixeria</code> y soporte de Telegram en <code>pixer-worker</code>.",
+          "Sustituir la entrada previa del <code>15</code> por un resumen mas util para Admirito en vez de duplicar la fecha con otra variante del mismo dia."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Limpiar o archivar el contenido local de <code>/Users/csilvasantin/AdmiraNext-Team</code> para evitar futuras lecturas equivocadas.",
-          "Revisar en una pasada separada los worktrees sucios con mas riesgo operativo, empezando por <code>AdmiraNext-Team</code>, <code>diario</code>, <code>pulpo</code> y <code>xtanco-game</code>.",
-          "Mantener el diario de Admirito como punto de control breve: que cambio de verdad, que se valido y que sigue bloqueado."
+          "Hacer una pasada visual real de <code>AdmiraNext-Team</code>, separar el rediseño arcade en commits revisables y decidir si se publica completo o en partes.",
+          "Verificar el flujo gemelo -&gt; <code>admira-app</code> -&gt; <code>pixeria</code> con una comprobacion funcional minima, no solo con <code>git log</code>, para confirmar que los bumps y la PLV por pantalla quedaron coherentes.",
+          "Mantener el diario alineado con remoto desde clon limpio mientras el checkout local de <code>github-csilvasantin/diario</code> siga sin reconciliar."
         ]
       }
     ]
