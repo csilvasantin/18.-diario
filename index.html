@@ -352,51 +352,52 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Una pasada previa de Codex publicada hoy en <code>origin/main</code> dejo los commits <code>13ae0c6</code> (<code>chore: actualizar repos.html 2026-06-16 [skip ci]</code>) y <code>0e1b510</code> (<code>Diario 2026-06-16 [Codex]</code>), creando <code>2026-06-16.md</code> y su bloque correspondiente en <code>index.html</code>.",
-          "En esta pasada se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de <code>actualizar-diario-2</code> y se inspeccionaron <code>README.md</code>, <code>2026-06-15.md</code>, <code>2026-06-16.md</code>, <code>index.html</code>, <code>git status --short --branch</code>, <code>git log --since='2026-06-16 00:00' --until='2026-06-16 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-16 00:00'</code>, <code>git fetch origin main</code> y <code>git show --stat --format=fuller 0e1b510</code>.",
-          "Tras detectar que <code>origin/main</code> ya contenia la fecha de hoy, se hizo <code>git switch --detach origin/main</code> y se reescriben <code>2026-06-16.md</code> e <code>index.html</code> para consolidar una sola entrada diaria con estado final.",
-          "Se verifico la cadena publica <code>https://csilvasantin.github.io/diario/</code> -> <code>https://www.carlossilva.info/diario/</code> -> <code>https://csilvasantin.github.io/18.-diario/</code> -> <code>https://www.carlossilva.info/18.-diario/</code>."
+          "Se ejecuto <code>agora-checkin codex start</code> y se leyo la memoria de la automatizacion para reanudar esta pasada sin duplicar trabajo.",
+          "Se reviso la actividad de hoy en repositorios Admirito con foco en <code>32.-ConsejoAdmiraNextGame</code>, <code>AdmiraNext-Team</code> y este checkout limpio de <code>diario</code>.",
+          "Se confirmo como trabajo publicado del dia el commit <code>ba53e57</code> en <code>32.-ConsejoAdmiraNextGame</code>, que da de alta al agente Smith (OpenCode + DeepSeek) en el Consejo y lo deja asignable desde la UI.",
+          "Se inspeccionaron los clones locales de <code>AdmiraNext-Team</code>: uno con cambios sueltos en <code>data/machines.json</code> y OCRs sin trackear, y otro en <code>Documents/Admirito/...</code> con una refactorizacion grande sin commit del dashboard hacia una UI tipo arcade (<code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>package.json</code>).",
+          "Se actualizo la entrada existente de <code>2026-06-16</code> en <code>2026-06-16.md</code> e <code>index.html</code> para reflejar hechos verificados del dia en vez del texto provisional anterior."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log --since='2026-06-16 00:00' --until='2026-06-16 23:59:59' --date=iso --stat --oneline --all</code> mostro tres commits relevantes de hoy en este repo: <code>13ae0c6</code>, <code>0e1b510</code> y <code>ee54f7f</code>.",
-          "<code>git show --stat --format=fuller ee54f7f</code> confirmo que el snapshot <code>Codex worktree snapshot: startup-cleanup</code> de las <code>21:32:17 +0200</code> anadio <code>2026-06-08.md</code> e <code>index.html</code>.",
-          "<code>curl -I -s https://csilvasantin.github.io/diario/</code>, <code>curl -I -s https://csilvasantin.github.io/18.-diario/</code> y <code>curl -I -s https://www.carlossilva.info/18.-diario/</code> devolvieron <code>301</code>, <code>301</code> y <code>200</code>, respectivamente.",
-          "<code>curl -s https://www.carlossilva.info/18.-diario/ | rg -n '2026-06-16|16 de junio de 2026|date: \"2026-06-16\"|entry-selector'</code> encontro el selector <code>entry-selector</code>, pero no la fecha <code>2026-06-16</code>, asi que el destino final sigue sirviendo una version que todavia no expone la fecha de hoy."
+          "<code>git status --short --branch</code> en <code>/Users/csilvasantin/Claude/diario/</code> devolvio <code>## main...origin/main</code>, y <code>git log --since='2026-06-16 00:00' --oneline --all</code> mostro actividad real del dia ya publicada aqui: <code>0e1b510</code> (<code>Diario 2026-06-16 [Codex]</code>), <code>13ae0c6</code> (<code>chore: actualizar repos.html 2026-06-16 [skip ci]</code>) y <code>7c054e1</code> (<code>docs: Update Codex 2026-06-16 [skip ci]</code>).",
+          "<code>git log --since='2026-06-16 00:00' --oneline --stat</code> en <code>32.-ConsejoAdmiraNextGame</code> confirmo el commit <code>ba53e57</code> y otros cambios del dia en salud de bots, adjuntos a tareas y endurecimiento de endpoints.",
+          "<code>git status --short</code> en <code>/Users/csilvasantin/AdmiraNext-Team</code> devolvio <code>M data/machines.json</code> mas dos JPG OCR y un directorio anidado sin trackear; el diff de <code>data/machines.json</code> solo mueve <code>updatedAt</code>, <code>lastSeen</code> y un estado de maquina con fechas de mayo, no trabajo nuevo de hoy.",
+          "<code>git status --short</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> mostro un workspace muy desalineado y <code>git diff --stat</code> resumo 1112 inserciones / 73 borrados sobre la UI publica, con version subida a <code>0.1.3</code> y tres screenshots modificadas."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>2026-06-16.md</code> queda como unica entrada Markdown del dia, sin duplicados y ya ajustada al estado final de publicacion.",
-          "<code>index.html</code> queda sincronizado con la misma version resumida del <code>16 de junio de 2026</code> bajo <code>Codex</code>.",
-          "La automatizacion conserva la evidencia de la publicacion previa del dia y le suma la verificacion final de URLs y remoto."
+          "Queda documentado que el trabajo con entrega comprobable de hoy estuvo en el Consejo de Admirito, no en <code>AdmiraNext-Team</code>.",
+          "La entrada del diario pasa de ser un placeholder tecnico a un resumen util: que se envio, que se comprobo y que cambios siguen pendientes en workspace.",
+          "<code>index.html</code> y el Markdown vuelven a estar alineados con una sola entrada para <code>2026-06-16</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Esta corrida arranco en detached HEAD sobre <code>1e659f4</code>, mientras <code>origin/main</code> ya habia avanzado hasta <code>0e1b510</code>, asi que no era seguro editar sin resincronizar.",
-          "La URL pedida responde, pero el destino definitivo que hoy sirve HTML es <code>https://www.carlossilva.info/18.-diario/</code>, no <code>github.io/diario</code> directamente.",
-          "En la verificacion de contenido, ese HTML final seguia sin mostrar <code>2026-06-16</code>, lo que apunta a desfase de publicacion o a que la web visible depende de otro repo."
+          "<code>AdmiraNext-Team</code> no tiene commits nuevos hoy en los clones inspeccionados, asi que la trazabilidad actual depende de cambios locales sin integrar.",
+          "Hay dos estados locales conflictivos de <code>AdmiraNext-Team</code>: el clon raiz con residuos de OCR y datos antiguos, y el clon de <code>Documents/Admirito/...</code> detras de <code>origin</code> por 303 commits y con una refactorizacion grande sin publicar.",
+          "Incluso en <code>32.-ConsejoAdmiraNextGame</code> quedan cambios locales tras el ultimo commit (<code>data/tasks.json</code>, <code>yar_context.json</code> y backups), lo que mezcla estado operativo con trabajo de producto."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener una sola entrada del <code>2026-06-16</code> y reemplazar la version intermedia de <code>0e1b510</code> por un cierre final mas exacto, en lugar de anadir otro bloque o fichero.",
-          "Basar esta pasada en <code>origin/main</code> antes de editar para no sobrescribir trabajo ya publicado hoy.",
-          "Considerar valida la URL publica por disponibilidad y cadena de redireccion, pero dejar anotado que la visibilidad de la fecha sigue pendiente en el destino final."
+          "Registrar como hecho del dia solo lo que esta sustentado por <code>git log</code>, <code>git status</code> y diffs reales de los repos inspeccionados.",
+          "Tratar los cambios de <code>AdmiraNext-Team</code> como trabajo pendiente o arrastrado, no como entrega hecha hoy, hasta que se elija un clon canonico y se publique.",
+          "Mantener la entrada breve y accionable, actualizando la del dia en vez de crear una segunda version."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer commit de esta consolidacion y empujarlo a <code>origin/main</code>.",
-          "Revalidar en unos minutos si <code>https://www.carlossilva.info/18.-diario/</code> ya sirve el HTML con <code>2026-06-16</code>.",
-          "Si no aparece, revisar el flujo que sincroniza este repo con <code>18.-diario</code> o con el dominio <code>carlossilva.info</code>."
+          "Elegir un unico clon canonico de <code>AdmiraNext-Team</code> y limpiar el resto antes de seguir tocando esa UI.",
+          "Si la version arcade de <code>AdmiraNext-Team</code> sigue vigente, moverla al clon canonico, regenerar capturas y dejarla en un commit publicable.",
+          "Publicar esta correccion del diario y verificar que <code>https://csilvasantin.github.io/diario/</code> muestre el <code>16 de junio de 2026</code> actualizado."
         ]
       }
     ]
