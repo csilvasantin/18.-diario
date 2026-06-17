@@ -352,45 +352,52 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se revisaron la memoria de la automatizacion <code>actualizar-diario</code>, el estado de <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se comprobo que no habia trabajo pendiente para Oraculo.",
-          "Se valido el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>, se tomo como referencia <code>2026-06-16.md</code>, <code>README.md</code> y el bloque <code>const entries</code> de <code>index.html</code>, y se creo la entrada de hoy en Markdown y HTML."
+          "Una pasada previa de hoy ya publico <code>50ee804</code> (<code>Diario 2026-06-17 [Codex]</code>) sobre <code>origin/main</code>, creando <code>2026-06-17.md</code> y el bloque correspondiente en <code>index.html</code>.",
+          "En esta pasada se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de <code>actualizar-diario-2</code> y se inspeccionaron <code>CERRAR-EL-DIA.md</code>, <code>2026-06-16.md</code>, <code>2026-06-17.md</code>, <code>index.html</code>, <code>git status --short --branch</code>, <code>git log --since='2026-06-17 00:00' --until='2026-06-17 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-17 00:00'</code> y <code>git log --oneline -5 --decorate</code>.",
+          "Se verifico el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>, se confirmo que <code>HEAD</code>, <code>main</code> y <code>origin/main</code> ya estaban en <code>50ee804</code>, y se reescriben <code>2026-06-17.md</code> e <code>index.html</code> para dejar la entrada de hoy con el estado final de publicacion y verificacion publica.",
+          "Se comprobo la cadena publica <code>https://csilvasantin.github.io/diario/</code> -&gt; <code>https://www.carlossilva.info/diario/</code> -&gt; <code>https://csilvasantin.github.io/18.-diario/</code> -&gt; <code>https://www.carlossilva.info/18.-diario/</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el repo del diario estaba limpio antes de editar.",
-          "<code>2026-06-17.md</code> no existia al empezar esta corrida, por lo que la fecha de hoy se publico desde cero sin reemplazar una entrada previa.",
-          "<code>agora tasks --from Codex --peek</code> devolvio <code>(sin tareas para Codex·gmail)</code> y <code>agora inbox --from Codex --peek</code> devolvio <code>(buzon vacio para Codex·gmail)</code>."
+          "<code>git log --since='2026-06-17 00:00' --until='2026-06-17 23:59:59' --date=iso --pretty=format:'%h %ad %s' --all</code> mostro los commits reales de hoy en este repo: <code>496737a</code>, <code>cf36ce0</code>, <code>978a969</code> y <code>50ee804</code>.",
+          "<code>git reflog --date=iso --since='2026-06-17 00:00'</code> mostro <code>cf36ce0 HEAD@{2026-06-17 00:00:55 +0200}: commit: Diario 2026-06-16 [Codex]</code>, y <code>git rev-parse HEAD</code> y <code>git rev-parse origin/main</code> devolvieron el mismo SHA <code>50ee80405cea16e75fba3a4da2089cb6ed619744</code>.",
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el repo estaba limpio antes de esta consolidacion.",
+          "<code>curl -I -s https://csilvasantin.github.io/diario/</code> devolvio <code>301</code> y <code>curl -I -s https://www.carlossilva.info/18.-diario/</code> devolvio <code>200</code>.",
+          "<code>curl -s https://www.carlossilva.info/18.-diario/ | rg -n '2026-06-17|17 de junio de 2026|date: \"2026-06-17\"|entry-selector'</code> encontro <code>entry-selector</code>, pero no la fecha <code>2026-06-17</code>, asi que el HTML final visible todavia no expone la novedad publicada hoy."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-17</code> queda documentada en un fichero propio y reflejada tambien en la portada publica del diario.",
-          "La automatizacion vuelve a dejar trazabilidad de estado, decisiones y siguientes pasos sin mezclar otras fechas ni otros repos."
+          "<code>2026-06-17.md</code> queda como unica entrada Markdown del dia y consolidada con evidencia de la publicacion previa y de esta verificacion final.",
+          "<code>index.html</code> queda alineado con la misma version resumida del <code>17 de junio de 2026</code> bajo <code>Codex</code>.",
+          "La automatizacion deja constancia de que la URL publica responde, aunque la propagacion del contenido visible sigue pendiente."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La memoria local de <code>actualizar-diario</code> no tenia contenido previo utilizable, asi que esta pasada partio sin contexto persistido de decisiones anteriores."
+          "Esta pasada empezo desde un worktree de Codex en detached HEAD, mientras la publicacion efectiva del diario vive en el checkout limpio <code>/Users/csilvasantin/Claude/diario/</code> con remoto <code>https://github.com/csilvasantin/18.-diario.git</code>.",
+          "La URL pedida responde, pero el destino final que hoy sirve HTML sigue siendo <code>https://www.carlossilva.info/18.-diario/</code>, no <code>github.io/diario</code> directamente.",
+          "En la verificacion de contenido, ese HTML final seguia sin mostrar <code>2026-06-17</code>, lo que apunta a desfase de publicacion o a una capa adicional de despliegue fuera de este repo."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener la entrada de hoy breve y factual, centrada solo en esta actualizacion del diario y en verificaciones realmente ejecutadas.",
-          "Crear la fecha desde cero en lugar de inferir trabajo no comprobado de otros repos o sesiones."
+          "Mantener una sola entrada del <code>2026-06-17</code> y actualizarla con el estado final de hoy, en lugar de anadir otro bloque o duplicar la fecha.",
+          "Basar la consolidacion en el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code> porque ahi ya estaba la publicacion real en <code>main</code>.",
+          "Considerar valida la URL publica por disponibilidad y cadena de redireccion, pero dejar anotado que la visibilidad de la fecha sigue pendiente en el destino final."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff final de <code>2026-06-17.md</code> e <code>index.html</code>.",
-          "Hacer <code>git add 2026-06-17.md index.html</code>, commit <code>Diario 2026-06-17 [Codex]</code> y <code>git push origin main</code>.",
-          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responda y muestre la fecha <code>17 de junio de 2026</code>."
+          "Hacer commit de esta consolidacion y empujarla a <code>origin/main</code>.",
+          "Revalidar en unos minutos si <code>https://www.carlossilva.info/18.-diario/</code> ya sirve el HTML con <code>2026-06-17</code>.",
+          "Si no aparece, revisar el flujo que sincroniza este repo con <code>18.-diario</code> o con el dominio <code>carlossilva.info</code>."
         ]
       }
     ]
