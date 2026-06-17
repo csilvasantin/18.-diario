@@ -352,53 +352,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la actividad real de hoy en los repos de Admirito con foco en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>01.-AdmiraXperience-Game</code>, <code>xpaceos</code>, <code>admira-app</code>, <code>admira-store</code>, <code>pixeria</code> y <code>32.-ConsejoAdmiraNextGame</code>.",
-          "El gemelo digital avanzo en cadena desde preprod a produccion: <code>01.-AdmiraXperience-Game</code> recibio CLI de turnos y digital signage, NPCs vivos, badge de entorno, render \"real\" fase A, i18n de eventos, y favicon/titulo de familia Admira en los commits <code>4a2dd7f</code>, <code>d42bdb5</code>, <code>3b99d7d</code>, <code>5277b90</code> y <code>1f8a0bd</code>.",
-          "<code>xpaceos</code> y <code>admira-store</code> se sincronizaron con esas builds y dejaron publicado el gemelo en preprod y produccion, destacando <code>b79a461</code> y <code>a9dde61</code> en <code>admira-store</code>, y <code>e8519d5</code>, <code>c744016</code> y <code>770f8d6</code> en <code>xpaceos</code>.",
-          "<code>admira-app</code> recibio trabajo paralelo de producto y rendimiento: login Google para backoffice, ruta <code>/backoffice</code>, SEO/Open Graph/robots/sitemap, y reduccion fuerte de peso de imagenes y JSON no usados en <code>4b00f83</code>, <code>9cf7225</code>, <code>67910bf</code>, <code>3d6a74b</code> y <code>ac2dc16</code>.",
-          "En <code>pixeria</code> se mejoro la pagina <code>/crear</code> con KPIs en vivo, chips rapidos de turnos y signage, enlace a ayuda y empuje bidireccional del plano al gemelo (<code>49eef8e</code>, <code>5b981fd</code>, <code>fa4c46c</code>, <code>7b54710</code>), y en <code>32.-ConsejoAdmiraNextGame</code> se trabajo el login Google del consejo y la captura/auditoria remota de ventanas (<code>3bae4c1</code>, <code>4119351</code>, <code>882c403</code>, <code>cf7b580</code>)."
+          "Se revisaron los checkouts de <code>AdmiraNext-Team</code>, <code>ConsejoAdmiraNextGame</code> y <code>ai-workspace</code> para separar actividad real de hoy de clones viejos o desalineados.",
+          "En <code>AdmiraNext-Team</code> quedaron cambios locales en <code>data/machines.json</code>, <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> para convertir la home en un selector arcade por miembro y anadir datos de acceso local/Tailscale al <code>macmini</code>.",
+          "En <code>32.-ConsejoAdmiraNextGame</code> se detecto el commit de hoy <code>2d1c75a</code> (<code>fix: autoheal tailscale funnel on startup</code>) y cambios locales adicionales en <code>data/tasks.json</code>, <code>data/machines.json</code>, <code>public/council-scumm.html</code> y <code>src/ssh-exec.js</code>.",
+          "Se actualizo esta entrada del diario en el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code> en vez de duplicar la fecha."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log --since='2026-06-17 00:00'</code> confirmo commits de hoy en <code>01.-AdmiraXperience-Game</code>, <code>admira-app</code>, <code>admira-store</code>, <code>pixeria</code>, <code>xpaceos</code> y <code>32.-ConsejoAdmiraNextGame</code>.",
-          "<code>find ... -newermt '2026-06-17 00:00'</code> confirmo cambios de hoy en ficheros publicos de esos repos, incluyendo <code>game.html</code>, <code>admira-app/index.html</code>, <code>admira-store/index.html</code>, <code>pixeria/crear/index.html</code> y <code>xpaceos/admira-xp/index.html</code>.",
-          "<code>curl -I -s https://admira.store/</code> devolvio <code>200</code>, <code>curl -I -s https://admira.app/</code> devolvio <code>200</code>, <code>curl -I -s https://xpaceos.com/admira-xp/</code> devolvio redireccion <code>301</code> hacia <code>https://www.xpaceos.com/admira-xp/</code>, y <code>curl -I -s https://www.pixeria.com/crear</code> devolvio redireccion <code>301</code> a la version con slash final.",
-          "<code>git status --short --branch</code> mostro limpios <code>01.-AdmiraXperience-Game</code>, <code>admira-app</code>, <code>admira-store</code>, <code>pixeria</code> y <code>32.-ConsejoAdmiraNextGame</code>; <code>xpaceos</code> mantiene <code>?? cpm/cpm-explainer.html</code> sin commitear.",
-          "<code>AdmiraNext-Team</code> no tuvo commits hoy: su ultimo commit local inspeccionado fue <code>edbeb7a</code> del <code>2026-03-28</code>, mientras <code>AdmiraNext-Team-latest</code> conserva cambios locales en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>INICIO_Y_CIERRE_DEL_DIA.md</code>."
+          "<code>git show --stat --format=fuller 2d1c75a</code> confirmo que el fix de hoy en <code>ConsejoAdmiraNextGame</code> toco <code>ops/macos/reconfigure-tailscale.sh</code> y <code>ops/macos/start-control-agent.sh</code> con <code>89 insertions</code> y <code>22 deletions</code>.",
+          "<code>git diff --stat</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> mostro <code>1112 insertions</code> y <code>73 deletions</code> en <code>8</code> ficheros, incluyendo el salto de version a <code>0.1.3</code>.",
+          "<code>git diff -- data/machines.json public/index.html</code> en ese checkout confirmo dos cambios funcionales claros: <code>connect_local</code> para <code>macmini</code> y una portada <code>World Warrior Ops</code> con bloque <code>Choose Your Fighter</code>.",
+          "<code>git status --short --branch</code> mostro que <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> esta <code>behind 303</code>, mientras <code>/Users/csilvasantin/AdmiraNext-Team</code> tiene otro diff distinto y un directorio <code>AdmiraNext-Team/</code> sin trackear."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El trabajo de hoy consolida el gemelo digital como producto principal de <code>admira.store</code>, con preprod sincronizada en <code>xpaceos/admira-xp</code> y base compartida propagada desde <code>01.-AdmiraXperience-Game</code>.",
-          "<code>admira-app</code> quedo mas preparada para adquisicion y acceso operativo: mejor SEO, menos peso descargado y backoffice con login Google.",
-          "<code>pixeria/crear</code> y el consejo avanzaron en capacidad operativa en vivo, tanto para control del gemelo como para auditoria y acceso del consejo."
+          "<code>AdmiraNext-Team</code> ya tiene una direccion mas util para operacion diaria: vista por miembro, mejor lectura del estado de flota y atajos de conexion mas concretos.",
+          "<code>ConsejoAdmiraNextGame</code> gano un primer autoheal del arranque de Tailscale Funnel y prepara una capa de previews y terminales por agente mas rica.",
+          "El diario de hoy queda reorientado al trabajo real de Admirito en vez de limitarse a la publicacion del propio diario."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>AdmiraNext-Team</code> esta <code>behind 303</code> respecto a <code>origin/main</code> y ademas tiene cambios locales en <code>data/machines.json</code>, capturas y la UI publica; hoy no hubo commits ahi, asi que sigue pendiente ordenar esa rama antes de mezclar trabajo nuevo.",
-          "<code>AdmiraNext-Team-latest</code> tambien esta sucio, con cambios en <code>src/server.js</code> y <code>src/ssh-exec.js</code>; el diff apunta a endurecer <code>osascript</code> remoto, aceptar <code>idle</code> como estado y permitir <code>PORT</code> configurable, pero no esta cerrado ni publicado.",
-          "No encontre actividad de hoy en el repo canonico <code>AdmiraNext-Team</code>, asi que el trabajo efectivo del dia quedo repartido en otros repos del workspace y no en el panel de equipo original."
+          "Hay varias copias de <code>AdmiraNext-Team</code> con estados distintos, asi que el trabajo de hoy no esta consolidado en un solo checkout limpio.",
+          "El checkout de <code>Documents/Admirito/.../AdmiraNext-Team</code> arrastra mucho trabajo local pero esta muy por detras de <code>origin/main</code>, lo que eleva el riesgo de mezclar cambios viejos con ajustes nuevos.",
+          "En <code>/Users/csilvasantin/AdmiraNext-Team</code> aparece ademas un subdirectorio <code>AdmiraNext-Team/</code> sin trackear y capturas OCR antiguas, senal de workspace a medio ordenar."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Actualizar la entrada del dia existente en vez de duplicarla, reemplazando el resumen centrado en el repo del diario por un cierre util sobre el trabajo real de Admirito.",
-          "Dar prioridad a evidencia de <code>git log</code>, <code>git status</code>, <code>find -newermt</code> y comprobaciones HTTP basicas, en lugar de inferir despliegues no visibles desde el workspace.",
-          "Dejar <code>AdmiraNext-Team</code> explicitamente como pendiente de sincronizacion y saneado, en vez de presentarlo como repositorio activo de hoy."
+          "Basar la entrada en evidencia de <code>git diff</code>, <code>git status</code> y <code>git show</code>, no en fechas de modificacion de ficheros ni en supuestos sobre que checkout es el bueno.",
+          "Mantener una sola entrada para <code>2026-06-17</code> y reemplazar el contenido previo para que el diario refleje Admirito, no el mantenimiento del diario.",
+          "Seguir usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico para publicar."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Ordenar y publicar los cambios locales de <code>AdmiraNext-Team</code> o decidir si deben portarse desde <code>AdmiraNext-Team-latest</code>.",
-          "Cerrar el diff abierto de <code>AdmiraNext-Team-latest</code> y decidir si esa rama sustituye al panel antiguo.",
-          "Revalidar visualmente <code>admira.store</code>, <code>admira.app</code>, <code>www.xpaceos.com/admira-xp/</code> y <code>www.pixeria.com/crear/</code> si se quiere confirmar la experiencia final mas alla del estado HTTP."
+          "Elegir un unico checkout de <code>AdmiraNext-Team</code>, rebasarlo contra <code>origin/main</code> y decidir que diff se conserva.",
+          "Probar localmente la nueva UI arcade y las previews/capturas del consejo antes de convertir esos cambios sueltos en commits.",
+          "Revisar el diff enorme de <code>data/tasks.json</code> en <code>ConsejoAdmiraNextGame</code> antes de publicarlo junto al resto del panel."
         ]
       }
     ]
