@@ -344,6 +344,58 @@
 <script>
 const entries = [
   {
+    date: "2026-06-17",
+    title: "17 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se revisaron la memoria de la automatizacion <code>actualizar-diario</code>, el estado de <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se comprobo que no habia trabajo pendiente para Oraculo.",
+          "Se valido el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>, se tomo como referencia <code>2026-06-16.md</code>, <code>README.md</code> y el bloque <code>const entries</code> de <code>index.html</code>, y se creo la entrada de hoy en Markdown y HTML."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el repo del diario estaba limpio antes de editar.",
+          "<code>2026-06-17.md</code> no existia al empezar esta corrida, por lo que la fecha de hoy se publico desde cero sin reemplazar una entrada previa.",
+          "<code>agora tasks --from Codex --peek</code> devolvio <code>(sin tareas para Codex·gmail)</code> y <code>agora inbox --from Codex --peek</code> devolvio <code>(buzon vacio para Codex·gmail)</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-06-17</code> queda documentada en un fichero propio y reflejada tambien en la portada publica del diario.",
+          "La automatizacion vuelve a dejar trazabilidad de estado, decisiones y siguientes pasos sin mezclar otras fechas ni otros repos."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La memoria local de <code>actualizar-diario</code> no tenia contenido previo utilizable, asi que esta pasada partio sin contexto persistido de decisiones anteriores."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Mantener la entrada de hoy breve y factual, centrada solo en esta actualizacion del diario y en verificaciones realmente ejecutadas.",
+          "Crear la fecha desde cero en lugar de inferir trabajo no comprobado de otros repos o sesiones."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff final de <code>2026-06-17.md</code> e <code>index.html</code>.",
+          "Hacer <code>git add 2026-06-17.md index.html</code>, commit <code>Diario 2026-06-17 [Codex]</code> y <code>git push origin main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responda y muestre la fecha <code>17 de junio de 2026</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-16",
     title: "16 de junio de 2026",
     member: "Carlos Silva",
