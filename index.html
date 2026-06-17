@@ -352,51 +352,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se revisaron los checkouts de <code>AdmiraNext-Team</code>, <code>ConsejoAdmiraNextGame</code> y <code>ai-workspace</code> para separar actividad real de hoy de clones viejos o desalineados.",
-          "En <code>AdmiraNext-Team</code> quedaron cambios locales en <code>data/machines.json</code>, <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> para convertir la home en un selector arcade por miembro y anadir datos de acceso local/Tailscale al <code>macmini</code>.",
-          "En <code>32.-ConsejoAdmiraNextGame</code> se detecto el commit de hoy <code>2d1c75a</code> (<code>fix: autoheal tailscale funnel on startup</code>) y cambios locales adicionales en <code>data/tasks.json</code>, <code>data/machines.json</code>, <code>public/council-scumm.html</code> y <code>src/ssh-exec.js</code>.",
-          "Se actualizo esta entrada del diario en el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code> en vez de duplicar la fecha."
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyeron la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy coincide con <code>origin/main</code> del repo publico <code>18.-diario</code>.",
+          "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-17 00:00' --until='2026-06-17 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-17 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se reescribieron <code>2026-06-17.md</code> e <code>index.html</code> para que la fecha refleje esta pasada real de cierre en el checkout canonico, sin crear otro fichero ni otra fecha duplicada."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git show --stat --format=fuller 2d1c75a</code> confirmo que el fix de hoy en <code>ConsejoAdmiraNextGame</code> toco <code>ops/macos/reconfigure-tailscale.sh</code> y <code>ops/macos/start-control-agent.sh</code> con <code>89 insertions</code> y <code>22 deletions</code>.",
-          "<code>git diff --stat</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> mostro <code>1112 insertions</code> y <code>73 deletions</code> en <code>8</code> ficheros, incluyendo el salto de version a <code>0.1.3</code>.",
-          "<code>git diff -- data/machines.json public/index.html</code> en ese checkout confirmo dos cambios funcionales claros: <code>connect_local</code> para <code>macmini</code> y una portada <code>World Warrior Ops</code> con bloque <code>Choose Your Fighter</code>.",
-          "<code>git status --short --branch</code> mostro que <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> esta <code>behind 303</code>, mientras <code>/Users/csilvasantin/AdmiraNext-Team</code> tiene otro diff distinto y un directorio <code>AdmiraNext-Team/</code> sin trackear."
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el checkout estaba limpio al empezar.",
+          "<code>git log --since='2026-06-17 00:00' --until='2026-06-17 23:59:59' --date=iso --stat --oneline --all</code> mostro cinco commits alcanzables de hoy en este repo: <code>50ee804</code>, <code>978a969</code>, <code>2f5147a</code>, <code>982405e</code> y <code>7b0920a</code>.",
+          "<code>git reflog --date=iso --since='2026-06-17 00:00'</code> confirmo ademas el commit reescrito <code>5c01e09</code> y el <code>pull --rebase origin main</code> de las <code>21:32:30 +0200</code> antes del cierre actual.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-17 23:56:55 CEST +0200</code> en el pre-check de esta corrida."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>AdmiraNext-Team</code> ya tiene una direccion mas util para operacion diaria: vista por miembro, mejor lectura del estado de flota y atajos de conexion mas concretos.",
-          "<code>ConsejoAdmiraNextGame</code> gano un primer autoheal del arranque de Tailscale Funnel y prepara una capa de previews y terminales por agente mas rica.",
-          "El diario de hoy queda reorientado al trabajo real de Admirito en vez de limitarse a la publicacion del propio diario."
+          "La fecha <code>2026-06-17</code> vuelve a quedar documentada con una sola entrada Markdown firmada como <code>[Codex]</code> y con las seis secciones numeradas exigidas por la rutina.",
+          "<code>index.html</code> queda sincronizado con el mismo contenido resumido de esta entrada para mantener visible el <code>17 de junio de 2026</code> en la UI publica bajo el filtro <code>Codex</code>.",
+          "La rutina de cierre queda rehecha sobre el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>, que era el objetivo operativo de esta automatizacion."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Hay varias copias de <code>AdmiraNext-Team</code> con estados distintos, asi que el trabajo de hoy no esta consolidado en un solo checkout limpio.",
-          "El checkout de <code>Documents/Admirito/.../AdmiraNext-Team</code> arrastra mucho trabajo local pero esta muy por detras de <code>origin/main</code>, lo que eleva el riesgo de mezclar cambios viejos con ajustes nuevos.",
-          "En <code>/Users/csilvasantin/AdmiraNext-Team</code> aparece ademas un subdirectorio <code>AdmiraNext-Team/</code> sin trackear y capturas OCR antiguas, senal de workspace a medio ordenar."
+          "La fecha de hoy ya habia sido reescrita varias veces en commits previos (<code>50ee804</code>, <code>2f5147a</code>, <code>982405e</code>, <code>7b0920a</code>), asi que no era correcto anadir otro bloque independiente para la misma autoria.",
+          "El historial de hoy incluye un commit intermedio ya no alcanzable (<code>5c01e09</code>) por el rebase de la tarde, de modo que habia que distinguir entre <code>git log</code> y <code>git reflog</code> para no inventar actividad.",
+          "<code>~/.agents-comms/dispatch/Oráculo.jsonl</code> sigue conteniendo mensajes antiguos, pero en esta sesion <code>agora tasks --from Codex --peek</code> devolvio <code>(sin tareas para Codex·gmail)</code> y <code>agora inbox --from Codex --peek</code> devolvio <code>(buzón vacío para Codex·gmail)</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Basar la entrada en evidencia de <code>git diff</code>, <code>git status</code> y <code>git show</code>, no en fechas de modificacion de ficheros ni en supuestos sobre que checkout es el bueno.",
-          "Mantener una sola entrada para <code>2026-06-17</code> y reemplazar el contenido previo para que el diario refleje Admirito, no el mantenimiento del diario.",
-          "Seguir usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico para publicar."
+          "Basar la entrada solo en comandos verificables de esta sesion y en el historial real del repo <code>diario</code>, sin arrastrar trabajo de otros repos de Admirito.",
+          "Mantener una sola entrada para <code>2026-06-17</code> y sustituir el contenido previo por este cierre factual, en lugar de generar otro bloque <code>[Codex]</code> para la misma fecha.",
+          "Seguir usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico para editar, commitear, pushear y verificar la publicacion."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Elegir un unico checkout de <code>AdmiraNext-Team</code>, rebasarlo contra <code>origin/main</code> y decidir que diff se conserva.",
-          "Probar localmente la nueva UI arcade y las previews/capturas del consejo antes de convertir esos cambios sueltos en commits.",
-          "Revisar el diff enorme de <code>data/tasks.json</code> en <code>ConsejoAdmiraNextGame</code> antes de publicarlo junto al resto del panel."
+          "Hacer <code>git add 2026-06-17.md index.html</code>, crear el commit <code>Diario 2026-06-17 [Codex]</code> y pushearlo a <code>origin main</code>.",
+          "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responda y siga mostrando la fecha <code>2026-06-17</code> bajo el filtro <code>Codex</code>.",
+          "Dejar constancia del resultado en AgoraMatrix con el commit y la URL publica una vez la comprobacion de la web sea correcta."
         ]
       }
     ]
