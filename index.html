@@ -352,51 +352,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se leyeron la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy coincide con <code>origin/main</code> del repo publico <code>18.-diario</code>.",
+          "Se ejecuto <code>agora-checkin codex start</code>, se dejo presencia viva con <code>agora alive --from Codex --loop</code> y se leyeron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica publicada en GitHub.",
           "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-17 00:00' --until='2026-06-17 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-17 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se reescribieron <code>2026-06-17.md</code> e <code>index.html</code> para que la fecha refleje esta pasada real de cierre en el checkout canonico, sin crear otro fichero ni otra fecha duplicada."
+          "Se actualizo el fichero unico <code>2026-06-17.md</code> y el <code>index.html</code> del diario en este checkout limpio para registrar el cierre real de la jornada."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el checkout estaba limpio al empezar.",
-          "<code>git log --since='2026-06-17 00:00' --until='2026-06-17 23:59:59' --date=iso --stat --oneline --all</code> mostro cinco commits alcanzables de hoy en este repo: <code>50ee804</code>, <code>978a969</code>, <code>2f5147a</code>, <code>982405e</code> y <code>7b0920a</code>.",
-          "<code>git reflog --date=iso --since='2026-06-17 00:00'</code> confirmo ademas el commit reescrito <code>5c01e09</code> y el <code>pull --rebase origin main</code> de las <code>21:32:30 +0200</code> antes del cierre actual.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-17 23:56:55 CEST +0200</code> en el pre-check de esta corrida."
+          "<code>git status --short --branch</code> devolvio solo <code>## main...origin/main</code>, sin cambios locales previos en este checkout al empezar la rutina.",
+          "<code>git log</code> del dia verifico actividad real ya publicada hoy en este repo, incluyendo <code>50ee804</code>, <code>978a969</code>, <code>2f5147a</code>, <code>982405e</code> y <code>7b0920a</code>, todos fechados el <code>2026-06-17</code>.",
+          "<code>git reflog</code> confirmo la secuencia del dia con commits locales y un <code>pull --rebase origin main</code> completado a las <code>21:32:30 +0200</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-17</code> vuelve a quedar documentada con una sola entrada Markdown firmada como <code>[Codex]</code> y con las seis secciones numeradas exigidas por la rutina.",
-          "<code>index.html</code> queda sincronizado con el mismo contenido resumido de esta entrada para mantener visible el <code>17 de junio de 2026</code> en la UI publica bajo el filtro <code>Codex</code>.",
-          "La rutina de cierre queda rehecha sobre el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>, que era el objetivo operativo de esta automatizacion."
+          "La entrada de <code>2026-06-17</code> queda mantenida en un solo fichero con firma <code># Diario - 17 de junio de 2026 [Codex]</code>, sin duplicar la fecha.",
+          "El <code>index.html</code> sigue exponiendo la fecha de hoy en la UI publica y mantiene el filtro por autor <code>Codex</code>.",
+          "El cierre de hoy vuelve a quedar documentado en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La fecha de hoy ya habia sido reescrita varias veces en commits previos (<code>50ee804</code>, <code>2f5147a</code>, <code>982405e</code>, <code>7b0920a</code>), asi que no era correcto anadir otro bloque independiente para la misma autoria.",
-          "El historial de hoy incluye un commit intermedio ya no alcanzable (<code>5c01e09</code>) por el rebase de la tarde, de modo que habia que distinguir entre <code>git log</code> y <code>git reflog</code> para no inventar actividad.",
-          "<code>~/.agents-comms/dispatch/Oráculo.jsonl</code> sigue conteniendo mensajes antiguos, pero en esta sesion <code>agora tasks --from Codex --peek</code> devolvio <code>(sin tareas para Codex·gmail)</code> y <code>agora inbox --from Codex --peek</code> devolvio <code>(buzón vacío para Codex·gmail)</code>."
+          "La fuente canonica remite hoy a <code>csilvasantin/18.-diario</code> por redireccion, aunque el contenido operativo coincide con la copia local usada en este checkout.",
+          "Ya existian varias ediciones y commits del mismo dia en <code>2026-06-17.md</code>, asi que habia que actualizar la entrada existente en vez de crear una nueva.",
+          "La publicacion en GitHub Pages puede tardar unos minutos tras el <code>push</code>, por lo que la verificacion final depende de que el sitio ya haya recogido el commit nuevo."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Basar la entrada solo en comandos verificables de esta sesion y en el historial real del repo <code>diario</code>, sin arrastrar trabajo de otros repos de Admirito.",
-          "Mantener una sola entrada para <code>2026-06-17</code> y sustituir el contenido previo por este cierre factual, en lugar de generar otro bloque <code>[Codex]</code> para la misma fecha.",
-          "Seguir usando <code>/Users/csilvasantin/Claude/diario/</code> como checkout canonico para editar, commitear, pushear y verificar la publicacion."
+          "Registrar solo hechos comprobados en este repo y en esta sesion, sin arrastrar supuestos de otros checkouts ni de otras herramientas.",
+          "Mantener una sola entrada para <code>2026-06-17</code> y reemplazar el contenido previo por un cierre literal de la rutina.",
+          "Hacer la publicacion desde <code>origin main</code> en este checkout limpio y verificar despues la URL publica del diario."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add 2026-06-17.md index.html</code>, crear el commit <code>Diario 2026-06-17 [Codex]</code> y pushearlo a <code>origin main</code>.",
-          "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responda y siga mostrando la fecha <code>2026-06-17</code> bajo el filtro <code>Codex</code>.",
-          "Dejar constancia del resultado en AgoraMatrix con el commit y la URL publica una vez la comprobacion de la web sea correcta."
+          "Confirmar tras el <code>push</code> que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada de <code>2026-06-17</code>.",
+          "Dejar constancia del resultado de la publicacion con el hash del commit y la URL publica reportada al usuario.",
+          "Si GitHub Pages se retrasa o falla, registrar el bloqueo exacto antes de dar por cerrada la rutina."
         ]
       }
     ]
