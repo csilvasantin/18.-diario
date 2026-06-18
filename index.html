@@ -352,111 +352,52 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se leyeron la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica publicada en <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, y se confirmo que hoy redirige al repo publico <code>csilvasantin/18.-diario</code>.",
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyeron la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica publicada en <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy devuelve el mismo contenido operativo.",
           "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-18 00:00' --until='2026-06-18 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-18 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se normalizo este checkout para poder cerrar el dia sin reescribir historia local: primero se detecto <code>HEAD detached</code>, luego se paso por <code>main</code>, se aborto un rebase residual sobre <code>fec4a90</code>, se limpio un <code>index.lock</code> huerfano y se abrio la rama temporal <code>close-2026-06-18-run</code> siguiendo <code>origin/main</code>.",
-          "Se actualizan <code>2026-06-18.md</code> e <code>index.html</code> para anadir este segundo bloque factual de Codex del mismo dia, separado por <code>---</code> y alineado con la UI publica."
+          "Se normalizo el checkout para continuar desde <code>origin/main</code>, se consolidaron <code>2026-06-18.md</code> e <code>index.html</code> en una sola entrada <code>Codex</code> para la fecha y se preparo la publicacion desde <code>main</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
           "<code>git status --short --branch</code> devolvio al empezar <code>## HEAD (no branch)</code>, confirmando que el checkout canonico no estaba situado en <code>main</code>.",
-          "<code>git log --since='2026-06-18 00:00' --until='2026-06-18 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real ya publicada hoy en este repo, incluyendo <code>76bbb0a</code>, <code>69b7fb6</code>, <code>cf66867</code> y <code>fec4a90</code>.",
-          "<code>git reflog --date=iso --since='2026-06-18 00:00'</code> confirmo la secuencia local del cierre de hoy, con el checkout <code>main -&gt; origin/main</code> a las <code>23:51:44 +0200</code> y el commit <code>fec4a90</code> a las <code>23:53:01 +0200</code>.",
-          "<code>agora whoami --from Codex</code> devolvio <code>Codex -&gt; Oraculo (Codex·gmail)</code>, mientras <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron vacio.",
-          "<code>curl -I -L --max-time 20 https://csilvasantin.github.io/diario/</code> devolvio <code>301</code> hacia <code>https://www.carlossilva.info/diario/</code> y despues <code>200 OK</code>."
+          "<code>git branch -avv</code> mostro <code>main</code> en <code>cf66867</code> con estado <code>ahead 1, behind 2</code> respecto a <code>origin/main</code>, mientras <code>origin/main</code> ya estaba en <code>fec4a90</code>.",
+          "<code>git log --since='2026-06-18 00:00' --until='2026-06-18 23:59:59' --date=iso --stat --oneline --all</code> confirmo actividad real previa de hoy en este repo, incluyendo <code>76bbb0a</code>, <code>69b7fb6</code>, <code>cf66867</code> y <code>fec4a90</code>.",
+          "<code>git reflog --date=iso --since='2026-06-18 00:00'</code> confirmo la secuencia local del cierre de hoy y el rebase abierto sobre la misma fecha.",
+          "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron vacio para <code>Codex·gmail</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-18</code> queda mantenida en un unico fichero Markdown con dos bloques <code>Codex</code>, sin sobrescribir el cierre previo ya publicado.",
-          "El cierre de esta automatizacion queda reflejado en la UI publica con una entrada adicional de <code>Codex</code> para el mismo dia, basada solo en hechos de esta sesion.",
-          "El checkout vuelve a quedar preparado para publicar desde la punta real de <code>origin/main</code>, sin depender del <code>detached HEAD</code> ni del rebase residual."
+          "La fecha <code>2026-06-18</code> vuelve a quedar en un unico fichero Markdown con un solo bloque <code>Codex</code>.",
+          "<code>index.html</code> vuelve a reflejar una sola entrada <code>Codex</code> para <code>2026-06-18</code>, alineada con el Markdown y con la UI publica.",
+          "El checkout canonico del diario queda otra vez preparado para publicar desde la punta real de <code>origin/main</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El pre-check arranco con el repo en <code>HEAD detached</code>, incumpliendo la expectativa de trabajar directamente sobre <code>main</code>.",
-          "La rama local <code>main</code> estaba divergida respecto a <code>origin/main</code> (<code>ahead 1, behind 2</code>), asi que no era seguro seguir cerrando desde ella sin revisar.",
-          "Quedaba un rebase interactivo huero sobre <code>fec4a90</code> con conflictos abiertos en <code>2026-06-18.md</code> e <code>index.html</code>, y ademas aparecio un <code>index.lock</code> huerfano al intentar abrir la rama temporal."
+          "El checkout canonico no estaba limpio de rama al empezar: arranco en <code>HEAD detached</code>.",
+          "La rama local <code>main</code> estaba divergida respecto a <code>origin/main</code>, por lo que seguir desde ahi sin reconciliar era arriesgado.",
+          "El <code>pull --rebase origin main</code> abrio conflictos en <code>2026-06-18.md</code> e <code>index.html</code> porque hoy ya existian varios cierres sobre la misma fecha."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "No reaprovechar la rama local <code>main</code> divergida: se aborto el rebase huero y se continuo desde una rama temporal creada sobre <code>origin/main</code>.",
-          "No sustituir la entrada ya publicada del <code>2026-06-18</code>: esta pasada se registra como un segundo bloque <code>Codex</code> del mismo dia, separado por <code>---</code>.",
-          "Registrar solo hechos comprobados en este repo y en esta sesion de cierre, incluyendo los bloqueos reales del checkout y la respuesta HTTP de la URL publica."
+          "Resolver esta pasada sobre la version ya publicada en <code>origin/main</code> en vez de arrastrar la rama local divergida.",
+          "Consolidar la fecha en una sola entrada <code>Codex</code> y no dejar duplicados del mismo autor en <code>2026-06-18.md</code> ni en <code>index.html</code>.",
+          "Registrar solo hechos comprobados en este repo y en esta sesion de cierre."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff final de <code>2026-06-18.md</code> e <code>index.html</code>.",
-          "Crear el commit <code>Diario 2026-06-18 [Codex]</code> y hacer <code>git push origin HEAD:main</code>.",
-          "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> siga respondiendo y muestre esta nueva entrada del <code>18 de junio de 2026</code>."
-        ]
-      }
-    ]
-  },
-  {
-    date: "2026-06-18",
-    title: "18 de junio de 2026",
-    member: "Carlos Silva",
-    author: "Codex",
-    sections: [
-      {
-        heading: "Que se hizo",
-        items: [
-          "En <code>pixeria</code> se publico el Anonimizador y se encadeno la iteracion del dia desde <code>2026.06.18.r1</code> hasta <code>2026.06.18.r9</code>: drag and drop, autoarranque, nuevas categorias de stock, envio a tienda y recorte transparente del NPC 8-bit.",
-          "En <code>xpaceos</code> se corrigio el chat del gemelo para que <code>/ifthendothat</code> y <code>/condicional</code> pasen por <code>window.__xtExec</code> y despues se sincronizo el gemelo para recibir NPCs del Anonimizador mediante <code>poll /twin/spawn + drawCustomNpcSprite</code>.",
-          "En este workspace de Admirito quedo trazado el handoff <code>HX-K7QM</code> del MCP del Consejo en produccion y documentado en <code>admira.live/help</code>.",
-          "En <code>github-csilvasantin/AdmiraNext-Team</code> se detecto trabajo local sin commit: portada arcade \"Player Select\", nueva seccion destacada de miembros, version <code>0.1.3</code>, screenshots renovados y datos SSH ampliados del Mac Mini.",
-          "Tambien quedaron cambios sueltos sin publicar en <code>AdmiraNext-Team-latest</code> (<code>src/server.js</code>, <code>src/ssh-exec.js</code>) y ficheros de prueba en <code>32.-ConsejoAdmiraNextGame</code>."
-        ]
-      },
-      {
-        heading: "Que se valido",
-        items: [
-          "<code>git log --since='2026-06-18 00:00' --all</code> de <code>pixeria</code>, <code>xpaceos</code> y <code>diario</code> confirmo la secuencia real del dia y los commits clave <code>d733830</code>, <code>dcc5bf6</code>, <code>b3592e7</code> y <code>e3d69ee</code>.",
-          "<code>git show --stat --format=fuller</code> de esos commits valido que el flujo nuevo une Anonimizador, gemelo y tienda.",
-          "<code>AdmiraNext-Team</code> no tiene commits de hoy, pero si un diff local de 8 ficheros y unas 1100 lineas netas; el avance de ese repo hoy esta en workspace WIP y no en historial publicado.",
-          "El handoff <code>handoff/2026-06-18-HX-K7QM.md</code> confirma que el MCP del Consejo quedo en produccion y con ayuda publicada."
-        ]
-      },
-      {
-        heading: "Avances",
-        items: [
-          "Quedo cerrada la cadena <code>Anonimizador -&gt; gemelo -&gt; tienda</code>, que era el avance visible mas claro del producto hoy.",
-          "<code>AdmiraNext-Team</code> ya tiene un salto visual fuerte preparado localmente, aunque todavia sin consolidar ni sincronizar con <code>origin/main</code>.",
-          "El diario de hoy queda actualizado con la foto real del trabajo publicado y del trabajo que sigue solo en workspace."
-        ]
-      },
-      {
-        heading: "Problemas encontrados",
-        items: [
-          "<code>AdmiraNext-Team</code> local esta <code>behind 303</code> respecto a <code>origin/main</code> y ademas tiene cambios fuertes sin commit; publicarlo desde ahi ahora seria arriesgado.",
-          "El handoff del Consejo deja dos incidencias abiertas: <code>www.admira.live/help</code> seguia con cache de Fastly en el momento del cierre y la cuenta de Anthropic estaba sin creditos, por lo que el MCP respondia con fallback a Groq.",
-          "Hay varios workspaces sucios paralelos (<code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>32.-ConsejoAdmiraNextGame</code>), lo que obliga a separar con cuidado lo publicado de lo experimental."
-        ]
-      },
-      {
-        heading: "Decisiones tomadas",
-        items: [
-          "No inventar actividad publicada en <code>AdmiraNext-Team</code>: se deja claro que hoy su avance comprobable es local y no un commit remoto.",
-          "Resumir el dia alrededor del pipeline <code>Anonimizador -&gt; gemelo -&gt; tienda</code>, el handoff del Consejo y el estado WIP de <code>AdmiraNext-Team</code>, porque ahi esta la evidencia directa.",
-          "Actualizar la entrada existente del <code>2026-06-18</code> en vez de duplicarla."
-        ]
-      },
-      {
-        heading: "Siguientes pasos",
-        items: [
-          "Probar end to end que el NPC generado por el Anonimizador aparece bien en el gemelo y en la tienda sin fondo.",
-          "Decidir desde que repo se consolida el trabajo del equipo (<code>AdmiraNext-Team</code> vs <code>AdmiraNext-Team-latest</code>) y sincronizar primero con remoto antes de publicar el rediseno arcade.",
-          "Añadir el MCP del Consejo a <code>mcp_servers</code> de <code>yarig.ai</code>, revisar cuando <code>www.admira.live/help</code> salga de cache y limpiar los artefactos sueltos del Consejo."
+          "Hacer <code>git add 2026-06-18.md index.html</code>, continuar el rebase y crear el commit <code>Diario 2026-06-18 [Codex]</code>.",
+          "Hacer <code>git push origin main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responda y muestre la entrada del <code>18 de junio de 2026</code>."
         ]
       }
     ]
