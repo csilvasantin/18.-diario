@@ -352,48 +352,43 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Una pasada previa de hoy ya publicada en <code>origin/main</code> ejecuto <code>agora-checkin codex start</code>, confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code>, dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code> y creo la primera version de <code>2026-06-18.md</code> junto con su bloque en <code>index.html</code>.",
-          "El historial del mismo dia tambien dejo dos huellas directas de Codex en este repo: el commit <code>653ec6d</code> (<code>Diario 2026-06-17 [Codex]</code>) a las <code>00:01:12 +0200</code> y el snapshot <code>b188358</code> (<code>Codex worktree snapshot: startup-cleanup</code>) a las <code>21:32:07 +0200</code>.",
-          "En esta pasada se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de <code>actualizar-diario-2</code>, se hizo <code>git fetch origin main</code>, se revisaron <code>2026-06-17.md</code>, <code>README.md</code>, <code>index.html</code> y <code>repos.html</code>, y se consolido la fecha <code>2026-06-18</code> en una sola entrada Markdown y una sola entrada HTML."
+          "Se reviso la actividad de hoy en los repositorios de Admirito y se confirmo que <code>AdmiraNext-Team</code> no tuvo commits ni archivos tocados hoy en las dos copias locales revisadas (<code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code> y <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code>).",
+          "El foco real del producto estuvo en <code>pixeria</code>: se publico el Anonimizador (<code>d733830</code>) y se itero durante el dia con drag and drop, autoarranque, nuevas categorias de stock, envio a la tienda y recorte transparente del NPC 8-bit (<code>dcc5bf6</code>).",
+          "En <code>xpaceos</code> se corrigio el chat del gemelo para que <code>/ifthendothat</code> y <code>/condicional</code> pasen por <code>window.__xtExec</code> (<code>b3592e7</code>) y despues se sincronizo el gemelo para recibir NPCs del Anonimizador mediante <code>poll /twin/spawn</code> (<code>e3d69ee</code>).",
+          "En este workspace se dejo trazado el handoff <code>HX-K7QM</code> del MCP del Consejo en produccion y se actualizo esta entrada para reflejar el trabajo real del dia."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git show --stat --format=fuller 08eb685</code> confirmo que <code>origin/main</code> ya habia recibido hoy <code>Diario 2026-06-18 [Codex]</code> antes de esta ejecucion.",
-          "<code>git show --stat --format=fuller b188358</code> confirmo que el snapshot de Codex de las <code>21:32:07 +0200</code> anadio <code>2026-06-10.md</code> e <code>index.html</code>.",
-          "<code>git log --since='2026-06-18 00:00' --until='2026-06-18 23:59:59' --date=iso --stat --oneline --all</code> devolvio actividad real del dia en este repo, incluyendo <code>653ec6d</code>, <code>b52557d</code>, <code>b90fe34</code>, <code>08eb685</code> y <code>b188358</code>.",
-          "<code>git fetch origin main</code> dejo este worktree sobre el estado remoto mas reciente antes de consolidar cambios, y el rebase en curso obligo a resolver <code>2026-06-18.md</code> e <code>index.html</code> para mantener una sola version final del dia."
-        ]
-      },
-      {
-        heading: "Avances",
-        items: [
-          "La fecha <code>2026-06-18</code> queda unificada en un solo fichero Markdown firmado por Codex.",
-          "<code>index.html</code> queda alineado con esa misma entrada para que la UI publica no muestre duplicados del dia.",
-          "Esta automatizacion deja trazadas en una sola entrada tanto la pasada temprana ya publicada como esta consolidacion posterior."
+          "Los <code>git log --since='2026-06-18 00:00' --all</code> de <code>pixeria</code>, <code>xpaceos</code> y <code>diario</code> confirmaron la secuencia real de trabajo y los commits clave del dia.",
+          "<code>git show --stat --format=fuller</code> de <code>d733830</code>, <code>dcc5bf6</code>, <code>b3592e7</code> y <code>e3d69ee</code> valido que el flujo nuevo une Anonimizador, gemelo y tienda.",
+          "El handoff <code>handoff/2026-06-18-HX-K7QM.md</code> confirma que el MCP del Consejo quedo en produccion y documentado en <code>admira.live/help</code>.",
+          "<code>b90fe34</code> confirma que GitHub Actions actualizo <code>repos.html</code> hoy y <code>566211c</code> que la entrada del diario se volvio a editar al cierre del dia."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El worktree arranco en <code>detached HEAD</code> y no podia reutilizar la rama local <code>main</code> porque ya esta asignada a otro worktree en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario</code>.",
-          "Mientras esta automatizacion preparaba el commit, <code>origin/main</code> avanzo con una nueva entrada del <code>2026-06-18</code>, asi que hubo que rebasar y resolver conflictos para evitar dos versiones distintas del mismo dia."
+          "<code>AdmiraNext-Team</code> no aporta hoy evidencia de trabajo visible, asi que no se podia usar como fuente principal para el diario.",
+          "El handoff del Consejo deja dos incidencias abiertas: <code>www.admira.live/help</code> seguia con cache de Fastly en el momento del cierre y la cuenta de Anthropic estaba sin creditos, por lo que el MCP respondia con fallback a Groq.",
+          "El trabajo del dia quedo repartido entre varios repos (<code>pixeria</code>, <code>xpaceos</code>, <code>diario</code> y el directorio local <code>council-mcp</code>), lo que obliga a consolidar manualmente la foto completa."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener una unica entrada del <code>2026-06-18</code> y reemplazar el contenido solapado por una version consolidada basada en evidencia de ambos pases de Codex.",
-          "Registrar solo hechos comprobables del repo y de esta sesion, sin inventar actividad externa ni duplicar fechas.",
-          "Trabajar sobre <code>origin/main</code> actualizado, aunque fuese en modo detached, para publicar desde el ultimo estado real del remoto."
+          "No inventar actividad en <code>AdmiraNext-Team</code>: se deja explicito que hoy el avance comprobable estuvo en otros repos de Admirito.",
+          "Resumir el dia alrededor del pipeline <code>Anonimizador -&gt; gemelo -&gt; tienda</code> y del despliegue/documentacion del MCP del Consejo, que son los cambios con evidencia directa.",
+          "Actualizar la entrada existente del <code>2026-06-18</code> en lugar de duplicarla."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Terminar el rebase, hacer <code>push</code> a <code>origin/main</code> y verificar que <code>https://csilvasantin.github.io/diario/</code> siga respondiendo.",
-          "Confirmar que el HTML publico visible ya incluya <code>18 de junio de 2026</code>."
+          "Probar end to end que el NPC generado por el Anonimizador aparece bien en el gemelo y en la tienda sin fondo.",
+          "Añadir el MCP del Consejo a <code>mcp_servers</code> de <code>yarig.ai</code> y revisar cuando <code>www.admira.live/help</code> salga de cache.",
+          "Decidir si <code>council-mcp</code> se sube a un repo propio para no dejarlo solo como carpeta local."
         ]
       }
     ]
