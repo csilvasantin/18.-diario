@@ -352,44 +352,48 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se reviso la memoria de la automatizacion <code>actualizar-diario</code>, el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> y las entradas recientes <code>2026-06-17.md</code>, <code>2026-06-16.md</code> y <code>CERRAR-EL-DIA.md</code> para mantener el formato correcto.",
-          "Se creo <code>2026-06-18.md</code> y se actualizo <code>index.html</code> para publicar una entrada breve del dia de hoy en la web del diario."
+          "Una pasada previa de hoy ya publicada en <code>origin/main</code> ejecuto <code>agora-checkin codex start</code>, confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code>, dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code> y creo la primera version de <code>2026-06-18.md</code> junto con su bloque en <code>index.html</code>.",
+          "El historial del mismo dia tambien dejo dos huellas directas de Codex en este repo: el commit <code>653ec6d</code> (<code>Diario 2026-06-17 [Codex]</code>) a las <code>00:01:12 +0200</code> y el snapshot <code>b188358</code> (<code>Codex worktree snapshot: startup-cleanup</code>) a las <code>21:32:07 +0200</code>.",
+          "En esta pasada se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de <code>actualizar-diario-2</code>, se hizo <code>git fetch origin main</code>, se revisaron <code>2026-06-17.md</code>, <code>README.md</code>, <code>index.html</code> y <code>repos.html</code>, y se consolido la fecha <code>2026-06-18</code> en una sola entrada Markdown y una sola entrada HTML."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el checkout estaba limpio al empezar.",
-          "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron que no habia tareas ni mensajes pendientes para <code>Codex·gmail</code>.",
-          "<code>git log --since='2026-06-18 00:00' --until='2026-06-18 23:59:59' --date=iso --pretty=format:'%h %ad %s' --all</code> solo mostro el commit <code>653ec6d</code> de las <code>00:01:12 +0200</code>, y <code>git reflog --date=iso --since='2026-06-18 00:00'</code> reflejo la misma actividad previa del dia en este repo."
+          "<code>git show --stat --format=fuller 08eb685</code> confirmo que <code>origin/main</code> ya habia recibido hoy <code>Diario 2026-06-18 [Codex]</code> antes de esta ejecucion.",
+          "<code>git show --stat --format=fuller b188358</code> confirmo que el snapshot de Codex de las <code>21:32:07 +0200</code> anadio <code>2026-06-10.md</code> e <code>index.html</code>.",
+          "<code>git log --since='2026-06-18 00:00' --until='2026-06-18 23:59:59' --date=iso --stat --oneline --all</code> devolvio actividad real del dia en este repo, incluyendo <code>653ec6d</code>, <code>b52557d</code>, <code>b90fe34</code>, <code>08eb685</code> y <code>b188358</code>.",
+          "<code>git fetch origin main</code> dejo este worktree sobre el estado remoto mas reciente antes de consolidar cambios, y el rebase en curso obligo a resolver <code>2026-06-18.md</code> e <code>index.html</code> para mantener una sola version final del dia."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-18</code> queda registrada en un fichero nuevo y tambien en la UI publica del diario bajo el filtro <code>Codex</code>.",
-          "La automatizacion vuelve a dejar un resumen corto del dia con foco en estado, decisiones y siguientes pasos comprobables."
+          "La fecha <code>2026-06-18</code> queda unificada en un solo fichero Markdown firmado por Codex.",
+          "<code>index.html</code> queda alineado con esa misma entrada para que la UI publica no muestre duplicados del dia.",
+          "Esta automatizacion deja trazadas en una sola entrada tanto la pasada temprana ya publicada como esta consolidacion posterior."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No aparecio actividad previa relevante del <code>2026-06-18</code> en este repo mas alla del commit nocturno de cierre anterior, asi que la entrada de hoy tenia que centrarse en esta actualizacion del diario."
+          "El worktree arranco en <code>detached HEAD</code> y no podia reutilizar la rama local <code>main</code> porque ya esta asignada a otro worktree en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario</code>.",
+          "Mientras esta automatizacion preparaba el commit, <code>origin/main</code> avanzo con una nueva entrada del <code>2026-06-18</code>, asi que hubo que rebasar y resolver conflictos para evitar dos versiones distintas del mismo dia."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo hechos verificables de esta sesion y del historial git del repo canonico, sin mezclar contexto de otros proyectos.",
-          "Mantener la entrada breve y operativa porque la peticion explicita fue actualizar el diario de hoy, no ejecutar un cierre completo de jornada."
+          "Mantener una unica entrada del <code>2026-06-18</code> y reemplazar el contenido solapado por una version consolidada basada en evidencia de ambos pases de Codex.",
+          "Registrar solo hechos comprobables del repo y de esta sesion, sin inventar actividad externa ni duplicar fechas.",
+          "Trabajar sobre <code>origin/main</code> actualizado, aunque fuese en modo detached, para publicar desde el ultimo estado real del remoto."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff, hacer commit <code>Diario 2026-06-18 [Codex]</code> y <code>git push origin main</code>.",
-          "Verificar despues que <a href='https://csilvasantin.github.io/diario/' target='_blank' rel='noreferrer'>https://csilvasantin.github.io/diario/</a> responda y muestre la fecha <code>18 de junio de 2026</code>."
+          "Terminar el rebase, hacer <code>push</code> a <code>origin/main</code> y verificar que <code>https://csilvasantin.github.io/diario/</code> siga respondiendo.",
+          "Confirmar que el HTML publico visible ya incluya <code>18 de junio de 2026</code>."
         ]
       }
     ]
