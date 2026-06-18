@@ -352,43 +352,52 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la actividad de hoy en los repositorios de Admirito y se confirmo que <code>AdmiraNext-Team</code> no tuvo commits ni archivos tocados hoy en las dos copias locales revisadas (<code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code> y <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code>).",
-          "El foco real del producto estuvo en <code>pixeria</code>: se publico el Anonimizador (<code>d733830</code>) y se itero durante el dia con drag and drop, autoarranque, nuevas categorias de stock, envio a la tienda y recorte transparente del NPC 8-bit (<code>dcc5bf6</code>).",
-          "En <code>xpaceos</code> se corrigio el chat del gemelo para que <code>/ifthendothat</code> y <code>/condicional</code> pasen por <code>window.__xtExec</code> (<code>b3592e7</code>) y despues se sincronizo el gemelo para recibir NPCs del Anonimizador mediante <code>poll /twin/spawn</code> (<code>e3d69ee</code>).",
-          "En este workspace se dejo trazado el handoff <code>HX-K7QM</code> del MCP del Consejo en produccion y se actualizo esta entrada para reflejar el trabajo real del dia."
+          "En <code>pixeria</code> se publico el Anonimizador y se encadeno la iteracion del dia desde <code>2026.06.18.r1</code> hasta <code>2026.06.18.r9</code>: drag and drop, autoarranque, nuevas categorias de stock, envio a tienda y recorte transparente del NPC 8-bit.",
+          "En <code>xpaceos</code> se corrigio el chat del gemelo para que <code>/ifthendothat</code> y <code>/condicional</code> pasen por <code>window.__xtExec</code> y despues se sincronizo el gemelo para recibir NPCs del Anonimizador mediante <code>poll /twin/spawn + drawCustomNpcSprite</code>.",
+          "En este workspace de Admirito quedo trazado el handoff <code>HX-K7QM</code> del MCP del Consejo en produccion y documentado en <code>admira.live/help</code>.",
+          "En <code>github-csilvasantin/AdmiraNext-Team</code> se detecto trabajo local sin commit: portada arcade \"Player Select\", nueva seccion destacada de miembros, version <code>0.1.3</code>, screenshots renovados y datos SSH ampliados del Mac Mini.",
+          "Tambien quedaron cambios sueltos sin publicar en <code>AdmiraNext-Team-latest</code> (<code>src/server.js</code>, <code>src/ssh-exec.js</code>) y ficheros de prueba en <code>32.-ConsejoAdmiraNextGame</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "Los <code>git log --since='2026-06-18 00:00' --all</code> de <code>pixeria</code>, <code>xpaceos</code> y <code>diario</code> confirmaron la secuencia real de trabajo y los commits clave del dia.",
-          "<code>git show --stat --format=fuller</code> de <code>d733830</code>, <code>dcc5bf6</code>, <code>b3592e7</code> y <code>e3d69ee</code> valido que el flujo nuevo une Anonimizador, gemelo y tienda.",
-          "El handoff <code>handoff/2026-06-18-HX-K7QM.md</code> confirma que el MCP del Consejo quedo en produccion y documentado en <code>admira.live/help</code>.",
-          "<code>b90fe34</code> confirma que GitHub Actions actualizo <code>repos.html</code> hoy y <code>566211c</code> que la entrada del diario se volvio a editar al cierre del dia."
+          "<code>git log --since='2026-06-18 00:00' --all</code> de <code>pixeria</code>, <code>xpaceos</code> y <code>diario</code> confirmo la secuencia real del dia y los commits clave <code>d733830</code>, <code>dcc5bf6</code>, <code>b3592e7</code> y <code>e3d69ee</code>.",
+          "<code>git show --stat --format=fuller</code> de esos commits valido que el flujo nuevo une Anonimizador, gemelo y tienda.",
+          "<code>AdmiraNext-Team</code> no tiene commits de hoy, pero si un diff local de 8 ficheros y unas 1100 lineas netas; el avance de ese repo hoy esta en workspace WIP y no en historial publicado.",
+          "El handoff <code>handoff/2026-06-18-HX-K7QM.md</code> confirma que el MCP del Consejo quedo en produccion y con ayuda publicada."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Quedo cerrada la cadena <code>Anonimizador -&gt; gemelo -&gt; tienda</code>, que era el avance visible mas claro del producto hoy.",
+          "<code>AdmiraNext-Team</code> ya tiene un salto visual fuerte preparado localmente, aunque todavia sin consolidar ni sincronizar con <code>origin/main</code>.",
+          "El diario de hoy queda actualizado con la foto real del trabajo publicado y del trabajo que sigue solo en workspace."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>AdmiraNext-Team</code> no aporta hoy evidencia de trabajo visible, asi que no se podia usar como fuente principal para el diario.",
+          "<code>AdmiraNext-Team</code> local esta <code>behind 303</code> respecto a <code>origin/main</code> y ademas tiene cambios fuertes sin commit; publicarlo desde ahi ahora seria arriesgado.",
           "El handoff del Consejo deja dos incidencias abiertas: <code>www.admira.live/help</code> seguia con cache de Fastly en el momento del cierre y la cuenta de Anthropic estaba sin creditos, por lo que el MCP respondia con fallback a Groq.",
-          "El trabajo del dia quedo repartido entre varios repos (<code>pixeria</code>, <code>xpaceos</code>, <code>diario</code> y el directorio local <code>council-mcp</code>), lo que obliga a consolidar manualmente la foto completa."
+          "Hay varios workspaces sucios paralelos (<code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>32.-ConsejoAdmiraNextGame</code>), lo que obliga a separar con cuidado lo publicado de lo experimental."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "No inventar actividad en <code>AdmiraNext-Team</code>: se deja explicito que hoy el avance comprobable estuvo en otros repos de Admirito.",
-          "Resumir el dia alrededor del pipeline <code>Anonimizador -&gt; gemelo -&gt; tienda</code> y del despliegue/documentacion del MCP del Consejo, que son los cambios con evidencia directa.",
-          "Actualizar la entrada existente del <code>2026-06-18</code> en lugar de duplicarla."
+          "No inventar actividad publicada en <code>AdmiraNext-Team</code>: se deja claro que hoy su avance comprobable es local y no un commit remoto.",
+          "Resumir el dia alrededor del pipeline <code>Anonimizador -&gt; gemelo -&gt; tienda</code>, el handoff del Consejo y el estado WIP de <code>AdmiraNext-Team</code>, porque ahi esta la evidencia directa.",
+          "Actualizar la entrada existente del <code>2026-06-18</code> en vez de duplicarla."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
           "Probar end to end que el NPC generado por el Anonimizador aparece bien en el gemelo y en la tienda sin fondo.",
-          "Añadir el MCP del Consejo a <code>mcp_servers</code> de <code>yarig.ai</code> y revisar cuando <code>www.admira.live/help</code> salga de cache.",
-          "Decidir si <code>council-mcp</code> se sube a un repo propio para no dejarlo solo como carpeta local."
+          "Decidir desde que repo se consolida el trabajo del equipo (<code>AdmiraNext-Team</code> vs <code>AdmiraNext-Team-latest</code>) y sincronizar primero con remoto antes de publicar el rediseno arcade.",
+          "Añadir el MCP del Consejo a <code>mcp_servers</code> de <code>yarig.ai</code>, revisar cuando <code>www.admira.live/help</code> salga de cache y limpiar los artefactos sueltos del Consejo."
         ]
       }
     ]
