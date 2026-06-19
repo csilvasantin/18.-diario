@@ -344,6 +344,64 @@
 <script>
 const entries = [
   {
+    date: "2026-06-19",
+    title: "19 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se revisaron <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>~/.agents-comms/dispatch/Oráculo.jsonl</code> para comprobar si habia trabajo entrante dirigido a Oraculo antes de tocar el diario.",
+          "Se leyo la memoria de la automatizacion <code>actualizar-diario</code>, se inspeccionaron <code>2026-06-18.md</code>, <code>2026-06-16.md</code> y el bloque <code>const entries</code> de <code>index.html</code> para reutilizar el formato vigente y evitar repetir trabajo.",
+          "Se creo esta nueva entrada <code>2026-06-19.md</code> y se preparo su reflejo en <code>index.html</code> dentro del checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> en <code>/Users/csilvasantin/Claude/diario/</code> devolvio <code>## close-2026-06-18-run...origin/main</code>, sin cambios locales antes de editar.",
+          "<code>git log --since='2026-06-19 00:00' --date=iso --oneline --decorate --all --max-count=30</code> no mostro commits del <code>2026-06-19</code> en este repo, asi que no habia actividad previa del dia ya registrada aqui.",
+          "<code>ls /Users/csilvasantin/Claude/diario/2026-06-19.md</code> fallo al principio, confirmando que la entrada de hoy aun no existia.",
+          "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron vacio para <code>Codex·gmail</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario vuelve a tener fichero propio para la fecha <code>2026-06-19</code> con firma <code>[Codex]</code>.",
+          "La portada <code>index.html</code> queda alineada con la misma entrada para que la fecha sea visible en la UI publica y en el filtro <code>Codex</code>.",
+          "La automatizacion de hoy deja constancia breve y verificable aunque no existieran commits previos del dia en este repo."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No habia memoria previa de la automatizacion en <code>$CODEX_HOME/automations/actualizar-diario/memory.md</code>, asi que esta corrida no podia apoyarse en un resumen anterior propio.",
+          "El dispatch local de Oraculo contiene mensajes historicos, pero <code>tasks</code> e <code>inbox</code> actuales estaban vacios y no aportaban trabajo nuevo que resumir en esta entrada.",
+          "No habia actividad git del <code>2026-06-19</code> en este repo aparte de esta propia actualizacion, por lo que el alcance del resumen de hoy debia mantenerse deliberadamente acotado."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos comprobados en esta sesion y en el historial real del repo, sin inferir trabajo externo no visible desde este checkout.",
+          "Crear la entrada de hoy aunque el repo no tuviera actividad previa del dia, porque el propio mantenimiento del diario ya constituye trabajo trazable.",
+          "Mantener el formato corto de seis bloques para que la lectura siga siendo uniforme con las entradas recientes."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff final de <code>2026-06-19.md</code> e <code>index.html</code>.",
+          "Crear el commit <code>Diario 2026-06-19 [Codex]</code> y hacer <code>git push origin HEAD:main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responda y muestre la entrada del <code>19 de junio de 2026</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-18",
     title: "18 de junio de 2026",
     member: "Carlos Silva",
