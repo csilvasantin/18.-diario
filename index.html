@@ -352,43 +352,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de <code>diario-admirito</code> y se revisaron los repositorios de Admirito con foco en <code>AdmiraNext-Team</code> y en el workspace reciente.",
-          "En <code>AdmiraNext-Team</code> se inspeccionaron las dos copias locales (<code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code>) con <code>git status</code>, <code>git log</code> y busqueda de ficheros tocados hoy.",
-          "El trabajo comprobable del dia aparecio en <code>ConsejoAdmiraNextGame</code>: se iteraron la mesa de control, las fichas y biografias del consejo, la seccion <code>/mcp</code>, el endurecimiento de <code>POST /api/teamwork/*</code>, el diagnostico SSH/MAC y el panel <code>FleetControl</code> con captura remota.",
-          "Se actualizo esta entrada y su reflejo en <code>index.html</code> para dejar una nota corta del dia sin duplicar la fecha."
+          "Se revisaron <code>git status</code>, <code>git diff --stat</code> y <code>git log --since='2026-06-19 00:00'</code> en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>04.- AdmiraGemini</code>, <code>ACE-Step</code> y <code>32.-ConsejoAdmiraNextGame</code> para resumir el trabajo visible del workspace.",
+          "En <code>AdmiraNext-Team</code> se detecto un rediseno grande del panel publico hacia una estetica arcade en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, junto con subida de version a <code>0.1.3</code> y ajuste de <code>data/machines.json</code> y capturas.",
+          "En <code>AdmiraGemini</code> se detecto una UI local nueva en <code>src/admira_gemini/web.py</code>, assets estaticos, el comando <code>admira-gemini-ui</code> y tests para el flujo web.",
+          "En <code>ACE-Step</code> se detecto un fallback de guardado de audio: si <code>torchaudio.save</code> falla, ahora cae a <code>soundfile</code> en <code>acestep/pipeline_ace_step.py</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "Las dos copias de <code>AdmiraNext-Team</code> devolvieron <code>git status --short</code> vacio y sin archivos con timestamp del <code>2026-06-19</code>, asi que no hay evidencia de trabajo visible hoy en ese repo.",
-          "El barrido de commits del dia por repos mostro actividad en <code>ConsejoAdmiraNextGame</code> y en <code>diario</code>, pero no en <code>AdmiraNext-Team</code>.",
-          "Los commits <code>30f29d1</code> y <code>db6ed4a</code> confirman dos hitos tecnicos del dia: control de energia y diagnostico SSH/MAC en la mesa, y endurecimiento de <code>FleetControl</code> con rate limit, auditoria y token timing-safe.",
-          "La secuencia de commits <code>fdef4f5</code>, <code>7676ea1</code>, <code>7297c8e</code>, <code>cda559c</code>, <code>02ea2fe</code>, <code>30f29d1</code>, <code>7922ee8</code>, <code>2fa444a</code>, <code>fa3abb9</code> y <code>db6ed4a</code> deja trazable la evolucion de consejo, MCP y flota a lo largo de la jornada."
+          "<code>git log --since='2026-06-19 00:00'</code> no mostro commits de hoy en <code>AdmiraNext-Team</code> ni en <code>32.-ConsejoAdmiraNextGame</code>, asi que el trabajo visible ahi sigue local y pendiente de cierre.",
+          "<code>PYTHONPATH=src python3 -m unittest tests.test_web</code> en <code>04.- AdmiraGemini</code> paso <code>5</code> tests.",
+          "<code>PYTHONPATH=src python3 -m py_compile src/admira_gemini/web.py</code>, <code>node --check public/app.js</code> y <code>python3 -m py_compile acestep/pipeline_ace_step.py</code> pasaron sin errores.",
+          "<code>data/machines.json</code> en <code>AdmiraNext-Team</code> sigue describiendo seis equipos con foco operativo y acceso SSH, base de la nueva UI por miembro."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>AdmiraNext-Team</code> queda encaminado a una vista de equipo mas narrativa: agrupa maquinas por miembro, destaca un perfil principal y anade una capa visual tipo <code>Player Select</code>.",
+          "<code>AdmiraGemini</code> ya tiene la base para lanzarse y configurarse desde navegador local, con lectura de log y parametros de automatizacion.",
+          "<code>ACE-Step</code> queda mas robusto frente a fallos del backend de audio en la exportacion final."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>AdmiraNext-Team</code> no aporta hoy commits ni cambios locales visibles, asi que no se podia usar como fuente principal del diario pese a ser el repo prioritario a revisar.",
-          "El trabajo real del dia quedo repartido entre varias capas del mismo producto (<code>consejo</code>, <code>mcp</code>, <code>teamwork</code>, <code>fleet-control</code> y <code>council-api</code>), por lo que hubo que reconstruir la historia cruzando muchos commits cortos.",
-          "Parte del contexto relevante aparece en handoffs y en el workspace, no solo en un unico repo, lo que hace mas facil perder decisiones si no se consolida el cierre."
+          "No hay evidencia de commit, push ni validacion visual final de <code>AdmiraNext-Team</code> en el historial de hoy; el cambio grande sigue en working tree.",
+          "Los tests de <code>AdmiraGemini</code> fallan si se lanzan sin <code>PYTHONPATH=src</code>, lo que deja una friccion de uso para quien no conozca el contexto del repo.",
+          "<code>32.-ConsejoAdmiraNextGame</code> solo muestra ficheros sueltos sin seguimiento (<code>.codex-write-test</code> y <code>council-api.py.new</code>), sin una implementacion verificable nueva en esta revision."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Dejar explicito que hoy la actividad comprobable estuvo en <code>ConsejoAdmiraNextGame</code> y no forzar una narrativa artificial sobre <code>AdmiraNext-Team</code>.",
-          "Resumir la jornada alrededor de dos decisiones de producto claras: exponer mejor el Consejo a humanos y agentes, y hacer mas segura y operable la flota remota.",
-          "Mantener una unica entrada para <code>2026-06-19</code> y actualizarla en lugar de crear otra version del mismo dia."
+          "Tomar el estado local del workspace como senal principal de hoy y no atribuir actividad inexistente en <code>git log</code>.",
+          "Priorizar en esta entrada <code>AdmiraNext-Team</code>, <code>AdmiraGemini</code> y <code>ACE-Step</code>, que son los cambios con mas evidencia tecnica util.",
+          "Actualizar la entrada existente del <code>2026-06-19</code> en vez de dejar la version previa centrada solo en mantenimiento del diario."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Validar de punta a punta el flujo nuevo de <code>FleetControl</code>, incluida la captura remota y el despertar por WoL en cada Mac.",
-          "Comprobar en produccion que la seccion <code>/mcp</code> y el cierre <code>requireCouncilWrite</code> no rompen flujos existentes del Consejo.",
-          "Si <code>AdmiraNext-Team</code> iba a concentrar este trabajo, decidir si toca mover o reflejar alli parte de los cambios para no seguir dispersando el contexto operativo."
+          "Hacer QA visual y commit de <code>AdmiraNext-Team</code> si la nueva capa arcade ya se considera lista para publicar.",
+          "Dejar <code>AdmiraGemini</code> instalable sin depender de <code>PYTHONPATH=src</code> en las pruebas y probar su UI en navegador local.",
+          "Decidir si el fallback de <code>ACE-Step</code> necesita declarar <code>soundfile</code> de forma explicita en dependencias y cerrar el cambio con commit."
         ]
       }
     ]
