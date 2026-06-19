@@ -352,8 +352,8 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se dejo presencia activa con <code>agora alive --from Codex --loop</code>.",
-          "Se leyeron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica publicada en <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que coinciden en los pasos operativos.",
+          "Se ejecutaron <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se dejo presencia activa con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyeron la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica publicada en <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy remite al mismo contenido operativo.",
           "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-19 00:00' --until='2026-06-19 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-19 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
           "Se reescribieron <code>2026-06-19.md</code> e <code>index.html</code> para que la entrada publica de hoy refleje este cierre real y no el contenido previo."
         ]
@@ -362,9 +362,9 @@ const entries = [
         heading: "Que se valido",
         items: [
           "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando un checkout limpio sobre <code>main</code>.",
-          "<code>git log --since='2026-06-19 00:00' --until='2026-06-19 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo, incluyendo <code>f3bf6ea</code>, <code>f94d419</code>, <code>7264cfc</code> y <code>75b1730</code>.",
+          "<code>git log --since='2026-06-19 00:00' --until='2026-06-19 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo, incluyendo <code>f3bf6ea</code>, <code>f94d419</code>, <code>7264cfc</code>, <code>75b1730</code> y <code>614dd30</code>.",
           "<code>git reflog --date=iso --since='2026-06-19 00:00'</code> confirmo la secuencia local de esos commits y el <code>pull --rebase origin main</code> cerrado a las <code>21:32:55 +0200</code>.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-19 23:56:32 CEST +0200</code> en el pre-check de esta ejecucion."
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-19 23:56:43 CEST +0200</code> y <code>agora tasks/inbox --peek</code> devolvieron vacio para <code>Codex·gmail</code>."
         ]
       },
       {
@@ -380,7 +380,7 @@ const entries = [
         items: [
           "El fichero <code>2026-06-19.md</code> y su bloque en <code>index.html</code> contenian una version previa centrada en otros repos y no en este cierre del diario.",
           "El historial de hoy ya incluye varios commits de <code>Codex</code>, por lo que esta ejecucion requiere actualizar la misma fecha sin duplicar entradas.",
-          "No se detecto bloqueo de dirty worktree en el checkout canonico al inicio de esta rutina."
+          "No se detecto bloqueo de dirty worktree ni mensajes pendientes para <code>Codex·gmail</code> al inicio de esta rutina."
         ]
       },
       {
