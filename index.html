@@ -352,51 +352,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se revisaron <code>git status</code>, <code>git diff --stat</code> y <code>git log --since='2026-06-19 00:00'</code> en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>04.- AdmiraGemini</code>, <code>ACE-Step</code> y <code>32.-ConsejoAdmiraNextGame</code> para resumir el trabajo visible del workspace.",
-          "En <code>AdmiraNext-Team</code> se detecto un rediseno grande del panel publico hacia una estetica arcade en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, junto con subida de version a <code>0.1.3</code> y ajuste de <code>data/machines.json</code> y capturas.",
-          "En <code>AdmiraGemini</code> se detecto una UI local nueva en <code>src/admira_gemini/web.py</code>, assets estaticos, el comando <code>admira-gemini-ui</code> y tests para el flujo web.",
-          "En <code>ACE-Step</code> se detecto un fallback de guardado de audio: si <code>torchaudio.save</code> falla, ahora cae a <code>soundfile</code> en <code>acestep/pipeline_ace_step.py</code>."
+          "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se dejo presencia activa con <code>agora alive --from Codex --loop</code>.",
+          "Se leyeron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica publicada en <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que coinciden en los pasos operativos.",
+          "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-19 00:00' --until='2026-06-19 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-19 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se reescribieron <code>2026-06-19.md</code> e <code>index.html</code> para que la entrada publica de hoy refleje este cierre real y no el contenido previo."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git log --since='2026-06-19 00:00'</code> no mostro commits de hoy en <code>AdmiraNext-Team</code> ni en <code>32.-ConsejoAdmiraNextGame</code>, asi que el trabajo visible ahi sigue local y pendiente de cierre.",
-          "<code>PYTHONPATH=src python3 -m unittest tests.test_web</code> en <code>04.- AdmiraGemini</code> paso <code>5</code> tests.",
-          "<code>PYTHONPATH=src python3 -m py_compile src/admira_gemini/web.py</code>, <code>node --check public/app.js</code> y <code>python3 -m py_compile acestep/pipeline_ace_step.py</code> pasaron sin errores.",
-          "<code>data/machines.json</code> en <code>AdmiraNext-Team</code> sigue describiendo seis equipos con foco operativo y acceso SSH, base de la nueva UI por miembro."
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando un checkout limpio sobre <code>main</code>.",
+          "<code>git log --since='2026-06-19 00:00' --until='2026-06-19 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo, incluyendo <code>f3bf6ea</code>, <code>f94d419</code>, <code>7264cfc</code> y <code>75b1730</code>.",
+          "<code>git reflog --date=iso --since='2026-06-19 00:00'</code> confirmo la secuencia local de esos commits y el <code>pull --rebase origin main</code> cerrado a las <code>21:32:55 +0200</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-19 23:56:32 CEST +0200</code> en el pre-check de esta ejecucion."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>AdmiraNext-Team</code> queda encaminado a una vista de equipo mas narrativa: agrupa maquinas por miembro, destaca un perfil principal y anade una capa visual tipo <code>Player Select</code>.",
-          "<code>AdmiraGemini</code> ya tiene la base para lanzarse y configurarse desde navegador local, con lectura de log y parametros de automatizacion.",
-          "<code>ACE-Step</code> queda mas robusto frente a fallos del backend de audio en la exportacion final."
+          "La entrada diaria del <code>2026-06-19</code> queda alineada con hechos verificables de esta sesion y del historial real del repo.",
+          "<code>index.html</code> sigue mostrando la fecha de hoy en el array <code>entries</code>, lista para publicarse en la UI publica del diario.",
+          "Este cierre deja preparado el repo para commit, push y verificacion externa de <code>https://csilvasantin.github.io/diario/</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No hay evidencia de commit, push ni validacion visual final de <code>AdmiraNext-Team</code> en el historial de hoy; el cambio grande sigue en working tree.",
-          "Los tests de <code>AdmiraGemini</code> fallan si se lanzan sin <code>PYTHONPATH=src</code>, lo que deja una friccion de uso para quien no conozca el contexto del repo.",
-          "<code>32.-ConsejoAdmiraNextGame</code> solo muestra ficheros sueltos sin seguimiento (<code>.codex-write-test</code> y <code>council-api.py.new</code>), sin una implementacion verificable nueva en esta revision."
+          "El fichero <code>2026-06-19.md</code> y su bloque en <code>index.html</code> contenian una version previa centrada en otros repos y no en este cierre del diario.",
+          "El historial de hoy ya incluye varios commits de <code>Codex</code>, por lo que esta ejecucion requiere actualizar la misma fecha sin duplicar entradas.",
+          "No se detecto bloqueo de dirty worktree en el checkout canonico al inicio de esta rutina."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar el estado local del workspace como senal principal de hoy y no atribuir actividad inexistente en <code>git log</code>.",
-          "Priorizar en esta entrada <code>AdmiraNext-Team</code>, <code>AdmiraGemini</code> y <code>ACE-Step</code>, que son los cambios con mas evidencia tecnica util.",
-          "Actualizar la entrada existente del <code>2026-06-19</code> en vez de dejar la version previa centrada solo en mantenimiento del diario."
+          "Sustituir la entrada existente del <code>2026-06-19</code> por una version basada solo en comandos ejecutados y trabajo real de esta sesion.",
+          "Mantener el titulo firmado como <code># Diario - 19 de junio de 2026 [Codex]</code>, conforme a la rutina canonica.",
+          "Hacer el commit con el formato indicado por la rutina: <code>Diario 2026-06-19 [Codex]</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer QA visual y commit de <code>AdmiraNext-Team</code> si la nueva capa arcade ya se considera lista para publicar.",
-          "Dejar <code>AdmiraGemini</code> instalable sin depender de <code>PYTHONPATH=src</code> en las pruebas y probar su UI en navegador local.",
-          "Decidir si el fallback de <code>ACE-Step</code> necesita declarar <code>soundfile</code> de forma explicita en dependencias y cerrar el cambio con commit."
+          "Revisar el diff de <code>2026-06-19.md</code> e <code>index.html</code> antes de publicar.",
+          "Hacer <code>git add</code>, <code>git commit -m \"Diario 2026-06-19 [Codex]\"</code> y <code>git push origin main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada de hoy ya publicada."
         ]
       }
     ]
