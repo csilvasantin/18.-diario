@@ -352,51 +352,43 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de <code>actualizar-diario-2</code> y se leyeron <code>CERRAR-EL-DIA.md</code>, <code>2026-06-18.md</code>, <code>2026-06-17.md</code> e <code>index.html</code> para seguir el formato vigente del diario.",
-          "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-19 00:00' --until='2026-06-19 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-19 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se trajo <code>origin/main</code>, se paso de la rama local <code>close-2026-06-18-run</code> a <code>main</code> y se resolvio el intento de <code>pull --rebase origin main</code> descartando el commit local obsoleto <code>cf66867</code> que chocaba con versiones mas nuevas ya publicadas del <code>2026-06-18</code>.",
-          "Se creo <code>2026-06-19.md</code> y se actualizo <code>index.html</code> para publicar la nueva fecha en la UI del diario."
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de <code>diario-admirito</code> y se revisaron los repositorios de Admirito con foco en <code>AdmiraNext-Team</code> y en el workspace reciente.",
+          "En <code>AdmiraNext-Team</code> se inspeccionaron las dos copias locales (<code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code>) con <code>git status</code>, <code>git log</code> y busqueda de ficheros tocados hoy.",
+          "El trabajo comprobable del dia aparecio en <code>ConsejoAdmiraNextGame</code>: se iteraron la mesa de control, las fichas y biografias del consejo, la seccion <code>/mcp</code>, el endurecimiento de <code>POST /api/teamwork/*</code>, el diagnostico SSH/MAC y el panel <code>FleetControl</code> con captura remota.",
+          "Se actualizo esta entrada y su reflejo en <code>index.html</code> para dejar una nota corta del dia sin duplicar la fecha."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio al empezar <code>## close-2026-06-18-run...origin/main</code>, confirmando que el checkout canonico seguia anclado en la rama auxiliar del cierre anterior.",
-          "<code>git log --since='2026-06-19 00:00' --until='2026-06-19 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa del dia en este repo, con <code>f4cd9fd</code> y <code>614dd30</code>.",
-          "<code>git reflog --date=iso --since='2026-06-19 00:00'</code> registro la secuencia local de hoy: cambios entre <code>close-2026-06-18-run</code> y <code>main</code>, inicio del <code>pull --rebase origin main</code> y finalizacion del rebase en <code>614dd30</code>.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-19 21:33:07 CEST +0200</code>, fijando la fecha efectiva de esta actualizacion."
-        ]
-      },
-      {
-        heading: "Avances",
-        items: [
-          "El diario vuelve a tener una entrada propia para <code>2026-06-19</code> sin duplicar la fecha en Markdown.",
-          "<code>index.html</code> queda sincronizado con la misma entrada para que la novedad sea visible en la portada publica y en el filtro <code>Codex</code>.",
-          "El checkout canonico queda otra vez sobre <code>main</code>, alineado con <code>origin/main</code>, antes del commit de hoy."
+          "Las dos copias de <code>AdmiraNext-Team</code> devolvieron <code>git status --short</code> vacio y sin archivos con timestamp del <code>2026-06-19</code>, asi que no hay evidencia de trabajo visible hoy en ese repo.",
+          "El barrido de commits del dia por repos mostro actividad en <code>ConsejoAdmiraNextGame</code> y en <code>diario</code>, pero no en <code>AdmiraNext-Team</code>.",
+          "Los commits <code>30f29d1</code> y <code>db6ed4a</code> confirman dos hitos tecnicos del dia: control de energia y diagnostico SSH/MAC en la mesa, y endurecimiento de <code>FleetControl</code> con rate limit, auditoria y token timing-safe.",
+          "La secuencia de commits <code>fdef4f5</code>, <code>7676ea1</code>, <code>7297c8e</code>, <code>cda559c</code>, <code>02ea2fe</code>, <code>30f29d1</code>, <code>7922ee8</code>, <code>2fa444a</code>, <code>fa3abb9</code> y <code>db6ed4a</code> deja trazable la evolucion de consejo, MCP y flota a lo largo de la jornada."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La rama local <code>main</code> estaba divergida respecto a <code>origin/main</code> porque arrastraba el commit local <code>cf66867</code> del cierre del <code>2026-06-18</code>.",
-          "El <code>pull --rebase origin main</code> abrio conflictos en <code>2026-06-18.md</code> e <code>index.html</code> al intentar reaplicar ese commit ya superado por publicaciones posteriores del mismo dia.",
-          "La entrada de hoy no existia todavia en este checkout, asi que habia que crear <code>2026-06-19.md</code> y su reflejo HTML desde cero."
+          "<code>AdmiraNext-Team</code> no aporta hoy commits ni cambios locales visibles, asi que no se podia usar como fuente principal del diario pese a ser el repo prioritario a revisar.",
+          "El trabajo real del dia quedo repartido entre varias capas del mismo producto (<code>consejo</code>, <code>mcp</code>, <code>teamwork</code>, <code>fleet-control</code> y <code>council-api</code>), por lo que hubo que reconstruir la historia cruzando muchos commits cortos.",
+          "Parte del contexto relevante aparece en handoffs y en el workspace, no solo en un unico repo, lo que hace mas facil perder decisiones si no se consolida el cierre."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar <code>origin/main</code> como base canonica del contenido publicado y no arrastrar el commit antiguo <code>cf66867</code>.",
-          "Registrar solo hechos comprobados en este repo y en esta sesion de mantenimiento del diario.",
-          "Mantener una sola entrada Markdown para la fecha <code>2026-06-19</code> y reflejarla literalmente en <code>index.html</code>."
+          "Dejar explicito que hoy la actividad comprobable estuvo en <code>ConsejoAdmiraNextGame</code> y no forzar una narrativa artificial sobre <code>AdmiraNext-Team</code>.",
+          "Resumir la jornada alrededor de dos decisiones de producto claras: exponer mejor el Consejo a humanos y agentes, y hacer mas segura y operable la flota remota.",
+          "Mantener una unica entrada para <code>2026-06-19</code> y actualizarla en lugar de crear otra version del mismo dia."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff final de <code>2026-06-19.md</code> e <code>index.html</code>.",
-          "Crear el commit <code>Diario 2026-06-19 [Codex]</code> y hacer <code>git push origin main</code>.",
-          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responda y muestre la entrada del <code>19 de junio de 2026</code>."
+          "Validar de punta a punta el flujo nuevo de <code>FleetControl</code>, incluida la captura remota y el despertar por WoL en cada Mac.",
+          "Comprobar en produccion que la seccion <code>/mcp</code> y el cierre <code>requireCouncilWrite</code> no rompen flujos existentes del Consejo.",
+          "Si <code>AdmiraNext-Team</code> iba a concentrar este trabajo, decidir si toca mover o reflejar alli parte de los cambios para no seguir dispersando el contexto operativo."
         ]
       }
     ]
