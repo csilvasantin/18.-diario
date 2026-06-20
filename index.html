@@ -344,6 +344,60 @@
 <script>
 const entries = [
   {
+    date: "2026-06-20",
+    title: "20 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia activa con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se revisaron <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>tail -n 20 ~/.agents-comms/dispatch/Oraculo.jsonl</code> para verificar si habia trabajo pendiente o mensajes nuevos para Oraculo.",
+          "Se inspeccionaron <code>2026-06-19.md</code>, <code>README.md</code> e <code>index.html</code> en <code>/Users/csilvasantin/Claude/diario/</code> para seguir el formato vigente y preparar la entrada de hoy sin duplicados.",
+          "Se creo <code>2026-06-20.md</code> y se anadio la entrada equivalente al array <code>entries</code> de <code>index.html</code> con un resumen breve de la sesion de hoy."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout canonico del diario estaba limpio sobre <code>main</code>.",
+          "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron vacio para <code>Codex·gmail</code> al iniciar la sesion.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-20 21:31:58 CEST +0200</code>, fijando la fecha operativa de esta actualizacion."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-06-20</code> ya queda registrada en Markdown y en la portada HTML publica del diario.",
+          "La entrada de hoy resume el estado real de esta sesion de actualizacion con el formato corto pedido para decisiones, avances, bloqueos y siguientes pasos."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No aparecieron tareas nuevas ni bloqueos operativos en AgoraMatrix al inicio.",
+          "La bandeja local revisada usa el nombre <code>Oraculo.jsonl</code>, mientras que otras instrucciones historicas la referencian como <code>Oraculo</code>; se tomo como valida la ruta existente solo para comprobacion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos verificables de esta sesion en vez de inferir trabajo externo no confirmado de hoy.",
+          "Crear una unica entrada <code>Codex</code> para <code>2026-06-20</code> y mantener <code>index.html</code> como espejo literal del Markdown."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-06-20.md</code> e <code>index.html</code>.",
+          "Hacer <code>git add</code>, <code>git commit -m \"Diario 2026-06-20 [Codex]\"</code> y <code>git push origin main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del <code>20 de junio de 2026</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-19",
     title: "19 de junio de 2026",
     member: "Carlos Silva",
