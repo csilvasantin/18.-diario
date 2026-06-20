@@ -361,6 +361,7 @@ const entries = [
       {
         heading: "Que se valido",
         items: [
+          "En los repos revisados no aparecieron commits fechados hoy; el trabajo visible de Admirito sigue mayormente en cambios locales sin publicar.",
           "<code>git diff --stat</code> en <code>AdmiraNext-Team</code> mostro 8 ficheros tocados con <code>1112 insertions(+), 73 deletions(-)</code> y <code>git status --short --branch</code> lo deja en <code>main...origin/main [behind 303]</code>.",
           "En <code>AdmiraNext-Team</code> pasaron <code>node --check public/app.js</code>, el parseo de <code>data/machines.json</code> y <code>git diff --check</code>.",
           "En <code>AdmiraNext-Team-latest</code> pasaron <code>node --check src/server.js</code>, <code>node --check src/ssh-exec.js</code> y <code>git diff --check</code>.",
@@ -372,8 +373,8 @@ const entries = [
         heading: "Avances",
         items: [
           "<code>AdmiraNext-Team</code> ya tiene una propuesta clara de nueva home: de dashboard tecnico simple a panel visual por miembros con tono arcade, ficha principal y resumen por fighters.",
-          "<code>AdmiraNext-Team-latest</code> deja mejor preparada la capa remota para estados intermedios y comandos AppleScript menos fragiles.",
-          "<code>AdmiraGemini</code> deja de depender solo del CLI y queda listo para abrirse tambien como UI local ligera."
+          "Tambien queda registrado que el panel ya incorpora mejor contexto operativo: foco actual, rol, conteo de maquinas, estado y accesos LAN del Mac Mini.",
+          "<code>AdmiraNext-Team-latest</code> deja mejor preparada la capa remota para estados intermedios y comandos AppleScript menos fragiles, y <code>AdmiraGemini</code> deja de depender solo del CLI."
         ]
       },
       {
@@ -381,7 +382,7 @@ const entries = [
         items: [
           "No aparecieron commits de hoy en <code>AdmiraNext-Team</code> ni en <code>AdmiraNext-Team-latest</code>; la evidencia principal de la jornada sigue en working tree local.",
           "<code>AdmiraNext-Team</code> mezcla en la misma tanda JS, HTML, CSS, datos operativos y capturas binarias, lo que complica revisar y publicar por partes.",
-          "Siguen dos lineas activas (<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>) con cambios relacionados pero separados, lo que mantiene riesgo de divergencia.",
+          "<code>AdmiraNext-Team</code> arrastra un checkout muy desfasado respecto a <code>origin/main</code> y siguen dos lineas activas (<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>), lo que aumenta riesgo de divergencia.",
           "En esta pasada no quedo evidencia de QA visual final en navegador para la home nueva de <code>AdmiraNext-Team</code>."
         ]
       },
@@ -389,8 +390,8 @@ const entries = [
         heading: "Decisiones tomadas",
         items: [
           "Tratar <code>AdmiraNext-Team</code> como el bloque principal del dia y usar el resto del workspace solo como contexto secundario verificable.",
-          "Registrar la actividad de hoy como trabajo en curso, no como cambio ya publicado, porque lo fuerte sigue sin commit en los repos clave.",
-          "Actualizar la entrada ya existente del <code>20 de junio</code> en vez de duplicarla."
+          "Actualizar la entrada ya existente del <code>20 de junio</code> en vez de duplicarla y registrar la actividad de hoy como trabajo en curso, no como cambio ya publicado.",
+          "Registrar solo hechos observables en Git, diff y chequeos locales, sin inventar despliegues ni pruebas no hechas."
         ]
       },
       {
@@ -399,7 +400,7 @@ const entries = [
           "Partir <code>AdmiraNext-Team</code> en commits pequenos: UI arcade, <code>data/machines.json</code> y capturas por separado.",
           "Levantar y revisar en navegador la portada nueva de <code>AdmiraNext-Team</code> antes de mezclarla con mas cambios.",
           "Decidir si la linea principal debe consolidarse en <code>AdmiraNext-Team</code> o en <code>AdmiraNext-Team-latest</code> antes de fusionar frontend y backend.",
-          "Publicar esta actualizacion del diario y verificar <code>https://csilvasantin.github.io/diario/</code>."
+          "Seguir editando esta misma fecha si entra mas actividad hoy y verificar <code>https://csilvasantin.github.io/diario/</code> tras publicar."
         ]
       }
     ]
