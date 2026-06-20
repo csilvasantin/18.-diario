@@ -352,46 +352,50 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia activa con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se revisaron <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>tail -n 20 ~/.agents-comms/dispatch/Oraculo.jsonl</code>, y despues se inspeccionaron <code>README.md</code>, <code>2026-06-19.md</code> e <code>index.html</code> para seguir el formato vigente sin duplicar fechas.",
-          "En esta automatizacion se reviso la memoria <code>actualizar-diario-2</code> y este worktree con <code>git status --short --branch</code>, <code>git log --since='2026-06-20 00:00' --decorate --stat --oneline --all</code> y <code>git remote -v</code>.",
-          "Se creo y despues se reconcilio <code>2026-06-20.md</code> con su espejo en <code>index.html</code> para dejar una sola entrada <code>Codex</code> del dia pese a las actualizaciones concurrentes en <code>origin/main</code>."
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion y se reviso este checkout del diario para actualizar la fecha <code>2026-06-20</code> sin duplicarla.",
+          "Se inspeccionaron repos de Admirito en <code>/Users/csilvasantin/Claude/repos</code>, <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin</code> y <code>/Users/csilvasantin/Documents/Admirito</code> con <code>git log --since='2026-06-20 00:00'</code> y <code>git status --short --branch</code>.",
+          "El foco real del dia aparecio en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>: se revisaron los diffs de <code>public/index.html</code>, <code>public/styles.css</code>, <code>public/app.js</code>, <code>package.json</code> y <code>data/machines.json</code>.",
+          "La evidencia muestra un rediseño tipo arcade para <code>AdmiraNext-Team</code>, con bloque <code>Player Select</code>, perfiles de miembros como fighters, estadisticas derivadas del estado de las maquinas y nuevas rutas SSH locales para el Mac Mini."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "El checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> estaba limpio sobre <code>main</code> y <code>agora tasks --from Codex --peek</code> junto con <code>agora inbox --from Codex --peek</code> devolvieron vacio al inicio.",
-          "Este worktree de automatizacion arranco en <code>## HEAD (no branch)</code> y <code>git log --since='2026-06-20 00:00' --decorate --stat --oneline --all</code> no mostraba actividad previa del dia antes de crear la entrada.",
-          "<code>git remote -v</code> confirmo el remoto <code>https://github.com/csilvasantin/diario.git</code> y <code>origin/main</code> avanzo hasta <code>99da2ca</code> mientras se hacia el cierre, obligando a reconciliar la misma fecha en rebase."
+          "En los repos revisados no aparecieron commits fechados hoy; el trabajo validado de Admirito esta mayormente en cambios locales sin publicar.",
+          "<code>Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> esta en <code>main</code>, por detras de <code>origin/main</code> en 303 commits, y conserva 8 ficheros modificados: datos, capturas, <code>package.json</code> y la UI publica.",
+          "<code>data/machines.json</code> anade <code>ip_local</code> y <code>connect_local</code> al Mac Mini, y <code>package.json</code> sube la version a <code>0.1.3</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-20</code> queda mantenida como una unica entrada Markdown firmada <code>[Codex]</code>.",
-          "<code>index.html</code> vuelve a quedar alineado con esa misma version para que la novedad siga visible en la portada publica del diario."
+          "Queda documentado que el principal avance del dia fue convertir <code>AdmiraNext-Team</code> en una experiencia visual mas expresiva, no solo un panel de estado.",
+          "Tambien queda registrado que el dashboard ya incorpora mejor contexto operativo: foco actual, rol, conteo de maquinas, estado y accesos del Mac Mini.",
+          "La entrada del diario y su espejo en <code>index.html</code> vuelven a quedar alineados en una sola version para hoy."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Hubo pushes concurrentes sobre <code>origin/main</code>, con rechazo de <code>git push</code> y conflictos de rebase en <code>2026-06-20.md</code> e <code>index.html</code>.",
-          "Este worktree no partia desde una rama local, sino desde detached HEAD, lo que obligo a publicar contra <code>HEAD:main</code>."
+          "No hay commits de hoy en los repos revisados, asi que parte del trabajo solo puede atribuirse por diff y estado local, no por historial publicado.",
+          "<code>AdmiraNext-Team</code> arrastra un checkout muy desfasado respecto a <code>origin/main</code>, lo que aumenta el riesgo de conflicto cuando toque integrar o publicar.",
+          "Las capturas nuevas y el rediseño siguen sin validacion publicada, asi que no se puede afirmar aun que la build final este desplegada o probada en remoto."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "No duplicar el <code>2026-06-20</code>: se fusiono la evidencia real de ambas sesiones del dia en una sola entrada.",
-          "Mantener solo hechos comprobados por comandos y estado real del repo, sin inferir trabajo externo no validado."
+          "Actualizar la entrada existente del <code>2026-06-20</code> en vez de crear otra, sustituyendo el contenido previo por un resumen del trabajo real de Admirito.",
+          "Priorizar <code>AdmiraNext-Team</code> sobre otros repos con ruido local porque es el unico cambio de hoy claramente material y verificable en el workspace.",
+          "Registrar solo hechos observables en Git y diff, sin inventar pruebas o despliegues que no aparecen en el estado real."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Empujar la version reconciliada y comprobar que <code>https://csilvasantin.github.io/diario/</code> responde con la fecha de hoy visible.",
-          "Si vuelve a ejecutarse otra automatizacion hoy, editar esta misma fecha en vez de crear otra entrada."
+          "Probar localmente <code>AdmiraNext-Team</code> para validar que el modo arcade funciona bien en desktop y movil antes de publicar.",
+          "Hacer <code>pull --rebase</code> o trabajar sobre un checkout actualizado de <code>AdmiraNext-Team</code> antes de integrar estos 8 cambios locales.",
+          "Si hay mas actividad hoy, seguir editando esta misma fecha en el diario en lugar de abrir otra entrada."
         ]
       }
     ]
