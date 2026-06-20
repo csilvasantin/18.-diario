@@ -347,57 +347,113 @@ const entries = [
     date: "2026-06-20",
     title: "20 de junio de 2026",
     member: "Carlos Silva",
-    author: "Codex",
+    author: "Claude",
     sections: [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se releyo la rutina local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
-          "Se contrasto la fuente canonica publicada en <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy redirige al repo publico <code>csilvasantin/18.-diario</code>, con la copia local del Mac Mini.",
-          "Se hizo el pre-check literal en este checkout con <code>git status --short --branch</code>, <code>git log --since='2026-06-20 00:00' --until='2026-06-20 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-20 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se revisaron <code>2026-06-20.md</code>, <code>index.html</code> y <code>git remote -v</code>, y se reescribieron ambos para que la portada publica refleje este cierre real del dia."
+          "Sesion de Claude Code on the web ejecutada como rutina programada en el contenedor remoto sobre clon fresco de <code>csilvasantin/18.-diario</code> en <code>/home/user/18.-diario/</code>, rama de trabajo <code>main-eydqg3</code>.",
+          "Se leyo la rutina canonica <code>CERRAR-EL-DIA.md</code>, el <code>CLAUDE.md</code> del proyecto y la entrada del dia ya firmada por <code>[Codex]</code> (<code>99da2ca</code>, <code>d9295fc</code>) para respetar la regla 1-2-3 de un unico fichero por fecha con bloques separados por <code>---</code>.",
+          "Se anadio este bloque <code>[Claude]</code> al final de <code>2026-06-20.md</code> y la entrada equivalente al array <code>const entries</code> de <code>index.html</code>, sin reescribir el bloque previo de Codex."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando un working tree limpio sobre <code>main</code>.",
-          "<code>git log --since='2026-06-20 00:00' --until='2026-06-20 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real de hoy en este repo, incluyendo <code>c83fd08 Diario 2026-06-20 [Claude]</code>, <code>99da2ca Diario 2026-06-20 [Codex]</code>, <code>d9295fc docs: Update Codex 2026-06-20 [skip ci]</code>, <code>f429294 Diario 2026-06-20 [Codex]</code>, <code>ab904a9 Diario 2026-06-20 [Codex]</code> y <code>f0c8195 Merge remote-tracking branch 'origin/main'</code>.",
-          "<code>git reflog --date=iso --since='2026-06-20 00:00'</code> confirmo la secuencia local de commits, un <code>pull --rebase origin main</code> cerrado a las <code>23:50:14 +0200</code> y el merge final a las <code>23:56:14 +0200</code>.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-20 23:57:05 CEST +0200</code>, fijando la fecha operativa de esta actualizacion.",
-          "<code>git remote -v</code> confirmo <code>origin https://github.com/csilvasantin/18.-diario.git</code> para fetch y push."
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-20 21:01:33 UTC +0000</code>, fijando la fecha efectiva de esta pasada.",
+          "<code>git status --short --branch</code> devolvio <code>## main-eydqg3</code> con working tree limpio antes de editar y <code>git rev-parse HEAD</code> el SHA <code>d9295fc5746a54404fa2f9e0ea65dc125a7e8324</code>.",
+          "<code>git log --since='2026-06-20 00:00' --until='2026-06-20 23:59:59' --date=iso --stat --oneline --all</code> confirmo los tres commits reales del dia ya publicados: <code>d9295fc</code> y <code>99da2ca</code> de Codex mas <code>4d1120b</code> del bot <code>update-repos.yml</code>.",
+          "<code>repos.html</code> ya llevaba la cabecera <code>generado 2026-06-20</code> y la fila del diario ya estaba sincronizada por el workflow <code>update-repos.yml</code>, asi que no requirio edicion manual."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "Queda rehecho el cierre del <code>2026-06-20</code> con hechos verificables del propio repo del diario, en vez de dejar una entrada centrada en otros workspaces.",
-          "La UI publica queda alineada con la misma version resumida del cierre en el bloque <code>const entries</code> de <code>index.html</code>.",
-          "Tambien queda trazado en la propia entrada que hoy hubo varias escrituras sobre esta fecha y que este run consolida el estado final del dia."
+          "La entrada del <code>2026-06-20</code> queda firmada por ambas IAs (<code>[Codex]</code> + <code>[Claude]</code>) en un unico fichero, conservando la trazabilidad del trabajo previo de Codex sin sobreescribirlo.",
+          "<code>index.html</code> queda con dos entradas del <code>20 de junio de 2026</code>, una por autor, visibles en los filtros <code>Todos</code>, <code>Codex</code> y <code>Claude</code>.",
+          "Se cumple la instruccion explicita del usuario: documentar el dia aunque no hubiera trabajo sustantivo adicional de Claude Code en este repo mas alla de la propia rutina de cierre."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La fecha <code>2026-06-20</code> ya tenia varias actualizaciones previas en Git y reflog, asi que hizo falta sobrescribir la entrada vigente para evitar seguir acumulando versiones inconsistentes del mismo cierre.",
-          "La URL canonica pedida por nombre de repo (<code>csilvasantin/diario</code>) hoy redirige a <code>csilvasantin/18.-diario</code>, lo que introduce una discrepancia nominal aunque el contenido operativo coincide.",
-          "En el momento de redactar esta entrada aun quedaban por ejecutar el commit final, el push y la comprobacion publica posterior a publicacion."
+          "La rama de trabajo asignada por la plataforma es <code>main-eydqg3</code>, no <code>main</code>, por lo que el push de esta sesion ira a esa rama y la publicacion en GitHub Pages dependera del merge posterior a <code>main</code>.",
+          "El repositorio remoto del entorno se sirve a traves de un proxy local (<code>http://local_proxy@127.0.0.1:39647/...</code>), un detalle del runtime que no es directamente accionable desde la sesion."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Mantener un solo fichero <code>2026-06-20.md</code> y actualizarlo en lugar de crear otra variante del mismo dia.",
-          "Registrar solo hechos observables en este repo y en esta sesion, sin arrastrar contexto no verificado de otros repos.",
-          "Tomar <code>index.html</code> como espejo operativo obligatorio porque la portada publica embebe las entradas desde <code>const entries</code>."
+          "No tocar el bloque <code>[Codex]</code> ya commiteado: solo anadir el segundo bloque tras <code>---</code>, respetando la convivencia de IAs en el mismo fichero.",
+          "No regenerar <code>repos.html</code> a mano porque su fuente de verdad es el workflow <code>update-repos.yml</code> y la cabecera ya indica que se genero hoy.",
+          "Mantener la entrada de Claude breve y factual, alineada con la nota del usuario \"si un dia en concreto no se ha hecho nada se documenta y ya esta\"."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add 2026-06-20.md index.html</code>, <code>git commit -m \"Diario 2026-06-20 [Codex]\"</code> y <code>git push origin main</code>.",
-          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del <code>20 de junio de 2026</code>.",
-          "Si la publicacion falla por red, auth o despliegue, dejar constancia precisa del bloqueo."
+          "Hacer <code>git add 2026-06-20.md index.html</code>, commit firmado como <code>[Claude]</code> y push a <code>origin main-eydqg3</code> con <code>-u</code>.",
+          "Abrir un Pull Request en draft desde <code>main-eydqg3</code> hacia <code>main</code> para que el cierre del dia llegue a la publicacion publica via GitHub Pages.",
+          "Cuando se mergee a <code>main</code>, verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>la portada del diario</a> muestre el <code>20 de junio de 2026</code> con ambos autores filtrables."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-06-20",
+    title: "20 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se intento dejar presencia con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyeron la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy redirige al repo publico <code>csilvasantin/18.-diario</code>.",
+          "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-20 00:00' --until='2026-06-20 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-20 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se revisaron <code>2026-06-20.md</code> e <code>index.html</code>, se recupero desde <code>git show c83fd08</code> el bloque <code>[Claude]</code> hoy publicado y se reescribieron ambos ficheros para que la fecha refleje este cierre real sin perder la convivencia de ambas IAs."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando un checkout limpio sobre <code>main</code>.",
+          "<code>git log --since='2026-06-20 00:00' --until='2026-06-20 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo: <code>f0c8195</code>, <code>ab904a9</code>, <code>f429294</code>, <code>c83fd08</code>, <code>d9295fc</code>, <code>99da2ca</code> y <code>4d1120b</code>.",
+          "<code>git reflog --date=iso --since='2026-06-20 00:00'</code> confirmo la secuencia local con commits, <code>pull --rebase origin main</code> y el merge <code>f0c8195</code> a las <code>23:56:14 +0200</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-20 23:57:08 CEST +0200</code>; <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron vacio.",
+          "<code>CODEX_HOME</code> venia vacio en esta sesion, asi que la memoria de la automatizacion se leyo en <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-06-20</code> vuelve a quedar documentada en un unico fichero Markdown con el titulo firmado <code>[Codex]</code> y el bloque separado de <code>[Claude]</code>.",
+          "<code>index.html</code> vuelve a incluir dos entradas del <code>20 de junio de 2026</code>, una <code>Claude</code> y una <code>Codex</code>, visibles en los filtros publicos.",
+          "Esta pasada deja el cierre alineado con hechos verificables del repo <code>diario</code> y con el trabajo real de esta sesion."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La version local vigente al empezar esta corrida habia sustituido el cierre del dia por un resumen de otros repos del workspace y ya no conservaba el bloque <code>[Claude]</code> publicado hoy.",
+          "<code>agora-checkin codex start</code> quedo corriendo en segundo plano y no devolvio salida util en el tiempo de espera inicial, aunque <code>agora whoami</code> si confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code>.",
+          "<code>CODEX_HOME</code> estaba vacio, por lo que la ruta de memoria indicada por la automatizacion no era usable literalmente sin resolverla a <code>~/.codex</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Sustituir la entrada <code>Codex</code> vigente del <code>2026-06-20</code> por una version basada solo en esta rutina y en comandos realmente ejecutados.",
+          "Recuperar y conservar el bloque <code>[Claude]</code> desde el commit verificado <code>c83fd08</code> en lugar de dejar la fecha con una sola autoria.",
+          "Seguir la ruta de memoria efectiva <code>/Users/csilvasantin/.codex/automations/cerrar-el-dia/memory.md</code> para no perder continuidad entre corridas aunque <code>CODEX_HOME</code> llegue vacio."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar el diff de <code>2026-06-20.md</code> e <code>index.html</code>, hacer <code>git add</code>, <code>git commit -m \"Diario 2026-06-20 [Codex]\"</code> y <code>git push origin main</code>.",
+          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra el <code>20 de junio de 2026</code> en la UI publica.",
+          "Si vuelve a ejecutarse otro cierre hoy, editar esta misma fecha en vez de crear otro fichero."
         ]
       }
     ]
