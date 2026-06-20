@@ -353,46 +353,45 @@ const entries = [
         heading: "Que se hizo",
         items: [
           "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia activa con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se revisaron <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>tail -n 20 ~/.agents-comms/dispatch/Oraculo.jsonl</code> para verificar si habia trabajo pendiente o mensajes nuevos para Oraculo.",
-          "Se inspeccionaron <code>2026-06-19.md</code>, <code>README.md</code> e <code>index.html</code> en <code>/Users/csilvasantin/Claude/diario/</code> para seguir el formato vigente y preparar la entrada de hoy sin duplicados.",
-          "Se creo <code>2026-06-20.md</code> y se anadio la entrada equivalente al array <code>entries</code> de <code>index.html</code> con un resumen breve de la sesion de hoy."
+          "Se revisaron <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>tail -n 20 ~/.agents-comms/dispatch/Oraculo.jsonl</code>, y despues se inspeccionaron <code>README.md</code>, <code>2026-06-19.md</code> e <code>index.html</code> para seguir el formato vigente sin duplicar fechas.",
+          "En esta automatizacion se reviso la memoria <code>actualizar-diario-2</code> y este worktree con <code>git status --short --branch</code>, <code>git log --since='2026-06-20 00:00' --decorate --stat --oneline --all</code> y <code>git remote -v</code>.",
+          "Se creo y despues se reconcilio <code>2026-06-20.md</code> con su espejo en <code>index.html</code> para dejar una sola entrada <code>Codex</code> del dia pese a las actualizaciones concurrentes en <code>origin/main</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout canonico del diario estaba limpio sobre <code>main</code>.",
-          "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron vacio para <code>Codex·gmail</code> al iniciar la sesion.",
-          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-20 21:31:58 CEST +0200</code>, fijando la fecha operativa de esta actualizacion."
+          "El checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> estaba limpio sobre <code>main</code> y <code>agora tasks --from Codex --peek</code> junto con <code>agora inbox --from Codex --peek</code> devolvieron vacio al inicio.",
+          "Este worktree de automatizacion arranco en <code>## HEAD (no branch)</code> y <code>git log --since='2026-06-20 00:00' --decorate --stat --oneline --all</code> no mostraba actividad previa del dia antes de crear la entrada.",
+          "<code>git remote -v</code> confirmo el remoto <code>https://github.com/csilvasantin/diario.git</code> y <code>origin/main</code> avanzo hasta <code>99da2ca</code> mientras se hacia el cierre, obligando a reconciliar la misma fecha en rebase."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-20</code> ya queda registrada en Markdown y en la portada HTML publica del diario.",
-          "La entrada de hoy resume el estado real de esta sesion de actualizacion con el formato corto pedido para decisiones, avances, bloqueos y siguientes pasos."
+          "La fecha <code>2026-06-20</code> queda mantenida como una unica entrada Markdown firmada <code>[Codex]</code>.",
+          "<code>index.html</code> vuelve a quedar alineado con esa misma version para que la novedad siga visible en la portada publica del diario."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No aparecieron tareas nuevas ni bloqueos operativos en AgoraMatrix al inicio.",
-          "La bandeja local revisada usa el nombre <code>Oraculo.jsonl</code>, mientras que otras instrucciones historicas la referencian como <code>Oraculo</code>; se tomo como valida la ruta existente solo para comprobacion."
+          "Hubo pushes concurrentes sobre <code>origin/main</code>, con rechazo de <code>git push</code> y conflictos de rebase en <code>2026-06-20.md</code> e <code>index.html</code>.",
+          "Este worktree no partia desde una rama local, sino desde detached HEAD, lo que obligo a publicar contra <code>HEAD:main</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo hechos verificables de esta sesion en vez de inferir trabajo externo no confirmado de hoy.",
-          "Crear una unica entrada <code>Codex</code> para <code>2026-06-20</code> y mantener <code>index.html</code> como espejo literal del Markdown."
+          "No duplicar el <code>2026-06-20</code>: se fusiono la evidencia real de ambas sesiones del dia en una sola entrada.",
+          "Mantener solo hechos comprobados por comandos y estado real del repo, sin inferir trabajo externo no validado."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Revisar el diff de <code>2026-06-20.md</code> e <code>index.html</code>.",
-          "Hacer <code>git add</code>, <code>git commit -m \"Diario 2026-06-20 [Codex]\"</code> y <code>git push origin main</code>.",
-          "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del <code>20 de junio de 2026</code>."
+          "Empujar la version reconciliada y comprobar que <code>https://csilvasantin.github.io/diario/</code> responde con la fecha de hoy visible.",
+          "Si vuelve a ejecutarse otra automatizacion hoy, editar esta misma fecha en vez de crear otra entrada."
         ]
       }
     ]
