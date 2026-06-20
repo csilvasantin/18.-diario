@@ -352,46 +352,54 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia activa con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se revisaron <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>tail -n 20 ~/.agents-comms/dispatch/Oraculo.jsonl</code>, y despues se inspeccionaron <code>README.md</code>, <code>2026-06-19.md</code> e <code>index.html</code> para seguir el formato vigente sin duplicar fechas.",
-          "En esta automatizacion se reviso la memoria <code>actualizar-diario-2</code> y este worktree con <code>git status --short --branch</code>, <code>git log --since='2026-06-20 00:00' --decorate --stat --oneline --all</code> y <code>git remote -v</code>.",
-          "Se creo y despues se reconcilio <code>2026-06-20.md</code> con su espejo en <code>index.html</code> para dejar una sola entrada <code>Codex</code> del dia pese a las actualizaciones concurrentes en <code>origin/main</code>."
+          "Se reviso el trabajo real de hoy en el workspace Admirito con foco en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/AdmiraNext-Team-latest</code> y los repos con cambios locales activos.",
+          "En <code>AdmiraNext-Team</code> quedaron abiertos cambios grandes de frontend y datos: salto a <code>0.1.3</code>, portada tipo arcade/fighter select en <code>public/index.html</code>, nueva logica de agrupacion por miembro y ficha destacada en <code>public/app.js</code>, renovacion fuerte de <code>public/styles.css</code>, tres capturas nuevas y datos LAN del Mac Mini en <code>data/machines.json</code>.",
+          "En <code>AdmiraNext-Team-latest</code> quedaron ajustes de backend sin commit: <code>PORT</code> configurable por entorno, soporte de estado <code>idle</code>, validacion centralizada de estados y quoting comun para comandos remotos <code>osascript</code> en <code>src/ssh-exec.js</code>.",
+          "Como contexto secundario del workspace, <code>04.- AdmiraGemini</code> incorpora una UI local nueva con <code>admira-gemini-ui</code>, <code>onboarding</code> amplia el contexto fisico del Mac Mini y la tabla viva de repos, <code>pulpo</code> actualiza estado/tareas de la landing, y <code>csilvasantin.github.io</code> suma contenido de <code>yarig-ai</code> y <code>telegram-consejeros</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "El checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> estaba limpio sobre <code>main</code> y <code>agora tasks --from Codex --peek</code> junto con <code>agora inbox --from Codex --peek</code> devolvieron vacio al inicio.",
-          "Este worktree de automatizacion arranco en <code>## HEAD (no branch)</code> y <code>git log --since='2026-06-20 00:00' --decorate --stat --oneline --all</code> no mostraba actividad previa del dia antes de crear la entrada.",
-          "<code>git remote -v</code> confirmo el remoto <code>https://github.com/csilvasantin/diario.git</code> y <code>origin/main</code> avanzo hasta <code>99da2ca</code> mientras se hacia el cierre, obligando a reconciliar la misma fecha en rebase."
+          "<code>git diff --stat</code> en <code>AdmiraNext-Team</code> mostro 8 ficheros tocados con <code>1112 insertions(+), 73 deletions(-)</code> y <code>git status --short --branch</code> lo deja en <code>main...origin/main [behind 303]</code>.",
+          "En <code>AdmiraNext-Team</code> pasaron <code>node --check public/app.js</code>, el parseo de <code>data/machines.json</code> y <code>git diff --check</code>.",
+          "En <code>AdmiraNext-Team-latest</code> pasaron <code>node --check src/server.js</code>, <code>node --check src/ssh-exec.js</code> y <code>git diff --check</code>.",
+          "En <code>04.- AdmiraGemini</code>, <code>PYTHONPATH=src python3 -m unittest tests.test_web</code> paso con <code>Ran 5 tests</code> y <code>OK</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-20 23:47:11 CEST +0200</code>, fijando la fecha operativa de esta actualizacion."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-06-20</code> queda mantenida como una unica entrada Markdown firmada <code>[Codex]</code>.",
-          "<code>index.html</code> vuelve a quedar alineado con esa misma version para que la novedad siga visible en la portada publica del diario."
+          "<code>AdmiraNext-Team</code> ya tiene una propuesta clara de nueva home: de dashboard tecnico simple a panel visual por miembros con tono arcade, ficha principal y resumen por fighters.",
+          "<code>AdmiraNext-Team-latest</code> deja mejor preparada la capa remota para estados intermedios y comandos AppleScript menos fragiles.",
+          "<code>AdmiraGemini</code> deja de depender solo del CLI y queda listo para abrirse tambien como UI local ligera."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "Hubo pushes concurrentes sobre <code>origin/main</code>, con rechazo de <code>git push</code> y conflictos de rebase en <code>2026-06-20.md</code> e <code>index.html</code>.",
-          "Este worktree no partia desde una rama local, sino desde detached HEAD, lo que obligo a publicar contra <code>HEAD:main</code>."
+          "No aparecieron commits de hoy en <code>AdmiraNext-Team</code> ni en <code>AdmiraNext-Team-latest</code>; la evidencia principal de la jornada sigue en working tree local.",
+          "<code>AdmiraNext-Team</code> mezcla en la misma tanda JS, HTML, CSS, datos operativos y capturas binarias, lo que complica revisar y publicar por partes.",
+          "Siguen dos lineas activas (<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>) con cambios relacionados pero separados, lo que mantiene riesgo de divergencia.",
+          "En esta pasada no quedo evidencia de QA visual final en navegador para la home nueva de <code>AdmiraNext-Team</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "No duplicar el <code>2026-06-20</code>: se fusiono la evidencia real de ambas sesiones del dia en una sola entrada.",
-          "Mantener solo hechos comprobados por comandos y estado real del repo, sin inferir trabajo externo no validado."
+          "Tratar <code>AdmiraNext-Team</code> como el bloque principal del dia y usar el resto del workspace solo como contexto secundario verificable.",
+          "Registrar la actividad de hoy como trabajo en curso, no como cambio ya publicado, porque lo fuerte sigue sin commit en los repos clave.",
+          "Actualizar la entrada ya existente del <code>20 de junio</code> en vez de duplicarla."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Empujar la version reconciliada y comprobar que <code>https://csilvasantin.github.io/diario/</code> responde con la fecha de hoy visible.",
-          "Si vuelve a ejecutarse otra automatizacion hoy, editar esta misma fecha en vez de crear otra entrada."
+          "Partir <code>AdmiraNext-Team</code> en commits pequenos: UI arcade, <code>data/machines.json</code> y capturas por separado.",
+          "Levantar y revisar en navegador la portada nueva de <code>AdmiraNext-Team</code> antes de mezclarla con mas cambios.",
+          "Decidir si la linea principal debe consolidarse en <code>AdmiraNext-Team</code> o en <code>AdmiraNext-Team-latest</code> antes de fusionar frontend y backend.",
+          "Publicar esta actualizacion del diario y verificar <code>https://csilvasantin.github.io/diario/</code>."
         ]
       }
     ]
