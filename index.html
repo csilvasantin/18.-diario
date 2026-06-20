@@ -347,6 +347,62 @@ const entries = [
     date: "2026-06-20",
     title: "20 de junio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion de Claude Code on the web ejecutada como rutina programada en el contenedor remoto sobre clon fresco de <code>csilvasantin/18.-diario</code> en <code>/home/user/18.-diario/</code>, rama de trabajo <code>main-eydqg3</code>.",
+          "Se leyo la rutina canonica <code>CERRAR-EL-DIA.md</code>, el <code>CLAUDE.md</code> del proyecto y la entrada del dia ya firmada por <code>[Codex]</code> (<code>99da2ca</code>, <code>d9295fc</code>) para respetar la regla 1-2-3 de un unico fichero por fecha con bloques separados por <code>---</code>.",
+          "Se anadio este bloque <code>[Claude]</code> al final de <code>2026-06-20.md</code> y la entrada equivalente al array <code>const entries</code> de <code>index.html</code>, sin reescribir el bloque previo de Codex."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-20 21:01:33 UTC +0000</code>, fijando la fecha efectiva de esta pasada.",
+          "<code>git status --short --branch</code> devolvio <code>## main-eydqg3</code> con working tree limpio antes de editar y <code>git rev-parse HEAD</code> el SHA <code>d9295fc5746a54404fa2f9e0ea65dc125a7e8324</code>.",
+          "<code>git log --since='2026-06-20 00:00' --until='2026-06-20 23:59:59' --date=iso --stat --oneline --all</code> confirmo los tres commits reales del dia ya publicados: <code>d9295fc</code> y <code>99da2ca</code> de Codex mas <code>4d1120b</code> del bot <code>update-repos.yml</code>.",
+          "<code>repos.html</code> ya llevaba la cabecera <code>generado 2026-06-20</code> y la fila del diario ya estaba sincronizada por el workflow <code>update-repos.yml</code>, asi que no requirio edicion manual."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada del <code>2026-06-20</code> queda firmada por ambas IAs (<code>[Codex]</code> + <code>[Claude]</code>) en un unico fichero, conservando la trazabilidad del trabajo previo de Codex sin sobreescribirlo.",
+          "<code>index.html</code> queda con dos entradas del <code>20 de junio de 2026</code>, una por autor, visibles en los filtros <code>Todos</code>, <code>Codex</code> y <code>Claude</code>.",
+          "Se cumple la instruccion explicita del usuario: documentar el dia aunque no hubiera trabajo sustantivo adicional de Claude Code en este repo mas alla de la propia rutina de cierre."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rama de trabajo asignada por la plataforma es <code>main-eydqg3</code>, no <code>main</code>, por lo que el push de esta sesion ira a esa rama y la publicacion en GitHub Pages dependera del merge posterior a <code>main</code>.",
+          "El repositorio remoto del entorno se sirve a traves de un proxy local (<code>http://local_proxy@127.0.0.1:39647/...</code>), un detalle del runtime que no es directamente accionable desde la sesion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "No tocar el bloque <code>[Codex]</code> ya commiteado: solo anadir el segundo bloque tras <code>---</code>, respetando la convivencia de IAs en el mismo fichero.",
+          "No regenerar <code>repos.html</code> a mano porque su fuente de verdad es el workflow <code>update-repos.yml</code> y la cabecera ya indica que se genero hoy.",
+          "Mantener la entrada de Claude breve y factual, alineada con la nota del usuario \"si un dia en concreto no se ha hecho nada se documenta y ya esta\"."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-06-20.md index.html</code>, commit firmado como <code>[Claude]</code> y push a <code>origin main-eydqg3</code> con <code>-u</code>.",
+          "Abrir un Pull Request en draft desde <code>main-eydqg3</code> hacia <code>main</code> para que el cierre del dia llegue a la publicacion publica via GitHub Pages.",
+          "Cuando se mergee a <code>main</code>, verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>la portada del diario</a> muestre el <code>20 de junio de 2026</code> con ambos autores filtrables."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-06-20",
+    title: "20 de junio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       {
