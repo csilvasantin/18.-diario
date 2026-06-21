@@ -344,6 +344,62 @@
 <script>
 const entries = [
   {
+    date: "2026-06-21",
+    title: "21 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion de Claude Code on the web ejecutada como rutina programada en el contenedor remoto sobre clon fresco de <code>csilvasantin/18.-diario</code> en <code>/home/user/18.-diario/</code>, rama de trabajo <code>main-1xz5v7</code>.",
+          "Se leyo la rutina canonica <code>CERRAR-EL-DIA.md</code>, el <code>CLAUDE.md</code> del proyecto y el handoff del dia <code>handoff/2026-06-21-HX-PRV9.md</code> para entender el trabajo real ya commiteado por el usuario antes de esta pasada.",
+          "Se creo el fichero <code>2026-06-21.md</code> con el formato 1-2-3 de seis secciones numeradas y se anadio la entrada equivalente al array <code>const entries</code> de <code>index.html</code> para que la fecha aparezca en la UI publica con el filtro <code>Claude</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-21 21:02:04 UTC +0000</code>, fijando la fecha efectiva de esta pasada.",
+          "<code>git status --short --branch</code> devolvio <code>## main-1xz5v7</code> con working tree limpio antes de editar y <code>git rev-parse HEAD</code> el SHA <code>a144345b875d57f3db2643a23c8419db0ca18c22</code>.",
+          "<code>git log --since='2026-06-21 00:00' --until='2026-06-21 23:59:59' --date=iso --stat --oneline --all</code> confirmo los tres commits reales del dia previos a esta sesion: <code>d2b8c70</code> y <code>594b23b</code> de <code>csilvasantin</code> (handoff <code>HX-PRV9</code> Morfeo&rarr;Neo sobre audiencia por camara en XPL) mas <code>a144345</code> del bot <code>github-actions[bot]</code> regenerando <code>repos.html</code>.",
+          "<code>repos.html</code> ya llevaba la cabecera <code>generado 2026-06-21</code> por el workflow <code>update-repos.yml</code>, asi que no requirio edicion manual en este cierre."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-06-21</code> queda documentada con el handoff <code>HX-PRV9</code> como hito real del dia: audiencia por camara (face-api de admira.tv: <code>viewers</code>, <code>audGender</code>, <code>audAge</code>) modelada como HECHO del motor XPL del gemelo en <code>xpaceos/admira-xp/</code>, con 3 reglas semilla verificadas en playground (mujer adulta&rarr;newColl, joven&rarr;happyhour, nadie&rarr;clearScreen) en el commit local <code>ff56c0f</code> aun sin pushear desde Morfeo.",
+          "<code>index.html</code> queda con la entrada del <code>21 de junio de 2026</code> firmada por <code>Claude</code> y filtrable, y la cabecera ya enlazaba al handoff <code>HX-PRV9</code> desde la nav publica.",
+          "Se cumple la nota del usuario en el chat: \"subir a GitHub el trabajo que hayamos realizado con Claude Code y actualizaremos el diario; si un dia en concreto no se ha hecho nada se documenta y ya esta\"."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rama de trabajo asignada por la plataforma es <code>main-1xz5v7</code>, no <code>main</code>, por lo que el push de esta sesion ira a esa rama y la publicacion en GitHub Pages dependera del merge posterior a <code>main</code>.",
+          "El handoff documenta que <code>xpl-store.csilvasantin.workers.dev</code> sigue VACIO (0 reglas) y que el wiring real cara-de-camara &rarr; <code>audGender</code>/<code>audAge</code>/<code>viewers</code> por <code>screenId</code> no esta cerrado; es pendiente para Neo, no para esta sesion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "No tocar <code>repos.html</code> a mano: la fuente de verdad es el workflow <code>update-repos.yml</code> y la cabecera ya marca <code>generado 2026-06-21</code>.",
+          "No mover ni reescribir el handoff <code>HX-PRV9</code>: queda como artefacto del dia y enlazado desde la nav del diario.",
+          "Mantener la entrada de Claude breve y factual, alineada con la rutina <code>CERRAR-EL-DIA.md</code> y con los hechos verificables del <code>git log</code> del dia."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-06-21.md index.html</code>, commit firmado como <code>[Claude]</code> y push a <code>origin main-1xz5v7</code> con <code>-u</code>.",
+          "Abrir un Pull Request en draft desde <code>main-1xz5v7</code> hacia <code>main</code> para que el cierre del dia llegue a la publicacion publica via GitHub Pages.",
+          "Cuando se mergee a <code>main</code>, verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>la portada del diario</a> muestre el <code>21 de junio de 2026</code> con el filtro <code>Claude</code> y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>repos.html</a> siga con la cabecera del dia."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-06-20",
     title: "20 de junio de 2026",
     member: "Carlos Silva",
