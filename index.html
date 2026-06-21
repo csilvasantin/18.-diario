@@ -333,7 +333,7 @@
       <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px">
         <a href="https://www.admira.live/council-scumm.html" style="color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;font-weight:600;transition:opacity 0.15s" title="Volver al Consejo (admira.live)" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">← Consejo</a>
         <a href="skills/diario-ia/index.html" style="color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:opacity 0.15s" title="Descargar la skill Diario IA para AdmiraNeXT" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">skill Diario IA →</a>
-        <a href="handoff/2026-06-21-HX-PRV9.md" style="color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:opacity 0.15s" title="Último handoff: HX-PRV9" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">📦 handoff HX-PRV9 →</a>
+        <a href="handoff/2026-06-21-HX-PWV2.md" style="color:var(--matrix-bright);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:opacity 0.15s" title="Último handoff: HX-PWV2" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">📦 handoff HX-PWV2 →</a>
         <a href="repos.html" style="color:var(--matrix-muted);text-decoration:none;font-size:0.8rem;white-space:nowrap;transition:color 0.15s" onmouseover="this.style.color='var(--matrix-bright)'" onmouseout="this.style.color='var(--matrix-muted)'">repos →</a>
       </div>
     </div>
@@ -343,6 +343,43 @@
 
 <script>
 const entries = [
+  {
+    date: "2026-06-21",
+    title: "21 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Espejo en vivo del MUPI en <code>clearchannel.tv</code> via <code>/signage/now</code>, con sincronia de posicion fotograma a fotograma (campo <code>startedAt</code> + reloj compartido, sin WebSocket).",
+        "Audiencia por camara publicada en <code>/signage/now</code> (<code>aud:{cam,faces,gender,age}</code>) y mostrada en la ficha bajo el CPM; HUD oculto en modo limpio; cartela de musica rediseñada.",
+        "Auto-alta de equipos: <code>admira.tv/alta</code> + endpoints <code>register</code>/<code>deregister</code>/<code>?selfreg=1</code> en <code>omnipublicity-api</code> + merge ligero en clearchannel.",
+        "Marcador de mapa de 2 anillos (interior = circuito, Admira verde; exterior = estado de emision verde/rojo). Robot XpaceOS integrado y dado de alta (Robot Sitges, <code>type:robot</code>, pecho con camara).",
+        "HTTPS activado en clearchannel.tv (cert Let's Encrypt + enforce). Tejido de 3 MCPs del ecosistema (XpaceOS, Pixeria, Admira.tv)."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>date</code> = <code>2026-06-21 23:15 CEST +0200</code>. Commits del dia: admira-tv 17, clearchannel-tv 12, omnipublicity-api 7, xpaceos 33, + 3 repos MCP nuevos.",
+        "MCPs en vivo: <code>tools/list</code> + llamadas reales (XpaceOS <code>fleet_status</code> robot online, Pixeria <code>stock_stats</code> 193 assets, Admira.tv <code>on_air</code> robot online).",
+        "HTTPS: <code>https://www.clearchannel.tv</code> 200 cert OK, HTTP 301 a HTTPS, <code>cert_state: approved</code>."
+      ]},
+      { heading: "Avances", items: [
+        "Equipos en la red: <code>admira-sitges</code>, <code>admira-sitges-2</code>, <code>robot-sitges</code>.",
+        "3 MCPs desplegados: <code>mcp.admira.store</code>, <code>mcp-pixeria.admira.store</code>, <code>mcp-tv.admira.store</code> (repos xpaceos-mcp / pixeria-mcp / admira-tv-mcp)."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "El catalogo <code>/locations</code> (8,48 MB) caducaba al timeout de 4,5s -> equipos auto-registrados no salian; resuelto con <code>?selfreg=1</code> + merge aditivo.",
+        "CORS del worker solo permitia HTTPS y clearchannel iba por HTTP -> bloqueaba el merge; añadidos origenes HTTP.",
+        "AgoraMatrix no posteable: el Mac Mini (backend Funnel <code>macmini.tail48b61c.ts.net</code>) esta offline (~3h). Pendiente al volver."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Espejo por reloj compartido (<code>startedAt</code>), no WebSocket: mismo resultado, cero infra.",
+        "<code>xpaceos.com</code> es Pages estatico -> el servidor MCP vive en Worker (<code>mcp.admira.store</code>) y la pagina <code>/mcp</code> solo documenta. Un MCP por proyecto, patron <code>council-mcp/worker</code>."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Postear el resumen en AgoraMatrix cuando el Mini vuelva online. Verificar cert de <code>mcp-tv.admira.store</code>.",
+        "Mover <code>admira-sitges</code> al worker (hoy solo en el seed). Imagen propia del robot. Mantener los 4 MCPs al dia."
+      ]}
+    ]
+  },
   {
     date: "2026-06-20",
     title: "20 de junio de 2026",
