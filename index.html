@@ -350,33 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en los checkouts de Admirito, con foco en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code>, que es donde aparecieron cambios locales reales.",
-        "En <code>AdmiraNext-Team</code> se anadio control remoto de energia para maquinas del consejo: nuevo endpoint <code>POST /api/machines/:id/power</code>, funciones <code>sleepMachine</code> y <code>wakeMachine</code>, y tabla de MACs para Wake-on-LAN en <code>src/ssh-exec.js</code>.",
-        "Tambien se actualizaron metadatos de <code>data/machines.json</code> para reflejar estados mas recientes, notas de \"Sleep enviado desde dashboard\" y la MAC de <code>admira-macbookpronegro14</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se abrio la rutina local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+        "Se consulto la fuente canonica <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy redirige al repositorio publico <code>csilvasantin/18.-diario</code>, y se confirmo que coincide con la copia operativa local.",
+        "Se reescriben <code>2026-06-22.md</code> e <code>index.html</code> para que la fecha documente este cierre real en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> y <code>git diff --stat</code> en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> confirmaron tres ficheros tocados hoy: <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>.",
-        "El diff confirma que el flujo de sleep usa <code>pmset displaysleepnow</code> para no perder conectividad SSH y que el wake intenta WoL seguido de <code>caffeinate -u -t 5</code>.",
-        "No aparecieron commits nuevos de hoy en las copias limpias de <code>AdmiraNext-Team</code>; el trabajo visible del dia quedo en cambios locales del workspace, no en historial publicado."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales al iniciar esta pasada.",
+        "<code>git log --since='2026-06-22 00:00' --until='2026-06-22 23:59:59' --date=iso --stat --oneline --all</code> mostro cuatro commits <code>Diario 2026-06-22 [Codex]</code> (<code>9bd9be8</code>, <code>8f1bc7b</code>, <code>bc0d5c8</code>, <code>8af3cf1</code>) y <code>c38ff43 chore: actualizar repos.html 2026-06-22 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-06-22 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> confirmaron actividad local hoy hasta <code>2026-06-22 23:55:50 CEST +0200</code>."
       ]},
       { heading: "Avances", items: [
-        "Queda planteado un panel de control capaz de dormir y despertar equipos del tailnet sin salir del dashboard de AdmiraNext.",
-        "La configuracion de maquinas incorpora mas contexto operativo para varios equipos y deja preparada la MAC necesaria para despertar <code>admira-macbookpronegro14</code>."
+        "La fecha <code>2026-06-22</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin crear otro archivo para el mismo dia.",
+        "<code>index.html</code> vuelve a reflejar la entrada de hoy bajo el autor <code>Codex</code> en la UI publica del diario.",
+        "La rutina queda alineada con el checkout canonico y con el remoto real <code>origin</code> apuntando a <code>https://github.com/csilvasantin/18.-diario.git</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>src/server.js</code> contiene dos handlers distintos para <code>POST /api/machines/:id/power</code>; el primero hace <code>return</code>, asi que el segundo bloque queda inalcanzable y su proteccion para <code>admira-macmini</code> no llega a aplicarse.",
-        "Hay una inconsistencia funcional: el endpoint marca la maquina como <code>offline</code> con nota de sleep, pero la implementacion real usa <code>displaysleepnow</code>, que solo apaga pantalla y puede dejar el host accesible.",
-        "Varias maquinas siguen sin MAC de WoL (<code>admira-macmini</code>, <code>admira-macbookairluna</code>), asi que el wake remoto no queda completo para toda la flota."
+        "La version local vigente al empezar esta corrida describia trabajo en otro repositorio y no cumplia la regla de registrar solo hechos verificados de esta sesion en <code>diario</code>.",
+        "El alias historico <code>https://github.com/csilvasantin/diario/...</code> hoy redirige a <code>csilvasantin/18.-diario</code>, asi que la comprobacion canonica requiere seguir esa redireccion.",
+        "El checkout ya tenia varios commits <code>Diario 2026-06-22 [Codex]</code> del mismo dia, por lo que no era correcto duplicar la fecha ni inventar otra actividad."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "La estrategia de sleep prioriza mantener el canal remoto vivo; por eso se eligio <code>displaysleepnow</code> en vez de un sleep completo.",
-        "El mapeo de MACs se resolvio en codigo para poder disparar WoL desde el propio backend sin depender de configuracion externa adicional.",
-        "Se actualiza la entrada existente del <code>2026-06-22</code> en lugar de duplicarla, manteniendo una sola version breve y util del dia."
+        "Se sustituye el contenido previo del <code>2026-06-22</code> por una version basada solo en comandos ejecutados, historial <code>git</code> verificado y trabajo real de esta sesion.",
+        "Se mantiene una sola entrada <code>Codex</code> para la fecha en <code>2026-06-22.md</code> y en <code>index.html</code>, en lugar de anadir otro bloque del mismo autor.",
+        "La verificacion publica se hara contra <code>https://csilvasantin.github.io/diario/</code>, tal como exige la rutina."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Unificar el endpoint <code>/power</code> en un solo handler y mover ahi la proteccion del Mac Mini para evitar sleeps accidentales del hub central.",
-        "Decidir si el estado correcto tras <code>displaysleepnow</code> debe seguir siendo <code>offline</code> o una variante mas fiel al comportamiento real.",
-        "Probar sleep y wake sobre un equipo con Tailscale activo y completar las MACs que faltan antes de dar la funcion por cerrada."
+        "Revisar el diff final de <code>2026-06-22.md</code> e <code>index.html</code> antes de publicar.",
+        "Crear el commit <code>Diario 2026-06-22 [Codex]</code> y hacer <code>git push origin main</code>.",
+        "Comprobar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada de hoy tras la publicacion."
       ]}
     ]
   },
