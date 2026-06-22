@@ -344,6 +344,47 @@
 <script>
 const entries = [
   {
+    date: "2026-06-22",
+    title: "22 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de la automatizacion en <code>~/.codex/automations/actualizar-diario-2/memory.md</code> y se confirmo que no habia entrada previa para hoy.",
+        "Se descarto el worktree actual en <code>detached HEAD</code> y se trabajo sobre el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, tal como exige la rutina local <code>CERRAR-EL-DIA.md</code>.",
+        "Se hizo <code>git fetch origin main</code> y <code>git merge --ff-only origin/main</code>, incorporando los commits <code>d2b8c70</code>, <code>594b23b</code>, <code>a144345</code>, <code>93c4731</code> y <code>c38ff43</code> antes de editar.",
+        "Se leyeron <code>CERRAR-EL-DIA.md</code>, <code>README.md</code>, <code>skills/diario-ia-claude-code/SKILL.md</code>, <code>2026-06-21.md</code> e <code>index.html</code> para seguir el formato vigente de una unica entrada Markdown por fecha y reflejo publico en <code>const entries</code>.",
+        "Se creo <code>2026-06-22.md</code> y se actualizo <code>index.html</code> para añadir el cierre de hoy con autor <code>Codex</code> y miembro <code>Carlos Silva</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> en el checkout canonico antes de editar.",
+        "<code>git log --since='2026-06-22 00:00' --until='2026-06-22 23:59:59' --date=iso --stat --oneline --all</code> solo mostro actividad previa real del dia en este repo: <code>c38ff43 chore: actualizar repos.html 2026-06-22 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-06-22 00:00'</code> registro <code>HEAD@{2026-06-22 21:32:00 +0200}: merge origin/main: Fast-forward</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-22 21:31:37 CEST +0200</code>, y <code>git remote -v</code> confirmo <code>https://github.com/csilvasantin/18.-diario.git</code> como remoto configurado."
+      ]},
+      { heading: "Avances", items: [
+        "La fecha <code>2026-06-22</code> queda registrada en un unico fichero Markdown firmado <code>[Codex]</code>, sin duplicar fechas ni mezclar actividad no verificada.",
+        "<code>index.html</code> vuelve a quedar preparado para mostrar <code>22 de junio de 2026</code> como entrada mas reciente bajo <code>Todos</code> y <code>Codex</code>.",
+        "El cierre de hoy queda alineado con la rutina local y listo para su publicacion en GitHub Pages."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "El directorio de trabajo inicial de esta sesion estaba en un worktree de <code>/Users/csilvasantin/.codex/worktrees/6ff2/diario</code> con <code>HEAD (no branch)</code>, asi que no era la base adecuada para publicar.",
+        "La memoria indicada por la automatizacion no existia todavia y hubo que inicializarla al final de esta corrida.",
+        "El checkout canonico estaba <code>behind 5</code> respecto a <code>origin/main</code>, por lo que hubo que sincronizarlo antes de editar para evitar publicar sobre una punta obsoleta."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Usar solo el checkout limpio <code>/Users/csilvasantin/Claude/diario/</code> y no tocar el worktree temporal.",
+        "Reflejar unicamente hechos comprobables de este repo y de esta sesion, aunque la actividad del dia sea corta.",
+        "No editar <code>repos.html</code> manualmente porque la actividad real de hoy ya venia reflejada por el commit automatico <code>c38ff43</code> del workflow."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Validar el array <code>const entries</code> de <code>index.html</code>, revisar el diff y hacer <code>git add 2026-06-22.md index.html</code>.",
+        "Crear el commit <code>Diario 2026-06-22 [Codex]</code>, hacer <code>git push origin main</code> y comprobar que la URL publica sigue respondiendo.",
+        "Si vuelve a correr otra actualizacion del diario hoy, editar esta misma fecha en vez de crear otro fichero."
+      ]}
+    ]
+  },
+  {
     date: "2026-06-21",
     title: "21 de junio de 2026",
     member: "Carlos Silva",
