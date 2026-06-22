@@ -350,33 +350,33 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "En <code>github-csilvasantin/AdmiraNext-Team</code> se dejo preparado un rediseño local fuerte de la home: modo arcade <code>Player Select</code>, ficha destacada por miembro, nuevo conteo por fighters, soporte visual para estado <code>idle</code> y subida de version a <code>0.1.3</code>.",
-        "En ese mismo repo tambien se anadio conectividad local del Mac Mini en <code>data/machines.json</code> (<code>ip_local</code> y <code>connect_local</code>) y se refrescaron capturas en <code>data/screenshots/</code>.",
-        "En el resto del workspace si hubo tres commits publicados hoy: <code>xpaceos</code> (<code>e1684dc</code>, enlaces cruzados a CMS y Canal), <code>pixer-worker</code> (<code>dee1282</code>, numeracion persistente/autosanante de stock y <code>POST /stock/reindex</code>) y <code>admira-tv</code> (<code>61f35b3</code>, ocultar play nativo y reforzar autoarranque en tablet Samsung)."
+        "Se reviso la actividad de hoy en los checkouts de Admirito, con foco en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code>, que es donde aparecieron cambios locales reales.",
+        "En <code>AdmiraNext-Team</code> se anadio control remoto de energia para maquinas del consejo: nuevo endpoint <code>POST /api/machines/:id/power</code>, funciones <code>sleepMachine</code> y <code>wakeMachine</code>, y tabla de MACs para Wake-on-LAN en <code>src/ssh-exec.js</code>.",
+        "Tambien se actualizaron metadatos de <code>data/machines.json</code> para reflejar estados mas recientes, notas de \"Sleep enviado desde dashboard\" y la MAC de <code>admira-macbookpronegro14</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>AdmiraNext-Team</code> no tiene commit de hoy, pero el diff local esta acotado a 8 ficheros y describe un cambio coherente: <code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>data/machines.json</code>, <code>package.json</code> y tres screenshots.",
-        "<code>node --check public/app.js</code>, parseo de <code>data/machines.json</code> y <code>git diff --check</code> pasaron sin errores visibles en <code>AdmiraNext-Team</code>, asi que el cambio queda al menos sintacticamente consistente.",
-        "Los otros cambios del dia si quedaron trazados en git con fecha y mensaje claros mediante <code>git show</code> sobre <code>e1684dc</code>, <code>dee1282</code> y <code>61f35b3</code>."
+        "<code>git status --short --branch</code> y <code>git diff --stat</code> en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> confirmaron tres ficheros tocados hoy: <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>.",
+        "El diff confirma que el flujo de sleep usa <code>pmset displaysleepnow</code> para no perder conectividad SSH y que el wake intenta WoL seguido de <code>caffeinate -u -t 5</code>.",
+        "No aparecieron commits nuevos de hoy en las copias limpias de <code>AdmiraNext-Team</code>; el trabajo visible del dia quedo en cambios locales del workspace, no en historial publicado."
       ]},
       { heading: "Avances", items: [
-        "<code>AdmiraNext-Team</code> queda conceptualmente reposicionado de panel operativo plano a escaparate visual tipo torneo, con mas peso en identidad de equipo y lectura rapida del estado.",
-        "El trabajo publicado de hoy en <code>xpaceos</code>, <code>pixer-worker</code> y <code>admira-tv</code> mejora navegacion entre herramientas, robustez del stock y fiabilidad de reproduccion en signage."
+        "Queda planteado un panel de control capaz de dormir y despertar equipos del tailnet sin salir del dashboard de AdmiraNext.",
+        "La configuracion de maquinas incorpora mas contexto operativo para varios equipos y deja preparada la MAC necesaria para despertar <code>admira-macbookpronegro14</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> esta en <code>main</code> pero aparece <code>behind 303</code>, con bastante trabajo local sin commit; antes de publicar hay riesgo de mezclar una deuda de sincronizacion grande con el rediseño de hoy.",
-        "No hubo commit hoy en <code>AdmiraNext-Team</code>, asi que la validacion es parcial: sintaxis y diff si, pero no despliegue verificado ni prueba visual final en navegador/tablet dentro de esta pasada.",
-        "El workspace muestra bastante actividad efimera fuera de repos principales, asi que conviene distinguir bien entre cambios reales de producto y artefactos locales."
+        "<code>src/server.js</code> contiene dos handlers distintos para <code>POST /api/machines/:id/power</code>; el primero hace <code>return</code>, asi que el segundo bloque queda inalcanzable y su proteccion para <code>admira-macmini</code> no llega a aplicarse.",
+        "Hay una inconsistencia funcional: el endpoint marca la maquina como <code>offline</code> con nota de sleep, pero la implementacion real usa <code>displaysleepnow</code>, que solo apaga pantalla y puede dejar el host accesible.",
+        "Varias maquinas siguen sin MAC de WoL (<code>admira-macmini</code>, <code>admira-macbookairluna</code>), asi que el wake remoto no queda completo para toda la flota."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar <code>AdmiraNext-Team</code> como foco principal del dia aunque el cambio siga local, porque es el bloque de trabajo mas grande del workspace reciente.",
-        "Reflejar por separado lo que ya esta publicado hoy (<code>xpaceos</code>, <code>pixer-worker</code>, <code>admira-tv</code>) y lo que todavia sigue en preparacion (<code>AdmiraNext-Team</code>).",
-        "Actualizar la entrada existente del <code>2026-06-22</code> en vez de duplicarla, manteniendo una sola version publica firmada <code>[Codex]</code>."
+        "La estrategia de sleep prioriza mantener el canal remoto vivo; por eso se eligio <code>displaysleepnow</code> en vez de un sleep completo.",
+        "El mapeo de MACs se resolvio en codigo para poder disparar WoL desde el propio backend sin depender de configuracion externa adicional.",
+        "Se actualiza la entrada existente del <code>2026-06-22</code> en lugar de duplicarla, manteniendo una sola version breve y util del dia."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Probar visualmente <code>AdmiraNext-Team</code> en navegador y, si aplica, en el dispositivo real antes de consolidar el rediseño arcade.",
-        "Decidir si se sincroniza primero <code>main</code> en <code>AdmiraNext-Team</code> o si se encapsula el cambio actual en una rama/commit limpio para no mezclarlo con los 303 commits pendientes.",
-        "Publicar despues el rediseño con verificacion final de la web y dejar trazabilidad equivalente a la que ya tienen los commits de hoy en los otros repos."
+        "Unificar el endpoint <code>/power</code> en un solo handler y mover ahi la proteccion del Mac Mini para evitar sleeps accidentales del hub central.",
+        "Decidir si el estado correcto tras <code>displaysleepnow</code> debe seguir siendo <code>offline</code> o una variante mas fiel al comportamiento real.",
+        "Probar sleep y wake sobre un equipo con Tailscale activo y completar las MACs que faltan antes de dar la funcion por cerrada."
       ]}
     ]
   },
