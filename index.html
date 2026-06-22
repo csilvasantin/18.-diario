@@ -350,37 +350,33 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de la automatizacion en <code>~/.codex/automations/actualizar-diario-2/memory.md</code> y se confirmo que no habia entrada previa para hoy.",
-        "Se descarto el worktree actual en <code>detached HEAD</code> y se trabajo sobre el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, tal como exige la rutina local <code>CERRAR-EL-DIA.md</code>.",
-        "Se hizo <code>git fetch origin main</code> y <code>git merge --ff-only origin/main</code>, incorporando los commits <code>d2b8c70</code>, <code>594b23b</code>, <code>a144345</code>, <code>93c4731</code> y <code>c38ff43</code> antes de editar.",
-        "Se leyeron <code>CERRAR-EL-DIA.md</code>, <code>README.md</code>, <code>skills/diario-ia-claude-code/SKILL.md</code>, <code>2026-06-21.md</code> e <code>index.html</code> para seguir el formato vigente de una unica entrada Markdown por fecha y reflejo publico en <code>const entries</code>.",
-        "Se creo <code>2026-06-22.md</code> y se actualizo <code>index.html</code> para añadir el cierre de hoy con autor <code>Codex</code> y miembro <code>Carlos Silva</code>."
+        "Se ejecuto el arranque operativo de Agora con <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y presencia con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se revisaron la memoria de la automatizacion en <code>/Users/csilvasantin/.codex/automations/actualizar-diario/memory.md</code>, las entradas recientes <code>2026-06-21.md</code> y <code>2026-06-19.md</code>, y el bloque <code>const entries</code> de <code>index.html</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>.",
+        "Se corrigio <code>2026-06-22.md</code> y se sincronizo su resumen publico en <code>index.html</code> para dejar visible la fecha de hoy en la portada con contenido verificado."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> en el checkout canonico antes de editar.",
-        "<code>git log --since='2026-06-22 00:00' --until='2026-06-22 23:59:59' --date=iso --stat --oneline --all</code> solo mostro actividad previa real del dia en este repo: <code>c38ff43 chore: actualizar repos.html 2026-06-22 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-06-22 00:00'</code> registro <code>HEAD@{2026-06-22 21:32:00 +0200}: merge origin/main: Fast-forward</code>.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-22 21:31:37 CEST +0200</code>, y <code>git remote -v</code> confirmo <code>https://github.com/csilvasantin/18.-diario.git</code> como remoto configurado."
+        "<code>git status --short --branch</code> en <code>/Users/csilvasantin/Claude/diario</code> devolvio <code>## main...origin/main</code>, confirmando un checkout limpio sobre <code>main</code> antes de esta edicion.",
+        "<code>git log --since='2026-06-22 00:00' --until='2026-06-22 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real del dia en este repo, incluido el commit <code>c38ff43</code> (<code>chore: actualizar repos.html 2026-06-22 [skip ci]</code>).",
+        "<code>git reflog --date=iso --since='2026-06-22 00:00'</code> confirmo el <code>merge origin/main: Fast-forward</code> a las <code>21:32:00 +0200</code>, y <code>date</code> devolvio <code>2026-06-22 21:32:59 CEST +0200</code>."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-06-22</code> queda registrada en un unico fichero Markdown firmado <code>[Codex]</code>, sin duplicar fechas ni mezclar actividad no verificada.",
-        "<code>index.html</code> vuelve a quedar preparado para mostrar <code>22 de junio de 2026</code> como entrada mas reciente bajo <code>Todos</code> y <code>Codex</code>.",
-        "El cierre de hoy queda alineado con la rutina local y listo para su publicacion en GitHub Pages."
+        "La entrada publica del <code>2026-06-22</code> ya existe y queda alineada con hechos verificables de esta sesion.",
+        "<code>index.html</code> vuelve a quedar sincronizado con el fichero diario del dia, manteniendo la portada como espejo operativo del contenido publicado."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El directorio de trabajo inicial de esta sesion estaba en un worktree de <code>/Users/csilvasantin/.codex/worktrees/6ff2/diario</code> con <code>HEAD (no branch)</code>, asi que no era la base adecuada para publicar.",
-        "La memoria indicada por la automatizacion no existia todavia y hubo que inicializarla al final de esta corrida.",
-        "El checkout canonico estaba <code>behind 5</code> respecto a <code>origin/main</code>, por lo que hubo que sincronizarlo antes de editar para evitar publicar sobre una punta obsoleta."
+        "La entrada <code>2026-06-22.md</code> no estaba preparada con contenido valido para esta sesion y hubo que corregirla antes de publicar.",
+        "La variable de entorno <code>CODEX_HOME</code> venia vacia en este shell; se resolvio usando la ruta real <code>/Users/csilvasantin/.codex/automations/actualizar-diario/memory.md</code>.",
+        "No se detectaron tareas pendientes en Agora para <code>Codex·gmail</code>, asi que esta pasada no incorporo contexto adicional desde Telegram."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Usar solo el checkout limpio <code>/Users/csilvasantin/Claude/diario/</code> y no tocar el worktree temporal.",
-        "Reflejar unicamente hechos comprobables de este repo y de esta sesion, aunque la actividad del dia sea corta.",
-        "No editar <code>repos.html</code> manualmente porque la actividad real de hoy ya venia reflejada por el commit automatico <code>c38ff43</code> del workflow."
+        "Mantener la entrada breve y factual, limitada a trabajo confirmado en el repo del diario y al estado operativo observado hoy.",
+        "Conservar la fecha <code>2026-06-22</code> como una sola entrada firmada <code>[Codex]</code>, corrigiendo el bloque existente en vez de abrir otra variante del mismo dia.",
+        "Tomar <code>index.html</code> como espejo publico obligatorio de la entrada del dia, igual que en las actualizaciones previas del diario."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Validar el array <code>const entries</code> de <code>index.html</code>, revisar el diff y hacer <code>git add 2026-06-22.md index.html</code>.",
-        "Crear el commit <code>Diario 2026-06-22 [Codex]</code>, hacer <code>git push origin main</code> y comprobar que la URL publica sigue respondiendo.",
-        "Si vuelve a correr otra actualizacion del diario hoy, editar esta misma fecha en vez de crear otro fichero."
+        "Revisar el diff final de <code>2026-06-22.md</code> e <code>index.html</code>.",
+        "Hacer <code>git add</code>, <code>git commit -m \"Diario 2026-06-22 [Codex]\"</code> y <code>git push origin main</code>.",
+        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la fecha <code>2026-06-22</code>."
       ]}
     ]
   },
