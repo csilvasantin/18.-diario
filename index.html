@@ -344,6 +344,46 @@
 <script>
 const entries = [
   {
+    date: "2026-06-23",
+    title: "23 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code>, se revisaron <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se leyeron la memoria de la automatizacion <code>actualizar-diario-2</code>, el skill local de AgoraMatrix y la rutina operativa de <code>CERRAR-EL-DIA.md</code> antes de tocar el repo.",
+        "Se revisaron <code>README.md</code>, <code>routines/update.md</code>, <code>2026-06-22.md</code> e <code>index.html</code> para seguir el formato vigente y mantener una unica entrada por fecha.",
+        "Se sincronizo este checkout con <code>origin/main</code> mediante <code>git fetch origin main</code> y <code>git merge --ff-only origin/main</code>, que avanzo <code>HEAD</code> de <code>f429294</code> a <code>dd62de7</code>.",
+        "Se crea <code>2026-06-23.md</code> y se actualiza <code>index.html</code> para que la fecha de hoy quede visible en la publicacion HTML del diario bajo el filtro <code>Codex</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> al arrancar, sin cambios locales previos en este worktree.",
+        "<code>git log --since='2026-06-23 00:00' --until='2026-06-23 23:59:59' --date=iso --stat --oneline --all</code> no mostro commits previos de hoy en este repo.",
+        "<code>git reflog --date=iso --since='2026-06-23 00:00'</code> solo registro la posicion inicial <code>f429294 HEAD@{2026-06-23 21:31:45 +0200}</code> antes de esta actualizacion.",
+        "<code>git show origin/main:2026-06-23.md</code> devolvio ausencia del fichero y <code>git grep -n 'date: \"2026-06-23\"' origin/main -- index.html</code> no encontro entrada previa para hoy en la portada.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-23 21:33:01 CEST +0200</code> durante el pre-check final previo a la edicion."
+      ]},
+      { heading: "Avances", items: [
+        "La fecha <code>2026-06-23</code> queda documentada en un fichero Markdown nuevo firmado como <code>[Codex]</code>.",
+        "<code>index.html</code> vuelve a quedar alineado con el Markdown y preparado para mostrar la novedad de hoy en la UI publica.",
+        "Esta pasada deja el cierre apoyado en evidencia real del propio repo <code>diario</code>, sin inventar actividad externa."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "Este worktree de automatizacion arranco fuera de rama local y desfasado respecto a <code>origin/main</code>, asi que no era seguro editar sin sincronizar primero.",
+        "No habia commits previos del <code>2026-06-23</code> en el repositorio, por lo que la evidencia disponible para hoy es la de esta sesion y el estado <code>git</code> verificado."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Tomar <code>origin/main</code> como base canonica de publicacion antes de escribir la fecha nueva.",
+        "Crear una sola entrada <code>Codex</code> para <code>2026-06-23</code> en lugar de abrir bloques duplicados para el mismo autor.",
+        "Registrar unicamente hechos comprobables de esta ejecucion en <code>diario</code>, incluyendo Agora, sincronizacion y pre-checks."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Revisar el diff de <code>2026-06-23.md</code> e <code>index.html</code>, hacer el commit <code>Diario 2026-06-23 [Codex]</code> y empujar <code>HEAD</code> a <code>origin/main</code>.",
+        "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y deja visible la entrada de hoy."
+      ]}
+    ]
+  },
+  {
     date: "2026-06-22",
     title: "22 de junio de 2026",
     member: "Carlos Silva",
