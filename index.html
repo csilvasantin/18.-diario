@@ -350,34 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad del <code>23 de junio</code> en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>admira-app</code>, <code>01.-AdmiraXperience-Game</code>, <code>admira-next-web</code>, <code>ACE-Step</code> y los cambios recientes del workspace <code>Admirito</code>.",
-        "En <code>github-csilvasantin/admira-app</code> se confirmaron dos commits de hoy sobre <code>index.html</code>: un deep-link de mapa con <code>?lng&amp;lat&amp;label</code> para abrir un punto exacto desde el CMS de flota, y un bump de <code>TWIN_BASE</code> a <code>v=20260623-0001</code> para cargar el build corregido del gemelo.",
-        "En <code>github-csilvasantin/01.-AdmiraXperience-Game</code> se confirmaron dos commits de hoy: el fix del gemelo que evitaba un <code>NaN</code> en render y dejaba la tienda vacia, y el bump de version/cache <code>20260623-0001</code> para forzar la carga del build sano."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se revisaron la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>.",
+        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-23 00:00' --until='2026-06-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-23 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se reescriben <code>2026-06-23.md</code> e <code>index.html</code> para que la fecha documente solo este cierre real en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git log</code> y <code>git reflog</code> mostraron actividad real hoy en <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code>, pero no en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>admira-next-web</code> ni <code>ACE-Step</code>.",
-        "<code>admira-app</code> y <code>01.-AdmiraXperience-Game</code> quedaron limpios en <code>main</code>, lo que encaja con trabajo ya confirmado en commits; ademas, el mensaje del fix del gemelo deja constancia explicita de que se verifico en preview.",
-        "<code>AdmiraNext-Team</code> sigue en <code>main</code> pero va <code>behind 303</code> respecto a <code>origin/main</code>, con ocho ficheros modificados; <code>AdmiraNext-Team-latest</code> mantiene dos cambios locales en <code>src/</code> y un <code>INICIO_Y_CIERRE_DEL_DIA.md</code> sin trackear."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin dirty worktree al empezar esta pasada.",
+        "<code>git log --since='2026-06-23 00:00' --until='2026-06-23 23:59:59' --date=iso --stat --oneline --all</code> mostro commits reales del dia para este repo, incluidos <code>485a589</code> y <code>4739347</code> de handoff, <code>dd62de7 chore: actualizar repos.html 2026-06-23 [skip ci]</code> y varios <code>Diario 2026-06-23 [Codex]</code> (<code>385a7d6</code>, <code>445d1cc</code>, <code>b9ee350</code>).",
+        "<code>git reflog --date=iso --since='2026-06-23 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> confirmaron actividad local hoy hasta <code>2026-06-23 23:56:41 CEST +0200</code>, y <code>git fetch origin</code> solo anadio la referencia remota <code>origin/main-8wedel</code>."
       ]},
       { heading: "Avances", items: [
-        "La entrada de Codex del <code>23 de junio de 2026</code> queda consolidada en un unico fichero diario, sin duplicar fecha, y firmada en el titulo como exige la rutina.",
-        "<code>index.html</code> ya incorpora la fecha <code>2026-06-23</code> y el bloque de Codex para que el cierre siga visible en los filtros del diario.",
-        "El pre-check de esta ejecucion confirmo que el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> estaba limpio en <code>main</code> antes de actualizar el cierre."
+        "La fecha <code>2026-06-23</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin crear otro archivo para el mismo dia.",
+        "<code>index.html</code> vuelve a reflejar la entrada de hoy bajo el autor <code>Codex</code> en la UI publica del diario con las seis secciones requeridas por la rutina.",
+        "La rutina queda alineada con el remoto real <code>origin</code> apuntando a <code>https://github.com/csilvasantin/18.-diario.git</code> y con la fuente canonica que hoy redirige a ese mismo repositorio publico."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El arbol local de <code>AdmiraNext-Team</code> tiene un diff muy grande en UI, datos y screenshots, pero sin commits, reflog ni marcas de hoy; no se puede atribuir con rigor al trabajo del <code>23 de junio</code>.",
-        "La rama local atrasada de <code>AdmiraNext-Team</code> complica usar ese checkout como fuente canonica hasta decidir si se sincroniza o se conserva como experimento aparte.",
-        "En el workspace hubo ficheros tocados hoy fuera del foco principal, pero el diario se limito a actividad respaldada por historial Git o estado verificable para no mezclar ruido con trabajo concluido."
+        "La version local vigente al empezar esta corrida describia trabajo de otros repositorios en lugar de registrar solo el cierre verificado de esta sesion en <code>diario</code>.",
+        "El alias historico <code>https://github.com/csilvasantin/diario/...</code> hoy redirige al repositorio publico <code>csilvasantin/18.-diario</code>, asi que la comprobacion canonica requiere seguir esa redireccion.",
+        "El checkout ya tenia varios commits <code>Diario 2026-06-23 [Codex]</code> del mismo dia, por lo que no era correcto duplicar la fecha ni inventar otra actividad."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada existente del <code>23 de junio de 2026</code> en vez de duplicarla.",
-        "Reflejar como trabajo de hoy solo lo comprobado en <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code>, y tratar <code>AdmiraNext-Team</code> como estado local pendiente de aclaracion, no como avance cerrado.",
-        "Mantener el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> como unica fuente para editar y publicar el diario."
+        "Sustituir el contenido previo del <code>2026-06-23</code> por una version basada solo en comandos ejecutados, historial <code>git</code> verificado y trabajo real de esta sesion.",
+        "Mantener una sola entrada <code>Codex</code> para la fecha en <code>2026-06-23.md</code> y en <code>index.html</code>, en lugar de anadir otro bloque del mismo autor.",
+        "Hacer la verificacion publica contra <code>https://csilvasantin.github.io/diario/</code>, tal como exige la rutina."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Aclarar si <code>AdmiraNext-Team</code> debe sincronizarse con <code>origin/main</code> o si esos cambios locales deben salvarse primero en una rama propia antes de tocar nada mas.",
-        "Si se retoma <code>AdmiraNext-Team</code>, validar en ejecucion los cambios locales de <code>public/</code> y <code>data/</code> antes de convertirlos en commit o descartarlos.",
-        "Mantener como referencia de trabajo validado de hoy los commits de <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code> para el siguiente handoff o cierre diario."
+        "Revisar el diff final de <code>2026-06-23.md</code> e <code>index.html</code> antes de publicar.",
+        "Crear el commit <code>Diario 2026-06-23 [Codex]</code> y hacer <code>git push origin main</code>.",
+        "Comprobar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada de hoy tras la publicacion."
       ]}
     ]
   },
