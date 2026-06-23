@@ -350,36 +350,29 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code>, se revisaron <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
-        "Se leyeron la memoria de la automatizacion <code>actualizar-diario-2</code>, el skill local de AgoraMatrix y la rutina operativa de <code>CERRAR-EL-DIA.md</code> antes de tocar el repo.",
-        "Se revisaron <code>README.md</code>, <code>routines/update.md</code>, <code>2026-06-22.md</code> e <code>index.html</code> para seguir el formato vigente y mantener una unica entrada por fecha.",
-        "Se sincronizo este checkout con <code>origin/main</code> mediante <code>git fetch origin main</code> y <code>git merge --ff-only origin/main</code>, que avanzo <code>HEAD</code> de <code>f429294</code> a <code>dd62de7</code>.",
-        "Se crea <code>2026-06-23.md</code> y se actualiza <code>index.html</code> para que la fecha de hoy quede visible en la publicacion HTML del diario bajo el filtro <code>Codex</code>."
+        "Se reviso la actividad del <code>23 de junio</code> en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>admira-app</code>, <code>01.-AdmiraXperience-Game</code>, <code>admira-next-web</code>, <code>ACE-Step</code> y los cambios recientes del workspace <code>Admirito</code>.",
+        "En <code>github-csilvasantin/admira-app</code> se confirmaron dos commits de hoy sobre <code>index.html</code>: un deep-link de mapa con <code>?lng&amp;lat&amp;label</code> para abrir un punto exacto desde el CMS de flota, y un bump de <code>TWIN_BASE</code> a <code>v=20260623-0001</code> para cargar el build corregido del gemelo.",
+        "En <code>github-csilvasantin/01.-AdmiraXperience-Game</code> se confirmaron dos commits de hoy: el fix del gemelo que evitaba un <code>NaN</code> en render y dejaba la tienda vacia, y el bump de version/cache <code>20260623-0001</code> para forzar la carga del build sano."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> al arrancar, sin cambios locales previos en este worktree.",
-        "<code>git log --since='2026-06-23 00:00' --until='2026-06-23 23:59:59' --date=iso --stat --oneline --all</code> no mostro commits previos de hoy en este repo.",
-        "<code>git reflog --date=iso --since='2026-06-23 00:00'</code> solo registro la posicion inicial <code>f429294 HEAD@{2026-06-23 21:31:45 +0200}</code> antes de esta actualizacion.",
-        "<code>git show origin/main:2026-06-23.md</code> devolvio ausencia del fichero y <code>git grep -n 'date: \"2026-06-23\"' origin/main -- index.html</code> no encontro entrada previa para hoy en la portada.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-23 21:33:01 CEST +0200</code> durante el pre-check final previo a la edicion."
-      ]},
-      { heading: "Avances", items: [
-        "La fecha <code>2026-06-23</code> queda documentada en un fichero Markdown nuevo firmado como <code>[Codex]</code>.",
-        "<code>index.html</code> vuelve a quedar alineado con el Markdown y preparado para mostrar la novedad de hoy en la UI publica.",
-        "Esta pasada deja el cierre apoyado en evidencia real del propio repo <code>diario</code>, sin inventar actividad externa."
+        "<code>git log</code> y <code>git reflog</code> mostraron actividad real hoy en <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code>, pero no en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>admira-next-web</code> ni <code>ACE-Step</code>.",
+        "<code>admira-app</code> y <code>01.-AdmiraXperience-Game</code> quedaron limpios en <code>main</code>, lo que encaja con trabajo ya confirmado en commits; ademas, el mensaje del fix del gemelo deja constancia explicita de que se verifico en preview.",
+        "<code>AdmiraNext-Team</code> sigue en <code>main</code> pero va <code>behind 303</code> respecto a <code>origin/main</code>, con ocho ficheros modificados; <code>AdmiraNext-Team-latest</code> mantiene dos cambios locales en <code>src/</code> y un <code>INICIO_Y_CIERRE_DEL_DIA.md</code> sin trackear."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Este worktree de automatizacion arranco fuera de rama local y desfasado respecto a <code>origin/main</code>, asi que no era seguro editar sin sincronizar primero.",
-        "No habia commits previos del <code>2026-06-23</code> en el repositorio, por lo que la evidencia disponible para hoy es la de esta sesion y el estado <code>git</code> verificado."
+        "El arbol local de <code>AdmiraNext-Team</code> tiene un diff muy grande en UI, datos y screenshots, pero sin commits, reflog ni marcas de hoy; no se puede atribuir con rigor al trabajo del <code>23 de junio</code>.",
+        "La rama local atrasada de <code>AdmiraNext-Team</code> complica usar ese checkout como fuente canonica hasta decidir si se sincroniza o se conserva como experimento aparte.",
+        "En el workspace hubo ficheros tocados hoy fuera del foco principal, pero el diario se limito a actividad respaldada por historial Git o estado verificable para no mezclar ruido con trabajo concluido."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar <code>origin/main</code> como base canonica de publicacion antes de escribir la fecha nueva.",
-        "Crear una sola entrada <code>Codex</code> para <code>2026-06-23</code> en lugar de abrir bloques duplicados para el mismo autor.",
-        "Registrar unicamente hechos comprobables de esta ejecucion en <code>diario</code>, incluyendo Agora, sincronizacion y pre-checks."
+        "Actualizar la entrada existente del <code>23 de junio de 2026</code> en vez de duplicarla.",
+        "Reflejar como trabajo de hoy solo lo comprobado en <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code>, y tratar <code>AdmiraNext-Team</code> como estado local pendiente de aclaracion, no como avance cerrado.",
+        "Mantener el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> como unica fuente para editar y publicar el diario."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff de <code>2026-06-23.md</code> e <code>index.html</code>, hacer el commit <code>Diario 2026-06-23 [Codex]</code> y empujar <code>HEAD</code> a <code>origin/main</code>.",
-        "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y deja visible la entrada de hoy."
+        "Aclarar si <code>AdmiraNext-Team</code> debe sincronizarse con <code>origin/main</code> o si esos cambios locales deben salvarse primero en una rama propia antes de tocar nada mas.",
+        "Si se retoma <code>AdmiraNext-Team</code>, validar en ejecucion los cambios locales de <code>public/</code> y <code>data/</code> antes de convertirlos en commit o descartarlos.",
+        "Mantener como referencia de trabajo validado de hoy los commits de <code>admira-app</code> y <code>01.-AdmiraXperience-Game</code> para el siguiente handoff o cierre diario."
       ]}
     ]
   },
