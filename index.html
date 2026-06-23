@@ -344,6 +344,44 @@
 <script>
 const entries = [
   {
+    date: "2026-06-23",
+    title: "23 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se revisaron <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, la memoria de la automatizacion <code>actualizar-diario</code> y la rutina local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+        "Se inspeccionaron <code>2026-06-22.md</code>, <code>index.html</code> y el estado del checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> para preparar la entrada nueva de hoy."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando un checkout limpio al iniciar la pasada.",
+        "<code>git log --since='2026-06-23 00:00' --until='2026-06-23 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-23 00:00'</code> no mostraron actividad previa hoy en este repo antes de esta actualizacion.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-23 21:31:57 CEST +0200</code>, fijando la fecha efectiva de esta entrada."
+      ]},
+      { heading: "Avances", items: [
+        "Se crea <code>2026-06-23.md</code> como fichero unico del dia, firmado por <code>Codex</code>, sin duplicar fechas anteriores.",
+        "<code>index.html</code> queda preparado para mostrar el <code>23 de junio de 2026</code> en la UI publica bajo el filtro <code>Codex</code>.",
+        "La automatizacion <code>actualizar-diario</code> recupera continuidad sobre el checkout limpio correcto del diario."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "No existia aun <code>2026-06-23.md</code>, asi que la pasada requirio crear la fecha desde cero.",
+        "La memoria indicada por la automatizacion no contenia contexto reutilizable en esta corrida.",
+        "No se detectaron tareas ni mensajes pendientes en AgoraMatrix para <code>Codex·gmail</code> al iniciar."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Registrar solo hechos comprobados de esta actualizacion del diario en lugar de inferir actividad de otros repos o sesiones.",
+        "Mantener el formato breve de seis secciones para que la entrada de hoy sea consistente con las fechas recientes.",
+        "Publicar desde el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> y verificar despues la URL publica del diario."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Revisar el diff final de <code>2026-06-23.md</code> e <code>index.html</code>.",
+        "Hacer <code>git add</code>, <code>git commit -m \"Diario 2026-06-23 [Codex]\"</code> y <code>git push origin main</code>.",
+        "Comprobar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada de hoy."
+      ]}
+    ]
+  },
+  {
     date: "2026-06-22",
     title: "22 de junio de 2026",
     member: "Carlos Silva",
