@@ -350,37 +350,29 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>actualizar-diario-2</code> y se revisaron <code>routines/update.md</code>, <code>README.md</code> y <code>2026-06-23.md</code> para seguir el formato vigente del repo.",
-        "Se inspecciono este worktree con <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git log --since='2026-06-24 00:00' --until='2026-06-24 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-24 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se hizo <code>git fetch origin main</code> y luego <code>git merge --ff-only origin/main</code>, avanzando este checkout de <code>f55a9da</code> a <code>e03ad93</code> para incorporar los cambios remotos reales de hoy antes de editar el diario.",
-        "Se crea <code>2026-06-24.md</code> y se actualiza <code>index.html</code>, se hizo el commit local <code>c657f58 Diario 2026-06-24 [Codex]</code>, y tras un <code>git push origin HEAD:main</code> rechazado con <code>fetch first</code> se detecto en <code>origin/main</code> el commit concurrente <code>f10535a Diario 2026-06-24 [Codex]</code>, por lo que se consolida una unica entrada para la fecha."
+        "Se reviso la actividad de hoy en <code>AdmiraNext-Team</code>, en el checkout limpio de <code>diario</code> y en el worktree actual usando <code>git status</code>, <code>git log</code>, <code>git reflog</code> y busqueda de repos Admirito con actividad del <code>2026-06-24</code>.",
+        "Se identificaron como cambios verificables del dia en <code>diario</code> las dos actualizaciones de <code>repos.html</code> (<code>897a965</code> y <code>e03ad93</code>), las dos revisiones de la entrada del <code>24/06</code> (<code>f10535a</code> y <code>6ad4de6</code>) y el handoff <code>feefbdd</code> sobre White Rabbit.",
+        "Se actualizo la entrada ya existente de <code>2026-06-24.md</code> y su bloque en <code>index.html</code> para reflejar trabajo real de Admirito sin duplicar la fecha."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> al arrancar, sin cambios locales previos en este worktree.",
-        "<code>git remote -v</code> confirmo <code>origin https://github.com/csilvasantin/diario.git</code> para <code>fetch</code> y <code>push</code>.",
-        "<code>git log --since='2026-06-24 00:00' --until='2026-06-24 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad previa real del dia en este repo: <code>e03ad93 chore: actualizar tabla de proyectos — 50 repos (2026-06-24) [Claude]</code> y <code>897a965 chore: actualizar repos.html 2026-06-24 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-06-24 00:00'</code> confirmo la posicion inicial <code>f55a9da HEAD@{2026-06-24 21:31:52 +0200}</code> y luego el <code>merge origin/main: Fast-forward</code> a <code>e03ad93</code>.",
-        "<code>git show origin/main:2026-06-24.md</code> devolvio ausencia del fichero antes de esta edicion, y tras el segundo <code>git fetch origin main</code> <code>origin/main</code> avanzo de <code>e03ad93</code> a <code>f10535a</code> con una entrada publicada del mismo dia.",
-        "<code>git diff --stat origin/main..HEAD</code> limito la divergencia local a <code>2026-06-24.md</code> e <code>index.html</code> antes de resolver el conflicto, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-24 21:32:29 CEST +0200</code> durante el pre-check inicial."
-      ]},
-      { heading: "Avances", items: [
-        "La fecha <code>2026-06-24</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir una segunda entrada para el mismo dia.",
-        "<code>index.html</code> vuelve a quedar alineado con el Markdown y preparado para reflejar una sola version consolidada de la fecha en la UI publica del diario.",
-        "Esta pasada deja el cierre apoyado en evidencia real del propio repo <code>diario</code>, incluyendo la sincronizacion local y la carrera de publicacion detectada en <code>origin/main</code>."
+        "<code>AdmiraNext-Team</code> quedo en <code>main...origin/main</code>, sin commits, reflog ni ficheros modificados hoy, asi que no hay avance verificable que atribuirle en esta entrada.",
+        "En <code>diario</code>, <code>git log --since='2026-06-24 00:00' --all</code> si mostro actividad real del workspace: inventario de <code>50 repos</code>, consolidacion de la entrada del dia y creacion de <code>handoff/2026-06-24-HX-YQE6.md</code>.",
+        "El checkout limpio <code>/Users/csilvasantin/Claude/diario/</code> se sincronizo con <code>origin/main</code> antes de editar para trabajar sobre la version publicada mas reciente."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Este worktree de automatizacion arranco en <code>HEAD</code> desacoplado y atrasado respecto a <code>origin/main</code>, asi que no era seguro editar sin sincronizar primero.",
-        "Mientras se cerraba esta corrida, otro checkout publico <code>f10535a Diario 2026-06-24 [Codex]</code> en <code>origin/main</code>, lo que hizo fallar el primer <code>push</code> con <code>fetch first</code>.",
-        "La actividad previa verificable del <code>2026-06-24</code> en este repo estaba limitada a actualizaciones de <code>repos.html</code> hasta que aparecio ese commit concurrente del propio diario."
+        "No aparece senal verificable de trabajo en <code>AdmiraNext-Team</code> durante el <code>2026-06-24</code>, asi que no conviene rellenar el diario con progreso no trazable.",
+        "La entrada existente estaba demasiado centrada en la mecanica de la automatizacion y poco en el trabajo de Admirito.",
+        "Hubo varias actualizaciones del mismo dia en <code>diario</code>, lo que hacia facil duplicar contexto o dejar una version obsoleta."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar <code>origin/main</code> como base canonica de publicacion antes de escribir la fecha nueva y volver a tomarlo como fuente de verdad cuando aparecio la carrera remota.",
-        "Mantener una sola entrada <code>Codex</code> para <code>2026-06-24</code>, sustituyendo las dos variantes de hoy por un unico texto consolidado.",
-        "Registrar unicamente hechos comprobables de esta ejecucion y del estado ya publicado hoy en <code>origin/main</code>, sin inventar actividad externa."
+        "Mantener una sola entrada <code>Codex</code> para <code>2026-06-24</code> y reescribirla desde actividad verificable de repos en vez de crear otra variante.",
+        "Dejar explicito que <code>AdmiraNext-Team</code> no tuvo cambios confirmables hoy y usar <code>diario</code> como fuente principal del resumen.",
+        "Dar prioridad a los cambios con trazabilidad clara: <code>repos.html</code>, la consolidacion de la entrada del dia y el handoff de White Rabbit."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Terminar el rebase sobre <code>origin/main</code> y repetir <code>git push origin HEAD:main</code>.",
-        "Comprobar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y deja visible la entrada de hoy."
+        "Si hubo trabajo fuera de git en <code>AdmiraNext-Team</code>, dejar manana al menos commit, nota o handoff para que el diario tenga trazabilidad real.",
+        "Vigilar si el handoff <code>HX-YQE6</code> genera cambios operativos en otros repos de Admirito y reflejarlos en la siguiente entrada.",
+        "Publicar esta correccion y comprobar que <code>https://csilvasantin.github.io/diario/</code> muestra la version actualizada."
       ]}
     ]
   },
