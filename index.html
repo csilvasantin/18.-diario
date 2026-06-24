@@ -350,29 +350,40 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en <code>AdmiraNext-Team</code>, en el checkout limpio de <code>diario</code> y en el worktree actual usando <code>git status</code>, <code>git log</code>, <code>git reflog</code> y busqueda de repos Admirito con actividad del <code>2026-06-24</code>.",
-        "Se identificaron como cambios verificables del dia en <code>diario</code> las dos actualizaciones de <code>repos.html</code> (<code>897a965</code> y <code>e03ad93</code>), las dos revisiones de la entrada del <code>24/06</code> (<code>f10535a</code> y <code>6ad4de6</code>) y el handoff <code>feefbdd</code> sobre White Rabbit.",
-        "Se actualizo la entrada ya existente de <code>2026-06-24.md</code> y su bloque en <code>index.html</code> para reflejar trabajo real de Admirito sin duplicar la fecha."
+        "Se reviso el trabajo de hoy en el workspace <code>Admirito</code>, comparando <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/AdmiraNext-Team-latest</code>, <code>04.- AdmiraGemini</code>, <code>ACE-Step</code> y los cambios recientes del checkout limpio del diario.",
+        "En <code>AdmiraNext-Team</code> quedo preparado un rediseño local de la portada con tema arcade <code>World Warrior Ops</code>: nuevo hero, selector de fighters, summary adaptado, <code>package.json</code> en <code>v0.1.3</code> y una ampliacion de <code>data/machines.json</code> con IP y comando SSH local para <code>admira-macmini</code>.",
+        "En <code>AdmiraNext-Team-latest</code> se trabajo sobre la rama <code>codex/fix-teamwork-api-discovery</code> reforzando el backend: <code>PORT</code> configurable, estado <code>idle</code> valido, quoting comun de AppleScript para llamadas SSH remotas y guia <code>INICIO_Y_CIERRE_DEL_DIA.md</code>.",
+        "En <code>AdmiraGemini</code> se anadio una UI web local (<code>src/admira_gemini/web.py</code>, assets, script <code>admira-gemini-ui</code>, tests) y en <code>ACE-Step</code> un fallback a <code>soundfile</code> cuando <code>torchaudio.save</code> falla al exportar audio.",
+        "Se reescribe esta entrada del <code>2026-06-24</code> para sustituir la nota provisional por un resumen factual del trabajo realmente detectado hoy."
       ]},
       { heading: "Que se valido", items: [
-        "<code>AdmiraNext-Team</code> quedo en <code>main...origin/main</code>, sin commits, reflog ni ficheros modificados hoy, asi que no hay avance verificable que atribuirle en esta entrada.",
-        "En <code>diario</code>, <code>git log --since='2026-06-24 00:00' --all</code> si mostro actividad real del workspace: inventario de <code>50 repos</code>, consolidacion de la entrada del dia y creacion de <code>handoff/2026-06-24-HX-YQE6.md</code>.",
-        "El checkout limpio <code>/Users/csilvasantin/Claude/diario/</code> se sincronizo con <code>origin/main</code> antes de editar para trabajar sobre la version publicada mas reciente."
+        "<code>PYTHONPATH=src python3 -m unittest tests/test_web.py</code> paso en <code>04.- AdmiraGemini</code> con <code>5</code> tests OK.",
+        "<code>node --check src/server.js &amp;&amp; node --check src/ssh-exec.js</code> paso en <code>AdmiraNext-Team-latest</code>, dejando valida la sintaxis de los cambios de backend.",
+        "<code>git diff --stat</code> en <code>AdmiraNext-Team</code> mostro <code>8 files changed, 1112 insertions(+), 73 deletions(-)</code>, concentrados en <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code>, <code>data/machines.json</code> y tres screenshots.",
+        "<code>git status --short --branch</code> confirmo que <code>AdmiraNext-Team</code> sigue en <code>main...origin/main [behind 303]</code> con cambios locales sin commit, mientras <code>AdmiraNext-Team-latest</code> esta en <code>codex/fix-teamwork-api-discovery</code> con modificaciones locales sobre <code>src/server.js</code> y <code>src/ssh-exec.js</code>.",
+        "El checkout limpio del diario estaba en <code>main...origin/main</code> y ya contenia actividad previa real de hoy (<code>repos.html</code> actualizado por Claude y la entrada provisional de esta fecha), por lo que se ha actualizado la entrada existente en vez de duplicarla."
+      ]},
+      { heading: "Avances", items: [
+        "Queda identificado que el frente mas grande del dia fue <code>AdmiraNext-Team</code>: una capa visual mucho mas expresiva para la home del equipo y mejores datos de conexion local para el Mac Mini.",
+        "Tambien queda trazado un segundo frente tecnico en <code>AdmiraNext-Team-latest</code>, orientado a hacer mas robusto el control remoto por SSH/AppleScript y aceptar estados operativos mas realistas como <code>idle</code>.",
+        "El workspace de hoy no solo movio UI: <code>AdmiraGemini</code> gano una interfaz lanzable con pruebas, y <code>ACE-Step</code> una salida de audio con fallback defensivo."
       ]},
       { heading: "Problemas encontrados", items: [
-        "No aparece senal verificable de trabajo en <code>AdmiraNext-Team</code> durante el <code>2026-06-24</code>, asi que no conviene rellenar el diario con progreso no trazable.",
-        "La entrada existente estaba demasiado centrada en la mecanica de la automatizacion y poco en el trabajo de Admirito.",
-        "Hubo varias actualizaciones del mismo dia en <code>diario</code>, lo que hacia facil duplicar contexto o dejar una version obsoleta."
+        "No aparecen commits de hoy en los repos inspeccionados; gran parte del trabajo sigue como cambios locales y por tanto aun no esta consolidado ni desplegado.",
+        "<code>AdmiraNext-Team</code> principal esta <code>behind 303</code>, lo que hace arriesgado mezclar o publicar esos cambios sin una sincronizacion previa con la rama remota.",
+        "La primera pasada de tests en <code>AdmiraGemini</code> fallo por importar sin <code>PYTHONPATH=src</code>, senal de que el flujo de test local aun depende del entorno.",
+        "<code>32.-ConsejoAdmiraNextGame</code> conserva ficheros sueltos sin integrar (<code>.codex-write-test</code>, <code>council-api.py.new</code>), que apuntan a trabajo incompleto o basura de workspace."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada <code>Codex</code> para <code>2026-06-24</code> y reescribirla desde actividad verificable de repos en vez de crear otra variante.",
-        "Dejar explicito que <code>AdmiraNext-Team</code> no tuvo cambios confirmables hoy y usar <code>diario</code> como fuente principal del resumen.",
-        "Dar prioridad a los cambios con trazabilidad clara: <code>repos.html</code>, la consolidacion de la entrada del dia y el handoff de White Rabbit."
+        "Actualizar la entrada existente del <code>2026-06-24</code> en lugar de crear otra, para mantener una sola version del dia en el diario publico.",
+        "Priorizar hechos verificables por <code>git status</code>, <code>git diff</code>, tests y chequeos de sintaxis, en lugar de asumir trabajo cerrado por memoria o nombres de carpetas.",
+        "Reflejar el estado real del dia como trabajo de workspace aun no cerrado en commits, porque eso describe mejor la situacion que venderlo como despliegue terminado."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Si hubo trabajo fuera de git en <code>AdmiraNext-Team</code>, dejar manana al menos commit, nota o handoff para que el diario tenga trazabilidad real.",
-        "Vigilar si el handoff <code>HX-YQE6</code> genera cambios operativos en otros repos de Admirito y reflejarlos en la siguiente entrada.",
-        "Publicar esta correccion y comprobar que <code>https://csilvasantin.github.io/diario/</code> muestra la version actualizada."
+        "Decidir si la fuente de verdad de <code>AdmiraNext-Team</code> pasa por <code>main</code> o por <code>AdmiraNext-Team-latest</code>, y solo entonces limpiar/commitear la linea correcta.",
+        "Hacer validacion visual de la nueva home arcade de <code>AdmiraNext-Team</code> antes de publicar, porque el diff es grande y afecta estructura, copy y estilos.",
+        "Dejar <code>AdmiraGemini</code> con un comando de test o instalacion que no dependa de exportar <code>PYTHONPATH=src</code>.",
+        "Confirmar si el fallback de <code>ACE-Step</code> requiere documentar o anadir explicitamente la dependencia <code>soundfile</code>."
       ]}
     ]
   },
