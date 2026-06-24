@@ -350,40 +350,75 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso el trabajo de hoy en el workspace <code>Admirito</code>, comparando <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/AdmiraNext-Team-latest</code>, <code>04.- AdmiraGemini</code>, <code>ACE-Step</code> y los cambios recientes del checkout limpio del diario.",
-        "En <code>AdmiraNext-Team</code> quedo preparado un rediseño local de la portada con tema arcade <code>World Warrior Ops</code>: nuevo hero, selector de fighters, summary adaptado, <code>package.json</code> en <code>v0.1.3</code> y una ampliacion de <code>data/machines.json</code> con IP y comando SSH local para <code>admira-macmini</code>.",
-        "En <code>AdmiraNext-Team-latest</code> se trabajo sobre la rama <code>codex/fix-teamwork-api-discovery</code> reforzando el backend: <code>PORT</code> configurable, estado <code>idle</code> valido, quoting comun de AppleScript para llamadas SSH remotas y guia <code>INICIO_Y_CIERRE_DEL_DIA.md</code>.",
-        "En <code>AdmiraGemini</code> se anadio una UI web local (<code>src/admira_gemini/web.py</code>, assets, script <code>admira-gemini-ui</code>, tests) y en <code>ACE-Step</code> un fallback a <code>soundfile</code> cuando <code>torchaudio.save</code> falla al exportar audio.",
-        "Se reescribe esta entrada del <code>2026-06-24</code> para sustituir la nota provisional por un resumen factual del trabajo realmente detectado hoy."
+        "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de la automatizacion <code>cerrar-el-dia</code> y se leyeron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, que hoy redirige al repo publico <code>csilvasantin/18.-diario</code>.",
+        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-24 00:00' --until='2026-06-24 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-24 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se revisaron el <code>2026-06-24.md</code> vigente, <code>index.html</code> y los commits <code>ee53aaf</code>, <code>93d57e0</code> y <code>8ca1796</code> para contrastar lo publicado hoy por Codex y Claude.",
+        "Se reescriben <code>2026-06-24.md</code> e <code>index.html</code> para que la fecha refleje esta pasada real de cierre, mantenga el bloque <code>[Claude]</code> ya verificado y no arrastre el resumen previo sobre otros repos del workspace."
       ]},
       { heading: "Que se valido", items: [
-        "<code>PYTHONPATH=src python3 -m unittest tests/test_web.py</code> paso en <code>04.- AdmiraGemini</code> con <code>5</code> tests OK.",
-        "<code>node --check src/server.js &amp;&amp; node --check src/ssh-exec.js</code> paso en <code>AdmiraNext-Team-latest</code>, dejando valida la sintaxis de los cambios de backend.",
-        "<code>git diff --stat</code> en <code>AdmiraNext-Team</code> mostro <code>8 files changed, 1112 insertions(+), 73 deletions(-)</code>, concentrados en <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code>, <code>data/machines.json</code> y tres screenshots.",
-        "<code>git status --short --branch</code> confirmo que <code>AdmiraNext-Team</code> sigue en <code>main...origin/main [behind 303]</code> con cambios locales sin commit, mientras <code>AdmiraNext-Team-latest</code> esta en <code>codex/fix-teamwork-api-discovery</code> con modificaciones locales sobre <code>src/server.js</code> y <code>src/ssh-exec.js</code>.",
-        "El checkout limpio del diario estaba en <code>main...origin/main</code> y ya contenia actividad previa real de hoy (<code>repos.html</code> actualizado por Claude y la entrada provisional de esta fecha), por lo que se ha actualizado la entrada existente en vez de duplicarla."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin dirty worktree al empezar esta corrida.",
+        "<code>git log --since='2026-06-24 00:00' --until='2026-06-24 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real del dia en este repo, incluyendo <code>8ca1796 Diario 2026-06-24 [Claude]</code>, <code>93d57e0 Diario 2026-06-24 [Codex]</code>, <code>ee53aaf Actualizar diario 2026-06-24 [Codex]</code>, <code>feefbdd Handoff HX-YQE6 — White Rabbit (Grok) operativo + cúpula + espejo Telegram</code>, <code>e03ad93 chore: actualizar tabla de proyectos — 50 repos (2026-06-24) [Claude]</code> y <code>897a965 chore: actualizar repos.html 2026-06-24 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-06-24 00:00'</code> confirmo los movimientos locales de hoy hasta <code>ee53aaf HEAD@{2026-06-24 23:52:34 +0200}: commit: Actualizar diario 2026-06-24 [Codex]</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-24 23:56:54 CEST +0200</code> durante el pre-check de esta sesion.",
+        "<code>git show 8ca1796:2026-06-24.md</code> y <code>git show 8ca1796:index.html</code> demostraron que hoy ya existia un bloque <code>[Claude]</code> para esta fecha aunque el estado actual del checkout ya no lo reflejaba."
       ]},
       { heading: "Avances", items: [
-        "Queda identificado que el frente mas grande del dia fue <code>AdmiraNext-Team</code>: una capa visual mucho mas expresiva para la home del equipo y mejores datos de conexion local para el Mac Mini.",
-        "Tambien queda trazado un segundo frente tecnico en <code>AdmiraNext-Team-latest</code>, orientado a hacer mas robusto el control remoto por SSH/AppleScript y aceptar estados operativos mas realistas como <code>idle</code>.",
-        "El workspace de hoy no solo movio UI: <code>AdmiraGemini</code> gano una interfaz lanzable con pruebas, y <code>ACE-Step</code> una salida de audio con fallback defensivo."
+        "La fecha <code>2026-06-24</code> vuelve a quedar en un unico fichero Markdown con los bloques <code>[Codex]</code> y <code>[Claude]</code>, separados por <code>---</code>, respetando la regla 1-2-3 del diario.",
+        "<code>index.html</code> vuelve a quedar alineado con esa convivencia de autorias en la UI publica para los filtros <code>Todos</code>, <code>Codex</code> y <code>Claude</code>.",
+        "Esta pasada deja el cierre sustentado solo en historial <code>git</code> verificable y en el trabajo real ejecutado en esta sesion sobre el repo <code>diario</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "No aparecen commits de hoy en los repos inspeccionados; gran parte del trabajo sigue como cambios locales y por tanto aun no esta consolidado ni desplegado.",
-        "<code>AdmiraNext-Team</code> principal esta <code>behind 303</code>, lo que hace arriesgado mezclar o publicar esos cambios sin una sincronizacion previa con la rama remota.",
-        "La primera pasada de tests en <code>AdmiraGemini</code> fallo por importar sin <code>PYTHONPATH=src</code>, senal de que el flujo de test local aun depende del entorno.",
-        "<code>32.-ConsejoAdmiraNextGame</code> conserva ficheros sueltos sin integrar (<code>.codex-write-test</code>, <code>council-api.py.new</code>), que apuntan a trabajo incompleto o basura de workspace."
+        "El contenido vigente al arrancar describia trabajo de otros repositorios del workspace en lugar de registrar solo el cierre real de esta rutina en <code>diario</code>.",
+        "El estado actual del checkout habia perdido el bloque <code>[Claude]</code> y su entrada HTML de hoy, pese a que ambos estaban verificados en el commit <code>8ca1796</code>.",
+        "La URL canonica indicada por la rutina ya no muestra el repo bajo el slug <code>diario</code>, sino que redirige al repositorio publico <code>18.-diario</code>, por lo que hubo que seguir esa redireccion para la comprobacion canonica."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada existente del <code>2026-06-24</code> en lugar de crear otra, para mantener una sola version del dia en el diario publico.",
-        "Priorizar hechos verificables por <code>git status</code>, <code>git diff</code>, tests y chequeos de sintaxis, en lugar de asumir trabajo cerrado por memoria o nombres de carpetas.",
-        "Reflejar el estado real del dia como trabajo de workspace aun no cerrado en commits, porque eso describe mejor la situacion que venderlo como despliegue terminado."
+        "Sustituir el bloque <code>Codex</code> vigente del <code>2026-06-24</code> por una version basada solo en esta sesion y en comandos realmente ejecutados.",
+        "Recuperar y conservar el bloque <code>[Claude]</code> ya publicado hoy en vez de dejar la fecha con una sola autoria.",
+        "Mantener una sola fecha <code>2026-06-24</code> en Markdown y en <code>index.html</code>, sin crear un segundo fichero ni inventar actividad externa."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Decidir si la fuente de verdad de <code>AdmiraNext-Team</code> pasa por <code>main</code> o por <code>AdmiraNext-Team-latest</code>, y solo entonces limpiar/commitear la linea correcta.",
-        "Hacer validacion visual de la nueva home arcade de <code>AdmiraNext-Team</code> antes de publicar, porque el diff es grande y afecta estructura, copy y estilos.",
-        "Dejar <code>AdmiraGemini</code> con un comando de test o instalacion que no dependa de exportar <code>PYTHONPATH=src</code>.",
-        "Confirmar si el fallback de <code>ACE-Step</code> requiere documentar o anadir explicitamente la dependencia <code>soundfile</code>."
+        "Revisar el diff final de <code>2026-06-24.md</code> e <code>index.html</code>.",
+        "Hacer <code>git add 2026-06-24.md index.html</code>, crear el commit <code>Diario 2026-06-24 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Verificar despues que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la fecha de hoy."
+      ]}
+    ]
+  },
+  {
+    date: "2026-06-24",
+    title: "24 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Sesion remota de Claude Code (rama <code>main-fa5zg0</code>) ejecutando la rutina <code>CERRAR-EL-DIA.md</code> para registrar el trabajo del dia en el repo <code>18.-diario</code>.",
+        "Se verifico la actividad del dia con <code>git log --since='2026-06-24 00:00' --until='2026-06-24 23:59:59'</code>, encontrando el commit Claude <code>e03ad93 chore: actualizar tabla de proyectos — 50 repos (2026-06-24) [Claude]</code> que regenero <code>repos.html</code> con 52 inserciones y 21 borrados, ademas de la actualizacion automatica previa <code>897a965</code>.",
+        "Se anadio una seccion <code>[Claude]</code> al final de <code>2026-06-24.md</code> para que la fecha tenga el cierre firmado por las dos IAs (Codex y Claude) sin duplicar el fichero, siguiendo la regla 1-2-3 del repo.",
+        "Se actualizo <code>index.html</code> para incluir el bloque <code>author: \"Claude\"</code> correspondiente al 2026-06-24 en la UI publica del diario."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status</code> devolvio arbol limpio sobre la rama <code>main-fa5zg0</code> antes de empezar.",
+        "<code>git log --oneline -10</code> confirmo la cadena <code>feefbdd Handoff HX-YQE6 → 6ad4de6 Diario 2026-06-24 [Codex] → f10535a Diario 2026-06-24 [Codex] → e03ad93 [Claude] → 897a965 [skip ci]</code>.",
+        "<code>git show --stat e03ad93</code> confirmo autoria <code>Carlos Silva &lt;csilva@admira.co&gt;</code> con fecha <code>Wed Jun 24 21:06:49 2026 +0200</code> y modificacion exclusiva de <code>repos.html</code>.",
+        "<code>git remote -v</code> confirmo <code>origin → http://local_proxy@127.0.0.1:41729/git/csilvasantin/18.-diario</code> (proxy del entorno remoto de Claude Code)."
+      ]},
+      { heading: "Avances", items: [
+        "La fecha <code>2026-06-24</code> queda firmada por Codex y Claude en un unico fichero Markdown, separados por <code>---</code>, sin abrir un segundo fichero.",
+        "<code>repos.html</code> queda al dia con la foto de los 50 repositorios del usuario tras el commit <code>e03ad93</code>.",
+        "Esta corrida cierra el dia desde la sesion remota gestionada por Claude Code en GitHub Actions / contenedor efimero."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "La sesion arranco en la rama <code>main-fa5zg0</code> (no <code>main</code>) por las reglas del entorno remoto, asi que el push final va a esa rama y se abrira PR draft hacia <code>main</code> en lugar de empujar directamente a <code>main</code>.",
+        "El dia ya tenia dos commits Codex (<code>f10535a</code> y <code>6ad4de6</code>) y un handoff (<code>feefbdd</code>); habia que evitar duplicar contenido y limitarse a anadir el bloque Claude."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Mantener una sola entrada por fecha consolidando Codex + Claude en el mismo <code>2026-06-24.md</code>, alineado con la rutina canonica.",
+        "Documentar el trabajo Claude del dia (regeneracion de <code>repos.html</code>) aun siendo previo a esta sesion, porque la rutina pide registrar lo realmente ejecutado en el repo durante el dia.",
+        "Publicar a traves de PR draft <code>main-fa5zg0 → main</code> en lugar de push directo a <code>main</code>, respetando las reglas del entorno remoto."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Push de <code>main-fa5zg0</code> y apertura de PR draft hacia <code>main</code> para integrar esta entrada en la web publica.",
+        "Verificar tras el merge que <code>https://csilvasantin.github.io/18.-diario/</code> muestra el bloque <code>[Claude]</code> del 2026-06-24 y que <code>https://csilvasantin.github.io/18.-diario/repos.html</code> sigue mostrando los 50 repos."
       ]}
     ]
   },
