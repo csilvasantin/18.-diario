@@ -352,45 +352,50 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de <code>diario-admirito</code> y se tomo como base la entrada ya existente de <code>2026-06-25</code> para actualizarla en vez de duplicarla.",
-          "Se audito la actividad real de hoy en <code>/Users/csilvasantin/Claude/diario/</code>, revisando los commits <code>9027ccb</code>, <code>a3b18b6</code>, <code>961c4a1</code> y <code>dfc8348</code>, todos fechados el 25 de junio de 2026.",
-          "Se reviso <code>AdmiraNext-Team</code> en los dos checkouts relevantes: <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/AdmiraNext-Team</code>, para distinguir trabajo ya consolidado de cambios locales todavia sin commit."
+          "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria <code>diario-admirito</code> y se tomo como base la entrada ya existente de <code>2026-06-25</code> para actualizarla en vez de duplicarla.",
+          "Se reviso el trabajo local de <code>github-csilvasantin/AdmiraNext-Team</code>, donde hoy se rehace la UI publica con un tema arcade tipo \"player select\": nuevo bloque <code>fighter-select</code>, fichas por miembro, perfil destacado, versionado <code>0.1.3</code> y resumen adaptado a estados <code>online</code>, <code>idle</code> y <code>offline</code>.",
+          "En <code>AdmiraNext-Team</code> tambien se actualiza <code>data/machines.json</code> para el Mac mini con IP local y comando <code>ssh</code> directo, y se renuevan las capturas <code>snap-admira-macbookair16.jpg</code>, <code>snap-admira-macbookpronegro14.jpg</code> y <code>snap-admira-macmini.jpg</code>.",
+          "Se reviso <code>github-csilvasantin/AdmiraNext-Team-latest</code>, donde hoy se endurece la capa de AppleScript remoto: <code>PORT</code> configurable por entorno, helper comun para componer <code>osascript</code> sobre SSH, soporte del estado <code>idle</code> y fusion mas segura de snapshots. Tambien se inspeccionaron cambios recientes del workspace en <code>csilvasantin.github.io</code>, <code>onboarding</code>, <code>pulpo</code> y <code>github-csilvasantin/diario</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "En <code>diario</code>, <code>git log --since='2026-06-25 00:00'</code> confirmo trabajo real del dia en el workspace: registro de handon/handoff en Diario de Silicio (<code>9027ccb</code>), restauracion obligatoria del fondo al retomar (<code>a3b18b6</code>), publicacion del handoff <code>HX-B3NK</code> (<code>961c4a1</code>) y la primera actualizacion de esta fecha (<code>dfc8348</code>).",
-          "En <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code>, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales ni commits nuevos hoy.",
-          "En <code>/Users/csilvasantin/AdmiraNext-Team</code>, <code>git status --short --branch</code> mostro <code>M data/machines.json</code> y tres no rastreados (<code>AdmiraNext-Team/</code> y dos capturas OCR de <code>admira-macmini</code>), mientras <code>git diff --stat</code> limito el cambio versionado a un refresco de <code>data/machines.json</code>."
+          "<code>node --check</code> pasa sobre <code>public/app.js</code> de <code>AdmiraNext-Team</code> y sobre <code>src/server.js</code> + <code>src/ssh-exec.js</code> de <code>AdmiraNext-Team-latest</code>, asi que al menos no hay errores de sintaxis JavaScript en los ficheros revisados.",
+          "<code>machines.json</code> parsea correctamente con Node tras anadir la IP local y el comando de conexion del Mac mini.",
+          "<code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> confirman identidad operativa de Oraculo y ausencia de tareas dirigidas durante esta pasada."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La entrada del 25 de junio queda alineada con el trabajo que si esta verificado hoy: mejoras en las skills de handon/handoff, publicacion de un handoff operativo y mantenimiento del propio diario.",
-          "<code>AdmiraNext-Team</code> queda reflejado como un frente de seguimiento, con inventario de maquinas refrescado localmente pero sin evidencia de commit publicado durante el dia."
+          "Queda identificado con precision que hoy el mayor bloque de trabajo fue un rediseño potente de <code>AdmiraNext-Team</code>, no un simple ajuste cosmetico.",
+          "Tambien queda separado el trabajo de producto/UI (<code>AdmiraNext-Team</code>) del trabajo tecnico de robustez remota (<code>AdmiraNext-Team-latest</code>), para no mezclar ambos frentes en el cierre.",
+          "Esta fecha del diario pasa a reflejar el estado real del workspace en lugar de limitarse a documentar la propia automatizacion."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La entrada vigente describia solo la automatizacion del diario y no separaba bien el trabajo comprometido en el workspace de los cambios locales pendientes en <code>AdmiraNext-Team</code>.",
-          "Hay deriva entre checkouts de <code>AdmiraNext-Team</code>: el clon de <code>Claude</code> esta limpio y el de <code>/Users/csilvasantin/AdmiraNext-Team</code> conserva cambios sin commit, lo que complica inferir si ese estado debe publicarse o descartarse."
+          "No aparece una suite de tests automatizados en <code>AdmiraNext-Team</code>; hoy solo queda validada la sintaxis y la coherencia del diff, no el comportamiento visual o remoto extremo a extremo.",
+          "Los cambios principales siguen sin commit en <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>, asi que todavia no hay punto de restauracion claro ni despliegue asociado.",
+          "El workspace tiene varios repos sucios a la vez, lo que aumenta el riesgo de mezclar trabajo publicado con material aun exploratorio si no se separan pronto los commits."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
           "Actualizar la entrada existente de <code>2026-06-25</code> en vez de crear otra, manteniendo una sola fecha por dia.",
-          "Registrar como hecho del dia solo lo que quedo verificado por <code>git</code> o por estado local observable, dejando <code>AdmiraNext-Team</code> marcado como cambio pendiente y no como avance ya cerrado."
+          "Priorizar <code>AdmiraNext-Team</code> como historia central del dia porque concentra el mayor volumen y la intencion mas clara de producto.",
+          "Registrar solo hechos verificables por diff y comandos locales, dejando <code>csilvasantin.github.io</code> y otros repos como contexto secundario mientras no haya validacion adicional."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Decidir si el refresco local de <code>data/machines.json</code> y las capturas OCR de <code>AdmiraNext-Team</code> deben convertirse en commit o limpiarse para volver a un estado unico.",
-          "Publicar esta actualizacion del diario y verificar que <code>https://csilvasantin.github.io/diario/</code> muestra la version corregida del 25 de junio de 2026."
+          "Levantar y probar visualmente <code>AdmiraNext-Team</code> para validar responsive, modo estatico/API y la nueva experiencia \"fighter select\" antes de commit.",
+          "Separar en commits pequenos y publicables el rediseño arcade de <code>AdmiraNext-Team</code> y el hardening SSH/AppleScript de <code>AdmiraNext-Team-latest</code>.",
+          "Decidir despues si los cambios locales de <code>csilvasantin.github.io</code> ya estan listos para publicarse o siguen como borrador de contexto."
         ]
       }
     ]
