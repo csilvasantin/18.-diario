@@ -89,7 +89,16 @@ canónica vive en `HANDOFF.md` del repo, pero las rutas correctas son las de aba
     Envía cabecera `📦 Handoff HX-XXXX` con URL, el contenido troceado en chunks
     `[HX-XXXX · i/N]` para copy-paste, y el `.md` como adjunto.
 
-11. **Reporta** a Carlos el código + URL pública. NO captura de pantalla.
+11. **Registra el handoff en el Diario de Silicio** (worker en vivo de admira.live), para que
+    todo el equipo lo vea sin abrir Telegram. Idempotente y portable:
+    ```bash
+    [ -x ~/Claude/admira-vault/diario-post.sh ] && \
+      bash ~/Claude/admira-vault/diario-post.sh handoff "Handoff HX-XXXX — <foco breve>" \
+        "https://csilvasantin.github.io/18.-diario/handoff/YYYY-MM-DD-HX-XXXX.md"
+    ```
+    Etiqueta solo persona+máquina activas; aparece en https://www.admira.live/diario.html.
+
+12. **Reporta** a Carlos el código + URL pública. NO captura de pantalla.
 
 ## Lo que NO hace
 

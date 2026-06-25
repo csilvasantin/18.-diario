@@ -31,6 +31,14 @@ Autocontenido y portable: clona el repo si falta, no depende de ninguna memoria.
    servicio NO está cargado, imprime el comando único para arrancarlo (la persistencia la
    lanza Carlos: el harness bloquea a los agentes). Pásale ese comando si aparece.
 
+   Acto seguido, **anuncia el arranque en el Diario de Silicio** (worker en vivo de admira.live)
+   para que el equipo sepa que retomas; deja además tu presencia activa:
+   ```bash
+   [ -x ~/Claude/admira-vault/diario-post.sh ] && \
+     bash ~/Claude/admira-vault/diario-post.sh arranque "Retomando sesión en esta máquina"
+   ```
+   Aparece en https://www.admira.live/diario.html (etiquetado por tu persona + máquina).
+
 2. **Localiza el repo** del diario (clónalo si no existe en este Mac):
    ```bash
    bash "$HOME/Documents/New project/csilvasantin-repos/18.-diario/skills/lib/locate-repo.sh"
