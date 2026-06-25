@@ -349,40 +349,50 @@ const entries = [
     member: "Carlos Silva",
     author: "Codex",
     sections: [
-      { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se intento leer la memoria de <code>actualizar-diario-2</code>, detectando que <code>CODEX_HOME</code> venia vacio en este entorno.",
-        "Se revisaron <code>README.md</code>, <code>routines/update.md</code>, <code>2026-06-24.md</code> e <code>index.html</code> para seguir el formato vigente del diario y confirmar donde insertar la fecha nueva sin duplicados.",
-        "Se inspecciono el estado del repo con <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git fetch origin main</code>, <code>git log --since='2026-06-25 00:00' --until='2026-06-25 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-25 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se hizo <code>git merge --ff-only origin/main</code>, avanzando este worktree de <code>6ad4de6</code> a <code>961c4a1</code>; despues se crea <code>2026-06-25.md</code>, se actualiza <code>index.html</code>, se hace el commit local <code>e43a598 Diario 2026-06-25 [Codex]</code> y, tras un <code>git push origin HEAD:main</code> rechazado con <code>fetch first</code>, se inicia un rebase sobre <code>origin/main</code> para consolidar una sola entrada del dia."
-      ]},
-      { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> al arrancar, sin cambios locales previos en este worktree.",
-        "<code>git remote -v</code> confirmo <code>origin https://github.com/csilvasantin/diario.git</code> para <code>fetch</code> y <code>push</code>.",
-        "<code>git log --since='2026-06-25 00:00' --until='2026-06-25 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa del dia en este repo: <code>961c4a1 Handoff HX-B3NK — Diario de Silicio en vivo + FleetControl + Telegram adjuntos + barra SCUMM</code>, <code>9027ccb feat(skills): handon/handoff registran en el Diario de Silicio (admira.live)</code>, <code>a3b18b6 feat(handon): aplicar SIEMPRE el fondo de la persona al retomar (ensure-persona.sh)</code> y <code>874065d chore: actualizar repos.html 2026-06-25 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-06-25 00:00'</code> confirmo la posicion inicial <code>6ad4de6 HEAD@{2026-06-25 21:31:57 +0200}</code> antes de sincronizar.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-25 21:32:32 CEST +0200</code> durante el pre-check.",
-        "Un segundo <code>git fetch origin main</code> mostro que <code>origin/main</code> avanzo de <code>961c4a1</code> a <code>dfc8348 Actualizar diario 2026-06-25 [Codex]</code>, lo que explica el rechazo del primer <code>push</code> y obliga a consolidar la fecha en vez de duplicarla."
-      ]},
-      { heading: "Avances", items: [
-        "La fecha <code>2026-06-25</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin dejar dos versiones concurrentes del mismo autor.",
-        "<code>index.html</code> vuelve a quedar alineado con el Markdown y con una sola entrada visible para el <code>25 de junio de 2026</code>.",
-        "Este cierre queda apoyado en evidencia real del propio repo <code>diario</code>, incluyendo la sincronizacion del worktree, la carrera remota detectada y la consolidacion posterior."
-      ]},
-      { heading: "Problemas encontrados", items: [
-        "El entorno arranco con <code>HEAD</code> desacoplado, asi que no era prudente editar sin sincronizar primero con <code>origin/main</code>.",
-        "<code>CODEX_HOME</code> venia vacio, por lo que la ruta de memoria de la automatizacion no podia resolverse por variable de entorno.",
-        "Mientras se cerraba esta corrida, otro checkout publico <code>dfc8348 Actualizar diario 2026-06-25 [Codex]</code> en <code>origin/main</code>, lo que hizo fallar el primer <code>push</code> con <code>fetch first</code>."
-      ]},
-      { heading: "Decisiones tomadas", items: [
-        "Tomar <code>origin/main</code> como base canonica antes de editar para evitar publicar una entrada nueva sobre un checkout atrasado.",
-        "Sustituir la version breve ya publicada de <code>2026-06-25</code> por una entrada consolidada con mas evidencia verificable, manteniendo una sola fecha y una sola autoria <code>Codex</code>.",
-        "Registrar solo comandos ejecutados y commits verificables del <code>2026-06-25</code>, sin inferir actividad externa no comprobada."
-      ]},
-      { heading: "Siguientes pasos", items: [
-        "Revisar el diff de <code>2026-06-25.md</code> e <code>index.html</code>.",
-        "Terminar el rebase, repetir <code>git push origin HEAD:main</code> y dejar <code>main</code> actualizado con esta version consolidada.",
-        "Verificar despues que <code>https://csilvasantin.github.io/diario/</code> responde y deja visible la fecha de hoy."
-      ]}
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de <code>diario-admirito</code> y se tomo como base la entrada ya existente de <code>2026-06-25</code> para actualizarla en vez de duplicarla.",
+          "Se audito la actividad real de hoy en <code>/Users/csilvasantin/Claude/diario/</code>, revisando los commits <code>9027ccb</code>, <code>a3b18b6</code>, <code>961c4a1</code> y <code>dfc8348</code>, todos fechados el 25 de junio de 2026.",
+          "Se reviso <code>AdmiraNext-Team</code> en los dos checkouts relevantes: <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/AdmiraNext-Team</code>, para distinguir trabajo ya consolidado de cambios locales todavia sin commit."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En <code>diario</code>, <code>git log --since='2026-06-25 00:00'</code> confirmo trabajo real del dia en el workspace: registro de handon/handoff en Diario de Silicio (<code>9027ccb</code>), restauracion obligatoria del fondo al retomar (<code>a3b18b6</code>), publicacion del handoff <code>HX-B3NK</code> (<code>961c4a1</code>) y la primera actualizacion de esta fecha (<code>dfc8348</code>).",
+          "En <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code>, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales ni commits nuevos hoy.",
+          "En <code>/Users/csilvasantin/AdmiraNext-Team</code>, <code>git status --short --branch</code> mostro <code>M data/machines.json</code> y tres no rastreados (<code>AdmiraNext-Team/</code> y dos capturas OCR de <code>admira-macmini</code>), mientras <code>git diff --stat</code> limito el cambio versionado a un refresco de <code>data/machines.json</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada del 25 de junio queda alineada con el trabajo que si esta verificado hoy: mejoras en las skills de handon/handoff, publicacion de un handoff operativo y mantenimiento del propio diario.",
+          "<code>AdmiraNext-Team</code> queda reflejado como un frente de seguimiento, con inventario de maquinas refrescado localmente pero sin evidencia de commit publicado durante el dia."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La entrada vigente describia solo la automatizacion del diario y no separaba bien el trabajo comprometido en el workspace de los cambios locales pendientes en <code>AdmiraNext-Team</code>.",
+          "Hay deriva entre checkouts de <code>AdmiraNext-Team</code>: el clon de <code>Claude</code> esta limpio y el de <code>/Users/csilvasantin/AdmiraNext-Team</code> conserva cambios sin commit, lo que complica inferir si ese estado debe publicarse o descartarse."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Actualizar la entrada existente de <code>2026-06-25</code> en vez de crear otra, manteniendo una sola fecha por dia.",
+          "Registrar como hecho del dia solo lo que quedo verificado por <code>git</code> o por estado local observable, dejando <code>AdmiraNext-Team</code> marcado como cambio pendiente y no como avance ya cerrado."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Decidir si el refresco local de <code>data/machines.json</code> y las capturas OCR de <code>AdmiraNext-Team</code> deben convertirse en commit o limpiarse para volver a un estado unico.",
+          "Publicar esta actualizacion del diario y verificar que <code>https://csilvasantin.github.io/diario/</code> muestra la version corregida del 25 de junio de 2026."
+        ]
+      }
     ]
   },
   {
