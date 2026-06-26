@@ -350,36 +350,37 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se consulto la memoria de la automatizacion <code>actualizar-diario-2</code> antes de editar el diario.",
-        "Se revisaron <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git branch -vv --all</code>, <code>README.md</code>, <code>CERRAR-EL-DIA.md</code> e <code>index.html</code> para confirmar el estado del checkout, el formato vigente y el punto exacto donde insertar la fecha nueva.",
-        "Se hizo el pre-check del dia con <code>git log --since='2026-06-26 00:00' --until='2026-06-26 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-26 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se crea <code>2026-06-26.md</code> y se actualiza <code>index.html</code> para publicar una unica entrada Markdown/HTML correspondiente al dia de hoy firmada como <code>[Codex]</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -> Oraculo (Codex·gmail)</code> y se revisaron <code>tasks</code>, <code>inbox</code> y la bandeja local antes de tocar el diario.",
+        "Se hizo el pre-check en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-26 00:00' --until='2026-06-26 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-26 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se detecto que el checkout local iba por detras de <code>origin/main</code>, se hizo <code>git fetch origin main</code> y <code>git pull --rebase origin main</code>, y se revisaron <code>handoff/2026-06-26-HX-N4SH.md</code> y el commit <code>71613b2</code> para resumir la actividad real del dia.",
+        "Se creo <code>2026-06-26.md</code> y se actualizo <code>index.html</code> para publicar una entrada breve de hoy con avances, bloqueos y siguientes pasos verificados."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> al arrancar, sin cambios locales pendientes en este worktree.",
-        "<code>git remote -v</code> confirmo <code>origin https://github.com/csilvasantin/diario.git</code> para <code>fetch</code> y <code>push</code>.",
-        "<code>git log --since='2026-06-26 00:00' --until='2026-06-26 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits previos del <code>2026-06-26</code>, asi que no habia evidencia real anterior que consolidar en esta fecha dentro de este repo.",
-        "<code>git reflog --date=iso --since='2026-06-26 00:00'</code> mostro <code>2c920e5 HEAD@{2026-06-26 21:30:03 +0200}</code> como punto de partida local de esta corrida.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-26 21:30:35 CEST +0200</code> durante la comprobacion inicial."
+        "<code>git fetch origin main</code> seguido de <code>git rev-list --left-right --count origin/main...HEAD</code> mostro primero <code>3 0</code>, confirmando que faltaban tres commits remotos antes de rebasar.",
+        "<code>git pull --rebase origin main</code> dejo el repo en <code>71613b2</code>, incorporando <code>363fb77 chore: actualizar repos.html 2026-06-26 [skip ci]</code>, <code>dc1cb6f Handoff HX-N4SH — admira.tv core de signage: bucle /grid + canales/proyectos</code> y <code>71613b2 docs: Update repos.html — tabla de proyectos 2026-06-26 [Claude]</code>.",
+        "<code>git status --short --branch</code> y <code>git rev-list --left-right --count origin/main...HEAD</code> devolvieron despues <code>## main...origin/main</code> y <code>0 0</code>, dejando el checkout sincronizado para esta edicion.",
+        "El handoff <code>HX-N4SH</code> documento avances reales en <code>admira.tv</code>, <code>pixer-worker</code>, <code>admira-design</code> y <code>claude-dotfiles</code>, y dejo explicitado el bloqueo de los <code>pixerScreens</code> de Xtanco por falta de IDs reales de los players.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-26 21:31:11 CEST +0200</code> durante esta pasada."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-06-26</code> queda creada como un unico fichero Markdown de diario para Codex, sin duplicar la jornada.",
-        "<code>index.html</code> queda alineado con la entrada nueva para que la UI publica pueda mostrar el <code>26 de junio de 2026</code>.",
-        "La entrada de hoy queda sustentada solo en comandos ejecutados y estado verificable del repo <code>diario</code>."
+        "<code>admira.tv</code> queda empujado como core de signage con la vista <code>Programar</code>, selector de canal, editor de canales y soporte de audio dentro del flujo <code>/grid</code>.",
+        "<code>pixer-worker</code> ya expone <code>/grid/projects</code> y acepta <code>audio</code> en <code>gridCleanCreative</code>, dejando la capa de canales/proyectos preparada de extremo a extremo.",
+        "<code>repos.html</code> quedo actualizado hoy y este cierre deja tambien el diario alineado con esa actividad en la UI publica."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El worktree arranco en <code>HEAD</code> desacoplado, asi que hubo que validar con cuidado que la base coincidiera con <code>origin/main</code> antes de publicar.",
-        "No habia commits previos del <code>2026-06-26</code> en el repo, por lo que no era correcto inferir actividad externa ni rellenar la fecha con trabajo no comprobado."
+        "El checkout local estaba atrasado respecto a <code>origin/main</code>, asi que no era seguro escribir la entrada sin rebase previo.",
+        "El mapeo de superficies Xtanco a players fisicos sigue bloqueado: solo constan <code>xtore-lg8qao</code> y <code>xtore-inicial</code>, y ninguno estaba emitiendo como referencia suficiente para mapear el resto sin riesgo.",
+        "<code>claude-dotfiles/payload/settings.json</code> sigue pendiente de push porque el propio agente no puede propagar sus guardas de permisos."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Registrar unicamente la actividad real de esta corrida de automatizacion como contenido del <code>2026-06-26</code>.",
-        "Mantener una sola entrada por fecha tanto en <code>2026-06-26.md</code> como en el array <code>entries</code> de <code>index.html</code>.",
-        "Publicar el cambio con un commit que incluya <code>Codex</code> para que la UI asociada pueda identificar correctamente el ultimo LLM que actualizo el repo."
+        "Basar la entrada de hoy en evidencia verificable del repo <code>diario</code> y del handoff <code>HX-N4SH</code>, en vez de inferir trabajo externo no trazado aqui.",
+        "Reflejar como decision operativa que <code>admira.tv</code> sea la capa robusta de emision y que la gestion owner completa siga en <code>xpaceos.com/control</code>, tal como dejo fijado el handoff.",
+        "No mapear pantallas Xtanco a ciegas; el siguiente paso correcto es esperar los IDs reales de Carlos o que los equipos se registren."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff final de <code>2026-06-26.md</code> e <code>index.html</code>.",
-        "Hacer <code>git add</code>, <code>git commit</code> y <code>git push</code> para dejar publicado el cierre de hoy en <code>origin/main</code>.",
-        "Comprobar despues que <code>https://csilvasantin.github.io/diario/</code> responde y deja visible la novedad del dia."
+        "Revisar el diff de <code>2026-06-26.md</code> e <code>index.html</code>, hacer <code>git add</code>, <code>git commit -m \"Diario 2026-06-26 [Codex]\"</code> y <code>git push origin main</code>.",
+        "Verificar despues que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra el <code>26 de junio de 2026</code>.",
+        "Cuando Carlos tenga los IDs reales, completar el mapeo <code>POST /grid/config</code> para las superficies de Xtanco que siguen sin asociacion fiable."
       ]}
     ]
   },
