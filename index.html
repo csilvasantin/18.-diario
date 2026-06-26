@@ -350,13 +350,13 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se leyeron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica publicada en GitHub, que hoy redirige al repo publico <code>csilvasantin/18.-diario</code>.",
+        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora alive --from Codex --loop --every 60</code>, y se leyeron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica publicada en GitHub, que hoy redirige al repo publico <code>csilvasantin/18.-diario</code>.",
         "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-26 00:00' --until='2026-06-26 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-26 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
         "Se revisaron <code>2026-06-26.md</code>, <code>index.html</code> y el ultimo commit <code>ea73b43 Diario 2026-06-26 [Codex]</code> para contrastar lo ya publicado hoy con el estado real del cierre actual.",
         "Se reescriben <code>2026-06-26.md</code> e <code>index.html</code> para que la fecha refleje esta corrida real del cierre, conserve la firma <code>[Codex]</code> y vuelva a cumplir la plantilla de seis secciones numeradas."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin dirty worktree en este checkout.",
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin dirty worktree en este checkout, y <code>git fetch origin main</code> seguido de <code>git rev-list --left-right --count origin/main...HEAD</code> devolvio <code>0\t0</code>, confirmando sincronizacion exacta con <code>origin/main</code>.",
         "<code>git log --since='2026-06-26 00:00' --until='2026-06-26 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real del dia en este repo, incluyendo <code>0cc0631 Diario 2026-06-25 [Codex]</code>, <code>363fb77 chore: actualizar repos.html 2026-06-26 [skip ci]</code>, <code>dc1cb6f Handoff HX-N4SH — admira.tv core de signage: bucle /grid + canales/proyectos</code>, <code>71613b2 docs: Update repos.html — tabla de proyectos 2026-06-26 [Claude]</code>, <code>6cac3d4 Diario 2026-06-26 [Codex]</code>, <code>126435b Diario 2026-06-26 [Codex]</code>, <code>3d417a1 Diario 2026-06-26 [Codex]</code> y <code>ea73b43 Diario 2026-06-26 [Codex]</code>.",
         "<code>git reflog --date=iso --since='2026-06-26 00:00'</code> confirmo la secuencia local de hoy: commits <code>e73ca43</code> y <code>56c4070</code> reescritos tras <code>pull --rebase origin main</code>, con finales en <code>126435b</code> a las <code>21:35:21 +0200</code> y <code>ea73b43</code> a las <code>23:54:47 +0200</code>.",
         "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-26 23:56:35 CEST +0200</code> durante el pre-check de esta sesion.",
@@ -370,7 +370,7 @@ const entries = [
       { heading: "Problemas encontrados", items: [
         "La entrada publicada de hoy habia quedado mal formada: faltaban secciones obligatorias del cierre, pese a que el fichero ya se habia actualizado varias veces durante el dia.",
         "La fuente canonica indicada por la rutina ya no resuelve bajo el slug <code>diario</code>; GitHub la redirige al repositorio publico <code>18.-diario</code>, y hubo que seguir esa redireccion para contrastar el contenido.",
-        "<code>CODEX_HOME</code> aparecio vacio en esta sesion, asi que la memoria de automatizacion tuvo que localizarse por ruta inferida en lugar de por variable exportada."
+        "La rutina exigio contrastar la copia local con la fuente canonica online porque la URL historica del repo ya no coincide con el slug actual visible en GitHub."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Sustituir el bloque vigente del <code>2026-06-26</code> por una version basada solo en esta corrida y en evidencia <code>git</code> comprobable del repo <code>diario</code>.",
