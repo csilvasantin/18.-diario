@@ -350,30 +350,32 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> y se reviso la memoria reciente de la automatizacion para no repetir el cierre de ayer.",
-        "Se contrasto la actividad ya documentada hoy en <code>2026-06-27.md</code> con el estado real de los repos de <code>~/Claude</code>, poniendo foco en <code>AdmiraNext-Team</code> y en los cambios recientes visibles del workspace.",
-        "Se actualizo esta misma entrada para dejar un resumen corto de seguimiento sin duplicar la fecha ni rehacer el relato tecnico principal del dia."
+        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> antes de revisar el trabajo de hoy.",
+        "Se inspeccionaron los repos activos del workspace de Admirito, con foco en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/AdmiraNext-Team-latest</code>, <code>04.- AdmiraGemini</code> y <code>ACE-Step</code>.",
+        "Se actualiza esta misma fecha para resumir los cambios locales visibles de hoy sin duplicar la cronica principal ya escrita antes en esta entrada."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git -C /Users/csilvasantin/Claude/AdmiraNext-Team status --short</code> salio vacio y <code>git log -1</code> situo su ultimo commit en <code>2026-04-10 15:33:58 +0200</code>, asi que hoy no hubo actividad nueva en ese checkout.",
-        "El unico repo con commits fechados hoy en <code>~/Claude</code> fue <code>diario</code>, y los ficheros tocados hoy que aparecen en el workspace fueron <code>diario/2026-06-27.md</code>, <code>diario/index.html</code> y <code>diario/repos.html</code>.",
-        "<code>git -C /Users/csilvasantin/Claude/diario log --since='2026-06-27 00:00' --until='2026-06-27 23:59:59'</code> confirmo que el trabajo fuerte del dia ya estaba reflejado aqui: players de <code>admira-player</code>, pagina <code>admira.tv/player</code>, TestFlight Apple y frente Echo Show."
+        "<code>AdmiraNext-Team</code> no trae commits fechados hoy, pero si cambios locales grandes sin publicar: rediseño arcade de <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, subida de version a <code>0.1.3</code>, refresco de screenshots y nuevos datos SSH locales en <code>data/machines.json</code>.",
+        "<code>AdmiraNext-Team-latest</code> refleja endurecimiento del backend de control: <code>PORT</code> configurable por entorno, soporte del estado <code>idle</code> y una unica rutina de escape para <code>osascript</code> remoto en <code>src/ssh-exec.js</code>.",
+        "<code>AdmiraGemini</code> anade una UI local (<code>admira-gemini-ui</code>, <code>src/admira_gemini/web.py</code>, <code>tests/test_web.py</code>) y <code>ACE-Step</code> incorpora fallback con <code>soundfile</code> cuando <code>torchaudio.save</code> falla al exportar audio.",
+        "En <code>AdmiraNext-Team</code> no aparecio una validacion automatica clara: <code>package.json</code> solo define <code>start</code>, asi que no hay evidencia de test o build ejecutados hoy desde el repo."
       ]},
       { heading: "Avances", items: [
-        "La entrada de hoy queda ajustada para separar el trabajo real del producto de la simple mecanica de publicar el diario.",
-        "Queda explicitado que <code>AdmiraNext-Team</code> no fue el foco de hoy y que el movimiento visible se concentro en la linea de <code>admira-player</code> y en el propio repo <code>diario</code>."
+        "El workspace enseña una linea clara de trabajo en torno a operaciones internas: panel del equipo mas visual, mejor control remoto entre maquinas y herramientas locales nuevas para Gemini.",
+        "La fecha queda actualizada con evidencia de cambios reales del workspace, no solo del repo <code>diario</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El prompt pedia revisar especialmente <code>AdmiraNext-Team</code>, pero el checkout local no tuvo cambios ni commits de hoy, asi que no habia base para atribuirle actividad nueva.",
-        "La entrada <code>2026-06-27.md</code> ya contenia bastante detalle operativo; anadir otra cronica larga de Codex solo habria metido ruido."
+        "<code>AdmiraNext-Team</code> esta <code>behind 303</code> respecto a <code>origin/main</code>, con bastante trabajo aun sin commit, asi que mezclar publicacion y sincronizacion requerira cuidado.",
+        "Los cambios relevantes de hoy aparecen sobre todo como diffs locales; sin commit ni pruebas registradas no conviene tratarlos como entregas cerradas."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola fecha <code>2026-06-27</code> y reutilizar el bloque <code>[Codex]</code> existente, actualizandolo en vez de anadir otro.",
-        "Dejar el bloque de Codex como capa de control: que se reviso, que se comprobo, que no aparecio y donde conviene mirar despues."
+        "Mantener una sola fecha <code>2026-06-27</code> y reutilizar el bloque <code>[Codex]</code> existente en vez de anadir otra entrada paralela.",
+        "Describir <code>AdmiraNext-Team</code> por lo que si esta comprobado en diff local y separar eso de lo que aun no esta validado ni publicado."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Si aparecen commits reales en <code>AdmiraNext-Team</code> o en otros repos de Admirito, incorporarlos en esta misma fecha con evidencia de <code>git</code>.",
-        "Tomar este resumen como base del cierre del dia, manteniendo el foco en despliegue Apple, skill de Alexa y activacion de CI donde hoy quedaron flecos."
+        "Arrancar <code>AdmiraNext-Team</code> en local y revisar visualmente el modo arcade antes de publicar o rebasar esos cambios contra <code>origin/main</code>.",
+        "Decidir si <code>AdmiraNext-Team-latest</code> se consolida en el repo principal o si sigue como rama de pruebas separada.",
+        "Cuando haya commit o verificacion real de estas lineas, ampliar esta misma fecha con hash, resultado y URL si aplica."
       ]}
     ]
   },
