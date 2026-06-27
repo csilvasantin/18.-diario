@@ -350,30 +350,40 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> para arrancar la sesion con presencia activa.",
-        "Se reviso el checkout limpio en <code>/Users/csilvasantin/Claude/diario/</code> y el patron reciente del diario en <code>2026-06-26.md</code>, <code>2026-06-25.md</code> e <code>index.html</code>.",
-        "Se creo la entrada <code>2026-06-27.md</code> y se actualizo <code>index.html</code> para dejar preparado el resumen de hoy con formato breve y claro."
+        "Se ejecuto <code>agora-checkin codex start</code> al arrancar la sesion y se comprobo que la memoria de la automatizacion <code>actualizar-diario-2</code> todavia no existia en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code>.",
+        "Se revisaron el arbol del repo y el estado del checkout con <code>rg --files</code>, <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git log --oneline --decorate -5</code> y <code>git branch -a --verbose --no-abbrev</code>.",
+        "Se leyeron <code>2026-06-26.md</code>, <code>README.md</code>, <code>routines/update.md</code>, <code>2026-06-27.md</code> e <code>index.html</code> para mantener una sola fecha en Markdown y dejar visible en HTML la novedad de hoy.",
+        "Se detecto que este worktree arrancaba en <code>detached HEAD</code> sobre <code>3d417a1</code>, se creo la rama temporal <code>codex-actualizar-diario-2026-06-27</code>, se hizo el commit <code>fd20535</code> y, tras el rechazo del push, se trajo <code>origin/main</code> para integrar la entrada del dia ya existente antes de publicar.",
+        "Se actualizo <code>index.html</code> para anadir la entrada publica <code>2026-06-27</code> de <code>Codex</code> y se incorporo este cierre al final del mismo <code>2026-06-27.md</code>, sin abrir un segundo fichero."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> en el repo <code>diario</code> devolvio <code>## main...origin/main</code>, sin cambios locales antes de editar.",
-        "<code>git log --since='2026-06-27 00:00' --until='2026-06-27 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-27 00:00'</code> no mostraron actividad previa del dia en este repo.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-27 21:31:48 CEST +0200</code> durante esta actualizacion."
+        "<code>git status --short --branch</code> devolvio primero <code>## HEAD (no branch)</code>, confirmando que esta copia arrancaba en estado desacoplado aunque alineada con <code>origin/main</code>.",
+        "<code>git branch -a --verbose --no-abbrev</code> mostro <code>origin/main</code> y <code>HEAD</code> en <code>3d417a125ede5d36c1c0a5c865771ff7fccdaa5c</code>, mientras la rama local <code>main</code> seguia <code>behind 530</code>.",
+        "<code>git switch main &amp;&amp; git merge --ff-only origin/main</code> fallo con <code>fatal: 'main' is already used by worktree at '/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario'</code>, dejando evidencia de por que hacia falta una rama temporal en este worktree.",
+        "<code>git push origin HEAD:main</code> fue rechazado porque el remoto avanzo hasta <code>e84f758</code>, y <code>git log --oneline --decorate --left-right --graph HEAD...origin/main -10</code> mostro seis commits nuevos del <code>2026-06-27</code> ya publicados en <code>origin/main</code>.",
+        "<code>git show origin/main:2026-06-27.md</code> confirmo que la fecha ya existia en remoto y que la carencia real estaba en <code>index.html</code>, que todavia no exponia el <code>27 de junio de 2026</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-27 21:32:15 CEST +0200</code> durante la revision previa."
       ]},
       { heading: "Avances", items: [
-        "El diario vuelve a tener una entrada propia para la fecha de hoy en Markdown y en la web publica.",
-        "La entrada deja constancia explicita de que hoy no habia actividad previa registrada en este repo antes de esta automatizacion."
+        "La fecha <code>2026-06-27</code> queda consolidada en un unico Markdown con la actividad del dia ya publicada y este cierre adicional de <code>Codex</code>.",
+        "<code>index.html</code> pasa a incluir por fin una entrada <code>2026-06-27</code>, haciendo visible la novedad del dia en la UI publica del diario.",
+        "El cierre queda preparado para publicarse desde este worktree sin tocar la rama <code>main</code> que esta ocupada en otra copia local."
       ]},
       { heading: "Problemas encontrados", items: [
-        "No existia aun <code>2026-06-27.md</code>, asi que la fecha de hoy no estaba representada en el diario.",
-        "No habia commits previos del dia en <code>diario</code>, por lo que el contenido debia limitarse a hechos verificables de esta propia ejecucion."
+        "Este checkout arrancaba en <code>detached HEAD</code>, lo que no era un estado comodo para dejar el cierre final.",
+        "La rama local <code>main</code> esta bloqueada en otro worktree del mismo repo, asi que no se puede reutilizar aqui sin interferir con la copia de <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario</code>.",
+        "El primer push fracaso porque otra automatizacion habia publicado varios commits del <code>2026-06-27</code> entre la inspeccion inicial y el envio.",
+        "La memoria de <code>actualizar-diario-2</code> no existia todavia, asi que no habia contexto persistido que reaprovechar al empezar."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada <code>[Codex]</code> para el 27 de junio de 2026, sin duplicar bloques ni inventar actividad externa.",
-        "Usar un resumen corto y factual, centrado en lo importante: estado, decision, avance y siguiente paso."
+        "No sobrescribir la entrada remota del <code>2026-06-27</code>; la salida correcta era integrarla y anadir este cierre en el mismo fichero.",
+        "Publicar en HTML una entrada nueva de <code>Codex</code> para el <code>27 de junio de 2026</code>, ya que <code>origin/main:index.html</code> aun no la mostraba.",
+        "Mantener una sola fecha en Markdown y resolver el cierre desde una rama temporal local con rebase sobre <code>origin/main</code>."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Si hoy aparecen avances adicionales, ampliar esta misma entrada sin abrir otro fichero para la fecha.",
-        "Usar esta base como referencia del cierre del dia cuando toque consolidarlo."
+        "Terminar el rebase, crear el commit final sobre <code>origin/main</code> y empujar a <code>main</code>.",
+        "Verificar despues que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra el <code>27 de junio de 2026</code>.",
+        "Guardar un resumen breve de esta corrida en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code>."
       ]}
     ]
   },
