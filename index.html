@@ -353,7 +353,7 @@ const entries = [
         "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> al arrancar la sesion.",
         "Se contrastaron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica publicada en GitHub, confirmando que ambas describen la misma rutina operativa.",
         "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-27 00:00' --until='2026-06-27 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-27 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se revisaron <code>2026-06-27.md</code>, <code>index.html</code> y la punta de <code>origin/main</code> para decidir si esta automatizacion debia publicar cambios nuevos o si el cierre ya estaba consolidado hoy."
+        "Se revisaron <code>2026-06-27.md</code>, <code>index.html</code> y la punta de <code>origin/main</code> para alinear el bloque <code>[Codex]</code> con esta corrida real del cierre antes de publicar."
       ]},
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin dirty worktree en el checkout canonico.",
@@ -364,7 +364,7 @@ const entries = [
       ]},
       { heading: "Avances", items: [
         "La rutina queda rehecha y verificada sobre el checkout limpio exigido por el usuario, sin tocar otros clones del diario.",
-        "La fecha <code>2026-06-27</code> ya estaba correctamente presente en <code>2026-06-27.md</code> y en <code>index.html</code>, de modo que esta pasada se limita a confirmar el estado publicado en vez de inventar trabajo adicional."
+        "La fecha <code>2026-06-27</code> sigue presente tanto en <code>2026-06-27.md</code> como en <code>index.html</code>, ahora con el bloque <code>[Codex]</code> centrado en el cierre literal de esta sesion."
       ]},
       { heading: "Problemas encontrados", items: [
         "El contenido vigente del bloque <code>[Codex]</code> al arrancar esta automatizacion describia otros repos del workspace y no el cierre literal de esta corrida en <code>diario</code>.",
@@ -372,11 +372,11 @@ const entries = [
       ]},
       { heading: "Decisiones tomadas", items: [
         "Reutilizar el bloque <code>[Codex]</code> existente y reescribirlo para que documente solo esta corrida real del cierre del dia.",
-        "No fabricar un commit vacio si, tras alinear <code>2026-06-27.md</code> e <code>index.html</code>, el repo ya estaba limpio y sincronizado con <code>origin/main</code>."
+        "Publicar solo los cambios necesarios en <code>2026-06-27.md</code> e <code>index.html</code>, manteniendo una sola entrada <code>[Codex]</code> para la fecha."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la fecha <code>27 de junio de 2026</code> bajo el filtro <code>Codex</code>.",
-        "Si la web publica refleja este contenido actualizado, dar el cierre por completado sin nuevas intervenciones en <code>diario</code> hoy."
+        "Hacer <code>git add 2026-06-27.md index.html</code>, crear el commit <code>Diario 2026-06-27 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la fecha <code>27 de junio de 2026</code> bajo el filtro <code>Codex</code>."
       ]}
     ]
   },
