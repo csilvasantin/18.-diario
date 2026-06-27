@@ -344,6 +344,40 @@
 <script>
 const entries = [
   {
+    date: "2026-06-27",
+    title: "27 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> para arrancar la sesion con presencia activa.",
+        "Se reviso el checkout limpio en <code>/Users/csilvasantin/Claude/diario/</code> y el patron reciente del diario en <code>2026-06-26.md</code>, <code>2026-06-25.md</code> e <code>index.html</code>.",
+        "Se creo la entrada <code>2026-06-27.md</code> y se actualizo <code>index.html</code> para dejar preparado el resumen de hoy con formato breve y claro."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> en el repo <code>diario</code> devolvio <code>## main...origin/main</code>, sin cambios locales antes de editar.",
+        "<code>git log --since='2026-06-27 00:00' --until='2026-06-27 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-27 00:00'</code> no mostraron actividad previa del dia en este repo.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-27 21:31:48 CEST +0200</code> durante esta actualizacion."
+      ]},
+      { heading: "Avances", items: [
+        "El diario vuelve a tener una entrada propia para la fecha de hoy en Markdown y en la web publica.",
+        "La entrada deja constancia explicita de que hoy no habia actividad previa registrada en este repo antes de esta automatizacion."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "No existia aun <code>2026-06-27.md</code>, asi que la fecha de hoy no estaba representada en el diario.",
+        "No habia commits previos del dia en <code>diario</code>, por lo que el contenido debia limitarse a hechos verificables de esta propia ejecucion."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Mantener una sola entrada <code>[Codex]</code> para el 27 de junio de 2026, sin duplicar bloques ni inventar actividad externa.",
+        "Usar un resumen corto y factual, centrado en lo importante: estado, decision, avance y siguiente paso."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Si hoy aparecen avances adicionales, ampliar esta misma entrada sin abrir otro fichero para la fecha.",
+        "Usar esta base como referencia del cierre del dia cuando toque consolidarlo."
+      ]}
+    ]
+  },
+  {
     date: "2026-06-26",
     title: "26 de junio de 2026",
     member: "Carlos Silva",
