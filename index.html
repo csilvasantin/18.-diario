@@ -350,32 +350,33 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> antes de revisar el trabajo de hoy.",
-        "Se inspeccionaron los repos activos del workspace de Admirito, con foco en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/AdmiraNext-Team-latest</code>, <code>04.- AdmiraGemini</code> y <code>ACE-Step</code>.",
-        "Se actualiza esta misma fecha para resumir los cambios locales visibles de hoy sin duplicar la cronica principal ya escrita antes en esta entrada."
+        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> al arrancar la sesion.",
+        "Se contrastaron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica publicada en GitHub, confirmando que ambas describen la misma rutina operativa.",
+        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-27 00:00' --until='2026-06-27 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-27 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se revisaron <code>2026-06-27.md</code>, <code>index.html</code> y la punta de <code>origin/main</code> para decidir si esta automatizacion debia publicar cambios nuevos o si el cierre ya estaba consolidado hoy."
       ]},
       { heading: "Que se valido", items: [
-        "<code>AdmiraNext-Team</code> no trae commits fechados hoy, pero si cambios locales grandes sin publicar: rediseño arcade de <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, subida de version a <code>0.1.3</code>, refresco de screenshots y nuevos datos SSH locales en <code>data/machines.json</code>.",
-        "<code>AdmiraNext-Team-latest</code> refleja endurecimiento del backend de control: <code>PORT</code> configurable por entorno, soporte del estado <code>idle</code> y una unica rutina de escape para <code>osascript</code> remoto en <code>src/ssh-exec.js</code>.",
-        "<code>AdmiraGemini</code> anade una UI local (<code>admira-gemini-ui</code>, <code>src/admira_gemini/web.py</code>, <code>tests/test_web.py</code>) y <code>ACE-Step</code> incorpora fallback con <code>soundfile</code> cuando <code>torchaudio.save</code> falla al exportar audio.",
-        "En <code>AdmiraNext-Team</code> no aparecio una validacion automatica clara: <code>package.json</code> solo define <code>start</code>, asi que no hay evidencia de test o build ejecutados hoy desde el repo."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin dirty worktree en el checkout canonico.",
+        "<code>git log --since='2026-06-27 00:00' --until='2026-06-27 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real de hoy en este repo, incluida la secuencia <code>55aa775</code>, <code>c0e5782</code>, <code>50b9408</code> y <code>2107817 Diario 2026-06-27 [Codex]</code>, ademas de varios commits funcionales previos del mismo dia sobre la entrada principal.",
+        "<code>git reflog --date=iso --since='2026-06-27 00:00'</code> confirmo que el ultimo cierre publicado de hoy quedo en <code>2107817 HEAD@{2026-06-27 23:51:08 +0200}: commit: Diario 2026-06-27 [Codex]</code>.",
+        "<code>git log -1 --decorate</code> y <code>git remote -v</code> confirmaron que <code>HEAD</code>, <code>origin/main</code> y <code>origin/HEAD</code> ya apuntaban a <code>2107817c0d28028cb7a7576b04c8ce4431456967</code>, asi que el cierre de hoy ya estaba empujado a <code>https://github.com/csilvasantin/18.-diario.git</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-27 23:57:34 CEST +0200</code> durante el pre-check de esta corrida."
       ]},
       { heading: "Avances", items: [
-        "El workspace enseña una linea clara de trabajo en torno a operaciones internas: panel del equipo mas visual, mejor control remoto entre maquinas y herramientas locales nuevas para Gemini.",
-        "La fecha queda actualizada con evidencia de cambios reales del workspace, no solo del repo <code>diario</code>."
+        "La rutina queda rehecha y verificada sobre el checkout limpio exigido por el usuario, sin tocar otros clones del diario.",
+        "La fecha <code>2026-06-27</code> ya estaba correctamente presente en <code>2026-06-27.md</code> y en <code>index.html</code>, de modo que esta pasada se limita a confirmar el estado publicado en vez de inventar trabajo adicional."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> esta <code>behind 303</code> respecto a <code>origin/main</code>, con bastante trabajo aun sin commit, asi que mezclar publicacion y sincronizacion requerira cuidado.",
-        "Los cambios relevantes de hoy aparecen sobre todo como diffs locales; sin commit ni pruebas registradas no conviene tratarlos como entregas cerradas."
+        "El contenido vigente del bloque <code>[Codex]</code> al arrancar esta automatizacion describia otros repos del workspace y no el cierre literal de esta corrida en <code>diario</code>.",
+        "Esta rutina llega despues de varios cierres ya publicados hoy por Codex, asi que anadir otro bloque paralelo para la misma autoria violaria la regla de una sola fecha por fichero."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola fecha <code>2026-06-27</code> y reutilizar el bloque <code>[Codex]</code> existente en vez de anadir otra entrada paralela.",
-        "Describir <code>AdmiraNext-Team</code> por lo que si esta comprobado en diff local y separar eso de lo que aun no esta validado ni publicado."
+        "Reutilizar el bloque <code>[Codex]</code> existente y reescribirlo para que documente solo esta corrida real del cierre del dia.",
+        "No fabricar un commit vacio si, tras alinear <code>2026-06-27.md</code> e <code>index.html</code>, el repo ya estaba limpio y sincronizado con <code>origin/main</code>."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Arrancar <code>AdmiraNext-Team</code> en local y revisar visualmente el modo arcade antes de publicar o rebasar esos cambios contra <code>origin/main</code>.",
-        "Decidir si <code>AdmiraNext-Team-latest</code> se consolida en el repo principal o si sigue como rama de pruebas separada.",
-        "Cuando haya commit o verificacion real de estas lineas, ampliar esta misma fecha con hash, resultado y URL si aplica."
+        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la fecha <code>27 de junio de 2026</code> bajo el filtro <code>Codex</code>.",
+        "Si la web publica refleja este contenido actualizado, dar el cierre por completado sin nuevas intervenciones en <code>diario</code> hoy."
       ]}
     ]
   },
