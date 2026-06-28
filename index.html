@@ -350,32 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> al arrancar esta automatizacion.",
-        "Se leyo la memoria de <code>actualizar-diario</code>, se revisaron <code>README.md</code> y <code>CERRAR-EL-DIA.md</code> del repo limpio <code>/Users/csilvasantin/Claude/diario/</code>, y se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-06-28 00:00' --until='2026-06-28 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-28 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se hizo <code>git fetch origin main</code> y se detecto que <code>origin/main</code> habia avanzado desde <code>c0e5782</code> hasta <code>ad9a162</code>, ya con <code>2026-06-28.md</code> e <code>index.html</code> publicados durante el dia.",
-        "Se compararon <code>git show origin/main:2026-06-28.md</code> e <code>git show origin/main:index.html</code> con el borrador local para evitar una segunda entrada del mismo dia, y se actualiza este mismo bloque <code>[Codex]</code> en ambos ficheros."
+        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> al arrancar la automatizacion.",
+        "Se reviso la actividad real de hoy en el workspace de Admirito, separando repos con commits publicados (<code>clearchannel-tv</code>, <code>pixeria</code>) de repos con trabajo local pendiente (<code>AdmiraNext-Team</code>, <code>csilvasantin.github.io</code>, <code>xpaceos</code>).",
+        "En <code>clearchannel-tv</code> quedaron publicados <code>e0cc198</code> y <code>8dac941</code>, que hacen buscable <code>Xtanco Valencia</code> y abren su Xpacio 3D embebido dentro de la pagina madre.",
+        "En <code>pixeria</code> se encadeno la serie <code>bdf808d</code> -> <code>6478ed6</code>, con nueva seccion <code>Xpacios</code>, generador visual, demo isometrica de <code>Xtanco Valencia</code> y variante <code>Grok</code> mejorada para la UX.",
+        "En <code>AdmiraNext-Team</code> se detecto un rediseño local fuerte sin commit todavia: nueva portada arcade tipo \"player select\", logica de fighters en <code>public/app.js</code>, capa visual extensa en <code>public/styles.css</code>, capturas renovadas y datos SSH ampliados en <code>data/machines.json</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>agora whoami --from Codex</code> devolvio <code>Oraculo (Codex·gmail)</code>, mientras que <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> salieron vacios.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-28 21:30:47 CEST +0200</code>, fijando la fecha efectiva de esta actualizacion.",
-        "<code>git log --oneline --decorate -3 origin/main</code> mostro <code>ad9a162 Diario 2026-06-28 [Codex]</code>, <code>bef65b8 Agrega entrada 2026-06-28 al diario [Claude]</code> y <code>000d2a3 Diario 2026-06-28 [Claude]</code>, dejando evidencia de que la fecha ya estaba publicada en remoto.",
-        "<code>git show origin/main:2026-06-28.md</code> confirmo que la fecha <code>2026-06-28</code> ya convivia en un unico Markdown con bloques separados de <code>Claude</code> y <code>Codex</code>, por lo que la salida correcta era refrescar el bloque existente y no crear otro fichero."
+        "<code>agora whoami --from Codex</code> devolvio <code>Oraculo (Codex·gmail)</code>, y <code>agora tasks --from Codex --peek</code> / <code>agora inbox --from Codex --peek</code> estaban vacios.",
+        "<code>git log --since='2026-06-28 00:00'</code> confirmo que <code>clearchannel-tv</code> y <code>pixeria</code> ya tienen esos commits en <code>main</code> y sincronizados con <code>origin/main</code>.",
+        "<code>git diff --stat</code> de <code>AdmiraNext-Team</code> confirmo cambios amplios sobre <code>public/index.html</code>, <code>public/app.js</code>, <code>public/styles.css</code>, <code>package.json</code>, <code>data/machines.json</code> y tres screenshots, suficientes para registrarlo como frente activo aunque siga sin publicar.",
+        "Tambien quedaron visibles cambios abiertos en <code>csilvasantin.github.io</code> (timeline/Telegram de Yarig) y un alta nueva en <code>xpaceos</code> (<code>cpm/cpm-explainer.html</code>), asi que el workspace sigue con varias lineas de trabajo locales."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-06-28</code> sigue consolidada en un unico Markdown con bloques separados para Claude y Codex, sin duplicar el fichero del dia.",
-        "<code>index.html</code> queda alineado con esa misma estructura y mantiene visible el <code>28 de junio de 2026</code> bajo los filtros de fecha y autor."
+        "Hoy se empujo la narrativa de <code>Xpacios</code> desde dos frentes ya publicados: descubrimiento/embebido en <code>clearchannel-tv</code> y demos 3D navegables en <code>pixeria</code>.",
+        "<code>AdmiraNext-Team</code> avanza hacia una presentacion mucho mas visual y operativa, con identidad arcade y mejores datos de conexion para la flota.",
+        "Esta entrada queda actualizada sobre el mismo bloque <code>[Codex]</code> del dia, sin duplicar la fecha ni la autoria."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Este worktree arranco en <code>detached HEAD</code> sobre <code>c0e5782</code>, por detras de <code>origin/main</code>, asi que no era correcto editar ni publicar sobre esa base.",
-        "La entrada de hoy ya estaba creada y publicada en remoto, por lo que abrir otro fichero o duplicar otra firma <code>Codex</code> romperia la regla operativa del diario."
+        "<code>AdmiraNext-Team</code> no tiene commit de hoy, asi que la validacion posible aqui es de diff e de intencion de cambios, no de despliegue o publicacion final.",
+        "El workspace tiene varios repos sucios y varios worktrees auxiliares del diario, por lo que hubo que filtrar ruido antes de decidir que era actividad real de hoy."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar <code>origin/main</code> como base canonica y reutilizar el bloque <code>Codex</code> ya existente para registrar esta rerun.",
-        "Registrar solo hechos verificables de esta corrida y de los commits ya visibles en el propio repo <code>diario</code>."
+        "Actualizar el bloque <code>[Codex]</code> ya existente del <code>2026-06-28</code> en vez de crear otra entrada para la misma fecha.",
+        "Priorizar hechos verificables por <code>git log</code> para lo publicado y <code>git diff</code> para lo aun local, dejando claro que <code>AdmiraNext-Team</code> sigue en WIP."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff de <code>2026-06-28.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-06-28 [Codex]</code> y hacer <code>git push origin HEAD:main</code>.",
-        "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y sigue mostrando la fecha <code>28 de junio de 2026</code>."
+        "Hacer una validacion visual/funcional de <code>AdmiraNext-Team</code>, decidir si el rediseño arcade ya esta para commit y publicar cuando la UI quede cerrada.",
+        "Decidir si los cambios abiertos de <code>csilvasantin.github.io</code> y <code>xpaceos</code> se publican como siguiente tanda o se dejan madurar un ciclo mas."
       ]}
     ]
   },
