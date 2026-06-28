@@ -344,6 +344,43 @@
 <script>
 const entries = [
   {
+    date: "2026-06-28",
+    title: "28 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto la rutina programada desde sesion remota de Claude Code (contenedor efimero en la nube): <em>Subir todos los cambios realizados en este maquina en local a la nube de github de csilvasantin y actualizar la tabla de proyectos</em>.",
+        "Se verifico el estado del contenedor: directorio de trabajo vacio (<code>/home/user/</code> sin archivos), sin repositorios git locales ni cambios pendientes que subir.",
+        "Se accedio a la API de GitHub con autenticacion via proxy (<code>https://api.github.com/users/csilvasantin/repos</code>) y se listaron los 52 repos publicos del usuario.",
+        "Se leyo el <code>repos.html</code> actual del repo <code>18.-diario</code> (19 repos, generado 2026-06-28 previo).",
+        "Se obtuvieron datos frescos via API para cada repo: ultimo commit, fecha, conteo total de commits, actividad en los ultimos 7 dias y deteccion de LLM por mensajes de commit.",
+        "Se genero un nuevo <code>repos.html</code> con 62 repos (43 nuevos anadidos) y se commiteo via GitHub REST API."
+      ]},
+      { heading: "Que se valido", items: [
+        "La API de GitHub devolvio 52 repos para <code>csilvasantin</code> en esta corrida.",
+        "El commit del <code>repos.html</code> actualizado se completo con exito: <a href='https://github.com/csilvasantin/18.-diario/commit/5a5673bb1b1fb6e6c6f6e8a9f46feb5f532c4d2f' target='_blank'>commit 5a5673b</a>."
+      ]},
+      { heading: "Avances", items: [
+        "La tabla de proyectos <code>repos.html</code> queda actualizada de 19 a 62 repos con datos frescos de commits, fechas y LLMs detectados.",
+        "Los repos nuevos anadidos incluyen: <code>clearchannel-tv</code>, <code>pixeria</code>, <code>admira-live</code>, <code>admira-next-web</code>, <code>pixer-worker</code>, <code>admira-tv</code>, <code>admira-design</code>, <code>admira-app</code>, <code>xpaceos</code>, <code>admira-studio</code>, y otros 33 repos mas."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "El contenedor de ejecucion remota arranca vacio: no hay repositorios locales clonados, por lo que la parte <em>subir cambios locales</em> de la rutina no tenia que ejecutar nada.",
+        "La tabla <code>repos.html</code> tenia solo 19 de los 52 repos activos — la mayoria de los repos mas recientes no estaban reflejados."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Actualizar <code>repos.html</code> via GitHub REST API directamente desde el contenedor remoto, sin necesidad de clonar el repo.",
+        "Usar los datos de la API para detectar automaticamente los LLMs segun patrones en los mensajes de commit (<code>[Claude]</code>, <code>[Codex]</code>, <code>Gemini</code>).",
+        "Preservar los datos de LLM de los repos ya existentes en la tabla original (para no perder asignaciones manuales)."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Verificar que <code>https://csilvasantin.github.io/18.-diario/repos.html</code> se actualiza con los 62 repos.",
+        "Configurar el routine para que tambien clone repos activos del dia y verifique cambios pendientes en ellos."
+      ]}
+    ]
+  },
+  {
     date: "2026-06-27",
     title: "27 de junio de 2026",
     member: "Carlos Silva",
