@@ -352,30 +352,30 @@ const entries = [
       { heading: "Que se hizo", items: [
         "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>agora alive --from Codex --loop --every 60</code> al arrancar esta automatizacion.",
         "Se leyo la memoria de <code>actualizar-diario</code>, se revisaron <code>README.md</code> y <code>CERRAR-EL-DIA.md</code> del repo limpio <code>/Users/csilvasantin/Claude/diario/</code>, y se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-06-28 00:00' --until='2026-06-28 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-28 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se hizo <code>git fetch origin main</code> y despues <code>git merge --ff-only origin/main</code>, avanzando este checkout de <code>f373973</code> a <code>bef65b8</code> y trayendo <code>2026-06-28.md</code>, <code>index.html</code> y <code>repos.html</code> ya publicados por Claude.",
-        "Se anade este bloque <code>[Codex]</code> a <code>2026-06-28.md</code> y su entrada equivalente al array <code>entries</code> de <code>index.html</code>, manteniendo un unico fichero para la fecha."
+        "Se hizo <code>git fetch origin main</code> y se detecto que <code>origin/main</code> habia avanzado desde <code>c0e5782</code> hasta <code>ad9a162</code>, ya con <code>2026-06-28.md</code> e <code>index.html</code> publicados durante el dia.",
+        "Se compararon <code>git show origin/main:2026-06-28.md</code> e <code>git show origin/main:index.html</code> con el borrador local para evitar una segunda entrada del mismo dia, y se actualiza este mismo bloque <code>[Codex]</code> en ambos ficheros."
       ]},
       { heading: "Que se valido", items: [
         "<code>agora whoami --from Codex</code> devolvio <code>Oraculo (Codex·gmail)</code>, mientras que <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> salieron vacios.",
         "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-28 21:30:47 CEST +0200</code>, fijando la fecha efectiva de esta actualizacion.",
-        "Antes de sincronizar, <code>git status --short --branch</code> devolvio <code>## main...origin/main [behind 4]</code>, y <code>git log --oneline --decorate --max-count=5 --all</code> mostro <code>bef65b8</code>, <code>000d2a3</code>, <code>5a5673b</code> y <code>6bffd6f</code> en remoto por delante del cierre local <code>f373973</code>.",
-        "<code>2026-06-28.md</code> no existia en este checkout antes del <code>ff-only</code>; despues de sincronizar quedo disponible con el bloque de Claude y la actualizacion de <code>repos.html</code> ya integrada."
+        "<code>git log --oneline --decorate -3 origin/main</code> mostro <code>ad9a162 Diario 2026-06-28 [Codex]</code>, <code>bef65b8 Agrega entrada 2026-06-28 al diario [Claude]</code> y <code>000d2a3 Diario 2026-06-28 [Claude]</code>, dejando evidencia de que la fecha ya estaba publicada en remoto.",
+        "<code>git show origin/main:2026-06-28.md</code> confirmo que la fecha <code>2026-06-28</code> ya convivia en un unico Markdown con bloques separados de <code>Claude</code> y <code>Codex</code>, por lo que la salida correcta era refrescar el bloque existente y no crear otro fichero."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-06-28</code> queda consolidada en un unico Markdown con bloques separados para Claude y Codex, sin duplicar el fichero del dia.",
-        "<code>index.html</code> vuelve a quedar alineado con dos entradas del <code>2026-06-28</code>, visibles por fecha y por filtro de autor."
+        "La fecha <code>2026-06-28</code> sigue consolidada en un unico Markdown con bloques separados para Claude y Codex, sin duplicar el fichero del dia.",
+        "<code>index.html</code> queda alineado con esa misma estructura y mantiene visible el <code>28 de junio de 2026</code> bajo los filtros de fecha y autor."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Este checkout local estaba atrasado respecto a <code>origin/main</code>, asi que no era correcto editar ni publicar sobre <code>f373973</code>.",
-        "La entrada de hoy ya habia sido creada por Claude, por lo que abrir otro fichero o sobrescribir su bloque romperia la regla operativa del diario."
+        "Este worktree arranco en <code>detached HEAD</code> sobre <code>c0e5782</code>, por detras de <code>origin/main</code>, asi que no era correcto editar ni publicar sobre esa base.",
+        "La entrada de hoy ya estaba creada y publicada en remoto, por lo que abrir otro fichero o duplicar otra firma <code>Codex</code> romperia la regla operativa del diario."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar <code>origin/main</code> como base canonica antes de escribir y anadir el cierre de Codex como segundo bloque separado por <code>---</code>.",
+        "Tomar <code>origin/main</code> como base canonica y reutilizar el bloque <code>Codex</code> ya existente para registrar esta rerun.",
         "Registrar solo hechos verificables de esta corrida y de los commits ya visibles en el propio repo <code>diario</code>."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff de <code>2026-06-28.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-06-28 [Codex]</code> y hacer <code>git push origin main</code>.",
-        "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la fecha <code>28 de junio de 2026</code> bajo el filtro <code>Codex</code>."
+        "Revisar el diff de <code>2026-06-28.md</code> e <code>index.html</code>, crear el commit <code>Diario 2026-06-28 [Codex]</code> y hacer <code>git push origin HEAD:main</code>.",
+        "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y sigue mostrando la fecha <code>28 de junio de 2026</code>."
       ]}
     ]
   },
