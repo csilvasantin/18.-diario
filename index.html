@@ -350,33 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en <code>github-csilvasantin/AdmiraNext-Team-latest</code>, <code>github-csilvasantin/admira-tv</code> y el resto del workspace con <code>git log</code>, <code>git status</code>, <code>git diff</code> y ficheros modificados desde <code>2026-06-29 00:00</code>.",
-        "En <code>AdmiraNext-Team-latest</code> se encadenaron iteraciones del sistema de <code>gaze router</code>: coordinador, confirmacion por wink, overlay/audible feedback, daemon, LaunchAgent, control on/off y alias <code>miradorDigital</code>.",
-        "En <code>admira-tv</code> se avanzaron varias capas del CMS de calendario: monetizacion, desglose dia/hora, slots comerciales, multi-Xpacio, relleno con IA, ayuda del CMS y exportacion/importacion <code>.ics</code>."
+        "Se audito la actividad de hoy en los repositorios de Admirito, con foco en <code>/Users/csilvasantin/AdmiraNext-Team</code> y en los checkouts relacionados <code>ai-workspace</code>, <code>admiranext</code> y <code>nuevo-miembro-admiranext</code>.",
+        "Se contrastaron <code>git log</code>, <code>git status</code>, diffs locales y fechas de modificacion para separar trabajo real de hoy frente a cambios viejos que siguen sin publicar.",
+        "Se actualizo esta misma entrada de <code>2026-06-29</code> y su tarjeta en <code>index.html</code>, sin abrir otra entrada para la misma fecha."
       ]},
       { heading: "Que se valido", items: [
-        "<code>admira-tv</code> quedo limpio en <code>main...origin/main</code> y el historial de hoy muestra una secuencia continua de commits entre <code>19:36</code> y <code>22:36</code>, rematada por <code>05f8965 feat(cms,calendar): exportar/importar Google Calendar (.ics)</code>.",
-        "<code>AdmiraNext-Team-latest</code> conserva el historial de hoy con 13 commits sobre <code>gaze router</code>, desde <code>412bcfa Add gaze router prototype</code> hasta <code>6ddec63 Add miradorDigital control alias</code>.",
-        "<code>AdmiraNext-Team</code> no tuvo commits hoy pero si cambios locales fuertes: <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code>, <code>data/machines.json</code> y nuevas capturas de equipo."
+        "No aparecieron commits fechados hoy (<code>2026-06-29</code>) en los repos de Admirito revisados; la actividad confirmada del dia quedo concentrada en <code>diario</code> y en la actualizacion automatica de <code>repos.html</code>.",
+        "<code>AdmiraNext-Team</code> mantiene cambios locales sin commit: en el repo exterior destaca <code>data/machines.json</code>, y dentro del repo anidado <code>AdmiraNext-Team/AdmiraNext-Team</code> siguen abiertos <code>src/server.js</code>, <code>src/ssh-exec.js</code> y otro <code>data/machines.json</code>.",
+        "Las fechas de esos cambios locales son antiguas (abril y mayo), asi que hoy no hubo evidencia verificable de desarrollo nuevo en esos repos, sino revision y arrastre de trabajo pendiente."
       ]},
       { heading: "Avances", items: [
-        "El flujo de control por mirada en <code>AdmiraNext-Team-latest</code> ya cubre instalacion, orquestacion, cambio de pantalla, feedback visual/sonoro y atajos operativos para uso diario.",
-        "<code>admira-tv</code> cerro un bloque de producto coherente para el calendario CMS, orientado a venta, operacion real y sincronizacion con Google Calendar.",
-        "El workspace deja visibles tareas en curso fuera de commit, especialmente el rediseno visual de <code>AdmiraNext-Team</code> y ajustes locales en <code>AdmiraGemini</code>, <code>ACE-Step</code> y <code>32.-ConsejoAdmiraNextGame</code>."
+        "Queda trazado que el trabajo util de hoy fue una auditoria de estado y no una entrega nueva en los repos de Admirito.",
+        "El diario conserva una sola entrada <code>Codex</code> para el <code>29 de junio de 2026</code>, ahora con contexto mas util para retomar manana.",
+        "Se deja identificado el frente tecnico principal pendiente: aclarar cual de los dos <code>AdmiraNext-Team</code> es el checkout canonico."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> esta <code>behind 303</code> respecto a <code>origin/main</code>, asi que mezclar o publicar sus cambios locales requiere primero decidir estrategia de sincronizacion.",
-        "<code>AdmiraNext-Team-latest</code> no esta limpio: ademas de los commits del dia, quedaron cambios sin cerrar en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>INICIO_Y_CIERRE_DEL_DIA.md</code>.",
-        "En el workspace siguen apareciendo pruebas o restos sin cerrar, como <code>.codex-write-test</code> y <code>council-api.py.new</code>, que conviene limpiar o consolidar."
+        "Hay duplicidad de repos en <code>/Users/csilvasantin/AdmiraNext-Team</code>, porque el repo exterior tiene un <code>AdmiraNext-Team/</code> anidado sin trackear que a su vez tambien es un repo git.",
+        "Los cambios abiertos sobre control de energia y estado de maquinas en <code>AdmiraNext-Team/AdmiraNext-Team</code> no estan frescos y mezclan codigo con datos de maquinas, lo que dificulta saber si siguen siendo validos.",
+        "El repo exterior y el anidado muestran divergencias en <code>data/machines.json</code>, con timestamps historicos, senal de estado local arrastrado y potencial confusion operativa."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Diferenciar en la entrada lo ya consolidado en commits de lo que aun esta solo en el workspace, para no dar como publicado lo que sigue abierto.",
-        "Tomar <code>AdmiraNext-Team-latest</code> como referencia del trabajo real de hoy en el bloque Team, ya que <code>AdmiraNext-Team</code> quedo como rama local atrasada y dirty.",
-        "Mantener la entrada breve y operativa, centrada en entregables, validaciones, riesgos y siguiente accion."
+        "Documentar solo hechos verificables por <code>git</code> y por estado local, sin atribuir desarrollo de hoy que no aparece reflejado en commits ni en mtimes del dia.",
+        "Actualizar la entrada ya existente de <code>2026-06-29</code> en vez de duplicarla, porque el valor esta en corregir el resumen y no en anadir otra firma.",
+        "No tocar los cambios pendientes de <code>AdmiraNext-Team</code>; solo dejarlos registrados para una limpieza o publicacion deliberada posterior."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Decidir si el trabajo local de <code>AdmiraNext-Team</code> se rebasea sobre <code>origin/main</code> o se migra/selectivamente a <code>AdmiraNext-Team-latest</code> antes de publicarlo.",
-        "Cerrar o descartar los cambios pendientes de <code>AdmiraNext-Team-latest</code>, <code>AdmiraGemini</code>, <code>ACE-Step</code> y <code>32.-ConsejoAdmiraNextGame</code> para que el siguiente resumen no mezcle deuda con avances nuevos."
+        "Decidir cual de los dos repos <code>AdmiraNext-Team</code> es el canonico y limpiar el otro para eliminar ambiguedad.",
+        "Revisar si los cambios de <code>src/server.js</code> y <code>src/ssh-exec.js</code> sobre sleep/wake remoto siguen siendo deseables antes de commitearlos o descartarlos.",
+        "Vigilar que GitHub Pages siga mostrando correctamente esta entrada actualizada del <code>29 de junio de 2026</code>."
       ]}
     ]
   },
