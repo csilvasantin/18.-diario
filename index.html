@@ -350,34 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se audito la actividad de hoy en los repositorios de Admirito, con foco en <code>/Users/csilvasantin/AdmiraNext-Team</code> y en los checkouts relacionados <code>ai-workspace</code>, <code>admiranext</code> y <code>nuevo-miembro-admiranext</code>.",
-        "Se contrastaron <code>git log</code>, <code>git status</code>, diffs locales y fechas de modificacion para separar trabajo real de hoy frente a cambios viejos que siguen sin publicar.",
-        "Se actualizo esta misma entrada de <code>2026-06-29</code> y su tarjeta en <code>index.html</code>, sin abrir otra entrada para la misma fecha."
+        "Se ejecuto <code>agora-checkin codex start</code>, se dejo presencia con <code>agora alive --from Codex --loop</code> y se leyo la rutina local <code>CERRAR-EL-DIA.md</code>, contrastada con la copia canonica en GitHub.",
+        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-06-29 00:00' --until='2026-06-29 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-29 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se actualizo la entrada existente <code>2026-06-29.md</code> y su tarjeta en <code>index.html</code> para reflejar esta corrida concreta de cierre, sin crear otro fichero para la misma fecha."
       ]},
       { heading: "Que se valido", items: [
-        "No aparecieron commits fechados hoy (<code>2026-06-29</code>) en los repos de Admirito revisados; la actividad confirmada del dia quedo concentrada en <code>diario</code> y en la actualizacion automatica de <code>repos.html</code>.",
-        "<code>AdmiraNext-Team</code> mantiene cambios locales sin commit: en el repo exterior destaca <code>data/machines.json</code>, y dentro del repo anidado <code>AdmiraNext-Team/AdmiraNext-Team</code> siguen abiertos <code>src/server.js</code>, <code>src/ssh-exec.js</code> y otro <code>data/machines.json</code>.",
-        "Las fechas de esos cambios locales son antiguas (abril y mayo), asi que hoy no hubo evidencia verificable de desarrollo nuevo en esos repos, sino revision y arrastre de trabajo pendiente."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales y con <code>HEAD</code> alineado con <code>origin/main</code> al empezar.",
+        "<code>git log --since='2026-06-29 00:00' --until='2026-06-29 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-29 00:00'</code> confirmaron actividad previa hoy en este repo: <code>cfaced3</code>, <code>cfd1c49</code>, <code>f2eb4d3</code>, <code>79d3980</code> y la regeneracion automatica <code>aab6a84</code> de <code>repos.html</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-29 23:56:38 CEST +0200</code> durante el pre-check."
       ]},
       { heading: "Avances", items: [
-        "Queda trazado que el trabajo util de hoy fue una auditoria de estado y no una entrega nueva en los repos de Admirito.",
-        "El diario conserva una sola entrada <code>Codex</code> para el <code>29 de junio de 2026</code>, ahora con contexto mas util para retomar manana.",
-        "Se deja identificado el frente tecnico principal pendiente: aclarar cual de los dos <code>AdmiraNext-Team</code> es el checkout canonico."
+        "Queda corregido el cierre de hoy para que documente literalmente esta sesion y no una auditoria ajena a <code>diario</code>.",
+        "La fecha <code>2026-06-29</code> sigue consolidada en un unico fichero y una sola tarjeta publica, cumpliendo la regla 1-2-3 del diario.",
+        "La publicacion de hoy queda lista para un nuevo commit y push sobre <code>main</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Hay duplicidad de repos en <code>/Users/csilvasantin/AdmiraNext-Team</code>, porque el repo exterior tiene un <code>AdmiraNext-Team/</code> anidado sin trackear que a su vez tambien es un repo git.",
-        "Los cambios abiertos sobre control de energia y estado de maquinas en <code>AdmiraNext-Team/AdmiraNext-Team</code> no estan frescos y mezclan codigo con datos de maquinas, lo que dificulta saber si siguen siendo validos.",
-        "El repo exterior y el anidado muestran divergencias en <code>data/machines.json</code>, con timestamps historicos, senal de estado local arrastrado y potencial confusion operativa."
+        "Ya existian varios commits de cierre hoy sobre <code>2026-06-29</code>, asi que abrir otra entrada o duplicar la fecha habria sido inconsistente con la rutina.",
+        "La entrada vigente de <code>2026-06-29</code> describia trabajo de otros repos y no esta ejecucion de cierre, por lo que hubo que corregirla antes de publicar.",
+        "No aparecio bloqueo de red, auth ni worktree sucio durante el pre-check; el riesgo pendiente queda solo en la verificacion final tras el push."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Documentar solo hechos verificables por <code>git</code> y por estado local, sin atribuir desarrollo de hoy que no aparece reflejado en commits ni en mtimes del dia.",
-        "Actualizar la entrada ya existente de <code>2026-06-29</code> en vez de duplicarla, porque el valor esta en corregir el resumen y no en anadir otra firma.",
-        "No tocar los cambios pendientes de <code>AdmiraNext-Team</code>; solo dejarlos registrados para una limpieza o publicacion deliberada posterior."
+        "Registrar solo hechos verificados por <code>git</code> y por esta sesion en <code>diario</code>, sin arrastrar afirmaciones no comprobadas de otros checkouts.",
+        "Reescribir la entrada <code>2026-06-29 [Codex]</code> ya existente en vez de anadir un segundo bloque <code>Codex</code> para la misma fecha.",
+        "Mantener <code>index.html</code> sincronizado con el mismo contenido factual del Markdown antes de commitear."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Decidir cual de los dos repos <code>AdmiraNext-Team</code> es el canonico y limpiar el otro para eliminar ambiguedad.",
-        "Revisar si los cambios de <code>src/server.js</code> y <code>src/ssh-exec.js</code> sobre sleep/wake remoto siguen siendo deseables antes de commitearlos o descartarlos.",
-        "Vigilar que GitHub Pages siga mostrando correctamente esta entrada actualizada del <code>29 de junio de 2026</code>."
+        "Hacer <code>git add 2026-06-29.md index.html</code>, crear el commit <code>Diario 2026-06-29 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada actualizada del <code>29 de junio de 2026</code>.",
+        "Dejar la URL publica como resultado final de esta automatizacion."
       ]}
     ]
   },
