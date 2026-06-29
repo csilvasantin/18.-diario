@@ -355,28 +355,28 @@ const entries = [
         "Se actualizo la entrada existente <code>2026-06-29.md</code> y su tarjeta en <code>index.html</code> para reflejar esta corrida concreta de cierre, sin crear otro fichero para la misma fecha."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales y con <code>HEAD</code> alineado con <code>origin/main</code> al empezar.",
-        "<code>git log --since='2026-06-29 00:00' --until='2026-06-29 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-29 00:00'</code> confirmaron actividad previa hoy en este repo: <code>cfaced3</code>, <code>cfd1c49</code>, <code>f2eb4d3</code>, <code>79d3980</code> y la regeneracion automatica <code>aab6a84</code> de <code>repos.html</code>.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-29 23:56:38 CEST +0200</code> durante el pre-check."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales, y <code>git fetch origin main</code> mantuvo <code>HEAD</code> alineado con <code>origin/main</code> en <code>79d3980</code>.",
+        "<code>git log --since='2026-06-29 00:00' --until='2026-06-29 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-29 00:00'</code> confirmaron actividad previa hoy en este repo: <code>6f84a4f</code>, <code>aab6a84</code>, <code>cfaced3</code>, <code>cfd1c49</code>, <code>f2eb4d3</code> y <code>79d3980</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-29 23:56:51 CEST +0200</code> durante el pre-check."
       ]},
       { heading: "Avances", items: [
         "Queda corregido el cierre de hoy para que documente literalmente esta sesion y no una auditoria ajena a <code>diario</code>.",
         "La fecha <code>2026-06-29</code> sigue consolidada en un unico fichero y una sola tarjeta publica, cumpliendo la regla 1-2-3 del diario.",
-        "La publicacion de hoy queda lista para un nuevo commit y push sobre <code>main</code>."
+        "La verificacion HTTP confirma que <code>https://csilvasantin.github.io/diario/</code> responde y redirige hasta <code>https://csilvasantin.github.io/18.-diario/</code>, que es el destino final publicado."
       ]},
       { heading: "Problemas encontrados", items: [
         "Ya existian varios commits de cierre hoy sobre <code>2026-06-29</code>, asi que abrir otra entrada o duplicar la fecha habria sido inconsistente con la rutina.",
         "La entrada vigente de <code>2026-06-29</code> describia trabajo de otros repos y no esta ejecucion de cierre, por lo que hubo que corregirla antes de publicar.",
-        "No aparecio bloqueo de red, auth ni worktree sucio durante el pre-check; el riesgo pendiente queda solo en la verificacion final tras el push."
+        "La URL canonica del diario pasa por una doble redireccion (<code>/diario/</code> -> <code>www.carlossilva.info/diario/</code> -> <code>csilvasantin.github.io/18.-diario/</code>), asi que la comprobacion correcta debe hacerse sobre el HTML final publicado."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Registrar solo hechos verificados por <code>git</code> y por esta sesion en <code>diario</code>, sin arrastrar afirmaciones no comprobadas de otros checkouts.",
         "Reescribir la entrada <code>2026-06-29 [Codex]</code> ya existente en vez de anadir un segundo bloque <code>Codex</code> para la misma fecha.",
-        "Mantener <code>index.html</code> sincronizado con el mismo contenido factual del Markdown antes de commitear."
+        "Mantener <code>index.html</code> sincronizado con el mismo contenido factual del Markdown y validar la publicacion sobre el destino final del redirect."
       ]},
       { heading: "Siguientes pasos", items: [
         "Hacer <code>git add 2026-06-29.md index.html</code>, crear el commit <code>Diario 2026-06-29 [Codex]</code> y publicar con <code>git push origin main</code>.",
-        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada actualizada del <code>29 de junio de 2026</code>.",
+        "Verificar que <code>https://csilvasantin.github.io/18.-diario/</code> incorpora la entrada actualizada del <code>29 de junio de 2026</code> tras la publicacion.",
         "Dejar la URL publica como resultado final de esta automatizacion."
       ]}
     ]
