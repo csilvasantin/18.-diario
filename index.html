@@ -347,6 +347,43 @@ const entries = [
     date: "2026-06-29",
     title: "29 de junio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto la rutina programada desde sesion remota de Claude Code (contenedor efimero en la nube) sobre el repo <code>csilvasantin/18.-diario</code>, rama de trabajo <code>main-efiuud</code>.",
+        "Se reviso el estado del repo (<code>git status</code>, <code>git log --since='2026-06-29 00:00'</code>, <code>git branch -a</code>) y se constato que hoy ya existian commits previos: <code>aab6a84 chore: actualizar repos.html 2026-06-29 [skip ci]</code> (GitHub Actions a las 09:50 UTC) y dos entradas de cierre de Codex (<code>cfaced3</code> y <code>cfd1c49</code>).",
+        "Se anadio este bloque <code>[Claude]</code> a <code>2026-06-29.md</code> separado por <code>---</code> del bloque de Codex y se reflejo la tarjeta correspondiente en <code>index.html</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status</code> quedo limpio en <code>main-efiuud</code>, alineado con <code>origin/main-efiuud</code> antes de empezar.",
+        "La rama <code>main-efiuud</code> no tenia divergencia respecto a <code>main</code> ni PR abierta (<code>mcp__github__list_pull_requests</code> devolvio lista vacia).",
+        "<code>repos.html</code> ya tenia la actualizacion automatica de hoy (<code>aab6a84</code>), por lo que no se toca manualmente."
+      ]},
+      { heading: "Avances", items: [
+        "El dia 29 queda firmado tambien por Claude, conviviendo con la entrada de Codex en el mismo fichero <code>2026-06-29.md</code> segun la regla 1-2-3.",
+        "La portada publica (<code>index.html</code>) muestra una tarjeta nueva <code>Claude</code> para <code>29 de junio de 2026</code> ademas de la tarjeta <code>Codex</code> existente.",
+        "Se mantiene la separacion limpia entre actualizacion automatica de <code>repos.html</code> (Actions) y cierre manual del diario."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "Esta sesion corre en un contenedor efimero en la nube, no en el checkout canonico del Mac Mini; se trabaja sobre la rama <code>main-efiuud</code> indicada por las instrucciones del entorno, no directamente sobre <code>main</code>.",
+        "No hay otro trabajo local de Claude que subir a GitHub hoy: el repo estaba ya sincronizado y sin cambios pendientes al arrancar."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Documentar el dia aunque no haya trabajo nuevo de codigo (regla del usuario: \"si un dia en concreto no se ha hecho nada se documenta y ya esta\").",
+        "No regenerar <code>repos.html</code> porque GitHub Actions ya lo hizo automaticamente hoy a las 09:50 UTC.",
+        "Publicar el cambio en la rama <code>main-efiuud</code> y abrir PR en draft contra <code>main</code>, en lugar de empujar directamente a <code>main</code>."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Verificar que <code>https://csilvasantin.github.io/18.-diario/</code> muestra la nueva tarjeta <code>Claude</code> del <code>29 de junio de 2026</code> tras el merge.",
+        "Verificar que <code>https://csilvasantin.github.io/18.-diario/repos.html</code> sigue mostrando la tabla actualizada por Actions.",
+        "Mantener la rutina automatica diaria para que ningun dia quede sin documentar."
+      ]}
+    ]
+  },
+  {
+    date: "2026-06-29",
+    title: "29 de junio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
