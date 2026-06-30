@@ -344,6 +344,44 @@
 <script>
 const entries = [
   {
+    date: "2026-06-30",
+    title: "30 de junio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y se dejo presencia con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se leyo la memoria de esta automatizacion y la rutina local <code>CERRAR-EL-DIA.md</code> para seguir el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>.",
+        "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-06-30 00:00' --until='2026-06-30 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-06-30 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, y se creo la entrada <code>2026-06-30.md</code> junto a su reflejo en <code>index.html</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales al arrancar esta corrida.",
+        "<code>git log --since='2026-06-30 00:00' --until='2026-06-30 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-06-30 00:00'</code> mostraron como actividad verificada del dia el commit <code>c92450d Diario 2026-06-29 [Codex]</code> a las <code>2026-06-30 00:00:04 +0200</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-06-30 21:31:20 CEST +0200</code> durante el pre-check de esta sesion."
+      ]},
+      { heading: "Avances", items: [
+        "La fecha <code>2026-06-30</code> queda creada en el diario con una entrada propia de Codex, sin reutilizar ni sobrescribir el cierre de ayer.",
+        "<code>index.html</code> vuelve a quedar alineado con la misma entrada resumida para que la UI publica pueda mostrar hoy en los filtros <code>Todos</code> y <code>Codex</code>.",
+        "La automatizacion retoma el hilo de ayer con memoria local, presencia en AgoraMatrix y el repo canonico limpio indicado por la rutina."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "No existia aun <code>2026-06-30.md</code>, asi que hoy habia que abrir una entrada nueva y actualizar tambien el bloque embebido de <code>const entries</code>.",
+        "La evidencia de actividad previa del dia en este repo era minima y se concentraba en el commit de las <code>00:00:04</code>, por lo que el resumen tenia que cenirse a hechos de esta corrida y evitar relleno.",
+        "No aparecieron bloqueos de dirty worktree, divergencia con <code>origin/main</code> ni mensajes pendientes en <code>tasks</code> o <code>inbox</code> de Codex."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Mantener la entrada breve y estrictamente factual, registrando solo lo verificado en <code>git</code>, AgoraMatrix y esta actualizacion del diario.",
+        "Crear un fichero nuevo <code>2026-06-30.md</code> en lugar de tocar <code>2026-06-29.md</code>, porque hoy corresponde una fecha distinta y no hay entrada previa de Codex para reutilizar.",
+        "Reflejar el mismo contenido resumido en <code>index.html</code> para que la portada publica siga siendo consistente con el Markdown del dia."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add 2026-06-30.md index.html</code>, crear el commit <code>Diario 2026-06-30 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la fecha <code>30 de junio de 2026</code>.",
+        "Dejar constancia del resultado en AgoraMatrix y en la memoria de la automatizacion."
+      ]}
+    ]
+  },
+  {
     date: "2026-06-29",
     title: "29 de junio de 2026",
     member: "Carlos Silva",
