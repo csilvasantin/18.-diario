@@ -357,7 +357,7 @@ const entries = [
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales antes de editar.",
         "<code>git log --since='2026-07-01 00:00' --until='2026-07-01 23:59:59' --date=iso --stat --oneline --all</code> mostro commits previos de hoy en este repo: <code>3e67fee Diario 2026-07-01 [Codex]</code>, <code>4097e69 chore: actualizar repos.html 2026-07-01 [skip ci]</code> y <code>b859862 Diario 2026-07-01 [Codex]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-01 00:00'</code> confirmo la secuencia local previa de hoy y <code>date</code> devolvio <code>2026-07-01 23:56:07 CEST +0200</code> durante el pre-check."
+        "<code>git reflog --date=iso --since='2026-07-01 00:00'</code> confirmo la secuencia local previa de hoy y <code>date</code> devolvio <code>2026-07-01 23:56:11 CEST +0200</code> durante el pre-check."
       ]},
       { heading: "Avances", items: [
         "La entrada de <code>2026-07-01</code> vuelve a quedar centrada en el cierre literal de <code>diario</code>, sin mezclar trabajo no verificado de otros repositorios.",
@@ -366,7 +366,7 @@ const entries = [
       ]},
       { heading: "Problemas encontrados", items: [
         "La fecha <code>2026-07-01</code> ya tenia commits previos de cierre de <code>Codex</code>, asi que no era correcto anadir otro bloque paralelo ni mantener un contenido que no describia esta corrida.",
-        "La variable <code>CODEX_HOME</code> llego vacia en esta sesion, por lo que hubo que resolver la memoria mediante <code>~/.codex/automations/cerrar-el-dia/memory.md</code>.",
+        "La fuente canonica indicada en GitHub redirigio al repo publico <code>csilvasantin/18.-diario</code>, asi que hubo que comprobar el contenido final de <code>CERRAR-EL-DIA.md</code> y no solo el slug escrito en la URL.",
         "La validez de la publicacion sigue dependiendo de que <code>git push origin main</code> y la web publica respondan correctamente al final de esta ejecucion."
       ]},
       { heading: "Decisiones tomadas", items: [
