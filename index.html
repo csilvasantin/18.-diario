@@ -350,34 +350,29 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se dejo presencia con <code>agora alive --from Codex --loop --every 60</code>.",
-        "Se reviso la memoria de la automatizacion <code>actualizar-diario-2</code>, el estado del checkout y el formato vigente del diario con <code>git status --short --branch</code>, <code>git rev-parse --short HEAD</code>, <code>git branch -a --contains HEAD</code>, <code>git remote -v</code>, <code>sed -n '1,220p' 2026-06-30.md</code> y <code>sed -n '340,430p' index.html</code>.",
-        "Se creo la entrada nueva <code>2026-07-01.md</code> y se anadio su reflejo al array <code>const entries</code> de <code>index.html</code> para que hoy quede visible en la publicacion HTML."
+        "Se reviso la actividad de hoy en <code>AdmiraNext-Team</code>, comparando el checkout de trabajo <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> con el espejo del workspace <code>github-csilvasantin/AdmiraNext-Team</code>.",
+        "En <code>AdmiraNext-Team</code> quedo en curso el control remoto de energia: <code>src/server.js</code> y <code>src/ssh-exec.js</code> anaden acciones <code>sleep</code> y <code>wake</code>, y <code>data/machines.json</code> actualiza estados, <code>lastSeen</code>, notas de <code>Sleep enviado desde dashboard</code> y una MAC nueva para <code>admira-macbookpronegro14</code>.",
+        "En el workspace se detectaron avances publicados en <code>32.-ConsejoAdmiraNextGame</code> y <code>github-csilvasantin/admira-tv</code>: Control Total sumo cuenta atras de auto-captura, atajos globales <code>c/m/s</code> y sliders CRT, mientras <code>admira-tv</code> movio el despliegue a Cloudflare Pages y actualizo documentacion."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, y <code>git show -s --format='%D' HEAD</code> confirmo que ese <code>HEAD</code> coincide con <code>origin/main</code> y <code>origin/HEAD</code>.",
-        "<code>git log --since='2026-07-01 00:00' --until='2026-07-01 23:59:59' --date=iso --stat --oneline --all</code> no mostro commits previos del dia en este repo, y <code>git reflog --date=iso --since='2026-07-01 00:00'</code> solo dejo constancia de <code>HEAD@{2026-07-01 21:31:09 +0200}</code> al iniciar esta corrida.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-01 21:31:50 CEST +0200</code> durante el pre-check."
-      ]},
-      { heading: "Avances", items: [
-        "La fecha <code>2026-07-01</code> queda registrada en un unico fichero Markdown con firma <code>[Codex]</code>, sin duplicar entradas del mismo dia.",
-        "<code>index.html</code> queda sincronizado con la misma informacion para que el filtro <code>Codex</code> y la vista por fecha puedan mostrar <code>1 de julio de 2026</code>.",
-        "La automatizacion vuelve a dejar trazabilidad local de lo hecho hoy en el repo canonico del diario."
+        "<code>git diff</code> en <code>AdmiraNext-Team</code> confirmo un nuevo endpoint <code>POST /api/machines/:id/power</code> y helpers <code>sleepMachine</code>/<code>wakeMachine</code>, con envio por SSH y Wake-on-LAN.",
+        "La validacion tambien detecto un problema tecnico en ese mismo diff: <code>src/server.js</code> contiene dos bloques para <code>/power</code>, con reglas distintas y logica duplicada, asi que aun no esta listo para cerrar como implementacion limpia.",
+        "<code>git log --since='2026-07-01 00:00'</code> mostro trabajo real ya guardado en <code>32.-ConsejoAdmiraNextGame</code> (<code>r6</code>, <code>r7</code>, <code>r8</code>) y en <code>admira-tv</code> (migracion a Cloudflare Pages, endurecimiento de headers y documentacion ASK/Motores y Frenos)."
       ]},
       { heading: "Problemas encontrados", items: [
-        "No existia todavia <code>2026-07-01.md</code>, asi que hacia falta abrir una entrada nueva y actualizar tambien el bloque embebido de <code>const entries</code>.",
-        "El checkout actual esta en detached HEAD, aunque alineado con <code>origin/main</code>, asi que la publicacion tendra que empujarse desde <code>HEAD</code> en vez de una rama local nombrada.",
-        "La evidencia previa del dia en este repo era nula fuera de esta propia ejecucion, por lo que el contenido tenia que limitarse a hechos observables en la sesion."
+        "<code>AdmiraNext-Team</code> sigue sin commit en el arbol principal y mantiene cambios locales delicados en <code>data/machines.json</code>, <code>src/server.js</code> y <code>src/ssh-exec.js</code>.",
+        "La duplicacion del endpoint <code>/power</code> deja ambigua la ruta real de ejecucion y mezcla dos estrategias distintas: <code>pmset displaysleepnow</code> con WoL, frente a <code>pmset sleepnow</code> y <code>caffeinate</code>.",
+        "El workspace conserva restos locales sin cerrar, por ejemplo <code>32.-ConsejoAdmiraNextGame/.codex-write-test</code> y <code>council-api.py.new</code>, ademas de un diff grande en <code>github-csilvasantin/AdmiraNext-Team</code> con cambios visuales y capturas."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener la entrada breve y factual, reflejando solo comandos, estado git y cambios comprobados en <code>diario</code>.",
-        "Crear un fichero nuevo <code>2026-07-01.md</code> en lugar de tocar <code>2026-06-30.md</code>, porque hoy corresponde una fecha distinta y aun no habia entrada para ella.",
-        "Repetir el mismo resumen estructurado en <code>index.html</code> para no dejar desalineada la version publica respecto al Markdown del dia."
+        "Actualizar la entrada ya existente de <code>2026-07-01</code> en vez de duplicarla, sustituyendo el contenido autoreferencial por un resumen del trabajo real observado hoy.",
+        "Dejar fuera afirmaciones no verificadas por navegador o pruebas end-to-end; la entrada recoge solo estado git, diffs y commits comprobados.",
+        "Dar prioridad narrativa a <code>AdmiraNext-Team</code>, y usar <code>ConsejoAdmiraNextGame</code> y <code>admira-tv</code> como contexto de los cambios recientes mas claros del workspace."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff final y hacer <code>git add 2026-07-01.md index.html</code>, <code>git commit -m 'Diario 2026-07-01 [Codex]'</code> y <code>git push origin HEAD:main</code>.",
-        "Comprobar que <code>https://csilvasantin.github.io/diario/</code> sigue respondiendo y muestra la entrada del <code>1 de julio de 2026</code>.",
-        "Guardar en la memoria de la automatizacion el resultado de esta corrida y emitir la confirmacion sonora final."
+        "Consolidar <code>AdmiraNext-Team</code> en un unico flujo de <code>/power</code>, eliminar la duplicacion del servidor y probar <code>sleep</code>/<code>wake</code> extremo a extremo antes de hacer commit.",
+        "Decidir si los commits <code>r6-r8</code> de <code>32.-ConsejoAdmiraNextGame</code> se empujan ya a <code>origin/main</code> y limpiar los ficheros sueltos del repo.",
+        "Revisar y cerrar el diff grande de <code>github-csilvasantin/AdmiraNext-Team</code> para separar lo visual, las capturas y la logica de control antes de publicar mas cambios."
       ]}
     ]
   },
