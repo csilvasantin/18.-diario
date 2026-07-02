@@ -350,34 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se revisaron los clones de Admirito con foco en <code>AdmiraNext-Team</code> y el workspace activo para localizar trabajo real de hoy sin duplicar la entrada del dia.",
-        "El trabajo vivo aparece sobre todo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, con una renovacion fuerte del frontend (<code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>) hacia una UI tipo arcade &quot;player select&quot;, subida de version a <code>0.1.3</code>, ajustes de <code>machines.json</code> y refresco de capturas.",
-        "En paralelo, el clon anidado <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> muestra cambios de backend para control remoto de energia: endpoint <code>/api/machines/:id/power</code>, helpers <code>sleepMachine</code> y <code>wakeMachine</code>, Wake-on-LAN y nuevos metadatos SSH."
+        "Se reviso el trabajo de hoy en <code>32.-ConsejoAdmiraNextGame</code>, donde quedaron publicados en <code>main</code> varios cambios de AdmiraNext: preview de escritorio en los iconos, halo online, icono-personaje por equipo, soporte Linux para la flota DS, skill <code>en-que-estamos</code>, flota completa de 16 equipos, identificacion de cada equipo en el panel, worker <code>admira-estado</code> y el pulido visual SCUMM de la Home.",
+        "Se inspeccionaron los cambios locales recientes en <code>github-csilvasantin/AdmiraNext-Team</code>: alta de IP local y comando SSH para el Mac Mini en <code>data/machines.json</code>, bump de version a <code>0.1.3</code>, rediseno fuerte del frontend en <code>public/app.js</code> y <code>public/styles.css</code>, y renovacion de screenshots en <code>data/screenshots/</code>.",
+        "Se reviso tambien trabajo en curso fuera de AdmiraNext: <code>04.- AdmiraGemini</code> incorpora una UI web local con assets estaticos, script <code>admira-gemini-ui</code> y tests de payload/automation; <code>ACE-Step</code> anade fallback a <code>soundfile</code> cuando <code>torchaudio.save</code> falla al exportar audio."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status</code> y <code>git diff --stat</code> confirmaron que hoy no hay commits nuevos en los clones inspeccionados de <code>AdmiraNext-Team</code>, pero si cambios locales grandes: <code>1112</code> lineas netas en el clon de <code>Documents/Admirito</code> y <code>169</code> lineas netas en el clon anidado.",
-        "Se validaron commits reales de hoy en otros repos del ecosistema Admirito: <code>Claudito/admira-live</code> avanzo en PWA, accesibilidad y navegacion, y <code>Claude/repos/ConsejoAdmiraNextGame</code> movio despliegue a Cloudflare Pages, tooltip de signage con lectura en vivo y un fondo nuevo para <code>pc-gdg</code>.",
-        "La entrada <code>2026-07-02.md</code> ya existia en el diario, asi que se actualiza esta misma fecha en vez de abrir otra."
+        "<code>git log --since='2026-07-02 00:00'</code> en <code>32.-ConsejoAdmiraNextGame</code> confirma una secuencia real de commits ya sincronizados hasta <code>f8c0170</code> en <code>origin/main</code>, asi que el grueso del trabajo del dia no estaba solo en local.",
+        "<code>git status --short</code> en <code>github-csilvasantin/AdmiraNext-Team</code> muestra cambios sin commit en <code>package.json</code>, <code>public/*.js|css|html</code>, <code>data/machines.json</code> y screenshots, lo que encaja con una iteracion de UI y conectividad aun abierta.",
+        "La entrada <code>2026-07-02.md</code> ya existia en <code>/Users/csilvasantin/Claude/diario/</code>, asi que se actualizo esta misma pagina en vez de crear un duplicado para la fecha."
       ]},
       { heading: "Avances", items: [
-        "<code>AdmiraNext-Team</code> se esta moviendo desde un panel sobrio a una presentacion mas intencional y visual, con selector de miembros, ficha destacada y lenguaje arcade.",
-        "Tambien se esta acercando a operaciones remotas mas directas: IP local, acciones de sleep/wake y estados de maquinas mas expresivos para el dashboard.",
-        "El diario queda alineado con evidencia verificable de repos y workspaces reales de Admirito, no con actividad inventada ni con commits inexistentes."
+        "El estado del ecosistema AdmiraNext queda mas claro: lo publicado hoy vive sobre todo en <code>32.-ConsejoAdmiraNextGame</code>, mientras <code>AdmiraNext-Team</code> conserva una capa local de panel arcade y datos operativos pendiente de cierre.",
+        "<code>AdmiraGemini</code> ya no parece solo wrapper CLI: el diff deja encaminado un panel local para lanzar sesiones, ver logs y persistir configuracion de automatizacion.",
+        "<code>ACE-Step</code> apunta a reducir fallos de exportacion de audio en entornos donde <code>torchaudio</code> no consiga guardar ciertos formatos."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El trabajo de <code>AdmiraNext-Team</code> esta repartido entre varios clones, y uno de los mas activos (<code>Documents/Admirito/...</code>) aparece <code>behind 303</code>, lo que aumenta el riesgo de deriva antes de integrar.",
-        "En <code>src/server.js</code> del clon anidado aparecen dos handlers para <code>/api/machines/:id/power</code>, senal de implementacion duplicada que conviene unificar antes de publicar.",
-        "No se encontro validacion de ejecucion o pruebas hoy para estos cambios; por ahora la comprobacion es de diff e historial git, no de comportamiento en runtime."
+        "En <code>AdmiraNext-Team</code> no hay commit ni evidencia de validacion automatica asociada a los cambios locales de hoy, asi que el estado funcional exacto del rediseno sigue siendo parcialmente manual.",
+        "<code>04.- AdmiraGemini</code> deja <code>admira-gemini.log</code> sin trackear, senal de artefacto local que conviene decidir si se ignora o se limpia antes de cerrar ese trabajo.",
+        "El ajuste de <code>ACE-Step</code> esta respaldado por diff de codigo, pero en este repaso no aparece una ejecucion que demuestre el fallback sobre un caso real."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar como evidencia principal el clon de <code>Documents/Admirito</code> porque concentra el cambio funcional y visual mas grande del dia en <code>AdmiraNext-Team</code>.",
-        "Registrar solo avances que se pudieron demostrar con <code>git status</code>, <code>git diff</code> y <code>git log</code>, aunque parte del trabajo siga sin commit.",
-        "Reescribir la entrada existente del <code>2 de julio</code> para mantener un unico resumen breve y util del dia."
+        "Resumir el dia apoyandome en <code>git log</code>, <code>git status</code> y <code>git diff</code>, priorizando hechos verificables frente a reconstrucciones especulativas.",
+        "Tratar <code>32.-ConsejoAdmiraNextGame</code> como la fuente principal del trabajo publicado de hoy y <code>AdmiraNext-Team</code> como workspace activo en iteracion, porque esa separacion es la que refleja el repositorio real.",
+        "Actualizar la entrada ya existente del <code>2026-07-02</code> en vez de abrir una nueva, para mantener una sola pagina por fecha."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Elegir un solo clon canonico de <code>AdmiraNext-Team</code>, rebasarlo con remoto y consolidar ahi los cambios antes de seguir iterando.",
-        "Probar el dashboard en runtime y verificar de extremo a extremo la UI nueva y las acciones <code>sleep/wake</code>, incluida la proteccion del Mac Mini.",
-        "Unificar el endpoint de power, revisar estados/snapshots y luego hacer un commit coherente del lote de hoy."
+        "Cerrar <code>AdmiraNext-Team</code> con commit y prueba visual/manual del panel para separar claramente lo validado de lo que sigue en borrador.",
+        "Ejecutar <code>tests/test_web.py</code> en <code>04.- AdmiraGemini</code> y decidir si <code>admira-gemini.log</code> debe ignorarse en git antes de publicar esa UI.",
+        "Probar un flujo real de exportacion en <code>ACE-Step</code> para confirmar que el fallback a <code>soundfile</code> resuelve el fallo que motivo el cambio."
       ]}
     ]
   },
