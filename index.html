@@ -367,7 +367,7 @@ const entries = [
       { heading: "Problemas encontrados", items: [
         "La fecha <code>2026-07-02</code> ya tenia varias iteraciones previas de <code>Codex</code>, asi que el contenido existente no describia de forma fiable esta corrida concreta.",
         "La fuente canonica en GitHub redirige desde <code>csilvasantin/diario</code> a <code>csilvasantin/18.-diario</code>, detalle que hubo que verificar antes de tomar el remoto por bueno.",
-        "Hasta completar <code>git push origin main</code> y la comprobacion web, la publicacion de este cierre seguia pendiente al redactar esta entrada."
+        "La publicacion final de este cierre depende de completar el <code>push</code> a <code>origin/main</code> y de que GitHub Pages sirva la version actualizada."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Reescribir la entrada existente de <code>2026-07-02 [Codex]</code> en vez de anadir otro bloque, para respetar la regla 1-2-3 del diario y evitar duplicados.",
@@ -375,9 +375,9 @@ const entries = [
         "Mantener la firma <code>[Codex]</code> en el titulo y reflejar en <code>index.html</code> exactamente el mismo contenido resumido."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Ejecutar <code>git add 2026-07-02.md index.html</code>, <code>git commit -m \"Diario 2026-07-02 [Codex]\"</code> y <code>git push origin main</code>.",
-        "Comprobar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del <code>2026-07-02</code>.",
-        "Reportar al usuario la URL publica final del diario, sin captura."
+        "Vigilar que <code>origin/main</code> y GitHub Pages sigan reflejando la version corregida del <code>2026-07-02</code>.",
+        "Mantener el proximo cierre del diario apoyado en el mismo pre-check literal para evitar desalineaciones con entradas previas.",
+        "Usar la URL publica <code>https://csilvasantin.github.io/diario/</code> como punto unico de verificacion externa del diario."
       ]}
     ]
   },
