@@ -344,6 +344,43 @@
 <script>
 const entries = [
   {
+    date: "2026-07-02",
+    title: "2 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad de Oraculo con <code>agora whoami --from Codex</code> y se dejo activa la presencia periodica con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se revisaron la memoria de la automatizacion <code>actualizar-diario</code>, el estado de <code>tasks</code> e <code>inbox</code> de AgoraMatrix y el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>.",
+        "Se creo esta entrada <code>2026-07-02.md</code> y se anadio su bloque equivalente en <code>index.html</code> para reflejar el resumen de hoy en la web publica del diario."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> antes de editar, sin cambios locales en el repo del diario.",
+        "<code>date</code> devolvio <code>2026-07-02 21:32:11 CEST +0200</code> durante el pre-check de esta corrida.",
+        "No habia una entrada previa para <code>2026-07-02</code> ni en Markdown ni en el array <code>entries</code> de <code>index.html</code>, asi que correspondia crearla y no reescribir una existente."
+      ]},
+      { heading: "Avances", items: [
+        "El diario vuelve a quedar actualizado al dia con una entrada especifica de <code>Codex</code> para el <code>2 de julio de 2026</code>.",
+        "La interfaz HTML y el Markdown quedan alineados para que el filtro <code>Codex</code> muestre exactamente el mismo contenido en ambos sitios.",
+        "La automatizacion <code>actualizar-diario</code> queda preparada para cerrar el ciclo con commit, push y verificacion publica."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "No aparecieron bloqueos operativos en AgoraMatrix ni en el checkout del diario durante esta ejecucion.",
+        "La publicacion final sigue dependiendo de que <code>git push origin main</code> y GitHub Pages respondan correctamente tras el despliegue."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Registrar solo hechos verificables de esta sesion en vez de inferir trabajo externo no confirmado.",
+        "Mantener el formato numerado del diario y la firma <code>[Codex]</code> en el titulo, como exige el repo.",
+        "Crear una entrada nueva para <code>2026-07-02</code> porque la fecha todavia no existia en el historico."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Revisar el diff final de <code>2026-07-02.md</code> e <code>index.html</code>.",
+        "Hacer <code>git add 2026-07-02.md index.html</code>, <code>git commit -m \"Diario 2026-07-02 [Codex]\"</code> y <code>git push origin main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y refleja la entrada del <code>2 de julio de 2026 [Codex]</code>."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-01",
     title: "1 de julio de 2026",
     member: "Carlos Silva",
