@@ -350,34 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "En la primera corrida del dia se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code>, se dejo presencia con <code>agora alive --from Codex --loop --every 60</code> y se revisaron la memoria <code>actualizar-diario</code>, <code>tasks</code>, <code>inbox</code> y el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>.",
-        "En esta segunda corrida se ejecuto de nuevo <code>agora-checkin codex start</code>, se dejo presencia con <code>agora alive --from Codex --loop --every 60</code> y se revisaron la memoria <code>actualizar-diario-2</code>, el estado del checkout detached con <code>git status --short --branch</code>, <code>git branch -a --contains HEAD</code>, <code>git remote -v</code>, <code>sed -n '1,220p' 2026-07-01.md</code> y <code>sed -n '345,470p' index.html</code>.",
-        "Se actualizo la entrada <code>2026-07-02.md</code> y su bloque en <code>index.html</code>, y tras un rechazo de <code>git push</code> se comparo el contenido con <code>origin/main</code> para consolidar ambas evidencias reales en una sola entrada del dia."
+        "Se revisaron los clones de Admirito con foco en <code>AdmiraNext-Team</code> y el workspace activo para localizar trabajo real de hoy sin duplicar la entrada del dia.",
+        "El trabajo vivo aparece sobre todo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, con una renovacion fuerte del frontend (<code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>) hacia una UI tipo arcade &quot;player select&quot;, subida de version a <code>0.1.3</code>, ajustes de <code>machines.json</code> y refresco de capturas.",
+        "En paralelo, el clon anidado <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> muestra cambios de backend para control remoto de energia: endpoint <code>/api/machines/:id/power</code>, helpers <code>sleepMachine</code> y <code>wakeMachine</code>, Wake-on-LAN y nuevos metadatos SSH."
       ]},
       { heading: "Que se valido", items: [
-        "La primera corrida del dia partio de un checkout limpio con <code>git status --short --branch</code> en <code>## main...origin/main</code>, sin cambios locales previos en el repo del diario.",
-        "Esta corrida partio de <code>## HEAD (no branch)</code>, y <code>git branch -a --contains HEAD</code> confirmo alineacion con <code>origin/main</code>; ademas <code>git log --since='2026-07-02 00:00' --until='2026-07-02 23:59:59' --date=iso --stat --oneline --all</code> no mostraba commits previos del dia en este worktree y <code>git reflog --date=iso --since='2026-07-02 00:00'</code> solo registraba <code>HEAD@{2026-07-02 21:31:14 +0200}</code>.",
-        "<code>date</code> devolvio <code>2026-07-02 21:31:52 CEST +0200</code> en esta corrida y <code>2026-07-02 21:32:11 CEST +0200</code> en la primera; despues <code>git fetch origin main</code> mostro que <code>origin/main</code> habia avanzado con <code>ab87f33</code> y luego con <code>b80f658 Diario 2026-07-02 [Codex]</code>."
+        "<code>git status</code> y <code>git diff --stat</code> confirmaron que hoy no hay commits nuevos en los clones inspeccionados de <code>AdmiraNext-Team</code>, pero si cambios locales grandes: <code>1112</code> lineas netas en el clon de <code>Documents/Admirito</code> y <code>169</code> lineas netas en el clon anidado.",
+        "Se validaron commits reales de hoy en otros repos del ecosistema Admirito: <code>Claudito/admira-live</code> avanzo en PWA, accesibilidad y navegacion, y <code>Claude/repos/ConsejoAdmiraNextGame</code> movio despliegue a Cloudflare Pages, tooltip de signage con lectura en vivo y un fondo nuevo para <code>pc-gdg</code>.",
+        "La entrada <code>2026-07-02.md</code> ya existia en el diario, asi que se actualiza esta misma fecha en vez de abrir otra."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-02</code> queda mantenida en un unico fichero Markdown con firma <code>[Codex]</code>, sin abrir una segunda entrada para el mismo dia.",
-        "<code>index.html</code> queda alineado con el Markdown del dia para que la vista publica y el filtro <code>Codex</code> muestren el mismo resumen consolidado.",
-        "La automatizacion deja trazabilidad de dos corridas reales del mismo dia sin inventar actividad y sin perder el historial publicado en <code>origin/main</code>."
+        "<code>AdmiraNext-Team</code> se esta moviendo desde un panel sobrio a una presentacion mas intencional y visual, con selector de miembros, ficha destacada y lenguaje arcade.",
+        "Tambien se esta acercando a operaciones remotas mas directas: IP local, acciones de sleep/wake y estados de maquinas mas expresivos para el dashboard.",
+        "El diario queda alineado con evidencia verificable de repos y workspaces reales de Admirito, no con actividad inventada ni con commits inexistentes."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El segundo checkout estaba en detached HEAD, aunque alineado con <code>origin/main</code>, asi que el despliegue debia publicarse desde <code>HEAD</code> y no desde una rama local nombrada.",
-        "<code>git push origin HEAD:main</code> fue rechazado porque <code>origin/main</code> recibio nuevos commits mientras esta corrida estaba en curso.",
-        "Ya existia una entrada <code>2026-07-02</code> en el remoto, asi que no era correcto duplicarla ni sobrescribirla sin consolidar primero ambas versiones."
+        "El trabajo de <code>AdmiraNext-Team</code> esta repartido entre varios clones, y uno de los mas activos (<code>Documents/Admirito/...</code>) aparece <code>behind 303</code>, lo que aumenta el riesgo de deriva antes de integrar.",
+        "En <code>src/server.js</code> del clon anidado aparecen dos handlers para <code>/api/machines/:id/power</code>, senal de implementacion duplicada que conviene unificar antes de publicar.",
+        "No se encontro validacion de ejecucion o pruebas hoy para estos cambios; por ahora la comprobacion es de diff e historial git, no de comportamiento en runtime."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada para <code>2026-07-02</code> y fusionar en ella las dos corridas verificables de Codex observadas hoy.",
-        "Tomar <code>origin/main</code> como nueva base tras el rechazo de push y rehacer la publicacion sobre ese estado para preservar el historial remoto.",
-        "Reflejar en <code>index.html</code> exactamente el mismo contenido consolidado que en <code>2026-07-02.md</code> para no desalinear la version publica respecto al Markdown."
+        "Tomar como evidencia principal el clon de <code>Documents/Admirito</code> porque concentra el cambio funcional y visual mas grande del dia en <code>AdmiraNext-Team</code>.",
+        "Registrar solo avances que se pudieron demostrar con <code>git status</code>, <code>git diff</code> y <code>git log</code>, aunque parte del trabajo siga sin commit.",
+        "Reescribir la entrada existente del <code>2 de julio</code> para mantener un unico resumen breve y util del dia."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff consolidado de <code>2026-07-02.md</code> e <code>index.html</code>.",
-        "Hacer <code>git add 2026-07-02.md index.html</code>, <code>git commit -m \"Diario 2026-07-02 [Codex]\"</code> y <code>git push origin HEAD:main</code>.",
-        "Verificar que <code>https://csilvasantin.github.io/diario/</code> sigue respondiendo y muestra la entrada del <code>2 de julio de 2026</code>."
+        "Elegir un solo clon canonico de <code>AdmiraNext-Team</code>, rebasarlo con remoto y consolidar ahi los cambios antes de seguir iterando.",
+        "Probar el dashboard en runtime y verificar de extremo a extremo la UI nueva y las acciones <code>sleep/wake</code>, incluida la proteccion del Mac Mini.",
+        "Unificar el endpoint de power, revisar estados/snapshots y luego hacer un commit coherente del lote de hoy."
       ]}
     ]
   },
