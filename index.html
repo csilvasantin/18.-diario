@@ -350,33 +350,32 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso el trabajo local pendiente en <code>AdmiraNext-Team</code>, con foco en el clon anidado <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code>, y se localizaron cambios en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>.",
-        "Se inspeccionaron los cambios recientes del workspace en <code>04.- AdmiraGemini</code> y <code>ACE-Step</code> para registrar el estado real del trabajo abierto y no solo el repo del diario.",
-        "Se actualizo la entrada existente de <code>2026-07-03</code> en el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code> para dejar una foto util del estado actual sin duplicar fechas."
+        "Se ejecuto <code>agora-checkin codex start</code> y se reviso el trabajo de hoy en los clones de Admirito, con foco en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code>.",
+        "En <code>AdmiraNext-Team</code> se localizaron cambios locales en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code> para controlar energia desde el dashboard con acciones <code>sleep</code> y <code>wake</code>.",
+        "Se contrasto el resto del workspace relevante (<code>/Users/csilvasantin/ai-workspace</code>, <code>/Users/csilvasantin/GitHub/ai-workspace</code>, <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code>) y no aparecieron commits nuevos hoy fuera del repo del diario."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git log --since='2026-07-03 00:00' --date=iso --pretty=format:'%h %ad %an %s' --all</code> no mostro commits de hoy en <code>AdmiraNext-Team</code>, <code>04.- AdmiraGemini</code> ni <code>ACE-Step</code>; la evidencia de trabajo queda como cambios locales sin publicar.",
-        "<code>git diff --stat</code> en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> mostro <code>169 insertions(+), 17 deletions(-)</code> sobre <code>data/machines.json</code>, <code>src/server.js</code> y <code>src/ssh-exec.js</code>, incluyendo el endpoint <code>POST /api/machines/:id/power</code> y las funciones <code>sleepMachine</code> y <code>wakeMachine</code>.",
-        "<code>git status --short</code> confirmo en <code>04.- AdmiraGemini</code> una UI local nueva (<code>src/admira_gemini/web.py</code>, <code>src/admira_gemini/static/</code>, <code>tests/test_web.py</code>) y en <code>ACE-Step</code> un fallback con <code>soundfile</code> para cuando falle <code>torchaudio.save</code>."
+        "<code>git log --since='2026-07-03 00:00' --date=iso --stat --oneline --all</code> no mostro commits de hoy en <code>AdmiraNext-Team</code> ni en <code>ai-workspace</code>, asi que la actividad verificable queda como cambios locales sin publicar.",
+        "<code>git diff --stat</code> en <code>AdmiraNext-Team/AdmiraNext-Team</code> mostro <code>169 insertions(+), 17 deletions(-)</code> sobre <code>data/machines.json</code>, <code>src/server.js</code> y <code>src/ssh-exec.js</code>.",
+        "El diff confirma un endpoint <code>POST /api/machines/:id/power</code>, funciones <code>sleepMachine</code> y <code>wakeMachine</code>, y actualizaciones de inventario como <code>lastSeen</code>, estados <code>offline</code> y la MAC de <code>admira-macbookpronegro14</code>."
       ]},
       { heading: "Avances", items: [
-        "<code>AdmiraNext-Team</code> ya tiene la base local para controlar reposo y despertar de maquinas desde el dashboard, ademas de un inventario <code>machines.json</code> mas actualizado.",
-        "<code>AdmiraGemini</code> queda encaminado hacia una interfaz local propia con script <code>admira-gemini-ui</code> y guardado de automatizaciones en Codex.",
-        "<code>ACE-Step</code> gana una ruta de guardado mas robusta al caer a <code>soundfile</code> si el backend de <code>torchaudio</code> falla."
+        "El dashboard de <code>AdmiraNext-Team</code> ya tiene la base para enviar reposo remoto por SSH y despertares por Wake-on-LAN desde la API.",
+        "<code>data/machines.json</code> queda alineado con estados mas recientes de varias maquinas y deja trazas de acciones como <code>Sleep enviado desde dashboard</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>src/server.js</code> en <code>AdmiraNext-Team</code> contiene dos handlers para la misma ruta <code>/api/machines/:id/power</code>; el primero responde antes y deja muerto el bloque posterior donde estaba la proteccion explicita del <code>admira-macmini</code>.",
-        "El repo superior <code>/Users/csilvasantin/AdmiraNext-Team</code> arrastra una copia completa sin trackear en <code>AdmiraNext-Team/</code> y dos JPEG OCR en <code>src/</code>, lo que complica distinguir codigo vigente de material auxiliar.",
-        "No hay commits ni pruebas ejecutadas hoy para estos cambios, asi que varias mejoras siguen sin validacion operativa extremo a extremo."
+        "<code>src/server.js</code> contiene dos handlers para la misma ruta <code>/api/machines/:id/power</code>; el primero responde antes y deja muerto el bloque posterior con la proteccion explicita del <code>admira-macmini</code>.",
+        "El mapa <code>WOL_MACS</code> sigue incompleto para maquinas como <code>admira-macbookairluna</code>, asi que el <code>wake</code> todavia no es universal.",
+        "No hay commit de hoy en <code>AdmiraNext-Team</code>, por lo que el trabajo sigue sin trazabilidad remota ni punto claro de recuperacion."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Registrar solo hechos comprobables por <code>git status</code>, <code>git diff</code> y lectura directa de archivos, sin atribuir ejecucion real a cambios que siguen locales.",
-        "Sustituir la entrada inicial de hoy por este resumen transversal del workspace en vez de abrir una segunda entrada para la misma fecha."
+        "Actualizar la entrada existente de <code>2026-07-03</code> en vez de duplicarla.",
+        "Reflejar solo hechos comprobables: diffs locales reales, ausencia de commits nuevos y problemas concretos del codigo actual."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Unificar el handler de <code>/api/machines/:id/power</code> en <code>AdmiraNext-Team</code>, mantener la proteccion del <code>admira-macmini</code> en el camino real y decidir cual de los dos clones es el canonico.",
-        "Probar en <code>AdmiraGemini</code> la UI local y sus tests antes de publicar el script <code>admira-gemini-ui</code>.",
-        "Validar en <code>ACE-Step</code> un caso real de exportacion para confirmar que el fallback con <code>soundfile</code> cubre el fallo que motivaba el cambio."
+        "Unificar el handler de <code>/api/machines/:id/power</code> en <code>src/server.js</code> y dejar activa la proteccion del <code>admira-macmini</code> en el camino real.",
+        "Probar <code>sleep</code> y <code>wake</code> extremo a extremo sobre una maquina no critica y completar las MAC que faltan en <code>WOL_MACS</code>.",
+        "Crear un commit en <code>AdmiraNext-Team</code> antes de seguir iterando para no perder el estado actual del dashboard."
       ]}
     ]
   },
