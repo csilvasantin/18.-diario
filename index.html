@@ -350,34 +350,33 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad de Oraculo con <code>agora whoami --from Codex</code>, se dejo presencia con <code>agora alive --from Codex --loop --every 60</code> y se revisaron <code>agora tasks --from Codex --peek</code>, <code>agora inbox --from Codex --peek</code> y <code>~/.agents-comms/dispatch/Oraculo.jsonl</code> antes de tocar el diario.",
-        "Se leyo la memoria de <code>/Users/csilvasantin/.codex/automations/actualizar-diario-2/memory.md</code>, se inspeccionaron <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git fetch origin main</code>, <code>git log --since='2026-07-03 00:00' --until='2026-07-03 23:59:59' --date=iso --stat --oneline --all</code> y <code>git show origin/main:2026-07-03.md</code>, y se confirmo al principio que hoy solo estaba la actualizacion automatica de <code>repos.html</code>.",
-        "Se hizo <code>git merge --ff-only origin/main</code>, se creo <code>2026-07-03.md</code> y su bloque en <code>index.html</code>, el primer <code>git push origin HEAD:main</code> fue rechazado con <code>fetch first</code>, y se resolvio rebasando sobre el nuevo <code>origin/main</code> para dejar una unica entrada consolidada del dia."
+        "Se reviso el trabajo local pendiente en <code>AdmiraNext-Team</code>, con foco en el clon anidado <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code>, y se localizaron cambios en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>.",
+        "Se inspeccionaron los cambios recientes del workspace en <code>04.- AdmiraGemini</code> y <code>ACE-Step</code> para registrar el estado real del trabajo abierto y no solo el repo del diario.",
+        "Se actualizo la entrada existente de <code>2026-07-03</code> en el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code> para dejar una foto util del estado actual sin duplicar fechas."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git fetch origin main</code> adelanto <code>origin/main</code> de <code>2f537bc</code> a <code>5367951</code>, y <code>git rev-list --left-right --count HEAD...origin/main</code> devolvio <code>0 4</code> antes del fast-forward local.",
-        "<code>git log --since='2026-07-03 00:00' --until='2026-07-03 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real de hoy en este repo: primero <code>5367951 chore: actualizar repos.html 2026-07-03 [skip ci]</code> y despues <code>0fa1b1b Diario 2026-07-03 [Codex]</code> entrando desde remoto.",
-        "<code>git show origin/main:2026-07-03.md</code> devolvio error en la primera comprobacion y, tras el rechazo del push, <code>git fetch origin main</code> revelo que la fecha ya se habia publicado tambien en remoto, lo que explica el conflicto <code>add/add</code> de <code>2026-07-03.md</code> y el conflicto de contenido en <code>index.html</code>."
+        "<code>git log --since='2026-07-03 00:00' --date=iso --pretty=format:'%h %ad %an %s' --all</code> no mostro commits de hoy en <code>AdmiraNext-Team</code>, <code>04.- AdmiraGemini</code> ni <code>ACE-Step</code>; la evidencia de trabajo queda como cambios locales sin publicar.",
+        "<code>git diff --stat</code> en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> mostro <code>169 insertions(+), 17 deletions(-)</code> sobre <code>data/machines.json</code>, <code>src/server.js</code> y <code>src/ssh-exec.js</code>, incluyendo el endpoint <code>POST /api/machines/:id/power</code> y las funciones <code>sleepMachine</code> y <code>wakeMachine</code>.",
+        "<code>git status --short</code> confirmo en <code>04.- AdmiraGemini</code> una UI local nueva (<code>src/admira_gemini/web.py</code>, <code>src/admira_gemini/static/</code>, <code>tests/test_web.py</code>) y en <code>ACE-Step</code> un fallback con <code>soundfile</code> para cuando falle <code>torchaudio.save</code>."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-03</code> queda unificada en un solo Markdown firmado por <code>Codex</code>, en lugar de dejar dos versiones distintas compitiendo entre local y remoto.",
-        "<code>index.html</code> vuelve a quedar alineado con esa version consolidada para que la portada publica muestre una sola tarjeta <code>Codex</code> del dia.",
-        "<code>repos.html</code> no se toco manualmente porque la actualizacion de hoy ya estaba cubierta por el commit automatico existente."
+        "<code>AdmiraNext-Team</code> ya tiene la base local para controlar reposo y despertar de maquinas desde el dashboard, ademas de un inventario <code>machines.json</code> mas actualizado.",
+        "<code>AdmiraGemini</code> queda encaminado hacia una interfaz local propia con script <code>admira-gemini-ui</code> y guardado de automatizaciones en Codex.",
+        "<code>ACE-Step</code> gana una ruta de guardado mas robusta al caer a <code>soundfile</code> si el backend de <code>torchaudio</code> falla."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Este worktree estaba en <code>detached HEAD</code>, asi que hubo que comprobar la relacion exacta con <code>origin/main</code> antes de publicar.",
-        "El remoto avanzo mientras se preparaba el cierre, provocando el rechazo <code>fetch first</code> justo despues del commit local <code>53b4317 Diario 2026-07-03 [Codex]</code>.",
-        "El rebase sobre <code>origin/main</code> abrio conflictos en <code>2026-07-03.md</code> e <code>index.html</code> porque ya existia otra entrada <code>Codex</code> para la misma fecha en remoto."
+        "<code>src/server.js</code> en <code>AdmiraNext-Team</code> contiene dos handlers para la misma ruta <code>/api/machines/:id/power</code>; el primero responde antes y deja muerto el bloque posterior donde estaba la proteccion explicita del <code>admira-macmini</code>.",
+        "El repo superior <code>/Users/csilvasantin/AdmiraNext-Team</code> arrastra una copia completa sin trackear en <code>AdmiraNext-Team/</code> y dos JPEG OCR en <code>src/</code>, lo que complica distinguir codigo vigente de material auxiliar.",
+        "No hay commits ni pruebas ejecutadas hoy para estos cambios, asi que varias mejoras siguen sin validacion operativa extremo a extremo."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada para <code>2026-07-03</code> y consolidar en ella la sesion remota previa y esta actualizacion, en vez de duplicar bloques del mismo autor.",
-        "Basar el contenido solo en pruebas directas del repo <code>diario</code> y en acciones realmente ejecutadas hoy: Agora, estado git, fast-forward, intento de push, fetch posterior y rebase.",
-        "No editar <code>repos.html</code> a mano ni registrar actividad externa no verificada de otros repositorios."
+        "Registrar solo hechos comprobables por <code>git status</code>, <code>git diff</code> y lectura directa de archivos, sin atribuir ejecucion real a cambios que siguen locales.",
+        "Sustituir la entrada inicial de hoy por este resumen transversal del workspace en vez de abrir una segunda entrada para la misma fecha."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Terminar el rebase, revisar el diff final y confirmar que <code>git status</code> quede limpio.",
-        "Publicar la version consolidada con <code>git push origin HEAD:main</code>.",
-        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y sirve la entrada <code>3 de julio de 2026</code>."
+        "Unificar el handler de <code>/api/machines/:id/power</code> en <code>AdmiraNext-Team</code>, mantener la proteccion del <code>admira-macmini</code> en el camino real y decidir cual de los dos clones es el canonico.",
+        "Probar en <code>AdmiraGemini</code> la UI local y sus tests antes de publicar el script <code>admira-gemini-ui</code>.",
+        "Validar en <code>ACE-Step</code> un caso real de exportacion para confirmar que el fallback con <code>soundfile</code> cubre el fallo que motivaba el cambio."
       ]}
     ]
   },
