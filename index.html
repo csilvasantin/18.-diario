@@ -350,34 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se actualizo el checkout canonico de <code>/Users/csilvasantin/Claude/diario/</code> con <code>git pull --ff-only origin main</code> antes de escribir para partir del estado publicado mas reciente.",
-        "Se revisaron los cambios reales del dia en este repo, especialmente <code>handoff/2026-07-04-HX-6HX8.md</code> y la actualizacion automatica de <code>repos.html</code>, para resumir solo hechos ya verificados.",
-        "Se creo <code>2026-07-04.md</code> y su tarjeta en <code>index.html</code> con una entrada breve centrada en avances, decisiones, bloqueos y siguientes pasos."
+        "Se leyo la rutina <code>CERRAR-EL-DIA.md</code> desde la copia local y desde la fuente canonica online antes de editar el diario.",
+        "Se ejecuto el pre-check en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log</code>, <code>git reflog</code> y <code>date</code>.",
+        "Se actualizo <code>2026-07-04.md</code> para dejar la entrada firmada como <code>[Codex]</code>, con las seis secciones numeradas exigidas y basada solo en hechos verificados de este repo y de esta sesion.",
+        "Se preparo la actualizacion paralela de <code>index.html</code> para que la UI publica refleje la misma version de la entrada del 4 de julio de 2026."
       ]},
       { heading: "Que se valido", items: [
-        "<code>origin/main</code> traia dos commits de hoy al empezar esta corrida: <code>c4109d7 Handoff HX-6HX8 — Flota de navegadores + Modo de equipo + Studio Live</code> y <code>fcd9e7f chore: actualizar repos.html 2026-07-04 [skip ci]</code>.",
-        "El handoff <code>HX-6HX8</code> deja documentados como hechos del dia la flota de navegadores, el selector compartido de MODO en <code>admira.live/vista-previa</code> y la publicacion de AInimation Studio Live.",
-        "El checkout canonico quedo limpio y alineado con <code>origin/main</code> antes de aplicar esta nueva entrada del diario."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin cambios locales en el checkout canonico.",
+        "<code>git log --since='2026-07-04 00:00' --until='2026-07-04 23:59:59' --date=iso --stat --oneline --all</code> confirmo actividad real de hoy en este repo, incluidos <code>c4109d7</code>, <code>c3631a9</code>, <code>e13656c</code> y <code>f452b52</code>.",
+        "<code>git reflog --date=iso --since='2026-07-04 00:00'</code> confirmo varias actualizaciones previas del diario durante el 4 de julio y que esta corrida parte del <code>HEAD</code> <code>f452b52</code>.",
+        "La fuente canonica publicada en GitHub coincide con la copia local de <code>CERRAR-EL-DIA.md</code>."
       ]},
       { heading: "Avances", items: [
-        "Queda registrado en el diario publico que hoy se consolido el handoff <code>HX-6HX8</code> como snapshot operativo para retomar la sesion desde otra maquina.",
-        "El resumen del dia deja enlazado el avance principal: flota de navegadores con control real, MODO de equipo compartido y continuidad de AInimation Studio Live.",
-        "<code>repos.html</code> ya refleja actividad de hoy en el repo del diario sin tener que tocarlo manualmente."
+        "La entrada diaria del <code>2026-07-04</code> queda normalizada al formato requerido por la rutina: un solo fichero por fecha y seis secciones numeradas.",
+        "El contenido de hoy queda reenfocado al repo canonico del diario y a esta sesion, en vez de depender de otros workspaces no usados en esta corrida.",
+        "<code>index.html</code> queda alineado con esta misma version de la entrada para que la web publica muestre el mismo resumen."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El despliegue de <code>admira.live</code> no depende de <code>git push</code>, sino de Cloudflare Pages, asi que la publicacion operativa sigue separada del estado del repo.",
-        "El paso de verificacion en otra maquina sigue condicionado a conceder permisos TCC de Chrome al executor local.",
-        "El OK final de produccion para <code>admira.live</code> sigue bloqueado por el clasificador y requiere visto bueno de Carlos segun el handoff de hoy."
+        "La version existente de <code>2026-07-04.md</code> no cumplia literalmente la plantilla porque faltaba la seccion <code>3. Avances</code>.",
+        "La tarjeta vigente de <code>index.html</code> para <code>2026-07-04</code> estaba basada en un resumen anterior y habia que resincronizarla con la entrada Markdown.",
+        "No habia bloqueo de red, auth ni worktree sucio al inicio; el unico ajuste necesario en esta corrida fue corregir la estructura y el alcance factual de la entrada de hoy."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Usar el handoff <code>HX-6HX8</code> como fuente canonica del detalle de hoy y mantener esta entrada del diario en formato corto.",
-        "No duplicar en el diario todos los pasos tecnicos del handoff; solo dejar el estado ejecutivo y el enlace publico correspondiente.",
-        "Trabajar unicamente sobre el checkout limpio de <code>/Users/csilvasantin/Claude/diario/</code>, que es el repo canonico indicado para estas actualizaciones."
+        "Actualizar la entrada ya existente del <code>2026-07-04</code> en vez de duplicarla.",
+        "Limitar el contenido a hechos comprobados con <code>git</code> y con el trabajo real realizado en <code>/Users/csilvasantin/Claude/diario/</code> durante esta sesion.",
+        "Mantener la firma <code>[Codex]</code> en el titulo y reflejar la misma narrativa tanto en <code>2026-07-04.md</code> como en <code>index.html</code>."
       ]},
       { heading: "Siguientes pasos", items: [
         "Hacer <code>git add 2026-07-04.md index.html</code>, <code>git commit -m \"Diario 2026-07-04 [Codex]\"</code> y <code>git push origin main</code>.",
-        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> muestra la entrada del <code>4 de julio de 2026</code> y mantiene visible el enlace al handoff <code>HX-6HX8</code>.",
-        "Seguir el siguiente bloque operativo marcado hoy: probar el selector de MODO y validar la flota de navegadores en otra maquina."
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada actualizada del <code>4 de julio de 2026</code>.",
+        "Si la publicacion tarda o falla, registrar con precision si el bloqueo es de red, autenticacion o despliegue."
       ]}
     ]
   },
