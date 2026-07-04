@@ -351,6 +351,7 @@ const entries = [
     sections: [
       { heading: "Que se hizo", items: [
         "Se leyo la rutina <code>CERRAR-EL-DIA.md</code> desde la copia local y desde la fuente canonica online antes de editar el diario.",
+        "Se confirmo que el checkout canonico seguia alineado con <code>origin/main</code> mediante <code>git pull --ff-only origin main</code>, con respuesta <code>Already up to date.</code>.",
         "Se ejecuto el pre-check en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log</code>, <code>git reflog</code> y <code>date</code>.",
         "Se actualizo <code>2026-07-04.md</code> para dejar la entrada firmada como <code>[Codex]</code>, con las seis secciones numeradas exigidas y basada solo en hechos verificados de este repo y de esta sesion.",
         "Se preparo la actualizacion paralela de <code>index.html</code> para que la UI publica refleje la misma version de la entrada del 4 de julio de 2026."
@@ -359,6 +360,7 @@ const entries = [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin cambios locales en el checkout canonico.",
         "<code>git log --since='2026-07-04 00:00' --until='2026-07-04 23:59:59' --date=iso --stat --oneline --all</code> confirmo actividad real de hoy en este repo, incluidos <code>c4109d7</code>, <code>c3631a9</code>, <code>e13656c</code> y <code>f452b52</code>.",
         "<code>git reflog --date=iso --since='2026-07-04 00:00'</code> confirmo varias actualizaciones previas del diario durante el 4 de julio y que esta corrida parte del <code>HEAD</code> <code>f452b52</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-04 23:57:33 CEST +0200</code> durante el pre-check.",
         "La fuente canonica publicada en GitHub coincide con la copia local de <code>CERRAR-EL-DIA.md</code>."
       ]},
       { heading: "Avances", items: [
