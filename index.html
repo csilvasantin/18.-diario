@@ -357,7 +357,7 @@ const entries = [
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al arrancar, sin worktree sucio en el checkout canonico.",
         "<code>git log --since='2026-07-05 00:00' --until='2026-07-05 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa del dia en este repo, incluidos <code>673d825 Diario 2026-07-05 [Codex]</code>, <code>1d40159 Diario 2026-07-05 [Codex]</code>, <code>4c9677e Actualizar diario 2026-07-05 [Codex]</code> y <code>75ff686 Diario 2026-07-05 [Codex]</code>, ademas de <code>e5c0300 chore: actualizar repos.html 2026-07-05 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-05 00:00'</code> confirmo esa secuencia local y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-05 23:57:00 CEST +0200</code>; <code>git pull --ff-only origin main</code> respondio <code>Already up to date.</code>"
+        "<code>git reflog --date=iso --since='2026-07-05 00:00'</code> confirmo esa secuencia local, <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-05 23:59:18 CEST +0200</code> y <code>git pull --ff-only --autostash origin main</code> respondio <code>Already up to date.</code> sobre el remoto actual."
       ]},
       { heading: "Avances", items: [
         "La fecha <code>2026-07-05</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir otra entrada distinta para el mismo dia.",
@@ -377,7 +377,7 @@ const entries = [
       { heading: "Siguientes pasos", items: [
         "Hacer <code>git add 2026-07-05.md index.html</code>, crear el commit <code>Diario 2026-07-05 [Codex]</code> y publicar con <code>git push origin main</code>.",
         "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada corregida del <code>5 de julio de 2026 [Codex]</code>.",
-        "Si la publicacion fallara o quedara retrasada, registrar con precision si el bloqueo es de red, autenticacion o despliegue."
+        "Tras el push, registrar con precision cualquier bloqueo de red, autenticacion o despliegue si la publicacion publica no reflejara la entrada."
       ]}
     ]
   },
