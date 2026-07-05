@@ -350,34 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de esta automatizacion y se compararon el worktree asignado por Codex y el checkout canonico de <code>/Users/csilvasantin/Claude/diario/</code> para elegir una base publicable.",
-        "En el checkout canonico se hizo <code>git pull --ff-only origin main</code>, que adelanto <code>HEAD</code> de <code>68966e7</code> a <code>e5c0300</code> y trajo la actualizacion automatica de <code>repos.html</code> correspondiente a hoy.",
-        "Se confirmo que no existian todavia <code>2026-07-05.md</code> ni una entrada <code>2026-07-05</code> en <code>index.html</code>, y se creo esta nueva entrada junto con su bloque HTML publico para reflejar esta sesion real."
+        "Se reviso la actividad real de hoy en los repositorios de Admirito con foco en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>04.- AdmiraGemini</code>, <code>ACE-Step</code> y <code>github-csilvasantin/csilvasantin.github.io</code>.",
+        "En <code>AdmiraNext-Team</code> se detecto un rediseño local fuerte del panel: portada estilo arcade en <code>public/index.html</code>, reescritura amplia de <code>public/styles.css</code>, nueva logica de <code>public/app.js</code>, subida de version <code>0.1.3</code> y enriquecimiento de <code>data/machines.json</code> con acceso local al Mac Mini.",
+        "Tambien quedaron cambios locales relevantes fuera de ese repo: <code>AdmiraNext-Team-latest</code> endurece el servidor y el quoting remoto de AppleScript, <code>AdmiraGemini</code> incorpora una UI web con assets estaticos y comando <code>admira-gemini-ui</code>, <code>ACE-Step</code> añade fallback a <code>soundfile</code> al guardar audio y <code>csilvasantin.github.io</code> amplia la bitacora publica de Yarig/Codex."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> en el checkout canonico, sin cambios locales antes de editar, y <code>date</code> marco <code>2026-07-05 21:31:57 CEST +0200</code>.",
-        "<code>git log --since='2026-07-05 00:00:00' --until='2026-07-05 23:59:59' --date=iso --stat --oneline --all</code> mostro como actividad previa real de hoy en este repo el commit <code>e5c0300 chore: actualizar repos.html 2026-07-05 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-05 00:00:00'</code> confirmo dos hitos verificables del dia en este clon: el commit previo <code>68966e7 HEAD@{2026-07-05 00:00:16 +0200}: commit: Diario 2026-07-04 [Codex]</code> y el <code>pull --ff-only origin main</code> hecho en esta corrida a las <code>2026-07-05 21:31:48 +0200</code>."
+        "El primer intento de <code>python3 -m unittest tests.test_web</code> fallo en <code>04.- AdmiraGemini</code> por no tener <code>PYTHONPATH=src</code>; repetido como <code>PYTHONPATH=src python3 -m unittest tests.test_web</code> ejecuto <code>5</code> tests y devolvio <code>OK</code>.",
+        "<code>node --check github-csilvasantin/AdmiraNext-Team/public/app.js</code> no devolvio errores y <code>python3</code> pudo cargar <code>github-csilvasantin/AdmiraNext-Team/data/machines.json</code> correctamente tras anadir <code>ip_local</code> y <code>connect_local</code>.",
+        "La inspeccion de <code>git status</code> y <code>git log --since='2026-07-05 00:00:00'</code> mostro que hoy no hay commits nuevos en esos repos: el trabajo del dia sigue mayoritariamente como cambios locales sin publicar y en varios casos con ramas por detras del remoto."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-05</code> queda incorporada por primera vez al diario con una sola entrada Markdown firmada <code>[Codex]</code>.",
-        "<code>index.html</code> queda sincronizado con el mismo resumen factual para que la UI publica muestre <code>5 de julio de 2026</code> bajo el filtro <code>Codex</code>.",
-        "El cierre de hoy vuelve a dejar trazabilidad explicita de que la unica actividad previa comprobada en este repo era la actualizacion automatica de <code>repos.html</code>, sin mezclar otros repos ni trabajo no verificado."
+        "<code>AdmiraNext-Team</code> pasa de listado funcional a panel visual tipo <code>player select</code>, con resumen por miembro, feature card por persona y capturas refrescadas del Mac Mini y portatiles del equipo.",
+        "<code>AdmiraNext-Team-latest</code> deja preparada una base mas robusta para control remoto: <code>PORT</code> configurable, estado <code>idle</code> admitido y construccion segura de comandos <code>osascript</code> sobre SSH para evitar quoting fragil.",
+        "<code>AdmiraGemini</code> avanza de wrapper CLI a herramienta con panel local y automatizacion editable desde web, mientras <code>ACE-Step</code> reduce riesgo de fallo al exportar audio y <code>csilvasantin.github.io</code> documenta mejor el estado operativo de Yarig/Codex."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El worktree inicial de la sesion estaba en <code>HEAD (no branch)</code> y apuntaba a otro remoto (<code>https://github.com/csilvasantin/diario.git</code>), asi que no era una base segura para cerrar y publicar.",
-        "Antes de esta corrida no habia ninguna entrada del <code>2026-07-05</code>, pese a que <code>origin/main</code> ya traia actividad automatica de hoy en <code>repos.html</code>.",
-        "La comprobacion publica final depende de que el nuevo commit llegue a <code>origin/main</code> y de que GitHub Pages sirva la version actualizada tras el push."
+        "El grueso del trabajo de hoy no esta consolidado en commits: <code>AdmiraNext-Team</code> esta <code>behind 303</code>, <code>AdmiraNext-Team-latest</code> tiene cambios sin publicar y <code>csilvasantin.github.io</code> sigue <code>behind 2</code>, asi que varias mejoras viven solo en el workspace actual.",
+        "La validacion automatica de <code>AdmiraGemini</code> dependia de recordar <code>PYTHONPATH=src</code>; el primer intento fallo por entorno, lo que apunta a que conviene fijar mejor la forma de ejecutar tests locales.",
+        "Los cambios mas grandes de <code>AdmiraNext-Team</code> son sobre todo visuales y de UX; hoy no quedo una comprobacion visual publicada ni un despliegue remoto asociado, solo validacion sintactica y de datos."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Publicar exclusivamente desde <code>/Users/csilvasantin/Claude/diario/</code>, que es el checkout limpio alineado con <code>origin/main</code>.",
-        "Registrar solo hechos verificables del propio repo <code>diario</code> y de esta sesion: estado git, <code>pull</code>, ausencia inicial de la entrada de hoy y edicion real de Markdown mas HTML.",
-        "Crear una entrada nueva para <code>2026-07-05</code> en vez de reescribir otra fecha o inventar actividad adicional no respaldada por git."
+        "Reescribir la entrada existente del <code>2026-07-05</code> para que resuma el trabajo real del workspace Admirito, en vez de dejarla centrada solo en la rutina del diario.",
+        "Priorizar <code>AdmiraNext-Team</code> como eje de la jornada porque es el repo con mas superficie tocada hoy, y tratar el resto como avances complementarios o endurecimiento tecnico.",
+        "Dejar explicitamente separadas las validaciones reales de lo que aun no esta cerrado, para no vender como publicado un trabajo que sigue local o detras del remoto."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add 2026-07-05.md index.html</code>, <code>git commit -m \"Diario 2026-07-05 [Codex]\"</code> y <code>git push origin main</code>.",
-        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada <code>5 de julio de 2026</code> despues de la publicacion.",
-        "Reportar al usuario la URL publica final y el estado exacto de la publicacion."
+        "Decidir si <code>AdmiraNext-Team</code> se consolida sobre el repo principal o sobre <code>AdmiraNext-Team-latest</code>, porque ahora mismo hay trabajo repartido entre ambos y con historiales distintos.",
+        "Hacer una verificacion visual del nuevo panel de <code>AdmiraNext-Team</code> antes de publicar, y despues crear commits pequenos por repo para no mezclar UI, conectividad y documentacion en una sola entrega.",
+        "En <code>AdmiraGemini</code>, fijar el comando de test y limpiar artefactos como <code>admira-gemini.log</code> antes de commitear la nueva UI web."
       ]}
     ]
   },
