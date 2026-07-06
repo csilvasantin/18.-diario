@@ -347,6 +347,43 @@ const entries = [
     date: "2026-07-06",
     title: "6 de julio de 2026",
     member: "Carlos Silva",
+    author: "Neo · subNeo · subSubNeo",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Carlos (El Arquitecto) pidio arrancar el proyecto <strong>Yokup</strong> con foco en <code>www.yokup.com/tool</code>, estrenando la arquitectura de 3 capas: Neo (Fable 5) coordina, subNeo (Opus 4.8) ejecuta, subSubNeo (Sonnet) documenta.",
+        "Se detecto que la web de Yokup (repo <code>csilvasantin/tool</code>, GitHub Pages, dominio custom <code>yokup.com</code> via <code>web/CNAME</code>) servia la app en la raiz <code>yokup.com/</code>, con <code>/tool</code> devolviendo 404.",
+        "Se descarto la via sugerida por el README (mover el dominio a <code>csilvasantin.github.io</code>) porque ese sitio ya usa el dominio <code>www.carlossilva.info</code>; hacerlo habria roto ese dominio."
+      ]},
+      { heading: "Que se valido", items: [
+        "Se confirmo que <code>web/CNAME</code> en <code>csilvasantin/tool</code> apunta a <code>yokup.com</code> y que la estructura actual sirve todo desde la raiz del repo.",
+        "Se confirmo que <code>csilvasantin.github.io</code> tiene su propio <code>CNAME</code> con <code>www.carlossilva.info</code>, por lo que no es candidato para alojar <code>yokup.com/tool</code>.",
+        "Tarea registrada en el tablero central: <code>#11</code> (<code>task.sh</code>)."
+      ]},
+      { heading: "Avances", items: [
+        "Decision de Neo: mantener el dominio <code>yokup.com</code> en el repo <code>tool</code> y reestructurar <code>web/</code> a <code>web/tool/</code>, con redirect en la raiz hacia <code>/tool</code> y red de seguridad en <code>404.html</code> para enlaces antiguos.",
+        "Cambio reversible via git (rama <code>backup-pre-tool</code>) antes de tocar la estructura en produccion.",
+        "Ejecucion delegada a subNeo (Opus): restructura de carpetas, fix de rutas absolutas (incluido el redirect del magic link de Supabase), actualizacion de README, push a <code>main</code>, deploy en GitHub Pages y verificacion final con <code>curl</code>."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "El README existente recomendaba mover el dominio <code>yokup.com</code> al repo <code>csilvasantin.github.io</code>, opcion descartada por colisionar con <code>www.carlossilva.info</code> ya alojado ahi.",
+        "El redirect de magic link de Supabase depende de rutas absolutas que hay que revisar al mover <code>web/</code> a <code>web/tool/</code>, para no romper el flujo de login tras el cambio de ruta."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "El dominio <code>yokup.com</code> permanece en el repo <code>tool</code>; no se toca <code>csilvasantin.github.io</code>.",
+        "La app pasa de raiz a <code>web/tool/</code>, con redirect automatico desde <code>/</code> y <code>404.html</code> como red de seguridad para no perder enlaces viejos.",
+        "Se estrena formalmente la cadena de 3 capas Neo (Fable) -&gt; subNeo (Opus) -&gt; subSubNeo (Sonnet) para este proyecto, con subSubNeo documentando en este Diario y avisando al equipo."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "subNeo completa la restructura <code>web/</code> -&gt; <code>web/tool/</code>, corrige rutas absolutas y hace push a <code>main</code> para que se dispare el deploy de GitHub Pages.",
+        "Verificar con <code>curl</code> que <code>yokup.com/</code> redirige correctamente a <code>/tool</code> y que <code>yokup.com/tool</code> sirve la app sin 404.",
+        "Confirmar que el magic link de Supabase sigue funcionando tras el cambio de rutas, y cerrar la tarea <code>#11</code> del tablero cuando quede verificado."
+      ]}
+    ]
+  },
+  {
+    date: "2026-07-06",
+    title: "6 de julio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
