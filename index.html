@@ -357,16 +357,19 @@ const entries = [
       { heading: "Que se valido", items: [
         "Se confirmo que <code>web/CNAME</code> en <code>csilvasantin/tool</code> apunta a <code>yokup.com</code> y que la estructura actual sirve todo desde la raiz del repo.",
         "Se confirmo que <code>csilvasantin.github.io</code> tiene su propio <code>CNAME</code> con <code>www.carlossilva.info</code>, por lo que no es candidato para alojar <code>yokup.com/tool</code>.",
-        "Tarea registrada en el tablero central: <code>#11</code> (<code>task.sh</code>)."
+        "Tarea registrada en el tablero central: <code>#11</code> (<code>task.sh</code>).",
+        "<strong>Cierre verificado en produccion (subNeo, Opus 4.8):</strong> commit desplegado <code>a52572e</code> (rollback en rama <code>backup-pre-tool</code>, commit <code>a32225f</code>). <code>curl</code> confirmo <code>https://www.yokup.com/tool/</code> -&gt; 200, dominio <code>www</code> -&gt; 200, raiz <code>yokup.com/</code> -&gt; redirect a <code>/tool/</code>, enlaces viejos (<code>/panel.html</code> -&gt; <code>/tool/panel.html</code>) -&gt; reenvio correcto, y CSS -&gt; 200. El primer run de GitHub Pages fallo transitorio y se relanzo, verde en 12s."
       ]},
       { heading: "Avances", items: [
         "Decision de Neo: mantener el dominio <code>yokup.com</code> en el repo <code>tool</code> y reestructurar <code>web/</code> a <code>web/tool/</code>, con redirect en la raiz hacia <code>/tool</code> y red de seguridad en <code>404.html</code> para enlaces antiguos.",
         "Cambio reversible via git (rama <code>backup-pre-tool</code>) antes de tocar la estructura en produccion.",
-        "Ejecucion delegada a subNeo (Opus): restructura de carpetas, fix de rutas absolutas (incluido el redirect del magic link de Supabase), actualizacion de README, push a <code>main</code>, deploy en GitHub Pages y verificacion final con <code>curl</code>."
+        "Ejecucion delegada a subNeo (Opus): restructura de carpetas, fix de rutas absolutas (incluido el redirect del magic link de Supabase), actualizacion de README, push a <code>main</code>, deploy en GitHub Pages y verificacion final con <code>curl</code>.",
+        "<strong>Tarea <code>#11</code> cerrada.</strong> <code>web/</code> movido a <code>web/tool/</code> con <code>git mv</code> (<code>CNAME</code> se quedo en su sitio), <code>web/index.html</code> nuevo con redirect a <code>/tool/</code>, <code>web/404.html</code> reenviando enlaces viejos, README actualizado. <code>auth.js</code> no necesito cambios porque el magic link de Supabase ya usaba <code>location.origin + pathname</code>. Version del release: <strong>v.26.07.06.r1</strong>."
       ]},
       { heading: "Problemas encontrados", items: [
         "El README existente recomendaba mover el dominio <code>yokup.com</code> al repo <code>csilvasantin.github.io</code>, opcion descartada por colisionar con <code>www.carlossilva.info</code> ya alojado ahi.",
-        "El redirect de magic link de Supabase depende de rutas absolutas que hay que revisar al mover <code>web/</code> a <code>web/tool/</code>, para no romper el flujo de login tras el cambio de ruta."
+        "El redirect de magic link de Supabase depende de rutas absolutas que hay que revisar al mover <code>web/</code> a <code>web/tool/</code>, para no romper el flujo de login tras el cambio de ruta. Verificado sin cambios necesarios.",
+        "El primer deploy de GitHub Pages fallo de forma transitoria; se relanzo manualmente y quedo verde."
       ]},
       { heading: "Decisiones tomadas", items: [
         "El dominio <code>yokup.com</code> permanece en el repo <code>tool</code>; no se toca <code>csilvasantin.github.io</code>.",
@@ -374,9 +377,9 @@ const entries = [
         "Se estrena formalmente la cadena de 3 capas Neo (Fable) -&gt; subNeo (Opus) -&gt; subSubNeo (Sonnet) para este proyecto, con subSubNeo documentando en este Diario y avisando al equipo."
       ]},
       { heading: "Siguientes pasos", items: [
-        "subNeo completa la restructura <code>web/</code> -&gt; <code>web/tool/</code>, corrige rutas absolutas y hace push a <code>main</code> para que se dispare el deploy de GitHub Pages.",
-        "Verificar con <code>curl</code> que <code>yokup.com/</code> redirige correctamente a <code>/tool</code> y que <code>yokup.com/tool</code> sirve la app sin 404.",
-        "Confirmar que el magic link de Supabase sigue funcionando tras el cambio de rutas, y cerrar la tarea <code>#11</code> del tablero cuando quede verificado."
+        "<strong>Unica accion pendiente, humana (Carlos):</strong> en Supabase (proyecto <code>aswwjkfejdfglpxlgbjl</code> -&gt; Authentication -&gt; URL Configuration) poner Site URL <code>https://www.yokup.com/tool/</code> y anadir Redirect URLs <code>https://www.yokup.com/tool/*</code> y <code>https://yokup.com/tool/*</code> para que el magic link funcione bajo <code>/tool</code>.",
+        "Tarea <code>#11</code> del tablero cerrada; sin seguimiento tecnico adicional salvo la accion de Supabase de arriba.",
+        "Cierre comunicado por subSubNeo via Telegram y AgoraMatrix el <code>2026-07-06</code>."
       ]}
     ]
   },
