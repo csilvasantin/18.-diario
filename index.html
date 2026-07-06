@@ -344,6 +344,44 @@
 <script>
 const entries = [
   {
+    date: "2026-07-06",
+    title: "6 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se verifico la identidad <code>Codex -> Oraculo</code> y se dejo activa la presencia periodica en AgoraMatrix antes de revisar el trabajo reciente.",
+        "Se inspeccionaron los repos con actividad reciente en los workspaces principales, con foco en <code>/Users/csilvasantin/Documents/Admirito</code> y en los repositorios tocados en las ultimas sesiones: <code>pixer-worker</code>, <code>pixeria</code>, <code>csilvasantin.github.io</code>, <code>diario</code>, <code>admira-adstack</code>, <code>admira-live</code> y <code>32.-ConsejoAdmiraNextGame</code>.",
+        "Se compararon commits recientes, estado local y diffs para separar lo ya publicado de lo que sigue solo en local, y se decidio actualizar este <code>diario</code> canonico sin tocar el hub publico porque ya registra actualizaciones automaticas del <code>2026-07-06</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git log --since='2026-06-29'</code> mostro trabajo publicado reciente en <code>github-csilvasantin/pixer-worker</code> y <code>github-csilvasantin/pixeria</code>, incluyendo <code>6ff3577 feat(newsletter)</code> del <code>2026-07-04</code>, <code>99c99df feat(segmentation)</code> del <code>2026-06-30</code>, <code>191773f fix(pixeria)</code> del <code>2026-07-04</code> y <code>fa04456 fix(stock)</code> del <code>2026-07-04</code>.",
+        "<code>git show --stat</code> confirmo el alcance de esos cambios: <code>pixer-worker</code> anadio endpoints de newsletter, segmentacion, pago y calendario en <code>src/index.js</code>, mientras <code>pixeria</code> toco <code>stock.html</code>, multiples paginas publicas y el workspace musical <code>Xpacio</code>.",
+        "Se comprobo que <code>/Users/csilvasantin/GitHub/00.-csilvasantin.github.io</code> ya habia registrado hoy commits automaticos <code>c078df1</code>, <code>baf6ac2</code>, <code>e71c141</code> y anteriores del <code>2026-07-06</code>, por lo que no hacia falta refrescar ahi un resumen manual adicional."
+      ]},
+      { heading: "Avances", items: [
+        "Queda consolidada una foto operativa verificable de principios de julio: <code>pixer-worker</code> avanza en backend comercial y operacional, <code>pixeria</code> corrige UX/publico y <code>admira-adstack</code> junto a <code>admira-live</code> acumulan iteraciones publicadas de producto y accesibilidad entre el <code>2026-07-02</code> y el <code>2026-07-04</code>.",
+        "Esta revision deja separadas tres categorias utiles para seguimiento: trabajo ya publicado, trabajo validado solo por diff/local y clones auxiliares con historico desordenado que no conviene tratar como fuente canonica.",
+        "El <code>diario</code> vuelve a recoger el estado real del dia sin duplicar entradas previas ni inventar despliegues, y sirve como puntero fiable para la siguiente automatizacion global."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "En <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io</code> siguen abiertos cambios sin commit en <code>codex/index.html</code>, <code>codex/yarig-ai/index.html</code>, <code>yarig-ai/index.html</code> y dos ficheros nuevos <code>telegram-consejeros.html</code>, asi que ese frente necesita revision visual y decision de publicacion.",
+        "El clon no canonico <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario</code> sigue con <code>index.html</code>, <code>2026-04-14.md</code> y numerosas entradas sin trackear entre abril y junio; no se ha tocado porque esta sucio y no debe confundirse con <code>/Users/csilvasantin/Claude/diario/</code>.",
+        "<code>32.-ConsejoAdmiraNextGame</code> mantiene un worktree grande y claramente abierto, con mas de cuatro mil lineas de diff repartidas entre <code>teamwork</code>, <code>council-api.py</code>, <code>data/tasks.json</code>, <code>public/*</code> y varios backups; este bloque sigue sin publicacion ni validacion final consolidada."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Se actualiza solo el <code>diario</code> canonico de hoy para reflejar esta revision operacional; no se modifica el hub publico <code>00.-csilvasantin.github.io</code> porque ya quedo autoactualizado el <code>6 de julio de 2026</code>.",
+        "Se tratan como fuentes primarias los commits publicados y los <code>git diff --stat</code> observables, evitando reconstruir trabajo a partir de memoria o de checkouts auxiliares sucios.",
+        "Se deja explicito que los cambios locales de <code>csilvasantin.github.io</code>, <code>github-csilvasantin/diario</code> y <code>32.-ConsejoAdmiraNextGame</code> siguen requiriendo criterio humano o una sesion de cierre especifica antes de publicar nada."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Revisar manualmente el frente <code>csilvasantin.github.io</code> dentro de Admirito para decidir si las paginas de <code>Yarig.ai</code> y <code>telegram-consejeros.html</code> deben publicarse, corregirse o descartarse.",
+        "Limpiar o aislar el clon sucio <code>github-csilvasantin/diario</code> para que no vuelva a mezclarse con el checkout canonico usado por la rutina <code>Cerrar el dia</code>.",
+        "Abrir una sesion especifica para <code>32.-ConsejoAdmiraNextGame</code> si se quiere convertir ese diff local en entregable: primero recorte del scope, despues validacion visual/funcional y solo entonces commit o despliegue."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-05",
     title: "5 de julio de 2026",
     member: "Carlos Silva",
