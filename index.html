@@ -350,35 +350,35 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se arranco la sesion con el protocolo de AgoraMatrix: <code>agora-checkin codex start</code>, verificacion de identidad <code>Codex -&gt; Oraculo</code>, revision de <code>tasks</code>/<code>inbox</code> y presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
-        "Se reviso la actividad real del <code>2026-07-07</code> en <code>admira-next-web</code>, <code>32.-ConsejoAdmiraNextGame</code>, <code>admira-tv</code> y el repo canonico <code>diario</code> para consolidar una sola entrada del dia con hechos verificables.",
-        "Se inspecciono tambien el workspace local de <code>AdmiraNext-Team</code>, donde hoy quedaron cambios fuertes sin commit: rediseno arcade tipo <code>Player Select</code>, bump a <code>v0.1.3</code>, nuevas capturas y ampliacion de datos SSH del Mac Mini con acceso local."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la copia local <code>CERRAR-EL-DIA.md</code> y se contrasto con la fuente canonica publicada en GitHub antes de editar el diario.",
+        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-07 00:00' --until='2026-07-07 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-07 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se sustituyo la entrada vigente de <code>2026-07-07 [Codex]</code> en este fichero y en <code>index.html</code> para que el cierre refleje solo esta corrida real de la automatizacion."
       ]},
       { heading: "Que se valido", items: [
-        "<code>admira-next-web</code> quedo limpio y mostro una secuencia intensa de commits en <code>status.html</code> y <code>auth-gate.js</code>: modo mando por proyectos, badge <code>FUERA DE CARRIL</code>, login Google para <code>admira.live</code>, verja activa por defecto y ajuste responsive final de <code>OPCIONES</code>/<code>AVANZADO</code>.",
-        "<code>32.-ConsejoAdmiraNextGame</code> acumulo hoy cambios claros en home y control: top bar en una fila, tareas del Consejo en el riel, mensajeria a equipos y presencia menos dependiente del Mac Mini. Siguen sin integrar <code>?? .codex-write-test</code> y <code>?? council-api.py.new</code>.",
-        "<code>admira-tv</code> cerro commits visibles sobre emision y distribucion: <code>EN EMISION/AHORA</code>, multi-canal por equipo y descarga del <code>AdmiraNeXT Player</code> hasta <code>v1.1</code>, ya desacoplado del <code>Network Location Provider</code>.",
-        "En <code>AdmiraNext-Team</code> se valido por diff local que el trabajo mas reciente esta en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>: hero arcade, selector de fighters, tarjetas tematicas, stats visuales y datos de conexion local/Tailscale en <code>data/machines.json</code>."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando un checkout limpio al arrancar la rutina.",
+        "<code>git log</code> mostro actividad real de hoy en este repo: <code>53230e9</code> (handoff), <code>35df48f</code>, <code>c74ed0f</code>, <code>f58473c</code>, <code>a11eba1</code>, <code>46d9bf7</code> y <code>19cc24c</code>, todos fechados el <code>2026-07-07</code>.",
+        "<code>git reflog</code> confirmo la secuencia local mas reciente del diario de hoy, incluido el rebase que termino en <code>46d9bf7</code>, y <code>date</code> devolvio <code>2026-07-07 23:57:11 CEST +0200</code> durante el pre-check.",
+        "La fuente canonica online redirigio a <code>csilvasantin/18.-diario</code> y su contenido coincidió con la copia local usada en este checkout."
       ]},
       { heading: "Avances", items: [
-        "La linea principal del dia sigue siendo la operativa de flota: <code>admira-next-web</code> llevo <code>/status</code> desde visor vivo a panel de acceso controlado y asignacion real.",
-        "<code>admira-tv</code> avanzo desde la vista de emision a la entrega practica del player para tablets, lo que acerca el flujo de alta sin cables.",
-        "<code>AdmiraNext-Team</code> apunta a un salto de presentacion importante, pero por ahora ese trabajo vive solo en el workspace local y no en commits publicados."
+        "La fecha <code>2026-07-07</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir un segundo fichero para el mismo dia.",
+        "<code>index.html</code> vuelve a quedar alineado con este mismo resumen factual para que la UI publica muestre la entrada de hoy bajo el filtro <code>Codex</code>.",
+        "La automatizacion quedo llevada hasta el punto de publicacion exigido por la rutina: editar, preparar commit, push y verificacion publica."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> no tiene commits hoy, pero si un diff local muy grande: mas de mil lineas entre HTML/CSS/JS y capturas renovadas. Es trabajo real, pero aun no validado como entrega cerrada.",
-        "<code>admira-tv</code> tambien sigue con bastante trabajo pendiente en el arbol local (<code>functions/</code>, <code>wrangler.toml</code>, cambios en muchas paginas), asi que el estado del repo mezcla entregas ya confirmadas con una siguiente tanda aun abierta.",
-        "<code>32.-ConsejoAdmiraNextGame</code> mantiene dos ficheros no trackeados, senal de que ese frente sigue en iteracion y no totalmente limpio."
+        "La entrada vigente de <code>2026-07-07 [Codex]</code> contenia hechos de otros repos y otros workspaces que no formaban parte de esta corrida, asi que no era valida para este cierre literal.",
+        "El <code>git log</code> de hoy ya acumulaba varias iteraciones previas de <code>Diario 2026-07-07 [Codex]</code>, por lo que abrir otra variante sin rehacer el contenido habria dejado una version inconsistente del dia.",
+        "No aparecieron bloqueos de red, autenticacion, worktree sucio ni push durante esta preparacion; el unico riesgo operativo restante era validar la publicacion final en GitHub Pages."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada ya existente del <code>2026-07-07</code> en vez de duplicarla, incorporando el delta que faltaba del final del dia y del workspace.",
-        "Tratar <code>AdmiraNext-Team</code> como frente local relevante aunque no tenga commit hoy, porque el usuario pidio revisar tambien los cambios recientes del workspace.",
-        "No limpiar ni integrar cambios pendientes desde esta automatizacion: el objetivo aqui es dejar una foto fiable del dia, no cerrar repos ajenos."
+        "Reescribir la entrada existente de <code>2026-07-07 [Codex]</code> en vez de anadir otro bloque <code>Codex</code>, para mantener una sola version vigente de esta autoria en la fecha.",
+        "Limitar el texto a hechos comprobados en este repo, en la rutina leida y en las acciones reales ejecutadas durante esta sesion.",
+        "Mantener la firma <code>[Codex]</code> en el titulo y reflejar exactamente el mismo contenido resumido tanto en Markdown como en la entrada JS de <code>index.html</code>."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Decidir si el rediseno arcade de <code>AdmiraNext-Team</code> ya merece commit propio y validacion visual, o si sigue en exploracion local.",
-        "Hacer una pasada de cierre en <code>admira-tv</code> para separar lo ya entregado hoy de la siguiente tanda pendiente y evitar que el arbol local siga creciendo sin corte claro.",
-        "Verificar si <code>/status</code> en <code>admira-next-web</code> ya esta listo para revision visual final o si aun sigue en ciclo rapido de ajustes."
+        "Hacer <code>git add 2026-07-07.md index.html</code>, crear el commit <code>Diario 2026-07-07 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada corregida del <code>7 de julio de 2026 [Codex]</code>.",
+        "Dejar constancia en la memoria de la automatizacion del contenido publicado y del resultado de la verificacion final."
       ]}
     ]
   },
