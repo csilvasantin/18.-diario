@@ -350,35 +350,29 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se arranco esta sesion con <code>agora-checkin codex start</code> y se leyeron la memoria de la automatizacion, <code>CERRAR-EL-DIA.md</code>, <code>README.md</code> y la skill local <code>skills/diario-ia-claude-code/SKILL.md</code> para seguir el flujo exacto del diario.",
-        "Se hizo el pre-check en este checkout con <code>git status --short --branch</code>, <code>git log --since='2026-07-07 00:00' --until='2026-07-07 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-07 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se ejecuto <code>git pull --ff-only origin main</code>, que avanzo <code>HEAD</code> de <code>35e18ac</code> a <code>35df48f</code> y trajo <code>2026-07-06.md</code>, <code>2026-07-07.md</code>, <code>handoff/2026-07-07-HX-8ZWD.md</code>, <code>index.html</code> y <code>repos.html</code>.",
-        "Se revisaron la entrada existente de <code>2026-07-07.md</code> y su bloque en <code>index.html</code>, y se reescribieron para dejar una sola version <code>[Codex]</code> de la fecha basada solo en hechos verificables de este repo y de esta ejecucion."
+        "Se reviso el handoff <code>HX-8ZWD</code> y el historial de este repo para reconstruir el trabajo real de hoy en Admirito sin duplicar la entrada del dia.",
+        "El foco operativo del <code>7 de julio</code> estuvo en la flota y en <code>admiranext.com/status</code>: mapa/CLI visual, rotacion de vistas, contador de presencia y estetica sci-fi para seguimiento de maquinas y agentes.",
+        "En paralelo se inspecciono el workspace local de <code>AdmiraNext-Team</code>, incluyendo <code>/Users/csilvasantin/AdmiraNext-Team</code>, su checkout anidado <code>AdmiraNext-Team/AdmiraNext-Team</code> y el clon limpio de <code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code>."
       ]},
       { heading: "Que se valido", items: [
-        "Antes de editar, <code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> sin cambios locales, y <code>git pull --ff-only origin main</code> respondio con un fast-forward limpio hasta <code>35df48f</code>.",
-        "<code>git log --since='2026-07-07 00:00' --until='2026-07-07 23:59:59' --date=iso --stat --oneline --all</code> confirmo actividad real previa de hoy en este repo: <code>19cc24c</code> (<code>chore: actualizar repos.html 2026-07-07 [skip ci]</code>), <code>53230e9</code> (<code>Handoff HX-8ZWD - Coordinador DG: flota descentralizada + admiranext.com/status</code>) y <code>35df48f</code> (<code>Diario 2026-07-07 [Codex]</code>).",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-07 21:32:55 CEST +0200</code>, y el array <code>const entries</code> de <code>index.html</code> siguio siendo parseable tras la edicion."
-      ]},
-      { heading: "Avances", items: [
-        "La fecha <code>2026-07-07</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir otra entrada separada para el mismo dia.",
-        "<code>index.html</code> vuelve a quedar sincronizado con <code>2026-07-07.md</code>, de modo que la novedad de hoy siga visible en la UI publica bajo <code>Todos</code> y <code>Codex</code>.",
-        "Esta corrida deja el diario centrado en trazabilidad real del propio repo y no en un resumen narrativo apoyado en otros workspaces."
+        "<code>handoff/2026-07-07-HX-8ZWD.md</code> confirma como entregas del dia la infraestructura de flota descentralizada, el rediseño de <code>www.admiranext.com/status</code> y cambios coordinados en repos auxiliares como <code>admira-vault</code>, <code>draw-gen</code>, <code>admira-fleet</code>, <code>adcelerate</code> y <code>ConsejoAdmiraNextGame</code>.",
+        "El clon canonico <code>Claude/repos/AdmiraNext-Team</code> esta limpio, sin commits nuevos locales del <code>7 de julio</code>, mientras los otros dos checkouts muestran trabajo sin consolidar.",
+        "En <code>AdmiraNext-Team/AdmiraNext-Team</code> siguen abiertos cambios en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>; en el checkout exterior quedan ademas un <code>machines.json</code> desfasado, dos capturas OCR sin trackear y un directorio <code>AdmiraNext-Team/</code> anidado."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Mientras se preparaba la actualizacion, <code>origin/main</code> avanzo y ya contenia <code>2026-07-07.md</code>, asi que no se podia crear otra entrada sin consolidar primero la fecha.",
-        "La version que llego en <code>35df48f</code> describia actividad externa al repo <code>diario</code>; para cumplir la consigna de no inventar ni ampliar sin evidencia directa en esta corrida, hubo que reenfocarla al trabajo verificable de este repositorio.",
-        "Este checkout esta en detached <code>HEAD</code>, asi que la publicacion debe hacerse con <code>git push origin HEAD:main</code> y no asumiendo una rama local activa."
+        "El trabajo de hoy en Admirito no esta reflejado como commits recientes en los clones locales consultados, asi que parte del estado solo se puede apoyar en el handoff y no en un <code>git log</code> fresco de esos repos.",
+        "<code>AdmiraNext-Team</code> arrastra deuda de workspace: hay dos checkouts distintos del mismo repo, uno dentro de otro, lo que vuelve facil mezclar cambios o publicar desde el sitio equivocado.",
+        "El diff local de <code>src/server.js</code> incluye dos implementaciones de <code>/api/machines/:id/power</code>; antes de retomar ese frente conviene unificar la ruta y volver a validar <code>sleep</code>/<code>wake</code> de forma explicita."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Reutilizar la entrada ya existente de <code>2026-07-07</code> en vez de crear otro bloque <code>Codex</code> o duplicar el fichero del dia.",
-        "Limitar el contenido a evidencia directa de esta sesion y del historial de <code>diario</code> del <code>2026-07-07</code>: estado, pull, commits presentes y archivos realmente tocados.",
-        "Mantener exactamente la misma narrativa en <code>2026-07-07.md</code> e <code>index.html</code> para evitar divergencias entre la fuente Markdown y la web publica."
+        "Actualizar la entrada existente del <code>7 de julio</code> en vez de crear otra, dejando una sola version <code>[Codex]</code> para la fecha.",
+        "Separar claramente lo que hoy fue entrega coordinada y validada (<code>/status</code>, flota, proxies y kiosco por proyecto) de lo que sigue siendo cambio local no publicado en <code>AdmiraNext-Team</code>.",
+        "Tratar <code>Claude/repos/AdmiraNext-Team</code> como referencia limpia y los otros workspaces como material de recuperacion o limpieza, no como fuente canonica de despliegue."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add 2026-07-07.md index.html</code>, crear el commit <code>Diario 2026-07-07 [Codex]</code> y publicar con <code>git push origin HEAD:main</code>.",
-        "Verificar por <code>gh api</code> que <code>main</code> apunta al nuevo commit y que GitHub Pages queda en estado <code>built</code>.",
-        "Confirmar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo tras la publicacion y cerrar la automatizacion con feedback sonoro local."
+        "Si se retoma <code>AdmiraNext-Team</code>, empezar comparando los dos checkouts y decidir cual sobrevive antes de tocar codigo o publicar nada.",
+        "Validar de nuevo el flujo de power control del dashboard: ruta unica, proteccion del Mac Mini, comandos <code>sleep</code>/<code>wake</code> y consistencia de <code>data/machines.json</code>.",
+        "Mantener <a href='https://www.admiranext.com/status' target='_blank'>https://www.admiranext.com/status</a> como referencia visible del estado de flota, y usar el handoff <code>HX-8ZWD</code> como punto de reentrada para continuar esa linea de trabajo."
       ]}
     ]
   },
