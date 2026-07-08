@@ -350,14 +350,14 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se leyeron la rutina local <code>CERRAR-EL-DIA.md</code>, la fuente canonica en GitHub y la memoria de la automatizacion, comprobando que <code>memory.md</code> todavia no existia.",
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyeron la rutina local <code>CERRAR-EL-DIA.md</code>, la fuente canonica en GitHub y la memoria previa de la automatizacion en <code>~/.codex/automations/cerrar-el-dia/memory.md</code>.",
         "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-08 00:00' --until='2026-07-08 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-08 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
         "Se reescribieron <code>2026-07-08.md</code> e <code>index.html</code> para que el cierre de hoy refleje solo esta corrida real del repo <code>diario</code> y mantenga la firma <code>[Codex]</code>."
       ]},
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> antes de editar, sin cambios locales en este checkout.",
         "<code>git log</code> mostro actividad real del <code>2026-07-08</code> en este repo: <code>570886b</code>, <code>4bf8eaf</code>, <code>96d8d71</code> y <code>b825136</code>.",
-        "<code>git reflog</code> confirmo la secuencia local mas reciente de hoy, incluido <code>b825136</code> a las <code>23:49:45 +0200</code>, y <code>date</code> devolvio <code>2026-07-08 23:57:07 CEST +0200</code> durante el pre-check."
+        "<code>git reflog</code> confirmo la secuencia local mas reciente de hoy, incluido <code>b825136</code> a las <code>23:49:45 +0200</code>, y <code>date</code> devolvio <code>2026-07-08 23:57:26 CEST +0200</code> durante el pre-check."
       ]},
       { heading: "Avances", items: [
         "La fecha <code>2026-07-08</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir otro fichero para el mismo dia.",
@@ -366,7 +366,7 @@ const entries = [
       ]},
       { heading: "Problemas encontrados", items: [
         "La entrada vigente de <code>2026-07-08 [Codex]</code> contenia hechos de otros repos y no describia esta sesion real, asi que no era valida para este cierre literal.",
-        "La memoria de automatizacion <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code> no existia al empezar, por lo que no habia contexto persistido de la corrida anterior dentro del canal de automations.",
+        "La variable <code>CODEX_HOME</code> no venia exportada en esta sesion, asi que la memoria previa hubo que leerla en <code>~/.codex/automations/cerrar-el-dia/memory.md</code>.",
         "La URL canonica facilitada en GitHub redirige al repo publico <code>csilvasantin/18.-diario</code>, de modo que la verificacion de la fuente remota exige seguir esa redireccion."
       ]},
       { heading: "Decisiones tomadas", items: [
