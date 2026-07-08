@@ -350,46 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se encendieron cinco apps de la lanzadera en <code>github-csilvasantin/admira-tv</code> con dos tandas publicadas hoy: <code>abb8c66</code> activo <code>Dashboard</code>, <code>Audiobranding</code> y <code>Salas</code>; <code>86c958c</code> activo <code>Catalogo</code> y <code>Soporte</code> y amplio <code>/help</code>.",
-        "Se recupero el control remoto de toda la flota en <code>32.-ConsejoAdmiraNextGame</code> con <code>b890de9</code>, corrigiendo la caducidad del <code>cred</code> de Google mediante refresco silencioso, reintento con cred fresco y cache-buster en las 12 pantallas afectadas.",
-        "Se documento en <code>32.-ConsejoAdmiraNextGame</code> el patron MCP de \"produccion de preproduccion\" con <code>4164d76</code>, dejando explicitado que <code>admira.tv</code> debe servir producto vivo desde <code>Pixeria</code> y <code>Yokup</code> sin duplicar codigo.",
-        "En <code>github-csilvasantin/AdmiraNext-Team</code> quedo abierto un rediseño fuerte sin commitear: portada estilo arcade/\"player select\", perfiles por miembro, nuevo bloque destacado por fighter, version bump a <code>0.1.3</code>, refresco de screenshots y alta del acceso local al Mac Mini (<code>192.168.0.118</code>) en <code>data/machines.json</code>.",
-        "En <code>Claude/admira-vault</code> se publicaron cuatro commits hoy en <code>main</code>: <code>034bbb0</code> y <code>e47660f</code> ampliaron la auditoria de <code>admira.tv</code> con controles ocultos de testing del canal, maxima pantalla partida, always-on-top y el incidente <code>KV_WRITES_OFF</code>; <code>9ea504d</code> corrigio la deteccion de <code>grok</code> en Macs; <code>702d678</code> extendio <code>presence-beat</code> para reportar <code>cpu</code> y <code>since</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyeron la rutina local <code>CERRAR-EL-DIA.md</code>, la fuente canonica en GitHub y la memoria de la automatizacion, comprobando que <code>memory.md</code> todavia no existia.",
+        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-08 00:00' --until='2026-07-08 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-08 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se reescribieron <code>2026-07-08.md</code> e <code>index.html</code> para que el cierre de hoy refleje solo esta corrida real del repo <code>diario</code> y mantenga la firma <code>[Codex]</code>."
       ]},
       { heading: "Que se valido", items: [
-        "Los cuatro commits publicados y comprobados de <code>admira-tv</code> y <code>32.-ConsejoAdmiraNextGame</code> quedaron fechados el <code>2026-07-08</code>: <code>abb8c66</code>, <code>86c958c</code>, <code>b890de9</code> y <code>4164d76</code>.",
-        "<code>admira-tv</code> quedo con la lanzadera en estado <code>12 en antena / 6 en construccion</code>, usando <code>window.AdmiraApps</code> como fuente unica de estado y cache-buster <code>?v=</code> propagado por las paginas tocadas.",
-        "El fix del control remoto quedo acotado al cliente: el commit <code>b890de9</code> deja documentado que el backend <code>/fleet</code> estaba sano y que el fallo provenia del canje de una credencial de Google ya caducada.",
-        "En <code>AdmiraNext-Team</code> no aparecen commits de hoy: el trabajo esta solo en local sobre <code>main</code>, con la rama ademas <code>behind 303</code>, asi que la validacion de esta tarde ha sido de consistencia por <code>git status</code>, <code>git diff</code> y estructura de ficheros, no de despliegue ni de test automatizado.",
-        "Los cuatro commits de <code>admira-vault</code> tambien quedaron en <code>origin/main</code> hoy: <code>034bbb0</code>, <code>e47660f</code>, <code>9ea504d</code> y <code>702d678</code>; <code>9ea504d</code> deja trazado el fix para que <code>ps -o comm=</code> vuelva a detectar <code>grok</code> en el Mac Mini."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> antes de editar, sin cambios locales en este checkout.",
+        "<code>git log</code> mostro actividad real del <code>2026-07-08</code> en este repo: <code>570886b</code>, <code>4bf8eaf</code>, <code>96d8d71</code> y <code>b825136</code>.",
+        "<code>git reflog</code> confirmo la secuencia local mas reciente de hoy, incluido <code>b825136</code> a las <code>23:49:45 +0200</code>, y <code>date</code> devolvio <code>2026-07-08 23:57:07 CEST +0200</code> durante el pre-check."
       ]},
       { heading: "Avances", items: [
-        "<code>admira-tv</code> paso de tres a cinco apps nuevas encendidas en el mismo dia, con <code>Dashboard</code>, <code>Audiobranding</code>, <code>Salas</code>, <code>Catalogo</code> y <code>Soporte</code> ya visibles dentro de la lanzadera.",
-        "<code>admira-vault</code> gana trazabilidad operativa real: desde hoy el latido de presencia calcula <code>cpu</code> por equipo y <code>since</code> por runtime, aunque todavia falte pasarlo completo por el worker.",
-        "<code>AdmiraNext-Team</code> deja mas claro el frente pendiente: el rediseño arcade y el dashboard de maquinas siguen vivos, pero todavia no estan listos para publicarse por deuda de sincronizacion y de workspace."
+        "La fecha <code>2026-07-08</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir otro fichero para el mismo dia.",
+        "<code>index.html</code> vuelve a quedar alineado con este mismo resumen factual para que la UI publica muestre la entrada de hoy bajo el filtro <code>Codex</code>.",
+        "La rutina local y la fuente canonica en GitHub quedaron contrastadas en esta corrida, y el contenido operativo relevante coincide entre ambas."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>github-csilvasantin/AdmiraNext-Team</code> concentra el mayor frente abierto del workspace: ocho ficheros modificados, cambios visuales amplios en <code>public/styles.css</code> y <code>public/app.js</code>, screenshots regeneradas y ausencia de suite de test declarada en <code>package.json</code>.",
-        "<code>AdmiraNext-Team</code> tiene ademas dos checkouts superpuestos (<code>/Users/csilvasantin/AdmiraNext-Team</code> y <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code>), ambos sucios; en el repo anidado siguen abiertos <code>data/machines.json</code>, <code>src/server.js</code> y <code>src/ssh-exec.js</code>, y <code>src/server.js</code> contiene dos bloques distintos para <code>POST /api/machines/:id/power</code>.",
-        "<code>32.-ConsejoAdmiraNextGame</code> sigue con trabajo abierto local: la rama <code>neo/ux-topbar-una-fila</code> esta <code>behind 4</code>, hay cambios sin commitear en <code>mcp/index.html</code> y <code>mcp/llms.txt</code>, y sigue el auxiliar <code>council-api.py.new</code>.",
-        "<code>Soporte</code> se ha servido por <code>iframe</code> y no por proxy para no romper el CORS de Supabase; si el origen anade <code>X-Frame-Options</code> o una CSP mas dura habra que pasar al plan B de edge-proxy.",
-        "El commit <code>702d678</code> ya genera <code>cpu</code> y <code>since</code>, pero el propio mensaje deja claro que el worker <code>admira-telegram</code> todavia no deja pasar esos campos, asi que la mejora aun no se ve end-to-end.",
-        "Hay mas WIP local secundario en el workspace (<code>04.- AdmiraGemini</code>, <code>admira-next-web</code>, <code>onboarding</code>, <code>pulpo</code>), asi que conviene separar bien que cambios son publicables y cuales son solo exploracion."
+        "La entrada vigente de <code>2026-07-08 [Codex]</code> contenia hechos de otros repos y no describia esta sesion real, asi que no era valida para este cierre literal.",
+        "La memoria de automatizacion <code>$CODEX_HOME/automations/cerrar-el-dia/memory.md</code> no existia al empezar, por lo que no habia contexto persistido de la corrida anterior dentro del canal de automations.",
+        "La URL canonica facilitada en GitHub redirige al repo publico <code>csilvasantin/18.-diario</code>, de modo que la verificacion de la fuente remota exige seguir esa redireccion."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener el patron \"produccion de preproduccion\": <code>admira.tv</code> muestra producto real en vivo y las mejoras se hacen en el repo fuente, no en una copia paralela.",
-        "Resolver el fallo del control remoto refrescando la credencial en cliente antes del canje de sesion, en vez de tocar backend que ya estaba validado como sano.",
-        "Tratar el trabajo de <code>AdmiraNext-Team</code> como WIP local hasta rebasar la deuda de sincronizacion de <code>main</code>; antes de publicar ese rediseño conviene decidir si se rebasea sobre las 303 revisiones pendientes o si se mueve a una rama limpia.",
-        "Contar como entregado del dia solo lo que hoy esta verificado en commits reales de <code>admira-tv</code>, <code>32.-ConsejoAdmiraNextGame</code> y <code>admira-vault</code>; <code>AdmiraNext-Team</code> queda como frente a ordenar, no como envio cerrado."
+        "Reescribir la entrada existente de <code>2026-07-08 [Codex]</code> en vez de anadir otro bloque <code>Codex</code>, para mantener una sola version vigente de esta autoria en la fecha.",
+        "Registrar solo hechos comprobados en este repo y en esta sesion, excluyendo trabajo de otros repos aunque apareciera en el contenido previo.",
+        "Mantener el trabajo en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> y publicar los cambios en <code>origin main</code>, como exige la rutina."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Ordenar <code>AdmiraNext-Team</code>: decidir si el rediseño arcade se conserva, pasarlo a rama propia o rearmarlo sobre una base actualizada antes de cualquier commit.",
-        "Elegir un unico checkout canonico para <code>AdmiraNext-Team</code>, eliminar o aislar el repo anidado y decidir si los cambios de <code>data/machines.json</code>, <code>src/server.js</code> y <code>src/ssh-exec.js</code> se publican o se descartan.",
-        "Si se retoma el control de energia, consolidar un solo handler <code>/power</code>, probar <code>sleep</code>/<code>wake</code> de punta a punta y dejar el inventario de maquinas consistente con el estado real.",
-        "Ordenar el worktree de <code>32.-ConsejoAdmiraNextGame</code>: decidir que hacer con <code>mcp/index.html</code>, <code>mcp/llms.txt</code>, <code>council-api.py.new</code> y sincronizar la rama que va cuatro commits por detras.",
-        "Cerrar o publicar el frente local restante de <code>admira-tv</code> en <code>wrangler.toml</code> y <code>functions/accesscontrol/</code> para que la lanzadera quede consistente con lo que ya se encendio hoy.",
-        "Verificar periodicamente que <code>Catalogo</code> y <code>Soporte</code> siguen pudiendo embeber <code>Pixeria</code> y <code>Yokup</code> sin restricciones nuevas de <code>XFO</code> o <code>CSP</code>.",
-        "Completar el circuito de <code>presence-beat</code> propagando <code>cpu</code> y <code>since</code> por <code>admira-telegram</code> para que la mejora de hoy aparezca tambien server-side y en la UI."
+        "Hacer <code>git add 2026-07-08.md index.html</code>, crear el commit <code>Diario 2026-07-08 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada corregida del <code>8 de julio de 2026 [Codex]</code>.",
+        "Dejar creada y actualizada la memoria de la automatizacion <code>cerrar-el-dia</code> para que la siguiente corrida parta de este estado real."
       ]}
     ]
   },
