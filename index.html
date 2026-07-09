@@ -361,22 +361,30 @@ const entries = [
         "<code>admira-next-web</code> tiene tres commits de hoy ya en <code>main</code>: <code>09229f9</code>, <code>011a2a3</code> y <code>dcf3cbf</code>.",
         "<code>admira-tv</code> tiene cinco commits de hoy visibles en el repo, culminando en <code>a7c70fc</code> con las 20 apps enlazadas a video.",
         "<code>admira-xr</code> tiene el commit <code>a145aa1</code> con el mensaje <code>BUILD SUCCEEDED</code>, que es la evidencia mas clara de validacion tecnica encontrada hoy.",
-        "La entrada <code>2026-07-09</code> ya existia en <code>/Users/csilvasantin/Claude/diario/</code> y en <code>index.html</code>, asi que esta corrida la actualiza en vez de duplicarla."
+        "<code>git status --short</code> en <code>AdmiraNext-Team</code> confirmo que el trabajo de hoy sigue local y sin commit: <code>data/machines.json</code>, tres screenshots y los ficheros principales del frontend estan modificados.",
+        "<code>curl -I http://127.0.0.1:3030/</code> y <code>curl http://127.0.0.1:3030/api/machines</code> confirmaron que hay una instancia respondiendo en local, pero sirviendo todavia el build anterior (<code>Control de flota - v2.4.1</code>) y no el nuevo tema arcade <code>v0.1.3</code>.",
+        "<code>node src/server.js</code> en <code>AdmiraNext-Team</code> fallo con <code>EADDRINUSE</code> en el puerto <code>3030</code>, corroborando que el servicio estaba ya levantado y que la validacion habia que hacerla contra esa instancia existente."
+      ]},
+      { heading: "Avances", items: [
+        "<code>AdmiraNext-Team</code> ya no apunta a un panel meramente utilitario: la UI de hoy lo empuja hacia una presentacion mas visual y diferenciada del equipo, con seleccion por miembro y estadisticas de perfil.",
+        "El inventario de maquinas gana datos operativos utiles para acceso local al Mac Mini, lo que reduce friccion para soporte y control remoto en red local.",
+        "Admirito si publico hoy trabajo visible en web, TV y XR, mientras que el bloque de <code>AdmiraNext-Team</code> permanece todavia en fase local."
       ]},
       { heading: "Problemas encontrados", items: [
         "<code>/Users/csilvasantin/Documents/Admirito</code> no es un repo Git raiz, asi que hubo que reconstruir el dia recorriendo subrepos y worktrees por separado.",
-        "<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> acumulan cambios relevantes en local, pero hoy no muestran commit propio ni evidencia automatica de prueba en esta sesion.",
-        "Hay otros checkouts del diario y repos auxiliares sucios en el workspace, por lo que el punto canonico para publicar esta entrada sigue siendo <code>/Users/csilvasantin/Claude/diario/</code>."
+        "La validacion local encontro desalineacion entre codigo y servicio activo: el puerto <code>3030</code> esta ocupado por una instancia que sigue sirviendo la version vieja, asi que el rediseño de hoy no esta aun reflejado en la URL local existente.",
+        "<code>AdmiraNext-Team</code> no tiene tests ni script de smoke test en <code>package.json</code>; solo existe <code>start</code>, de modo que la comprobacion real depende de reinicio manual y verificacion visual/API.",
+        "Hay varios repositorios con cambios locales simultaneos en el workspace, lo que complica leer el trabajo del dia solo a partir de <code>git status</code> si no se separa bien lo publicado de lo pendiente."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Actualizar la entrada existente del <code>9 de julio de 2026 [Codex]</code> en vez de crear otra, para mantener un solo registro del dia.",
         "Distinguir con claridad entre trabajo ya publicado y trabajo local pendiente de commit o QA, para no atribuir despliegues no verificados.",
-        "Resumir <code>AdmiraNext-Team</code> como frente activo de UI y operativa, dejando explicito que su siguiente paso real es validacion local antes de publicarlo."
+        "Dar prioridad narrativa a <code>AdmiraNext-Team</code>, pero dejando constancia breve de <code>admira-next-web</code>, <code>admira-tv</code> y <code>admira-xr</code> para no perder el contexto del dia."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Levantar y probar <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> en local antes de decidir commit y push de esos cambios.",
-        "Mantener seguimiento de <code>admira-next-web</code>, <code>admira-tv</code> y <code>admira-xr</code> ya publicados, especialmente si el nuevo frente XR necesita iteracion cruzada entre web, TV y Vision Pro.",
-        "Publicar esta actualizacion del diario y verificar <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+        "Reiniciar o redesplegar <code>AdmiraNext-Team</code> para que el servicio en <code>:3030</code> cargue el frontend arcade <code>v0.1.3</code> y no siga mostrando <code>v2.4.1</code>.",
+        "Hacer una smoke check funcional del nuevo flujo: carga de <code>Player Select</code>, render del bloque destacado y guardado de estado, nota y foco por maquina.",
+        "Decidir si los cambios paralelos en <code>AdmiraNext-Team-latest</code> deben absorberse en el repo principal o mantenerse como linea separada antes de publicar."
       ]}
     ]
   },
