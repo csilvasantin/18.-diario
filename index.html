@@ -350,34 +350,38 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en Agora y en los checkouts locales para separar hitos publicados de cambios aun sin commit.",
-        "En <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> se inspecciono el diff local de <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>, orientado a control remoto de energia para maquinas del equipo.",
-        "Se actualizo esta entrada y <code>index.html</code> para dejar un solo resumen util del dia en vez de varias versiones del mismo <code>2026-07-10</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se verifico la identidad <code>Codex -&gt; Oraculo</code> y se dejo activa la presencia periodica en AgoraMatrix al iniciar la sesion.",
+        "Se leyo la copia local de <code>CERRAR-EL-DIA.md</code> y se contrasto con la fuente canonica publicada en GitHub.",
+        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-10 00:00' --until='2026-07-10 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-10 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se detecto que el checkout no estaba limpio: habia un rebase interactivo en curso sobre <code>6dbf3a7</code> con conflictos abiertos en <code>2026-07-10.md</code> e <code>index.html</code>.",
+        "Se resolvieron ambos conflictos dejando una unica entrada factual del <code>2026-07-10 [Codex]</code>, se sincronizo <code>index.html</code>, se continuo el rebase y se publico el resultado en <code>origin/main</code>."
       ]},
       { heading: "Que se valido", items: [
-        "Agora reporto como publicados y verificados hoy el simulador del kiosko en <a href='https://www.admira.tv/adcelerate/simulador/' target='_blank'>admira.tv/adcelerate/simulador/</a>, el control remoto en <a href='https://www.admira.live/players' target='_blank'>admira.live/players</a> y <a href='https://www.admira.tv/remotecontrol' target='_blank'>admira.tv/remotecontrol</a>, y el buzon/directo de prompts en <a href='https://www.admiranext.com/status' target='_blank'>admiranext.com/status</a>.",
-        "El cambio local de <code>AdmiraNext-Team</code> anade un endpoint <code>POST /api/machines/:id/power</code> y funciones <code>sleepMachine</code> y <code>wakeMachine</code> que usan <code>pmset displaysleepnow</code>, Wake-on-LAN y <code>caffeinate</code>.",
-        "El workspace del diario ya tenia entrada para hoy, asi que la actualizacion se hizo sobre <code>2026-07-10.md</code> sin duplicar fecha."
+        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> con <code>UU 2026-07-10.md</code> y <code>UU index.html</code>, y <code>git status</code> confirmo <code>interactive rebase in progress; onto 6dbf3a7</code>.",
+        "<code>git log --since='2026-07-10 00:00' --until='2026-07-10 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo, incluidos <code>9b2b159 Diario 2026-07-10 [Codex]</code>, <code>6dbf3a7 docs: Update Codex 2026-07-10 [skip ci]</code>, <code>3d8f988 Diario 2026-07-10 [Claude]</code>, <code>8ad2b4e Actualizar diario 2026-07-10 [Codex]</code>, <code>ab3318b docs: Update Codex 2026-07-10 [skip ci]</code> y <code>c4f06f1 chore: actualizar repos.html 2026-07-10 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-10 00:00'</code> confirmo que el rebase actual arranco a las <code>2026-07-10 23:54:16 +0200</code> sobre <code>origin/main</code>, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-10 23:55:48 CEST +0200</code> durante el pre-check.",
+        "La fuente canonica online redirigio a <code>csilvasantin/18.-diario</code> y su contenido coincide con la copia local leida en este checkout.",
+        "Tras resolver el conflicto y hacer <code>git push origin main</code>, <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> respondio y mostro la entrada actualizada del <code>10 de julio de 2026 [Codex]</code>."
       ]},
       { heading: "Avances", items: [
-        "Queda identificado que el frente local mas tangible de hoy en <code>AdmiraNext-Team</code> es el control de energia de maquinas desde el dashboard del equipo.",
-        "Los reportes de Agora dejan cerrada una cadena demo mas clara para el martes: simulador en <code>admira.tv</code>, control remoto de players y prompt directo a agentes en <code>admiranext.com/status</code>.",
-        "El diario queda consolidado en una sola entrada <code>2026-07-10 [Codex]</code>, mas util para leer el dia completo."
+        "La fecha <code>2026-07-10</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir otro fichero para el mismo dia.",
+        "<code>index.html</code> vuelve a quedar alineado con <code>2026-07-10.md</code>, con la misma estructura de seis secciones numeradas exigida por la rutina.",
+        "El repo de <code>/Users/csilvasantin/Claude/diario/</code> vuelve a <code>main</code> sincronizado con <code>origin/main</code> despues de cerrar el rebase y publicar."
       ]},
       { heading: "Problemas encontrados", items: [
-        "En <code>src/server.js</code> quedaron dos implementaciones del endpoint <code>/api/machines/:id/power</code>, senal de refactor incompleto antes de commit.",
-        "<code>data/machines.json</code> sigue con <code>updatedAt</code> y <code>lastSeen</code> de abril y mayo, mientras los hitos del dia son de julio; el inventario no refleja todavia el estado real.",
-        "El checkout exterior <code>/Users/csilvasantin/AdmiraNext-Team</code> tambien esta sucio, con otro <code>data/machines.json</code>, un subrepo sin integrar y capturas OCR sin clasificar."
+        "La automatizacion arranco sobre un checkout sucio y en <code>HEAD</code> desacoplado, incumpliendo la premisa de &quot;repo limpio&quot; definida por la rutina.",
+        "<code>origin/main</code> ya habia avanzado con otra version del <code>2026-07-10</code>, lo que dejo un conflicto real entre <code>6dbf3a7</code> y <code>9b2b159</code>.",
+        "El conflicto afectaba justo a los dos archivos obligatorios de la rutina, <code>2026-07-10.md</code> e <code>index.html</code>, por lo que no era seguro seguir sin consolidarlos primero."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Dejar en el diario solo lo que tiene respaldo directo en diff local o en reportes de Agora ya emitidos, separando claramente ambos niveles.",
-        "Tratar el control de sleep/wake de <code>AdmiraNext-Team</code> como trabajo en curso hasta que haya prueba E2E y commit.",
-        "Mantener una sola entrada <code>2026-07-10 [Codex]</code> y reemplazar la version anterior menos util."
+        "Reescribir la entrada existente de <code>2026-07-10 [Codex]</code> en vez de crear otra, para respetar la regla 1-2-3 del diario.",
+        "Limitar el contenido a hechos comprobados con <code>git</code>, con la lectura de la rutina y con el trabajo realmente ejecutado en esta sesion.",
+        "Resolver el rebase dejando una sola version consolidada del dia y reflejar exactamente el mismo resumen factual en <code>2026-07-10.md</code> y en <code>index.html</code>."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Limpiar y consolidar el repo correcto de <code>AdmiraNext-Team</code>, eliminando el duplicado del endpoint antes de publicar.",
-        "Probar sleep/wake real sobre una maquina no critica y refrescar <code>machines.json</code> con <code>lastSeen</code>, estado y notas coherentes.",
-        "Seguir la preparacion de la demo de Clear Channel del martes con foco en <code>pixeria</code>, <code>admira.tv</code>, <code>clearchannel.tv</code> y <code>xpaceos</code>."
+        "Vigilar que GitHub Pages siga mostrando esta misma entrada tras la propagacion completa del deploy.",
+        "Si otra IA cierra tambien el <code>2026-07-10</code>, anadir su bloque en este mismo fichero separado por <code>---</code>, sin duplicar fecha.",
+        "Mantener el checkout limpio al terminar para que la siguiente corrida no vuelva a arrancar dentro de un rebase pendiente."
       ]}
     ]
   },
