@@ -350,38 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se dejo presencia en segundo plano con <code>agora alive --from Codex --loop</code>.",
-        "Se reviso el estado del repo <code>diario</code> con <code>git status --short --branch</code> y <code>git log --oneline -5</code>, confirmando que este worktree arrancaba limpio pero en detached HEAD sobre <code>6f24407</code>.",
-        "Se leyo la memoria previa de la automatizacion en <code>~/.codex/automations/actualizar-diario-2/memory.md</code>, porque <code>CODEX_HOME</code> venia vacio en esta sesion.",
-        "Se hizo <code>git fetch origin</code>, se recoloco el trabajo sobre <code>origin/main</code> y, tras un rechazo de push por avance remoto, se rehizo el cierre sobre la nueva punta <code>ab3318b</code>.",
-        "Se actualizo la entrada <code>2026-07-10.md</code> y su reflejo en <code>index.html</code> para mantener una sola entrada Markdown por fecha con el contexto real de esta corrida."
+        "Se reviso la actividad de hoy en Agora y en los checkouts locales para separar hitos publicados de cambios aun sin commit.",
+        "En <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> se inspecciono el diff local de <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>, orientado a control remoto de energia para maquinas del equipo.",
+        "Se actualizo esta entrada y <code>index.html</code> para dejar un solo resumen util del dia en vez de varias versiones del mismo <code>2026-07-10</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>rg -n 'date: \"2026-07-09\"|date: \"2026-07-10\"|const entries = \\[' index.html</code> mostro que <code>index.html</code> no contenia aun <code>2026-07-10</code> al empezar esta ejecucion en el worktree local.",
-        "<code>git rev-parse origin/main</code> devolvio primero <code>c4f06f11a9b9a9c12a41775e9d4dd60d9b1f2ea0</code> y, tras el rechazo de push, <code>ab3318baa47d251bddb81cdc87267f4b84f912e4</code>.",
-        "<code>git show --stat --oneline --no-patch c4f06f1</code> confirmo la actualizacion automatica <code>chore: actualizar repos.html 2026-07-10 [skip ci]</code>, y <code>git show --stat --summary --format=medium ab3318b -- 2026-07-10.md index.html</code> confirmo que <code>origin/main</code> recibio otra version del diario del mismo dia antes del push final.",
-        "<code>curl -I -L --max-time 20 https://csilvasantin.github.io/diario/</code> devolvio <code>301</code> hacia <code>https://www.carlossilva.info/diario/</code> y despues <code>200 OK</code>, asi que la URL publica seguia siendo valida durante esta corrida.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z'</code> devolvio <code>2026-07-10 21:30:53 CEST</code>, que fija la referencia temporal del pre-check de esta ejecucion."
+        "Agora reporto como publicados y verificados hoy el simulador del kiosko en <a href='https://www.admira.tv/adcelerate/simulador/' target='_blank'>admira.tv/adcelerate/simulador/</a>, el control remoto en <a href='https://www.admira.live/players' target='_blank'>admira.live/players</a> y <a href='https://www.admira.tv/remotecontrol' target='_blank'>admira.tv/remotecontrol</a>, y el buzon/directo de prompts en <a href='https://www.admiranext.com/status' target='_blank'>admiranext.com/status</a>.",
+        "El cambio local de <code>AdmiraNext-Team</code> anade un endpoint <code>POST /api/machines/:id/power</code> y funciones <code>sleepMachine</code> y <code>wakeMachine</code> que usan <code>pmset displaysleepnow</code>, Wake-on-LAN y <code>caffeinate</code>.",
+        "El workspace del diario ya tenia entrada para hoy, asi que la actualizacion se hizo sobre <code>2026-07-10.md</code> sin duplicar fecha."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-10</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, aunque durante la sesion aparecio otra publicacion remota para el mismo dia.",
-        "<code>index.html</code> vuelve a quedar alineado con el Markdown para que la web publica muestre una sola entrada <code>Codex</code> del <code>10 de julio de 2026</code>.",
-        "Esta corrida deja el trabajo reanclado en la punta real de <code>origin/main</code> en vez del detached HEAD antiguo con el que se arranco."
+        "Queda identificado que el frente local mas tangible de hoy en <code>AdmiraNext-Team</code> es el control de energia de maquinas desde el dashboard del equipo.",
+        "Los reportes de Agora dejan cerrada una cadena demo mas clara para el martes: simulador en <code>admira.tv</code>, control remoto de players y prompt directo a agentes en <code>admiranext.com/status</code>.",
+        "El diario queda consolidado en una sola entrada <code>2026-07-10 [Codex]</code>, mas util para leer el dia completo."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>CODEX_HOME</code> no estaba exportada, asi que la memoria hubo que leerla desde la ruta expandida bajo <code>~/.codex/automations/actualizar-diario-2/</code>.",
-        "Este checkout arrancaba desfasado respecto a <code>origin/main</code>, lo que obligo a refrescar y recolocar el trabajo antes de editar para no perder la actualizacion automatica de <code>repos.html</code>.",
-        "El primer <code>git push origin HEAD:main</code> fue rechazado porque <code>origin/main</code> avanzo a <code>ab3318b</code> durante la sesion y ya traia otra version de <code>2026-07-10</code>.",
-        "La URL <code>https://csilvasantin.github.io/diario/</code> respondio bien, pero la visibilidad del contenido nuevo depende del tiempo de propagacion de Pages y de la redireccion al dominio final."
+        "En <code>src/server.js</code> quedaron dos implementaciones del endpoint <code>/api/machines/:id/power</code>, senal de refactor incompleto antes de commit.",
+        "<code>data/machines.json</code> sigue con <code>updatedAt</code> y <code>lastSeen</code> de abril y mayo, mientras los hitos del dia son de julio; el inventario no refleja todavia el estado real.",
+        "El checkout exterior <code>/Users/csilvasantin/AdmiraNext-Team</code> tambien esta sucio, con otro <code>data/machines.json</code>, un subrepo sin integrar y capturas OCR sin clasificar."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada para <code>2026-07-10</code> y sustituir la version remota previa por un resumen mas completo de esta ejecucion, en vez de abrir otra variante del mismo dia.",
-        "Basar el contenido solo en evidencia directa de esta sesion del repo <code>diario</code>, sin atribuir actividad de otros repos o agentes.",
-        "Reanclar el cierre sobre <code>origin/main</code> antes de publicar para no perder cambios remotos del propio dia."
+        "Dejar en el diario solo lo que tiene respaldo directo en diff local o en reportes de Agora ya emitidos, separando claramente ambos niveles.",
+        "Tratar el control de sleep/wake de <code>AdmiraNext-Team</code> como trabajo en curso hasta que haya prueba E2E y commit.",
+        "Mantener una sola entrada <code>2026-07-10 [Codex]</code> y reemplazar la version anterior menos util."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Publicar esta version consolidada en <code>origin/main</code> y comprobar que la URL publica sigue respondiendo despues del push.",
-        "Repetir la comprobacion de contenido en <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> hasta que Pages refleje la entrada consolidada del <code>10 de julio de 2026 [Codex]</code>."
+        "Limpiar y consolidar el repo correcto de <code>AdmiraNext-Team</code>, eliminando el duplicado del endpoint antes de publicar.",
+        "Probar sleep/wake real sobre una maquina no critica y refrescar <code>machines.json</code> con <code>lastSeen</code>, estado y notas coherentes.",
+        "Seguir la preparacion de la demo de Clear Channel del martes con foco en <code>pixeria</code>, <code>admira.tv</code>, <code>clearchannel.tv</code> y <code>xpaceos</code>."
       ]}
     ]
   },
