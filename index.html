@@ -350,36 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se comprobo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> y se arranco la presencia con <code>agora alive --from Codex --loop --every 60</code>.",
-        "Se leyo la rutina local <code>CERRAR-EL-DIA.md</code>, la memoria de la automatizacion <code>actualizar-diario</code> y las entradas recientes <code>2026-07-10.md</code> y <code>2026-07-09.md</code> para mantener el mismo formato.",
-        "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-11 00:00' --until='2026-07-11 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-11 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se creo <code>2026-07-11.md</code> y se actualizo <code>index.html</code> para publicar una entrada nueva del dia de hoy."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria disponible de la automatizacion y se reviso el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>.",
+        "Se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-07-11 00:00' --until='2026-07-11 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-11 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se ejecuto <code>git pull --ff-only origin main</code>, que avanzo este checkout de <code>eab82d5</code> a <code>5e3d2a0</code> y trajo la actualizacion real de <code>repos.html</code> publicada hoy.",
+        "Se creo esta entrada <code>2026-07-11.md</code> y se inserto su reflejo al principio de <code>index.html</code> para que la novedad quede visible en la publicacion HTML del diario."
       ]},
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales antes de editar.",
-        "<code>git log --since='2026-07-11 00:00' --until='2026-07-11 23:59:59' --date=iso --stat --oneline --all</code> mostro solo actividad heredada del cierre anterior, con <code>eab82d5 Diario 2026-07-10 [Codex]</code> y <code>ca26bb2 Actualizar diario 2026-07-10 [Codex]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-11 00:00'</code> confirmo esos dos commits a las <code>2026-07-11 00:02:16 +0200</code> y <code>2026-07-11 00:00:48 +0200</code>, y <code>date</code> devolvio <code>2026-07-11 21:32:40 CEST +0200</code> durante el pre-check.",
-        "No existia todavia un fichero <code>2026-07-11.md</code>, asi que la fecha de hoy seguia sin entrada propia en el diario antes de esta corrida."
+        "<code>git log --since='2026-07-11 00:00' --until='2026-07-11 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real de hoy en este repo: <code>5e3d2a0 chore: actualizar repos.html 2026-07-11 [skip ci]</code>, <code>eab82d5 Diario 2026-07-10 [Codex]</code> y <code>ca26bb2 Actualizar diario 2026-07-10 [Codex]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-11 00:00'</code> confirmo <code>5e3d2a0 HEAD@{2026-07-11 21:33:07 +0200}: pull --ff-only origin main: Fast-forward</code>, y <code>date</code> devolvio <code>2026-07-11 21:33:06 CEST +0200</code> durante la recogida de evidencia.",
+        "Antes de esta edicion no existia <code>2026-07-11.md</code>, y <code>index.html</code> seguia encabezado por la entrada <code>2026-07-10</code>, asi que la fecha de hoy aun no estaba publicada."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-11</code> queda creada como fichero independiente y firmado por <code>Codex</code>, respetando la regla de un fichero por dia.",
-        "<code>index.html</code> vuelve a quedar alineado con el Markdown para que la UI publica pueda listar el <code>11 de julio de 2026</code> bajo el filtro <code>Codex</code>.",
-        "La entrada deja reflejado de forma explicita que hoy no habia actividad nueva previa en el repo <code>diario</code> aparte del arrastre de medianoche del cierre anterior."
+        "La fecha <code>2026-07-11</code> queda recogida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin duplicar la jornada en otro archivo.",
+        "<code>index.html</code> queda sincronizado con esta nueva entrada para que la UI publica muestre <code>11 de julio de 2026</code> bajo el filtro <code>Codex</code>.",
+        "El checkout local queda preparado para el cierre completo: diff, commit, push y verificacion de <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "La actividad que aparece en <code>git log</code> para el <code>2026-07-11</code> pertenece en realidad al cierre del <code>2026-07-10</code>, porque ambos commits entraron justo despues de medianoche.",
-        "La memoria de la automatizacion no aporto contexto adicional util para resumir el dia, asi que el contenido verificable ha quedado limitado a esta sesion y al historial real del repo.",
-        "Antes de esta corrida la portada publica todavia no tenia una entrada propia para el <code>11 de julio de 2026</code>."
+        "Hoy apenas habia evidencia propia del <code>2026-07-11</code> en este repo, mas alla del <code>pull</code> nocturno y del commit remoto sobre <code>repos.html</code>, asi que no era valido inventar mas actividad.",
+        "La portada publica seguia detenida en <code>2026-07-10</code>, por lo que hacia falta crear explicitamente la entrada de hoy y propagarla.",
+        "La memoria local de la automatizacion no aporto contexto adicional util para ampliar la entrada con hechos previos del dia."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Crear una entrada nueva para <code>2026-07-11</code> en vez de reabrir <code>2026-07-10</code>, porque ya es un dia distinto y la regla del diario es un fichero por fecha.",
-        "Mantener el resumen breve y centrado en hechos comprobados por <code>git</code> y por el trabajo realmente ejecutado en esta sesion.",
-        "Reflejar exactamente el mismo contenido factual en <code>2026-07-11.md</code> y en <code>index.html</code> para evitar divergencias entre Markdown y web publica."
+        "Crear <code>2026-07-11.md</code> como nueva entrada del dia, porque no existia ninguna pagina previa para esta fecha.",
+        "Limitar el relato a hechos observables por <code>git</code>, por la inspeccion del arbol y por la actualizacion real ejecutada en esta sesion.",
+        "Mantener el mismo resumen factual en <code>2026-07-11.md</code> y en la tarjeta nueva de <code>index.html</code> para evitar divergencias entre Markdown y HTML publico."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add 2026-07-11.md index.html</code>, crear el commit <code>Diario 2026-07-11 [Codex]</code> y publicar con <code>git push origin main</code>.",
-        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada del <code>11 de julio de 2026 [Codex]</code>.",
-        "Si otra IA escribe tambien hoy, anadir su bloque en este mismo fichero separado por <code>---</code>, sin duplicar fecha."
+        "Revisar <code>git diff</code>, hacer <code>git add 2026-07-11.md index.html</code>, crear el commit <code>Diario 2026-07-11 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y deja visible la fecha <code>2026-07-11</code>.",
+        "Si GitHub Pages tarda en propagar, repetir la comprobacion hasta ver la nueva entrada servida en la URL publica."
       ]}
     ]
   },
