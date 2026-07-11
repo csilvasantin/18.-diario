@@ -350,35 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso el trabajo real del dia en <code>/Users/csilvasantin/Documents/Admirito</code>, con foco en <code>github-csilvasantin/AdmiraNext-Team</code> y en los repos del workspace con cambios locales visibles.",
-        "En <code>AdmiraNext-Team</code> se encontro un rediseño fuerte de la portada publica: nueva cabecera <code>World Warrior Ops</code>, bloque <code>Choose Your Fighter</code>, tarjetas de miembros estilo arcade y resumen agregado por persona en lugar de limitarse a maquinas sueltas.",
-        "Tambien se detectaron cambios funcionales en <code>public/app.js</code> para normalizar miembros, calcular estadisticas visuales, activar una vista destacada por luchador y refrescar el <code>cache busting</code>; en <code>data/machines.json</code> se anadieron <code>ip_local</code> y <code>connect_local</code> para el Mac mini.",
-        "Como contexto del workspace, se confirmaron cambios sin commit en <code>pulpo</code>, <code>csilvasantin.github.io</code>, <code>onboarding</code>, <code>AdmiraNext-Team-latest</code>, <code>xpaceos</code>, <code>CodexBot</code> y <code>xtanco-game</code>, ademas del checkout alternativo y sucio de <code>github-csilvasantin/diario</code>.",
-        "Se actualizo esta misma entrada del dia en lugar de duplicarla, para que refleje el trabajo detectado despues del primer cierre rapido del diario."
+        "Se ejecuto <code>agora-checkin codex start</code> y despues se leyo la rutina canonica en <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> junto con su copia local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-11 00:00' --until='2026-07-11 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-11 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se detecto que <code>2026-07-11.md</code> ya existia y se actualizo la entrada de hoy en ese mismo fichero, sin crear una fecha duplicada.",
+        "Se sincronizo <code>index.html</code> para que la UI publica refleje exactamente la misma entrada del <code>2026-07-11 [Codex]</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short</code> en <code>github-csilvasantin/AdmiraNext-Team</code> mostro 8 ficheros modificados: <code>data/machines.json</code>, tres capturas en <code>data/screenshots/</code>, <code>package.json</code>, <code>public/app.js</code>, <code>public/index.html</code> y <code>public/styles.css</code>.",
-        "<code>git diff --stat</code> en ese repo devolvio <code>1112 insertions</code> y <code>73 deletions</code>, suficiente para confirmar que el cambio de hoy fue una iteracion grande de UI y no un retoque menor.",
-        "<code>git log --since='today 00:00'</code> no mostro commits nuevos en <code>AdmiraNext-Team</code>, <code>pulpo</code>, <code>csilvasantin.github.io</code>, <code>onboarding</code> ni <code>AdmiraNext-Team-latest</code>, asi que la evidencia del dia esta sobre todo en diffs locales pendientes.",
-        "En el checkout canonico del diario (<code>/Users/csilvasantin/Claude/diario/</code>) ya existia <code>2026-07-11.md</code>, con ultimo commit local <code>dc5d723</code> a las <code>2026-07-11 21:36:14 +0200</code>, por lo que correspondia editar la entrada existente y no crear otra.",
-        "La recogida de evidencia para esta actualizacion cerro a las <code>2026-07-11 23:48:07 CEST +0200</code>."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales al empezar esta ejecucion en el checkout canonico.",
+        "<code>git log --since='2026-07-11 00:00' --until='2026-07-11 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo, incluidos <code>534f28c Diario 2026-07-11 [Codex]</code>, <code>dc5d723 Diario 2026-07-11 [Codex]</code>, <code>18263ee Actualizar diario 2026-07-11 [Codex]</code> y <code>5e3d2a0 chore: actualizar repos.html 2026-07-11 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-11 00:00'</code> confirmo esos movimientos locales de <code>HEAD</code> y el <code>pull --ff-only origin main</code> de las <code>2026-07-11 21:33:07 +0200</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-11 23:57:27 CEST +0200</code> durante el pre-check de esta pasada."
+      ]},
+      { heading: "Avances", items: [
+        "La entrada del <code>2026-07-11 [Codex]</code> queda normalizada con las seis secciones numeradas exigidas por la rutina.",
+        "<code>2026-07-11.md</code> e <code>index.html</code> vuelven a quedar alineados entre si dentro del checkout canonico del diario.",
+        "La actualizacion se hizo sobre el mismo fichero del dia, respetando la regla 1-2-3 de no duplicar fecha."
       ]},
       { heading: "Problemas encontrados", items: [
-        "La primera version de la entrada de hoy se habia quedado demasiado centrada en la rutina del diario y no en el trabajo real de los repositorios.",
-        "En <code>AdmiraNext-Team</code> hay una mezcla de cambio visual, logica cliente, datos operativos y screenshots; sin un commit aun, el conjunto es util pero todavia dificil de revisar por bloques.",
-        "El checkout <code>github-csilvasantin/diario</code> sigue sucio con entradas antiguas y cambios acumulados, asi que no es una base fiable para este flujo y hubo que mantener el trabajo en <code>/Users/csilvasantin/Claude/diario/</code>.",
-        "Parte del arbol del workspace tenia mucho ruido de mtime y ficheros auxiliares, asi que hubo que separar actividad real de repo frente a caches o artefactos temporales."
+        "La entrada existente de <code>2026-07-11.md</code> no seguia literalmente la estructura pedida, porque faltaba la seccion <code>3. Avances</code>.",
+        "La URL de la rutina canonica redirige al remoto real <a href='https://github.com/csilvasantin/18.-diario' target='_blank'>https://github.com/csilvasantin/18.-diario</a>, asi que hubo que contrastar ese destino para verificar que la instruccion online y la copia local coincidian.",
+        "No aparecieron bloqueos de dirty worktree, auth ni rebase en <code>/Users/csilvasantin/Claude/diario/</code> durante el pre-check de esta ejecucion."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tratar <code>AdmiraNext-Team</code> como la historia principal del dia porque es el repo con mas señal clara y con cambios locales mas grandes del workspace.",
-        "Documentar solo hechos observables por <code>git status</code>, <code>git diff</code>, estructura de ficheros y contenido actual, sin atribuir commits o despliegues que hoy no aparecen registrados en esos repos.",
-        "Actualizar la entrada existente del <code>2026-07-11</code> y su reflejo en <code>index.html</code> para mantener una sola version canonica de la jornada.",
-        "Mencionar el resto de repos sucios solo como contexto operativo, sin inflar el diario con detalles no verificados repo por repo."
+        "Trabajar solo en <code>/Users/csilvasantin/Claude/diario/</code>, sin tocar el checkout alternativo de <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario/</code>.",
+        "Reescribir la entrada existente del <code>2026-07-11 [Codex]</code> en vez de crear otra, para mantener un unico fichero por fecha.",
+        "Registrar solo hechos verificables en este repo y en esta sesion de cierre, sin atribuir trabajo no confirmado por <code>git</code> o por la propia ejecucion."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Validar visualmente <code>AdmiraNext-Team</code> en navegador antes de cerrar ese repo, porque el rediseño es amplio y mezcla layout desktop/mobile, estados y contenido dinamico.",
-        "Separar, si compensa, los cambios de <code>AdmiraNext-Team</code> en commits legibles: datos SSH, logica <code>app.js</code> y capa visual arcade.",
-        "Revisar los cambios pendientes en <code>pulpo</code>, <code>csilvasantin.github.io</code>, <code>onboarding</code> y <code>AdmiraNext-Team-latest</code> para decidir si forman parte del mismo frente de trabajo o si deben cerrarse aparte."
+        "Hacer <code>git add 2026-07-11.md index.html</code>, <code>git commit</code> y <code>git push origin main</code> desde este checkout canonico.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada actualizada del <code>2026-07-11 [Codex]</code>.",
+        "Si otra IA cierra tambien hoy, anadir su bloque en este mismo fichero separado por <code>---</code>, sin abrir otra fecha."
       ]}
     ]
   },
