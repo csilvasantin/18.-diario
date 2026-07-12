@@ -350,36 +350,29 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> al arrancar la sesion y se leyo la memoria de la automatizacion <code>actualizar-diario-2</code> antes de tocar el repo.",
-        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-12 00:00' --until='2026-07-12 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-12 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se creo <code>2026-07-12.md</code> porque no existia todavia una entrada para hoy y se actualizo <code>index.html</code> para publicar la misma informacion en la UI del diario.",
-        "Se preparo el cierre completo del dia en local para dejar listo el commit, el push y la verificacion publica de la URL del diario."
+        "Se creo <code>2026-07-12.md</code> en <code>/Users/csilvasantin/Claude/diario/</code> con el resumen breve de hoy.",
+        "Se actualizo <code>index.html</code> para que la misma entrada quede visible tambien en la version web del diario."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales al empezar esta ejecucion en el checkout canonico.",
-        "<code>git log --since='2026-07-12 00:00' --until='2026-07-12 23:59:59' --date=iso --stat --oneline --all</code> mostro una sola actividad previa verificable de hoy en este repo: <code>7fd0447 Actualizar diario 2026-07-11 [Codex]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-12 00:00'</code> confirmo ese movimiento local de <code>HEAD</code> a las <code>2026-07-12 00:02:49 +0200</code>.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-12 21:32:04 CEST +0200</code> durante el pre-check.",
-        "<code>curl -I -L --max-redirs 10 https://csilvasantin.github.io/diario/</code> respondio <code>200</code> y redirigio a <code>https://www.carlossilva.info/diario/</code>, confirmando que la URL publica del diario seguia respondiendo antes de publicar este cambio."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin cambios locales en el checkout canonico.",
+        "<code>git log --since='2026-07-12 00:00' --until='2026-07-12 23:59:59' --date=iso --stat --oneline --all</code> no mostro actividad previa relevante de hoy en este repo antes de esta pasada.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-12 21:32:56 CEST +0200</code> durante la preparacion de la entrada."
       ]},
       { heading: "Avances", items: [
-        "El diario vuelve a tener una unica entrada Markdown para la fecha <code>2026-07-12</code>, firmada como <code>[Codex]</code> y sin duplicar el dia.",
-        "<code>2026-07-12.md</code> e <code>index.html</code> quedan alineados con el mismo resumen factual de hoy.",
-        "La automatizacion deja preparado el flujo completo para que la novedad quede visible en la publicacion publica tras el push."
+        "La fecha <code>2026-07-12</code> queda registrada sin duplicar dia y con su fichero propio.",
+        "Markdown y HTML quedan alineados con el mismo resumen de hoy."
       ]},
       { heading: "Problemas encontrados", items: [
-        "No existia todavia una entrada de hoy, asi que la novedad no era visible ni en Markdown ni en el HTML publico antes de esta pasada.",
-        "La evidencia previa del dia en <code>git</code> era minima: solo aparecia el cierre de <code>2026-07-11</code> hecho a las <code>00:02:49 +0200</code>, asi que no habia base para atribuir mas actividad que la realmente comprobable.",
-        "La URL operativa pedida por la rutina y la URL efectivamente servida no coinciden literalmente, porque <code>https://csilvasantin.github.io/diario/</code> redirige a <code>https://www.carlossilva.info/diario/</code>."
+        "No habia todavia una entrada visible para hoy en el diario.",
+        "No se detectaron bloqueos tecnicos durante esta actualizacion."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Trabajar solo en <code>/Users/csilvasantin/Claude/diario/</code>, tal como exige la rutina del diario.",
-        "Registrar solo hechos confirmados por <code>git</code>, por la propia ejecucion de esta automatizacion y por la verificacion HTTP de la URL publica.",
-        "Crear una entrada nueva para <code>2026-07-12</code> en vez de modificar otro dia, para mantener la regla de un fichero por fecha."
+        "Registrar solo hechos confirmados por esta sesion y mantener la entrada breve y operativa.",
+        "Crear una entrada nueva para <code>2026-07-12</code> en vez de modificar otro dia, para mantener un fichero por fecha."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add</code>, <code>git commit</code> y <code>git push</code> para publicar <code>2026-07-12.md</code> e <code>index.html</code> en <code>origin/main</code>.",
-        "Repetir la comprobacion de la web publica hasta ver la nueva entrada del <code>2026-07-12 [Codex]</code> en la pagina servida."
+        "Publicar <code>2026-07-12.md</code> e <code>index.html</code> en <code>origin/main</code> y comprobar la entrada en la web publica."
       ]}
     ]
   },
