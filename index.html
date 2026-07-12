@@ -350,39 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad real de hoy en Agora y en los checkouts locales para separar despliegues ya publicados de cambios que siguen solo en workspace.",
-        "En <code>tool</code> quedaron confirmados nueve commits de hoy sobre <code>yokup-site</code> y <code>admira.live</code>, incluyendo el espejo desde produccion (<code>0f635cd</code>), la barra/cuadro Yokup (<code>425794e</code>, <code>6d3f72d</code>, <code>11a8e56</code>, <code>e8ab01f</code>, <code>ac400ce</code>) y el helpdesk con tickets en vivo y asignacion a agente (<code>8c4ddaa</code>, <code>19affc8</code>).",
-        "En <code>pixeria</code> quedaron confirmados ocho commits en <code>origin/main</code>, con el triangulo Clear Channel, la retirada de referencias cruzadas por decision de Carlos y la nueva barra/cuadratura redimensionable (<code>385909e</code>, <code>2aa6b04</code>, <code>f0d6d62</code>, <code>be23887</code>, <code>3433291</code>).",
-        "<code>AdmiraNext-Team</code> aparece hoy en dos lineas locales distintas: <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> con control remoto de energia (<code>/api/machines/:id/power</code>, <code>sleepMachine</code>, <code>wakeMachine</code>) y <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> con el redisenyo arcade <code>0.1.3</code>, perfiles <code>fighter</code>, SSH local para el Mac Mini y capturas renovadas.",
-        "Se actualizaron <code>2026-07-12.md</code> e <code>index.html</code> para sustituir la entrada minima previa por un resumen util del dia, sin duplicar fecha."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se revisaron la rutina canonica en GitHub y su copia local <code>CERRAR-EL-DIA.md</code>.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-12 00:00' --until='2026-07-12 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-12 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se reescribieron <code>2026-07-12.md</code> e <code>index.html</code> para sustituir la version previa del dia por una entrada alineada con esta corrida real, sin duplicar la fecha."
       ]},
       { heading: "Que se valido", items: [
-        "<code>tool</code> tenia <code>## main...origin/main [behind 12]</code>, sin cambios locales, y <code>git log --since='2026-07-12 00:00' --until='2026-07-12 23:59:59'</code> devolvio nueve commits reales de hoy ya presentes en <code>origin/main</code>.",
-        "<code>pixeria</code> tenia <code>## main...origin/main</code> limpio, y el mismo rango horario devolvio ocho commits de hoy ya publicados, rematando en <code>3433291 feat: make Pixeria quadratic panels resizable</code>.",
-        "El checkout <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> tenia tres ficheros modificados, sin commits de hoy, <code>git diff --check</code> limpio y dos implementaciones del endpoint <code>/api/machines/:id/power</code> dentro de <code>src/server.js</code>; ademas <code>/Users/csilvasantin/.openclaw/workspace-admira</code> conserva solo los archivos base <code>AGENTS.md</code>, <code>BOOTSTRAP.md</code>, <code>HEARTBEAT.md</code>, <code>IDENTITY.md</code>, <code>SOUL.md</code>, <code>TOOLS.md</code> y <code>USER.md</code>.",
-        "El checkout <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> tenia ocho ficheros modificados sin commit y la rama <code>main</code> estaba <code>behind 303</code>; <code>git diff --check</code> salio limpio en ese redisenyo local.",
-        "La entrada de hoy ya existia, asi que se actualizo en vez de duplicarse."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el checkout canonico estaba limpio y sincronizado antes de editar.",
+        "<code>git log --since='2026-07-12 00:00' --until='2026-07-12 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo, incluidos <code>d580f85 Diario 2026-07-12 [Codex]</code>, <code>07e50da Actualizar diario 2026-07-12 [Codex]</code>, <code>ff1cbdf Diario 2026-07-12 [Claude]</code>, <code>1e883f3 Actualizar diario 2026-07-12 [Codex]</code>, <code>c81bb7b Actualizar diario 2026-07-12 [Codex]</code> y <code>162650c chore: actualizar repos.html 2026-07-12 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-12 00:00'</code> confirmo la secuencia local del dia, incluido el commit <code>db521d0</code>, el <code>pull --rebase origin main</code> y el estado actual <code>d580f85</code>.",
+        "<code>date</code> devolvio <code>2026-07-12 23:56:48 CEST +0200</code> durante el pre-check.",
+        "La entrada de hoy ya existia en <code>2026-07-12.md</code> y en <code>index.html</code>, por lo que se actualizo en vez de crear otro fichero o otra fecha."
       ]},
       { heading: "Avances", items: [
-        "La produccion publicada del dia se concentra en <code>tool</code> y <code>pixeria</code>, sobre todo en helpdesk <code>admira.live</code> y en la demo Clear Channel con UX cuadratica.",
-        "Quedan identificadas dos lineas de trabajo activas para <code>AdmiraNext-Team</code>: control remoto de energia y redisenyo arcade del dashboard del equipo.",
-        "Markdown y HTML vuelven a quedar alineados con una entrada util y no con un placeholder."
+        "La fecha <code>2026-07-12</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>.",
+        "<code>index.html</code> vuelve a quedar alineado con el Markdown para que la UI publica muestre una sola entrada <code>Codex</code> del 12 de julio con las seis secciones numeradas.",
+        "El cierre del dia vuelve a quedar centrado en hechos comprobados del repo <code>diario</code>, no en actividad inferida de otros workspaces."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Hay dos checkouts locales distintos de <code>AdmiraNext-Team</code>, lo que aumenta riesgo de deriva entre la linea de energia y la linea arcade.",
-        "En <code>src/server.js</code> del checkout de energia quedaron dos implementaciones de <code>/api/machines/:id/power</code>, sintoma de refactor incompleto antes de commit.",
-        "El checkout arcade de <code>AdmiraNext-Team</code> esta 303 commits por detras de <code>origin/main</code>, asi que no es publicable sin antes sincronizar e integrar.",
-        "El barrido bruto del workspace devolvia ruido de caches y bootstrap locales, por lo que hubo que filtrar el resumen a hechos confirmados por <code>git</code>."
+        "Hoy ya existian varias iteraciones previas del cierre en <code>git log</code> y <code>git reflog</code>, asi que dejar el contenido anterior sin rehacer habria mantenido una version inconsistente del dia.",
+        "La fuente canonica publicada en GitHub redirige al repositorio <code>18.-diario</code>, detalle que hubo que verificar antes de continuar.",
+        "La verificacion publica aun dependia de publicar este nuevo commit y esperar a que GitHub Pages sirviera la version actualizada."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada <code>2026-07-12 [Codex]</code> y fusionar en ella la informacion remota y local en vez de competir con otra version del mismo dia.",
-        "Registrar como &quot;hecho&quot; solo lo confirmado por <code>git log</code>, <code>git status</code>, <code>git diff</code> o Agora, sin atribuir despliegues a <code>AdmiraNext-Team</code> que aun no existen.",
-        "Dar mas peso en el resumen a <code>tool</code> y <code>pixeria</code> como actividad publicada del dia, dejando <code>AdmiraNext-Team</code> como trabajo pendiente pero relevante."
+        "Reescribir la entrada existente de <code>2026-07-12 [Codex]</code> en vez de anadir otra, para respetar la regla de un unico fichero por fecha.",
+        "Limitar el contenido a hechos comprobados con <code>git</code>, con la lectura de la rutina y con el trabajo realmente ejecutado en <code>/Users/csilvasantin/Claude/diario/</code> durante esta sesion.",
+        "Mantener el trabajo solo en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, sin tocar otros clones del diario."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Elegir y consolidar una linea canonica para <code>AdmiraNext-Team</code>, empezando por eliminar la ruta duplicada <code>/power</code> y probar sleep/wake en una maquina no critica.",
-        "Sincronizar el checkout arcade con <code>origin/main</code> antes de intentar subir el build <code>0.1.3</code> y validarlo en navegador o build local.",
-        "Publicar esta actualizacion del diario y comprobarla en <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+        "Hacer <code>git add 2026-07-12.md index.html</code>, crear el commit <code>Diario 2026-07-12 [Codex]</code> y publicar con <code>git push origin main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra esta version corregida del 12 de julio de 2026.",
+        "Dejar registrada en la memoria de la automatizacion esta corrida y el resultado de la publicacion."
       ]}
     ]
   },
