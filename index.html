@@ -350,29 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se creo <code>2026-07-12.md</code> en <code>/Users/csilvasantin/Claude/diario/</code> con el resumen breve de hoy.",
-        "Se actualizo <code>index.html</code> para que la misma entrada quede visible tambien en la version web del diario."
+        "Se reviso la actividad real de hoy en Agora y en los checkouts locales para separar despliegues ya publicados de cambios que siguen solo en workspace.",
+        "En <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> se inspeccionaron los cambios locales de <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code>, centrados en control remoto de energia para las maquinas del equipo.",
+        "Se actualizaron <code>2026-07-12.md</code> e <code>index.html</code> para sustituir la entrada minima previa por un resumen mas util del dia, sin duplicar fecha."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin cambios locales en el checkout canonico.",
-        "<code>git log --since='2026-07-12 00:00' --until='2026-07-12 23:59:59' --date=iso --stat --oneline --all</code> no mostro actividad previa relevante de hoy en este repo antes de esta pasada.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-12 21:32:56 CEST +0200</code> durante la preparacion de la entrada."
+        "<code>AdmiraNext-Team</code> no tiene commits de hoy, pero si cambios locales claros: un endpoint <code>POST /api/machines/:id/power</code>, funciones <code>sleepMachine</code> y <code>wakeMachine</code>, uso de <code>pmset displaysleepnow</code>, Wake-on-LAN y <code>caffeinate</code>, y ajustes de estado en <code>machines.json</code>.",
+        "El workspace reciente de <code>/Users/csilvasantin/.openclaw/workspace-admira</code> aparece con archivos base sin versionar como <code>AGENTS.md</code>, <code>BOOTSTRAP.md</code>, <code>HEARTBEAT.md</code>, <code>IDENTITY.md</code>, <code>SOUL.md</code>, <code>TOOLS.md</code> y <code>USER.md</code>, senal de arranque o rebootstrap todavia no consolidado en git.",
+        "Agora deja como hechos publicados hoy varios avances de demo y producto: <code>pixeria.com/megafonia</code>, <code>pixeria.com/hilomusical</code> y <code>pixeria.com/segmentado</code> pasaron a responder 200; la UX cuadratica se aplico y verifico en <code>pixeria.com/stock.html</code>; y el gemelo de <code>admira.tv/adcelerate/demo</code> recibio tambien el canon cuadratico en produccion."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-12</code> queda registrada sin duplicar dia y con su fichero propio.",
-        "Markdown y HTML quedan alineados con el mismo resumen de hoy."
+        "Queda identificado que el trabajo local mas concreto del dia en <code>AdmiraNext-Team</code> es convertir el dashboard del equipo en un centro de sleep/wake remoto para varios Macs.",
+        "El frente publico mas visible de hoy avanza sobre la demo de Clear Channel: Pixeria ya tiene entrypoints funcionales y la UX cuadratica aterrizada en produccion.",
+        "El diario del <code>2026-07-12</code> deja de ser una nota vacia y pasa a reflejar el estado real entre codigo local, despliegues verificados y trabajo aun pendiente."
       ]},
       { heading: "Problemas encontrados", items: [
-        "No habia todavia una entrada visible para hoy en el diario.",
-        "No se detectaron bloqueos tecnicos durante esta actualizacion."
+        "En <code>src/server.js</code> quedaron dos implementaciones del endpoint <code>/api/machines/:id/power</code>, sintoma de refactor incompleto antes de commit.",
+        "<code>data/machines.json</code> se actualiza con marcas de abril y estados offline/notas de sleep, no con telemetria reciente de julio; el inventario sigue desfasado respecto al uso real.",
+        "El despliegue de paneles redimensionables en Pixeria quedo bloqueado al final del hilo por errores <code>522</code> de Wrangler contra Cloudflare Pages, asi que ese ultimo ajuste no consta como publicado."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Trabajar solo en <code>/Users/csilvasantin/Claude/diario/</code>, tal como exige la rutina del diario.",
-        "Registrar solo hechos confirmados por esta sesion y mantener la entrada breve y operativa.",
-        "Crear una entrada nueva para <code>2026-07-12</code> en vez de modificar otro dia, para mantener un fichero por fecha."
+        "Diferenciar en la entrada tres niveles de evidencia: despliegues confirmados por Agora, cambios locales de repositorio y workspaces arrancados pero aun sin consolidar.",
+        "Tratar el control de energia de <code>AdmiraNext-Team</code> como trabajo en curso hasta que desaparezca el endpoint duplicado y exista prueba real de sleep/wake en una maquina no critica.",
+        "Mantener una sola entrada <code>2026-07-12 [Codex]</code> y reemplazar la version previa demasiado generica."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Publicar <code>2026-07-12.md</code> e <code>index.html</code> en <code>origin/main</code> y comprobar la entrada en la web publica."
+        "Limpiar <code>AdmiraNext-Team</code> antes de publicar: dejar una sola ruta <code>/power</code>, validar sleep/wake sobre hardware real y refrescar <code>machines.json</code> con estado y notas coherentes.",
+        "Reintentar el deploy pendiente de Pixeria cuando Cloudflare Pages deje de devolver <code>522</code> y verificar que los paneles redimensionables llegan realmente a produccion.",
+        "Publicar esta actualizacion del diario en <code>origin/main</code> y comprobarla en <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
       ]}
     ]
   },
