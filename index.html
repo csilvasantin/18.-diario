@@ -347,6 +347,43 @@ const entries = [
     date: "2026-07-12",
     title: "12 de julio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto la rutina programada de cierre desde Claude Code en un checkout efimero, sobre la rama <code>main-3gsj44</code> (rama de trabajo asignada a esta sesion en el entorno remoto).",
+        "Se leyo la rutina canonica en <code>CERRAR-EL-DIA.md</code> y el <code>CLAUDE.md</code> del repo para respetar la regla 1-2-3 (una entrada por fecha, sin duplicar).",
+        "Se anadio este bloque <code>[Claude]</code> a <code>2026-07-12.md</code> separado por <code>---</code> del bloque previo de <code>[Codex]</code>, sin abrir un fichero nuevo.",
+        "Se sincronizo <code>index.html</code> con la nueva entrada de <code>[Claude]</code> para el 12 de julio."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status</code> devolvio arbol limpio al arrancar la sesion en la rama <code>main-3gsj44</code>.",
+        "<code>git log --oneline -10</code> mostro que hoy ya habia commits previos de <code>[Codex]</code> (<code>1e883f3</code>, <code>c81bb7b</code>) y de CI (<code>162650c chore: actualizar repos.html 2026-07-12 [skip ci]</code>), asi que no habia trabajo extra pendiente por descubrir en el diario.",
+        "<code>mcp__github__list_pull_requests</code> con <code>head=csilvasantin:main-3gsj44</code> devolvio lista vacia, confirmando que no existia todavia un PR abierto para esta rama."
+      ]},
+      { heading: "Avances", items: [
+        "La entrada del <code>2026-07-12</code> queda firmada tambien por <code>[Claude]</code> en el mismo fichero, respetando la convivencia con la entrada previa de <code>[Codex]</code>.",
+        "<code>2026-07-12.md</code> e <code>index.html</code> vuelven a quedar alineados con el nuevo bloque.",
+        "El trabajo se publica en la rama <code>main-3gsj44</code> con su PR draft para que el usuario decida cuando integrarlo en <code>main</code>."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "No se detecto trabajo nuevo de Claude Code durante el dia mas alla de esta propia rutina programada: los commits del 12 de julio ya estaban a nombre de <code>[Codex]</code> y del bot de CI.",
+        "La rutina canonica esta escrita para el checkout del Mac Mini; esta sesion corre en un contenedor remoto, asi que se registro el detalle sin desviarse de los pasos."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Documentar la pasada programada aunque el dia estuviera ya cerrado por <code>[Codex]</code>, tal como pide la instruccion 'si un dia en concreto no se ha hecho nada se documenta y ya esta'.",
+        "Trabajar sobre la rama <code>main-3gsj44</code> asignada al entorno remoto y abrir un PR draft en vez de empujar directamente a <code>main</code>.",
+        "No regenerar <code>repos.html</code> a mano: el workflow <code>update-repos.yml</code> ya publico su version del 12 de julio (<code>162650c</code>)."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Publicar la entrada <code>[Claude]</code> en <code>origin/main-3gsj44</code> y abrir el PR draft correspondiente contra <code>main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> sigue sirviendo el 12 de julio y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> mantiene el listado actualizado."
+      ]}
+    ]
+  },
+  {
+    date: "2026-07-12",
+    title: "12 de julio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
