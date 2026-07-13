@@ -344,6 +344,50 @@
 <script>
 const entries = [
   {
+    date: "2026-07-13",
+    title: "13 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se dejo presencia con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se leyo <a href='https://github.com/csilvasantin/18.-diario/blob/main/README.md' target='_blank'>README.md</a> del repo <code>18.-diario</code> y se siguio su <code>Guia para Codex</code>, manteniendo el flujo del diario sobre <code>/tmp/diario</code>.",
+        "Se barrieron los 44 repos activos listados en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/onboarding/CURRENT_STATE.md</code>, ejecutando <code>git status --porcelain</code>, <code>git fetch origin --prune</code> cuando habia <code>origin</code>, y <code>git pull --ff-only</code> solo en repos limpios con actualizacion remota.",
+        "Se aplico <code>pull --ff-only</code> en <code>admira-next-web</code>, <code>xpaceos</code>, <code>github-csilvasantin/admira-store</code>, <code>github-csilvasantin/admira-tv</code>, <code>github-csilvasantin/digitalavatar.ai</code>, <code>github-csilvasantin/pixer-worker</code> y <code>github-csilvasantin/tool</code>.",
+        "Se actualizo la tabla viva de liderazgo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/onboarding/CURRENT_STATE.md</code> con las columnas <code>Repo</code>, <code>LLM</code>, <code>Ultimo cambio liderado por</code>, <code>Fecha</code> y <code>Evidencia local</code>, marcando <code>Codex Update</code> en los cambios liderados por esta automatizacion.",
+        "Se clono <code>https://github.com/csilvasantin/18.-diario.git</code> en <code>/tmp/diario</code>, quedando <code>## main...origin/main</code> limpio antes de editar, para crear esta entrada y anadirla a <code>index.html</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "El barrido estructurado quedo guardado en <code>/tmp/codex-update-global-repo-scan.json</code> y confirmo 7 repos actualizados por fast-forward, 24 repos ya al dia, 11 repos con worktree sucio, 1 repo sin <code>origin</code> y 1 fetch fallido por SSL.",
+        "<code>github-csilvasantin/10.-Yarig.aiTheGame</code> no pudo completar <code>fetch origin --prune</code> por <code>SSL_ERROR_SYSCALL in connection to github.com:443</code>, asi que se reporta como bloqueo de red concreto.",
+        "<code>git -C /tmp/diario status --short --branch</code> devolvio <code>## main...origin/main</code> y <code>git -C /tmp/diario log -1 --date=short --pretty='%ad%n%an%n%s'</code> devolvio <code>2026-07-13</code>, <code>csilvasantin</code> y <code>Diario 2026-07-12 [Codex]</code>, confirmando que no existia aun una entrada <code>2026-07-13</code>.",
+        "<code>rg -n '18\\.-diario|csilvasantin.github.io/18\\.-diario' /Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io/diario /Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io/carlossilva</code> confirmo que el repo del sitio ya redirige <code>/diario/</code> y <code>/diario/repos.html</code> a <code>https://csilvasantin.github.io/18.-diario/</code>.",
+        "<code>git -C /Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io status --short</code> mostro cambios locales en <code>codex/index.html</code>, <code>codex/yarig-ai/index.html</code>, <code>yarig-ai/index.html</code>, <code>codex/yarig-ai/telegram-consejeros.html</code> y <code>yarig-ai/telegram-consejeros.html</code>, dejando bloqueado cualquier cambio adicional en ese repo."
+      ]},
+      { heading: "Avances", items: [
+        "Los repos fast-forward quedaron alineados con <code>origin</code> sin mezclar cambios locales, y la tabla de <code>CURRENT_STATE.md</code> ya refleja las fechas y evidencias nuevas del barrido de hoy.",
+        "Esta fecha queda incorporada al diario de <code>18.-diario</code> con <code>author: \"Codex\"</code> y visible desde el selector de la UI publica.",
+        "La automatizacion deja identificado que <code>onboarding</code>, <code>csilvasantin.github.io</code>, <code>diario</code>, <code>AdmiraNext-Team</code>, <code>xtanco-game</code>, <code>xpaceos</code> y otros repos sucios necesitan atencion manual antes de poder sincronizar remotos pendientes."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "<code>github-csilvasantin/onboarding</code> ya venia con <code>AGENTS.md</code>, <code>CURRENT_STATE.md</code> y <code>README.md</code> modificados, y ademas esta <code>behind=23</code>; por eso solo se actualizo la tabla pedida sin hacer <code>pull</code>.",
+        "<code>github-csilvasantin/csilvasantin.github.io</code> ya venia sucio y <code>behind=3</code>, asi que no se sobrescribio ni se intento publicar desde ahi aunque el redirect a <code>18.-diario</code> ya existe.",
+        "<code>github-csilvasantin/diario</code> local sigue sucio y <code>behind=650</code>, por lo que no se uso para este flujo; el checkout operativo fue <code>/tmp/diario</code> tal como exige la instruccion.",
+        "Once repos no admitian <code>pull</code> por cambios locales, y varios de ellos ademas tienen actualizacion remota pendiente, incluidos <code>32.-ConsejoAdmiraNextGame</code>, <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/pulpo</code>, <code>github-csilvasantin/xpaceos</code> y <code>github-csilvasantin/xtanco-game</code>."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Mantener el criterio estricto de <code>pull --ff-only</code> solo en worktrees limpios y sin commits locales por delante.",
+        "Marcar <code>Codex Update</code> solo cuando el cambio visible fue liderado por esta automatizacion, y usar <code>sin firma explicita</code> en el resto cuando el historial no identifica claramente al agente.",
+        "Tratar <code>csilvasantin.github.io</code> como bloqueo explicito para cambios de publicacion, porque el redirect necesario ya esta presente y el repo tiene ediciones locales ajenas."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add 2026-07-13.md index.html</code>, <code>git commit -m \"docs: Update Codex 2026-07-13 [skip ci]\"</code> y <code>git push -u origin main</code> en <code>/tmp/diario</code>.",
+        "Verificar despues del push que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra <code>2026-07-13</code> como entrada visible y mantiene el estilo Matrix del sitio.",
+        "Dejar sin tocar <code>github-csilvasantin/csilvasantin.github.io</code> hasta que se resuelvan sus cambios locales si en otra sesion hace falta actualizar algo mas alla del redirect actual."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-12",
     title: "12 de julio de 2026",
     member: "Carlos Silva",
