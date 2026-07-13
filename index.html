@@ -350,14 +350,14 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se leyeron la rutina canonica en GitHub y su copia local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>, y se hizo el check-in inicial con <code>agora-checkin codex start</code>.",
+        "Se hizo el check-in inicial con <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y despues se leyeron la rutina canonica en GitHub y su copia local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
         "En <code>/Users/csilvasantin/Claude/diario/</code> se ejecuto el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-13 00:00' --until='2026-07-13 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-13 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
         "Se reescribieron <code>2026-07-13.md</code> e <code>index.html</code> para que la entrada <code>2026-07-13 [Codex]</code> recoja este cierre real y mantenga la regla de un solo fichero por fecha."
       ]},
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales pendientes antes de editar el diario.",
         "<code>git log --since='2026-07-13 00:00' --until='2026-07-13 23:59:59' --date=iso --stat --oneline --all</code> confirmo actividad real previa de hoy en este repo: <code>19814fc docs: Update Codex 2026-07-13 [skip ci]</code>, <code>5a5b4d6 Diario 2026-07-13 [Codex]</code>, <code>c167928 Diario 2026-07-13 [Codex]</code>, <code>b16013d Diario 2026-07-13 [Codex]</code> y <code>924fa22 chore: actualizar repos.html 2026-07-13 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-13 00:00'</code> confirmo que hoy ya hubo commits y rebases sobre la entrada de <code>2026-07-13 [Codex]</code>, asi que correspondia actualizar esa misma fecha y no crear otra."
+        "<code>git reflog --date=iso --since='2026-07-13 00:00'</code> confirmo que hoy ya hubo commits y rebases sobre la entrada de <code>2026-07-13 [Codex]</code>, incluido <code>7a044ff</code> antes del rebase que termino en <code>b16013d</code>, asi que correspondia actualizar esa misma fecha y no crear otra."
       ]},
       { heading: "Avances", items: [
         "La entrada de hoy vuelve a quedar firmada como <code>[Codex]</code> y estructurada con las seis secciones numeradas que exige la rutina.",
@@ -367,7 +367,7 @@ const entries = [
       { heading: "Problemas encontrados", items: [
         "La entrada previa de <code>2026-07-13 [Codex]</code> describia otros repos en vez de este cierre literal, asi que no cumplia la instruccion de registrar solo trabajo verificado de la sesion.",
         "El historial local de hoy incluye varios commits y rebases sobre la misma fecha, lo que obligo a revisar <code>git log</code> y <code>git reflog</code> antes de reescribir para no duplicar hechos.",
-        "La publicacion en GitHub Pages depende de que <code>origin/main</code> acepte el push y de que la web publica sirva la entrada nueva tras el commit."
+        "La fuente canonica en GitHub redirige al repositorio publico <code>csilvasantin/18.-diario</code>, asi que la comprobacion online hubo que leerla sobre ese destino efectivo."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Se actualizo la entrada existente del <code>2026-07-13 [Codex]</code> en vez de crear un fichero nuevo, para respetar la regla 1-2-3 del diario.",
