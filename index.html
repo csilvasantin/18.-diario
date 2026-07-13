@@ -352,22 +352,22 @@ const entries = [
       { heading: "Que se hizo", items: [
         "Se hizo el check-in inicial con <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> con <code>agora whoami --from Codex</code> y despues se leyeron la rutina canonica en GitHub y su copia local en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
         "En <code>/Users/csilvasantin/Claude/diario/</code> se ejecuto el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-13 00:00' --until='2026-07-13 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-13 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se reescribieron <code>2026-07-13.md</code> e <code>index.html</code> para que la entrada <code>2026-07-13 [Codex]</code> recoja este cierre real y mantenga la regla de un solo fichero por fecha."
+        "Se reescribieron <code>2026-07-13.md</code> e <code>index.html</code>, se creo el commit <code>68c3c87</code> (<code>Diario 2026-07-13 [Codex]</code>) y se publico con <code>git push origin main</code>."
       ]},
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, sin cambios locales pendientes antes de editar el diario.",
         "<code>git log --since='2026-07-13 00:00' --until='2026-07-13 23:59:59' --date=iso --stat --oneline --all</code> confirmo actividad real previa de hoy en este repo: <code>19814fc docs: Update Codex 2026-07-13 [skip ci]</code>, <code>5a5b4d6 Diario 2026-07-13 [Codex]</code>, <code>c167928 Diario 2026-07-13 [Codex]</code>, <code>b16013d Diario 2026-07-13 [Codex]</code> y <code>924fa22 chore: actualizar repos.html 2026-07-13 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-13 00:00'</code> confirmo que hoy ya hubo commits y rebases sobre la entrada de <code>2026-07-13 [Codex]</code>, incluido <code>7a044ff</code> antes del rebase que termino en <code>b16013d</code>, asi que correspondia actualizar esa misma fecha y no crear otra."
+        "<code>git reflog --date=iso --since='2026-07-13 00:00'</code> confirmo que hoy ya hubo commits y rebases sobre la entrada de <code>2026-07-13 [Codex]</code>, incluido <code>7a044ff</code> antes del rebase que termino en <code>b16013d</code>; despues <code>git log -1 --oneline --decorate</code> dejo <code>68c3c87 (HEAD -&gt; main, origin/main, origin/HEAD) Diario 2026-07-13 [Codex]</code>."
       ]},
       { heading: "Avances", items: [
         "La entrada de hoy vuelve a quedar firmada como <code>[Codex]</code> y estructurada con las seis secciones numeradas que exige la rutina.",
         "<code>index.html</code> queda alineado con <code>2026-07-13.md</code>, de modo que la UI publica puede mostrar esta misma version en el filtro de <code>Codex</code>.",
-        "La ejecucion mantiene presencia en Agora con <code>agora alive --from Codex --loop</code> mientras se completa el cierre."
+        "El cierre ya queda publicado en el remoto correcto <code>https://github.com/csilvasantin/18.-diario.git</code>, con <code>main</code> sincronizada en el mismo commit local y remoto."
       ]},
       { heading: "Problemas encontrados", items: [
         "La entrada previa de <code>2026-07-13 [Codex]</code> describia otros repos en vez de este cierre literal, asi que no cumplia la instruccion de registrar solo trabajo verificado de la sesion.",
         "El historial local de hoy incluye varios commits y rebases sobre la misma fecha, lo que obligo a revisar <code>git log</code> y <code>git reflog</code> antes de reescribir para no duplicar hechos.",
-        "La fuente canonica en GitHub redirige al repositorio publico <code>csilvasantin/18.-diario</code>, asi que la comprobacion online hubo que leerla sobre ese destino efectivo."
+        "La verificacion publica mostro retardo de Pages o cache: <code>curl -I -L --max-redirs 10 https://csilvasantin.github.io/diario/</code> devolvio <code>301</code> hacia <code>https://www.carlossilva.info/diario/</code> y despues <code>200</code>, pero <code>curl -L --max-redirs 10 https://csilvasantin.github.io/18.-diario/ | rg \"2026-07-13|13 de julio de 2026|Codex\"</code> seguia mostrando el bloque anterior de <code>2026-07-13 [Codex]</code> en el momento de la comprobacion."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Se actualizo la entrada existente del <code>2026-07-13 [Codex]</code> en vez de crear un fichero nuevo, para respetar la regla 1-2-3 del diario.",
@@ -375,9 +375,9 @@ const entries = [
         "La salida final del cierre sera la URL publica <code>https://csilvasantin.github.io/diario/</code>, no una captura, conforme a la preferencia del usuario."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add 2026-07-13.md index.html</code>, crear el commit <code>Diario 2026-07-13 [Codex]</code> y empujarlo a <code>origin main</code>.",
-        "Verificar con <code>curl</code> que <code>https://csilvasantin.github.io/diario/</code> responde y expone la entrada <code>2026-07-13 [Codex]</code> en la UI publica.",
-        "Reportar al usuario la URL publica y cualquier bloqueo preciso de push o publicacion si apareciera."
+        "Repetir la comprobacion publica de <code>https://csilvasantin.github.io/diario/</code> y <code>https://csilvasantin.github.io/18.-diario/</code> cuando GitHub Pages o la cache terminen de propagar <code>68c3c87</code>.",
+        "Si la pagina siguiera sirviendo el bloque anterior tras la propagacion normal, revisar el flujo de despliegue o la rama origen de GitHub Pages para <code>18.-diario</code>.",
+        "Mantener como referencia publica de este cierre la URL <code>https://csilvasantin.github.io/diario/</code>, indicando que ahora mismo responde pero aun no refleja el ultimo bloque corregido."
       ]}
     ]
   },
