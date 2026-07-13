@@ -350,38 +350,29 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion en <code>$CODEX_HOME/automations/actualizar-diario-2/memory.md</code> y se revisaron <code>CERRAR-EL-DIA.md</code>, <code>2026-07-12.md</code> e <code>index.html</code> para recuperar la estructura vigente del diario.",
-        "En este checkout se detecto un <code>HEAD</code> desacoplado en <code>8d19c4e</code>, se hizo <code>git fetch origin main</code> y se recoloco el trabajo en <code>origin/main</code>, quedando <code>HEAD</code> en <code>924fa22 chore: actualizar repos.html 2026-07-13 [skip ci]</code> antes de editar.",
-        "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-13 00:00' --until='2026-07-13 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-13 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se reescribieron <code>2026-07-13.md</code> e <code>index.html</code> para sustituir la entrada previa de hoy, que describia otra automatizacion, por este cierre factual del diario manteniendo una unica entrada Markdown para la fecha.",
-        "Se dejo preparado el cierre completo para publicarlo con <code>git add 2026-07-13.md index.html</code>, <code>git commit -m \"Diario 2026-07-13 [Codex]\"</code> y <code>git push origin HEAD:main</code>."
+        "Se reviso la actividad real de hoy en los repositorios de Admirito con foco en <code>AdmiraNext-Team</code>, <code>admira-tv</code>, <code>pixer-worker</code>, <code>pixeria</code> y <code>clearchannel-tv</code>.",
+        "En <code>admira-tv</code> se encadeno trabajo sobre la parrilla y el kiosko: diez slots, edicion inline de titulos, miniaturas y preview tipo stock, ratio contenido/publicidad ajustable y mejor integracion del canal municipal de Gracia y del demo Street View.",
+        "En <code>pixer-worker</code> se acompaso esa linea con importacion etiquetada para la grid, persistencia de overrides de titulo y reemplazo atomico de rundowns.",
+        "En <code>pixeria</code> se movio el stock hacia campañas y tags mas operables y se dejo activo el despliegue automatico en Cloudflare Pages.",
+        "En <code>clearchannel-tv</code> se rehizo la presentacion comercial para apoyarla en demo viva de <code>admira.tv</code> y se anadio una pagina de documentacion con material de NotebookLM."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> tanto antes de editar como despues de fijar el checkout en <code>origin/main</code>, sin cambios locales previos a esta corrida.",
-        "<code>git log --since='2026-07-13 00:00' --until='2026-07-13 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo: <code>924fa22 chore: actualizar repos.html 2026-07-13 [skip ci]</code>, <code>19814fc docs: Update Codex 2026-07-13 [skip ci]</code> y <code>8d19c4e Diario 2026-07-12 [Codex]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-13 00:00'</code> confirmo el movimiento local <code>924fa22 HEAD@{2026-07-13 21:32:36 +0200}: checkout: moving from 8d19c4e17e1791515ac0b31ce6eeeacf5c9771d5 to origin/main</code>.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-13 21:32:54 CEST +0200</code> durante el pre-check.",
-        "La fecha <code>2026-07-13</code> ya existia en <code>2026-07-13.md</code> y en <code>index.html</code>, asi que se actualizo esa misma entrada en lugar de crear un segundo bloque <code>Codex</code>."
-      ]},
-      { heading: "Avances", items: [
-        "La entrada del <code>2026-07-13 [Codex]</code> vuelve a quedar centrada en el trabajo real de este repo y de esta ejecucion del diario.",
-        "<code>2026-07-13.md</code> e <code>index.html</code> quedan de nuevo alineados con el mismo contenido factual para la web publica.",
-        "El cierre ya incorpora el estado real de hoy en <code>origin/main</code>, partiendo del ultimo commit publicado antes de esta edicion."
+        "<code>git log</code> del <code>2026-07-13</code> confirmo commits hoy en <code>admira-tv</code>, <code>pixer-worker</code>, <code>pixeria</code> y <code>clearchannel-tv</code>.",
+        "Las dos copias limpias de <code>AdmiraNext-Team</code> (<code>/Users/csilvasantin/Claude/repos</code> y <code>/Users/csilvasantin/Claude</code>) no registran commits ni ficheros tocados hoy.",
+        "La copia de <code>AdmiraNext-Team</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> sigue sucia y <code>303</code> commits por detras de <code>origin/main</code>; los cambios locales visibles corresponden a una iteracion antigua tipo arcade (<code>package.json</code> <code>0.1.3</code>, <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code> y capturas), no a trabajo de hoy."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El worktree actual no estaba situado sobre el ultimo <code>origin/main</code>, sino sobre el commit antiguo <code>8d19c4e</code>, y hubo que recolocarlo antes de editar para no publicar desde una base obsoleta.",
-        "La entrada vigente del <code>2026-07-13</code> describia una automatizacion distinta y no este cierre del diario, de modo que no era valida como evidencia de esta sesion.",
-        "El repo en este entorno sigue en modo detached (<code>## HEAD (no branch)</code>), asi que el push final debe hacerse explicitamente como <code>HEAD:main</code>."
+        "Hay varias copias de <code>AdmiraNext-Team</code> y la que contiene cambios locales no coincide con la rama publicada ni con la actividad del dia, lo que aumenta el riesgo de leer estado obsoleto como si fuera trabajo reciente.",
+        "El avance funcional de hoy esta repartido entre <code>pixer-worker</code>, <code>admira-tv</code>, <code>pixeria</code> y <code>clearchannel-tv</code>, asi que la trazabilidad depende de seguir la cadena completa y no solo un repo aislado."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Reescribir la entrada existente del <code>2026-07-13 [Codex]</code> en vez de conservar el resumen previo o abrir otra firma paralela, para respetar la regla de una sola entrada Markdown por fecha.",
-        "Limitar el contenido de hoy a hechos comprobados en este repositorio con <code>git</code>, la memoria de la automatizacion y la lectura directa de los ficheros del diario.",
-        "Mantener el mismo relato en <code>2026-07-13.md</code> e <code>index.html</code> para evitar divergencias entre el Markdown y la publicacion HTML."
+        "Tomar como referencia factual para hoy la actividad confirmada por <code>git</code> en los repos con commits del dia y tratar <code>AdmiraNext-Team</code> solo como comprobacion de estado, no como fuente de avances inexistentes.",
+        "Actualizar la entrada ya existente del <code>2026-07-13</code> en vez de duplicarla, dejando un resumen breve orientado a producto, validacion y riesgo operativo."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff final de <code>2026-07-13.md</code> e <code>index.html</code>.",
-        "Crear el commit <code>Diario 2026-07-13 [Codex]</code> y publicarlo con <code>git push origin HEAD:main</code>.",
-        "Comprobar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> sigue respondiendo y que la web final muestra esta version del <code>2026-07-13 [Codex]</code>."
+        "Probar en caliente la cadena <code>pixer-worker</code> -&gt; <code>admira-tv</code> para confirmar que los tags, overrides y rundowns siguen coherentes en la parrilla y el kiosko.",
+        "Decidir si la copia atrasada de <code>AdmiraNext-Team</code> debe rescatarse, limpiarse o descartarse para evitar futuras lecturas confusas.",
+        "Mantener alineada la narrativa de <code>clearchannel-tv</code> con la demo viva que realmente esta saliendo desde <code>admira.tv</code>."
       ]}
     ]
   },
