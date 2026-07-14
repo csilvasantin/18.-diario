@@ -344,6 +344,40 @@
 <script>
 const entries = [
   {
+    date: "2026-07-14",
+    title: "14 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>actualizar-diario-2</code> y se revisaron <code>git status --short --branch</code>, <code>git remote -v</code> y <code>git fetch origin</code> en este checkout del repo <code>diario</code>.",
+        "Se detecto que el checkout local estaba en <code>HEAD</code> detached y cinco commits por detras de <code>origin/main</code>, asi que se tomo como base la punta remota para no reintroducir una version vieja de <code>2026-07-13</code>.",
+        "Se creo esta entrada <code>2026-07-14.md</code> y se actualizo <code>index.html</code> para que la novedad de hoy quede visible en la portada publica del diario."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git rev-list --left-right --count HEAD...origin/main</code> devolvio <code>0 5</code>, confirmando que antes de editar no habia commits locales sin subir y si habia cinco commits remotos por incorporar.",
+        "<code>git show origin/main:index.html</code> confirmo que la portada remota todavia empezaba en <code>2026-07-13</code>, asi que hacia falta insertar una entrada nueva para <code>2026-07-14</code>.",
+        "La publicacion final se comprobara contra <code>https://csilvasantin.github.io/diario/</code> para asegurar que la URL publica siga respondiendo tras el push."
+      ]},
+      { heading: "Avances", items: [
+        "El diario vuelve a tener una unica entrada Markdown para la fecha <code>2026-07-14</code>, firmada como <code>[Codex]</code>.",
+        "<code>index.html</code> queda sincronizado con el mismo resumen del dia para que el filtro de <code>Codex</code> y el selector de fechas muestren esta actualizacion."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "Este worktree habia quedado atrasado respecto a <code>origin/main</code>, y seguir editando sobre ese estado hubiera pisado la version mas reciente de la entrada <code>2026-07-13</code>.",
+        "El repo esta configurado en detached <code>HEAD</code>, asi que el cierre requiere empujar explicitamente la rama temporal resultante hacia <code>origin/main</code>."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Basar el cierre en la punta actual de <code>origin/main</code> y no en el <code>HEAD</code> viejo del worktree.",
+        "Registrar solo hechos verificables de esta ejecucion del diario, sin inventar actividad de otros repos ni de otras sesiones."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add</code>, <code>git commit</code> y <code>git push</code> con una referencia explicita a Codex para dejar el cierre publicado en GitHub.",
+        "Verificar con <code>curl</code> que <code>https://csilvasantin.github.io/diario/</code> siga siendo valida despues de la publicacion."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-13",
     title: "13 de julio de 2026",
     member: "Carlos Silva",
