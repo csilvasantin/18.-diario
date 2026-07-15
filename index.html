@@ -350,34 +350,35 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso el trabajo de hoy en los repos de Admirito, con foco en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, tomando como fuente el <code>git status</code>, los diffs locales y los ficheros tocados del workspace.",
-        "En <code>AdmiraNext-Team</code> quedo avanzando un rediseño fuerte del dashboard: <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> pasan a una presentacion tipo arcade con bloque <code>Player Select</code>, tarjetas de miembros y tema visual nuevo.",
-        "Tambien se actualizaron datos operativos del inventario en <code>data/machines.json</code>, anadiendo IP local y comando SSH local para <code>admira-macmini</code>, y se regeneraron capturas en <code>data/screenshots/</code> junto con la subida de version a <code>0.1.3</code> en <code>package.json</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad <code>Codex -&gt; Oraculo (Codex·gmail)</code> y se revisaron <code>tasks</code>, <code>inbox</code> y la memoria de esta automatizacion antes de tocar el diario.",
+        "Se reviso el trabajo del dia en los repositorios de Admirito con foco especial en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> y contraste con <code>xpaceos</code>, <code>32.-ConsejoAdmiraNextGame</code> y <code>04.- AdmiraGemini</code>, usando <code>git log</code>, <code>git status</code>, <code>git diff</code> y los ficheros tocados del workspace.",
+        "En <code>AdmiraNext-Team</code> quedo avanzando un rediseño fuerte del dashboard: <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> pasan a una presentacion tipo arcade con bloque <code>Player Select</code>, tarjetas de miembros y tema visual nuevo; ademas <code>data/machines.json</code> incorpora IP local y comando SSH local para <code>admira-macmini</code>, se regeneran capturas en <code>data/screenshots/</code> y <code>package.json</code> sube a <code>0.1.3</code>.",
+        "Se actualizo esta entrada de <code>2026-07-15.md</code> y su bloque correspondiente en <code>index.html</code> para reflejar el estado real del dia en el workspace."
       ]},
       { heading: "Que se valido", items: [
-        "<code>node --check public/app.js</code> y <code>node --check src/server.js</code> pasaron sin errores en <code>AdmiraNext-Team</code>.",
-        "Levantando <code>node src/server.js</code> localmente, <code>curl -I http://127.0.0.1:3030/</code> respondio <code>HTTP/1.1 200 OK</code> y <code>/api/machines</code> devolvio JSON valido del panel.",
-        "Se confirmo que no hay commits fechados hoy en los repos principales revisados, pero si cambios locales sustanciales sin publicar en <code>AdmiraNext-Team</code>."
+        "<code>node --check public/app.js</code> y <code>node --check src/server.js</code> pasaron sin errores en <code>AdmiraNext-Team</code>; en paralelo ya habia un <code>node</code> escuchando en <code>:3030</code>, y <code>curl -I http://127.0.0.1:3030/</code> respondio <code>HTTP/1.1 200 OK</code> mientras <code>/api/machines</code> devolvio JSON valido del panel.",
+        "<code>xpaceos</code> si tuvo actividad publicada hoy: <code>git log --since='2026-07-15 00:00'</code> mostro 12 commits en <code>main...origin/main</code>, incluyendo <code>feat: publica Xsuperman como Xpacio isometrico</code>, la saga de Xperiencias y varios ajustes de UI en <code>admira-xp</code>; el arbol quedo limpio.",
+        "<code>32.-ConsejoAdmiraNextGame</code> conserva trabajo local sin publicar: <code>mcp/index.html</code> y <code>mcp/llms.txt</code> anaden 73 lineas de documentacion sobre la lanzadera <code>admira.tv</code>, en la rama <code>neo/ux-topbar-una-fila</code>, que sigue <code>behind 159</code> respecto a <code>origin/main</code>; <code>04.- AdmiraGemini</code> tambien mantiene una UI local para lanzar Gemini (<code>web.py</code>, <code>static/</code>, tests y docs) todavia sin commit."
       ]},
       { heading: "Avances", items: [
-        "El panel ya no es solo una tabla de flota: ahora apunta a una experiencia mas presentacional para mostrar miembros, roles y estado de maquinas.",
-        "El inventario tecnico del equipo mejora al dejar preparada la via de acceso local al Mac Mini ademas de la de Tailscale.",
-        "El workspace deja una base coherente para una siguiente pasada de pulido y publicacion, aunque todavia no esta empaquetada en commit."
+        "<code>AdmiraNext-Team</code> deja de apuntar a un panel puramente utilitario y pasa a una presentacion mucho mas visual de miembros, roles y maquinas, sin romper la API local que ya estaba sirviendo en <code>:3030</code>.",
+        "El inventario tecnico mejora al dejar preparada la via de acceso local al Mac Mini ademas de Tailscale y al refrescar capturas del equipo.",
+        "La entrada de hoy queda consolidada distinguiendo trabajo ya publicado (<code>xpaceos</code>) de trabajo aun local pendiente de cierre (<code>AdmiraNext-Team</code>, <code>Consejo</code> y <code>AdmiraGemini</code>)."
       ]},
       { heading: "Problemas encontrados", items: [
         "<code>AdmiraNext-Team</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> esta <code>behind 303</code>, asi que mezclar este trabajo con remoto exigira reconciliar bastante historia antes de publicar.",
-        "El repo activo esta sucio y combina cambios de UI, datos y capturas binarias, lo que aumenta el riesgo de colar ruido o mezclar trabajo visual con inventario operativo.",
-        "No aparecen scripts de test o build en <code>package.json</code>; la validacion de hoy se queda en arranque local y chequeo sintactico."
+        "El repo activo de <code>AdmiraNext-Team</code> esta sucio y combina cambios de UI, datos operativos y capturas binarias, lo que aumenta el riesgo de colar ruido si no se separa antes.",
+        "Fuera de <code>xpaceos</code>, los repos clave revisados no muestran commits de hoy, asi que buena parte del trabajo del workspace sigue sin cerrar ni publicar."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar como fuente principal el estado real del workspace y no inventar validaciones que no existen en el repo.",
-        "Dar prioridad a <code>AdmiraNext-Team</code> frente a otros repos de Admirito porque es donde se concentran hoy los cambios de mayor impacto y volumen.",
-        "Dejar esta entrada breve y factual, actualizando la fecha existente en vez de duplicarla."
+        "Priorizar evidencia de <code>git</code>, del estado real del workspace y de las validaciones ejecutadas, sin inventar build/test que no existen en los repos revisados.",
+        "Dar prioridad narrativa a <code>AdmiraNext-Team</code> porque concentra hoy el mayor volumen de cambios locales, pero sin perder el contexto de lo ya publicado en <code>xpaceos</code> ni del trabajo pendiente en <code>Consejo</code> y <code>AdmiraGemini</code>.",
+        "Mantener una unica entrada <code>2026-07-15 [Codex]</code> y actualizarla con este resumen consolidado, en vez de duplicar la fecha."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Separar en commit(s) el rediseño arcade del dashboard y los cambios de inventario para que la revision no mezcle UI con datos operativos.",
-        "Sincronizar el repo activo con remoto antes de publicar, resolviendo el <code>behind 303</code> con criterio para no pisar trabajo previo.",
-        "Anadir una comprobacion de smoke o un script de validacion minima en <code>AdmiraNext-Team</code> para que la proxima pasada no dependa solo de inspeccion manual."
+        "Separar en commit(s) el rediseño arcade del dashboard y los cambios de inventario/capturas de <code>AdmiraNext-Team</code> para que la revision no mezcle UI con datos operativos.",
+        "Sincronizar con remoto los repos locales mas atrasados, especialmente <code>AdmiraNext-Team</code> y <code>32.-ConsejoAdmiraNextGame</code>, antes de intentar publicar esos cambios.",
+        "Publicar tambien, si procede, el trabajo pendiente de <code>AdmiraGemini</code> y comprobar despues que <code>https://csilvasantin.github.io/diario/</code> sirve esta entrada corregida del <code>15 de julio de 2026</code>."
       ]}
     ]
   },
