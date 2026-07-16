@@ -355,9 +355,9 @@ const entries = [
         "Se revisaron <code>2026-07-16.md</code> e <code>index.html</code>, se sustituyo el bloque vigente del <code>2026-07-16 [Codex]</code> para que describa esta corrida real del cierre y se alineo la UI publica con el mismo contenido."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, y <code>git rev-list --left-right --count HEAD...origin/main</code> confirmo <code>0 0</code> tras <code>git fetch origin main</code>.",
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>; <code>git rev-list --left-right --count HEAD...origin/main</code> confirmo <code>0 0</code>, y <code>git pull --rebase origin main</code> respondio <code>Already up to date.</code> en este cierre.",
         "<code>git log</code> del dia mostro actividad previa real en este repo: <code>1cd3d77 Diario 2026-07-16 [Codex]</code>, <code>577dfaa Actualizar diario 2026-07-16 [Codex]</code>, <code>3f2934b Diario 2026-07-16 [Codex]</code> y <code>2321bac chore: actualizar repos.html 2026-07-16 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-16 00:00'</code> confirmo los rebases y commits locales de hoy sobre la misma fecha, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-16 23:55:50 CEST +0200</code> en esta corrida."
+        "<code>git reflog --date=iso --since='2026-07-16 00:00'</code> confirmo los rebases y commits locales de hoy sobre la misma fecha, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-16 23:56:58 CEST +0200</code> en esta corrida."
       ]},
       { heading: "Avances", items: [
         "La entrada de <code>2026-07-16 [Codex]</code> vuelve a quedar centrada en el cierre literal de esta sesion sobre <code>diario</code>, en lugar de resumir trabajo de otros repos.",
