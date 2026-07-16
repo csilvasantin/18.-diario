@@ -350,36 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad real de hoy en Admirito con <code>git log --since='2026-07-16 00:00'</code> y <code>git status --short</code> sobre los repos con movimiento: <code>admira-next-web</code>, <code>admira-tv</code>, <code>clearchannel-tv</code>, <code>xpaceos</code>, <code>github-csilvasantin/AdmiraNext-Team</code> y <code>github-csilvasantin/AdmiraNext-Team-latest</code>.",
-        "En <code>admira-next-web</code> se encadeno la entrega del portal de presentaciones de CaixaBank: generacion desde el editor de ideas (<code>9bd1568</code>, <code>aef31eb</code>), publicacion de artefactos (<code>31fd2e5</code>, <code>e73c5bd</code>) y ajustes de reproduccion embebida / fullscreen / jobs completados (<code>884a5a5</code>, <code>058a44b</code>, <code>fb6e1f7</code>, <code>9b7bb14</code>).",
-        "En la cadena comercial de Xcaixa se publicaron hoy cambios coordinados entre <code>clearchannel-tv</code> (<code>baa4354</code>, <code>84324e9</code>), <code>xpaceos</code> (<code>00bf37f</code>, <code>8cbb8de</code>, <code>c2bc6f2</code>, <code>5a2b029</code>) y <code>admira-tv</code> (<code>badd39c</code>, <code>4307232</code>, <code>7c6a004</code>, <code>2aa08e8</code>) para sembrar oficinas, corregir duplicados, calibrar fachadas y enlazar el gemelo fotorreal.",
-        "En <code>AdmiraNext-Team</code> quedo trabajo local sin commit: subida de version a <code>0.1.3</code>, modo <code>idle</code>, IP local y comando <code>ssh</code> para <code>macmini</code>, rediseño fuerte de <code>public/app.js</code> + <code>public/styles.css</code> con enfoque tipo &quot;fighter roster&quot; y renovacion de capturas. En <code>AdmiraNext-Team-latest</code> quedo preparado soporte de <code>PORT</code>, aceptacion de <code>idle</code> y endurecimiento del quoting AppleScript sobre SSH."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de <code>cerrar-el-dia</code>, y se contrastaron la rutina canonica en <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-16 00:00' --until='2026-07-16 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-16 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se revisaron <code>2026-07-16.md</code> e <code>index.html</code>, se sustituyo el bloque vigente del <code>2026-07-16 [Codex]</code> para que describa esta corrida real del cierre y se alineo la UI publica con el mismo contenido."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> en <code>/Users/csilvasantin/Claude/diario</code> estaba limpio antes de editar y el cierre actual se ha rehecho sobre <code>origin/main</code> durante el rebase.",
-        "<code>git log --since='2026-07-16 00:00' --until='2026-07-16 23:59:59' --date=iso --pretty=format:'%h %ad %s'</code> confirmo entregas publicadas hoy en <code>admira-next-web</code>, <code>admira-tv</code>, <code>clearchannel-tv</code> y <code>xpaceos</code>, con cierres hasta <code>23:42:33 +0200</code> en <code>admira-tv</code>.",
-        "<code>git diff --stat</code>, <code>git rev-list --left-right --count HEAD...origin/main</code>, <code>node --check public/app.js</code> y <code>JSON.parse</code> sobre <code>data/machines.json</code> confirmaron que <code>AdmiraNext-Team</code> tiene cambios funcionales grandes sin publicar, sigue <code>303</code> commits por detras de <code>origin/main</code>, y que el JavaScript y el JSON tocados hoy siguen siendo sintacticamente validos.",
-        "<code>git diff --stat</code> tambien confirmo que <code>AdmiraNext-Team-latest</code> solo arrastra cambios acotados pero relevantes en <code>src/server.js</code> y <code>src/ssh-exec.js</code>."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, y <code>git rev-list --left-right --count HEAD...origin/main</code> confirmo <code>0 0</code> tras <code>git fetch origin main</code>.",
+        "<code>git log</code> del dia mostro actividad previa real en este repo: <code>1cd3d77 Diario 2026-07-16 [Codex]</code>, <code>577dfaa Actualizar diario 2026-07-16 [Codex]</code>, <code>3f2934b Diario 2026-07-16 [Codex]</code> y <code>2321bac chore: actualizar repos.html 2026-07-16 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-16 00:00'</code> confirmo los rebases y commits locales de hoy sobre la misma fecha, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-16 23:55:50 CEST +0200</code> en esta corrida."
       ]},
       { heading: "Avances", items: [
-        "El frente de presentaciones para CaixaBank quedo funcionalmente cerrado hoy en <code>admira-next-web</code>, pasando de generacion de ideas a publicacion y ajuste final del modo embebido.",
-        "La narrativa comercial de Xcaixa avanzo en paralelo: <code>clearchannel-tv</code> siembra la red de oficinas, <code>xpaceos</code> publica el Xpacio y <code>admira-tv</code> calibra la fachada y el scan de contactos para ventas.",
-        "El workspace deja preparado otro bloque de trabajo pendiente de publicar en <code>AdmiraNext-Team</code>: panel visual nuevo, mejor inventario de conectividad y soporte de estado <code>idle</code> tambien en el backend &quot;latest&quot;."
+        "La entrada de <code>2026-07-16 [Codex]</code> vuelve a quedar centrada en el cierre literal de esta sesion sobre <code>diario</code>, en lugar de resumir trabajo de otros repos.",
+        "<code>index.html</code> queda alineado con <code>2026-07-16.md</code>, de forma que la UI publica pueda mostrar el mismo bloque bajo el filtro <code>Codex</code>.",
+        "El cierre se rehace sobre el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, sin tocar otros clones del diario."
       ]},
       { heading: "Problemas encontrados", items: [
         "<code>agora-checkin codex start</code> no devolvio salida util en esta sesion, asi que el cierre se baso en evidencia de <code>git</code> y del estado actual del workspace.",
-        "<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> estan en estado intermedio: hay cambios claros y utiles, pero todavia no existe commit publicado de hoy que los deje trazables como entrega cerrada.",
-        "La actividad de hoy esta muy repartida entre varios repos, asi que el riesgo principal era escribir un diario demasiado centrado en <code>diario</code> y perder el trabajo real hecho en producto."
+        "La URL de verificacion <code>https://csilvasantin.github.io/diario/</code> responde con <code>301</code> hacia <code>https://www.carlossilva.info/diario/</code>, asi que la comprobacion publica requiere seguir la redireccion y revisar tambien <code>https://csilvasantin.github.io/18.-diario/</code>.",
+        "El contenido vigente al empezar esta corrida no seguia el criterio factual de la rutina, porque el bloque <code>2026-07-16 [Codex]</code> describia otros repos en vez de este cierre de <code>diario</code>."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada ya existente del <code>2026-07-16</code> en vez de duplicarla, porque hoy ya habia un cierre previo en <code>diario</code> y este trabajo consiste en enriquecerlo con contexto real de Admirito.",
-        "Separar explicitamente trabajo publicado de trabajo todavia local: los commits de <code>admira-next-web</code> / <code>admira-tv</code> / <code>clearchannel-tv</code> / <code>xpaceos</code> cuentan como entrega validada; <code>AdmiraNext-Team</code> queda documentado como pendiente.",
-        "Resumir solo hechos comprobables por hash, diff y estado del workspace, sin atribuir validaciones manuales que no aparecen reflejadas en comandos o historial."
+        "Sustituir la entrada existente del <code>2026-07-16 [Codex]</code> en vez de abrir otro bloque nuevo, para mantener un unico fichero por fecha y una unica version activa de esta autoria.",
+        "Registrar solo hechos verificables con comandos ejecutados en esta sesion sobre <code>diario</code>, sin arrastrar resumenes de otros workspaces.",
+        "Tratar como verificacion valida tanto la respuesta HTTP de la URL publica como la presencia del bloque del dia en la pagina final servida."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar y publicar el trabajo pendiente de <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>, sobre todo el nuevo panel visual, el soporte de <code>idle</code> y el quoting remoto de AppleScript.",
-        "Mantener la verificacion cruzada entre <code>clearchannel-tv</code>, <code>xpaceos</code> y <code>admira-tv</code> para que oficinas, catalogo, calibracion y gemelo fotorreal sigan apuntando a los mismos activos.",
-        "Confirmar despues del push del diario que <code>https://csilvasantin.github.io/diario/</code> refleja esta version resumida del <code>16 de julio de 2026</code>."
+        "Hacer <code>git add 2026-07-16.md index.html</code>, crear el commit final <code>Diario 2026-07-16 [Codex]</code> y publicarlo en <code>origin main</code>.",
+        "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y que <code>https://csilvasantin.github.io/18.-diario/</code> muestra esta version del <code>16 de julio de 2026</code>.",
+        "Si GitHub Pages sirve contenido en cache, dejar documentado el desfase exacto y la URL que si responde."
       ]}
     ]
   },
