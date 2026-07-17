@@ -347,6 +347,44 @@ const entries = [
     date: "2026-07-17",
     title: "17 de julio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto la rutina programada <code>actualizar diario</code> en un contenedor efimero de Claude Code sobre el repo <code>csilvasantin/18.-diario</code>, con checkout limpio en <code>/home/user/18.-diario/</code> y trabajo aislado en la rama <code>main-n1ehor</code>.",
+        "Se revisaron <code>CLAUDE.md</code>, <code>CERRAR-EL-DIA.md</code>, <code>2026-07-17.md</code>, <code>2026-07-16.md</code>, <code>index.html</code> y <code>repos.html</code> para contrastar el formato canonico del cierre y no duplicar la fecha ni sobrescribir la entrada <code>Codex</code> ya publicada.",
+        "Se anadio este bloque <code>Claude</code> como segunda entrada del <code>2026-07-17</code> en <code>2026-07-17.md</code> (separada por <code>---</code>) y se replico en el array <code>entries</code> de <code>index.html</code> para que el filtro publico <code>Claude</code> la muestre junto a la <code>Codex</code> del mismo dia."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status</code> devolvio <code>nothing to commit, working tree clean</code> antes de editar, con <code>## main-n1ehor</code> como rama activa y sin cambios locales pendientes.",
+        "<code>git log --since='2026-07-17 00:00' --until='2026-07-17 23:59:59' --date=iso --stat --oneline --all</code> mostro solo commits del autor <code>Codex</code> para hoy (<code>079785c</code>, <code>7478557</code>) y el <code>chore</code> automatico <code>709ae24</code> de <code>repos.html</code>, confirmando que no habia actividad previa de <code>Claude Code</code> en el repo hoy.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-17 21:06:59 UTC +0000</code> en el contenedor, dentro del dia natural europeo objetivo."
+      ]},
+      { heading: "Avances", items: [
+        "<code>2026-07-17.md</code> queda con dos bloques verificados para hoy (<code>Codex</code> + <code>Claude</code>), respetando la regla 1-2-3 del diario de un unico fichero por fecha.",
+        "<code>index.html</code> queda alineado con <code>2026-07-17.md</code>, con la nueva entrada <code>Claude</code> visible bajo el filtro correspondiente sin desplazar la entrada <code>Codex</code> ya publicada.",
+        "La rutina programada queda documentada: se cubre el caso explicito del usuario de que si un dia no hay actividad de <code>Claude Code</code>, se registre expresamente en el diario en vez de dejarlo en silencio."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "El contenedor de esta ejecucion es efimero y no comparte disco con la Mac local; no hubo checkout canonico en <code>/Users/csilvasantin/Claude/diario/</code> disponible, por lo que la publicacion se hace via <code>main-n1ehor</code> y no directamente contra <code>main</code>.",
+        "El repo remoto muestra <code>origin</code> como <code>csilvasantin/18.-diario</code> (con prefijo <code>18.-</code>), no <code>csilvasantin/diario</code>, asi que la URL publica de verificacion valida hoy es <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a>.",
+        "<code>repos.html</code> fue regenerado automaticamente hoy por GitHub Actions (<code>709ae24 chore: actualizar repos.html 2026-07-17 [skip ci]</code>), por lo que esta corrida no lo reescribe manualmente para no colisionar con el bot."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Anadir un unico bloque <code>Claude</code> para el <code>2026-07-17</code> como continuacion del fichero existente en vez de crear una segunda variante para la misma fecha, cumpliendo la regla de un fichero por dia con bloques separados por <code>---</code> por autoria.",
+        "Registrar solo hechos verificables por <code>git</code>, <code>date</code> y el estado real de los ficheros de esta corrida, sin inventar actividad de otros repos.",
+        "Publicar los cambios sobre <code>main-n1ehor</code> (rama asignada en esta sesion) y abrir Pull Request en borrador para que la integracion a <code>main</code> la valide el usuario."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "<code>git add 2026-07-17.md index.html</code>, commit <code>Diario 2026-07-17 [Claude]</code> y <code>git push -u origin main-n1ehor</code>.",
+        "Crear un Pull Request en borrador desde <code>main-n1ehor</code> hacia <code>main</code> con el resumen de esta entrada.",
+        "Tras el merge, verificar que <code>https://csilvasantin.github.io/18.-diario/</code> muestra la nueva entrada <code>Claude</code> bajo el filtro correspondiente para el <code>17 de julio de 2026</code>."
+      ]}
+    ]
+  },
+  {
+    date: "2026-07-17",
+    title: "17 de julio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
