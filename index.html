@@ -350,36 +350,35 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en los repositorios de Admirito dentro de <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin</code>, con foco en <code>AdmiraNext-Team</code> y en los cambios locales aun no publicados.",
-        "En <code>admira-next-web</code> se concentraron los commits del dia: cola multilingue para produccion de presentaciones, panel de control de accesos, telemetria/metricas, inspiracion visual para el generador y materiales en catalan de La Caixa.",
-        "<code>AdmiraNext-Team</code> concentro el trabajo local pendiente: rediseno fuerte de <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> hacia una UI arcade \"player select\", subida de version a <code>0.1.3</code>, ampliacion de <code>data/machines.json</code> con IP local y comando <code>ssh</code> local del Mac Mini, y renovacion de capturas en <code>data/screenshots/</code>.",
-        "Tambien hubo actividad hoy en <code>01.-AdmiraXperience-Game</code>, <code>clearchannel-tv</code>, <code>pixer-worker</code>, <code>admira-studio</code>, <code>pixeria</code>, <code>xpaceos</code> y cambios locales en <code>32.-ConsejoAdmiraNextGame</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria local de <code>cerrar-el-dia</code> y se contrastaron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica en GitHub para seguir la rutina literal.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check pedido por la rutina con <code>git status --short --branch</code>, <code>git log --since='2026-07-17 00:00' --until='2026-07-17 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-17 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se revisaron <code>2026-07-17.md</code> e <code>index.html</code> y se sustituyo el bloque vigente de <code>2026-07-17 [Codex]</code>, que describia otros repos, por este cierre factual de la sesion sobre <code>diario</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>admira-next-web</code> esta limpio y sincronizado con <code>origin/main</code>; el log de hoy muestra una cadena continua de commits sobre presentaciones, control de accesos y localizacion del contenido.",
-        "<code>git log --since='2026-07-17 00:00'</code> confirmo commits reales hoy en <code>01.-AdmiraXperience-Game</code> (<code>0401671</code>, <code>cb9d36c</code>), <code>clearchannel-tv</code> (<code>92c9050</code>, <code>0f8498f</code>, <code>86c2638</code>, <code>14c5ee7</code>), <code>pixer-worker</code> (<code>c242923</code>) y <code>admira-studio</code> (<code>0eb83bb</code>, <code>0a43e2c</code>, <code>d4e893f</code>, <code>e51311f</code>); <code>pixeria</code> y <code>xpaceos</code> tambien registran actividad en <code>main</code>.",
-        "En <code>AdmiraNext-Team</code>, <code>git status --short --branch</code> y <code>git diff --stat</code> confirmaron 8 ficheros modificados y unas <code>1112</code> lineas tocadas, todavia sin commit y con el repo <code>303</code> commits por detras de <code>origin/main</code>.",
-        "<code>node --check public/app.js</code> paso sin errores y <code>JSON.parse</code> valido <code>data/machines.json</code>; <code>32.-ConsejoAdmiraNextGame</code> sigue en <code>neo/ux-topbar-una-fila</code>, <code>behind 169</code>, con cambios trackeados y untracked aun sin consolidar."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el checkout estaba limpio al empezar esta corrida.",
+        "<code>git log</code> del dia mostro actividad previa real en este repo: <code>a516e52 Diario 2026-07-17 [Codex]</code>, <code>079785c Diario 2026-07-17 [Codex]</code>, <code>7478557 Diario 2026-07-17 [Codex]</code> y <code>709ae24 chore: actualizar repos.html 2026-07-17 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-17 00:00'</code> confirmo la secuencia local de commits y el <code>pull --rebase origin main</code> que termino en <code>7478557</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-17 23:57:14 CEST +0200</code> durante este cierre."
       ]},
       { heading: "Avances", items: [
-        "El frente mas productivo del dia fue <code>admira-next-web</code>: el generador de presentaciones gano inspiracion visual y cola multilingue, y el panel de accesos ya expone mejor telemetria y control.",
-        "<code>AdmiraNext-Team</code> avanza hacia una version mas visual y operativa del roster del equipo, con enfoque claro en roles, estado de maquinas y accesos SSH locales.",
-        "El resto del workspace tambien se movio: <code>clearchannel-tv</code> mejoro el tour, <code>pixer-worker</code> rescato mejor la imagen en importaciones Telegram, <code>admira-studio</code> siguio el clon del site y <code>01.-AdmiraXperience-Game</code> corrigio fallos de tube."
+        "La entrada de <code>2026-07-17 [Codex]</code> vuelve a quedar centrada en este cierre literal del repo <code>diario</code>, en lugar de resumir actividad de otros workspaces.",
+        "<code>index.html</code> queda alineado con <code>2026-07-17.md</code> para que la UI publica exponga el mismo contenido bajo el filtro <code>Codex</code>.",
+        "El cierre se mantiene en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, sin tocar otros clones del diario."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> sigue solo en local, mezclado con binarios grandes de capturas y <code>behind 303</code>, asi que no era seguro publicarlo hoy sin integracion previa ni revision visual.",
-        "<code>32.-ConsejoAdmiraNextGame</code> mezcla cambios trackeados con ficheros sueltos, lo que complica distinguir documentacion util de residuos temporales.",
-        "El barrido bruto de archivos recientes del workspace mete ruido por caches y perfiles locales; para este diario fue mas fiable basarse en <code>git log</code>, <code>git status</code> y <code>git diff</code>."
+        "El contenido vigente al empezar esta corrida no seguia la instruccion de registrar solo trabajo real de esta sesion, porque el bloque <code>2026-07-17 [Codex]</code> hablaba de otros repos.",
+        "<code>agora-checkin codex start</code> y <code>agora alive --from Codex --loop</code> no devolvieron salida util en esta sesion, asi que la evidencia operativa del cierre tuvo que basarse en <code>git</code> y en los ficheros del repo.",
+        "La fuente canonica indicada por el usuario redirigio de <code>csilvasantin/diario</code> a <code>csilvasantin/18.-diario</code>, pero el contenido de la rutina coincide con la copia local."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada ya existente del <code>2026-07-17 [Codex]</code> en vez de duplicarla, sustituyendo el texto previo por un resumen factual de trabajo real en repositorios.",
-        "Tomar como fuente operativa tanto los commits publicados como el estado real del workspace con cambios sin publicar, especialmente en <code>AdmiraNext-Team</code>.",
-        "Tratar <code>admira-next-web</code> como el repo con evidencia mas fuerte del dia y dejar <code>AdmiraNext-Team</code> explicitamente marcado como trabajo local en curso, no como entrega cerrada."
+        "Sustituir la entrada existente del <code>2026-07-17 [Codex]</code> en vez de abrir otro bloque nuevo, para mantener una sola fecha y una sola firma activa de esta autoria.",
+        "Registrar solo hechos verificados con comandos ejecutados en este checkout limpio y con el trabajo real de esta sesion.",
+        "Tratar como canonica la rutina mostrada en GitHub tras la redireccion al repo <code>18.-diario</code>, porque coincide con la copia local usada para editar."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Integrar o rebasar <code>AdmiraNext-Team</code> antes de publicar ese rediseno; con <code>behind 303</code> no conviene commitear a ciegas.",
-        "Abrir <code>AdmiraNext-Team</code> en navegador y revisar visualmente el nuevo modo \"player select\" antes de separar UI, datos y capturas en un commit limpio.",
-        "Mantener el ritmo en <code>admira-next-web</code>, pero cerrar el circuito con validacion funcional visible del panel de accesos y del generador multilingue."
+        "Hacer <code>git add 2026-07-17.md index.html</code>, crear el commit final <code>Diario 2026-07-17 [Codex]</code> y publicarlo en <code>origin main</code>.",
+        "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y que la pagina publica servida contiene esta version del <code>17 de julio de 2026</code>.",
+        "Si GitHub Pages sirve una version en cache o no refleja el commit nuevo, dejar documentado el desfase exacto."
       ]}
     ]
   },
