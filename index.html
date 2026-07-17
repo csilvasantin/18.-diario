@@ -350,36 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en los repositorios de Admirito, con foco en <code>admira-next-web</code>, <code>github-csilvasantin/AdmiraNext-Team</code>, <code>32.-ConsejoAdmiraNextGame</code>, <code>github-csilvasantin/pixeria</code>, <code>github-csilvasantin/clearchannel-tv</code> y <code>xpaceos</code>.",
-        "En <code>admira-next-web</code> se concentraron los commits del dia: cola multilingue para produccion de presentaciones, panel de control de accesos, telemetria/metricas, inspiracion visual para el generador y materiales en catalan de La Caixa, incluyendo PDF, PPTX, audio, infografia y ajustes del video final.",
-        "En <code>AdmiraNext-Team</code> quedo trabajo local importante sin publicar: rediseño del panel a una estetica arcade tipo \"player select\", subida de version a <code>0.1.3</code>, nuevas IPs/comandos SSH locales en <code>data/machines.json</code> y renovacion de capturas de maquinas.",
-        "En el workspace tambien aparecieron cambios locales en <code>32.-ConsejoAdmiraNextGame</code> para documentar la lanzadera de <code>admira.tv/apps</code>, mientras que <code>pixeria</code>, <code>clearchannel-tv</code> y <code>xpaceos</code> si registraron commits reales hoy en <code>main</code>."
+        "Se reviso la actividad de hoy en los repositorios de Admirito dentro de <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin</code>, con foco en <code>AdmiraNext-Team</code> y en los cambios locales aun no publicados.",
+        "En <code>admira-next-web</code> se concentraron los commits del dia: cola multilingue para produccion de presentaciones, panel de control de accesos, telemetria/metricas, inspiracion visual para el generador y materiales en catalan de La Caixa.",
+        "<code>AdmiraNext-Team</code> concentro el trabajo local pendiente: rediseno fuerte de <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> hacia una UI arcade \"player select\", subida de version a <code>0.1.3</code>, ampliacion de <code>data/machines.json</code> con IP local y comando <code>ssh</code> local del Mac Mini, y renovacion de capturas en <code>data/screenshots/</code>.",
+        "Tambien hubo actividad hoy en <code>01.-AdmiraXperience-Game</code>, <code>clearchannel-tv</code>, <code>pixer-worker</code>, <code>admira-studio</code>, <code>pixeria</code>, <code>xpaceos</code> y cambios locales en <code>32.-ConsejoAdmiraNextGame</code>."
       ]},
       { heading: "Que se valido", items: [
         "<code>admira-next-web</code> esta limpio y sincronizado con <code>origin/main</code>; el log de hoy muestra una cadena continua de commits sobre presentaciones, control de accesos y localizacion del contenido.",
-        "<code>pixeria</code>, <code>clearchannel-tv</code> y <code>xpaceos</code> tambien tienen commits de hoy verificables en <code>main</code>, centrados en navegacion/layout, recorridos del mapa y ajustes de <code>admira-xp</code>, respectivamente.",
-        "<code>AdmiraNext-Team</code> no tiene commits fechados hoy, pero <code>git status --short --branch</code> confirma una tanda local de 8 ficheros modificados y el branch <code>main</code> va <code>behind 303</code>, asi que el rediseño visto hoy sigue pendiente de integrar/publicar.",
-        "<code>32.-ConsejoAdmiraNextGame</code> sigue en <code>neo/ux-topbar-una-fila</code>, <code>behind 169</code> respecto a <code>origin/main</code>, con dos ficheros trackeados modificados y dos untracked, por lo que la documentacion nueva sobre <code>admira.tv</code> aun no esta consolidada."
+        "<code>git log --since='2026-07-17 00:00'</code> confirmo commits reales hoy en <code>01.-AdmiraXperience-Game</code> (<code>0401671</code>, <code>cb9d36c</code>), <code>clearchannel-tv</code> (<code>92c9050</code>, <code>0f8498f</code>, <code>86c2638</code>, <code>14c5ee7</code>), <code>pixer-worker</code> (<code>c242923</code>) y <code>admira-studio</code> (<code>0eb83bb</code>, <code>0a43e2c</code>, <code>d4e893f</code>, <code>e51311f</code>); <code>pixeria</code> y <code>xpaceos</code> tambien registran actividad en <code>main</code>.",
+        "En <code>AdmiraNext-Team</code>, <code>git status --short --branch</code> y <code>git diff --stat</code> confirmaron 8 ficheros modificados y unas <code>1112</code> lineas tocadas, todavia sin commit y con el repo <code>303</code> commits por detras de <code>origin/main</code>.",
+        "<code>node --check public/app.js</code> paso sin errores y <code>JSON.parse</code> valido <code>data/machines.json</code>; <code>32.-ConsejoAdmiraNextGame</code> sigue en <code>neo/ux-topbar-una-fila</code>, <code>behind 169</code>, con cambios trackeados y untracked aun sin consolidar."
       ]},
       { heading: "Avances", items: [
-        "El frente mas productivo del dia fue <code>admira-next-web</code>: el generador de presentaciones gano inspiracion visual y cola multilingue, el panel de accesos ya expone metricas/eventos y la rama de La Caixa quedo mucho mas completa para demos y entrega.",
-        "<code>AdmiraNext-Team</code> avanza en paralelo hacia una version mas visual y operativa del roster del equipo, con enfoque mas claro en roles, estado de maquinas y accesos SSH.",
-        "En el resto del workspace se siguio puliendo producto visible: <code>pixeria</code> ajusto navegacion/encuadre, <code>clearchannel-tv</code> mejoro el tour de la red y <code>xpaceos</code> retoco experiencia y automatismos del gemelo/pared."
+        "El frente mas productivo del dia fue <code>admira-next-web</code>: el generador de presentaciones gano inspiracion visual y cola multilingue, y el panel de accesos ya expone mejor telemetria y control.",
+        "<code>AdmiraNext-Team</code> avanza hacia una version mas visual y operativa del roster del equipo, con enfoque claro en roles, estado de maquinas y accesos SSH locales.",
+        "El resto del workspace tambien se movio: <code>clearchannel-tv</code> mejoro el tour, <code>pixer-worker</code> rescato mejor la imagen en importaciones Telegram, <code>admira-studio</code> siguio el clon del site y <code>01.-AdmiraXperience-Game</code> corrigio fallos de tube."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> esta muy atrasado frente a remoto y con cambios locales grandes, asi que hoy no era seguro asumir que estaba listo para commit o despliegue sin una integracion previa.",
-        "<code>32.-ConsejoAdmiraNextGame</code> mezcla cambios trackeados con ficheros sueltos (<code>.codex-write-test</code>, <code>council-api.py.new</code>), lo que complica distinguir trabajo util de residuos temporales.",
-        "El barrido bruto de archivos recientes del workspace mete bastante ruido por caches/perfiles locales; para este diario fue mas fiable basarse en <code>git log</code>, <code>git status</code> y <code>git diff</code>."
+        "<code>AdmiraNext-Team</code> sigue solo en local, mezclado con binarios grandes de capturas y <code>behind 303</code>, asi que no era seguro publicarlo hoy sin integracion previa ni revision visual.",
+        "<code>32.-ConsejoAdmiraNextGame</code> mezcla cambios trackeados con ficheros sueltos, lo que complica distinguir documentacion util de residuos temporales.",
+        "El barrido bruto de archivos recientes del workspace mete ruido por caches y perfiles locales; para este diario fue mas fiable basarse en <code>git log</code>, <code>git status</code> y <code>git diff</code>."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada ya existente del <code>2026-07-17 [Codex]</code> en vez de duplicarla, sustituyendo el texto previo por un resumen de trabajo real en repositorios.",
-        "Reflejar solo hechos verificables: commits donde hubo commits y trabajo local pendiente donde solo habia <code>status</code>/<code>diff</code>, sin inventar despliegues ni validaciones no vistas.",
+        "Actualizar la entrada ya existente del <code>2026-07-17 [Codex]</code> en vez de duplicarla, sustituyendo el texto previo por un resumen factual de trabajo real en repositorios.",
+        "Tomar como fuente operativa tanto los commits publicados como el estado real del workspace con cambios sin publicar, especialmente en <code>AdmiraNext-Team</code>.",
         "Tratar <code>admira-next-web</code> como el repo con evidencia mas fuerte del dia y dejar <code>AdmiraNext-Team</code> explicitamente marcado como trabajo local en curso, no como entrega cerrada."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Integrar o rebasar <code>AdmiraNext-Team</code> antes de publicar ese rediseño; con <code>behind 303</code> el siguiente paso razonable no es commitear a ciegas, sino reconciliar primero con remoto.",
-        "Limpiar temporales y decidir si la documentacion de <code>32.-ConsejoAdmiraNextGame</code> se conserva, se mueve o se descarta antes de otra ronda de trabajo.",
-        "Mantener el ritmo en <code>admira-next-web</code> pero cerrar el circuito con validacion funcional visible del panel de accesos y del generador multilingue, no solo con commits."
+        "Integrar o rebasar <code>AdmiraNext-Team</code> antes de publicar ese rediseno; con <code>behind 303</code> no conviene commitear a ciegas.",
+        "Abrir <code>AdmiraNext-Team</code> en navegador y revisar visualmente el nuevo modo \"player select\" antes de separar UI, datos y capturas en un commit limpio.",
+        "Mantener el ritmo en <code>admira-next-web</code>, pero cerrar el circuito con validacion funcional visible del panel de accesos y del generador multilingue."
       ]}
     ]
   },
