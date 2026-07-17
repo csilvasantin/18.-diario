@@ -344,6 +344,44 @@
 <script>
 const entries = [
   {
+    date: "2026-07-17",
+    title: "17 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia activa con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se reviso la memoria de la automatizacion <code>actualizar-diario</code>, el estado limpio de <code>/Users/csilvasantin/Claude/diario/</code> y el patron reciente de <code>2026-07-16.md</code>, <code>2026-07-15.md</code> e <code>index.html</code>.",
+        "Se creo <code>2026-07-17.md</code> y se anadio su bloque equivalente en <code>index.html</code> para dejar una entrada breve de hoy con resumen, decisiones, avances, bloqueos y siguientes pasos."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code> al empezar, sin cambios locales en el checkout canonico del diario.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-17 21:30:55 CEST +0200</code> durante esta actualizacion.",
+        "La fecha <code>2026-07-17</code> no existia aun en el repo, asi que correspondia crear una entrada nueva en vez de sustituir una previa."
+      ]},
+      { heading: "Avances", items: [
+        "El diario vuelve a quedar actualizado tambien para hoy, manteniendo un solo fichero Markdown por fecha.",
+        "<code>index.html</code> queda alineado con <code>2026-07-17.md</code> para que la web publica pueda mostrar el mismo resumen bajo el filtro <code>Codex</code>.",
+        "La entrada de hoy queda centrada en esta propia corrida de actualizacion, sin arrastrar contenido de otros repos."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "La memoria de esta automatizacion no tenia contenido previo util porque es la primera ejecucion (<code>Last run: never</code>).",
+        "<code>agora-checkin codex start</code> no devolvio salida visible en esta sesion, aunque la identidad y la presencia de Oraculo si pudieron confirmarse despues.",
+        "La verificacion publica del diario puede tardar unos minutos en reflejar el push por la propagacion habitual de GitHub Pages."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Crear una entrada nueva del <code>2026-07-17 [Codex]</code> en lugar de reescribir otro dia, porque hoy aun no habia bloque propio.",
+        "Mantener el contenido breve y operativo, priorizando hechos verificables de esta sesion sobre el repo <code>diario</code>.",
+        "Publicar desde el checkout limpio <code>/Users/csilvasantin/Claude/diario/</code>, tal como marcan las instrucciones del proyecto."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add 2026-07-17.md index.html</code>, crear el commit <code>Diario 2026-07-17 [Codex]</code> y publicarlo en <code>origin main</code>.",
+        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y que la pagina final acaba mostrando esta entrada del <code>17 de julio de 2026</code>.",
+        "Dejar constancia del resultado en la memoria de la automatizacion y en AgoraMatrix con la URL publica."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-16",
     title: "16 de julio de 2026",
     member: "Carlos Silva",
