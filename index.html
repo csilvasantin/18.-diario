@@ -350,36 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad de Oraculo con <code>agora whoami --from Codex</code> y se comprobo que <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> estaban vacios antes de revisar repos.",
-        "Se audito el trabajo local de hoy en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, donde el frente principal sigue abierto sin commit: <code>public/index.html</code>, <code>public/styles.css</code> y <code>public/app.js</code> pasan de un panel simple a una UI arcade tipo player select, <code>package.json</code> sube a <code>0.1.3</code>, <code>data/machines.json</code> anade acceso local SSH al Mac mini y se renuevan tres capturas en <code>data/screenshots/</code>.",
-        "Se contrastaron tambien otros cambios recientes del workspace: en <code>AdmiraNext-Team-latest</code> hay endurecimiento del backend para aceptar <code>idle</code>, usar <code>PORT</code> configurable y construir los <code>osascript</code> remotos con quoting centralizado; en <code>csilvasantin.github.io</code> aparecen ampliaciones de las paginas de <code>codex/</code> y <code>yarig-ai/</code>, incluida una pagina nueva de integracion con Telegram y consejeros.",
-        "Se actualizo esta entrada <code>2026-07-18.md</code> y su reflejo en <code>index.html</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, sustituyendo la nota operativa previa por un resumen real del trabajo detectado hoy."
+        "Se ejecuto la rutina en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo la copia local <code>CERRAR-EL-DIA.md</code> y comprobando la identidad de Oraculo con <code>agora whoami --from Codex</code>.",
+        "Se hizo el pre-check literal pedido por la rutina con <code>git status --short --branch</code>, <code>git log --since='2026-07-18 00:00' --until='2026-07-18 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-18 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se reescribio esta entrada <code>2026-07-18.md</code> y el bloque correspondiente de <code>index.html</code> para que el cierre del dia describa solo esta sesion real sobre el repo <code>diario</code>."
       ]},
       { heading: "Que se valido", items: [
         "<code>agora tasks --from Codex --peek</code> devolvio <code>(sin tareas para Codex·gmail)</code> y <code>agora inbox --from Codex --peek</code> devolvio <code>(buzon vacio para Codex·gmail)</code>.",
-        "<code>git -C .../AdmiraNext-Team diff --stat</code> mostro <code>1112 insertions</code> y <code>73 deletions</code> repartidas en ocho ficheros, confirmando que hoy hubo una remodelacion visual amplia pero aun local.",
-        "<code>node --check public/app.js</code> en <code>AdmiraNext-Team</code> paso sin errores y <code>node --input-type=module -e \"import('./src/server.js')\"</code> devolvio <code>server-import-ok</code>, asi que al menos la sintaxis del frontend cambiado y la carga del servidor siguen bien.",
-        "<code>package.json</code> de <code>AdmiraNext-Team</code> solo expone <code>npm start</code>, asi que no hay suite automatizada de tests para validar comportamiento mas alla de comprobaciones basicas de arranque y lectura de diffs."
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, confirmando que el checkout estaba limpio antes de editar.",
+        "<code>git rev-parse HEAD</code> y <code>git rev-parse origin/main</code> devolvieron el mismo commit <code>a5d53789c1b6f06a1ddb5a8d656918521e809aa4</code>, y <code>git log</code> del dia confirmo actividad real previa en este repo con <code>c46b4e2</code>, <code>fe70810</code>, <code>790ea32</code> y <code>a5d5378</code>, todos firmados <code>[Codex]</code>."
       ]},
       { heading: "Avances", items: [
-        "Queda identificado con claridad que el trabajo principal del dia es la evolucion de <code>AdmiraNext-Team</code> hacia una presentacion mas dramatica y orientada a seleccion de miembros, no un simple retoque menor del panel.",
-        "<code>AdmiraNext-Team-latest</code> refleja en paralelo un refuerzo tecnico del control remoto: estados <code>idle</code>, quoting mas robusto para AppleScript via SSH y configuracion de puerto por entorno.",
-        "El diario del <code>18 de julio de 2026</code> deja de ser una entrada de arranque y pasa a resumir hechos verificables del workspace real, con <code>index.html</code> sincronizado para mostrarlos bajo el filtro <code>Codex</code>."
+        "La fecha <code>2026-07-18</code> sigue concentrada en un unico fichero Markdown firmado <code>[Codex]</code>, sin abrir un segundo cierre para el mismo dia.",
+        "<code>index.html</code> queda alineado con <code>2026-07-18.md</code>, de modo que la UI publica pueda mostrar este cierre corregido bajo el filtro <code>Codex</code>.",
+        "El cierre del dia vuelve a quedar centrado en hechos verificables del repo <code>diario</code> y de esta sesion, sin arrastrar resumenes de otros workspaces."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El frente principal de <code>AdmiraNext-Team</code> sigue sin commit ni despliegue asociados, asi que todavia no hay una version publicada que permita validar visualmente si la direccion arcade debe quedar como canonica.",
-        "No hay tests automatizados en <code>AdmiraNext-Team</code>; la validacion de hoy queda limitada a diff, sintaxis y carga basica del servidor.",
-        "<code>agora-checkin codex start</code> no devolvio salida util en esta sesion, aunque <code>agora whoami</code>, <code>tasks</code> e <code>inbox</code> si permitieron comprobar el estado operativo de Oraculo."
+        "La entrada vigente al empezar esta corrida no seguia la rutina literal, porque describia actividad de otros repos en vez de este cierre factual del repo <code>diario</code>.",
+        "<code>agora-checkin codex start</code> y <code>agora alive --from Codex --loop --every 60</code> no devolvieron salida util en esta sesion, asi que la evidencia operativa quedo apoyada en <code>agora whoami</code>, <code>tasks</code>, <code>inbox</code> y <code>git</code>.",
+        "El <code>git reflog</code> confirma varios rebases sobre el cierre de hoy, asi que era necesario revisar el historial antes de publicar otra actualizacion para no duplicar ni desalinear la fecha."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada ya existente del <code>2026-07-18</code> en vez de duplicarla, para mantener una sola fecha y una sola firma <code>Codex</code> en el diario.",
-        "Priorizar en el resumen el trabajo no publicado de <code>AdmiraNext-Team</code> y usar <code>AdmiraNext-Team-latest</code> mas <code>csilvasantin.github.io</code> solo como contexto secundario del workspace.",
-        "No afirmar despliegues ni validaciones visuales finales que hoy no constan; dejar solo evidencia de cambios locales y comprobaciones realmente ejecutadas."
+        "Sustituir la entrada vigente del <code>2026-07-18 [Codex]</code> en vez de anadir otro bloque, para mantener una sola version activa de esta autoria en la fecha.",
+        "Registrar solo hechos verificados con <code>git</code> y con comandos ejecutados en esta sesion, sin resumir trabajo de otros repos.",
+        "Mantener la firma <code>[Codex]</code> en el titulo y preparar la publicacion desde <code>main</code> hacia <code>origin/main</code>, como exige la rutina."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Abrir y revisar visualmente <code>AdmiraNext-Team</code> en navegador para decidir si la capa player select arcade queda como UI definitiva o si necesita simplificacion antes del commit.",
-        "Consolidar con commit los cambios de <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> cuando quede clara la direccion visual y funcional, incluyendo una comprobacion manual del flujo de estados y del control remoto.",
-        "Publicar esta actualizacion del diario en <code>origin/main</code> y comprobar despues la URL publica <code>https://csilvasantin.github.io/diario/</code>."
+        "Hacer <code>git add 2026-07-18.md index.html</code>, crear el commit final <code>Diario 2026-07-18 [Codex]</code> y publicarlo en <code>origin/main</code>.",
+        "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del <code>18 de julio de 2026</code>.",
+        "Reportar al usuario la URL publica del diario y cualquier bloqueo real de red, auth, dirty worktree o publicacion si apareciera."
       ]}
     ]
   },
