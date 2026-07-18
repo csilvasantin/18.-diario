@@ -350,34 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en los repositorios de Admirito, con foco en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> y en los clones alternativos de <code>AdmiraNext-Team</code>.",
-        "En <code>AdmiraNext-Team</code> se encontraron cambios locales sin commit en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code> orientados a control remoto de energia para el dashboard del equipo.",
-        "El diff de <code>src/server.js</code> anade un endpoint <code>POST /api/machines/:id/power</code> para acciones <code>sleep</code> y <code>wake</code>, y <code>src/ssh-exec.js</code> incorpora <code>sleepMachine</code>, <code>wakeMachine</code> y una tabla <code>WOL_MACS</code> para Wake-on-LAN.",
-        "<code>data/machines.json</code> se actualizo con nuevos <code>lastSeen</code>, estados <code>offline</code> y notas <code>Sleep enviado desde dashboard</code>, ademas de registrar la MAC de <code>admira-macbookpronegro14</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad de Oraculo con <code>agora whoami --from Codex</code> y se comprobo que <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> estaban vacios antes de revisar repos.",
+        "Se audito el trabajo local de hoy en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, donde el frente principal sigue abierto sin commit: <code>public/index.html</code>, <code>public/styles.css</code> y <code>public/app.js</code> pasan de un panel simple a una UI arcade tipo player select, <code>package.json</code> sube a <code>0.1.3</code>, <code>data/machines.json</code> anade acceso local SSH al Mac mini y se renuevan tres capturas en <code>data/screenshots/</code>.",
+        "Se contrastaron tambien otros cambios recientes del workspace: en <code>AdmiraNext-Team-latest</code> hay endurecimiento del backend para aceptar <code>idle</code>, usar <code>PORT</code> configurable y construir los <code>osascript</code> remotos con quoting centralizado; en <code>csilvasantin.github.io</code> aparecen ampliaciones de las paginas de <code>codex/</code> y <code>yarig-ai/</code>, incluida una pagina nueva de integracion con Telegram y consejeros.",
+        "Se actualizo esta entrada <code>2026-07-18.md</code> y su reflejo en <code>index.html</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, sustituyendo la nota operativa previa por un resumen real del trabajo detectado hoy."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git -C /Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team status --short --branch</code> devolvio <code>## main...origin/main</code> con tres ficheros modificados y sin commit publicado hoy en ese clone.",
-        "<code>git log --since='2026-07-18 00:00' --until='2026-07-18 23:59:59' --stat --oneline --all</code> no mostro commits de hoy en los clones revisados de <code>AdmiraNext-Team</code>, asi que el trabajo visible sigue siendo local.",
-        "El diff confirma que <code>sleepMachine</code> usa <code>pmset displaysleepnow</code> para mantener la conectividad remota y que <code>wakeMachine</code> envia magic packets por broadcast con <code>python3</code>.",
-        "Se comprobo que los otros clones inspeccionados (<code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code>, <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/admirito/AdmiraNext-Team</code>) no tienen cambios locales ni actividad nueva de hoy."
+        "<code>agora tasks --from Codex --peek</code> devolvio <code>(sin tareas para Codex·gmail)</code> y <code>agora inbox --from Codex --peek</code> devolvio <code>(buzon vacio para Codex·gmail)</code>.",
+        "<code>git -C .../AdmiraNext-Team diff --stat</code> mostro <code>1112 insertions</code> y <code>73 deletions</code> repartidas en ocho ficheros, confirmando que hoy hubo una remodelacion visual amplia pero aun local.",
+        "<code>node --check public/app.js</code> en <code>AdmiraNext-Team</code> paso sin errores y <code>node --input-type=module -e \"import('./src/server.js')\"</code> devolvio <code>server-import-ok</code>, asi que al menos la sintaxis del frontend cambiado y la carga del servidor siguen bien.",
+        "<code>package.json</code> de <code>AdmiraNext-Team</code> solo expone <code>npm start</code>, asi que no hay suite automatizada de tests para validar comportamiento mas alla de comprobaciones basicas de arranque y lectura de diffs."
       ]},
       { heading: "Avances", items: [
-        "Queda perfilado un flujo de sleep/wake para maquinas del equipo directamente desde el backend de <code>AdmiraNext-Team</code>.",
-        "La configuracion de maquinas ya refleja mejor el estado operativo de varios equipos tras pruebas de energia y conectividad."
+        "Queda identificado con claridad que el trabajo principal del dia es la evolucion de <code>AdmiraNext-Team</code> hacia una presentacion mas dramatica y orientada a seleccion de miembros, no un simple retoque menor del panel.",
+        "<code>AdmiraNext-Team-latest</code> refleja en paralelo un refuerzo tecnico del control remoto: estados <code>idle</code>, quoting mas robusto para AppleScript via SSH y configuracion de puerto por entorno.",
+        "El diario del <code>18 de julio de 2026</code> deja de ser una entrada de arranque y pasa a resumir hechos verificables del workspace real, con <code>index.html</code> sincronizado para mostrarlos bajo el filtro <code>Codex</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>src/server.js</code> contiene dos implementaciones distintas del mismo endpoint <code>/api/machines/:id/power</code>; la segunda queda practicamente muerta porque la primera responde antes.",
-        "No hay commits de hoy en <code>AdmiraNext-Team</code>, asi que parte del trabajo aun no deja una traza compartible fuera del diff local.",
-        "Varias maquinas pasan a <code>offline</code> en <code>data/machines.json</code>, lo que sugiere que la sincronizacion de estado todavia depende de pruebas manuales o incompletas."
+        "El frente principal de <code>AdmiraNext-Team</code> sigue sin commit ni despliegue asociados, asi que todavia no hay una version publicada que permita validar visualmente si la direccion arcade debe quedar como canonica.",
+        "No hay tests automatizados en <code>AdmiraNext-Team</code>; la validacion de hoy queda limitada a diff, sintaxis y carga basica del servidor.",
+        "<code>agora-checkin codex start</code> no devolvio salida util en esta sesion, aunque <code>agora whoami</code>, <code>tasks</code> e <code>inbox</code> si permitieron comprobar el estado operativo de Oraculo."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada existente del <code>2026-07-18</code> en vez de duplicarla, y centrarla en evidencia real de <code>AdmiraNext-Team</code> y del workspace.",
-        "Registrar como decision tecnica observable el uso de <code>displaysleepnow</code> en lugar de <code>sleepnow</code> para no perder acceso remoto tras poner un equipo en reposo."
+        "Actualizar la entrada ya existente del <code>2026-07-18</code> en vez de duplicarla, para mantener una sola fecha y una sola firma <code>Codex</code> en el diario.",
+        "Priorizar en el resumen el trabajo no publicado de <code>AdmiraNext-Team</code> y usar <code>AdmiraNext-Team-latest</code> mas <code>csilvasantin.github.io</code> solo como contexto secundario del workspace.",
+        "No afirmar despliegues ni validaciones visuales finales que hoy no constan; dejar solo evidencia de cambios locales y comprobaciones realmente ejecutadas."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Unificar el endpoint de energia en <code>src/server.js</code> para dejar una sola ruta y un solo criterio de respuesta.",
-        "Probar de extremo a extremo los flujos <code>sleep</code> y <code>wake</code> desde el dashboard sobre una maquina no critica antes de publicar commit.",
-        "Si las pruebas salen bien, consolidar estos cambios en un commit y dejar trazabilidad publica del comportamiento esperado."
+        "Abrir y revisar visualmente <code>AdmiraNext-Team</code> en navegador para decidir si la capa player select arcade queda como UI definitiva o si necesita simplificacion antes del commit.",
+        "Consolidar con commit los cambios de <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> cuando quede clara la direccion visual y funcional, incluyendo una comprobacion manual del flujo de estados y del control remoto.",
+        "Publicar esta actualizacion del diario en <code>origin/main</code> y comprobar despues la URL publica <code>https://csilvasantin.github.io/diario/</code>."
       ]}
     ]
   },
