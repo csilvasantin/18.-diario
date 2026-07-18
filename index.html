@@ -350,33 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> al arrancar la sesion y se dejo presencia periodica con <code>agora alive --from Codex --loop</code>.",
-        "Se confirmo la identidad de Oraculo con <code>agora whoami --from Codex</code>, se revisaron <code>tasks</code> e <code>inbox</code>, sin mensajes pendientes, y en el checkout canonico de <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check de hoy con <code>git status --short --branch</code>, <code>git log --since='2026-07-18 00:00' --until='2026-07-18 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-18 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Esta automatizacion leyo la memoria <code>actualizar-diario-2</code> y la guia operativa del repo en <code>README.md</code>, y en el worktree de <code>/Users/csilvasantin/.codex/worktrees/b0d6/diario</code> reviso <code>git status --short --branch</code>, <code>git remote -v</code>, <code>git branch -a --contains HEAD</code> y <code>git log --oneline -1 --decorate</code> antes de editar.",
-        "Se creo la entrada <code>2026-07-18.md</code>, se anadio <code>2026-07-18 [Codex]</code> en <code>index.html</code> y despues se consolido todo en una sola version del dia para mantener una unica entrada por fecha."
+        "Se reviso la actividad de hoy en los repositorios de Admirito, con foco en <code>/Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team</code> y en los clones alternativos de <code>AdmiraNext-Team</code>.",
+        "En <code>AdmiraNext-Team</code> se encontraron cambios locales sin commit en <code>src/server.js</code>, <code>src/ssh-exec.js</code> y <code>data/machines.json</code> orientados a control remoto de energia para el dashboard del equipo.",
+        "El diff de <code>src/server.js</code> anade un endpoint <code>POST /api/machines/:id/power</code> para acciones <code>sleep</code> y <code>wake</code>, y <code>src/ssh-exec.js</code> incorpora <code>sleepMachine</code>, <code>wakeMachine</code> y una tabla <code>WOL_MACS</code> para Wake-on-LAN.",
+        "<code>data/machines.json</code> se actualizo con nuevos <code>lastSeen</code>, estados <code>offline</code> y notas <code>Sleep enviado desde dashboard</code>, ademas de registrar la MAC de <code>admira-macbookpronegro14</code>."
       ]},
       { heading: "Que se valido", items: [
-        "En el checkout canonico, <code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el repo estaba limpio al empezar la primera sesion de hoy.",
-        "En este worktree, <code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, sin cambios locales al empezar, y <code>git log --oneline -1 --decorate</code> dejaba <code>304d0ef (HEAD, origin/main, origin/HEAD, diario-2026-07-17-update) Actualizar diario 2026-07-17 [Codex]</code>.",
-        "<code>git log</code> y <code>git reflog</code> del <code>2026-07-18</code> solo mostraban actividad de cierre pasada la medianoche sobre <code>2026-07-17</code> (<code>36ab1f0</code> y <code>c0a40e9</code>) antes de crear la fecha nueva, y <code>rg -n \"2026-07-18|18 de julio de 2026\" 2026-07-18.md index.html repos.html || true</code> confirmo al principio de esta corrida que no existia aun el fichero local de hoy.",
-        "<code>git remote -v</code> confirmo el remoto <code>https://github.com/csilvasantin/diario.git</code>, y <code>README.md</code> confirma que <code>index.html</code> es la UI viva del diario y que las entradas de Codex deben llevar <code>author: \"Codex\"</code>."
+        "<code>git -C /Users/csilvasantin/AdmiraNext-Team/AdmiraNext-Team status --short --branch</code> devolvio <code>## main...origin/main</code> con tres ficheros modificados y sin commit publicado hoy en ese clone.",
+        "<code>git log --since='2026-07-18 00:00' --until='2026-07-18 23:59:59' --stat --oneline --all</code> no mostro commits de hoy en los clones revisados de <code>AdmiraNext-Team</code>, asi que el trabajo visible sigue siendo local.",
+        "El diff confirma que <code>sleepMachine</code> usa <code>pmset displaysleepnow</code> para mantener la conectividad remota y que <code>wakeMachine</code> envia magic packets por broadcast con <code>python3</code>.",
+        "Se comprobo que los otros clones inspeccionados (<code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code>, <code>/Users/csilvasantin/Claude/AdmiraNext-Team</code> y <code>/Users/csilvasantin/admirito/AdmiraNext-Team</code>) no tienen cambios locales ni actividad nueva de hoy."
       ]},
       { heading: "Avances", items: [
-        "El diario queda con una unica entrada <code>2026-07-18 [Codex]</code> registrada en Markdown y en la UI publica.",
-        "La evidencia del dia queda limitada al repo <code>diario</code>, a AgoraMatrix y a comandos realmente ejecutados en las dos sesiones verificadas de hoy."
+        "Queda perfilado un flujo de sleep/wake para maquinas del equipo directamente desde el backend de <code>AdmiraNext-Team</code>.",
+        "La configuracion de maquinas ya refleja mejor el estado operativo de varios equipos tras pruebas de energia y conectividad."
       ]},
       { heading: "Problemas encontrados", items: [
-        "La fecha <code>2026-07-18</code> aun no estaba registrada al empezar, asi que faltaba dejar constancia operativa de hoy.",
-        "Este worktree arranco en <code>detached HEAD</code>, asi que convino verificar primero que <code>HEAD</code> coincidia con <code>origin/main</code> antes de preparar el cierre.",
-        "Hubo pushes concurrentes sobre <code>origin/main</code> mientras se hacia esta automatizacion, lo que obligo a rebasar y consolidar la entrada de hoy sin duplicarla."
+        "<code>src/server.js</code> contiene dos implementaciones distintas del mismo endpoint <code>/api/machines/:id/power</code>; la segunda queda practicamente muerta porque la primera responde antes.",
+        "No hay commits de hoy en <code>AdmiraNext-Team</code>, asi que parte del trabajo aun no deja una traza compartible fuera del diff local.",
+        "Varias maquinas pasan a <code>offline</code> en <code>data/machines.json</code>, lo que sugiere que la sincronizacion de estado todavia depende de pruebas manuales o incompletas."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada para <code>2026-07-18</code>, fusionando la sesion ya publicada y esta automatizacion en vez de dejar dos versiones compitiendo.",
-        "Registrar solo hechos comprobados en el repo <code>diario</code>, en AgoraMatrix y en esta automatizacion, sin resumir actividad externa no sustentada por comandos reales aqui."
+        "Actualizar la entrada existente del <code>2026-07-18</code> en vez de duplicarla, y centrarla en evidencia real de <code>AdmiraNext-Team</code> y del workspace.",
+        "Registrar como decision tecnica observable el uso de <code>displaysleepnow</code> en lugar de <code>sleepnow</code> para no perder acceso remoto tras poner un equipo en reposo."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Terminar el rebase, publicar la version consolidada en <code>origin main</code> y verificar despues que <code>https://csilvasantin.github.io/diario/</code> sigue respondiendo.",
-        "Confirmar que la novedad del <code>18 de julio de 2026 [Codex]</code> queda visible en la publicacion publica sin abrir una segunda entrada para la misma fecha."
+        "Unificar el endpoint de energia en <code>src/server.js</code> para dejar una sola ruta y un solo criterio de respuesta.",
+        "Probar de extremo a extremo los flujos <code>sleep</code> y <code>wake</code> desde el dashboard sobre una maquina no critica antes de publicar commit.",
+        "Si las pruebas salen bien, consolidar estos cambios en un commit y dejar trazabilidad publica del comportamiento esperado."
       ]}
     ]
   },
