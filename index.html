@@ -344,6 +344,40 @@
 <script>
 const entries = [
   {
+    date: "2026-07-18",
+    title: "18 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad de Oraculo con <code>agora whoami --from Codex</code> y se revisaron <code>tasks</code> e <code>inbox</code>, sin mensajes pendientes.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check de hoy con <code>git status --short --branch</code>, <code>git log --since='2026-07-18 00:00' --until='2026-07-18 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-18 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se creo <code>2026-07-18.md</code> y se actualizo <code>index.html</code> para reflejar el resumen de hoy en la UI publica del diario."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el checkout canonico estaba limpio al empezar.",
+        "<code>git log</code> y <code>git reflog</code> del <code>2026-07-18</code> solo mostraron la actividad de cierre pasada la medianoche sobre <code>2026-07-17</code> (<code>36ab1f0</code> y <code>c0a40e9</code>), confirmando que todavia no existia una entrada propia para el <code>18 de julio de 2026</code>.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-18 21:32:40 CEST +0200</code> durante esta actualizacion."
+      ]},
+      { heading: "Avances", items: [
+        "El diario vuelve a tener una entrada especifica para el <code>18 de julio de 2026 [Codex]</code> en el checkout canonico.",
+        "<code>index.html</code> queda alineado con <code>2026-07-18.md</code>, de modo que la portada publica pueda mostrar el mismo resumen bajo el filtro <code>Codex</code>."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "La fecha <code>2026-07-18</code> aun no estaba registrada en el diario, asi que faltaba dejar constancia operativa de hoy.",
+        "<code>agora-checkin codex start</code> no devolvio salida util en esta sesion, aunque <code>agora whoami</code>, <code>tasks</code> e <code>inbox</code> si permitieron validar el estado de Oraculo."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Crear una entrada nueva para <code>2026-07-18</code> en vez de reescribir la del <code>2026-07-17</code>, porque hoy todavia no existia fichero propio para esta fecha.",
+        "Mantener el resumen breve y factual, limitado a hechos verificados en el repo <code>diario</code> y en AgoraMatrix durante esta sesion."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add 2026-07-18.md index.html</code>, crear el commit <code>Diario 2026-07-18 [Codex]</code> y publicarlo en <code>origin main</code>.",
+        "Verificar despues del push que <code>https://csilvasantin.github.io/diario/</code> responde y sirve esta entrada del <code>18 de julio de 2026</code>."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-17",
     title: "17 de julio de 2026",
     member: "Carlos Silva",
