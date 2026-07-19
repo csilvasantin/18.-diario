@@ -349,30 +349,33 @@ const entries = [
     member: "Carlos Silva",
     author: "Codex",
     sections: [
-      { heading: "Lo importante", items: [
-        "Se reviso la comparativa de cuatro CLI frente a pruebas reales y quedo fijado el veredicto en <code>comparativa-clis/2026-07-19/VEREDICTO.md</code>.",
-        "La prueba decisiva fue la poblacion de Sitges: <code>claude</code> acerto con fuentes y contexto; <code>nemotron</code> fue honesto y no invento cifra; <code>codex</code> y <code>grok</code> atribuyeron a la fuente correcta un numero que no aparecia en ella.",
-        "Se actualizo el diario publico con esta entrada y su reflejo en <code>index.html</code>."
+      { heading: "Que se hizo", items: [
+        "Se reviso la comparativa de cuatro CLI frente a pruebas reales y quedo fijado el veredicto en <code>comparativa-clis/2026-07-19/VEREDICTO.md</code>, con Sitges como prueba mas discriminante.",
+        "Se inspecciono <code>AdmiraNext-Team</code> y aparecio trabajo local fuerte sin commit: <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> pasan a una UI arcade tipo <code>World Warrior Ops</code> con <code>Player Select</code>, fichas por miembro y vista destacada por luchador.",
+        "En ese repo tambien se actualizan <code>data/machines.json</code> y <code>package.json</code>: el panel sube a <code>v0.1.3</code> y el Mac Mini gana <code>ip_local</code> y <code>connect_local</code> para SSH directo en LAN.",
+        "Se reviso <code>admira-next-web</code>, que si tuvo actividad real hoy con commits sobre historial restaurable, edicion oculta de texto, fondos, credenciales headless y tolerancia a imagenes de Grok.",
+        "Se actualiza esta entrada existente del diario y su reflejo en <code>index.html</code> para dejar una sola version del dia mas fiel al trabajo real del workspace."
       ]},
-      { heading: "Decisiones", items: [
-        "Se prioriza fiabilidad por encima de rapidez o estilo: el orden de hoy queda <code>claude &gt; nemotron &gt; codex ≈ grok</code>.",
-        "<code>nemotron</code> no queda aprobado todavia para misiones autonomas porque en la repeticion de pruebas no ejecuto herramientas de forma fiable.",
-        "La entrada de hoy se deja breve y centrada en hechos verificables ya documentados."
+      { heading: "Que se valido", items: [
+        "<code>AdmiraNext-Team</code> no tiene commits de hoy en este checkout, pero <code>git status --short</code> confirma ocho ficheros modificados y <code>git diff --stat</code> muestra 1112 inserciones y 73 borrados, incluida la renovacion de tres capturas.",
+        "El diff de <code>AdmiraNext-Team</code> confirma cambios concretos: textos <code>World Warrior Ops</code>, <code>Choose Your Fighter</code>, build <code>v0.1.3</code> y logica nueva para agrupar maquinas por miembro y destacar perfiles.",
+        "<code>admira-next-web</code> deja rastro verificable con doce commits hoy en <code>main</code>, culminando en <code>99296f7 feat(presentations): add restorable version history</code>."
       ]},
-      { heading: "Avances", items: [
-        "Queda una conclusion operativa util para la flota: <code>nemotron</code> sirve para conversar y razonar, pero no aun para automatizacion fiable.",
-        "El diario vuelve a tener cubierta la fecha <code>2026-07-19</code> con un fichero propio firmado como <code>[Codex]</code>.",
-        "<code>index.html</code> queda alineado para mostrar esta sintesis en la publicacion web."
+      { heading: "Problemas encontrados", items: [
+        "La comparativa deja dos riesgos abiertos: <code>codex</code> y <code>grok</code> citaron una fuente real con una cifra que no estaba ahi, y <code>nemotron</code> sigue fallando en uso autonomo de herramientas.",
+        "<code>AdmiraNext-Team</code> sigue sin una validacion automatizada real mas alla de <code>node src/server.js</code>; no hay script de test ni build para cerrar el cambio visual con mas rigor.",
+        "El trabajo de <code>AdmiraNext-Team</code> sigue en working tree sucio y sin commit, asi que hoy existe avance tangible pero no un punto de restauracion claro.",
+        "<code>comparativa-clis/</code> sigue fuera de control de versiones en este checkout del diario, por lo que el veredicto queda documentado pero no resuelto como artefacto publicado dentro del repo."
       ]},
-      { heading: "Bloqueos o riesgos", items: [
-        "La pregunta <code>cifra exacta a dia de hoy</code> para Sitges estaba mal planteada: no existe un dato censal en tiempo real y eso favorece alucinaciones si no se corrige el marco.",
-        "El riesgo tecnico principal sigue siendo la ejecucion irregular de herramientas en <code>nemotron</code> sobre OpenCode Zen.",
-        "La carpeta <code>comparativa-clis/</code> sigue fuera de control de versiones en este checkout, asi que su publicacion no queda resuelta por esta actualizacion del diario."
+      { heading: "Decisiones tomadas", items: [
+        "Se documenta <code>AdmiraNext-Team</code> aunque no haya commit de hoy porque el diff local y las capturas renovadas muestran trabajo real del dia que conviene no perder.",
+        "Se prioriza fiabilidad sobre estilo en la comparativa: el orden operativo de hoy queda <code>claude &gt; nemotron &gt; codex ≈ grok</code>, pero <code>nemotron</code> aun no se aprueba para misiones autonomas.",
+        "La entrada se mantiene breve y factual, separando trabajo confirmado por commit (<code>admira-next-web</code>) de trabajo confirmado por diff local (<code>AdmiraNext-Team</code>)."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Probar <code>nemotron</code> por la via directa de NVIDIA para separar si el fallo es del modelo o de la integracion actual.",
-        "Decidir si <code>comparativa-clis/2026-07-19/VEREDICTO.md</code> debe publicarse tambien dentro del repo.",
-        "Mantener las pruebas centradas en honestidad, uso real de herramientas y capacidad de citar fuentes sin inventar."
+        "Convertir el cambio arcade de <code>AdmiraNext-Team</code> en un commit verificable y abrir una pasada minima de comprobacion funcional sobre el panel y el flujo SSH local.",
+        "Probar <code>nemotron</code> por la via directa de NVIDIA para separar si el fallo esta en el modelo o en la integracion actual.",
+        "Decidir si <code>comparativa-clis/2026-07-19/VEREDICTO.md</code> debe publicarse tambien dentro de un repo versionado."
       ]}
     ]
   },
