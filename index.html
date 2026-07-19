@@ -349,32 +349,30 @@ const entries = [
     member: "Carlos Silva",
     author: "Codex",
     sections: [
-      { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>actualizar-diario-2</code> y se inspecciono este checkout en <code>/Users/csilvasantin/.codex/worktrees/be97/diario/</code>.",
-        "Se hizo <code>git fetch origin main</code> seguido de <code>git merge --ff-only origin/main</code>, avanzando el checkout de <code>790ea32</code> a <code>f3f467e</code> con cambios remotos en <code>2026-07-18.md</code>, <code>index.html</code> y <code>repos.html</code>.",
-        "Se comprobo que no existia todavia <code>2026-07-19.md</code>, se redacto esta entrada unica para la fecha y se preparo su reflejo en <code>index.html</code>."
+      { heading: "Lo importante", items: [
+        "Se reviso la comparativa de cuatro CLI frente a pruebas reales y quedo fijado el veredicto en <code>comparativa-clis/2026-07-19/VEREDICTO.md</code>.",
+        "La prueba decisiva fue la poblacion de Sitges: <code>claude</code> acerto con fuentes y contexto; <code>nemotron</code> fue honesto y no invento cifra; <code>codex</code> y <code>grok</code> atribuyeron a la fuente correcta un numero que no aparecia en ella.",
+        "Se actualizo el diario publico con esta entrada y su reflejo en <code>index.html</code>."
       ]},
-      { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> y <code>git rev-parse HEAD</code> mas <code>git rev-parse origin/main</code> devolvieron el mismo SHA <code>f3f467e09d1bc9ec6c39940b496434583918d1a0</code> antes de editar.",
-        "<code>git log --since='2026-07-19 00:00' --until='2026-07-19 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo: <code>f3f467e chore: actualizar repos.html 2026-07-19 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-19 00:00'</code> devolvio <code>790ea32 HEAD@{2026-07-19 21:30:39 +0200}:</code>, dejando constancia local del punto de partida de esta corrida.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-19 21:31:46 CEST +0200</code> durante la preparacion del cierre."
+      { heading: "Decisiones", items: [
+        "Se prioriza fiabilidad por encima de rapidez o estilo: el orden de hoy queda <code>claude &gt; nemotron &gt; codex ≈ grok</code>.",
+        "<code>nemotron</code> no queda aprobado todavia para misiones autonomas porque en la repeticion de pruebas no ejecuto herramientas de forma fiable.",
+        "La entrada de hoy se deja breve y centrada en hechos verificables ya documentados."
       ]},
       { heading: "Avances", items: [
-        "El diario vuelve a quedar cubierto para <code>2026-07-19</code> con un solo fichero Markdown firmado como <code>[Codex]</code>.",
-        "<code>index.html</code> quedara alineado con esta misma evidencia para que la novedad sea visible en la portada publica del diario."
+        "Queda una conclusion operativa util para la flota: <code>nemotron</code> sirve para conversar y razonar, pero no aun para automatizacion fiable.",
+        "El diario vuelve a tener cubierta la fecha <code>2026-07-19</code> con un fichero propio firmado como <code>[Codex]</code>.",
+        "<code>index.html</code> queda alineado para mostrar esta sintesis en la publicacion web."
       ]},
-      { heading: "Problemas encontrados", items: [
-        "El checkout actual esta en detached HEAD (<code>## HEAD (no branch)</code>), asi que la publicacion tendra que hacerse empujando explicitamente <code>HEAD</code> hacia <code>origin/main</code>.",
-        "<code>agora-checkin codex start</code> no devolvio salida util en esta sesion, asi que la evidencia del dia depende de <code>git</code>, del reloj local y de los ficheros del repo."
-      ]},
-      { heading: "Decisiones tomadas", items: [
-        "Registrar solo hechos verificables de esta corrida sobre el repo <code>diario</code>, sin arrastrar actividad de otros workspaces.",
-        "Crear la entrada de hoy desde cero porque la fecha <code>2026-07-19</code> no existia aun ni en Markdown ni en <code>index.html</code>."
+      { heading: "Bloqueos o riesgos", items: [
+        "La pregunta <code>cifra exacta a dia de hoy</code> para Sitges estaba mal planteada: no existe un dato censal en tiempo real y eso favorece alucinaciones si no se corrige el marco.",
+        "El riesgo tecnico principal sigue siendo la ejecucion irregular de herramientas en <code>nemotron</code> sobre OpenCode Zen.",
+        "La carpeta <code>comparativa-clis/</code> sigue fuera de control de versiones en este checkout, asi que su publicacion no queda resuelta por esta actualizacion del diario."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Actualizar <code>index.html</code>, validar el diff, crear el commit <code>Actualizar diario 2026-07-19 [Codex]</code> y publicarlo en <code>origin main</code>.",
-        "Comprobar despues del push que <code>https://csilvasantin.github.io/diario/</code> sigue respondiendo y que la portada publica deja visible esta nueva fecha."
+        "Probar <code>nemotron</code> por la via directa de NVIDIA para separar si el fallo es del modelo o de la integracion actual.",
+        "Decidir si <code>comparativa-clis/2026-07-19/VEREDICTO.md</code> debe publicarse tambien dentro del repo.",
+        "Mantener las pruebas centradas en honestidad, uso real de herramientas y capacidad de citar fuentes sin inventar."
       ]}
     ]
   },
