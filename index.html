@@ -350,29 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso el trabajo del dia en el workspace de Admirito con foco en <code>AdmiraNext-Team</code> y en los ficheros tocados hoy dentro de <code>/Users/csilvasantin/Documents/Admirito</code>.",
-        "En <code>AdmiraNext-Team</code> hay un rediseño fuerte del panel publico hacia una capa tipo <code>player select</code>/arcade: <code>public/index.html</code> añade la seccion de fighters, <code>public/app.js</code> normaliza maquinas por miembro y renderiza perfiles/estadisticas, <code>public/styles.css</code> rehace la identidad visual, <code>package.json</code> sube a <code>0.1.3</code>, se refrescan capturas y <code>data/machines.json</code> gana acceso local por SSH para el Mac Mini.",
-        "Tambien queda trazado un cambio publicado en <code>pixer-worker</code>: el commit <code>c9a655d</code> (<code>feat(elevenlabs): add protected dubbing proxy</code>) sobre <code>src/index.js</code>, y aparecen mas ficheros recientes en <code>codex/registro</code>, <code>omnipublicity</code>, <code>admira-tv</code>, <code>digitalavatar.ai</code>, <code>tool/yokup-site</code> y <code>onboarding</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se consultaron <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> antes de tocar el repo del diario.",
+        "Se leyeron la fuente canonica <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> para seguir literalmente la rutina sobre el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>.",
+        "En ese checkout se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-20 00:00' --until='2026-07-20 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-20 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, y despues se sustituyo esta entrada y su reflejo en <code>index.html</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>jq empty data/machines.json</code> y <code>node --check public/app.js</code> pasan en <code>AdmiraNext-Team</code>, asi que la ampliacion de datos y la logica JS no quedaron rotas a nivel sintactico.",
-        "<code>git status --short</code> en <code>AdmiraNext-Team</code> confirma cambios locales en <code>public/index.html</code>, <code>public/styles.css</code>, <code>public/app.js</code>, <code>data/machines.json</code>, <code>package.json</code> y tres capturas, coherentes con el rediseño leido.",
-        "En <code>pixer-worker</code>, <code>src/index.js</code> figura tocado hoy y contiene el proxy server-side con secretos en vault, consistente con el commit <code>c9a655d</code> ya registrado en el historial."
+        "<code>agora whoami --from Codex</code> devolvio <code>Codex  →  Oráculo (Codex·gmail)  →  bot propio @CodexSilvaBot</code>, y <code>agora tasks --from Codex --peek</code> junto con <code>agora inbox --from Codex --peek</code> devolvieron que no habia trabajo nuevo en esta sesion.",
+        "<code>git rev-list --left-right --count HEAD...origin/main</code> devolvio <code>0 0</code>, asi que el checkout canonico estaba sincronizado con <code>origin/main</code> antes de editar.",
+        "El pre-check de <code>git log</code> y <code>git reflog</code> confirmo actividad real previa del <code>2026-07-20</code> en este repo con los commits <code>2dddd34</code>, <code>7b664df</code>, <code>13f6d41</code>, <code>2377d25</code>, <code>2b9e6a2</code> y <code>e095ef5</code>, y <code>date</code> devolvio <code>2026-07-20 23:56:08 CEST +0200</code>."
+      ]},
+      { heading: "Avances", items: [
+        "<code>2026-07-20.md</code> vuelve a quedar centrado en este cierre literal del repo <code>diario</code>, con las seis secciones numeradas exigidas por la rutina.",
+        "<code>index.html</code> queda alineado con esta misma version para que la UI publica muestre el cierre de hoy bajo el filtro <code>Codex</code>.",
+        "Se mantiene la regla 1-2-3 del diario: un unico fichero para <code>2026-07-20</code>, sin duplicar la fecha ni abrir otro bloque nuevo de <code>Codex</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El trabajo principal de <code>AdmiraNext-Team</code> sigue local en este checkout: no hay commit de hoy para ese repo, asi que el rediseño aun no queda trazado como cambio publicado desde aqui.",
-        "Parte de la actividad reciente del workspace aparece mezclada con carpetas de runtime/cache y con directorios que no ofrecen historial Git util en esta ruta, lo que dificulta separar publicacion real de ruido local.",
-        "En el repo canonico del diario sigue presente <code>?? comparativa-clis/2026-07-19/VEREDICTO.md</code>, y se mantuvo fuera de esta actualizacion para no arrastrar contenido ajeno."
+        "El checkout canonico no estaba completamente limpio al iniciar: <code>git status --short --branch</code> mostro <code>?? comparativa-clis/</code>.",
+        "Dentro de esa carpeta sin trackear aparecen ficheros ajenos al cierre, como <code>comparativa-clis/2026-07-19/VEREDICTO.md</code>, <code>codex.md</code>, <code>claude.md</code>, <code>grok.md</code>, <code>nemotron.md</code> y <code>tiempos.tsv</code>.",
+        "La entrada vigente de <code>2026-07-20 [Codex]</code> no seguia ya la rutina de forma estricta, porque describia otros workspaces y ademas no incluia la seccion <code>3. Avances</code>."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Actualizar la entrada ya existente del <code>2026-07-20</code> en vez de duplicarla, sustituyendo el foco anterior en el propio diario por el resumen del trabajo real del workspace.",
-        "Separar explicitamente lo que esta validado por commit o comprobacion tecnica (<code>pixer-worker</code>, sintaxis/JSON de <code>AdmiraNext-Team</code>) de lo que solo consta como cambio local reciente.",
-        "No tocar ni limpiar cambios ajenos del workspace; solo registrar el estado observado y util para seguimiento."
+        "Sustituir el bloque existente de <code>2026-07-20 [Codex]</code> en vez de anadir otro, para mantener una sola version activa de esta autoria en la fecha.",
+        "Limitar el contenido a hechos verificados con comandos ejecutados en esta sesion y con el historial <code>git</code> del propio repo <code>diario</code>.",
+        "No tocar ni limpiar <code>comparativa-clis/</code>, porque es contenido no trackeado ajeno a esta rutina y no bloquea un <code>git add 2026-07-20.md index.html</code>."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Probar visualmente <code>AdmiraNext-Team</code> y decidir si este <code>arcade build v0.1.3</code> se consolida con commit/publicacion o si aun necesita ajuste de contenido y UX.",
-        "Revisar los cambios recientes del resto del workspace (<code>tool/yokup-site</code>, <code>admira-tv</code>, <code>digitalavatar.ai</code>, <code>codex/registro</code>, <code>onboarding</code>) para distinguir que esta listo para publicar y que es solo trabajo en curso.",
-        "Mantener el diario de hoy alineado con ese estado real, sin volver a convertir la entrada en una nota sobre la propia automatizacion."
+        "Hacer <code>git add 2026-07-20.md index.html</code>, crear el commit final <code>Diario 2026-07-20 [Codex]</code> y publicarlo en <code>origin main</code>.",
+        "Verificar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra esta entrada actualizada del <code>20 de julio de 2026</code>.",
+        "Mantener documentado el estado del worktree si <code>comparativa-clis/</code> sigue sin trackear al terminar la rutina."
       ]}
     ]
   },
