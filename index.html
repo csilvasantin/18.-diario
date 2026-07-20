@@ -350,30 +350,29 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se revisaron los repositorios de Admirito con foco en <code>AdmiraNext-Team</code>, comparando el clon activo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> con otras copias locales y el estado del workspace actual.",
-        "En <code>AdmiraNext-Team</code> se detecto un rediseño fuerte de la interfaz publica: <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> pasan a una presentacion estilo arcade con bloque <code>Player Select</code>, ficha destacada por miembro y nuevo <code>Arcade Build v0.1.3</code>.",
-        "Tambien se localizaron cambios recientes en datos y assets: refresco de <code>data/screenshots/*.jpg</code>, ajuste de <code>data/machines.json</code> y nuevas rutas SSH locales para <code>macmini</code>, ademas de artefactos OCR sin trackear en otra copia del repo."
+        "Se reviso el trabajo del dia en el workspace de Admirito con foco en <code>AdmiraNext-Team</code> y en los ficheros tocados hoy dentro de <code>/Users/csilvasantin/Documents/Admirito</code>.",
+        "En <code>AdmiraNext-Team</code> hay un rediseño fuerte del panel publico hacia una capa tipo <code>player select</code>/arcade: <code>public/index.html</code> añade la seccion de fighters, <code>public/app.js</code> normaliza maquinas por miembro y renderiza perfiles/estadisticas, <code>public/styles.css</code> rehace la identidad visual, <code>package.json</code> sube a <code>0.1.3</code>, se refrescan capturas y <code>data/machines.json</code> gana acceso local por SSH para el Mac Mini.",
+        "Tambien queda trazado un cambio publicado en <code>pixer-worker</code>: el commit <code>c9a655d</code> (<code>feat(elevenlabs): add protected dubbing proxy</code>) sobre <code>src/index.js</code>, y aparecen mas ficheros recientes en <code>codex/registro</code>, <code>omnipublicity</code>, <code>admira-tv</code>, <code>digitalavatar.ai</code>, <code>tool/yokup-site</code> y <code>onboarding</code>."
       ]},
       { heading: "Que se valido", items: [
-        "No aparecieron commits de <code>2026-07-20</code> en las copias inspeccionadas de <code>AdmiraNext-Team</code>; el trabajo de hoy sigue estando en local y sin publicar.",
-        "<code>node --check public/app.js</code> paso sin errores en el clon de <code>Documents</code>, confirmando al menos la sintaxis del principal cambio JavaScript; <code>package.json</code> queda en <code>0.1.3</code> y mantiene el arranque con <code>node src/server.js</code>.",
-        "En este workspace de <code>diario</code> sigue presente <code>?? comparativa-clis/2026-07-19/VEREDICTO.md</code>, y se dejo fuera del cambio para no mezclarlo con la entrada."
-      ]},
-      { heading: "Avances", items: [
-        "Queda documentado que el avance principal del dia en Admirito fue una capa visual nueva para <code>AdmiraNext-Team</code>, mas orientada a presentacion del equipo que al tablero austero anterior.",
-        "Tambien queda localizada la actualizacion operativa de inventario/SSH y el refresco de capturas, con evidencia suficiente para retomar o publicar el trabajo despues."
+        "<code>jq empty data/machines.json</code> y <code>node --check public/app.js</code> pasan en <code>AdmiraNext-Team</code>, asi que la ampliacion de datos y la logica JS no quedaron rotas a nivel sintactico.",
+        "<code>git status --short</code> en <code>AdmiraNext-Team</code> confirma cambios locales en <code>public/index.html</code>, <code>public/styles.css</code>, <code>public/app.js</code>, <code>data/machines.json</code>, <code>package.json</code> y tres capturas, coherentes con el rediseño leido.",
+        "En <code>pixer-worker</code>, <code>src/index.js</code> figura tocado hoy y contiene el proxy server-side con secretos en vault, consistente con el commit <code>c9a655d</code> ya registrado en el historial."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Hay varias copias divergentes de <code>AdmiraNext-Team</code>: la de <code>Documents</code> esta <code>behind 306</code>, mientras otra copia local tiene un diff distinto en <code>data/machines.json</code> y archivos OCR no trackeados.",
-        "La validacion funcional de hoy es limitada: no hay evidencia de arranque del servidor ni de revision manual completa en navegador, solo comprobacion de diffs y sintaxis."
+        "El trabajo principal de <code>AdmiraNext-Team</code> sigue local en este checkout: no hay commit de hoy para ese repo, asi que el rediseño aun no queda trazado como cambio publicado desde aqui.",
+        "Parte de la actividad reciente del workspace aparece mezclada con carpetas de runtime/cache y con directorios que no ofrecen historial Git util en esta ruta, lo que dificulta separar publicacion real de ruido local.",
+        "En el repo canonico del diario sigue presente <code>?? comparativa-clis/2026-07-19/VEREDICTO.md</code>, y se mantuvo fuera de esta actualizacion para no arrastrar contenido ajeno."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Resumir solo trabajo verificado en local, sin presentarlo como entregado ni publicado mientras siga repartido entre clones y sin commit del dia.",
-        "Tomar como referencia principal el clon de <code>Documents</code> para la narrativa del diario, pero dejar constancia explicita de las divergencias y del contenido ajeno del workspace."
+        "Actualizar la entrada ya existente del <code>2026-07-20</code> en vez de duplicarla, sustituyendo el foco anterior en el propio diario por el resumen del trabajo real del workspace.",
+        "Separar explicitamente lo que esta validado por commit o comprobacion tecnica (<code>pixer-worker</code>, sintaxis/JSON de <code>AdmiraNext-Team</code>) de lo que solo consta como cambio local reciente.",
+        "No tocar ni limpiar cambios ajenos del workspace; solo registrar el estado observado y util para seguimiento."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Elegir un clon canonico de <code>AdmiraNext-Team</code>, reconciliar los diffs de datos/assets y probar el panel arrancando <code>node src/server.js</code> antes de hacer commit.",
-        "Decidir si <code>comparativa-clis/</code> y los OCR sin trackear deben conservarse, moverse o limpiarse para que el siguiente cierre parta de un estado menos ambiguo."
+        "Probar visualmente <code>AdmiraNext-Team</code> y decidir si este <code>arcade build v0.1.3</code> se consolida con commit/publicacion o si aun necesita ajuste de contenido y UX.",
+        "Revisar los cambios recientes del resto del workspace (<code>tool/yokup-site</code>, <code>admira-tv</code>, <code>digitalavatar.ai</code>, <code>codex/registro</code>, <code>onboarding</code>) para distinguir que esta listo para publicar y que es solo trabajo en curso.",
+        "Mantener el diario de hoy alineado con ese estado real, sin volver a convertir la entrada en una nota sobre la propia automatizacion."
       ]}
     ]
   },
