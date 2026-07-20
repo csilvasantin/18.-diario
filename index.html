@@ -350,29 +350,30 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se leyo la memoria de la automatizacion <code>actualizar-diario</code>, se ejecuto <code>agora-checkin codex start</code> y se confirmo el estado operativo con <code>agora whoami --from Codex</code>, <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>.",
-        "Se revisaron <code>README.md</code>, <code>2026-07-19.md</code> y <code>2026-07-18.md</code> para mantener el formato canonico del diario antes de escribir la entrada de hoy.",
-        "Se sincronizo el checkout con <code>origin/main</code>, se resolvio la colision de una actualizacion concurrente sobre <code>2026-07-20.md</code> e <code>index.html</code> y se consolido una unica entrada de hoy para <code>Codex</code>."
+        "Se revisaron los repositorios de Admirito con foco en <code>AdmiraNext-Team</code>, comparando el clon activo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> con otras copias locales y el estado del workspace actual.",
+        "En <code>AdmiraNext-Team</code> se detecto un rediseño fuerte de la interfaz publica: <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> pasan a una presentacion estilo arcade con bloque <code>Player Select</code>, ficha destacada por miembro y nuevo <code>Arcade Build v0.1.3</code>.",
+        "Tambien se localizaron cambios recientes en datos y assets: refresco de <code>data/screenshots/*.jpg</code>, ajuste de <code>data/machines.json</code> y nuevas rutas SSH locales para <code>macmini</code>, ademas de artefactos OCR sin trackear en otra copia del repo."
       ]},
       { heading: "Que se valido", items: [
-        "<code>agora whoami --from Codex</code> devolvio <code>Codex  →  Oráculo (Codex·gmail)  →  bot propio @CodexSilvaBot</code>, y <code>tasks</code> e <code>inbox</code> estaban vacios al iniciar.",
-        "<code>origin/main</code> avanzo durante la sesion con una actualizacion previa del <code>2026-07-20</code>, por eso el primer <code>push</code> fue rechazado y hubo que rebasar antes de publicar.",
-        "El checkout local del diario mostraba <code>?? comparativa-clis/</code> sin trackear, y esa carpeta se dejo intacta fuera del cambio de hoy."
+        "No aparecieron commits de <code>2026-07-20</code> en las copias inspeccionadas de <code>AdmiraNext-Team</code>; el trabajo de hoy sigue estando en local y sin publicar.",
+        "<code>node --check public/app.js</code> paso sin errores en el clon de <code>Documents</code>, confirmando al menos la sintaxis del principal cambio JavaScript; <code>package.json</code> queda en <code>0.1.3</code> y mantiene el arranque con <code>node src/server.js</code>.",
+        "En este workspace de <code>diario</code> sigue presente <code>?? comparativa-clis/2026-07-19/VEREDICTO.md</code>, y se dejo fuera del cambio para no mezclarlo con la entrada."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-20</code> queda otra vez con un unico archivo Markdown y una unica entrada <code>Codex</code> en <code>index.html</code>.",
-        "El resumen de hoy ya recoge lo importante de la sesion: sincronizacion, consolidacion de conflictos y preparacion de publicacion."
+        "Queda documentado que el avance principal del dia en Admirito fue una capa visual nueva para <code>AdmiraNext-Team</code>, mas orientada a presentacion del equipo que al tablero austero anterior.",
+        "Tambien queda localizada la actualizacion operativa de inventario/SSH y el refresco de capturas, con evidencia suficiente para retomar o publicar el trabajo despues."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Hubo una carrera entre automatizaciones sobre la misma fecha, que genero conflicto de rebase en <code>2026-07-20.md</code> e <code>index.html</code>.",
-        "El worktree no estaba completamente limpio por <code>comparativa-clis/</code>, asi que hubo que aislar el cambio para no arrastrar contenido ajeno."
+        "Hay varias copias divergentes de <code>AdmiraNext-Team</code>: la de <code>Documents</code> esta <code>behind 306</code>, mientras otra copia local tiene un diff distinto en <code>data/machines.json</code> y archivos OCR no trackeados.",
+        "La validacion funcional de hoy es limitada: no hay evidencia de arranque del servidor ni de revision manual completa en navegador, solo comprobacion de diffs y sintaxis."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Rebasar sobre <code>origin/main</code> y consolidar la fecha de hoy en una sola version, en vez de duplicar entradas o forzar el <code>push</code>.",
-        "Mantener el contenido limitado a hechos comprobados en esta sesion y no tocar <code>comparativa-clis/</code>."
+        "Resumir solo trabajo verificado en local, sin presentarlo como entregado ni publicado mientras siga repartido entre clones y sin commit del dia.",
+        "Tomar como referencia principal el clon de <code>Documents</code> para la narrativa del diario, pero dejar constancia explicita de las divergencias y del contenido ajeno del workspace."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Terminar el rebase, publicar en <code>origin main</code> y verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> muestra la entrada del <code>20 de julio de 2026</code>."
+        "Elegir un clon canonico de <code>AdmiraNext-Team</code>, reconciliar los diffs de datos/assets y probar el panel arrancando <code>node src/server.js</code> antes de hacer commit.",
+        "Decidir si <code>comparativa-clis/</code> y los OCR sin trackear deben conservarse, moverse o limpiarse para que el siguiente cierre parta de un estado menos ambiguo."
       ]}
     ]
   },
