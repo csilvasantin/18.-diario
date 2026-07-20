@@ -344,6 +344,43 @@
 <script>
 const entries = [
   {
+    date: "2026-07-20",
+    title: "20 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se inventariaron los repos activos dentro de <code>/Users/csilvasantin/Documents/Admirito</code> y se reviso su estado con comandos <code>git status</code>, <code>git fetch origin --prune</code> y comparacion contra upstream.",
+        "Se aplico <code>git pull --ff-only</code> solo en repos limpios con fast-forward disponible: <code>github-csilvasantin/admira-app</code>, <code>github-csilvasantin/admira-tv</code>, <code>github-csilvasantin/digitalavatar.ai</code> y <code>github-csilvasantin/tool</code>.",
+        "Se actualizo <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/onboarding/CURRENT_STATE.md</code> y se clono <code>https://github.com/csilvasantin/18.-diario.git</code> en <code>/tmp/diario</code> para registrar este cierre."
+      ]},
+      { heading: "Que se valido", items: [
+        "El clon nuevo en <code>/tmp/diario</code> quedo limpio: <code>git -C /tmp/diario status --short</code> no devolvio cambios antes de editar.",
+        "El checkout local <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io</code> esta sucio con cambios en <code>codex/index.html</code>, <code>codex/yarig-ai/index.html</code>, <code>yarig-ai/index.html</code> y dos archivos no trackeados de <code>telegram-consejeros</code>.",
+        "El sweep detecto actualizaciones remotas pendientes sin sobrescribir worktrees sucios en repos como <code>32.-ConsejoAdmiraNextGame</code>, <code>AdmiraNext-Team</code>, <code>xpaceos</code>, <code>csilvasantin.github.io</code>, <code>diario</code> y <code>xtanco-game</code>."
+      ]},
+      { heading: "Avances", items: [
+        "La tabla viva de liderazgo LLM en <code>CURRENT_STATE.md</code> queda alineada con el estado verificado del <code>2026-07-20</code>.",
+        "Esta nueva entrada <code>2026-07-20.md</code> resume la sesion con hechos comprobados por comandos ejecutados en esta corrida.",
+        "<code>index.html</code> queda actualizado para que la fecha <code>2026-07-20</code> sea seleccionable desde la UI publica del diario con autoria <code>Codex</code>."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "Varios repos locales siguen con worktree sucio o divergencia y por eso no se pudieron actualizar con fast-forward sin riesgo.",
+        "El repo local de publicacion <code>csilvasantin.github.io</code> no esta limpio, asi que cualquier cambio ahi requiere atencion manual para no pisar trabajo ajeno."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "No sobrescribir ningun repo con cambios locales; cuando hubo suciedad o divergencia solo se dejo constancia del bloqueo.",
+        "Marcar <code>Codex Update</code> solo en los casos liderados por esta automatizacion o donde el flujo exigia identificar expresamente esta corrida.",
+        "Mantener el cierre del diario centrado en evidencia verificable de esta sesion y no en suposiciones sobre autoria pasada."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add 2026-07-20.md index.html</code>, crear el commit <code>docs: Update Codex 2026-07-20 [skip ci]</code> y empujarlo a <code>origin main</code>.",
+        "Verificar despues del push que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra la entrada <code>20 de julio de 2026</code> en el selector y mantiene el estilo Matrix actual.",
+        "Resolver primero la suciedad local de <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io</code> si se quiere usar ese checkout para una publicacion adicional."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-19",
     title: "19 de julio de 2026",
     member: "Carlos Silva",
