@@ -352,30 +352,40 @@ const entries = [
       { heading: "Que se hizo", items: [
         "En <code>admira-next-web</code> se encadenaron cinco commits publicados hoy para reforzar la presentacion web: apertura responsive, reflow del bloque fuente de Admira, logos siempre visibles y ajuste del modo <code>Good</code> para que use mejor las fotografias.",
         "En <code>xpaceos</code> se publicaron cinco commits sobre la home y <code>admira-xp</code>: el hero paso de imagen fija a canal en vivo, la demo viva bajo a la seccion 00, se corrigio el encaje del canal en cualquier ancho, se redujo la barra superior a <code>46px</code> y se arreglo el calculo de pantalla que dejaba la demo invisible en <code>MacMini</code>.",
-        "En <code>AdmiraNext-Team</code> quedaron cambios locales importantes sin cerrar en el checkout de trabajo de <code>github-csilvasantin</code>: rediseño visual estilo arcade en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, subida de version a <code>0.1.3</code>, refresco de capturas y datos SSH locales en <code>data/machines.json</code>."
+        "En <code>01.-AdmiraXperience-Game</code> quedaron publicados tres fixes del proxy: <code>e66db53</code> conserva el error real de <code>/tube/status</code>, <code>bf11289</code> mantiene el estado final <code>published</code> el tiempo suficiente para que el worker lo lea y <code>bddbe20</code> evita que <code>/healthz</code> abra una ventana de Suno en cada sondeo.",
+        "En <code>AdmiraNext-Team</code> quedaron cambios locales importantes sin cerrar en el checkout de trabajo de <code>github-csilvasantin</code>: rediseño visual estilo arcade en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, subida de version a <code>0.1.3</code>, refresco de capturas, <code>ip_local</code> y <code>connect_local</code> para el Mac Mini en <code>data/machines.json</code>, y Carla ya marcada como <code>idle</code>.",
+        "En <code>AdmiraNext-Team-latest</code> quedaron cambios paralelos en <code>src/server.js</code> y <code>src/ssh-exec.js</code> para aceptar <code>idle</code>, parametrizar <code>PORT</code> y dejar de construir comandos remotos de AppleScript con quoting fragil."
       ]},
       { heading: "Que se valido", items: [
         "<code>node --test test/presentation-deck-sequence.test.js</code> en <code>admira-next-web</code> paso con <code>4/4</code> tests en verde, validando la libreria de decks y el montaje de la presentacion por segmentos.",
         "<code>git log --since='2026-07-21 00:00'</code> en <code>admira-next-web</code> y <code>xpaceos</code> confirma los commits publicados hoy con cambios concentrados en <code>functions/presentaciones/[client]/presentacion.js</code>, <code>_deck-library.js</code>, <code>test/presentation-deck-sequence.test.js</code>, <code>index.html</code> y <code>admira-xp/index.html</code>.",
+        "Los mensajes de commit de <code>01.-AdmiraXperience-Game</code> dejan validaciones explicitas: un <code>curl /healthz</code> ya no levanta Chrome y tres sondeos seguidos mantienen <code>0</code> navegadores; en el flujo Tube el worker pasa de <code>running</code> a <code>done</code> y despues a <code>published [200]</code> sin falsa alarma.",
+        "<code>AdmiraNext-Team</code> muestra <code>8</code> ficheros modificados y sin commit en el checkout activo, incluyendo binarios de screenshots de <code>admira-macmini</code>, <code>admira-macbookpronegro14</code> y <code>admira-macbookair16</code>, lo que apunta a validacion visual reciente del panel y de las maquinas.",
+        "<code>package.json</code> de <code>AdmiraNext-Team</code> solo expone <code>npm start</code>, asi que hoy no hay evidencia de una suite automatizada de test o lint ejecutada en ese repo.",
         "<code>curl -I -L https://csilvasantin.github.io/diario/</code> respondio <code>301</code> hacia <code>https://www.carlossilva.info/diario/</code> y despues <code>200</code>, asi que la publicacion actual del diario sigue accesible."
       ]},
       { heading: "Avances", items: [
         "El frente mas cerrado del dia fue <code>admira-next-web</code>, donde la narrativa visual de presentaciones quedo mas robusta sin romper la secuencia cubierta por test.",
         "<code>xpaceos</code> termino el dia limpio en <code>main</code>, con las correcciones del hero en vivo ya integradas y sin cambios pendientes en <code>git status</code>.",
-        "<code>AdmiraNext-Team</code> avanzo hacia una interfaz de <em>player select</em> para el equipo, pero todavia no esta en estado de commit limpio."
+        "<code>01.-AdmiraXperience-Game</code> salio del modo falla silenciosa: ahora tanto los errores de importacion como los exitos publicados dejan un estado final legible para el worker y para Telegram.",
+        "<code>AdmiraNext-Team</code> avanzo hacia una interfaz de <em>player select</em> para el equipo, con una lectura por miembro mas clara, pero todavia no esta en estado de commit limpio.",
+        "El workspace tambien deja preparada una ruta mas solida para control remoto: estado <code>idle</code>, acceso local directo al Mac Mini y AppleScript remoto mejor encapsulado."
       ]},
       { heading: "Problemas encontrados", items: [
         "El checkout <code>github-csilvasantin/AdmiraNext-Team</code> esta <code>behind 306</code> respecto a <code>origin/main</code>, asi que mezclar ese rediseño con sincronizacion remota exige ordenar antes la base.",
+        "En <code>AdmiraNext-Team</code> hay un descuadre funcional: el dataset y parte del backend ya manejan <code>idle</code>, pero el selector HTML de estado todavia solo ofrece <code>online</code>, <code>busy</code>, <code>offline</code> y <code>maintenance</code>.",
         "Ese mismo repo arrastra varios ficheros modificados a la vez (<code>HTML</code>, <code>JS</code>, <code>CSS</code>, <code>JSON</code> y capturas), lo que dificulta separar hoy lo puramente visual de lo operativo.",
         "El checkout canonico del diario sigue con contenido sin trackear ajeno a esta tarea (<code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>), aunque no bloquea la actualizacion."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Reflejar en el diario tanto los commits ya publicados como el trabajo local relevante de <code>AdmiraNext-Team</code>, porque hoy si existe evidencia verificable en ambos niveles.",
-        "No tocar ni limpiar los untracked del repo del diario ni los cambios sucios de <code>AdmiraNext-Team</code>, porque son ajenos a esta automatizacion y conviene no mezclar historiales.",
-        "Tratar <code>admira-next-web</code> y <code>xpaceos</code> como el trabajo validado del dia, y <code>AdmiraNext-Team</code> como avance abierto que todavia necesita remate tecnico."
+        "Tratar <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> como dos lineas relacionadas pero distintas: una centrada en UX/panel y otra en robustez del backend/SSH.",
+        "Documentar <code>idle</code> como decision de producto ya adoptada, pero dejar constancia de que todavia falta cerrar la coherencia UI + backend antes de darlo por terminado.",
+        "No tocar ni limpiar los untracked del repo del diario ni los cambios sucios de <code>AdmiraNext-Team</code>, porque son ajenos a esta automatizacion y conviene no mezclar historiales."
       ]},
       { heading: "Siguientes pasos", items: [
         "Ordenar <code>AdmiraNext-Team</code>: rebasar o actualizar contra <code>origin/main</code>, separar el rediseño arcade de los cambios de datos y dejar un commit publicable.",
+        "Anadir <code>idle</code> al selector de <code>public/index.html</code> o retirarlo temporalmente del flujo manual para evitar incoherencias durante la sincronizacion.",
         "Mantener la cobertura de <code>admira-next-web</code> si se sigue tocando la secuencia de decks o el modo <code>Good</code>, porque hoy el test si esta protegiendo ese flujo.",
         "Publicar esta actualizacion del diario con commit propio y comprobar despues que la entrada del <code>21 de julio de 2026</code> queda visible en la web."
       ]}
