@@ -384,6 +384,44 @@ const entries = [
     ]
   },
   {
+    date: "2026-07-21",
+    title: "21 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Claude Code se desperto como rutina programada en un contenedor remoto (Claude Code on the web) con el checkout <code>csilvasantin/18.-diario</code> en la rama <code>main-4oh416</code>, con la mision explicita de 'subir a GitHub el trabajo realizado con Claude Code y actualizar el diario y <code>repos.html</code>; si no se hizo nada, se documenta y ya esta'.",
+        "Se hizo el pre-check: <code>git status</code> reporto <code>nothing to commit, working tree clean</code>; <code>git log --since='2026-07-21 00:00' --until='2026-07-21 23:59:59' --stat --oneline --all</code> devolvio solo commits <code>[Codex]</code> y <code>chore: actualizar repos.html</code> para hoy; <code>date</code> devolvio <code>2026-07-21 21:05:54 UTC +0000</code>.",
+        "Se leyeron <code>2026-07-21.md</code> e <code>index.html</code> para comprobar que la entrada del dia ya estaba consolidada por Codex, y se comprobo <code>mcp__github__list_pull_requests</code> con <code>head=csilvasantin:main-4oh416</code>, que devolvio <code>[]</code> (sin PR abierto para esta rama todavia).",
+        "Como no hay trabajo local pendiente de subir desde Claude Code, se opta por documentar la corrida: se anade un bloque <code>[Claude]</code> al fichero de hoy (regla 1-2-3: convivencia por <code>---</code> en el mismo fichero) y se refleja en <code>index.html</code> como entrada adicional para el <code>2026-07-21</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio <code>## main-4oh416</code> sin cambios; <code>git branch --show-current</code> confirmo <code>main-4oh416</code>; <code>git log --oneline -10</code> mostro que <code>HEAD</code> esta en <code>f803c0b docs: Update Codex 2026-07-21 [skip ci]</code>.",
+        "<code>git fetch origin main-4oh416</code> devolvio <code>fatal: couldn't find remote ref main-4oh416</code>, asi que la rama de desarrollo aun no existe en el remoto y este push la crea por primera vez.",
+        "<code>git log --oneline origin/main..HEAD</code> no devolvio commits, es decir, <code>main-4oh416</code> y <code>origin/main</code> estan al mismo commit local (<code>f803c0b</code>), sin divergencia previa.",
+        "Se reviso <code>repos.html</code> (linea 121 y siguientes) y <code>index.html</code> (linea 347 y siguientes) para no duplicar entradas y respetar la estructura JS <code>entries = [ { date, title, member, author, sections } ]</code>."
+      ]},
+      { heading: "Avances", items: [
+        "La entrada del <code>2026-07-21</code> gana un segundo bloque <code>[Claude]</code> que documenta la corrida remota de Claude Code sin inventar trabajo; queda registro fiel de que el dia ya estaba cerrado por Codex y de que Claude Code paso a documentar y firmar la rutina.",
+        "La rama <code>main-4oh416</code> sale por primera vez a <code>origin</code> con este cambio, y queda lista para PR draft segun las reglas de sesion."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "No hay trabajo tecnico de Claude Code pendiente en el repo <code>18.-diario</code>; la rutina programada podria dispararse sin nada real que publicar. Se registra explicitamente para no simular actividad.",
+        "Las instrucciones de sesion piden trabajar en <code>main-4oh416</code> y abrir PR draft; el <code>CERRAR-EL-DIA.md</code> canonico habla de <code>origin/main</code> desde el checkout del Mac Mini. Se prioriza la instruccion de sesion (rama <code>main-4oh416</code> + PR) porque este contenedor es efimero y no es el checkout canonico del Mac Mini."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Documentar la corrida (opcion 3 de la rutina: 'si no se hizo nada, se documenta y ya esta') en vez de forzar commits ficticios o tocar <code>repos.html</code>, que hoy no requiere edicion manual (la Action <code>update-repos.yml</code> ya publico <code>4045b58</code> esta manana).",
+        "Publicar en <code>main-4oh416</code> con <code>git push -u origin main-4oh416</code> y abrir Pull Request en modo draft contra <code>main</code>, sin mergear ni tocar la rama canonica directamente.",
+        "Convivir con Codex en el mismo <code>2026-07-21.md</code> separados por <code>---</code>, sin sobreescribir su entrada."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Push a <code>origin main-4oh416</code> + creacion de PR draft.",
+        "Suscribirse a la actividad del PR (<code>subscribe_pr_activity</code>) para reaccionar a CI o revisiones si llegan.",
+        "Notificar al usuario por PushNotification con el estado y las URLs (<a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a>) tras publicar."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-20",
     title: "20 de julio de 2026",
     member: "Carlos Silva",
