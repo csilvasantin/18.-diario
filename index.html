@@ -352,40 +352,38 @@ const entries = [
       { heading: "Que se hizo", items: [
         "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria local de la automatizacion <code>cerrar-el-dia</code> y se contrastaron la rutina canonica en GitHub y la copia local <code>CERRAR-EL-DIA.md</code> antes de tocar el diario.",
         "Se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-21 00:00' --until='2026-07-21 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-21 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "En <code>admira-next-web</code> quedaron publicados hoy once commits visibles en <code>git log</code>, centrados en presentaciones: apertura responsive, decks reutilizables, segmentacion narrativa en cuatro bloques, modos de calidad interactivos y refuerzos del modo <code>Good</code>.",
-        "En <code>xpaceos</code> quedaron publicados hoy cuatro commits funcionales sobre la home y <code>admira-xp</code>: el hero pasa a emitir el canal en vivo, la demo baja a la seccion <code>00</code>, el marco del hero ajusta bien en cualquier ancho, la barra superior de <code>admira-xp</code> baja a <code>46px</code> y se corrige el calculo de pantalla que dejaba la demo invisible en <code>MacMini</code>.",
-        "En <code>AdmiraNext-Team</code> sigue abierto trabajo local sin commit en <code>public/index.html</code>, <code>public/app.js</code>, <code>public/styles.css</code>, <code>package.json</code>, <code>data/machines.json</code> y tres capturas de <code>data/screenshots/</code>, con el checkout en <code>main...origin/main [behind 306]</code>.",
+        "Se reviso la rama publicada del propio <code>diario</code>, se detecto una carrera remota durante el push y se dejo esta fecha corregida en una sola version consistente tras resolver el cruce con <code>origin/main</code>.",
+        "Se comprobaron dos checkouts externos que si existen en este Mac: <code>AdmiraNext-Team</code>, con ocho ficheros modificados en <code>main...origin/main [behind 306]</code>, y <code>AdmiraNext-Team-latest</code>, con cambios locales en <code>src/server.js</code> y <code>src/ssh-exec.js</code>.",
         "Se corrigieron <code>2026-07-21.md</code> e <code>index.html</code> para que la fecha quede registrada solo con hechos comprobados en esta sesion y sin conflictos de merge."
       ]},
       { heading: "Que se valido", items: [
         "<code>git status --short --branch</code> mostro que el checkout activo del diario es <code>codex-diario-2026-07-21</code>, que sigue a <code>origin/main</code>, y que el repo no esta limpio por dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
         "<code>git log</code> y <code>git reflog</code> del dia confirmaron actividad previa real en este repo para <code>2026-07-21</code>, incluidos <code>d8790f1</code>, <code>96c6ef1</code>, <code>f803c0b</code> y <code>4a6a7fa</code>, ademas del <code>pull --rebase origin main</code> que dejo la rama publicada alineada con <code>origin/main</code>.",
-        "<code>node --test test/presentation-deck-sequence.test.js</code> en <code>admira-next-web</code> paso con <code>4/4</code> tests en verde, validando la libreria de decks y el montaje de la presentacion por segmentos.",
-        "<code>git log --since='2026-07-21 00:00'</code> y <code>git status --short --branch</code> confirman <code>admira-next-web</code> y <code>xpaceos</code> limpios en <code>main...origin/main</code>, mientras <code>AdmiraNext-Team</code> conserva ocho ficheros modificados sin publicar.",
+        "<code>git fetch origin main</code> mostro que <code>origin/main</code> avanzo de <code>4a6a7fa</code> a <code>27b756a</code> durante esta corrida, y el historial local termino en <code>751659e (HEAD -&gt; codex-diario-2026-07-21, origin/main, origin/HEAD) Diario 2026-07-21 [Codex]</code>.",
+        "<code>git status --short --branch</code> en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> confirmo ocho ficheros modificados en <code>main...origin/main [behind 306]</code>, y el mismo comando en <code>AdmiraNext-Team-latest</code> confirmo dos ficheros modificados y un <code>INICIO_Y_CIERRE_DEL_DIA.md</code> sin trackear.",
         "La ruta canonica online de la rutina respondio y redirigio a <code>https://github.com/csilvasantin/18.-diario/blob/main/CERRAR-EL-DIA.md</code>, cuyo contenido coincide con la copia local leida en este checkout.",
         "<code>curl -I -L https://csilvasantin.github.io/diario/</code> respondio <code>301</code> hacia <code>https://www.carlossilva.info/diario/</code> y luego <code>200</code>; ademas, <code>curl -L https://csilvasantin.github.io/18.-diario/</code> muestra la entrada <code>21 de julio de 2026</code>, asi que la publicacion sigue accesible."
       ]},
       { heading: "Avances", items: [
-        "<code>admira-next-web</code> cierra el dia como el frente mas consolidado: los cambios de presentaciones estan publicados y protegidos por la prueba de secuencia.",
-        "<code>xpaceos</code> termina limpio en <code>main</code>, con las correcciones del hero en vivo y de <code>admira-xp</code> ya integradas en historial.",
-        "<code>AdmiraNext-Team</code> mantiene avance real de interfaz y datos, pero sigue como trabajo abierto de workspace y no como cambio publicado.",
-        "La entrada de <code>2026-07-21 [Codex]</code> vuelve a quedar centrada en hechos verificables y <code>index.html</code> queda sincronizado con el Markdown para la UI publica."
+        "La entrada de <code>2026-07-21 [Codex]</code> vuelve a quedar centrada en hechos verificables y <code>index.html</code> queda sincronizado con el Markdown para la UI publica.",
+        "La rama activa del diario vuelve a quedar alineada con <code>origin/main</code> despues de la carrera remota y la resolucion del cruce.",
+        "<code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> quedan registrados solo como trabajo local abierto que si fue comprobado en este Mac, sin presentarlos como cambios publicados."
       ]},
       { heading: "Problemas encontrados", items: [
         "El checkout canonico del diario no estaba limpio al empezar esta corrida por contenido ajeno a la automatizacion (<code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>), asi que no era correcto asumir un estado impecable de trabajo.",
         "<code>AdmiraNext-Team</code> esta <code>behind 306</code> respecto a <code>origin/main</code>, asi que antes de publicar ese bloque hay que ordenar la base remota.",
         "Ese mismo repo mezcla a la vez <code>HTML</code>, <code>JS</code>, <code>CSS</code>, <code>JSON</code> y binarios de capturas, lo que complica revisar o partir el cambio con precision.",
-        "La entrada previa contenia un conflicto de merge abierto en <code>2026-07-21.md</code> e <code>index.html</code>, y hubo que resolverlo antes de cerrar correctamente el diario."
+        "La entrada publicada durante la carrera remota quedo con afirmaciones sobre otros repos que no pude volver a localizar en esta maquina durante esta verificacion, asi que hizo falta una correccion adicional mas conservadora."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Sustituir la version vigente del <code>2026-07-21 [Codex]</code> por una sola version consistente, en vez de abrir otro bloque nuevo para la misma autoria y fecha.",
-        "Reescribir la entrada con hechos revalidados en este run, corrigiendo cualquier detalle que no cuadraba exactamente con los logs reales o con rutas inexistentes.",
-        "No tocar ni limpiar los untracked del repo <code>diario</code> ni el checkout sucio de <code>AdmiraNext-Team</code>, porque son elementos ajenos a esta automatizacion y no deben colarse en el commit final.",
-        "Tratar <code>admira-next-web</code> y <code>xpaceos</code> como trabajo validado y publicado del dia, y <code>AdmiraNext-Team</code> como avance abierto pendiente de cierre tecnico."
+        "Reescribir la entrada con hechos revalidados en este run, corrigiendo cualquier detalle que no cuadraba exactamente con los logs reales o con rutas que no pude confirmar.",
+        "No tocar ni limpiar los untracked del repo <code>diario</code> ni los checkouts sucios externos, porque son elementos ajenos a esta automatizacion y no deben colarse en el commit final.",
+        "Limitar las referencias fuera del diario a los checkouts que si pude inspeccionar directamente en este Mac durante esta sesion."
       ]},
       { heading: "Siguientes pasos", items: [
         "Ordenar <code>AdmiraNext-Team</code>: actualizar contra <code>origin/main</code>, separar rediseño, datos y capturas, y dejar un commit publicable.",
-        "Mantener la cobertura de <code>admira-next-web</code> si se sigue tocando la secuencia de decks o el modo <code>Good</code>, porque hoy la prueba si esta protegiendo ese flujo.",
+        "Si se quiere volver a mencionar otros repos en este cierre, localizar primero sus checkouts reales en este Mac antes de resumirlos en el diario.",
         "Publicar esta correccion del diario con commit propio y comprobar despues que la entrada del <code>21 de julio de 2026</code> queda visible en la web publica."
       ]}
     ]
