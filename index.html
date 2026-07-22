@@ -350,36 +350,37 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad de Oraculo con <code>agora whoami --from Codex</code> y se dejo presencia activa con <code>agora alive --from Codex --loop</code>.",
-        "Se leyeron la memoria local de la automatizacion <code>actualizar-diario-2</code> y la copia local de la rutina canonica <code>CERRAR-EL-DIA.md</code> antes de editar el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>.",
-        "Se hizo el pre-check del repo con <code>git status --short --branch</code>, <code>git log --since='2026-07-22 00:00' --until='2026-07-22 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-22 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se comprobo que <code>2026-07-22.md</code> todavia no existia, y se creo esta entrada junto con la actualizacion correspondiente de <code>index.html</code>."
+        "En <code>AdmiraNext-Team</code> quedaron cambios locales fuertes en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> para convertir la vista del equipo en un <em>player select</em> estilo arcade, con resumen por miembro y feature principal.",
+        "En ese mismo repo se subio <code>package.json</code> a <code>0.1.3</code>, se refrescaron las capturas de <code>admira-macmini</code>, <code>admira-macbookpronegro14</code> y <code>admira-macbookair16</code>, y se anadieron <code>ip_local</code> y <code>connect_local</code> del Mac Mini en <code>data/machines.json</code>.",
+        "<code>AdmiraNext-Team-latest</code> recibio el soporte operativo paralelo: <code>src/server.js</code> ya acepta <code>idle</code> y <code>PORT</code> por entorno, y <code>src/ssh-exec.js</code> centraliza la construccion de comandos <code>osascript</code> remotos para evitar quoting fragil.",
+        "Tambien aparecio <code>INICIO_Y_CIERRE_DEL_DIA.md</code> en <code>AdmiraNext-Team-latest</code> como guia breve para abrir, vigilar y cerrar <code>AdmiraNext Control</code> sin dejar equipos bloqueados."
       ]},
       { heading: "Que se valido", items: [
-        "<code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> devolvieron <code>(sin tareas para Codex·gmail)</code> y <code>(buzon vacio para Codex·gmail)</code>.",
-        "<code>git status --short --branch</code> mostro <code>## codex-diario-2026-07-21...origin/main</code> y dos directorios sin trackear ajenos a esta automatizacion: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "<code>git log</code> del dia ya muestra <code>16e5658 Diario 2026-07-22 [Codex]</code> rebasado sobre <code>4da06cc chore: actualizar repos.html 2026-07-22 [skip ci]</code>, y <code>git reflog</code> deja la secuencia local <code>commit -&gt; pull --rebase origin main -&gt; returning to refs/heads/codex-diario-2026-07-21</code>.",
-        "<code>date</code> devolvio <code>2026-07-22 21:32:58 CEST +0200</code>, asi que esta actualizacion queda fechada y alineada con la hora local del Mac."
+        "<code>node --check public/app.js</code> en <code>AdmiraNext-Team</code> paso sin errores de sintaxis.",
+        "<code>node --check src/server.js</code> y <code>node --check src/ssh-exec.js</code> en <code>AdmiraNext-Team-latest</code> tambien pasaron, asi que los cambios de <code>idle</code>, <code>PORT</code> y AppleScript remoto no rompen el parseo base.",
+        "<code>git status --short --branch</code> confirma que <code>AdmiraNext-Team</code> sigue en <code>main...origin/main [behind 306]</code> con <code>8</code> ficheros modificados, mientras <code>AdmiraNext-Team-latest</code> mantiene <code>2</code> ficheros modificados y una guia nueva sin commit.",
+        "La incoherencia de <code>idle</code> sigue comprobada: <code>data/machines.json</code> y <code>public/app.js</code> lo usan, pero el selector de <code>public/index.html</code> de <code>AdmiraNext-Team</code> aun no ofrece esa opcion y <code>src/server.js</code> de ese checkout todavia no la acepta.",
+        "<code>package.json</code> de <code>AdmiraNext-Team</code> solo define <code>npm start</code>, asi que hoy no hay evidencia de tests o lint automatizados en ese repo."
       ]},
       { heading: "Avances", items: [
-        "El diario vuelve a tener una entrada propia para hoy con el formato de seis secciones exigido por la rutina.",
-        "<code>index.html</code> queda preparado para exponer <code>22 de julio de 2026</code> en la UI publica y en el filtro de <code>Codex</code>.",
-        "La automatizacion <code>actualizar-diario-2</code> queda retomada sobre el checkout correcto del diario, sin mezclar este trabajo con otros repos."
+        "El frente de UX del panel avanzo bastante: ya no es solo una lista de maquinas, sino una vista orientada a miembros y estado de flota con una direccion visual clara.",
+        "El frente tecnico de control remoto tambien mejoro en paralelo en <code>AdmiraNext-Team-latest</code>, sobre todo por la encapsulacion del AppleScript remoto y la aceptacion explicita de <code>idle</code>.",
+        "El workspace deja mas preparada la operativa del Mac Mini al registrar acceso local directo ademas del acceso por Tailscale."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El checkout canonico del diario sigue sin estar completamente limpio por contenido sin trackear que no pertenece a esta entrada.",
-        "<code>/Users/csilvasantin/Documents/Admirito</code> no es un repo Git en este entorno, asi que no se puede usar su historial como fuente verificable para resumir actividad del dia.",
-        "El estado visible de hoy en <code>git log</code> del diario solo reflejaba trabajo sobre la fecha anterior, por lo que hizo falta abrir explicitamente la entrada nueva de <code>2026-07-22</code>."
+        "<code>AdmiraNext-Team</code> acumula deuda de sincronizacion seria: esta <code>behind 306</code> respecto a <code>origin/main</code>, asi que no conviene publicar estos cambios mezclados sin ordenar la base.",
+        "El estado <code>idle</code> quedo partido entre datos, frontend y backend: ya existe en algunos sitios, pero no en todo el flujo manual de cambio de estado.",
+        "Los cambios de hoy siguen sin commit en ambos checkouts de <code>AdmiraNext-Team</code>, lo que mezcla rediseño visual, operativa SSH y capturas en un mismo estado sucio."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Registrar un cierre breve y verificable centrado en esta sesion, en vez de inventar avances externos no trazables desde el repo <code>diario</code>.",
-        "No tocar ni limpiar los directorios sin trackear del checkout canonico porque son ajenos a esta automatizacion.",
-        "Mantener la actualizacion de hoy limitada a <code>2026-07-22.md</code> e <code>index.html</code> para respetar la regla de un fichero por fecha."
+        "Reflejar hoy sobre todo trabajo local de <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>, porque es donde hay evidencia clara de actividad real aunque todavia no este publicada.",
+        "Tratar <code>AdmiraNext-Team</code> como linea de UX/datos y <code>AdmiraNext-Team-latest</code> como linea de backend/control hasta que se reconcilien.",
+        "No tocar ni limpiar esos repos desde esta automatizacion; solo documentar su estado y publicar el diario."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add</code>, <code>git commit</code> y <code>git push</code> de la entrada de hoy desde <code>/Users/csilvasantin/Claude/diario/</code>.",
-        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra <code>22 de julio de 2026</code>.",
-        "Seguir usando este checkout canonico en futuras actualizaciones del diario para evitar cruces con otros clones."
+        "Reconciliar <code>AdmiraNext-Team</code> con <code>origin/main</code> antes de intentar publicar el rediseño arcade.",
+        "Cerrar la coherencia de <code>idle</code> en todo el flujo: selector HTML, backend del checkout principal y sincronizacion manual.",
+        "Separar en commits pequenos los cambios de UI, datos de maquinas y robustez SSH para que el siguiente push sea revisable."
       ]}
     ]
   },
