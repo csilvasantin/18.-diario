@@ -350,34 +350,35 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
-        "En este repo se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-23 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se revisaron <code>2026-07-22.md</code> e <code>index.html</code>, y se creo esta entrada <code>2026-07-23.md</code> junto con su reflejo en la UI publica."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria local de la automatizacion <code>actualizar-diario-2</code> y se revisaron <code>README.md</code>, <code>CERRAR-EL-DIA.md</code> y la entrada previa <code>2026-07-22.md</code> para seguir la rutina vigente del diario.",
+        "En el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-23 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se comprobo que no existia <code>2026-07-23.md</code>, se hizo <code>git fetch origin main</code> y despues <code>git pull --rebase origin main</code>, incorporando <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code> antes de escribir la entrada de hoy.",
+        "Se creo <code>2026-07-23.md</code> y se anadio esta entrada al array <code>entries</code> para dejar visible la novedad en la publicacion HTML."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git rev-list --left-right --count HEAD...origin/main</code> devolvio <code>0 0</code>, asi que el checkout activo <code>codex-diario-2026-07-21</code> quedo alineado con <code>origin/main</code>.",
-        "<code>git status --short --branch</code> mostro dos directorios sin trackear ajenos a esta automatizacion: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "<code>git log</code> del 2026-07-23 confirmo actividad previa real en este repo con <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code> y <code>6105267 Diario 2026-07-22 [Codex]</code>, y <code>date</code> marco esta corrida en <code>2026-07-23 21:32:33 CEST +0200</code>."
+        "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-21...origin/main</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "<code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo con <code>6105267 Diario 2026-07-22 [Codex]</code> y, tras sincronizar, <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-23 00:00'</code> confirmo el commit de las <code>00:03:25 +0200</code> para el cierre anterior y la secuencia de <code>pull --rebase origin main</code> ejecutada en esta corrida.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-23 21:31:37 CEST +0200</code> durante el pre-check de esta sesion."
       ]},
       { heading: "Avances", items: [
-        "Queda creada la entrada de hoy en <code>2026-07-23.md</code>.",
-        "<code>index.html</code> queda actualizado para que la fecha aparezca bajo <code>Todos</code> y <code>Codex</code>.",
-        "El cierre queda listo para commit, push y verificacion publica."
+        "La fecha <code>2026-07-23</code> queda registrada en un unico fichero Markdown firmado por <code>Codex</code>, sin duplicar la fecha.",
+        "<code>index.html</code> vuelve a quedar alineado con el Markdown del dia para que la UI publica muestre la nueva entrada bajo el filtro <code>Codex</code>.",
+        "El cierre de hoy ya parte de la base remota mas reciente disponible en <code>origin/main</code>, incluyendo la actualizacion automatica de <code>repos.html</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El checkout canonico sigue sin estar completamente limpio por los dos untracked ya existentes.",
-        "La rama activa sigue siendo <code>codex-diario-2026-07-21</code>, no <code>main</code>, aunque esta sincronizada con remoto.",
-        "La UI del diario depende de mantener el bloque de <code>entries</code> en <code>index.html</code> sincronizado manualmente con cada nueva fecha."
+        "El checkout canonico no estaba totalmente limpio al empezar por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "La rama activa durante la sesion no era <code>main</code>, sino <code>codex-diario-2026-07-21</code>, aunque sigue siguiendo a <code>origin/main</code>.",
+        "<code>origin/main</code> avanzo durante la corrida, asi que no era seguro editar sin sincronizar primero."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Registrar solo hechos verificados en esta sesion y en el historial real del repo <code>diario</code>.",
-        "No tocar ni limpiar <code>backup-yokup-2026-07-21/</code> ni <code>comparativa-clis/</code> porque son ajenos a esta automatizacion.",
-        "Publicar la entrada desde el checkout canonico en vez de usar otros clones del diario."
+        "Sincronizar primero con <code>origin/main</code> y escribir despues sobre <code>34db2c0</code>, en vez de dejar la entrada de hoy sobre una base antigua.",
+        "Mantener intactos los directorios sin trackear y limitar el commit a <code>2026-07-23.md</code> e <code>index.html</code>.",
+        "Registrar solo hechos verificables del propio repo <code>diario</code> y de esta sesion real."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add 2026-07-23.md index.html</code>, crear <code>Diario 2026-07-23 [Codex]</code> y empujarlo a <code>origin main</code>.",
-        "Verificar que <code>https://csilvasantin.github.io/diario/</code> responde y muestra <code>23 de julio de 2026</code>.",
-        "Revisar aparte si conviene limpiar o ignorar los untracked persistentes para futuras corridas."
+        "Revisar el diff de <code>2026-07-23.md</code> e <code>index.html</code>, hacer <code>git add</code>, crear el commit del dia y empujarlo a <code>origin main</code>.",
+        "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y deja visible la entrada del <code>23 de julio de 2026</code>."
       ]}
     ]
   },
