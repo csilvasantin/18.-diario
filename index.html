@@ -350,39 +350,33 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en <code>/Users/csilvasantin/Documents/Admirito</code>, con foco en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>admira-next-web</code> y <code>32.-ConsejoAdmiraNextGame</code>, usando <code>git log</code>, <code>git status</code> y <code>git diff --stat</code>.",
-        "En <code>AdmiraNext-Team</code> se detecto una remodelacion local grande sin commit: version <code>0.1.3</code>, nueva portada arcade tipo \"player select\", tarjetas de miembros derivadas de <code>machines.json</code>, nuevas capturas y datos SSH locales para el Mac Mini.",
-        "En <code>admira-next-web</code> quedaron verificados ocho commits de hoy sobre presentaciones, creditos, control remoto, auditor visual, revision de traducciones e impacto/signage; en <code>32.-ConsejoAdmiraNextGame</code> quedaron verificados seis commits sobre asignaciones, ideas, modo degradado y el cambio de <code>workers.dev</code> a <code>api.yokup.com</code>.",
-        "Se actualizo esta unica entrada del <code>2026-07-23</code> en vez de crear otra duplicada y se sincronizo tambien <code>index.html</code>."
+        "Se reviso la actividad de hoy en <code>AdmiraNext-Team</code>, con foco en el checkout anidado <code>AdmiraNext-Team/AdmiraNext-Team</code>, que es donde quedo el trabajo local verificable del dia.",
+        "En ese checkout se anadieron controles de energia para las maquinas: <code>src/server.js</code> incorpora <code>POST /api/machines/:id/power</code> y <code>src/ssh-exec.js</code> suma <code>sleepMachine</code>, <code>wakeMachine</code> y el mapa <code>WOL_MACS</code> para wake-on-LAN.",
+        "<code>data/machines.json</code> se actualizo para reflejar estados, <code>lastSeen</code>, notas de <code>Sleep enviado desde dashboard</code> y la MAC de <code>admira-macbookpronegro14</code>; en el checkout superior tambien quedaron sin trackear dos capturas OCR de <code>admira-macmini</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>AdmiraNext-Team</code> no tiene commits fechados hoy, pero si un working tree amplio con cambios en <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code>, <code>data/machines.json</code> y tres screenshots.",
-        "<code>admira-next-web</code> si tuvo actividad confirmada hoy con commits como <code>53df907 feat: generador de creditos para presentaciones</code>, <code>b7f8d4a feat(presentations): add secure cross-device remote</code> y <code>67046b6 feat(presentations): add narrative slide media</code>.",
-        "<code>32.-ConsejoAdmiraNextGame</code> tuvo actividad confirmada hoy con commits como <code>e38d229</code> sobre miembro↔maquina, <code>f33c0c9</code> para el modulo Ideas y <code>da607ea</code> para mover el worker host a <code>api.yokup.com</code>.",
-        "El workspace sigue con WIP sin cerrar en varios repos: <code>AdmiraNext-Team</code>, <code>32.-ConsejoAdmiraNextGame</code>, <code>ACE-Step</code>, <code>csilvasantin-github-pages-clean</code> y un <code>node_modules/</code> sin trackear dentro de <code>admira-next-web</code>."
+        "<code>node --check src/server.js</code> y <code>node --check src/ssh-exec.js</code> en <code>AdmiraNext-Team/AdmiraNext-Team</code> pasaron, asi que el codigo nuevo parsea correctamente.",
+        "<code>git status --short --branch</code> confirmo que el checkout anidado mantiene exactamente <code>3</code> ficheros modificados (<code>data/machines.json</code>, <code>src/server.js</code>, <code>src/ssh-exec.js</code>) y que el checkout superior mantiene <code>data/machines.json</code> modificado mas el repo anidado y dos JPG OCR sin trackear.",
+        "No aparecieron commits fechados el <code>2026-07-23</code> ni en el diario ni en los checkouts revisados, asi que la evidencia de hoy es trabajo local sin publicar."
       ]},
       { heading: "Avances", items: [
-        "Queda registrado que el frente mas visible del dia fue producto en <code>admira-next-web</code> y <code>ConsejoAdmiraNextGame</code>, mientras <code>AdmiraNext-Team</code> sigue como rediseño local aun no publicado.",
-        "Tambien queda anotado el alcance funcional real: generador de creditos, remoto seguro entre dispositivos, auditor visual privado, revision multilenguaje, narrativas de impacto y resiliencia del cockpit de Yokup.",
-        "La entrada de hoy pasa de describir solo la automatizacion del diario a resumir trabajo util del workspace."
+        "El panel de control queda mas cerca de operar suspension y despertar remoto desde el dashboard sin salir al terminal.",
+        "El workspace ya conserva parte de la telemetria operativa del dia en <code>data/machines.json</code>, sobre todo cambios de estado hacia <code>offline</code> y notas de sleep enviadas desde el panel."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> concentra mas de mil lineas de diff y cambios binarios en screenshots, pero sin commit de hoy; ahora mismo es facil perder contexto o mezclarlo con otras tareas.",
-        "<code>32.-ConsejoAdmiraNextGame</code> sigue con cambios locales abiertos en <code>mcp/index.html</code> y <code>mcp/llms.txt</code>, ademas de ficheros sin trackear, asi que el estado del repo no esta limpio tras los commits del dia.",
-        "El propio historial de <code>ConsejoAdmiraNextGame</code> refleja un problema operativo real con <code>workers.dev</code> en algunos ISPs de Espana, que obligo a mover el host del worker a <code>api.yokup.com</code>.",
-        "El diario sigue dependiendo de mantener el Markdown y el bloque <code>entries</code> de <code>index.html</code> sincronizados a mano."
+        "<code>src/server.js</code> quedo con dos handlers distintos para <code>POST /api/machines/:id/power</code>; el primero devuelve antes y deja el segundo bloque practicamente inalcanzable.",
+        "Esa duplicacion tambien deja en duda protecciones previstas en el segundo bloque, como impedir el sleep de <code>admira-macmini</code>, porque la primera implementacion no aplica esa restriccion.",
+        "El trabajo de hoy sigue sin commit y repartido entre el checkout superior y el anidado, lo que complica revisar o publicar los cambios con seguridad."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tratar <code>AdmiraNext-Team</code> como trabajo en curso y no como entrega cerrada, porque hoy no hay evidencia de commit o validacion final en ese repo.",
-        "Priorizar en la entrada los hechos contrastados por historial Git y diff real, en vez de reciclar texto generico de la automatizacion anterior.",
-        "Mantener una sola entrada para <code>2026-07-23 [Codex]</code>, sustituyendo el contenido previo en lugar de anadir otra seccion paralela.",
-        "No limpiar ni reorganizar otros repos del workspace desde esta automatizacion; solo documentar su estado real."
+        "Reflejar el dia sobre evidencia local verificable y no sobre intenciones: controles de energia, actualizacion de estados y residuos OCR del workspace.",
+        "Senalar la duplicacion de <code>/power</code> como riesgo principal de la jornada, porque afecta al comportamiento real mas que al parseo.",
+        "No modificar <code>AdmiraNext-Team</code> desde esta automatizacion; solo dejar constancia del estado actual en el diario."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Cerrar <code>AdmiraNext-Team</code> con un commit propio y una validacion minima antes de mezclar ese rediseño con mas cambios del workspace.",
-        "En <code>32.-ConsejoAdmiraNextGame</code>, decidir si los cambios abiertos de <code>mcp/</code> forman parte de una nueva entrega o deben separarse del trabajo ya publicado hoy.",
-        "Consolidar en <code>admira-next-web</code> la verificacion final de los flujos nuevos de presentaciones y creditos si aun falta QA manual.",
-        "Hacer <code>git add 2026-07-23.md index.html</code>, crear el commit del diario, empujarlo a <code>origin main</code> y verificar la publicacion en <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+        "Unificar <code>src/server.js</code> en una sola implementacion de <code>/power</code> y decidir explicitamente si <code>admira-macmini</code> puede o no recibir sleep remoto.",
+        "Probar el flujo real de <code>sleep</code> y <code>wake</code> contra una maquina no critica antes de publicar estos cambios.",
+        "Separar en commits pequenos la logica de energia, los cambios de <code>data/machines.json</code> y los artefactos OCR para que el siguiente push sea revisable."
       ]}
     ]
   },
