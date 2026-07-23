@@ -350,35 +350,39 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria local de la automatizacion <code>actualizar-diario-2</code> y se revisaron <code>README.md</code>, <code>CERRAR-EL-DIA.md</code> y la entrada previa <code>2026-07-22.md</code> para seguir la rutina vigente del diario.",
-        "En el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-23 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se comprobo que no existia <code>2026-07-23.md</code>, se hizo <code>git fetch origin main</code> y despues <code>git pull --rebase origin main</code>, incorporando <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code> antes de escribir la entrada de hoy.",
-        "Se creo <code>2026-07-23.md</code> y se anadio esta entrada al array <code>entries</code> para dejar visible la novedad en la publicacion HTML."
+        "Se reviso la actividad de hoy en <code>/Users/csilvasantin/Documents/Admirito</code>, con foco en <code>github-csilvasantin/AdmiraNext-Team</code>, <code>admira-next-web</code> y <code>32.-ConsejoAdmiraNextGame</code>, usando <code>git log</code>, <code>git status</code> y <code>git diff --stat</code>.",
+        "En <code>AdmiraNext-Team</code> se detecto una remodelacion local grande sin commit: version <code>0.1.3</code>, nueva portada arcade tipo \"player select\", tarjetas de miembros derivadas de <code>machines.json</code>, nuevas capturas y datos SSH locales para el Mac Mini.",
+        "En <code>admira-next-web</code> quedaron verificados ocho commits de hoy sobre presentaciones, creditos, control remoto, auditor visual, revision de traducciones e impacto/signage; en <code>32.-ConsejoAdmiraNextGame</code> quedaron verificados seis commits sobre asignaciones, ideas, modo degradado y el cambio de <code>workers.dev</code> a <code>api.yokup.com</code>.",
+        "Se actualizo esta unica entrada del <code>2026-07-23</code> en vez de crear otra duplicada y se sincronizo tambien <code>index.html</code>."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-21...origin/main</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "<code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code> mostro actividad real previa de hoy en este repo con <code>6105267 Diario 2026-07-22 [Codex]</code> y, tras sincronizar, <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-23 00:00'</code> confirmo el commit de las <code>00:03:25 +0200</code> para el cierre anterior y la secuencia de <code>pull --rebase origin main</code> ejecutada en esta corrida.",
-        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-23 21:31:37 CEST +0200</code> durante el pre-check de esta sesion."
+        "<code>AdmiraNext-Team</code> no tiene commits fechados hoy, pero si un working tree amplio con cambios en <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code>, <code>data/machines.json</code> y tres screenshots.",
+        "<code>admira-next-web</code> si tuvo actividad confirmada hoy con commits como <code>53df907 feat: generador de creditos para presentaciones</code>, <code>b7f8d4a feat(presentations): add secure cross-device remote</code> y <code>67046b6 feat(presentations): add narrative slide media</code>.",
+        "<code>32.-ConsejoAdmiraNextGame</code> tuvo actividad confirmada hoy con commits como <code>e38d229</code> sobre miembro↔maquina, <code>f33c0c9</code> para el modulo Ideas y <code>da607ea</code> para mover el worker host a <code>api.yokup.com</code>.",
+        "El workspace sigue con WIP sin cerrar en varios repos: <code>AdmiraNext-Team</code>, <code>32.-ConsejoAdmiraNextGame</code>, <code>ACE-Step</code>, <code>csilvasantin-github-pages-clean</code> y un <code>node_modules/</code> sin trackear dentro de <code>admira-next-web</code>."
       ]},
       { heading: "Avances", items: [
-        "La fecha <code>2026-07-23</code> queda registrada en un unico fichero Markdown firmado por <code>Codex</code>, sin duplicar la fecha.",
-        "<code>index.html</code> vuelve a quedar alineado con el Markdown del dia para que la UI publica muestre la nueva entrada bajo el filtro <code>Codex</code>.",
-        "El cierre de hoy ya parte de la base remota mas reciente disponible en <code>origin/main</code>, incluyendo la actualizacion automatica de <code>repos.html</code>."
+        "Queda registrado que el frente mas visible del dia fue producto en <code>admira-next-web</code> y <code>ConsejoAdmiraNextGame</code>, mientras <code>AdmiraNext-Team</code> sigue como rediseño local aun no publicado.",
+        "Tambien queda anotado el alcance funcional real: generador de creditos, remoto seguro entre dispositivos, auditor visual privado, revision multilenguaje, narrativas de impacto y resiliencia del cockpit de Yokup.",
+        "La entrada de hoy pasa de describir solo la automatizacion del diario a resumir trabajo util del workspace."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El checkout canonico no estaba totalmente limpio al empezar por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "La rama activa durante la sesion no era <code>main</code>, sino <code>codex-diario-2026-07-21</code>, aunque sigue siguiendo a <code>origin/main</code>.",
-        "<code>origin/main</code> avanzo durante la corrida, asi que no era seguro editar sin sincronizar primero."
+        "<code>AdmiraNext-Team</code> concentra mas de mil lineas de diff y cambios binarios en screenshots, pero sin commit de hoy; ahora mismo es facil perder contexto o mezclarlo con otras tareas.",
+        "<code>32.-ConsejoAdmiraNextGame</code> sigue con cambios locales abiertos en <code>mcp/index.html</code> y <code>mcp/llms.txt</code>, ademas de ficheros sin trackear, asi que el estado del repo no esta limpio tras los commits del dia.",
+        "El propio historial de <code>ConsejoAdmiraNextGame</code> refleja un problema operativo real con <code>workers.dev</code> en algunos ISPs de Espana, que obligo a mover el host del worker a <code>api.yokup.com</code>.",
+        "El diario sigue dependiendo de mantener el Markdown y el bloque <code>entries</code> de <code>index.html</code> sincronizados a mano."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Sincronizar primero con <code>origin/main</code> y escribir despues sobre <code>34db2c0</code>, en vez de dejar la entrada de hoy sobre una base antigua.",
-        "Mantener intactos los directorios sin trackear y limitar el commit a <code>2026-07-23.md</code> e <code>index.html</code>.",
-        "Registrar solo hechos verificables del propio repo <code>diario</code> y de esta sesion real."
+        "Tratar <code>AdmiraNext-Team</code> como trabajo en curso y no como entrega cerrada, porque hoy no hay evidencia de commit o validacion final en ese repo.",
+        "Priorizar en la entrada los hechos contrastados por historial Git y diff real, en vez de reciclar texto generico de la automatizacion anterior.",
+        "Mantener una sola entrada para <code>2026-07-23 [Codex]</code>, sustituyendo el contenido previo en lugar de anadir otra seccion paralela.",
+        "No limpiar ni reorganizar otros repos del workspace desde esta automatizacion; solo documentar su estado real."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Revisar el diff de <code>2026-07-23.md</code> e <code>index.html</code>, hacer <code>git add</code>, crear el commit del dia y empujarlo a <code>origin main</code>.",
-        "Comprobar despues del push que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y deja visible la entrada del <code>23 de julio de 2026</code>."
+        "Cerrar <code>AdmiraNext-Team</code> con un commit propio y una validacion minima antes de mezclar ese rediseño con mas cambios del workspace.",
+        "En <code>32.-ConsejoAdmiraNextGame</code>, decidir si los cambios abiertos de <code>mcp/</code> forman parte de una nueva entrega o deben separarse del trabajo ya publicado hoy.",
+        "Consolidar en <code>admira-next-web</code> la verificacion final de los flujos nuevos de presentaciones y creditos si aun falta QA manual.",
+        "Hacer <code>git add 2026-07-23.md index.html</code>, crear el commit del diario, empujarlo a <code>origin main</code> y verificar la publicacion en <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
       ]}
     ]
   },
