@@ -350,33 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso la actividad de hoy en <code>AdmiraNext-Team</code>, con foco en el checkout anidado <code>AdmiraNext-Team/AdmiraNext-Team</code>, que es donde quedo el trabajo local verificable del dia.",
-        "En ese checkout se anadieron controles de energia para las maquinas: <code>src/server.js</code> incorpora <code>POST /api/machines/:id/power</code> y <code>src/ssh-exec.js</code> suma <code>sleepMachine</code>, <code>wakeMachine</code> y el mapa <code>WOL_MACS</code> para wake-on-LAN.",
-        "<code>data/machines.json</code> se actualizo para reflejar estados, <code>lastSeen</code>, notas de <code>Sleep enviado desde dashboard</code> y la MAC de <code>admira-macbookpronegro14</code>; en el checkout superior tambien quedaron sin trackear dos capturas OCR de <code>admira-macmini</code>."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria local de <code>cerrar-el-dia</code> y se contrastaron la fuente canonica publicada y la copia local de <code>CERRAR-EL-DIA.md</code>.",
+        "Se hizo el pre-check exigido en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-23 00:00'</code> y <code>date</code>.",
+        "Se hizo <code>git fetch origin</code> y despues <code>git pull --rebase origin main</code>, que en este caso fue un fast-forward de <code>36dfa05</code> a <code>017c31c</code>, antes de reescribir esta entrada del <code>2026-07-23</code> y su espejo en <code>index.html</code> sin duplicar la fecha."
       ]},
       { heading: "Que se valido", items: [
-        "<code>node --check src/server.js</code> y <code>node --check src/ssh-exec.js</code> en <code>AdmiraNext-Team/AdmiraNext-Team</code> pasaron, asi que el codigo nuevo parsea correctamente.",
-        "<code>git status --short --branch</code> confirmo que el checkout anidado mantiene exactamente <code>3</code> ficheros modificados (<code>data/machines.json</code>, <code>src/server.js</code>, <code>src/ssh-exec.js</code>) y que el checkout superior mantiene <code>data/machines.json</code> modificado mas el repo anidado y dos JPG OCR sin trackear.",
-        "No aparecieron commits fechados el <code>2026-07-23</code> ni en el diario ni en los checkouts revisados, asi que la evidencia de hoy es trabajo local sin publicar."
+        "El pre-check confirmo que este checkout no estaba en <code>main</code>, sino en la rama <code>codex-diario-2026-07-21</code>, y que el worktree tenia dos directorios sin seguimiento: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "El historial del dia en este repo ya incluia commits reales de hoy como <code>86c1bf5 Diario 2026-07-23 [Claude]</code>, <code>36dfa05 Diario 2026-07-23 [Codex]</code>, <code>db02bb5 fix: restore index.html 2026-07-23 [Codex]</code> y <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code>.",
+        "<code>git fetch origin</code> mostro que <code>origin/main</code> habia avanzado a <code>017c31c docs: revise Codex 2026-07-23 Admirito [skip ci]</code>, y <code>git pull --rebase origin main</code> confirmo que hacia falta incorporar ese commit remoto antes de publicar."
       ]},
       { heading: "Avances", items: [
-        "El panel de control queda mas cerca de operar suspension y despertar remoto desde el dashboard sin salir al terminal.",
-        "El workspace ya conserva parte de la telemetria operativa del dia en <code>data/machines.json</code>, sobre todo cambios de estado hacia <code>offline</code> y notas de sleep enviadas desde el panel."
+        "La rutina de cierre queda ejecutada otra vez sobre evidencia actual del repo, con la entrada diaria y <code>index.html</code> sincronizados con el estado verificado de este run.",
+        "La rama de trabajo queda alineada con <code>origin/main</code>, lo que elimina el bloqueo inmediato de publicacion que existia antes del fast-forward.",
+        "El diario conserva una sola entrada <code>2026-07-23 [Codex]</code> en lugar de multiplicar bloques del mismo autor para la misma fecha."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>src/server.js</code> quedo con dos handlers distintos para <code>POST /api/machines/:id/power</code>; el primero devuelve antes y deja el segundo bloque practicamente inalcanzable.",
-        "Esa duplicacion tambien deja en duda protecciones previstas en el segundo bloque, como impedir el sleep de <code>admira-macmini</code>, porque la primera implementacion no aplica esa restriccion.",
-        "El trabajo de hoy sigue sin commit y repartido entre el checkout superior y el anidado, lo que complica revisar o publicar los cambios con seguridad."
+        "El checkout pedido como \"limpio\" no lo estaba del todo al empezar: habia dos rutas <code>??</code> no relacionadas con el diario en la raiz del repo.",
+        "La rama local seguia siendo <code>codex-diario-2026-07-21</code> en vez de <code>main</code>, lo que se aparta de la rutina y obligo a revisar con cuidado como publicar sin reescribir historia local.",
+        "<code>origin/main</code> ya tenia un commit nuevo de documentacion del mismo dia; sin incorporarlo primero, el siguiente push del diario habria quedado bloqueado o rechazado."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Reflejar el dia sobre evidencia local verificable y no sobre intenciones: controles de energia, actualizacion de estados y residuos OCR del workspace.",
-        "Senalar la duplicacion de <code>/power</code> como riesgo principal de la jornada, porque afecta al comportamiento real mas que al parseo.",
-        "No modificar <code>AdmiraNext-Team</code> desde esta automatizacion; solo dejar constancia del estado actual en el diario."
+        "Mantener una sola entrada para <code>2026-07-23 [Codex]</code> y sustituir su contenido por hechos contrastados de este cierre, en vez de anadir otra seccion paralela del mismo autor.",
+        "No tocar ni limpiar <code>backup-yokup-2026-07-21/</code> ni <code>comparativa-clis/</code> desde esta automatizacion, porque son residuos ajenos al objetivo inmediato del diario.",
+        "Rebasar primero contra <code>origin/main</code> y solo despues editar y publicar, para preservar el historial remoto y evitar un push inconsistente."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Unificar <code>src/server.js</code> en una sola implementacion de <code>/power</code> y decidir explicitamente si <code>admira-macmini</code> puede o no recibir sleep remoto.",
-        "Probar el flujo real de <code>sleep</code> y <code>wake</code> contra una maquina no critica antes de publicar estos cambios.",
-        "Separar en commits pequenos la logica de energia, los cambios de <code>data/machines.json</code> y los artefactos OCR para que el siguiente push sea revisable."
+        "Hacer <code>git add 2026-07-23.md index.html</code>, crear el commit <code>Diario 2026-07-23 [Codex]</code> y empujarlo a <code>origin main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y sigue mostrando la entrada de <code>2026-07-23</code> tras la publicacion.",
+        "Dejar reportado al usuario que el repo sigue teniendo dos directorios sin seguimiento aunque la actualizacion del diario haya quedado publicada."
       ]}
     ]
   },
