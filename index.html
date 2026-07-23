@@ -347,6 +347,44 @@ const entries = [
     date: "2026-07-23",
     title: "23 de julio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se disparo la rutina programada de Claude Code (sesion remota) para subir a GitHub el trabajo hecho con Claude Code y actualizar el diario y <code>repos.html</code>.",
+        "En el checkout <code>/home/user/18.-diario/</code> (rama <code>main-y92h1c</code>) se ejecuto <code>git status</code>, <code>git log --oneline -10</code>, <code>git branch -a</code>, <code>git log --all --oneline --since='2026-07-23 00:00' --until='2026-07-23 23:59:59'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se leyeron <code>CLAUDE.md</code>, <code>CERRAR-EL-DIA.md</code>, <code>2026-07-23.md</code> y el bloque <code>entries</code> de <code>index.html</code> para confirmar si Claude tenia trabajo pendiente de firmar hoy."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status</code> devolvio <code>On branch main-y92h1c</code> y <code>nothing to commit, working tree clean</code>.",
+        "<code>git log</code> del 2026-07-23 mostro que toda la actividad del dia en este repo era de Codex: <code>db02bb5</code>, <code>74857df</code>, <code>1e7d407</code> y <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code>.",
+        "<code>git log --author=Claude --since='2026-07-01'</code> no devolvio commits, confirmando que Claude Code no habia hecho trabajo propio en este repo hoy.",
+        "<code>date</code> en la sesion remota marco <code>2026-07-23 21:07:19 UTC +0000</code>."
+      ]},
+      { heading: "Avances", items: [
+        "Queda registrado por escrito que Claude Code no aporto cambios nuevos al repo <code>18.-diario</code> durante el 2026-07-23 mas alla de esta anotacion de control.",
+        "El cierre firmado por Codex queda ya publicado en <code>origin/main-y92h1c</code> y visible bajo el filtro <code>Codex</code> en la UI publica.",
+        "<code>repos.html</code> esta al dia gracias al workflow <code>update-repos.yml</code> (commit <code>34db2c0</code> de hoy con <code>[skip ci]</code>)."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "Ninguno tecnico: la rutina programada se encontro el repo limpio y sin trabajo Claude Code pendiente que subir.",
+        "Sigue vigente el mismo aviso del cierre de Codex: el checkout canonico local conserva untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>, ajenos a esta rutina."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Cumplir la regla \"si un dia no se ha hecho nada, se documenta y ya esta\" anadiendo esta entrada <code>[Claude]</code> al mismo fichero <code>2026-07-23.md</code>, separada por <code>---</code>, en vez de crear un fichero nuevo.",
+        "Reflejar la entrada <code>[Claude]</code> en <code>index.html</code> para que aparezca bajo los filtros <code>Todos</code> y <code>Claude</code>.",
+        "No modificar el bloque <code>[Codex]</code> ya publicado ni tocar <code>repos.html</code>, que se regenera solo."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add 2026-07-23.md index.html</code>, commit <code>Diario 2026-07-23 [Claude]</code> y push a <code>origin main-y92h1c</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> sigue respondiendo y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> muestra la actividad del dia.",
+        "Abrir un PR draft en <code>csilvasantin/18.-diario</code> desde <code>main-y92h1c</code> con este cierre si aun no existe uno abierto."
+      ]}
+    ]
+  },
+  {
+    date: "2026-07-23",
+    title: "23 de julio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
