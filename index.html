@@ -350,34 +350,37 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria local de <code>cerrar-el-dia</code> y se contrastaron la fuente canonica publicada y la copia local de <code>CERRAR-EL-DIA.md</code>.",
-        "Se hizo el pre-check exigido en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-23 00:00'</code> y <code>date</code>.",
-        "Se hizo <code>git fetch origin</code> y despues <code>git pull --rebase origin main</code>, que en este caso fue un fast-forward de <code>36dfa05</code> a <code>017c31c</code>, antes de reescribir esta entrada del <code>2026-07-23</code> y su espejo en <code>index.html</code> sin duplicar la fecha."
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+        "Se contrastaron la fuente canonica en GitHub <code>CERRAR-EL-DIA.md</code> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-23 00:00' --until='2026-07-23 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-23 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Tras detectar un commit remoto nuevo, se ejecuto <code>git pull --rebase origin main</code>, se reescribio esta entrada con la plantilla de seis secciones y se sincronizo su reflejo en <code>index.html</code>."
       ]},
       { heading: "Que se valido", items: [
-        "El pre-check confirmo que este checkout no estaba en <code>main</code>, sino en la rama <code>codex-diario-2026-07-21</code>, y que el worktree tenia dos directorios sin seguimiento: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "El historial del dia en este repo ya incluia commits reales de hoy como <code>86c1bf5 Diario 2026-07-23 [Claude]</code>, <code>36dfa05 Diario 2026-07-23 [Codex]</code>, <code>db02bb5 fix: restore index.html 2026-07-23 [Codex]</code> y <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code>.",
-        "<code>git fetch origin</code> mostro que <code>origin/main</code> habia avanzado a <code>017c31c docs: revise Codex 2026-07-23 Admirito [skip ci]</code>, y <code>git pull --rebase origin main</code> confirmo que hacia falta incorporar ese commit remoto antes de publicar."
+        "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-21...origin/main</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "<code>git log</code> del 2026-07-23 confirmo actividad real en este repo con <code>34db2c0 chore: actualizar repos.html 2026-07-23 [skip ci]</code>, <code>1e7d407 Diario 2026-07-23 [Codex]</code>, <code>74857df Fix diario 2026-07-23 [Codex]</code>, <code>db02bb5 fix: restore index.html 2026-07-23 [Codex]</code>, <code>86c1bf5 Diario 2026-07-23 [Claude]</code>, <code>36dfa05 Diario 2026-07-23 [Codex]</code> y <code>017c31c docs: revise Codex 2026-07-23 Admirito [skip ci]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-23 00:00'</code> confirmo dos <code>pull --rebase origin main</code> hoy, incluido el fast-forward de esta corrida a <code>017c31c</code>.",
+        "<code>date</code> marco esta ejecucion en <code>2026-07-23 23:56:58 CEST +0200</code>."
       ]},
       { heading: "Avances", items: [
-        "La rutina de cierre queda ejecutada otra vez sobre evidencia actual del repo, con la entrada diaria y <code>index.html</code> sincronizados con el estado verificado de este run.",
-        "La rama de trabajo queda alineada con <code>origin/main</code>, lo que elimina el bloqueo inmediato de publicacion que existia antes del fast-forward.",
-        "El diario conserva una sola entrada <code>2026-07-23 [Codex]</code> en lugar de multiplicar bloques del mismo autor para la misma fecha."
+        "<code>2026-07-23.md</code> vuelve a describir solo hechos sostenidos por <code>git</code> y por el trabajo real de esta sesion de cierre.",
+        "<code>index.html</code> queda alineado con esta misma version para que la UI publica muestre el cierre bajo el filtro <code>Codex</code>.",
+        "El repo queda preparado para el commit final del cierre de hoy sin abrir otra fecha ni otra entrada paralela de Codex."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El checkout pedido como \"limpio\" no lo estaba del todo al empezar: habia dos rutas <code>??</code> no relacionadas con el diario en la raiz del repo.",
-        "La rama local seguia siendo <code>codex-diario-2026-07-21</code> en vez de <code>main</code>, lo que se aparta de la rutina y obligo a revisar con cuidado como publicar sin reescribir historia local.",
-        "<code>origin/main</code> ya tenia un commit nuevo de documentacion del mismo dia; sin incorporarlo primero, el siguiente push del diario habria quedado bloqueado o rechazado."
+        "El checkout canonico no estaba limpio al empezar por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "La rama activa sigue siendo <code>codex-diario-2026-07-21</code>, no <code>main</code>, aunque tras el rebase quedo actualizada respecto a <code>origin/main</code>.",
+        "La entrada previa de <code>2026-07-23 [Codex]</code> mezclaba afirmaciones sobre otros repos del workspace que no quedaban justificadas por el pre-check literal de esta rutina.",
+        "El diario sigue dependiendo de mantener a mano el Markdown y el bloque <code>entries</code> de <code>index.html</code> sincronizados."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Mantener una sola entrada para <code>2026-07-23 [Codex]</code> y sustituir su contenido por hechos contrastados de este cierre, en vez de anadir otra seccion paralela del mismo autor.",
-        "No tocar ni limpiar <code>backup-yokup-2026-07-21/</code> ni <code>comparativa-clis/</code> desde esta automatizacion, porque son residuos ajenos al objetivo inmediato del diario.",
-        "Rebasar primero contra <code>origin/main</code> y solo despues editar y publicar, para preservar el historial remoto y evitar un push inconsistente."
+        "Reescribir la entrada vigente de <code>2026-07-23 [Codex]</code> en lugar de anadir otro bloque para la misma fecha y autoria.",
+        "Limitar el cierre a <code>2026-07-23.md</code> e <code>index.html</code>, sin tocar los untracked existentes ni otros checkouts.",
+        "Registrar unicamente hechos verificables en el repo <code>diario</code>, incluso cuando eso contradice texto previo de la propia entrada."
       ]},
       { heading: "Siguientes pasos", items: [
         "Hacer <code>git add 2026-07-23.md index.html</code>, crear el commit <code>Diario 2026-07-23 [Codex]</code> y empujarlo a <code>origin main</code>.",
-        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y sigue mostrando la entrada de <code>2026-07-23</code> tras la publicacion.",
-        "Dejar reportado al usuario que el repo sigue teniendo dos directorios sin seguimiento aunque la actualizacion del diario haya quedado publicada."
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>23 de julio de 2026</code>.",
+        "Revisar aparte si conviene limpiar o ignorar los untracked persistentes para recuperar un checkout realmente limpio en futuras corridas."
       ]}
     ]
   },
