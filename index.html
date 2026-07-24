@@ -350,38 +350,38 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "En <code>github-csilvasantin/AdmiraNext-Team</code> quedo preparado un rediseño grande sin commit: subida de version a <code>0.1.3</code>, portada &quot;arcade&quot;, selector de miembros tipo fighter, ficha destacada por miembro y nuevo fallback de <code>machines.json</code>.",
-        "Ese mismo worktree incorpora datos locales nuevos para el Mac Mini en <code>data/machines.json</code> (<code>ip_local</code> y <code>connect_local</code>) y mantiene tocadas las tres capturas de <code>data/screenshots/</code>.",
-        "En <code>github-csilvasantin/tool</code> hubo tres commits de Yokup a primera hora: mejora del generador <code>✨ Idea nueva</code>, adaptacion al Consejero/proyecto y ampliacion de <code>/informes</code> con tiempo de mision y fallback a la prueba de la mision.",
-        "En <code>admira-next-web</code> quedaron registrados los commits de biblioteca multimedia para presentaciones y el fix del limite de subida por cliente."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se confirmo que no existia todavia <code>memory.md</code>.",
+        "Se contrastaron la fuente canonica en GitHub <code>CERRAR-EL-DIA.md</code> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-24 00:00' --until='2026-07-24 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-24 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se revisaron <code>2026-07-24.md</code> e <code>index.html</code>, se localizaron tres commits previos de <code>Diario 2026-07-24 [Codex]</code> hechos hoy y se reescribio esta fecha para dejar solo hechos verificados en esta sesion."
       ]},
       { heading: "Que se valido", items: [
-        "<code>node --check github-csilvasantin/AdmiraNext-Team/public/app.js</code> paso sin errores de sintaxis.",
-        "<code>node --test admira-next-web/test/presentation-media-library-qa.test.js</code> paso en verde: 7 tests, 0 fallos.",
-        "<code>node --test github-csilvasantin/tool/yokup-site/ideas-generador-adapta.test.mjs</code> paso en verde: 13 tests, 0 fallos.",
-        "<code>git status --short</code> confirmo que <code>AdmiraNext-Team</code> sigue con cambios locales sin commit y que <code>admira-next-web</code> y <code>tool</code> acumulan trabajo del dia ya committeado junto a nuevos cambios en curso."
+        "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-21...origin/main</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "<code>git log</code> del 2026-07-24 confirmo actividad real en este repo con <code>84ebb0f Diario 2026-07-24 [Codex]</code>, <code>a226b7b Diario 2026-07-24 [Codex]</code>, <code>a423889 Diario 2026-07-24 [Codex]</code>, <code>906e93d chore: actualizar repos.html 2026-07-24 [skip ci]</code>, <code>07a07ce Diario 2026-07-23 [Codex]</code> y <code>6367821 Diario 2026-07-23 [Codex]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-24 00:00'</code> confirmo los tres commits locales de hoy para esta misma fecha y el <code>pull --rebase origin main</code> previo a ellos.",
+        "<code>git branch -vv</code> mostro que la rama activa es <code>codex-diario-2026-07-21</code> en <code>84ebb0f</code> y que la rama local <code>main</code> esta desalineada (<code>ahead 1, behind 23</code>) respecto a <code>origin/main</code>.",
+        "<code>date</code> marco esta ejecucion en <code>2026-07-24 23:56:38 CEST +0200</code>."
       ]},
       { heading: "Avances", items: [
-        "<code>AdmiraNext-Team</code> paso de panel sobrio a una propuesta visual mucho mas marcada, con resumen de flota, roster de miembros y spotlight por perfil.",
-        "Yokup quedo mas guiado en la generacion de ideas y mas legible en el cierre de misiones gracias al tiempo visible y al fallback de evidencia.",
-        "La biblioteca multimedia de presentaciones quedo cubierta con QA automatizada para scoping por cliente, aceptacion por Carlos y limites de carga."
+        "<code>2026-07-24.md</code> vuelve a cumplir la estructura literal de seis secciones numeradas pedida por la rutina.",
+        "<code>index.html</code> queda sincronizado con esta misma version para que la UI publica muestre una sola narrativa consistente bajo el filtro <code>Codex</code>.",
+        "La entrada de hoy queda reducida a hechos sostenidos por <code>git</code> y por el trabajo real de este cierre, sin apoyarse en otros repos no revalidados en esta corrida."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> acumula una diff muy grande en local (<code>public/styles.css</code>, <code>public/app.js</code>, <code>public/index.html</code> y binarios de capturas) pero todavia no hay commit del cambio completo.",
-        "En <code>admira-next-web</code> sigue apareciendo <code>node_modules/</code> como untracked en el worktree, lo que mete ruido al revisar el estado real.",
-        "En <code>tool</code> siguen quedando cambios sin cerrar y varios <code>.bak-*</code>, asi que el repo mezcla el avance ya committeado con restos operativos del ajuste.",
-        "El checkout limpio esperado de <code>diario</code> no estaba totalmente limpio en este cierre: siguen sin trackear <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>."
+        "El checkout canonico no estaba limpio al empezar por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "La rama activa durante el cierre no es <code>main</code>, sino <code>codex-diario-2026-07-21</code>, y la rama local <code>main</code> no sirve como base fiable para un <code>git push origin main</code> literal.",
+        "Ya existian tres commits de <code>Diario 2026-07-24 [Codex]</code> hechos hoy, asi que la fecha necesitaba correccion en lugar de anadir otro relato paralelo.",
+        "El diario sigue dependiendo de mantener a mano el Markdown y el bloque <code>entries</code> de <code>index.html</code> sincronizados."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tratar <code>AdmiraNext-Team</code> como WIP local del dia y no como entrega cerrada, porque hoy la evidencia fuerte es la diff, no un commit.",
-        "Dar mas peso en la entrada a los repos con validacion automatizada (<code>admira-next-web</code> y <code>tool</code>) para dejar claro que si se comprobo de verdad.",
-        "Sustituir la entrada previa de hoy en vez de duplicarla, porque la version anterior describia la mecanica del diario y no el trabajo efectivo del workspace.",
-        "Mantener el cierre sobre este checkout de <code>diario</code> y reportar la suciedad tal cual, en vez de intentar limpiarla sin evidencia de que fuese seguro borrarla o moverla."
+        "Sustituir el contenido vigente de <code>2026-07-24 [Codex]</code> en vez de anadir otro bloque para la misma fecha y autoria.",
+        "Limitar esta corrida a <code>2026-07-24.md</code> e <code>index.html</code>, sin tocar los untracked existentes ni otros checkouts.",
+        "Registrar solo hechos comprobados en el repo <code>diario</code> y en el trabajo real de esta sesion, aunque eso contradiga texto previo de la propia entrada."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Cerrar o recortar la diff de <code>AdmiraNext-Team</code> con una validacion visual real antes de commit, porque el cambio de interfaz es grande.",
-        "Limpiar los restos de trabajo en <code>tool</code> (<code>.bak-*</code> y cambios abiertos) para distinguir mejor lo ya resuelto de lo que sigue en curso.",
-        "Decidir si la biblioteca multimedia de <code>admira-next-web</code> queda lista para integrar o si necesita una pasada adicional de UX sobre el flujo de presentaciones."
+        "Hacer <code>git add 2026-07-24.md index.html</code>, crear el commit <code>Diario 2026-07-24 [Codex]</code> y empujarlo a <code>origin/main</code> desde la referencia correcta.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>24 de julio de 2026</code>.",
+        "Revisar aparte si conviene limpiar o ignorar los untracked persistentes para recuperar un checkout realmente limpio en futuras corridas."
       ]}
     ]
   },
