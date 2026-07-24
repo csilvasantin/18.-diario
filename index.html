@@ -369,12 +369,14 @@ const entries = [
       { heading: "Problemas encontrados", items: [
         "<code>AdmiraNext-Team</code> acumula una diff muy grande en local (<code>public/styles.css</code>, <code>public/app.js</code>, <code>public/index.html</code> y binarios de capturas) pero todavia no hay commit del cambio completo.",
         "En <code>admira-next-web</code> sigue apareciendo <code>node_modules/</code> como untracked en el worktree, lo que mete ruido al revisar el estado real.",
-        "En <code>tool</code> siguen quedando cambios sin cerrar y varios <code>.bak-*</code>, asi que el repo mezcla el avance ya committeado con restos operativos del ajuste."
+        "En <code>tool</code> siguen quedando cambios sin cerrar y varios <code>.bak-*</code>, asi que el repo mezcla el avance ya committeado con restos operativos del ajuste.",
+        "El checkout limpio esperado de <code>diario</code> no estaba totalmente limpio en este cierre: siguen sin trackear <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>."
       ]},
       { heading: "Decisiones tomadas", items: [
         "Tratar <code>AdmiraNext-Team</code> como WIP local del dia y no como entrega cerrada, porque hoy la evidencia fuerte es la diff, no un commit.",
         "Dar mas peso en la entrada a los repos con validacion automatizada (<code>admira-next-web</code> y <code>tool</code>) para dejar claro que si se comprobo de verdad.",
-        "Sustituir la entrada previa de hoy en vez de duplicarla, porque la version anterior describia la mecanica del diario y no el trabajo efectivo del workspace."
+        "Sustituir la entrada previa de hoy en vez de duplicarla, porque la version anterior describia la mecanica del diario y no el trabajo efectivo del workspace.",
+        "Mantener el cierre sobre este checkout de <code>diario</code> y reportar la suciedad tal cual, en vez de intentar limpiarla sin evidencia de que fuese seguro borrarla o moverla."
       ]},
       { heading: "Siguientes pasos", items: [
         "Cerrar o recortar la diff de <code>AdmiraNext-Team</code> con una validacion visual real antes de commit, porque el cambio de interfaz es grande.",
