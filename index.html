@@ -344,6 +344,42 @@
 <script>
 const entries = [
   {
+    date: "2026-07-25",
+    title: "25 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se ejecuto <code>agora-checkin codex start</code> al arrancar la sesion y se revisaron <code>README.md</code> y <code>CERRAR-EL-DIA.md</code> para seguir la rutina vigente del diario.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-25 00:00' --until='2026-07-25 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-25 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se hizo <code>git fetch origin main</code> y <code>git merge --ff-only origin/main</code>, avanzando este checkout de <code>963511a</code> a <code>a25d084</code> para incorporar la actualizacion automatica de <code>repos.html</code> del dia.",
+        "Como no existia todavia <code>2026-07-25.md</code>, se creo esta entrada y se anadio su reflejo a <code>index.html</code> para que la fecha de hoy quede visible en la publicacion HTML."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status --short --branch</code> devolvio la rama activa <code>codex-diario-2026-07-21</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "<code>git log</code> del 2026-07-25 mostro actividad real previa en este repo con <code>a25d084 chore: actualizar repos.html 2026-07-25 [skip ci]</code> y el cierre de ayer <code>963511a Diario 2026-07-24 [Codex]</code>.",
+        "<code>git reflog --date=iso --since='2026-07-25 00:00'</code> confirmo el fast-forward de esta corrida a las <code>2026-07-25 21:31:11 +0200</code>.",
+        "<code>rg -n '2026-07-25|25 de julio de 2026' 2026-07-25.md index.html repos.html</code> no devolvio coincidencias antes de editar, asi que la fecha de hoy aun no estaba publicada."
+      ]},
+      { heading: "Avances", items: [
+        "<code>2026-07-25.md</code> deja cubierta la fecha de hoy con un unico fichero Markdown firmado como <code>[Codex]</code>.",
+        "<code>index.html</code> queda alineado con esta misma version para que la UI publica muestre <code>25 de julio de 2026</code> bajo el filtro <code>Codex</code>."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "El checkout canonico sigue sin estar totalmente limpio por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "La unica actividad previa de hoy en el repo era la regeneracion automatica de <code>repos.html</code>, asi que habia que evitar inventar trabajo adicional antes de esta sesion."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "Trabajar sobre el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> y no sobre el worktree temporal de Codex.",
+        "Registrar solo hechos verificables de este repo y de esta sesion, sin arrastrar narrativa de otros repos."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "Hacer <code>git add 2026-07-25.md index.html</code>, crear el commit <code>Diario 2026-07-25 [Codex]</code> y empujarlo a <code>origin/main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>25 de julio de 2026</code>."
+      ]}
+    ]
+  },
+  {
     date: "2026-07-24",
     title: "24 de julio de 2026",
     member: "Carlos Silva",
