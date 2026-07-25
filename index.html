@@ -350,30 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad de <code>Codex</code> y se dejaron revisadas las instrucciones operativas y el formato vigente del repo <code>diario</code>.",
-        "En <code>/Users/csilvasantin/Claude/diario/</code> se valido el estado real con <code>git status --short --branch</code>, <code>git log --since='2026-07-25 00:00' --until='2026-07-25 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-25 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se hizo <code>git pull --ff-only --autostash</code> para incorporar el avance remoto del dia y luego se actualizo esta entrada junto con su reflejo en <code>index.html</code>."
+        "Se reviso el trabajo del <code>2026-07-25</code> en el workspace <code>/Users/csilvasantin/Documents/Admirito</code>, con foco en <code>github-csilvasantin/AdmiraNext-Team</code> y en los repos con cambios locales relevantes.",
+        "En <code>AdmiraNext-Team</code> se detecto una refactorizacion visual grande del panel publico: nuevo tema arcade tipo <em>player select</em>, bloque destacado por miembro, nueva navegacion de hero, versionado <code>v0.1.3</code> y soporte de estado <code>idle</code>.",
+        "Tambien quedaron registrados cambios de soporte en <code>AdmiraNext-Team-latest</code>, <code>tool</code>, <code>32.-ConsejoAdmiraNextGame</code>, <code>04.- AdmiraGemini</code>, <code>pulpo</code>, <code>onboarding</code> y <code>csilvasantin.github.io</code>, y se reescribio esta entrada para resumirlos sin duplicar la fecha."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio la rama activa <code>codex-diario-2026-07-21</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "<code>git log</code> del 2026-07-25 mostro actividad real previa en este repo con <code>a25d084 chore: actualizar repos.html 2026-07-25 [skip ci]</code> y el cierre de ayer <code>963511a Diario 2026-07-24 [Codex]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-25 00:00'</code> confirmo el fast-forward de esta corrida a las <code>2026-07-25 21:31:11 +0200</code>, y <code>date</code> marco esta ejecucion en <code>2026-07-25 21:31:58 CEST +0200</code>."
+        "<code>git log --since='2026-07-25 00:00' --until='2026-07-25 23:59:59'</code> no mostro commits nuevos en los repos revisados, asi que la actividad real del dia esta sobre todo en diffs locales sin publicar.",
+        "<code>git diff --stat</code> de <code>AdmiraNext-Team</code> dio <code>1112 insertions</code> y <code>73 deletions</code> sobre <code>public/app.js</code>, <code>public/styles.css</code>, <code>public/index.html</code>, <code>package.json</code>, <code>data/machines.json</code> y tres capturas de maquinas.",
+        "En <code>AdmiraNext-Team-latest</code> se valido una mejora de robustez para AppleScript remoto y aceptacion de <code>PORT</code> por entorno; en <code>tool</code> se vio una pasada de rendimiento para Yokup (<code>ensureSchema</code> cacheado, <code>Promise.all</code>, cache de <code>sessionStorage</code> y poll visible mas lento); y en <code>AdmiraGemini</code> se documento una UI local con nuevo entrypoint <code>admira-gemini-ui</code>."
       ]},
       { heading: "Avances", items: [
-        "La fecha de hoy queda resumida en un unico bloque breve con hechos verificados, decisiones, avances, bloqueos y siguientes pasos.",
-        "<code>index.html</code> queda alineado con esta misma version para que la UI publica muestre <code>25 de julio de 2026</code> bajo el filtro <code>Codex</code>."
+        "<code>AdmiraNext-Team</code> pasa de un panel corporativo simple a una presentacion mucho mas intencional y diferenciada, con foco en miembros, roles, estado operativo y lectura visual de la flota.",
+        "<code>data/machines.json</code> anade <code>ip_local</code> y <code>connect_local</code> al Mac Mini, lo que apunta a una operativa mas directa dentro de la red local ademas de Tailscale.",
+        "El resto del workspace muestra trabajo alineado con documentacion operativa y performance: nuevas notas de arranque/cierre, aclaraciones de arquitectura <code>admira.tv</code>, mejoras de polling/carga en Yokup y actualizaciones de estado en <code>pulpo</code> y <code>onboarding</code>."
       ]},
       { heading: "Problemas encontrados", items: [
-        "El checkout canonico sigue sin estar totalmente limpio por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "La rama activa sigue siendo <code>codex-diario-2026-07-21</code>, no <code>main</code>, asi que la publicacion exige cuidar la referencia de push."
+        "El trabajo de hoy esta disperso en muchos repos y casi todo sigue sin commit, lo que complica distinguir que esta ya validado de lo que aun es exploracion o borrador.",
+        "En varios repos hay untracked o artefactos auxiliares (<code>INICIO_Y_CIERRE_DEL_DIA.md</code>, backups <code>.bak</code>, <code>node_modules/</code>, nuevos HTML y assets) que conviene limpiar o clasificar antes de publicar.",
+        "No se encontraron pruebas automatizadas ejecutadas hoy asociadas a estos cambios; la validacion visible se apoya sobre todo en revision de diff, estructura y contratos de codigo."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Trabajar solo sobre el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> y no tocar los untracked existentes.",
-        "Registrar solo hechos verificables de este repo y de esta sesion, manteniendo la entrada breve."
+        "Priorizar <code>AdmiraNext-Team</code> como hilo principal del dia porque concentra el cambio mas grande y mas visible del workspace.",
+        "Describir el resto de repos por intencion tecnica y alcance, sin inflar el diario con detalles de archivos que aun no tienen verificacion funcional o commit.",
+        "Mantener una sola entrada <code>2026-07-25 [Codex]</code> y actualizarla en lugar de abrir otro bloque para la misma fecha."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add 2026-07-25.md index.html</code>, crear el commit <code>Diario 2026-07-25 [Codex]</code> y empujarlo a <code>origin/main</code>.",
-        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>25 de julio de 2026</code>."
+        "Probar visualmente <code>AdmiraNext-Team</code> para confirmar que el nuevo layout arcade sigue funcionando bien en desktop y movil antes de publicar.",
+        "Separar en commits pequenos los cambios de <code>AdmiraNext-Team</code>, <code>tool</code> y <code>AdmiraGemini</code>, eliminando backups o artefactos accidentales antes del push.",
+        "Publicar esta actualizacion del diario y verificar que la web muestra la entrada corregida del <code>25 de julio de 2026</code>."
       ]}
     ]
   },
