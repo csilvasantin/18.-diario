@@ -350,32 +350,34 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code>, se consulto la memoria de la automatizacion <code>cerrar-el-dia</code> y se contrastaron la fuente canonica en GitHub <code>CERRAR-EL-DIA.md</code> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
-        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-25 00:00' --until='2026-07-25 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-25 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-        "Se inspeccionaron <code>git branch -vv</code>, <code>git remote -v</code>, <code>2026-07-25.md</code> e <code>index.html</code>; despues se probo <code>git switch main</code>, se detecto que <code>main</code> local no era base fiable para publicar y se volvio a <code>codex-diario-2026-07-21</code> para reescribir esta fecha y su reflejo en la UI publica."
+        "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code>, se revisaron <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se dejo <code>agora alive --from Codex --loop --every 60</code> en segundo plano.",
+        "Se leyeron la fuente canonica <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>, y despues se hizo el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-25 00:00' --until='2026-07-25 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-25 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se cambio de <code>codex-diario-2026-07-21</code> a <code>main</code>, se intento <code>git pull --ff-only origin main</code>, se audito la divergencia de la <code>main</code> local frente a <code>origin/main</code>, se abrio la rama <code>close-2026-07-25-run</code> desde <code>origin/main</code> y se reescribieron <code>2026-07-25.md</code> e <code>index.html</code> para que esta fecha describa solo este cierre real."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-21...origin/main</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "<code>git log</code> del <code>2026-07-25</code> confirmo actividad real previa en este repo con <code>23c5414 Diario 2026-07-25 [Codex]</code>, <code>af093d4 Diario 2026-07-25 [Codex]</code>, <code>6fe88a7 Diario 2026-07-25 [Codex]</code>, <code>a25d084 chore: actualizar repos.html 2026-07-25 [skip ci]</code> y <code>963511a Diario 2026-07-24 [Codex]</code>.",
-        "<code>git reflog --date=iso --since='2026-07-25 00:00'</code> confirmo los tres commits locales de hoy para esta misma fecha, y <code>git branch -vv</code> mostro que <code>codex-diario-2026-07-21</code> coincide con <code>origin/main</code> en <code>6fe88a7</code> mientras que la rama local <code>main</code> esta <code>ahead 1, behind 29</code>; <code>date</code> marco esta ejecucion en <code>2026-07-25 23:56:23 CEST +0200</code>."
+        "<code>agora whoami --from Codex</code> devolvio <code>Codex  →  OraculoMini (Codex·gmail)  →  bot propio @CodexSilvaBot</code>, y <code>agora tasks --from Codex --peek</code> junto con <code>agora inbox --from Codex --peek</code> devolvieron que no habia trabajo nuevo dirigido a esta sesion.",
+        "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-21...origin/main</code> y dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>; <code>date</code> marco el pre-check en <code>2026-07-25 23:57:28 CEST +0200</code>.",
+        "<code>git log</code> del <code>2026-07-25</code> confirmo actividad real previa en este repo con <code>23c5414 Diario 2026-07-25 [Codex]</code>, <code>af093d4 Diario 2026-07-25 [Codex]</code>, <code>6fe88a7 Diario 2026-07-25 [Codex]</code>, <code>a25d084 chore: actualizar repos.html 2026-07-25 [skip ci]</code> y <code>963511a Diario 2026-07-24 [Codex]</code>; <code>git reflog --date=iso --since='2026-07-25 00:00'</code> confirmo esos commits y el salto posterior entre <code>main</code> y <code>codex-diario-2026-07-21</code>.",
+        "Ya en <code>main</code>, <code>git pull --ff-only origin main</code> fallo con <code>fatal: Not possible to fast-forward, aborting.</code>; <code>git log --left-right --graph --cherry-pick --oneline main...origin/main</code> mostro un unico commit local en <code>main</code> (<code>96c6ef1 Diario 2026-07-21 [Codex]</code>) frente a veintinueve commits presentes solo en <code>origin/main</code>, cuya punta actual es <code>6fe88a7 Diario 2026-07-25 [Codex]</code>."
       ]},
       { heading: "Avances", items: [
         "<code>2026-07-25.md</code> vuelve a quedar centrado en hechos verificados del repo <code>diario</code> y de esta sesion real de cierre, con las seis secciones numeradas exigidas por la rutina.",
         "<code>index.html</code> queda sincronizado con esta misma narrativa para que la UI publica muestre una sola version consistente bajo el filtro <code>Codex</code>.",
-        "La base de publicacion queda otra vez en la referencia que coincide con <code>origin/main</code>, en lugar de apoyarse en la rama local <code>main</code> desalineada."
+        "La base de publicacion queda fijada en <code>origin/main</code>, sin depender de la rama local <code>main</code>, que estaba desfasada."
       ]},
       { heading: "Problemas encontrados", items: [
         "El checkout canonico no estaba limpio al empezar por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-        "La rama local <code>main</code> no estaba sincronizada con el remoto: al hacer <code>git switch main</code> quedo visible como <code>ahead 1, behind 29</code>, asi que un <code>git push origin main</code> literal desde esa referencia no era seguro.",
+        "La rama activa del pre-check era <code>codex-diario-2026-07-21</code>, no <code>main</code>, y la <code>main</code> local estaba divergida (<code>ahead 1, behind 29</code>) respecto a <code>origin/main</code>.",
+        "<code>git pull --ff-only origin main</code> no pudo sincronizar <code>main</code>, asi que no era seguro usar esa rama local como base directa para el cierre.",
         "Ya existian tres commits de <code>Diario 2026-07-25 [Codex]</code> hechos hoy, por lo que la fecha necesitaba consolidacion en lugar de anadir otro relato paralelo del mismo autor."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Tomar <code>codex-diario-2026-07-21</code> como base de trabajo para esta corrida porque coincide exactamente con <code>origin/main</code> en <code>6fe88a7</code>.",
+        "Tomar <code>origin/main</code> como fuente de verdad del diario para esta corrida y aislar la edicion en <code>close-2026-07-25-run</code> en lugar de reescribir la <code>main</code> local divergida.",
         "Sustituir el contenido vigente de <code>2026-07-25 [Codex]</code> en vez de anadir otro bloque para la misma fecha y autoria.",
         "Limitar esta correccion a <code>2026-07-25.md</code> e <code>index.html</code>, sin tocar los untracked existentes ni otros checkouts."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Hacer <code>git add 2026-07-25.md index.html</code>, crear el commit <code>Diario 2026-07-25 [Codex]</code> y publicarlo en <code>origin/main</code> desde la referencia correcta.",
+        "Hacer <code>git add 2026-07-25.md index.html</code>, crear el commit <code>Diario 2026-07-25 [Codex]</code> y publicarlo en <code>origin/main</code> desde la rama basada en <code>origin/main</code>.",
         "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>25 de julio de 2026</code> bajo el filtro <code>Codex</code>.",
         "Revisar aparte si conviene normalizar la rama local <code>main</code> y limpiar los untracked persistentes para recuperar un checkout realmente limpio en futuras corridas."
       ]}
