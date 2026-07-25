@@ -347,6 +347,41 @@ const entries = [
     date: "2026-07-25",
     title: "25 de julio de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      { heading: "Que se hizo", items: [
+        "Se disparo la rutina programada <code>cerrar-el-dia</code> desde Claude Code on the web sobre el repo <code>csilvasantin/18.-diario</code>, rama de trabajo <code>main-14yf7h</code>.",
+        "Se aplico la rutina <code>CERRAR-EL-DIA.md</code>: pre-check con <code>git status</code>, <code>git log --since='2026-07-25 00:00'</code>, <code>git reflog --since='2026-07-25 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se detecto que Codex ya habia firmado la entrada del dia; se anade la firma de Claude en el mismo <code>2026-07-25.md</code> separada con <code>---</code>, cumpliendo la regla 1-2-3 (un fichero por fecha) y se refleja en <code>index.html</code>."
+      ]},
+      { heading: "Que se valido", items: [
+        "<code>git status</code> en <code>/home/user/18.-diario/</code> devolvio working tree limpio en la rama <code>main-14yf7h</code>, alineada con <code>origin/main-14yf7h</code>.",
+        "<code>git log --all</code> del 2026-07-25 confirmo <code>af093d4 Diario 2026-07-25 [Codex]</code>, <code>23c5414 Diario 2026-07-25 [Codex]</code> y <code>a25d084 chore: actualizar repos.html 2026-07-25 [skip ci]</code> como unica actividad real del dia antes de este cierre.",
+        "<code>date</code> marco esta ejecucion en <code>2026-07-25 21:05:56 UTC +0000</code> dentro del contenedor efimero remoto."
+      ]},
+      { heading: "Avances", items: [
+        "La firma de Claude queda registrada junto a la de Codex, permitiendo al filtro <code>Claude</code> de la UI mostrar el 25-07 sin desplazar la entrada previa de Codex.",
+        "Queda documentado explicitamente que la actividad del dia en este repo se limito al cierre del propio diario y a la regeneracion automatica de <code>repos.html</code> por GitHub Actions."
+      ]},
+      { heading: "Problemas encontrados", items: [
+        "El checkout remoto de Claude Code on the web es efimero y vive en <code>/home/user/18.-diario/</code> sobre una rama de trabajo (<code>main-14yf7h</code>), no sobre <code>main</code>, asi que el push debe ir a esa rama y abrirse un PR en lugar de empujar directo a <code>main</code>.",
+        "La rutina canonica <code>CERRAR-EL-DIA.md</code> esta redactada asumiendo el checkout de la Mac Mini (<code>/Users/csilvasantin/Claude/diario/</code>) y push directo a <code>main</code>; no cubre este entorno remoto, se cumple su espiritu adaptando el destino."
+      ]},
+      { heading: "Decisiones tomadas", items: [
+        "No sobrescribir la entrada de Codex: se anade la de Claude debajo con separador <code>---</code> y se agrega un segundo objeto en el array <code>entries</code> de <code>index.html</code> para ese mismo dia.",
+        "Empujar a <code>origin/main-14yf7h</code> y abrir Pull Request en modo draft, dejando la integracion a <code>main</code> bajo control del usuario."
+      ]},
+      { heading: "Siguientes pasos", items: [
+        "<code>git add 2026-07-25.md index.html</code>, commit <code>Diario 2026-07-25 [Claude]</code> y <code>git push -u origin main-14yf7h</code>.",
+        "Abrir PR draft desde <code>main-14yf7h</code> hacia <code>main</code> para llevar al publico lo pendiente del dia.",
+        "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde y que la entrada <code>25 de julio de 2026</code> aparece bajo el filtro <code>Claude</code> una vez fusionado el PR."
+      ]}
+    ]
+  },
+  {
+    date: "2026-07-25",
+    title: "25 de julio de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
