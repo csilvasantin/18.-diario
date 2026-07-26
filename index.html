@@ -350,37 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se ejecuto <code>agora-checkin codex start</code> y se reviso la memoria de esta automatizacion antes de rehacer la entrada de hoy para que refleje trabajo real de Admirito en vez de solo mantenimiento del repo <code>diario</code>.",
-        "Se auditaron varias copias de <code>AdmiraNext-Team</code> y la fuente mas relevante para hoy fue <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, que tiene cambios locales sin commit en <code>package.json</code>, <code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>data/machines.json</code> y tres capturas de <code>data/screenshots/</code>.",
-        "En ese checkout se reviso el diff y se detecto un rediseño fuerte del dashboard: portada estilo arcade con <code>World Warrior Ops</code>, selector de miembros tipo <code>fighter grid</code>, ficha destacada por miembro y nueva logica en <code>public/app.js</code> para agrupar maquinas por persona, calcular stats y renderizar perfiles.",
-        "Tambien se detecto una mejora operativa en <code>data/machines.json</code>: para <code>macmini</code> se anaden <code>ip_local</code> y <code>connect_local</code>, mientras que en otra copia (<code>/Users/csilvasantin/AdmiraNext-Team</code>) hay un ajuste alternativo mas antiguo de estados y fechas sin publicar.",
-        "En este workspace del diario se contrastaron los commits de hoy y quedaron visibles tres movimientos recientes: <code>3379c88 chore: actualizar repos.html 2026-07-26 [skip ci]</code>, <code>0bbe538 Diario 2026-07-26 [Codex]</code> y <code>08725c3 docs: consolidate Codex 2026-07-26 [skip ci]</code>."
+        "Se reviso <code>github-csilvasantin/AdmiraNext-Team</code> y aparecieron cambios locales grandes en <code>public/index.html</code>, <code>public/styles.css</code> y <code>public/app.js</code> para convertir el panel en un \"player select\" arcade: hero nuevo <code>World Warrior Ops</code>, <code>fighter-feature</code>, <code>fighter-grid</code>, perfiles por miembro, barras de estadisticas y soporte visual para estado <code>idle</code>.",
+        "En el mismo repo se actualizaron <code>data/machines.json</code> y <code>package.json</code>: se anadio <code>ip_local</code> y <code>connect_local</code> para el Mac Mini y la version paso de <code>0.1.0</code> a <code>0.1.3</code>; tambien quedaron nuevas capturas en <code>data/screenshots/</code>.",
+        "Se inspecciono <code>github-csilvasantin/AdmiraNext-Team-latest</code>, donde <code>src/server.js</code> ya acepta <code>PORT</code> por entorno, valida tambien <code>idle</code>, y <code>src/ssh-exec.js</code> centraliza la construccion segura de comandos <code>osascript</code> remotos con <code>buildRemoteOsascriptCommand(...)</code>.",
+        "Se reviso el workspace y el repo del diario para no duplicar la fecha <code>2026-07-26</code>, y se actualizo esta entrada existente en vez de crear otra distinta."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> en <code>~/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> confirmo que la rama sigue en <code>main...origin/main</code> pero con ocho ficheros modificados sin staged ni commit publicado hoy.",
-        "<code>node --check public/app.js</code> y <code>jq empty data/machines.json</code> pasaron sin errores en ese repo, asi que al menos la parte JavaScript y el JSON siguen siendo parseables tras el rediseño.",
-        "<code>git log --since='2026-07-26 00:00' --until='2026-07-26 23:59:59' --all</code> y <code>git reflog --since='2026-07-26 00:00'</code> no mostraron commits ni movimientos de hoy en las copias revisadas de <code>AdmiraNext-Team</code>, lo que indica trabajo local no publicado.",
-        "En el workspace actual del diario si hubo actividad hoy: la historia local muestra la creacion inicial de la entrada y una consolidacion posterior de <code>2026-07-26</code>, ademas del ajuste de <code>repos.html</code>."
+        "<code>git status --short --branch</code> en <code>AdmiraNext-Team</code> confirmo 8 ficheros modificados y el repo atrasado <code>306</code> commits respecto a <code>origin/main</code>, asi que el trabajo visible hoy sigue local y todavia no esta integrado.",
+        "<code>git diff --stat</code> en <code>AdmiraNext-Team</code> mostro <code>1112 insertions</code> y <code>73 deletions</code>, coherente con un rediseño visual profundo mas una pequena ampliacion de datos SSH.",
+        "<code>git status --short --branch</code> en <code>AdmiraNext-Team-latest</code> dejo ver cambios solo en <code>src/server.js</code> y <code>src/ssh-exec.js</code>, mas <code>INICIO_Y_CIERRE_DEL_DIA.md</code> sin trackear, lo que encaja con un ajuste de backend/utilidades y no con una refactorizacion completa.",
+        "<code>git log --since='2026-07-26 00:00'</code> en <code>github-csilvasantin/diario</code> confirmo que hoy ya se habian publicado <code>Diario 2026-07-26 [Codex]</code> y <code>docs: consolidate Codex 2026-07-26 [skip ci]</code>, por eso esta corrida debia fusionar contenido en la misma fecha."
       ]},
       { heading: "Avances", items: [
-        "Queda identificado con bastante claridad el eje del trabajo de hoy en Admirito: un refresh visual potente de <code>AdmiraNext-Team</code> y una pequena mejora de conectividad local para <code>macmini</code>.",
-        "La entrada de hoy deja trazado que el trabajo mas sustancial esta aun en estado local, mientras que lo ya publicado hoy pertenece sobre todo al repo <code>diario</code>.",
-        "El diario queda corregido para no duplicar la fecha y para distinguir entre cambios validados, cambios pendientes de publicar y actividad real del workspace."
+        "El panel <code>AdmiraNext-Team</code> apunta claramente a una nueva presentacion tipo roster arcade, con seleccion de miembros, vista destacada y metricas sinteticas por persona.",
+        "<code>AdmiraNext-Team-latest</code> queda mejor preparado para despliegue y control remoto: <code>PORT</code> configurable, <code>idle</code> aceptado como estado valido y quoting centralizado para AppleScript remoto.",
+        "El diario del <code>2026-07-26</code> ya refleja tanto lo publicado hoy como el trabajo local que sigue pendiente de commit en los repos principales."
       ]},
       { heading: "Problemas encontrados", items: [
-        "Hay varias copias de <code>AdmiraNext-Team</code> en el equipo y no todas contienen lo mismo; eso complica saber de un vistazo cual es la fuente canonica de trabajo.",
-        "El rediseño del dashboard es grande y visual, pero hoy no aparece acompanado de commit, reflog ni evidencia de arranque manual del servidor, asi que la validacion funcional sigue incompleta.",
-        "Existe otra copia en <code>/Users/csilvasantin/AdmiraNext-Team</code> con cambios distintos en <code>data/machines.json</code> y archivos OCR sin trackear, senal de contexto tecnico disperso."
+        "<code>AdmiraNext-Team</code> esta muy por detras de <code>origin/main</code> (<code>behind 306</code>), asi que antes de integrar ese rediseño convendra rebasar o reconciliar la rama para evitar conflictos grandes.",
+        "El repo del diario ya tenia una entrada del dia y un commit de consolidacion, asi que habia riesgo real de duplicar contenido si no se actualizaba la fecha existente.",
+        "El checkout de <code>/Users/csilvasantin/Claude/diario</code> sigue con <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code> sin trackear, por lo que no era buena base para editar directamente."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Reemplazar la entrada previa de <code>2026-07-26</code> en vez de anadir otra, porque ya existia y estaba demasiado centrada en la mecanica del diario.",
-        "Tomar como foco principal <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, ya que concentra el rediseño local mas amplio y encaja mejor con la peticion del usuario.",
-        "Documentar solo validaciones verificables hoy: parseo correcto de JS y JSON, estado git real y commits visibles del workspace, sin afirmar pruebas visuales o de servidor que no se ejecutaron."
+        "Usar <code>/Users/csilvasantin/Claude/repos/diario</code> como checkout limpio para editar y publicar, dejando intacto el checkout sucio de <code>/Users/csilvasantin/Claude/diario</code>.",
+        "Actualizar la entrada ya existente del <code>2026-07-26</code> en vez de anadir otra, porque la fecha ya estaba publicada hoy en <code>origin/main</code>.",
+        "Mantener la cronica factual: se refleja lo que esta committeado hoy en <code>diario</code> y lo que sigue solo en working tree en <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Abrir <code>AdmiraNext-Team</code> desde el checkout canonico, arrancar el dashboard y revisar visualmente el nuevo flujo <code>fighter select</code> antes de decidir commit.",
-        "Elegir una sola copia de <code>AdmiraNext-Team</code> como fuente de verdad y limpiar o archivar las demas para evitar diffs divergentes.",
-        "Si el rediseño queda aprobado, crear commit con el dashboard arcade y publicar junto con una comprobacion rapida de la conectividad local de <code>macmini</code>."
+        "Integrar o aislar los cambios de <code>AdmiraNext-Team</code> antes de mezclar con <code>origin/main</code>, porque el desfase de <code>306</code> commits es el riesgo tecnico principal.",
+        "Decidir si <code>AdmiraNext-Team-latest</code> es la rama/copia canonica para los ajustes de backend y, si lo es, convertir esos cambios locales en commit verificable.",
+        "Mantener el diario del dia actualizado si hoy entra mas trabajo relevante en esos repos."
       ]}
     ]
   },
