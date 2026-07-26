@@ -350,36 +350,36 @@ const entries = [
     author: "Codex",
     sections: [
       { heading: "Que se hizo", items: [
-        "Se reviso <code>github-csilvasantin/AdmiraNext-Team</code> y aparecieron cambios locales grandes en <code>public/index.html</code>, <code>public/styles.css</code> y <code>public/app.js</code> para convertir el panel en un \"player select\" arcade: hero nuevo <code>World Warrior Ops</code>, <code>fighter-feature</code>, <code>fighter-grid</code>, perfiles por miembro, barras de estadisticas y soporte visual para estado <code>idle</code>.",
-        "En el mismo repo se actualizaron <code>data/machines.json</code> y <code>package.json</code>: se anadio <code>ip_local</code> y <code>connect_local</code> para el Mac Mini y la version paso de <code>0.1.0</code> a <code>0.1.3</code>; tambien quedaron nuevas capturas en <code>data/screenshots/</code>.",
-        "Se inspecciono <code>github-csilvasantin/AdmiraNext-Team-latest</code>, donde <code>src/server.js</code> ya acepta <code>PORT</code> por entorno, valida tambien <code>idle</code>, y <code>src/ssh-exec.js</code> centraliza la construccion segura de comandos <code>osascript</code> remotos con <code>buildRemoteOsascriptCommand(...)</code>.",
-        "Se reviso el workspace y el repo del diario para no duplicar la fecha <code>2026-07-26</code>, y se actualizo esta entrada existente en vez de crear otra distinta."
+        "Se ejecuto <code>agora-checkin codex start</code>, se leyeron la memoria de la automatizacion <code>cerrar-el-dia</code> si existia, la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> y la fuente canonica en GitHub para seguir la rutina literal.",
+        "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check pedido por la rutina con <code>git status --short --branch</code>, <code>git log --since='2026-07-26 00:00' --until='2026-07-26 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-26 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+        "Se inspeccionaron <code>2026-07-26.md</code> e <code>index.html</code>, se hizo <code>git fetch origin main</code> y se comprobo que <code>origin/main</code> ya habia avanzado hoy con nuevas consolidaciones de la fecha <code>2026-07-26</code>.",
+        "Se abrio la rama <code>close-2026-07-26-run</code> desde <code>origin/main</code> en este mismo checkout y se reescribio la entrada del dia junto con su bloque en <code>index.html</code> para dejar solo hechos verificados de esta sesion y de este repo."
       ]},
       { heading: "Que se valido", items: [
-        "<code>git status --short --branch</code> en <code>AdmiraNext-Team</code> confirmo 8 ficheros modificados y el repo atrasado <code>306</code> commits respecto a <code>origin/main</code>, asi que el trabajo visible hoy sigue local y todavia no esta integrado.",
-        "<code>git diff --stat</code> en <code>AdmiraNext-Team</code> mostro <code>1112 insertions</code> y <code>73 deletions</code>, coherente con un rediseño visual profundo mas una pequena ampliacion de datos SSH.",
-        "<code>git status --short --branch</code> en <code>AdmiraNext-Team-latest</code> dejo ver cambios solo en <code>src/server.js</code> y <code>src/ssh-exec.js</code>, mas <code>INICIO_Y_CIERRE_DEL_DIA.md</code> sin trackear, lo que encaja con un ajuste de backend/utilidades y no con una refactorizacion completa.",
-        "<code>git log --since='2026-07-26 00:00'</code> en <code>github-csilvasantin/diario</code> confirmo que hoy ya se habian publicado <code>Diario 2026-07-26 [Codex]</code> y <code>docs: consolidate Codex 2026-07-26 [skip ci]</code>, por eso esta corrida debia fusionar contenido en la misma fecha."
+        "<code>git status --short --branch</code> mostro <code>## close-2026-07-25-run...origin/main</code> y dos directorios sin trackear en el checkout canonico: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+        "Antes del <code>fetch</code>, <code>git log --since='2026-07-26 00:00' --until='2026-07-26 23:59:59' --date=iso --stat --oneline --all</code> devolvio <code>0bbe538 Diario 2026-07-26 [Codex]</code>, <code>3379c88 chore: actualizar repos.html 2026-07-26 [skip ci]</code> y <code>1dac779 Diario 2026-07-25 [Codex]</code>; <code>git reflog --date=iso --since='2026-07-26 00:00'</code> registro el commit local <code>03f4dbe</code> y el rebase que acabo en <code>0bbe538</code>.",
+        "<code>git fetch origin main</code> avanzo <code>origin/main</code> de <code>0bbe538</code> a <code>fe4c035</code>, y <code>git log --oneline -n 5 origin/main</code> mostro <code>fe4c035 docs: consolidate Codex 2026-07-26 [skip ci]</code>, <code>f8cc9f0 docs: refresh Codex 2026-07-26 entry [skip ci]</code> y <code>08725c3 docs: consolidate Codex 2026-07-26 [skip ci]</code> por delante del commit local previo.",
+        "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> marco esta corrida en <code>2026-07-26 23:56:27 CEST +0200</code>, y la lectura de <code>origin/main:2026-07-26.md</code> confirmo que la fecha ya existia publicada y debia corregirse sin abrir otro fichero."
       ]},
       { heading: "Avances", items: [
-        "El panel <code>AdmiraNext-Team</code> apunta claramente a una nueva presentacion tipo roster arcade, con seleccion de miembros, vista destacada y metricas sinteticas por persona.",
-        "<code>AdmiraNext-Team-latest</code> queda mejor preparado para despliegue y control remoto: <code>PORT</code> configurable, <code>idle</code> aceptado como estado valido y quoting centralizado para AppleScript remoto.",
-        "El diario del <code>2026-07-26</code> ya refleja tanto lo publicado hoy como el trabajo local que sigue pendiente de commit en los repos principales."
+        "<code>2026-07-26.md</code> vuelve a quedar centrado en esta sesion real de cierre sobre el repo <code>diario</code>, sin mezclar actividad de otros repos o de otro checkout.",
+        "<code>index.html</code> queda alineado con el mismo contenido para que la UI publica siga mostrando una sola entrada <code>Codex</code> coherente para <code>26 de julio de 2026</code>.",
+        "La rama de trabajo queda basada en la punta remota actual <code>fe4c035</code>, lista para crear el commit final del cierre sin perder las consolidaciones publicadas durante el dia."
       ]},
       { heading: "Problemas encontrados", items: [
-        "<code>AdmiraNext-Team</code> esta muy por detras de <code>origin/main</code> (<code>behind 306</code>), asi que antes de integrar ese rediseño convendra rebasar o reconciliar la rama para evitar conflictos grandes.",
-        "El repo del diario ya tenia una entrada del dia y un commit de consolidacion, asi que habia riesgo real de duplicar contenido si no se actualizaba la fecha existente.",
-        "El checkout de <code>/Users/csilvasantin/Claude/diario</code> sigue con <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code> sin trackear, por lo que no era buena base para editar directamente."
+        "El checkout canonico no estaba limpio al empezar: seguian presentes <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code> sin trackear.",
+        "<code>origin/main</code> avanzo durante la corrida, asi que no era seguro seguir sobre el commit local <code>0bbe538</code> sin rebasar la automatizacion sobre la nueva punta remota.",
+        "La entrada publicada de <code>2026-07-26</code> ya existia y contenia una narrativa distinta, de modo que habia riesgo real de dejar hechos no verificados si no se consolidaba de nuevo la misma fecha."
       ]},
       { heading: "Decisiones tomadas", items: [
-        "Usar <code>/Users/csilvasantin/Claude/repos/diario</code> como checkout limpio para editar y publicar, dejando intacto el checkout sucio de <code>/Users/csilvasantin/Claude/diario</code>.",
-        "Actualizar la entrada ya existente del <code>2026-07-26</code> en vez de anadir otra, porque la fecha ya estaba publicada hoy en <code>origin/main</code>.",
-        "Mantener la cronica factual: se refleja lo que esta committeado hoy en <code>diario</code> y lo que sigue solo en working tree en <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>."
+        "Mantener el trabajo en <code>/Users/csilvasantin/Claude/diario/</code>, como pide la rutina, y limitar los cambios a <code>2026-07-26.md</code> e <code>index.html</code> sin tocar los untracked persistentes.",
+        "Abrir <code>close-2026-07-26-run</code> desde <code>origin/main</code> para publicar desde la punta remota actual en vez de intentar reaprovechar la rama <code>close-2026-07-25-run</code> ya desfasada.",
+        "Sustituir la narrativa vigente de <code>2026-07-26 [Codex]</code> por una version estrictamente basada en comandos ejecutados y estado git verificado de esta sesion."
       ]},
       { heading: "Siguientes pasos", items: [
-        "Integrar o aislar los cambios de <code>AdmiraNext-Team</code> antes de mezclar con <code>origin/main</code>, porque el desfase de <code>306</code> commits es el riesgo tecnico principal.",
-        "Decidir si <code>AdmiraNext-Team-latest</code> es la rama/copia canonica para los ajustes de backend y, si lo es, convertir esos cambios locales en commit verificable.",
-        "Mantener el diario del dia actualizado si hoy entra mas trabajo relevante en esos repos."
+        "Hacer <code>git add 2026-07-26.md index.html</code>, crear el commit <code>Diario 2026-07-26 [Codex]</code> y publicarlo en <code>origin/main</code>.",
+        "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>26 de julio de 2026</code> bajo el filtro <code>Codex</code>.",
+        "Revisar en otra corrida si conviene limpiar o reubicar los untracked persistentes del checkout canonico para que el pre-check vuelva a partir de un estado limpio."
       ]}
     ]
   },
