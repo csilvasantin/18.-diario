@@ -352,48 +352,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se hizo el arranque operativo completo de Codex: <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code> y <code>agora alive --from Codex --loop --every 60</code>, ademas de leer la cache operativa y las maximas comunes antes de revisar repos.",
-          "Se reviso el trabajo real de hoy en el workspace Admirito con foco en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team-latest</code> y <code>/Users/csilvasantin/Documents/Admirito/32.-ConsejoAdmiraNextGame</code>.",
-          "En <code>AdmiraNext-Team</code> se constato que sigue abierto un rediseño local grande del panel: subida de version a <code>0.1.3</code>, UI tipo arcade/fighter select, agrupacion por miembro, nuevas barras de stats y alta del acceso LAN del Mac Mini en <code>data/machines.json</code>, junto con tres screenshots regenerados.",
-          "En <code>AdmiraNext-Team-latest</code> se confirmo un endurecimiento tecnico del panel: <code>PORT</code> configurable por entorno, estado <code>idle</code> aceptado como valido, helper comun para construir <code>osascript</code> remotos con quoting seguro y ajuste del refresco de snapshots para no arrastrar estado viejo.",
-          "En <code>32.-ConsejoAdmiraNextGame</code> se localizaron cambios documentales en <code>mcp/index.html</code> y <code>mcp/llms.txt</code> para dejar explicado el patron de <code>admira.tv/apps</code>: <code>Catálogo</code> embebiendo <code>pixeria</code>, <code>Soporte</code> embebiendo <code>yokup/tool</code> y <code>Acceso</code> como codigo propio dentro de <code>admira-tv</code>."
+          "Se ejecuto <code>agora-checkin codex start</code> y se leyeron la fuente canonica online <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-28 00:00' --until='2026-07-28 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-28 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se revisaron la rama activa, la punta de <code>origin/main</code>, la entrada existente de <code>2026-07-28</code> y su reflejo en <code>index.html</code>, y se reescribieron ambos para que este cierre describa solo hechos verificados de esta corrida."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>agora whoami --from Codex</code> devolvio <code>Codex  →  OraculoMini (Codex·gmail)  →  bot propio @CodexSilvaBot</code>.",
-          "No aparecieron commits fechados hoy (<code>2026-07-28</code>) en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code> ni <code>32.-ConsejoAdmiraNextGame</code>; la evidencia del dia en esos repos sigue estando en working tree local, no en historial publicado.",
-          "En <code>AdmiraNext-Team</code>, <code>node --check public/app.js</code>, el parseo de <code>data/machines.json</code> y <code>git diff --check</code> pasaron correctamente.",
-          "En <code>AdmiraNext-Team-latest</code>, <code>node --check src/server.js</code>, <code>node --check src/ssh-exec.js</code> y <code>git diff --check</code> pasaron correctamente.",
-          "En <code>32.-ConsejoAdmiraNextGame</code>, <code>git diff --check</code> paso sin errores para los cambios abiertos de documentacion."
+          "<code>git status --short --branch</code> devolvio <code>## close-2026-07-27-run...origin/main</code> y dos untracked persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>; <code>date</code> marco el pre-check en <code>2026-07-28 23:57:36 CEST +0200</code>.",
+          "<code>git log</code> del <code>2026-07-28</code> confirmo actividad previa real en este repo con <code>cb05da9 Diario 2026-07-28 [Codex]</code>, <code>9f8c5ff Diario 2026-07-28 [Codex]</code>, <code>fb75387 Diario 2026-07-28 [Codex]</code> y <code>bcd7ab3 chore: actualizar repos.html 2026-07-28 [skip ci]</code>.",
+          "<code>git reflog</code> del <code>2026-07-28</code> confirmo dos commits previos de <code>Diario 2026-07-28 [Codex]</code> (<code>2cc8696</code> y <code>752a54a</code>) y sus rebases posteriores hasta dejar <code>fb75387</code> como punta actual compartida con <code>origin/main</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada de <code>2026-07-28 [Codex]</code> vuelve a cumplir la plantilla literal con seis secciones numeradas y solo hechos verificables de esta ejecucion.",
+          "<code>index.html</code> queda sincronizado con el mismo contenido corregido para que la UI publica refleje esta version sin duplicar la fecha.",
+          "Queda documentado dentro del propio diario que el checkout canonico no arranco limpio y que la entrada publicada hoy necesitaba correccion factual."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>AdmiraNext-Team</code> sigue mezclando en el mismo diff frontend, datos operativos y binarios de capturas: <code>1112</code> inserciones y <code>73</code> borrados en ocho ficheros, mas <code>package-lock.json</code> sin trackear.",
-          "Ese checkout sigue <code>behind 306</code> respecto a <code>origin/main</code>, asi que publicar ahi sin limpiar ni rebasear elevaria mucho el riesgo de integracion.",
-          "Persiste la divergencia historica entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>: uno concentra el rediseño visual y el otro los cambios tecnicos del runtime del panel.",
-          "En esta pasada no hay evidencia de validacion visual real en navegador ni de cierre funcional end-to-end para el panel nuevo; lo verificado hoy es sintaxis, consistencia de datos y diff real."
+          "El checkout pedido por la rutina no estaba limpio al empezar por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "La rama activa del pre-check fue <code>close-2026-07-27-run</code>, no <code>main</code>, aunque ya estaba alineada con <code>origin/main</code>.",
+          "La entrada vigente de <code>2026-07-28 [Codex]</code> y su bloque en <code>index.html</code> no seguian ya la rutina literal, porque omitian <code>3. Avances</code> y describian actividad ajena a este cierre del repo <code>diario</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Actualizar la entrada existente del <code>2026-07-28</code> en vez de duplicarla, porque ya habia una base para hoy pero no reflejaba el trabajo real del workspace.",
-          "Tratar <code>AdmiraNext-Team</code> como foco principal del dia por volumen e impacto, pero describirlo como WIP local, no como entrega cerrada ni publicada.",
-          "Mantener separado <code>AdmiraNext-Team-latest</code> como linea tecnica distinta hasta decidir cual de los dos checkouts sera la fuente canonica del panel.",
-          "Dejar el bloque del Consejo como contexto secundario y documental, sin inflarlo como si fuera un despliegue o una entrega de producto."
+          "Actualizar la entrada existente del <code>2026-07-28 [Codex]</code> en vez de crear otro bloque para la misma fecha y autoria.",
+          "Limitar este cierre al repo <code>diario</code> y a los hechos observados con <code>git</code> y con el trabajo real de esta sesion.",
+          "Mantener intactos los untracked persistentes del checkout y no incluirlos en el commit de la rutina."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Decidir una unica linea canonica para el panel entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> antes de seguir mezclando frontend y backend en paralelo.",
-          "En <code>AdmiraNext-Team</code>, partir el diff en commits pequenos y revisables: UI arcade, <code>data/machines.json</code> y capturas por separado.",
-          "Hacer una validacion visual real del panel de <code>AdmiraNext-Team</code> antes de plantear publicacion.",
-          "Si la linea tecnica de <code>AdmiraNext-Team-latest</code> se mantiene, cerrarla con commit propio para no seguir acumulando fixes estructurales solo en working tree."
+          "Hacer <code>git add 2026-07-28.md index.html</code>, crear el commit <code>Diario 2026-07-28 [Codex]</code> y empujarlo a <code>origin/main</code> como correccion de esta fecha.",
+          "Verificar que <a href=\"https://csilvasantin.github.io/diario/\" target=\"_blank\">https://csilvasantin.github.io/diario/</a> responde y muestra la entrada corregida del <code>28 de julio de 2026</code>.",
+          "Revisar en otra pasada si conviene recuperar un checkout realmente limpio y una rama base normalizada para esta automatizacion."
         ]
       }
     ]
