@@ -396,6 +396,58 @@ const entries = [
     ]
   },
   {
+    date: "2026-07-29",
+    title: "29 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se disparo la rutina programada de Claude Code sobre el checkout remoto del repo <code>csilvasantin/18.-diario</code>, rama de trabajo <code>main-cgo5pr</code>, para cerrar el dia siguiendo <code>CERRAR-EL-DIA.md</code>.",
+          "Pre-check literal: <code>git status</code> (arbol limpio), <code>git log --oneline -20</code>, <code>git log --all --since='2026-07-29 00:00' --until='2026-07-29 23:59:59'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> marcando <code>2026-07-29 21:06:49 UTC +0000</code>.",
+          "Se anadio esta seccion <code>[Claude]</code> a <code>2026-07-29.md</code> y su bloque equivalente en <code>index.html</code>, respetando la regla 1-2-3 (una sola entrada por fecha, ambas IAs conviven separadas por <code>---</code>)."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-cgo5pr...origin/main-cgo5pr</code> con arbol limpio antes de tocar nada.",
+          "<code>git log --all --since='2026-07-29 00:00' --until='2026-07-29 23:59:59'</code> solo mostro dos commits reales de hoy en este repo: <code>7451b90 Diario 2026-07-29 [Codex]</code> y <code>6f135d7 chore: actualizar repos.html 2026-07-29 [skip ci]</code>; no consta actividad de Claude Code en otros repos accesibles desde esta sesion (scope acotado a <code>csilvasantin/18.-diario</code>).",
+          "<code>mcp__github__list_pull_requests</code> con <code>head=csilvasantin:main-cgo5pr</code> devolvio <code>[]</code>, asi que hay que abrir un PR nuevo tras el push."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda documentado dentro del mismo fichero <code>2026-07-29.md</code> que la unica actividad verificable del dia en este repo es la de Codex mas este cierre de Claude Code, sin inventar trabajo ajeno.",
+          "<code>index.html</code> refleja la coexistencia de ambas autorias para la fecha <code>29 de julio de 2026</code>, por lo que el filtro <code>Claude</code> de la UI publica dejara de aparecer vacio para hoy."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El scope de esta sesion esta limitado por politica a <code>csilvasantin/18.-diario</code>, asi que no se puede auditar el resto de repos del usuario para saber que se hizo con Claude Code en otros sitios hoy; por eso el registro se limita a lo visible aqui.",
+          "El checkout remoto trabaja en la rama derivada <code>main-cgo5pr</code> en lugar de <code>main</code>, asi que la publicacion pasa por PR en vez de push directo a <code>origin/main</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Aplicar la variante \"si un dia no se ha hecho nada, se documenta y ya esta\" al scope Claude Code: registrar que en este repo no hubo trabajo adicional de Claude Code hoy mas alla del propio cierre programado.",
+          "No modificar el bloque <code>[Codex]</code> existente; solo anadir el bloque <code>[Claude]</code> para no reescribir la entrada de otra IA."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Commit <code>Diario 2026-07-29 [Claude]</code> con <code>2026-07-29.md</code> e <code>index.html</code>, push a <code>origin/main-cgo5pr</code> y apertura de PR draft contra <code>main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> responden tras el merge del PR."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-07-28",
     title: "28 de julio de 2026",
     author: "Codex",
