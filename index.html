@@ -352,45 +352,46 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se activo la escucha de <code>OraculoMini</code> y se leyo la memoria de la automatizacion <code>diario-admirito</code> antes de revisar el trabajo del dia.",
-          "En <code>github-csilvasantin/AdmiraNext-Team</code> se inspeccionaron <code>git status --short</code>, <code>git diff --stat</code> y los diffs de <code>public/index.html</code>, <code>public/app.js</code>, <code>public/styles.css</code>, <code>package.json</code> y <code>data/machines.json</code>, junto con las capturas nuevas de <code>data/screenshots/</code>.",
-          "Tambien se revisaron cambios recientes del workspace para separar trabajo real de artefactos locales, y luego se reescribieron <code>2026-07-29.md</code> e <code>index.html</code> para dejar una sola entrada del dia con ese resumen."
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyeron la memoria local de <code>cerrar-el-dia</code>, la fuente canonica <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-29 00:00' --until='2026-07-29 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-29 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se revisaron <code>git branch -vv</code>, <code>git rev-parse HEAD origin/main main</code>, <code>git log --oneline --decorate --graph -n 12 --all</code>, la entrada existente de <code>2026-07-29</code> y su bloque en <code>index.html</code>, y luego se reescribieron ambos para dejar solo hechos verificados de esta corrida."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>AdmiraNext-Team</code> tiene hoy ocho ficheros modificados y sin commit publicado: <code>public/index.html</code>, <code>public/app.js</code>, <code>public/styles.css</code>, <code>package.json</code>, <code>data/machines.json</code> y tres capturas de <code>data/screenshots/</code>; <code>git diff --stat</code> dio <code>1112 insertions(+), 73 deletions(-)</code>.",
-          "El cambio funcional verificable es un rediseño grande del panel hacia una UI tipo <code>fighter select</code> / arcade, con versionado a <code>0.1.3</code>, nuevas fichas por miembro, agregacion por persona y datos SSH locales nuevos para <code>macmini</code> en <code>data/machines.json</code>.",
-          "En el resto del workspace no aparecieron hoy otros cambios de producto comparables; lo detectado en <code>admira-next-web</code> fue ruido local de <code>.runtime</code> y <code>node_modules/</code>, no evidencia util para el diario."
+          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code> y dos untracked persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>; <code>date</code> marco el pre-check en <code>2026-07-29 23:55:48 CEST +0200</code>.",
+          "<code>git log</code> del <code>2026-07-29</code> confirmo actividad previa real en este repo con <code>7451b90 Diario 2026-07-29 [Codex]</code>, <code>6f135d7 chore: actualizar repos.html 2026-07-29 [skip ci]</code> y <code>4662833 Diario 2026-07-29 [Codex]</code>; <code>git reflog</code> del mismo dia anoto ademas <code>bc0ebc7 Diario 2026-07-29 [Codex]</code> antes del checkout a <code>origin/main</code>.",
+          "<code>git rev-parse</code> y el grafo confirmaron que <code>HEAD</code>, <code>origin/main</code> y <code>origin/HEAD</code> apuntaban a <code>4662833</code>, mientras <code>main</code> seguia separado en <code>96c6ef1</code>, asi que la publicacion correcta de este cierre tenia que salir desde la referencia remota actual y no desde la rama local <code>main</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La entrada del <code>29 de julio de 2026</code> deja de describir solo el mantenimiento del propio diario y pasa a reflejar el trabajo real observado hoy en Admirito.",
-          "Queda documentado que el foco del dia fue la nueva presentacion visual de <code>AdmiraNext-Team</code>, con metadatos de flota y snapshots actualizados, pero todavia en working tree."
+          "La entrada de <code>2026-07-29 [Codex]</code> vuelve a cumplir la plantilla literal con seis secciones numeradas y solo hechos verificables de esta ejecucion.",
+          "<code>index.html</code> queda sincronizado con la misma narrativa para que la UI publica muestre una sola version coherente del <code>29 de julio de 2026</code> bajo el filtro <code>Codex</code>.",
+          "Queda documentado dentro del propio diario que la punta publicada de hoy ya existia en <code>origin/main</code>, pero que su contenido necesitaba correccion factual para ajustarse a este cierre real."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "No hay commits de hoy ni una validacion automatica visible para <code>AdmiraNext-Team</code>; todo lo observado esta aun sin publicar, asi que no se puede afirmar despliegue ni estabilidad final.",
-          "El checkout canonico de <code>diario</code> sigue en detached HEAD (<code>HEAD (no branch)</code>) y arranca con los untracked persistentes <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>, lo que obliga a publicar con cuidado."
+          "El checkout canonico no arranco limpio ni en rama local: estaba en detached HEAD y con dos directorios untracked persistentes, lo que obligo a verificar primero la relacion exacta con <code>origin/main</code>.",
+          "La entrada vigente de <code>2026-07-29 [Codex]</code> describia una sesion distinta a esta corrida, asi que no servia como cierre literal del dia sin ser reescrita."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Actualizar la entrada existente del <code>2026-07-29</code> en vez de duplicarla, manteniendo una sola version diaria bajo autoria <code>Codex</code>.",
-          "Registrar solo cambios verificables por diff y estado local, ignorando caches y artefactos de runtime que no aportan senal sobre producto."
+          "Actualizar la entrada existente del <code>2026-07-29</code> en vez de duplicarla, manteniendo un unico fichero diario y una sola version activa de autoria <code>Codex</code>.",
+          "Registrar solo hechos comprobados por <code>git</code>, por la lectura de la rutina y por el trabajo real realizado en esta sesion sobre el repo <code>diario</code>."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Probar <code>AdmiraNext-Team</code> en local y hacer una verificacion visual del nuevo layout arcade antes de commitear, para detectar roturas de JS, responsive o contraste.",
-          "Si la UI queda valida, commitear y publicar tanto el cambio de <code>AdmiraNext-Team</code> como esta correccion del diario, y verificar despues <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>."
+          "Hacer <code>git add 2026-07-29.md index.html</code>, crear el commit <code>Diario 2026-07-29 [Codex]</code> y empujarlo a <code>origin/main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>29 de julio de 2026</code> bajo el filtro <code>Codex</code>."
         ]
       }
     ]
