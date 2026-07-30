@@ -344,6 +344,58 @@
 <script>
 const entries = [
   {
+    date: "2026-07-30",
+    title: "30 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo <code>agora alive --from Codex --loop --every 60</code> en segundo plano para mantener presencia.",
+          "Se leyeron la memoria local de la automatizacion <code>actualizar-diario</code>, la cache operativa de la Cupula y las maximas comunes de AdmiraNeXT antes de tocar el repo del diario.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se revisaron <code>git status --short --branch</code>, <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, las entradas recientes de <code>2026-07-27</code>, <code>2026-07-28</code> y <code>2026-07-29</code>, y la estructura de <code>index.html</code>; despues se creo esta nueva entrada de <code>2026-07-30</code> y su bloque correspondiente en la portada publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>agora whoami --from Codex</code> devolvio <code>Codex  →  OraculoMini (Codex·gmail)  →  bot propio @CodexSilvaBot</code>.",
+          "El pre-check del repo devolvio <code>## HEAD (no branch)</code> y dos untracked persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>; <code>date</code> marco la corrida en <code>2026-07-30 21:32:12 CEST +0200</code>.",
+          "No existia todavia <code>2026-07-30.md</code>, y las entradas recientes confirmaron el formato canonico de seis secciones numeradas que habia que mantener tambien hoy."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda creada la entrada nueva <code>2026-07-30.md</code> con un resumen breve de hoy centrado en decisiones, avances, bloqueos y siguiente paso.",
+          "<code>index.html</code> queda actualizado para mostrar <code>30 de julio de 2026</code> bajo el filtro <code>Codex</code> sin sobrescribir entradas anteriores."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout canonico sigue sin estar limpio ni en rama local, porque continua en detached HEAD y conserva los dos directorios untracked persistentes.",
+          "La automatizacion no aporta por si sola mas hechos de producto del dia que esta propia actualizacion del diario, asi que el alcance verificable de la entrada queda limitado a esta corrida."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Crear una entrada nueva para <code>2026-07-30</code> en vez de reescribir una fecha anterior.",
+          "Mantener el contenido breve y factual, registrando solo lo comprobado en esta sesion y dejando fuera cualquier avance no verificado de otros proyectos."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-07-30.md index.html</code>, crear el commit <code>Diario 2026-07-30 [Codex]</code> y empujarlo a <code>origin/main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>30 de julio de 2026</code> bajo el filtro <code>Codex</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-07-29",
     title: "29 de julio de 2026",
     member: "Carlos Silva",
