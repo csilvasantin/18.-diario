@@ -396,6 +396,62 @@ const entries = [
     ]
   },
   {
+    date: "2026-07-30",
+    title: "30 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion de Claude Code en la nube (entorno remoto efimero, rama <code>main-73x95x</code>) lanzada como rutina programada de fondo con el encargo de subir a GitHub el trabajo con Claude Code, actualizar el diario <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <code>repos.html</code>, y documentar los dias sin trabajo.",
+          "Pre-check literal en <code>/home/user/18.-diario/</code> con <code>git status --short --branch</code>, <code>git rev-parse HEAD</code>, <code>git remote -v</code>, <code>git fetch origin main</code>, <code>git log --all --oneline --since='2026-07-30 00:00' --until='2026-07-30 23:59:59'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se anade este bloque <code>[Claude]</code> a <code>2026-07-30.md</code> separado por <code>---</code> y se replica la entrada en <code>index.html</code> para dejar constancia de la pasada de Claude Code aunque no haya trabajo de codigo nuevo que publicar hoy."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-73x95x</code> con arbol limpio, y <code>git rev-parse HEAD</code> coincidia con <code>origin/main</code> en <code>56f855e2438b348822809de9cc0a9df0080b97e1</code> antes de editar.",
+          "<code>git fetch origin main</code> movio <code>origin/main</code> de <code>a226b7b</code> a <code>56f855e</code> (<code>56f855e Diario 2026-07-30 [Codex]</code>), y <code>git log --all --oneline --since='2026-07-30 00:00' --until='2026-07-30 23:59:59'</code> mostro solo commits firmados <code>[Codex]</code> (<code>56f855e</code>, <code>6aa8e38</code>) y el commit CI del workflow (<code>8f6b192 chore: actualizar repos.html 2026-07-30 [skip ci]</code>), sin actividad de Claude Code para el <code>2026-07-30</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-07-30 21:08:11 UTC +0000</code> durante esta corrida; <code>repos.html</code> ya estaba regenerado por el workflow <code>update-repos.yml</code> con el commit <code>8f6b192</code> del <code>2026-07-30</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda registrado explicitamente que Claude Code paso por el diario el <code>30 de julio de 2026</code> y que la publicacion del dia ya estaba cerrada por Codex antes de esta pasada.",
+          "<code>2026-07-30.md</code> e <code>index.html</code> cumplen la regla 1-2-3 con dos bloques (<code>[Codex]</code> y <code>[Claude]</code>) en una unica pagina por fecha.",
+          "Se confirma que la salida publica en <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> seguira teniendo una unica fila para hoy, ahora con las dos firmas visibles bajo los filtros por autor."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No hubo trabajo nuevo de codigo con Claude Code en este repo durante el <code>2026-07-30</code>, asi que la contribucion se limita a la documentacion del cierre (regla del usuario: \"si un dia en concreto no se ha hecho nada se documenta y ya esta\").",
+          "La sesion corre en un entorno remoto efimero de Claude Code sobre la rama <code>main-73x95x</code> (no <code>main</code>), asi que el push va a esa rama de trabajo y la promocion a <code>main</code> queda pendiente del PR draft habitual.",
+          "La URL publica puede tardar unos minutos en propagar por GitHub Pages tras el merge a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Anadir el bloque <code>[Claude]</code> al mismo <code>2026-07-30.md</code> en vez de crear otro fichero, para mantener una unica pagina por fecha segun la regla 1-2-3.",
+          "Publicar en la rama de trabajo <code>main-73x95x</code> como exige el entorno remoto de Claude Code, y abrir un PR draft para que el usuario lo revise y lo funda cuando quiera.",
+          "Limitar el contenido a hechos verificables de <code>git</code> y de esta sesion, sin inventar actividad de codigo que no ocurrio hoy."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Empujar la rama <code>main-73x95x</code> a <code>origin</code> y dejar abierto un PR draft para revision.",
+          "Notificar al usuario por push notification con el resumen y la URL del diario para que verifique la propagacion en <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a>.",
+          "Tras el merge a <code>main</code>, <code>repos.html</code> sera regenerado automaticamente por el workflow <code>update-repos.yml</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-07-29",
     title: "29 de julio de 2026",
     member: "Carlos Silva",
