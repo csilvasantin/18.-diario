@@ -352,45 +352,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se consultaron la memoria local de <code>actualizar-diario-2</code>, <code>routines/update.md</code>, <code>CERRAR-EL-DIA.md</code>, la entrada <code>2026-07-29.md</code> y el bloque <code>const entries</code> de <code>index.html</code>.",
-          "En este checkout de <code>diario</code> se revisaron <code>git status --short --branch</code>, <code>git log --since='2026-07-30 00:00' --until='2026-07-30 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-30 00:00'</code>, <code>git remote -v</code>, <code>git branch -a --contains HEAD</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se creo la entrada <code>2026-07-30.md</code> y se actualizo <code>index.html</code> para publicar <code>30 de julio de 2026</code> bajo autoria <code>Codex</code>."
+          "Se reviso la actividad local de hoy en los repos de Admirito, con foco en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code> y el workspace reciente de <code>tool</code>.",
+          "En <code>AdmiraNext-Team</code> se detecto una remodelacion fuerte del frontal: la portada pasa a un modo arcade tipo <code>Player Select</code>, se anade una capa de perfiles por miembro, cambian los contadores de resumen y se refrescan capturas y metadatos de conexion del Mac Mini en <code>data/machines.json</code>.",
+          "En <code>AdmiraNext-Team-latest</code> quedaron ajustes de backend para hacer el control remoto mas robusto: <code>PORT</code> configurable por entorno, aceptacion explicita del estado <code>idle</code> y helpers compartidos para construir <code>osascript</code> remoto con quoting consistente por SSH.",
+          "En <code>tool</code> aparecieron cambios recientes en Yokup orientados a rendimiento y sensacion de carga: cache de <code>ensureSchema</code>, <code>listTickets</code> y <code>stats</code> en paralelo, nuevas reglas de cache para assets y un primer pintado de <code>misiones.html</code> desde <code>sessionStorage</code> mientras revalida."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, sin cambios locales antes de editar la entrada del dia.",
-          "<code>git log</code> para el <code>30 de julio de 2026</code> no devolvio commits previos en este repo y <code>git reflog --since='2026-07-30 00:00'</code> solo mostro la apertura del checkout en <code>HEAD@{2026-07-30 21:31:36 +0200}</code>.",
-          "<code>git remote -v</code> confirmo <code>origin https://github.com/csilvasantin/diario.git</code>, <code>git branch -a --contains HEAD</code> confirmo que este detached HEAD coincide con <code>origin/main</code>, y <code>date</code> marco el pre-check en <code>2026-07-30 21:32:11 CEST +0200</code>."
+          "Se confirmo que hoy no hay commits locales hechos en estos repos; el trabajo visible esta todavia en forma de cambios sin commit.",
+          "Se verifico por diff que <code>AdmiraNext-Team</code> concentra mas de mil lineas de cambio en <code>public/app.js</code>, <code>public/index.html</code> y <code>public/styles.css</code>, junto a nuevas IPs/comandos locales para el Mac Mini y capturas de pantalla actualizadas.",
+          "Se valido en <code>AdmiraNext-Team-latest</code> que el cambio principal va sobre ejecucion remota y estados de maquina, no sobre interfaz.",
+          "Se valido en <code>tool</code> que el ajuste real del dia esta en <code>yokup-site/misiones.html</code>, <code>yokup-site/_headers</code>, <code>yokup-site/yk-decisions.js</code> y <code>yokup-rtc/src/index.js</code>, con menos poll agresivo y mejor cacheo."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "Queda creada una unica entrada Markdown para la fecha <code>2026-07-30</code>, sin duplicar dias ni atribuir actividad no verificada.",
-          "<code>index.html</code> queda sincronizado con la misma informacion para que la novedad sea visible en la publicacion web del diario."
+          "<code>AdmiraNext-Team</code> ya tiene una direccion visual nueva y mucho mas expresiva para presentar la flota y a sus miembros sin perder el acceso al panel de control.",
+          "<code>AdmiraNext-Team-latest</code> deja mejor preparada la base tecnica para operar estados como <code>idle</code> y para lanzar acciones remotas por AppleScript con menos fragilidad de quoting.",
+          "<code>tool</code> avanza en reducir latencia percibida y carga innecesaria de Yokup, tanto en edge como en navegador, especialmente en <code>misiones</code> y <code>decisiones</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El checkout seguia en detached HEAD (<code>HEAD (no branch)</code>), asi que la publicacion debe hacerse empujando el commit resultante a <code>origin/main</code>.",
-          "No habia mas evidencia real de trabajo previo hoy en este repo; cualquier detalle adicional sobre el <code>30 de julio</code> habria sido inventado."
+          "El trabajo de hoy esta disperso en varios clones y workspaces con cambios pendientes, lo que dificulta reconstruir una historia limpia solo desde commits.",
+          "El checkout de <code>AdmiraNext-Team</code> que concentra cambios visibles va <code>behind 306</code> respecto a <code>origin/main</code>, lo que eleva el riesgo de integrar el rediseño sobre una base atrasada.",
+          "En <code>tool</code> hay ruido de workspace con varios <code>.bak-*</code> sin versionar, y en general sigue faltando una pasada de prueba registrada para saber si los cambios ya estan listos para integrar."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo hechos observables de esta ejecucion y del historial real del repo <code>diario</code>.",
-          "Crear la entrada nueva de <code>2026-07-30</code> en vez de reutilizar fechas anteriores, para mantener una sola entrada por dia en Markdown."
+          "Actualizar la entrada ya existente del <code>30 de julio de 2026</code> en vez de duplicarla.",
+          "Registrar solo hechos verificables por <code>git status</code>, <code>git diff</code> y el estado real de los repos, sin atribuir despliegues o validaciones que no constan hechos hoy.",
+          "Tratar <code>AdmiraNext-Team</code> como frente principal del dia y <code>AdmiraNext-Team-latest</code> junto a <code>tool</code> como trabajo de soporte tecnico y rendimiento."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add 2026-07-30.md index.html</code>, crear el commit <code>Diario 2026-07-30 [Codex]</code> y empujarlo a <code>origin/main</code>.",
-          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>30 de julio de 2026</code>."
+          "Consolidar el trabajo de <code>AdmiraNext-Team</code> en un checkout actualizado contra <code>origin/main</code> antes de seguir iterando el rediseño.",
+          "Probar manualmente el panel renovado y el flujo remoto con estados <code>idle</code>, SSH local y ejecucion de <code>osascript</code> antes de hacer commit.",
+          "Limpiar backups y ruido de workspace en <code>tool</code>, agrupar cambios por tema y hacer commits pequenos antes de desplegar o mezclar nada."
         ]
       }
     ]
