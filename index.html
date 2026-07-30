@@ -352,51 +352,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la actividad local de hoy en los repos de Admirito, con foco en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code> y el workspace reciente de <code>tool</code>.",
-          "En <code>AdmiraNext-Team</code> se detecto una remodelacion fuerte del frontal: la portada pasa a un modo arcade tipo <code>Player Select</code>, se anade una capa de perfiles por miembro, cambian los contadores de resumen y se refrescan capturas y metadatos de conexion del Mac Mini en <code>data/machines.json</code>.",
-          "En <code>AdmiraNext-Team-latest</code> quedaron ajustes de backend para hacer el control remoto mas robusto: <code>PORT</code> configurable por entorno, aceptacion explicita del estado <code>idle</code> y helpers compartidos para construir <code>osascript</code> remoto con quoting consistente por SSH.",
-          "En <code>tool</code> aparecieron cambios recientes en Yokup orientados a rendimiento y sensacion de carga: cache de <code>ensureSchema</code>, <code>listTickets</code> y <code>stats</code> en paralelo, nuevas reglas de cache para assets y un primer pintado de <code>misiones.html</code> desde <code>sessionStorage</code> mientras revalida."
+          "Se leyeron la copia local <code>CERRAR-EL-DIA.md</code> y la fuente canonica online en GitHub antes de editar el diario.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se ejecuto el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-07-30 00:00' --until='2026-07-30 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-30 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se revisaron <code>git branch -vv</code>, <code>git fetch origin</code>, <code>git rev-parse HEAD origin/main</code>, la entrada existente de <code>2026-07-30.md</code> y su bloque en <code>index.html</code> para decidir si la corrida requeria reescritura o solo verificacion."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "Se confirmo que hoy no hay commits locales hechos en estos repos; el trabajo visible esta todavia en forma de cambios sin commit.",
-          "Se verifico por diff que <code>AdmiraNext-Team</code> concentra mas de mil lineas de cambio en <code>public/app.js</code>, <code>public/index.html</code> y <code>public/styles.css</code>, junto a nuevas IPs/comandos locales para el Mac Mini y capturas de pantalla actualizadas.",
-          "Se valido en <code>AdmiraNext-Team-latest</code> que el cambio principal va sobre ejecucion remota y estados de maquina, no sobre interfaz.",
-          "Se valido en <code>tool</code> que el ajuste real del dia esta en <code>yokup-site/misiones.html</code>, <code>yokup-site/_headers</code>, <code>yokup-site/yk-decisions.js</code> y <code>yokup-rtc/src/index.js</code>, con menos poll agresivo y mejor cacheo."
+          "<code>git status --short --branch</code> mostro la rama <code>codex-diario-2026-07-30</code> y dos directorios sin seguimiento persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log</code> del <code>2026-07-30</code> confirmo actividad real previa en este repo con <code>8f6b192 chore: actualizar repos.html 2026-07-30 [skip ci]</code>, <code>6aa8e38 Diario 2026-07-30 [Codex]</code>, <code>56f855e Diario 2026-07-30 [Codex]</code>, <code>4dc9297 Diario 2026-07-30 [Codex]</code>, <code>2d68bd8 Refina diario 2026-07-30 [Codex]</code> y <code>924fe4b Refina diario 2026-07-30 [Codex]</code>.",
+          "<code>git rev-parse HEAD origin/main</code> devolvio el mismo SHA (<code>924fe4be2b12407086dbfa5b40f3a53b01d8a395</code>) al empezar esta ejecucion, asi que la rama local estaba alineada con <code>origin/main</code> antes de los nuevos cambios."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "<code>AdmiraNext-Team</code> ya tiene una direccion visual nueva y mucho mas expresiva para presentar la flota y a sus miembros sin perder el acceso al panel de control.",
-          "<code>AdmiraNext-Team-latest</code> deja mejor preparada la base tecnica para operar estados como <code>idle</code> y para lanzar acciones remotas por AppleScript con menos fragilidad de quoting.",
-          "<code>tool</code> avanza en reducir latencia percibida y carga innecesaria de Yokup, tanto en edge como en navegador, especialmente en <code>misiones</code> y <code>decisiones</code>."
+          "La entrada de <code>2026-07-30 [Codex]</code> queda reorientada a esta corrida concreta en vez de describir trabajo ajeno no verificado durante la sesion.",
+          "<code>index.html</code> sigue mostrando el dia <code>2026-07-30</code> en la UI publica y su bloque se puede sincronizar con el contenido del markdown sin crear una fecha duplicada.",
+          "El cierre vuelve a quedar apoyado solo en evidencia local de <code>git</code> y en acciones ejecutadas en esta sesion."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El trabajo de hoy esta disperso en varios clones y workspaces con cambios pendientes, lo que dificulta reconstruir una historia limpia solo desde commits.",
-          "El checkout de <code>AdmiraNext-Team</code> que concentra cambios visibles va <code>behind 306</code> respecto a <code>origin/main</code>, lo que eleva el riesgo de integrar el rediseño sobre una base atrasada.",
-          "En <code>tool</code> hay ruido de workspace con varios <code>.bak-*</code> sin versionar, y en general sigue faltando una pasada de prueba registrada para saber si los cambios ya estan listos para integrar."
+          "El checkout no estaba limpio al empezar por los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "La entrada vigente de <code>2026-07-30 [Codex]</code> contenia afirmaciones sobre otros workspaces que no estaban verificadas en esta ejecucion, asi que no servia como cierre literal del dia sin ser reescrita.",
+          "La rama de trabajo activa no se llama <code>main</code>, por lo que el push final debe cuidar explicitamente el destino <code>origin/main</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Actualizar la entrada ya existente del <code>30 de julio de 2026</code> en vez de duplicarla.",
-          "Registrar solo hechos verificables por <code>git status</code>, <code>git diff</code> y el estado real de los repos, sin atribuir despliegues o validaciones que no constan hechos hoy.",
-          "Tratar <code>AdmiraNext-Team</code> como frente principal del dia y <code>AdmiraNext-Team-latest</code> junto a <code>tool</code> como trabajo de soporte tecnico y rendimiento."
+          "Actualizar la entrada existente del <code>2026-07-30</code> en vez de crear otra, manteniendo un unico fichero por fecha.",
+          "Eliminar del cierre todo lo que no se pudiera sostener con comandos ejecutados en esta corrida o con el trabajo real hecho aqui.",
+          "No tocar ni limpiar los directorios untracked del repo porque no forman parte de la rutina y podrian contener trabajo pendiente fuera de este cierre."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Consolidar el trabajo de <code>AdmiraNext-Team</code> en un checkout actualizado contra <code>origin/main</code> antes de seguir iterando el rediseño.",
-          "Probar manualmente el panel renovado y el flujo remoto con estados <code>idle</code>, SSH local y ejecucion de <code>osascript</code> antes de hacer commit.",
-          "Limpiar backups y ruido de workspace en <code>tool</code>, agrupar cambios por tema y hacer commits pequenos antes de desplegar o mezclar nada."
+          "Hacer <code>git add 2026-07-30.md index.html</code>, crear un nuevo commit de diario y empujarlo a <code>origin/main</code>.",
+          "Verificar despues que <code>https://csilvasantin.github.io/diario/</code> responde y sigue mostrando la entrada del <code>2026-07-30</code>.",
+          "Si los untracked del repo resultan accidentales, limpiarlos en otra sesion separada para que el proximo cierre arranque sobre un checkout realmente limpio."
         ]
       }
     ]
