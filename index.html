@@ -352,45 +352,45 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se confirmo la identidad con <code>agora whoami --from Codex</code> y se dejo <code>agora alive --from Codex --loop --every 60</code> en segundo plano para mantener presencia.",
-          "Se leyeron la memoria local de la automatizacion <code>actualizar-diario</code>, la cache operativa de la Cupula y las maximas comunes de AdmiraNeXT antes de tocar el repo del diario.",
-          "En <code>/Users/csilvasantin/Claude/diario/</code> se revisaron <code>git status --short --branch</code>, <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>, las entradas recientes de <code>2026-07-27</code>, <code>2026-07-28</code> y <code>2026-07-29</code>, y la estructura de <code>index.html</code>; despues se creo esta nueva entrada de <code>2026-07-30</code> y su bloque correspondiente en la portada publica."
+          "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se consultaron la memoria local de <code>actualizar-diario-2</code>, <code>routines/update.md</code>, <code>CERRAR-EL-DIA.md</code>, la entrada <code>2026-07-29.md</code> y el bloque <code>const entries</code> de <code>index.html</code>.",
+          "En este checkout de <code>diario</code> se revisaron <code>git status --short --branch</code>, <code>git log --since='2026-07-30 00:00' --until='2026-07-30 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-30 00:00'</code>, <code>git remote -v</code>, <code>git branch -a --contains HEAD</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo la entrada <code>2026-07-30.md</code> y se actualizo <code>index.html</code> para publicar <code>30 de julio de 2026</code> bajo autoria <code>Codex</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>agora whoami --from Codex</code> devolvio <code>Codex  →  OraculoMini (Codex·gmail)  →  bot propio @CodexSilvaBot</code>.",
-          "El pre-check del repo devolvio <code>## HEAD (no branch)</code> y dos untracked persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>; <code>date</code> marco la corrida en <code>2026-07-30 21:32:12 CEST +0200</code>.",
-          "No existia todavia <code>2026-07-30.md</code>, y las entradas recientes confirmaron el formato canonico de seis secciones numeradas que habia que mantener tambien hoy."
+          "<code>git status --short --branch</code> devolvio <code>## HEAD (no branch)</code>, sin cambios locales antes de editar la entrada del dia.",
+          "<code>git log</code> para el <code>30 de julio de 2026</code> no devolvio commits previos en este repo y <code>git reflog --since='2026-07-30 00:00'</code> solo mostro la apertura del checkout en <code>HEAD@{2026-07-30 21:31:36 +0200}</code>.",
+          "<code>git remote -v</code> confirmo <code>origin https://github.com/csilvasantin/diario.git</code>, <code>git branch -a --contains HEAD</code> confirmo que este detached HEAD coincide con <code>origin/main</code>, y <code>date</code> marco el pre-check en <code>2026-07-30 21:32:11 CEST +0200</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "Queda creada la entrada nueva <code>2026-07-30.md</code> con un resumen breve de hoy centrado en decisiones, avances, bloqueos y siguiente paso.",
-          "<code>index.html</code> queda actualizado para mostrar <code>30 de julio de 2026</code> bajo el filtro <code>Codex</code> sin sobrescribir entradas anteriores."
+          "Queda creada una unica entrada Markdown para la fecha <code>2026-07-30</code>, sin duplicar dias ni atribuir actividad no verificada.",
+          "<code>index.html</code> queda sincronizado con la misma informacion para que la novedad sea visible en la publicacion web del diario."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El checkout canonico sigue sin estar limpio ni en rama local, porque continua en detached HEAD y conserva los dos directorios untracked persistentes.",
-          "La automatizacion no aporta por si sola mas hechos de producto del dia que esta propia actualizacion del diario, asi que el alcance verificable de la entrada queda limitado a esta corrida."
+          "El checkout seguia en detached HEAD (<code>HEAD (no branch)</code>), asi que la publicacion debe hacerse empujando el commit resultante a <code>origin/main</code>.",
+          "No habia mas evidencia real de trabajo previo hoy en este repo; cualquier detalle adicional sobre el <code>30 de julio</code> habria sido inventado."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Crear una entrada nueva para <code>2026-07-30</code> en vez de reescribir una fecha anterior.",
-          "Mantener el contenido breve y factual, registrando solo lo comprobado en esta sesion y dejando fuera cualquier avance no verificado de otros proyectos."
+          "Registrar solo hechos observables de esta ejecucion y del historial real del repo <code>diario</code>.",
+          "Crear la entrada nueva de <code>2026-07-30</code> en vez de reutilizar fechas anteriores, para mantener una sola entrada por dia en Markdown."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
           "Hacer <code>git add 2026-07-30.md index.html</code>, crear el commit <code>Diario 2026-07-30 [Codex]</code> y empujarlo a <code>origin/main</code>.",
-          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>30 de julio de 2026</code> bajo el filtro <code>Codex</code>."
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>30 de julio de 2026</code>."
         ]
       }
     ]
