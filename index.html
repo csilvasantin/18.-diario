@@ -344,6 +344,58 @@
 <script>
 const entries = [
   {
+    date: "2026-07-31",
+    title: "31 de julio de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se consulto la memoria local de <code>actualizar-diario-2</code>, sin contenido previo visible en esta corrida.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se revisaron <code>git status --short --branch</code>, <code>git log --since='2026-07-31 00:00' --until='2026-07-31 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-31 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-07-31.md</code> y se actualizo <code>index.html</code> para publicar <code>31 de julio de 2026</code> bajo autoria <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-30...origin/main</code> y dos untracked persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log</code> para el <code>31 de julio de 2026</code> confirmo actividad previa real en este repo con <code>c03aa76 Diario 2026-07-30 [Codex]</code>.",
+          "<code>git reflog --since='2026-07-31 00:00'</code> mostro <code>c03aa76 HEAD@{2026-07-31 00:01:09 +0200}: commit: Diario 2026-07-30 [Codex]</code>, y <code>date</code> marco el pre-check en <code>2026-07-31 21:31:35 CEST +0200</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda creada una unica entrada Markdown para la fecha <code>2026-07-31</code>, sin duplicar dias ni atribuir actividad no verificada.",
+          "<code>index.html</code> queda sincronizado con la misma informacion para que la novedad sea visible en la publicacion web del diario."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout canonico no estaba limpio por dos directorios sin seguimiento ajenos a esta automatizacion.",
+          "No habia mas evidencia real de trabajo previo de Codex hoy en este repo aparte del commit de <code>00:01</code>, asi que cualquier detalle adicional habria sido inventado."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos observables de esta ejecucion y del historial real del repo <code>diario</code>.",
+          "Crear una entrada nueva para <code>2026-07-31</code> en vez de reescribir fechas anteriores, manteniendo una sola entrada por dia en Markdown."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-07-31.md index.html</code>, crear el commit <code>Diario 2026-07-31 [Codex]</code> y empujarlo a <code>origin/main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>31 de julio de 2026</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-07-30",
     title: "30 de julio de 2026",
     member: "Carlos Silva",
