@@ -346,51 +346,53 @@ const entries = [
   {
     date: "2026-07-31",
     title: "31 de julio de 2026",
-    member: "Carlos Silva",
     author: "Codex",
+    xpacio: "",
     sections: [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code> al abrir la sesion y se consulto la memoria local de <code>actualizar-diario-2</code>, sin contenido previo visible en esta corrida.",
-          "En <code>/Users/csilvasantin/Claude/diario/</code> se revisaron <code>git status --short --branch</code>, <code>git log --since='2026-07-31 00:00' --until='2026-07-31 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-07-31 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se creo <code>2026-07-31.md</code> y se actualizo <code>index.html</code> para publicar <code>31 de julio de 2026</code> bajo autoria <code>Codex</code>."
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria local de <code>diario-admirito-bac5d0cef565</code> y se revisaron <code>2026-07-30.md</code> e <code>index.html</code> para mantener una sola entrada por fecha.",
+          "Se inspeccionaron los clones de <code>AdmiraNext-Team</code> en <code>/Users/csilvasantin/AdmiraNext-Team</code>, <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code>, <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/AdmiraNext-Team-latest</code> y <code>/Users/csilvasantin/Claude/repos/AdmiraNext-Team</code> con <code>git status --short --branch</code>, <code>git log --since='2026-07-31 00:00' --until='2026-07-31 23:59:59' --date=iso --oneline --decorate --stat</code> y <code>git reflog --date=iso</code>.",
+          "En <code>Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> se revisaron los diffs de <code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>package.json</code> y <code>data/machines.json</code>, y en <code>AdmiraNext-Team-latest</code> los de <code>src/server.js</code> y <code>src/ssh-exec.js</code>, para resumir el trabajo local real del dia.",
+          "Se actualizo <code>2026-07-31.md</code> y <code>index.html</code> con un resumen breve del trabajo observado hoy en los repositorios de Admirito."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-30...origin/main</code> y dos untracked persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-          "<code>git log</code> para el <code>31 de julio de 2026</code> confirmo actividad previa real en este repo con <code>c03aa76 Diario 2026-07-30 [Codex]</code>.",
-          "<code>git reflog --since='2026-07-31 00:00'</code> mostro <code>c03aa76 HEAD@{2026-07-31 00:01:09 +0200}: commit: Diario 2026-07-30 [Codex]</code>, y <code>date</code> marco el pre-check en <code>2026-07-31 21:31:35 CEST +0200</code>."
+          "Ninguno de los clones revisados tenia commits ni reflog fechados el <code>31 de julio de 2026</code>, pero si habia trabajo local sin publicar: el clon principal de <code>AdmiraNext-Team</code> mostraba cambios en <code>data/machines.json</code>, tres capturas en <code>data/screenshots/</code>, <code>package.json</code>, <code>public/app.js</code>, <code>public/index.html</code> y <code>public/styles.css</code>.",
+          "El diff del frontend confirma un rediseño fuerte del panel hacia una UI tipo arcade: alta de la seccion <code>Player Select</code>, perfiles <code>fighter</code>, nuevas metricas derivadas por miembro y versionado <code>v0.1.3</code>.",
+          "<code>data/machines.json</code> incorporo <code>ip_local</code> y <code>connect_local</code> para <code>macmini</code>, y <code>AdmiraNext-Team-latest</code> amplio el backend para aceptar el estado <code>idle</code>, permitir <code>PORT</code> por entorno y construir comandos <code>osascript</code> remotos de forma mas robusta en <code>src/ssh-exec.js</code>.",
+          "El clon <code>Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> seguia <code>behind 306</code> respecto a <code>origin/main</code>, mientras <code>AdmiraNext-Team-latest</code> estaba en la rama <code>codex/fix-teamwork-api-discovery</code> con cambios locales aun sin commit."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "Queda creada una unica entrada Markdown para la fecha <code>2026-07-31</code>, sin duplicar dias ni atribuir actividad no verificada.",
-          "<code>index.html</code> queda sincronizado con la misma informacion para que la novedad sea visible en la publicacion web del diario."
+          "Queda documentado que hoy hubo iteracion real sobre la experiencia publica de <code>AdmiraNext-Team</code> y sobre la capa de control remoto, aunque ese trabajo todavia no se habia consolidado en commits fechados hoy.",
+          "El diario y <code>index.html</code> quedan alineados con una sola entrada para <code>2026-07-31</code>, sin duplicar fechas ni atribuir validaciones inexistentes."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El checkout canonico no estaba limpio por dos directorios sin seguimiento ajenos a esta automatizacion.",
-          "No habia mas evidencia real de trabajo previo de Codex hoy en este repo aparte del commit de <code>00:01</code>, asi que cualquier detalle adicional habria sido inventado."
+          "La evidencia de hoy estaba fragmentada entre varios clones de <code>AdmiraNext-Team</code>, con cambios locales pero sin commits del dia, lo que obliga a resumir desde working trees en lugar de desde historial publicado.",
+          "El clon principal en <code>Documents/Admirito/github-csilvasantin/AdmiraNext-Team</code> esta muy retrasado frente a <code>origin/main</code> (<code>behind 306</code>), asi que mezclar ahi trabajo nuevo con sincronizacion remota seria arriesgado sin una pasada aparte."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar solo hechos observables de esta ejecucion y del historial real del repo <code>diario</code>.",
-          "Crear una entrada nueva para <code>2026-07-31</code> en vez de reescribir fechas anteriores, manteniendo una sola entrada por dia en Markdown."
+          "Registrar solo hechos observables en diffs y estados de git, y no asumir despliegues ni pruebas no verificadas.",
+          "Reflejar como foco del dia dos lineas de trabajo: el rediseño arcade del frontend y el endurecimiento de la ejecucion remota y estados del backend auxiliar."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add 2026-07-31.md index.html</code>, crear el commit <code>Diario 2026-07-31 [Codex]</code> y empujarlo a <code>origin/main</code>.",
-          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra <code>31 de julio de 2026</code>."
+          "Consolidar los cambios de <code>AdmiraNext-Team</code> en un solo clon canonico antes de publicar, para evitar divergencias entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>.",
+          "Probar el flujo completo con el nuevo estado <code>idle</code>, las rutas SSH locales y Tailscale y la UI <code>v0.1.3</code> antes de convertir este trabajo en commit compartido."
         ]
       }
     ]
