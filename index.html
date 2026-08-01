@@ -346,52 +346,57 @@ const entries = [
   {
     date: "2026-08-01",
     title: "1 de agosto de 2026",
-    member: "Carlos Silva",
     author: "Codex",
     xpacio: "",
     sections: [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion en <code>~/.codex/automations/actualizar-diario-2/memory.md</code> y se revisaron <code>README.md</code>, <code>skills/diario-ia-claude-code/SKILL.md</code>, <code>2026-07-31.md</code> e <code>index.html</code> para preparar el cierre de hoy sin duplicar fechas.",
-          "Se inspecciono el estado del repo con <code>git status --short --branch</code>, <code>git log --since='2026-08-01 00:00:00' --until='2026-08-01 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-08-01 00:00:00'</code>, y se confirmo actividad real previa del dia en este repo.",
-          "Se reviso el commit <code>6f68ef6 Codex worktree snapshot: startup-cleanup</code>, fechado hoy a las <code>21:30:42 +0200</code>, que anadio <code>2026-07-24.md</code> con <code>Co-authored-by: Codex</code>.",
-          "Se hizo <code>git fetch origin main</code>, se detecto que <code>origin/main</code> habia avanzado a <code>f129a15 chore: actualizar repos.html 2026-08-01 [skip ci]</code>, se movio este worktree a esa punta, se creo <code>2026-08-01.md</code>, se inserto la fecha en <code>index.html</code> y se publico todo con <code>git push origin HEAD:main</code> como <code>e0818f2 Diario 2026-08-01 [Codex]</code>."
+          "En <code>github-csilvasantin/AdmiraNext-Team</code> quedo preparado un rediseño grande del panel: nueva portada <code>World Warrior Ops</code>, selector <code>Choose Your Fighter</code>, fichas por miembro, metricas derivadas en <code>public/app.js</code>, estilos arcade en <code>public/styles.css</code>, <code>version</code> subida a <code>0.1.3</code> y datos extra de conexion local para el Mac Mini en <code>data/machines.json</code>.",
+          "En <code>32.-ConsejoAdmiraNextGame</code> se añadieron notas operativas sin commit sobre la lanzadera de <code>admira.tv</code>: patron de iframe para Catalogo (<code>pixeria</code>) y Soporte (<code>tool</code>), plan B con proxy edge y separacion entre Acceso v2 y la whitelist v1 de <code>admira.live</code>.",
+          "En <code>github-csilvasantin/tool</code> si quedo un commit verificable de hoy, <code>8399a65 feat(misiones): add recoverable deleted state</code>, tocando <code>yokup-rtc</code> y <code>yokup-site</code> para soportar estado recuperable de eliminadas y ampliar pruebas asociadas.",
+          "Tambien aparecieron cambios recientes de workspace sin cerrar en <code>04.- AdmiraGemini</code> (README, <code>pyproject.toml</code>, web estatica y test), <code>csilvasantin-github-pages-clean</code> (paginas de <code>codex</code>) y <code>admira-next-web</code> (<code>node_modules/</code> sin seguimiento)."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git show origin/main:2026-08-01.md</code> devolvio que todavia no existia una entrada remota para hoy, y <code>git show origin/main:index.html | rg 'date: \"2026-08-01\"'</code> confirmo que tampoco estaba en la UI publica del repo.",
-          "<code>gh api repos/csilvasantin/diario/commits/main --jq '.sha[0:7]+\" | \"+.commit.message'</code> devolvio <code>f129a15 | chore: actualizar repos.html 2026-08-01 [skip ci]</code> antes de esta edicion, asi que la referencia remota ya estaba actualizada.",
-          "<code>gh api repos/csilvasantin/diario/pages/builds/latest --jq '{status,commit}'</code> paso de <code>{\"commit\":\"bf2da80d8894b8206b6fbf9a79e386144598cbe4\",\"status\":\"built\"}</code> en el pre-check a <code>{\"commit\":\"e0818f23312295ce30460845fabf654a4f1e636f\",\"status\":\"built\"}</code> tras el push.",
-          "<code>curl -L https://csilvasantin.github.io/18.-diario/ | rg '2026-08-01|1 de agosto de 2026'</code> ya encontro la nueva fecha en el HTML servido por GitHub Pages, mientras <code>curl -L https://www.carlossilva.info/diario/ | rg '2026-08-01|1 de agosto de 2026'</code> todavia no la devolvio en esta comprobacion."
+          "<code>git status --short --branch</code> en <code>github-csilvasantin/AdmiraNext-Team</code> devolvio <code>## main...origin/main [behind 306]</code> con ocho ficheros modificados, y <code>git diff --stat</code> marco <code>1112</code> inserciones y <code>73</code> borrados entre datos, capturas y frontend.",
+          "<code>git diff</code> en <code>AdmiraNext-Team</code> confirmo cambios concretos: alta de <code>ip_local</code> y <code>connect_local</code> para el Mac Mini, bump de <code>package.json</code> a <code>0.1.3</code>, y nuevo flujo en <code>public/app.js</code> para agrupar maquinas por miembro y renderizar el selector arcade.",
+          "<code>git diff --stat</code> en <code>32.-ConsejoAdmiraNextGame</code> mostro <code>73</code> lineas añadidas solo en <code>mcp/index.html</code> y <code>mcp/llms.txt</code>, ambas dedicadas a documentar <code>admira.tv/apps</code>, <code>contentcatalogue</code>, <code>support</code> y <code>accesscontrol</code>.",
+          "<code>git show --stat --summary --format=fuller 8399a65</code> en <code>tool</code> confirmo el commit de hoy a las <code>2026-08-01 00:02:41 +0200</code>, con nuevos tests <code>tickets-status-cancelled.test.mjs</code> y <code>misiones-eliminadas.test.mjs</code>."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La fecha <code>2026-08-01</code> queda publicada en <code>main</code> en Markdown y en <code>index.html</code> con una sola entrada <code>Codex</code>, apoyada en evidencia de git y de esta propia sesion."
+          "El trabajo mas visible del dia queda concentrado en <code>AdmiraNext-Team</code>: la base de una UI mucho mas expresiva para leer estado, rol y foco de cada miembro desde una sola pantalla.",
+          "<code>tool</code> si deja una entrega trazable en <code>git</code> con soporte para estado recuperable de misiones eliminadas, mientras Consejo y otros repos conservan material reciente todavia en fase local.",
+          "La entrada del diario pasa a resumir cambios reales de producto y workspace, en vez del proceso interno de publicacion del propio diario."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "La variable de entorno <code>CODEX_HOME</code> venia vacia en este entorno, asi que la memoria de la automatizacion tuvo que resolverse manualmente en <code>~/.codex/automations/actualizar-diario-2/memory.md</code>.",
-          "Este worktree estaba desfasado respecto a <code>origin/main</code> al arrancar, porque seguia en <code>693154d</code> mientras remoto ya habia avanzado a <code>f129a15</code>."
+          "<code>AdmiraNext-Team</code> y <code>32.-ConsejoAdmiraNextGame</code> acumulan cambios importantes sin commit ni validacion automatizada visible en esta revision, asi que no se pueden dar por cerrados ni desplegados.",
+          "<code>AdmiraNext-Team</code> sigue <code>behind 306</code> respecto a <code>origin/main</code>, lo que aumenta el riesgo de conflicto antes de publicar esa tanda local.",
+          "El checkout canonico del diario sigue en una rama de trabajo <code>codex-diario-2026-07-30</code> con untracked persistentes (<code>backup-yokup-2026-07-21/</code>, <code>comparativa-clis/</code>), aunque no bloquean esta actualizacion."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar <code>origin/main</code> como fuente de verdad para esta corrida y editar desde <code>f129a15</code> en lugar de publicar sobre el estado local anterior.",
-          "Registrar solo hechos verificables del repo <code>diario</code> y de los comandos ejecutados hoy, sin inferir actividad externa no comprobada."
+          "Priorizar <code>AdmiraNext-Team</code> y <code>tool</code> como señales principales del dia, porque son los cambios con mas peso operativo dentro del workspace revisado.",
+          "Tratar lo de Consejo, AdmiraGemini y otros repos como trabajo reciente en curso, no como entregas terminadas, al no existir commit o verificacion suficiente en esta pasada.",
+          "Actualizar la entrada ya existente del <code>2026-08-01</code> en lugar de duplicarla, manteniendo la regla de un solo fichero por fecha."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Esperar a que el dominio final <code>https://www.carlossilva.info/diario/</code> refleje tambien el contenido que ya sirve <code>https://csilvasantin.github.io/18.-diario/</code>."
+          "Cerrar con commit y validacion los cambios locales de <code>AdmiraNext-Team</code>, especialmente el rediseño arcade y la actualizacion de <code>machines.json</code>.",
+          "Decidir si la documentacion nueva de <code>32.-ConsejoAdmiraNextGame</code> debe publicarse ya o esperar a que el patron de <code>admira.tv</code> cambie de nuevo.",
+          "Mantener la proxima pasada del diario atenta a <code>tool</code>, porque es el repo que si dejo hoy un cambio verificable de producto."
         ]
       }
     ]
