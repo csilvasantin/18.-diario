@@ -357,7 +357,7 @@ const entries = [
           "Se repasaron los commits de hoy en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/tool</code> y <code>/Users/csilvasantin/Documents/Admirito/admira-next-web</code>, donde se concentro la actividad publicada del <code>2 de agosto</code>.",
           "En <code>tool</code> se confirmo una tanda fuerte sobre Yokup: rescate de <code>/normativa</code>, ampliacion de <code>highscore</code> a todos los agentes vivos, recuperacion de <code>trackandfield.html</code>, unificacion de sellos <code>v.DD.MM.AAAA.rN</code> y fixes para validar la fuente antes de sellar despliegues y eliminar el bucle 308.",
           "En <code>admira-next-web</code> se confirmaron cambios de producto sobre TikTok y una nueva zona <code>/webmaster</code> con historial de snapshots, paginacion de despliegues y cierre server-side con Google para que solo Carlos vea la topografia de versiones vivas.",
-          "En <code>AdmiraNext-Team</code> no aparecieron commits fechados hoy, pero si un diff local grande: <code>package.json</code> sube a <code>0.1.3</code>, <code>data/machines.json</code> gana IP y conexion local del Mac Mini, y <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> convierten el panel en un selector arcade de miembros y maquinas."
+          "En <code>AdmiraNext-Team</code> no aparecieron commits fechados hoy, pero si un diff local grande: <code>package.json</code> sube a <code>0.1.3</code>, <code>data/machines.json</code> gana IP y conexion local del Mac Mini, y <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> convierten el panel en un selector arcade de miembros y maquinas con seccion destacada, alias por fighter y resumen por persona."
         ]
       },
       {
@@ -366,7 +366,7 @@ const entries = [
           "<code>agora whoami --from Codex</code> devolvio <code>Codex -> OraculoMini (Codex·gmail) -> bot propio @CodexSilvaBot</code>.",
           "<code>git log --since='2026-08-02 00:00' --until='2026-08-03 00:00'</code> en <code>tool</code> mostro commits reales hasta <code>d519ff6</code>, incluyendo <code>42669ab feat(yokup): ampliar la carrera a todos los agentes vivos</code>, <code>3f4d84d fix(yokup): consolidar sello r13 y recuperar Track &amp; Field</code> y <code>5ee2717 fix(yokup): eliminar bucle 308 de Track &amp; Field</code>.",
           "<code>git log</code> del mismo rango en <code>admira-next-web</code> confirmo actividad desde <code>ab0716c</code> hasta <code>22021e3</code>, con arreglos de empaquetado TikTok y la secuencia completa de <code>/webmaster</code> y <code>normativa</code>.",
-          "<code>git status --short</code> y <code>git diff --stat</code> en <code>AdmiraNext-Team</code> confirmaron 8 ficheros modificados y <code>1112 insertions(+), 73 deletions(-)</code>, pero sin commit publicado hoy."
+          "<code>git status --short</code> y <code>git diff --stat</code> en <code>AdmiraNext-Team</code> confirmaron 8 ficheros modificados y <code>1112 insertions(+), 73 deletions(-)</code>, con el mayor peso en <code>public/styles.css</code> y <code>public/app.js</code>, pero sin commit publicado hoy."
         ]
       },
       {
@@ -374,7 +374,7 @@ const entries = [
         items: [
           "Yokup quedo hoy mas alineado con produccion y con la nueva doctrina de versionado y autoria visible.",
           "<code>admira-next-web</code> gano una vista operativa para saber que version esta en antena y como volver atras sin depender de notas manuales.",
-          "<code>AdmiraNext-Team</code> avanza hacia una UI mas expresiva y orientada a miembros, aunque el trabajo siga local y sin cierre de publicacion."
+          "<code>AdmiraNext-Team</code> avanza hacia una UI mas expresiva y orientada a miembros, y ademas deja mas util la capa operativa al exponer conexion local del Mac Mini, aunque el trabajo siga local y sin cierre de publicacion."
         ]
       },
       {
@@ -382,21 +382,21 @@ const entries = [
         items: [
           "En Yokup hubo que rescatar <code>/normativa</code> porque estaba en produccion pero no en el repo, un patron peligroso si otro despliegue reemplaza el sitio completo.",
           "La API de Cloudflare Pages para el historial de despliegues fallo con <code>per_page</code> por encima de 25, asi que hubo que paginar la vista de <code>/webmaster</code>.",
-          "<code>AdmiraNext-Team</code> mantiene hoy un cambio amplio solo en workspace local, con capturas y front renovado pero sin validacion publicada ni commit asociado."
+          "<code>AdmiraNext-Team</code> mantiene hoy un cambio amplio solo en workspace local, con capturas y front renovado pero sin validacion publicada ni commit asociado; ademas, la existencia de varios clones del repo hace facil perder de vista cual es el checkout activo."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
           "Actualizar la entrada existente del <code>2026-08-02</code> en vez de duplicarla, sustituyendo el cierre preliminar por un resumen de trabajo real del dia en Admirito.",
-          "Registrar <code>AdmiraNext-Team</code> como trabajo en curso y no como entrega cerrada, porque la evidencia hoy es diff local y no historial publicado.",
+          "Registrar <code>AdmiraNext-Team</code> como trabajo en curso y no como entrega cerrada, porque la evidencia hoy es diff local y no historial publicado, aunque la senal de validacion visual sea fuerte por las capturas regeneradas.",
           "Priorizar en la nota de hoy los repos con cambios verificables en git (<code>tool</code> y <code>admira-next-web</code>) y usar <code>AdmiraNext-Team</code> como foco de siguientes pasos."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Cerrar o trocear el diff local de <code>AdmiraNext-Team</code>, validar la UI arcade en navegador y decidir si sale como <code>0.1.3</code> o se divide en piezas mas pequenas.",
+          "Cerrar o trocear el diff local de <code>AdmiraNext-Team</code>, validar la UI arcade en navegador en desktop y movil, y decidir si sale como <code>0.1.3</code> o se divide en piezas mas pequenas.",
           "Mantener en Yokup la comprobacion de prod frente a repo antes de cualquier <code>wrangler pages deploy</code>, sobre todo en rutas recuperadas como <code>/normativa</code> y <code>Track &amp; Field</code>.",
           "Verificar que la pagina publica del diario muestre esta version resumida del <code>2 de agosto de 2026</code>."
         ]
