@@ -353,51 +353,52 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>actualizar-diario</code> y se arrancaron los chequeos operativos de presencia de Codex en AgoraMatrix.",
-          "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check con <code>git status --short --branch</code>, <code>git branch -vv</code>, <code>git fetch origin main</code>, <code>git log --since='2026-08-02 00:00' --until='2026-08-02 23:59:59' --date=iso --stat --oneline --all</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se revisaron <code>2026-08-01.md</code> y el bloque mas reciente de <code>index.html</code> para copiar el formato vigente del diario antes de redactar la nueva entrada de hoy.",
-          "Se hizo <code>git merge --ff-only origin/main</code> para absorber el avance remoto en <code>repos.html</code> y despues se crearon <code>2026-08-02.md</code> y su bloque correspondiente en <code>index.html</code>."
+          "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code> antes de revisar el trabajo del dia.",
+          "Se repasaron los commits de hoy en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/tool</code> y <code>/Users/csilvasantin/Documents/Admirito/admira-next-web</code>, donde se concentro la actividad publicada del <code>2 de agosto</code>.",
+          "En <code>tool</code> se confirmo una tanda fuerte sobre Yokup: rescate de <code>/normativa</code>, ampliacion de <code>highscore</code> a todos los agentes vivos, recuperacion de <code>trackandfield.html</code>, unificacion de sellos <code>v.DD.MM.AAAA.rN</code> y fixes para validar la fuente antes de sellar despliegues y eliminar el bucle 308.",
+          "En <code>admira-next-web</code> se confirmaron cambios de producto sobre TikTok y una nueva zona <code>/webmaster</code> con historial de snapshots, paginacion de despliegues y cierre server-side con Google para que solo Carlos vea la topografia de versiones vivas.",
+          "En <code>AdmiraNext-Team</code> no aparecieron commits fechados hoy, pero si un diff local grande: <code>package.json</code> sube a <code>0.1.3</code>, <code>data/machines.json</code> gana IP y conexion local del Mac Mini, y <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code> convierten el panel en un selector arcade de miembros y maquinas."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> mostro la rama <code>codex-diario-2026-07-30</code> alineada al arrancar con <code>origin/main</code>, junto con dos untracked persistentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-          "<code>git fetch origin main</code> movio <code>origin/main</code> de <code>931c36f</code> a <code>63ad27f</code>, y el <code>merge --ff-only</code> confirmo que el unico cambio remoto pendiente antes de editar era <code>repos.html</code>.",
-          "<code>git log --since='2026-08-02 00:00' --until='2026-08-02 23:59:59' --date=iso --stat --oneline --all</code> no mostro commits fechados hoy en este checkout antes de esta actualizacion, asi que la entrada del dia se baso solo en hechos de esta corrida.",
-          "<code>date</code> fijo el pre-check principal de esta pasada en <code>2026-08-02 21:32:08 CEST +0200</code>."
+          "<code>agora whoami --from Codex</code> devolvio <code>Codex -> OraculoMini (Codex·gmail) -> bot propio @CodexSilvaBot</code>.",
+          "<code>git log --since='2026-08-02 00:00' --until='2026-08-03 00:00'</code> en <code>tool</code> mostro commits reales hasta <code>d519ff6</code>, incluyendo <code>42669ab feat(yokup): ampliar la carrera a todos los agentes vivos</code>, <code>3f4d84d fix(yokup): consolidar sello r13 y recuperar Track &amp; Field</code> y <code>5ee2717 fix(yokup): eliminar bucle 308 de Track &amp; Field</code>.",
+          "<code>git log</code> del mismo rango en <code>admira-next-web</code> confirmo actividad desde <code>ab0716c</code> hasta <code>22021e3</code>, con arreglos de empaquetado TikTok y la secuencia completa de <code>/webmaster</code> y <code>normativa</code>.",
+          "<code>git status --short</code> y <code>git diff --stat</code> en <code>AdmiraNext-Team</code> confirmaron 8 ficheros modificados y <code>1112 insertions(+), 73 deletions(-)</code>, pero sin commit publicado hoy."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "El diario vuelve a tener una entrada propia para <code>2026-08-02</code>, separada de la consolidacion excepcional que hubo ayer sobre <code>2026-08-01</code>.",
-          "<code>index.html</code> queda actualizado en paralelo con el Markdown para que la vista publica del diario mantenga el mismo contenido que el fichero fuente.",
-          "La automatizacion <code>actualizar-diario</code> queda documentada hoy con un resumen breve de estado, decisiones y siguientes pasos."
+          "Yokup quedo hoy mas alineado con produccion y con la nueva doctrina de versionado y autoria visible.",
+          "<code>admira-next-web</code> gano una vista operativa para saber que version esta en antena y como volver atras sin depender de notas manuales.",
+          "<code>AdmiraNext-Team</code> avanza hacia una UI mas expresiva y orientada a miembros, aunque el trabajo siga local y sin cierre de publicacion."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>origin/main</code> avanzo durante el pre-check, asi que hubo que hacer fast-forward antes de editar para no escribir sobre una punta ya desfasada.",
-          "Los directorios <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code> siguen sin seguimiento en este checkout y se mantuvieron intactos por no pertenecer a esta actualizacion.",
-          "No habia actividad previa fechada hoy en <code>git log</code>, por lo que la entrada del dia debia limitarse estrictamente a los hechos verificables de esta ejecucion."
+          "En Yokup hubo que rescatar <code>/normativa</code> porque estaba en produccion pero no en el repo, un patron peligroso si otro despliegue reemplaza el sitio completo.",
+          "La API de Cloudflare Pages para el historial de despliegues fallo con <code>per_page</code> por encima de 25, asi que hubo que paginar la vista de <code>/webmaster</code>.",
+          "<code>AdmiraNext-Team</code> mantiene hoy un cambio amplio solo en workspace local, con capturas y front renovado pero sin validacion publicada ni commit asociado."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Tomar <code>63ad27f</code> en <code>origin/main</code> como base vigente antes de redactar la entrada de hoy.",
-          "Crear un fichero nuevo <code>2026-08-02.md</code> en vez de seguir editando <code>2026-08-01.md</code>, recuperando la cadencia normal de una entrada por fecha.",
-          "Mantener la entrada breve y factual, sin arrastrar contexto no comprobado fuera de esta corrida."
+          "Actualizar la entrada existente del <code>2026-08-02</code> en vez de duplicarla, sustituyendo el cierre preliminar por un resumen de trabajo real del dia en Admirito.",
+          "Registrar <code>AdmiraNext-Team</code> como trabajo en curso y no como entrega cerrada, porque la evidencia hoy es diff local y no historial publicado.",
+          "Priorizar en la nota de hoy los repos con cambios verificables en git (<code>tool</code> y <code>admira-next-web</code>) y usar <code>AdmiraNext-Team</code> como foco de siguientes pasos."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer commit y push de <code>2026-08-02.md</code> e <code>index.html</code> para que la entrada de hoy quede publicada.",
-          "Revalidar <code>https://csilvasantin.github.io/diario/</code> cuando GitHub Pages propague la nueva version.",
-          "Mantener sin tocar los untracked persistentes salvo que una tarea especifica del diario pida limpiarlos."
+          "Cerrar o trocear el diff local de <code>AdmiraNext-Team</code>, validar la UI arcade en navegador y decidir si sale como <code>0.1.3</code> o se divide en piezas mas pequenas.",
+          "Mantener en Yokup la comprobacion de prod frente a repo antes de cualquier <code>wrangler pages deploy</code>, sobre todo en rutas recuperadas como <code>/normativa</code> y <code>Track &amp; Field</code>.",
+          "Verificar que la pagina publica del diario muestre esta version resumida del <code>2 de agosto de 2026</code>."
         ]
       }
     ]
