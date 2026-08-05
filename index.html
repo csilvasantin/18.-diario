@@ -344,6 +344,65 @@
 <script>
 const entries = [
   {
+    date: "2026-08-05",
+    title: "5 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>diario-admirito</code> y se releyo la rutina canonica en <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-08-05 00:00' --until='2026-08-05 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-05 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se revisaron los cambios de hoy en <code>github-csilvasantin/tool</code>, el working tree actual de <code>github-csilvasantin/AdmiraNext-Team</code> y el estado reciente de <code>github-csilvasantin/admira-telegram</code> para resumir trabajo real, validaciones y bloqueos del dia.",
+          "Se creo <code>2026-08-05.md</code> y se actualizo <code>index.html</code> en el checkout canonico del diario para reflejar una sola entrada <code>Codex</code> de hoy."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En el repo canonico del diario no habia actividad previa hoy en <code>git log</code> ni en <code>git reflog</code>; <code>date</code> fijo el pre-check en <code>2026-08-05 23:46:13 CEST +0200</code>.",
+          "<code>tool</code> si tuvo actividad real hoy: <code>git log --since='2026-08-05 00:00:00'</code> devolvio commits entre <code>8a8ffd4</code> y <code>40977f1</code> sobre Yokup, highscore, tareas, dashboard y normativa, y <code>git diff --stat</code> confirma ademas trabajo local abierto en <code>incidencias</code>, <code>highscore</code>, <code>equipo</code> y nuevas pruebas de evidencia.",
+          "<code>AdmiraNext-Team</code> no muestra commits hoy, pero <code>git diff --stat</code> confirma un rediseño local grande del panel (<code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>), subida de version a <code>0.1.3</code>, nuevos datos SSH locales en <code>data/machines.json</code> y refresco de capturas; el repo sigue <code>behind 306</code>.",
+          "<code>admira-telegram</code> sigue sin commit hoy y mantiene trabajo local sin cerrar: un test nuevo <code>tests/public-inbox-routing-contract.test.mjs</code> y el parche <code>.flt-1231-telegram.patch</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda registrado que hoy el trabajo cerrado y visible se concentro en <code>tool/Yokup</code>, especialmente en puntuacion de highscore, alineacion de tareas/misiones y filtros por proyecto canonico.",
+          "Tambien queda documentado que <code>AdmiraNext-Team</code> avanzo fuerte en local hacia una UI tipo arcade <code>player select</code>, pero todavia como WIP sin commit ni publicacion verificada.",
+          "La fecha <code>2026-08-05</code> queda resumida en un solo fichero y en una sola entrada de <code>index.html</code>, sin duplicar el dia ni mezclar hechos de sesiones anteriores."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>agora-checkin codex start</code> volvio a fallar parcialmente: no pudo escribir <code>/Users/csilvasantin/.agents-comms/loop-Codex.pid</code> por permisos y el inbox de Telegram fallo por red con <code>nodename nor servname provided</code>.",
+          "El checkout canonico del diario no cumple el ideal de \"repo limpio\": sigue en la rama <code>codex-diario-2026-07-30</code> y arrastra los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "Tanto <code>AdmiraNext-Team</code> como <code>tool</code> mantienen cambios locales abiertos, asi que parte del trabajo de hoy aun no esta empaquetado como entrega cerrada ni validado visualmente en produccion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Separar de forma explicita trabajo committeado (<code>tool</code>) y trabajo todavia en curso (<code>AdmiraNext-Team</code>, <code>admira-telegram</code>) para no sobreatribuir entregas.",
+          "Usar el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> para la actualizacion del diario y no el clon sucio de <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/diario/</code>.",
+          "Mantener la entrada breve y util, centrada en hechos verificables por <code>git</code> y por el estado actual del workspace."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-08-05.md index.html</code>, crear el commit <code>Diario 2026-08-05 [Codex]</code> y empujarlo a <code>origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde mostrando la entrada del <code>5 de agosto de 2026</code>.",
+          "Cerrar en los proximos ciclos el WIP local de <code>AdmiraNext-Team</code> y <code>tool</code> con pruebas, commit y publicacion, para que el siguiente diario pueda registrar entregas completas y no solo progreso."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-04",
     title: "4 de agosto de 2026",
     member: "Carlos Silva",
