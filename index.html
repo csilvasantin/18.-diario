@@ -353,40 +353,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>diario-admirito</code> y se releyeron las instrucciones operativas de Admirito antes de revisar el trabajo de hoy.",
-          "Se inspeccionaron los commits del <code>2026-08-06</code> en <code>github-csilvasantin/tool</code>, <code>github-csilvasantin/pixer-worker</code> y <code>github-csilvasantin/01.-AdmiraXperience-Game</code>, junto con el working tree actual de <code>github-csilvasantin/AdmiraNext-Team</code>.",
-          "Se creo <code>2026-08-06.md</code> y se actualizo <code>index.html</code> en <code>/Users/csilvasantin/Claude/diario/</code> para registrar una sola entrada <code>Codex</code> del dia."
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se contrastaron la fuente canonica online <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-08-06 00:00' --until='2026-08-06 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-06 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se revisaron <code>2026-08-06.md</code> e <code>index.html</code>, se detecto que la entrada publicada hoy no correspondia a esta corrida, y se reescribieron ambos ficheros para dejar solo hechos verificados de esta sesion."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "En el repo canonico del diario aun no existia <code>2026-08-06.md</code>, asi que no habia entrada previa del dia que fusionar.",
-          "<code>tool</code> tuvo actividad real hoy sobre Yokup: el <code>git log</code> del dia muestra cambios en <code>informes</code>, <code>tareas</code>, <code>decisiones</code>, <code>objetivos</code>, <code>highscore</code> y cursores durables; ademas, <code>git diff --stat</code> confirma trabajo local abierto en <code>incidencias</code>, <code>highscore</code>, <code>equipo</code> y pruebas de evidencia.",
-          "<code>pixer-worker</code> si tuvo una cadena de commits hoy orientada a avisos e importacion desde Telegram, incluyendo tolerancia a <code>429</code>, fallback a texto, entrega diferida y cambio de chat para avisos de Stock.",
-          "<code>AdmiraNext-Team</code> sigue sin commits hoy, pero <code>git diff --stat</code> confirma un rediseño local grande del panel: cambios en <code>public/app.js</code>, <code>public/index.html</code>, <code>public/styles.css</code>, <code>package.json</code>, <code>data/machines.json</code> y refresco de capturas."
+          "La fuente canonica online y la copia local describen la misma rutina de seis pasos para el cierre del diario.",
+          "<code>git status --short --branch</code> devolvio la rama <code>codex-diario-2026-07-30...origin/main</code> con dos untracked: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log</code> del <code>2026-08-06</code> confirmo actividad real hoy en este repo con <code>f3b2c39 docs: Update Codex 2026-08-06 [skip ci]</code> y <code>4a12d89 chore: actualizar repos.html 2026-08-06 [skip ci]</code>, y <code>git reflog</code> confirmo ademas el commit local previo <code>ae56e0b docs: Update Codex 2026-08-06 [skip ci]</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-06</code> queda mantenida en un unico fichero Markdown firmado como <code>[Codex]</code>, sin abrir un segundo fichero para el mismo dia.",
+          "<code>index.html</code> vuelve a quedar alineado con esta misma narrativa factual para que la UI publica muestre una sola entrada <code>Codex</code> del <code>6 de agosto de 2026</code>.",
+          "Esta corrida deja preparados los dos ficheros requeridos por la rutina para su publicacion en <code>origin/main</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>agora-checkin codex start</code> volvio a fallar parcialmente: no pudo escribir <code>/Users/csilvasantin/.agents-comms/loop-Codex.pid</code> por permisos y el volcado del inbox de Telegram fallo por red.",
+          "<code>agora-checkin codex start</code> fallo parcialmente: no pudo dejar el PID de presencia y no devolvio instrucciones utiles desde Telegram.",
           "El checkout canonico del diario sigue sin estar limpio: mantiene los untracked <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-          "Parte importante del trabajo de hoy en <code>AdmiraNext-Team</code> y <code>tool</code> sigue como WIP local sin cierre en commit o validacion publica final."
+          "La rama de trabajo actual no se llama <code>main</code>; el <code>HEAD</code> coincide con <code>origin/main</code>, pero la referencia local <code>main</code> esta en otro commit."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Reflejar por separado las entregas ya committeadas (<code>tool</code>, <code>pixer-worker</code>, <code>01.-AdmiraXperience-Game</code>) y el trabajo todavia abierto (<code>AdmiraNext-Team</code> y el diff local extra de <code>tool</code>) para no mezclar avance con entrega cerrada.",
-          "Mantener la entrada breve y util, centrada en hechos verificables por <code>git</code> y por el estado real del workspace."
+          "Sustituir la entrada existente del <code>2026-08-06</code> en vez de anadir otro bloque <code>Codex</code>, porque el contenido previo no describia esta ejecucion concreta.",
+          "No tocar ni borrar los untracked del repo, porque no forman parte de esta rutina y pueden pertenecer a trabajo del usuario.",
+          "Continuar la publicacion desde el <code>HEAD</code> actual, ya alineado con <code>origin/main</code>, documentando la desviacion del nombre de rama en vez de inventar un estado limpio que no existe."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Cerrar el rediseño local de <code>AdmiraNext-Team</code> con pruebas y commit antes de que siga creciendo el diff del panel.",
-          "Empaquetar el trabajo abierto de <code>tool</code> en una entrega verificable para que el siguiente diario pueda registrar validaciones finales y no solo progreso de desarrollo."
+          "Hacer <code>git add 2026-08-06.md index.html</code>, crear el commit <code>Diario 2026-08-06 [Codex]</code> y publicarlo en <code>origin/main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra esta version corregida del <code>6 de agosto de 2026</code>.",
+          "Revisar mas adelante si conviene limpiar o ignorar <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code> en este checkout canonico."
         ]
       }
     ]
