@@ -355,6 +355,7 @@ const entries = [
         items: [
           "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se releyo la rutina <code>CERRAR-EL-DIA.md</code> tanto en su copia local como en la fuente canonica publicada en GitHub.",
           "Se hizo el pre-check en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-08-09 00:00' --until='2026-08-09 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-09 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se ejecuto <code>git fetch origin</code>, se comprobo que la rama activa <code>codex-diario-2026-07-30</code> seguia exactamente a <code>origin/main</code>, se detecto que la rama local <code>main</code> estaba divergida y se volvio a la rama correcta para cerrar sin reescribir historial ajeno.",
           "Se corrigio la entrada existente de <code>2026-08-09.md</code> y su reflejo en <code>index.html</code> para dejarla alineada solo con hechos comprobados en este repo y en esta sesion de cierre."
         ]
       },
@@ -362,8 +363,9 @@ const entries = [
         heading: "Que se valido",
         items: [
           "<code>git status --short --branch</code> confirmo la rama <code>codex-diario-2026-07-30</code> y un working tree no limpio por dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-          "<code>git log</code> del <code>2026-08-09</code> mostro cuatro commits <code>Diario 2026-08-09 [Codex]</code> en este repo (<code>2e4c949</code>, <code>605127b</code>, <code>1855d7b</code> y <code>bd6d8da</code>) y un commit adicional <code>chore: actualizar repos.html 2026-08-09 [skip ci]</code>.",
-          "<code>git reflog --since='2026-08-09 00:00'</code> mostro la secuencia de commits de hoy y un <code>rebase</code> terminado sobre <code>origin/main</code>, confirmando que el historial util de la jornada esta en este checkout."
+          "<code>git log</code> del <code>2026-08-09</code> mostro cinco commits <code>Diario 2026-08-09 [Codex]</code> en este repo (<code>2e4c949</code>, <code>605127b</code>, <code>1855d7b</code>, <code>bd6d8da</code> y <code>97268bb</code>), un commit <code>Diario 2026-08-09 [Claude]</code> (<code>39c5e58</code>) y <code>chore: actualizar repos.html 2026-08-09 [skip ci]</code> (<code>114564e</code>).",
+          "<code>git reflog --since='2026-08-09 00:00'</code> mostro la secuencia local de commits de hoy, el <code>rebase</code> terminado sobre <code>origin/main</code> y los checkouts de comprobacion entre <code>codex-diario-2026-07-30</code> y <code>main</code>.",
+          "<code>date</code> devolvio <code>2026-08-09 23:58:39 CEST +0200</code> en el ultimo pre-check y <code>git fetch origin</code> respondio sin error contra el remoto publicado."
         ]
       },
       {
@@ -371,7 +373,7 @@ const entries = [
         items: [
           "La entrada del dia ya no depende de hechos de otros workspaces: queda reducida al cierre real del repo <code>diario</code> y a la evidencia obtenida por <code>git</code> en esta sesion.",
           "<code>index.html</code> mantiene la fecha <code>2026-08-09</code> visible en la UI publica y su bloque de datos queda corregido para coincidir con el Markdown del dia.",
-          "<code>git fetch origin</code> respondio correctamente contra <code>https://github.com/csilvasantin/18.-diario.git</code>, asi que el remoto seguia accesible antes del commit final."
+          "El cierre queda documentado con el bloqueo real del checkout, en vez de aparentar un <code>main</code> limpio que no existia en esta maquina."
         ]
       },
       {
@@ -379,7 +381,7 @@ const entries = [
         items: [
           "El checkout pedido como base limpia no estaba limpio al empezar por los dos directorios sin trackear detectados en <code>git status</code>.",
           "La entrada vigente de <code>2026-08-09</code> contenia contenido ajeno a este repo y no cumplia la instruccion de registrar solo hechos verificados de esta sesion y de <code>git</code>.",
-          "La rama activa al iniciar no era <code>main</code>, sino <code>codex-diario-2026-07-30</code>, aunque estaba configurada para seguir <code>origin/main</code>."
+          "La rama activa al iniciar no era <code>main</code>, sino <code>codex-diario-2026-07-30</code>, y al intentar alinear el checkout se verifico que la rama local <code>main</code> estaba <code>ahead 1, behind 100</code> respecto de <code>origin/main</code>."
         ]
       },
       {
@@ -387,6 +389,7 @@ const entries = [
         items: [
           "Actualizar la unica entrada <code>Codex</code> existente del <code>2026-08-09</code> en vez de crear otra, respetando la regla de un fichero por fecha.",
           "Conservar sin tocar los directorios sin trackear porque son ajenos al cambio del diario y no habia orden explicita de limpiarlos o borrarlos.",
+          "Cerrar desde la rama <code>codex-diario-2026-07-30</code>, que si estaba alineada con <code>origin/main</code>, en vez de usar una <code>main</code> local divergida.",
           "Limitar el contenido del cierre a este repo <code>diario</code>, a la rutina leida y a la evidencia concreta de <code>git</code>, descartando referencias a otros repositorios."
         ]
       },
