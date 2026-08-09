@@ -353,43 +353,49 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se reviso la memoria de la automatizacion <code>diario-admirito</code> y se releyo el contexto operativo obligatorio de AdmiraNeXT antes de inspeccionar el workspace.",
-          "Se reviso el trabajo visible de hoy en <code>/Users/csilvasantin/Documents/Admirito</code>, con foco en <code>github-csilvasantin/AdmiraNext-Team</code> y <code>github-csilvasantin/AdmiraNext-Team-latest</code>, contrastando <code>git status</code>, <code>git diff --stat</code>, <code>git diff --check</code>, <code>git log</code> y los diffs funcionales de frontend y backend.",
-          "Se actualizo la entrada existente de <code>2026-08-09</code> en <code>2026-08-09.md</code> e <code>index.html</code> dentro de <code>/Users/csilvasantin/Claude/diario/</code> para reflejar el estado real del dia sin duplicar la fecha."
+          "Se ejecuto <code>agora-checkin codex start</code>, se leyo la memoria de la automatizacion <code>cerrar-el-dia</code> y se releyo la rutina <code>CERRAR-EL-DIA.md</code> tanto en su copia local como en la fuente canonica publicada en GitHub.",
+          "Se hizo el pre-check en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-08-09 00:00' --until='2026-08-09 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-09 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se corrigio la entrada existente de <code>2026-08-09.md</code> y su reflejo en <code>index.html</code> para dejarla alineada solo con hechos comprobados en este repo y en esta sesion de cierre."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>AdmiraNext-Team</code> mantiene un diff local grande sin commit: 8 ficheros tocados y <code>1112 insertions(+), 73 deletions(-)</code>, con portada rehecha a estilo arcade <code>player select</code>, logica nueva para agrupar maquinas por miembro, visualizacion del estado <code>idle</code>, <code>version</code> subida a <code>0.1.3</code>, rutas SSH locales para el Mac Mini y capturas renovadas de tres maquinas.",
-          "En <code>AdmiraNext-Team</code>, <code>git diff --check</code> paso limpio, asi que el WIP actual no deja errores basicos de whitespace o conflicto en los ficheros revisados.",
-          "<code>AdmiraNext-Team-latest</code> sigue en la rama <code>codex/fix-teamwork-api-discovery</code> con dos ficheros modificados y un Markdown nuevo sin trackear: <code>src/server.js</code> acepta <code>PORT</code> por entorno y el estado <code>idle</code>, <code>src/ssh-exec.js</code> centraliza el quoting de <code>osascript</code> remoto y evita mezclar snapshots viejos, y <code>INICIO_Y_CIERRE_DEL_DIA.md</code> documenta la operativa diaria del panel.",
-          "En <code>AdmiraNext-Team-latest</code>, <code>node --check src/server.js</code>, <code>node --check src/ssh-exec.js</code> y <code>git diff --check</code> pasaron correctamente.",
-          "No aparecieron commits ni reflog del <code>2026-08-09</code> en ninguno de los dos repos; la evidencia util del dia sigue estando en el working tree local."
+          "<code>git status --short --branch</code> confirmo la rama <code>codex-diario-2026-07-30</code> y un working tree no limpio por dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log</code> del <code>2026-08-09</code> mostro cuatro commits <code>Diario 2026-08-09 [Codex]</code> en este repo (<code>2e4c949</code>, <code>605127b</code>, <code>1855d7b</code> y <code>bd6d8da</code>) y un commit adicional <code>chore: actualizar repos.html 2026-08-09 [skip ci]</code>.",
+          "<code>git reflog --since='2026-08-09 00:00'</code> mostro la secuencia de commits de hoy y un <code>rebase</code> terminado sobre <code>origin/main</code>, confirmando que el historial util de la jornada esta en este checkout."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada del dia ya no depende de hechos de otros workspaces: queda reducida al cierre real del repo <code>diario</code> y a la evidencia obtenida por <code>git</code> en esta sesion.",
+          "<code>index.html</code> mantiene la fecha <code>2026-08-09</code> visible en la UI publica y su bloque de datos queda corregido para coincidir con el Markdown del dia.",
+          "<code>git fetch origin</code> respondio correctamente contra <code>https://github.com/csilvasantin/18.-diario.git</code>, asi que el remoto seguia accesible antes del commit final."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El trabajo principal del dia sigue en estado WIP: hay cambios fuertes en local, pero sin commit asociado ni validacion publica observable desde <code>git log</code>.",
-          "Persisten dos arboles activos para el mismo panel, <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code>, lo que mantiene el riesgo de divergencia entre la linea visual y la linea tecnica.",
-          "El barrido por fecha del workspace saco mucho ruido de worktrees y temporales, asi que para esta entrada fue mas fiable apoyarse en el estado <code>git</code> de los repos principales que en los <code>mtime</code>."
+          "El checkout pedido como base limpia no estaba limpio al empezar por los dos directorios sin trackear detectados en <code>git status</code>.",
+          "La entrada vigente de <code>2026-08-09</code> contenia contenido ajeno a este repo y no cumplia la instruccion de registrar solo hechos verificados de esta sesion y de <code>git</code>.",
+          "La rama activa al iniciar no era <code>main</code>, sino <code>codex-diario-2026-07-30</code>, aunque estaba configurada para seguir <code>origin/main</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar hoy el avance como trabajo local verificado por diff y checks, no como entrega cerrada, para no atribuir publicaciones que no estan demostradas.",
-          "Dar prioridad narrativa a <code>AdmiraNext-Team</code> como frente principal del cambio visible y a <code>AdmiraNext-Team-latest</code> como linea tecnica de endurecimiento.",
-          "Actualizar la entrada ya existente del <code>2026-08-09</code> en vez de crear otra, para mantener una sola entrada <code>Codex</code> del dia."
+          "Actualizar la unica entrada <code>Codex</code> existente del <code>2026-08-09</code> en vez de crear otra, respetando la regla de un fichero por fecha.",
+          "Conservar sin tocar los directorios sin trackear porque son ajenos al cambio del diario y no habia orden explicita de limpiarlos o borrarlos.",
+          "Limitar el contenido del cierre a este repo <code>diario</code>, a la rutina leida y a la evidencia concreta de <code>git</code>, descartando referencias a otros repositorios."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Elegir una sola base entre <code>AdmiraNext-Team</code> y <code>AdmiraNext-Team-latest</code> antes de seguir abriendo mas diff en paralelo.",
-          "Cerrar el WIP de <code>AdmiraNext-Team</code> con prueba visual y commit, especialmente la nueva UI arcade y el uso real del estado <code>idle</code>.",
-          "Probar en entorno real los cambios de <code>AdmiraNext-Team-latest</code> sobre ejecucion remota por <code>ssh</code> y <code>osascript</code>, y decidir si <code>INICIO_Y_CIERRE_DEL_DIA.md</code> entra en seguimiento."
+          "Hacer <code>git add 2026-08-09.md index.html</code>, crear el commit de cierre de hoy y empujarlo a <code>origin main</code> como exige la rutina.",
+          "Verificar despues la publicacion en <code>https://csilvasantin.github.io/diario/</code> comprobando que responde y muestra la entrada del <code>2026-08-09</code>.",
+          "Revisar en una pasada separada si conviene limpiar o ignorar <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code> para recuperar un checkout base realmente limpio."
         ]
       }
     ]
