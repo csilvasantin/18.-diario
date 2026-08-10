@@ -344,6 +344,63 @@
 <script>
 const entries = [
   {
+    date: "2026-08-10",
+    title: "10 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, <code>agora whoami --from Codex</code>, <code>agora alive --from Codex --loop --every 60</code>, <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code> para arrancar la sesion con presencia operativa.",
+          "Se clono <code>https://github.com/csilvasantin/18.-diario.git</code> en <code>/tmp/diario</code> y se leyo <code>README.md</code> para seguir la seccion <code>Guia para Codex</code> de forma literal.",
+          "Se recorrieron los repos activos de <code>/Users/csilvasantin/Documents/Admirito</code>, se ejecuto <code>git fetch origin --prune</code> en cada repo con remoto <code>origin</code> y se aplico <code>git pull --ff-only</code> solo donde el checkout estaba limpio y el fast-forward era seguro.",
+          "Se actualizo la tabla viva de liderazgo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/onboarding/CURRENT_STATE.md</code> con fechas, LLM detectado, estado local y evidencia del sweep."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "El sweep dejo constancia de fast-forward aplicado en <code>ainimation</code>, <code>github-csilvasantin/admira-store</code>, <code>github-csilvasantin/admira-studio</code>, <code>github-csilvasantin/admira-tv</code>, <code>github-csilvasantin/ainimation</code>, <code>github-csilvasantin/digitalavatar.ai</code>, <code>github-csilvasantin/pixer-worker</code> y <code>github-csilvasantin/pixeria</code>.",
+          "Se confirmo que no se toco ningun repo con worktree sucio, incluidos <code>github-csilvasantin/csilvasantin.github.io</code>, <code>github-csilvasantin/diario</code>, <code>github-csilvasantin/onboarding</code>, <code>github-csilvasantin/tool</code> y <code>github-csilvasantin/xtanco-game</code>.",
+          "<code>git -C /Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io status --short --branch</code> mostro un worktree sucio y <code>git rev-list --left-right --count HEAD...origin/main</code> devolvio <code>0 4</code>, asi que la publicacion por ese checkout quedo bloqueada sin sobrescribir cambios ajenos."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El barrido dejo actualizado el estado remoto de los repos principales y subio localmente los que admitian fast-forward limpio.",
+          "La entrada de hoy queda anadida al diario con <code>author: \"Codex\"</code> y visible desde el selector de fechas de <code>index.html</code>.",
+          "La tabla de liderazgo ya usa la columna <code>LLM</code> y marca <code>Codex Update</code> solo en los repos que esta automatizacion actualizo de verdad."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Varios repos tienen cambios locales o divergencia y no admiten <code>pull --ff-only</code> sin revision manual, por ejemplo <code>github-csilvasantin/csilvasantin.github.io</code>, <code>github-csilvasantin/diario</code>, <code>github-csilvasantin/onboarding</code>, <code>github-csilvasantin/tool</code> y <code>github-csilvasantin/01.-AdmiraXperience-Game</code>.",
+          "<code>github-csilvasantin/csilvasantin.github.io</code> no se puede usar para publicar esta sesion sin resolver antes sus cambios locales (<code>codex/index.html</code>, <code>codex/yarig-ai/index.html</code>, <code>yarig-ai/index.html</code> y dos archivos nuevos en <code>yarig-ai</code>)."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Se limitaron los <code>pull</code> a repos limpios con fast-forward puro, tal como exige el flujo, y se dejaron los demas como pendientes.",
+          "En la tabla de liderazgo se escribio <code>sin firma explicita</code> cuando el ultimo commit no identifica de forma clara a Codex, Claude o Gemini como lider del cambio.",
+          "La publicacion del diario se intento primero desde el repo canonico <code>18.-diario</code> y el repo de sitio separado queda reportado como bloqueo especifico en vez de forzar una mezcla sobre un worktree sucio."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-08-10.md index.html</code>, <code>git commit -m \"docs: Update Codex 2026-08-10 [skip ci]\"</code> y <code>git push -u origin main</code> en <code>/tmp/diario</code>.",
+          "Verificar luego <code>https://csilvasantin.github.io/18.-diario/</code> para confirmar que la entrada del <code>2026-08-10</code> aparece en vivo con el estilo Matrix intacto.",
+          "Revisar aparte los repos bloqueados por worktree sucio, en especial <code>github-csilvasantin/csilvasantin.github.io</code>, antes de intentar cualquier publicacion adicional."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-09",
     title: "9 de agosto de 2026",
     member: "Carlos Silva",
