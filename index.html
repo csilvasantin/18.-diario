@@ -353,43 +353,51 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se reviso la actividad de hoy en los repos de Admirito con foco en <code>AdmiraNext-Team</code> y en los cambios recientes del workspace.",
-          "En <code>github-csilvasantin/AdmiraNext-Team</code> se detecto un rediseño local grande del panel: nueva estetica arcade en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, subida de version a <code>0.1.3</code>, ampliacion de <code>data/machines.json</code> con <code>ip_local</code> y <code>connect_local</code>, y renovacion de las tres capturas de maquinas.",
-          "Se resumieron tambien los commits ya hechos hoy en otros repos activos: <code>admira-telegram</code> endurecio el cierre de flota y la prueba de presencia, <code>admira-tv</code> publico la release <code>v.11.08.2026.r4.19:32</code> con columna <code>Remote</code> en el CMS y <code>tool</code> sello <code>yokup rtc r10</code>.",
-          "Se actualizo la entrada existente del <code>2026-08-11</code> en vez de duplicarla para dejar el diario alineado con el estado real del dia."
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, leyendo <code>CERRAR-EL-DIA.md</code> tanto desde la copia local como desde GitHub.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-08-11 00:00' --until='2026-08-11 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-11 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se corrigio <code>2026-08-11.md</code> para que esta entrada <code>Codex</code> vuelva a seguir la plantilla literal de seis secciones numeradas, sin crear un segundo fichero ni un segundo bloque del mismo autor.",
+          "Se sincronizo el bloque correspondiente de <code>index.html</code> para que la UI publica refleje esta misma version del cierre."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>AdmiraNext-Team</code> no tuvo commits en <code>git log --since='2026-08-11 00:00'</code>, pero si un diff local de 8 ficheros con <code>1112</code> inserciones y <code>73</code> borrados.",
-          "El diff confirma que el cambio principal del dia en <code>AdmiraNext-Team</code> fue de presentacion y operativa del panel, no un ajuste menor: selector de miembros estilo fighting game, nuevo bloque destacado por persona y soporte local de conexion a la Mac Mini.",
-          "<code>admira-telegram</code> dejo tres commits seguidos a las <code>18:09</code>, <code>18:22</code> y <code>18:25</code> centrados en prueba de cierre, reutilizacion de PIDs y plazo de evidencia.",
-          "<code>admira-tv</code> y <code>tool</code> cerraron el dia con una publicacion funcional visible y un sello de version, respectivamente, lo que da contexto de release y mantenimiento sobre el resto del workspace."
+          "<code>git status --short --branch</code> mostro la rama <code>codex-diario-2026-07-30</code> siguiendo <code>origin/main</code> y un worktree no limpio por dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log</code> del dia mostro tres commits ya existentes en este repo: <code>71c9778 Diario 2026-08-11 [Codex]</code>, <code>5712fe2 Diario 2026-08-11 [Codex]</code> y <code>8fa2781 chore: actualizar repos.html 2026-08-11 [skip ci]</code>.",
+          "<code>git reflog</code> del dia confirmo ademas el rebase sobre <code>origin/main</code> y el commit previo local <code>ab15d55 Diario 2026-08-11 [Codex]</code>.",
+          "La version anterior de <code>2026-08-11.md</code> y su espejo en <code>index.html</code> no cumplian ya la rutina literal porque omitian la seccion <code>3. Avances</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La entrada de <code>2026-08-11 [Codex]</code> queda rehecha con las seis secciones exigidas por la rutina y con contenido limitado a hechos verificados de <code>git</code> y de esta sesion.",
+          "<code>index.html</code> vuelve a apuntar a una sola entrada <code>Codex</code> para hoy, sin duplicar fecha ni autoria.",
+          "El cierre queda preparado para publicarse a <code>origin main</code> desde este checkout canonico aunque la rama local activa no se llame <code>main</code>."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "<code>AdmiraNext-Team</code> sigue en estado local sin commit ni validacion visual final, asi que el rediseño no se puede dar por publicado.",
-          "El repo del diario sigue sin estar completamente limpio por <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>, aunque no bloqueaban esta actualizacion.",
-          "No hay evidencia en <code>git log</code> de un commit de hoy para <code>AdmiraNext-Team</code>, asi que el diario tenia que reflejarlo como trabajo en curso y no como entrega cerrada."
+          "El checkout canonico no estaba completamente limpio al arrancar por <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "La entrada <code>Codex</code> de hoy ya publicada en el repo describia otra sesion y no servia como cierre literal de esta corrida sin corregirse.",
+          "La rama local activa era <code>codex-diario-2026-07-30</code>, asi que habia que vigilar el push final para actualizar exactamente <code>origin/main</code>."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Registrar <code>AdmiraNext-Team</code> como avance local relevante del dia aunque siga sin commit, porque es el cambio mas voluminoso del workspace hoy.",
-          "Separar claramente trabajo validado por commit de trabajo solo presente en el diff local para no mezclar publicado con pendiente.",
-          "Mantener una entrada breve y operativa: que se hizo, que se valido, problemas, decisiones y siguientes pasos."
+          "Mantener la regla de un solo fichero por fecha y actualizar <code>2026-08-11.md</code> en vez de crear otro bloque <code>Codex</code>.",
+          "Conservar sin tocar los directorios sin trackear del worktree y limitar el cambio de esta corrida a <code>2026-08-11.md</code> e <code>index.html</code>.",
+          "Reflejar solo hechos comprobados en este repo y en esta sesion, sin arrastrar resumenes de otros repos o trabajo no verificado."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer QA visual y funcional del modo arcade de <code>AdmiraNext-Team</code> antes de decidir commit y despliegue.",
-          "Confirmar si el soporte <code>ip_local/connect_local</code> en <code>data/machines.json</code> debe usarse ya en la UI o quedar solo como dato operativo.",
-          "Vigilar manana si los cambios de <code>admira-telegram</code>, <code>admira-tv</code> y <code>tool</code> requieren seguimiento en flota, CMS o Yokup."
+          "Hacer <code>git add 2026-08-11.md index.html</code>, crear el commit <code>Diario 2026-08-11 [Codex]</code> y empujarlo a <code>origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra esta version corregida del <code>11 de agosto de 2026</code>.",
+          "Mantener visibles como pendientes los dos directorios sin trackear del checkout canonico hasta que se decida limpiarlos o integrarlos fuera de esta rutina."
         ]
       }
     ]
