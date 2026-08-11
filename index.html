@@ -353,51 +353,43 @@ const entries = [
       {
         heading: "Que se hizo",
         items: [
-          "Se ejecuto <code>agora-checkin codex start</code>, se releyo la rutina <code>CERRAR-EL-DIA.md</code> en la copia local y en la fuente canonica publicada en GitHub, y se revisaron los mandamientos operativos y las maximas de AdmiraNeXT antes de actuar sobre el repo.",
-          "Se hizo el pre-check en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-08-11 00:00' --until='2026-08-11 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-11 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
-          "Se inspeccionaron el diff local de <code>index.html</code>, el fichero sin trackear <code>2026-08-10.md</code> y el historial reciente del repo para entender por que el checkout exigido como limpio no lo estaba al arrancar.",
-          "Se creo esta entrada <code>2026-08-11.md</code> y se actualizo <code>index.html</code> para anadir el cierre de hoy sin borrar ni reescribir los cambios previos ajenos presentes en el working tree."
+          "Se reviso la actividad de hoy en los repos de Admirito con foco en <code>AdmiraNext-Team</code> y en los cambios recientes del workspace.",
+          "En <code>github-csilvasantin/AdmiraNext-Team</code> se detecto un rediseño local grande del panel: nueva estetica arcade en <code>public/index.html</code>, <code>public/app.js</code> y <code>public/styles.css</code>, subida de version a <code>0.1.3</code>, ampliacion de <code>data/machines.json</code> con <code>ip_local</code> y <code>connect_local</code>, y renovacion de las tres capturas de maquinas.",
+          "Se resumieron tambien los commits ya hechos hoy en otros repos activos: <code>admira-telegram</code> endurecio el cierre de flota y la prueba de presencia, <code>admira-tv</code> publico la release <code>v.11.08.2026.r4.19:32</code> con columna <code>Remote</code> en el CMS y <code>tool</code> sello <code>yokup rtc r10</code>.",
+          "Se actualizo la entrada existente del <code>2026-08-11</code> en vez de duplicarla para dejar el diario alineado con el estado real del dia."
         ]
       },
       {
         heading: "Que se valido",
         items: [
-          "<code>git status --short --branch</code> confirmo la rama activa <code>codex-diario-2026-07-30...origin/main</code> y un working tree no limpio por <code>index.html</code> modificado y tres elementos sin trackear: <code>2026-08-10.md</code>, <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-          "<code>git log --since='2026-08-11 00:00' --until='2026-08-11 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits del <code>2026-08-11</code> en este repo antes de este cierre.",
-          "<code>git reflog --date=iso --since='2026-08-11 00:00'</code> tampoco devolvio movimientos locales del <code>2026-08-11</code> previos a esta sesion.",
-          "<code>date</code> devolvio <code>2026-08-11 14:29:15 CEST +0200</code> en el pre-check, y el historial reciente visible con <code>git log --oneline -5</code> estaba compuesto por cinco commits consecutivos <code>Diario 2026-08-09 [Codex]</code>."
-        ]
-      },
-      {
-        heading: "Avances",
-        items: [
-          "El diario vuelve a tener una entrada del <code>2026-08-11</code> firmada por Codex y alineada con hechos comprobados de esta sesion, sin mezclar actividad no verificada de otros repositorios.",
-          "<code>index.html</code> incorpora la fecha nueva en la UI publica junto con el detalle de que el checkout arranco sucio y sin commits previos del dia.",
-          "Queda documentado en el propio diario que el cierre de hoy consistio en diagnosticar, registrar y publicar el estado real del repo requerido para la rutina."
+          "<code>AdmiraNext-Team</code> no tuvo commits en <code>git log --since='2026-08-11 00:00'</code>, pero si un diff local de 8 ficheros con <code>1112</code> inserciones y <code>73</code> borrados.",
+          "El diff confirma que el cambio principal del dia en <code>AdmiraNext-Team</code> fue de presentacion y operativa del panel, no un ajuste menor: selector de miembros estilo fighting game, nuevo bloque destacado por persona y soporte local de conexion a la Mac Mini.",
+          "<code>admira-telegram</code> dejo tres commits seguidos a las <code>18:09</code>, <code>18:22</code> y <code>18:25</code> centrados en prueba de cierre, reutilizacion de PIDs y plazo de evidencia.",
+          "<code>admira-tv</code> y <code>tool</code> cerraron el dia con una publicacion funcional visible y un sello de version, respectivamente, lo que da contexto de release y mantenimiento sobre el resto del workspace."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
-          "El checkout indicado por la rutina como base limpia no estaba limpio al empezar: <code>index.html</code> ya traia cambios locales y seguian sin trackear <code>2026-08-10.md</code>, <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
-          "La presencia de <code>2026-08-10.md</code> sin trackear y de su bloque ya insertado en <code>index.html</code> indicaba un cierre previo dejado a medias en este mismo repo.",
-          "Al no existir commits ni reflog previos del <code>2026-08-11</code> en este repo, no habia mas hechos verificables del dia que los producidos por esta sesion de cierre."
+          "<code>AdmiraNext-Team</code> sigue en estado local sin commit ni validacion visual final, asi que el rediseño no se puede dar por publicado.",
+          "El repo del diario sigue sin estar completamente limpio por <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>, aunque no bloqueaban esta actualizacion.",
+          "No hay evidencia en <code>git log</code> de un commit de hoy para <code>AdmiraNext-Team</code>, asi que el diario tenia que reflejarlo como trabajo en curso y no como entrega cerrada."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Continuar con un commit selectivo de <code>2026-08-11.md</code> e <code>index.html</code>, preservando sin tocar los artefactos ajenos ya presentes para no reescribir ni borrar trabajo previo no confirmado.",
-          "Registrar explicitamente el estado sucio del checkout en vez de asumir que el repo cumplia la condicion de <code>checkout limpio</code> descrita por la rutina.",
-          "Limitar el contenido del cierre a hechos comprobados en el repo <code>diario</code> y en la sesion actual, sin atribuir como cerrada la entrada previa de <code>2026-08-10.md</code> que seguia sin trackear."
+          "Registrar <code>AdmiraNext-Team</code> como avance local relevante del dia aunque siga sin commit, porque es el cambio mas voluminoso del workspace hoy.",
+          "Separar claramente trabajo validado por commit de trabajo solo presente en el diff local para no mezclar publicado con pendiente.",
+          "Mantener una entrada breve y operativa: que se hizo, que se valido, problemas, decisiones y siguientes pasos."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add 2026-08-11.md index.html</code>, crear el commit <code>Diario 2026-08-11 [Codex]</code> y empujarlo a <code>origin main</code>.",
-          "Verificar despues que <code>https://csilvasantin.github.io/diario/</code> responde y muestra la entrada del <code>2026-08-11</code>.",
-          "Revisar en otra pasada si el estado a medias de <code>2026-08-10.md</code> y los directorios sin trackear debe limpiarse, ignorarse o cerrarse con su propio commit."
+          "Hacer QA visual y funcional del modo arcade de <code>AdmiraNext-Team</code> antes de decidir commit y despliegue.",
+          "Confirmar si el soporte <code>ip_local/connect_local</code> en <code>data/machines.json</code> debe usarse ya en la UI o quedar solo como dato operativo.",
+          "Vigilar manana si los cambios de <code>admira-telegram</code>, <code>admira-tv</code> y <code>tool</code> requieren seguimiento en flota, CMS o Yokup."
         ]
       }
     ]
