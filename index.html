@@ -344,6 +344,65 @@
 <script>
 const entries = [
   {
+    date: "2026-08-12",
+    title: "12 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, contrastando <code>CERRAR-EL-DIA.md</code> entre la copia local y <a href='https://raw.githubusercontent.com/csilvasantin/diario/main/CERRAR-EL-DIA.md' target='_blank'>https://raw.githubusercontent.com/csilvasantin/diario/main/CERRAR-EL-DIA.md</a>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-08-12 00:00' --until='2026-08-12 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-12 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-08-12.md</code> con esta entrada firmada como <code>[Codex]</code>.",
+          "Se preparo la insercion correspondiente en <code>index.html</code> para que la UI publica pueda mostrar la fecha de hoy bajo el filtro <code>Codex</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> mostro la rama <code>codex-diario-2026-07-30</code> siguiendo <code>origin/main</code> y un worktree no limpio por dos directorios sin trackear: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log --since='2026-08-12 00:00' --until='2026-08-12 23:59:59' --date=iso --stat --oneline --all</code> no devolvio commits de esta fecha en este repo.",
+          "<code>git reflog --date=iso --since='2026-08-12 00:00'</code> no devolvio movimientos de <code>HEAD</code> de esta fecha en este repo.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-12 23:56:26 CEST +0200</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-12</code> queda registrada en su propio fichero Markdown con las seis secciones numeradas exigidas por la rutina.",
+          "El cierre de hoy queda preparado para aparecer en la UI publica del diario como una entrada <code>Codex</code> nueva, sin reutilizar ni duplicar un fichero previo del mismo dia.",
+          "La narrativa del cierre se limita a hechos verificados de <code>git</code> y al trabajo real de esta sesion."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout canonico no estaba completamente limpio al arrancar por <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "La rama local activa no es <code>main</code>, sino <code>codex-diario-2026-07-30</code>, asi que el push final debe vigilarse contra <code>origin main</code>.",
+          "El pre-check del <code>2026-08-12</code> no mostro actividad previa del dia en este repo, por lo que esta entrada solo puede registrar esta sesion de cierre."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Crear <code>2026-08-12.md</code> desde cero porque no existia ninguna entrada previa para esta fecha.",
+          "Conservar sin tocar los dos directorios sin trackear del worktree y limitar esta rutina a <code>2026-08-12.md</code> e <code>index.html</code>.",
+          "Reflejar solo hechos comprobados en este repo y en esta sesion, sin arrastrar resumenes de otros repos ni contenido no verificado."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Actualizar <code>index.html</code> con esta misma narrativa del <code>12 de agosto de 2026</code>.",
+          "Hacer <code>git add 2026-08-12.md index.html</code>, crear el commit <code>Diario 2026-08-12 [Codex]</code> y empujarlo a <code>origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra esta nueva entrada del <code>12 de agosto de 2026</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-11",
     title: "11 de agosto de 2026",
     member: "Carlos Silva",
