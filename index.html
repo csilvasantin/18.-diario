@@ -344,6 +344,66 @@
 <script>
 const entries = [
   {
+    date: "2026-08-12",
+    title: "12 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> desde una sesion programada de Claude Code en la nube (contenedor efimero, checkout fresco de <code>https://github.com/csilvasantin/18.-diario.git</code>).",
+          "Se leyo <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> para seguir la rutina canonica literal.",
+          "Se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-08-12 00:00' --until='2026-08-12 23:59:59' --date=iso --stat --oneline --all</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se documento el dia como <code>sin trabajo sustantivo con Claude Code</code> segun la instruccion recibida: si un dia concreto no se ha hecho nada, se documenta y ya esta."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> mostro la rama activa <code>main-fvliql</code> (rama de trabajo asignada a esta sesion) con worktree limpio.",
+          "<code>git log --since='2026-08-12 00:00'</code> del dia devolvio un unico commit: <code>e5fff60 chore: actualizar repos.html 2026-08-12 [skip ci]</code>, generado automaticamente por el workflow <code>update-repos.yml</code> de GitHub Actions.",
+          "<code>date</code> devolvio <code>2026-08-12 21:07:58 UTC +0000</code> en el contenedor remoto.",
+          "No se detectaron commits <code>Diario 2026-08-12 [*]</code> de ninguna IA antes de esta corrida, ni actividad manual en el repo <code>18.-diario</code> durante el dia."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda cerrado el dia <code>2026-08-12</code> con una entrada <code>Claude</code> que refleja fielmente el estado: solo hubo la actualizacion automatica de <code>repos.html</code>.",
+          "<code>index.html</code> incorpora la fecha nueva en primera posicion para que la UI publica en <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> la muestre en el selector.",
+          "Se mantiene la regla 1-2-3 del diario: un fichero por fecha, sin duplicar."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No hay problemas tecnicos que reportar en el repo <code>diario</code> para el <code>2026-08-12</code>.",
+          "La sesion se ejecuta en un contenedor remoto efimero sin acceso a los checkouts locales del Mac Mini (<code>/Users/csilvasantin/Claude/diario/</code>), asi que la evidencia se limita al clone remoto."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Aplicar la regla explicita del usuario: si el dia no tiene trabajo, se documenta como tal y no se rellena con contenido ajeno.",
+          "Firmar la entrada como <code>[Claude]</code> porque es Claude Code quien ejecuta esta corrida programada.",
+          "Trabajar en la rama <code>main-fvliql</code> segun las instrucciones de sesion, y no tocar <code>main</code> directamente.",
+          "No inventar actividad de otros repos que no consta verificada desde este checkout."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-08-12.md index.html</code>, commit <code>Diario 2026-08-12 [Claude]</code> y push a <code>origin main-fvliql</code>.",
+          "Abrir/actualizar el Pull Request en draft para que <code>main-fvliql</code> pueda integrarse a <code>main</code> cuando el usuario lo apruebe.",
+          "GitHub Actions (<code>update-repos.yml</code>) regenerara <code>repos.html</code> automaticamente al mezclarse a <code>main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> sigue respondiendo y mostrara la entrada del <code>12 de agosto de 2026</code> tras el merge."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-11",
     title: "11 de agosto de 2026",
     member: "Carlos Silva",
