@@ -344,6 +344,67 @@
 <script>
 const entries = [
   {
+    date: "2026-08-14",
+    title: "14 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina <code>Cerrar el dia</code> desde una sesion remota de Claude Code (contenedor efimero), no desde el checkout canonico de Mac Mini <code>/Users/csilvasantin/Claude/diario/</code>.",
+          "Se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-08-14 00:00' --until='2026-08-14 23:59:59' --date=iso --stat --oneline --all</code>, <code>git fetch origin</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-08-14.md</code> con esta entrada firmada como <code>[Claude]</code> y se actualizo <code>index.html</code> para incorporar la fecha de hoy en la UI publica.",
+          "Se preparo el commit y push sobre la rama <code>main-qh5zog</code> (rama de desarrollo asignada a esta sesion) en lugar de <code>main</code>, para respetar la politica de PRs del entorno remoto."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> mostro la rama <code>main-qh5zog</code> limpia y alineada con <code>origin/main-qh5zog</code> (<code>0 0</code>) al iniciar la sesion.",
+          "<code>git log --since='2026-08-14 00:00' --until='2026-08-14 23:59:59' --date=iso --stat --oneline --all</code> devolvio unicamente el commit automatico <code>e868d33 chore: actualizar repos.html 2026-08-14 [skip ci]</code> generado por <code>github-actions[bot]</code> a las 06:16 UTC; no hubo trabajo humano commiteado en este repo hoy antes del cierre.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-14 21:08:42 UTC +0000</code> (contenedor remoto en UTC, no CEST del Mac Mini).",
+          "<code>repos.html</code> esta al dia: la meta cabecera muestra <code>generado 2026-08-14</code>, resultado del workflow <code>Actualizar tabla de repos</code> disparado por cron."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-14</code> queda registrada en su propio fichero Markdown con las seis secciones numeradas exigidas por la rutina.",
+          "La UI publica del diario queda preparada para mostrar una nueva entrada <code>Claude</code> del <code>14 de agosto de 2026</code>.",
+          "El cierre queda documentado con hechos verificados en este repo, indicando explicitamente que no hubo actividad humana adicional en el dia."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La sesion se ejecuta en un contenedor remoto efimero, no en el checkout canonico <code>/Users/csilvasantin/Claude/diario/</code>, por lo que el pre-check no cubre <code>reflog</code> local del Mac Mini ni cambios sin trackear que puedan existir alli.",
+          "La rama activa <code>main-qh5zog</code> no es <code>main</code>, y el remoto aun no tiene esa rama; se creara al hacer <code>git push -u origin main-qh5zog</code> y se abrira un PR draft hacia <code>main</code> en lugar de push directo.",
+          "No hubo trabajo humano en el repo <code>diario</code> durante 2026-08-14; el unico commit del dia es el automatismo de <code>repos.html</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia aunque no haya actividad humana, siguiendo la regla del <code>CLAUDE.md</code>: si un dia en concreto no se ha hecho nada se documenta y ya esta.",
+          "Firmar la entrada como <code>[Claude]</code> porque es Claude Code (no Codex) quien ejecuta esta rutina, y respetar la firma canonica de la rutina <code>Cerrar el dia</code>.",
+          "Empujar a la rama <code>main-qh5zog</code> y abrir PR draft hacia <code>main</code>, en lugar de push directo a <code>main</code>, para cumplir con las instrucciones del entorno remoto.",
+          "No tocar otros ficheros aparte de <code>2026-08-14.md</code> e <code>index.html</code>; <code>repos.html</code> ya esta regenerado por el workflow."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-08-14.md index.html</code>, crear el commit <code>Diario 2026-08-14 [Claude]</code> y empujarlo con <code>git push -u origin main-qh5zog</code>.",
+          "Abrir un PR draft desde <code>main-qh5zog</code> hacia <code>main</code> para que el usuario decida el merge cuando revise.",
+          "Verificar tras el merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde y muestra esta nueva entrada del <code>14 de agosto de 2026</code>.",
+          "Confirmar que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> sigue mostrando <code>generado 2026-08-14</code> (ya regenerado por el workflow del cron)."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-13",
     title: "13 de agosto de 2026",
     member: "Carlos Silva",
