@@ -347,6 +347,66 @@ const entries = [
     date: "2026-08-17",
     title: "17 de agosto de 2026",
     member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se disparo la rutina programada de Claude Code en entorno remoto (contenedor efimero) sobre el clone fresco de <code>csilvasantin/18.-diario</code>, con checkout en la rama de desarrollo <code>main-jyfg28</code>.",
+          "Se leyo <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> para aplicar la rutina literal de cierre, y se hizo el pre-check habitual con <code>git status --short --branch</code>, <code>git log --since='2026-08-17 00:00' --until='2026-08-17 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-17 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se ejecuto <code>git fetch origin</code> y se contrasto el estado local frente a <code>origin/main</code> y <code>origin/main-jyfg28</code>; ambos remotos apuntan al mismo <code>HEAD</code> que el checkout local.",
+          "Se anadio esta seccion <code>[Claude]</code> al fichero unico del dia <code>2026-08-17.md</code> (separada por <code>---</code> de la entrada <code>[Codex]</code>) y se reflejo la nueva entrada en el array <code>entries</code> de <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-17 21:06:21 UTC +0000</code> al inicio de esta corrida.",
+          "<code>git status --short --branch</code> devolvio <code>## main-jyfg28</code> con el working tree limpio antes de editar.",
+          "<code>git log</code> del <code>2026-08-17</code> mostro exactamente dos commits del dia previos a esta corrida: <code>69d2b60 chore: actualizar repos.html 2026-08-17 [skip ci]</code> y <code>8ac2691 docs: Update Codex 2026-08-17 [skip ci]</code>, ambos ya en <code>origin/main</code>.",
+          "<code>git fetch origin</code> confirmo que <code>origin/main</code> y <code>origin/main-jyfg28</code> estan sincronizados en <code>8ac2691</code>, asi que no existia trabajo adicional de Claude Code pendiente de subir.",
+          "<code>repos.html</code> figura regenerado hoy por el workflow <code>update-repos.yml</code> (<code>69d2b60</code>), asi que no se toca a mano en esta pasada."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-17</code> queda con doble firma en su fichero unico: seccion <code>[Codex]</code> (ya publicada) y seccion <code>[Claude]</code> con el registro real de esta corrida programada.",
+          "La UI publica del diario incorpora una entrada <code>Claude</code> visible junto a la de <code>Codex</code> sin duplicar la fecha ni cambiar el estilo Matrix.",
+          "Queda documentado que la corrida programada de hoy no aporto trabajo nuevo con Claude Code mas alla de esta rutina de cierre."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rama activa no es <code>main</code> sino <code>main-jyfg28</code>, tal como exige el entorno remoto de Claude Code; el push final debe apuntar explicitamente a esa rama.",
+          "No hay checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> en el contenedor remoto, asi que la parte de la rutina que asume esa ruta se aplica sobre <code>/home/user/18.-diario</code>.",
+          "El repo <code>csilvasantin.github.io</code> sigue fuera del alcance de esta corrida (repo no autorizado en la sesion), asi que cualquier publicacion adicional queda para otra pasada."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Cumplir la regla 1-2-3 del diario anadiendo la firma <code>[Claude]</code> en el mismo fichero <code>2026-08-17.md</code> separada por <code>---</code>, en lugar de crear un fichero nuevo.",
+          "No regenerar <code>repos.html</code> manualmente: el workflow ya lo hizo hoy y el output es el fuente de verdad.",
+          "Empujar el cambio a <code>origin main-jyfg28</code> (rama de desarrollo asignada) y abrir PR draft hacia <code>main</code>, sin tocar directamente <code>main</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-08-17.md index.html</code>, commit <code>Diario 2026-08-17 [Claude]</code> y <code>git push -u origin main-jyfg28</code>.",
+          "Crear/actualizar PR draft desde <code>main-jyfg28</code> hacia <code>main</code> con el resumen del cierre de Claude.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestre la entrada <code>Claude</code> una vez que la rama se integre en <code>main</code>."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-08-17",
+    title: "17 de agosto de 2026",
+    member: "Carlos Silva",
     author: "Codex",
     xpacio: "",
     sections: [
