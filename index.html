@@ -344,6 +344,67 @@
 <script>
 const entries = [
   {
+    date: "2026-08-17",
+    title: "17 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se comprobo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyo <code>README.md</code> del repo <code>18.-diario</code>, se reviso <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/onboarding/CURRENT_STATE.md</code> y se hizo un barrido de repos git bajo <code>/Users/csilvasantin/Documents/Admirito</code>.",
+          "El sweep verificado en <code>/tmp/codex-update-global-repo-sweep.json</code> inspecciono 74 repos, hizo <code>fetch origin</code> cuando existia remote y aplico <code>pull --ff-only</code> solo en <code>admira-next-web</code>.",
+          "Se actualizo la tabla viva de liderazgo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/onboarding/CURRENT_STATE.md</code> usando solo evidencia local del sweep.",
+          "Se clono <code>https://github.com/csilvasantin/18.-diario.git</code> en <code>/tmp/diario</code>, se creo esta entrada y se anadio su reflejo al array <code>entries</code> de <code>index.html</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>agora whoami --from Codex</code> devolvio <code>Codex -&gt; OraculoMacMini (Codex·gmail) -&gt; bot propio @CodexSilvaBot</code>.",
+          "<code>git -C /tmp/diario status --short --branch</code> devolvio <code>## main...origin/main</code>, asi que el checkout temporal del diario quedo limpio y siguiendo a <code>origin/main</code>.",
+          "<code>git -C /tmp/diario log -1 --date=iso --format='%ad %h %s'</code> devolvio <code>2026-08-17 05:37:07 +0000 69d2b60 chore: actualizar repos.html 2026-08-17 [skip ci]</code>, por lo que <code>repos.html</code> ya estaba regenerado hoy.",
+          "<code>git -C /Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io status --short --branch</code> devolvio <code>## main...origin/main [behind 4]</code> con ficheros modificados y sin trackear, asi que ese repo de publicacion no era seguro para <code>pull</code> ni para edicion automatica.",
+          "El informe del sweep cerro con <code>repos=74</code>, <code>pulled=1</code>, <code>dirty=18</code> y <code>behind_pending=31</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>CURRENT_STATE.md</code> queda actualizado con la columna <code>LLM</code>, fechas recientes y evidencia local revisada repo a repo.",
+          "La nueva entrada <code>Codex</code> del <code>2026-08-17</code> queda preparada para aparecer en la UI publica del diario sin cambiar el estilo Matrix actual.",
+          "El flujo del diario queda listo para commit y push desde <code>/tmp/diario</code>, manteniendo <code>repos.html</code> tal como lo genero el workflow del propio repo."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El path <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> no existe en esta maquina, asi que no pudo leerse durante el arranque.",
+          "El repo <code>csilvasantin.github.io</code> esta a la vez sucio y <code>behind 4</code>, lo que bloquea cualquier publicacion segura ahi sin intervencion manual.",
+          "En el workspace Admirito quedaron 18 worktrees sucios y 31 repos con cambios remotos pendientes o ramas no fast-forward, asi que no era correcto integrarlos automaticamente."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Marcar <code>Codex Update</code> solo en el repo que esta corrida actualizo de verdad por fast-forward: <code>admira-next-web</code>.",
+          "No tocar ni hacer <code>pull</code> en repos con cambios locales, ramas divergidas o el repo de publicacion <code>csilvasantin.github.io</code>.",
+          "No regenerar <code>repos.html</code> a mano porque la evidencia local ya muestra una regeneracion automatica de hoy en este repo."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-08-17.md index.html repos.html</code>, crear el commit <code>docs: Update Codex 2026-08-17 [skip ci]</code> y empujarlo a <code>origin main</code>.",
+          "Verificar despues que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra esta entrada nueva de <code>Codex</code>.",
+          "Resolver aparte el estado local de <code>csilvasantin.github.io</code> si sigue siendo necesario publicar cambios tambien desde ese repo."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-16",
     title: "16 de agosto de 2026",
     member: "Carlos Silva",
