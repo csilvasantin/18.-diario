@@ -344,6 +344,66 @@
 <script>
 const entries = [
   {
+    date: "2026-08-18",
+    title: "18 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se comprobo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyo la rutina <q>Cerrar el dia</q> tanto en la fuente canonica publicada en GitHub como en la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+          "Se ejecuto el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-08-18 00:00' --until='2026-08-18 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-18 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-08-18.md</code> con esta entrada firmada como <code>[Codex]</code> y se actualizo <code>index.html</code> para anadir la ficha del dia en la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>agora whoami --from Codex</code> devolvio <code>Codex  -&gt;  OraculoMacMini (Codex·gmail)  -&gt;  bot propio @CodexSilvaBot</code>.",
+          "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-30...origin/main</code> y mostro dos directorios sin trackear ya presentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log --since='2026-08-18 00:00' --until='2026-08-18 23:59:59' --date=iso --stat --oneline --all</code> devolvio solo <code>1c77599 Diario 2026-08-17 [Codex]</code>, y <code>git reflog --date=iso --since='2026-08-18 00:00'</code> devolvio tres movimientos ligados al rebase cerrado a las <code>00:03:06 +0200</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-18 23:56:06 CEST +0200</code> en el pre-check.",
+          "La URL canonica solicitada redirigio a <code>https://github.com/csilvasantin/18.-diario/blob/main/CERRAR-EL-DIA.md</code>, y el contenido operativo coincidio con la copia local leida en esta sesion."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-18</code> queda registrada en su fichero Markdown con las seis secciones numeradas exigidas por la rutina.",
+          "<code>index.html</code> queda sincronizado con una nueva entrada <code>Codex</code> para el <code>18 de agosto de 2026</code>.",
+          "El cierre de hoy queda documentado sin arrastrar hechos de otras sesiones ni de otros repos."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout canonico no arranco completamente limpio por los directorios sin trackear <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "La rama local activa no es <code>main</code>, sino <code>codex-diario-2026-07-30</code>, aunque sigue a <code>origin/main</code>.",
+          "La ruta <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> indicada por AGENTS no existe en esta maquina y no pudo leerse."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Trabajar solo sobre <code>/Users/csilvasantin/Claude/diario/</code>, como exige la rutina, sin tocar otros checkouts del diario.",
+          "Dejar fuera del cambio los directorios no relacionados <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "Registrar solo hechos verificados con <code>git</code>, con la lectura de la rutina y con el trabajo real de esta sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-08-18.md index.html</code>, crear el commit <code>Diario 2026-08-18 [Codex]</code> y empujarlo a <code>origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada nueva del <code>18 de agosto de 2026</code>.",
+          "Actualizar la memoria de la automatizacion <code>cerrar-el-dia-69b6761696b8</code> con un resumen breve de esta corrida y su tiempo de ejecucion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-17",
     title: "17 de agosto de 2026",
     member: "Carlos Silva",
