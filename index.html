@@ -344,6 +344,66 @@
 <script>
 const entries = [
   {
+    date: "2026-08-20",
+    title: "20 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina de cierre del dia sobre el repositorio <code>csilvasantin/18.-diario</code> desde la rama de trabajo <code>main-qrrklu</code>.",
+          "Se leyo <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> locales para aplicar la regla 1-2-3 (una entrada por fecha, historico separado por dias, cierre con HTML y URL publica).",
+          "Se hizo pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-08-20 00:00' --until='2026-08-20 23:59:59' --date=iso --stat --oneline --all</code>, <code>git branch --show-current</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-08-20.md</code> y se anadio la ficha del dia al principio de <code>index.html</code> para que aparezca en la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git branch --show-current</code> devolvio <code>main-qrrklu</code> y <code>git status --short --branch</code> devolvio <code>## main-qrrklu</code> con arbol limpio antes de escribir la entrada.",
+          "<code>git log --since='2026-08-20 00:00' --until='2026-08-20 23:59:59' --date=iso --stat --oneline --all</code> devolvio un unico commit del dia: <code>4a9afa2 chore: actualizar repos.html 2026-08-20 [skip ci]</code> de <code>github-actions[bot]</code> a las <code>2026-08-20 05:33:44 +0000</code>, con <code>repos.html | 6 +++---</code>.",
+          "<code>git rev-parse HEAD</code> devolvio <code>4a9afa257fc9c9e5076935982d6323f1e1562375</code> y <code>git rev-parse origin/main</code> devolvio <code>910eb563bca3153a01a0186edd07a05d791274ee</code>; la rama <code>main-qrrklu</code> va 9 commits por delante de <code>origin/main</code> (todos ya publicados en <code>origin/main-qrrklu</code>).",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-20 21:06:35 UTC +0000</code> en el pre-check.",
+          "La consulta a la API de GitHub para PRs abiertas con <code>head=csilvasantin:main-qrrklu</code> devolvio lista vacia, por lo que el cierre de hoy abre una PR draft nueva."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-20</code> queda registrada en su propio fichero Markdown con las seis secciones numeradas exigidas por la rutina.",
+          "<code>index.html</code> incorpora la ficha del <code>20 de agosto de 2026</code> firmada <code>[Claude]</code> para que la UI publica del diario liste el dia.",
+          "El commit del dia queda documentado incluso siendo un dia sin trabajo humano: solo la regeneracion automatica de <code>repos.html</code> por GitHub Actions."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No se ha registrado trabajo real con Claude Code durante <code>2026-08-20</code>: el unico commit del dia previo a este cierre es el mantenimiento automatizado de <code>repos.html</code>.",
+          "La rama de trabajo asignada <code>main-qrrklu</code> va 9 commits por delante de <code>origin/main</code>, todos ya publicados en <code>origin/main-qrrklu</code> pero aun sin PR abierta.",
+          "El entorno remoto de esta sesion no tiene acceso al checkout canonico <code>/Users/csilvasantin/Claude/diario/</code> del Mac Mini; el cierre se ejecuta sobre el clone efimero del contenedor."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia aunque no haya trabajo humano, tal como pide la instruccion del usuario (<q>si un dia en concreto no se ha hecho nada se documenta y ya esta</q>).",
+          "Firmar la entrada como <code>[Claude]</code> porque la abre Claude Code, y respetar el formato de las seis secciones numeradas del resto del historico.",
+          "Trabajar sobre la rama asignada <code>main-qrrklu</code> y abrir una PR draft nueva contra <code>main</code> con este cierre, sin tocar otras ramas ni otros repos."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-08-20.md index.html</code>, commit <code>Diario 2026-08-20 [Claude]</code> y <code>git push -u origin main-qrrklu</code>.",
+          "Abrir PR draft de <code>main-qrrklu</code> -&gt; <code>main</code> en <code>csilvasantin/18.-diario</code> con el resumen del cierre.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> responden tras el merge y muestran la entrada del <code>20 de agosto de 2026</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-19",
     title: "19 de agosto de 2026",
     member: "Carlos Silva",
