@@ -344,6 +344,68 @@
 <script>
 const entries = [
   {
+    date: "2026-08-21",
+    title: "21 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se comprobo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyeron la memoria local de la automatizacion <code>cerrar-el-dia-69b6761696b8</code>, la rutina canonica en <a href='https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md' target='_blank'>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</a> y la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>.",
+          "Se ejecuto el pre-check literal en <code>/Users/csilvasantin/Claude/diario/</code> con <code>git status --short --branch</code>, <code>git log --since='2026-08-21 00:00' --until='2026-08-21 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-21 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se hizo <code>git fetch origin</code>, se detecto el avance remoto <code>f35f495 chore: actualizar repos.html 2026-08-21 [skip ci]</code> y se rebaso la rama activa <code>codex-diario-2026-07-30</code> sobre <code>origin/main</code>.",
+          "Se creo <code>2026-08-21.md</code> con esta entrada firmada como <code>[Codex]</code> y se actualizo <code>index.html</code> para anadir la ficha del dia en la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>agora whoami --from Codex</code> devolvio <code>Codex  -&gt;  OraculoMacMini (Codex·gmail)  -&gt;  bot propio @CodexSilvaBot</code>.",
+          "<code>git status --short --branch</code> devolvio <code>## codex-diario-2026-07-30...origin/main</code> y mostro dos directorios sin trackear ya presentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "<code>git log --since='2026-08-21 00:00' --until='2026-08-21 23:59:59' --date=iso --stat --oneline --all</code> y <code>git reflog --date=iso --since='2026-08-21 00:00'</code> no devolvieron lineas en el pre-check.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-21 23:57:04 CEST +0200</code> en el pre-check.",
+          "<code>git show origin/main:CERRAR-EL-DIA.md | cmp -s - /Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code> devolvio salida correcta, confirmando que la rutina local coincide con la publicada en <code>origin/main</code>.",
+          "Despues de <code>git fetch origin</code>, <code>git show-ref --verify refs/remotes/origin/main</code> y <code>git log -1 --oneline --decorate refs/remotes/origin/main</code> confirmaron el remoto <code>f35f49545173b0e7e1a14f3b7d40f7d28f7a1968</code> (<code>chore: actualizar repos.html 2026-08-21 [skip ci]</code>), mientras <code>git branch -vv</code> confirmo que la rama activa estaba <code>behind 1</code> antes del rebase."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-21</code> queda registrada en su fichero Markdown con las seis secciones numeradas exigidas por la rutina.",
+          "La rama de trabajo queda alineada con <code>origin/main</code> antes de preparar el commit del cierre.",
+          "<code>index.html</code> queda sincronizado con una nueva entrada <code>Codex</code> para el <code>21 de agosto de 2026</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El checkout canonico no arranco completamente limpio por los directorios sin trackear <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "La rama local activa no es <code>main</code>, sino <code>codex-diario-2026-07-30</code>, y al empezar estaba <code>behind 1</code> respecto a <code>origin/main</code>.",
+          "La ruta <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> indicada por AGENTS no existe en esta maquina y no pudo leerse desde esa ubicacion."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Trabajar solo sobre <code>/Users/csilvasantin/Claude/diario/</code>, como exige la rutina, sin tocar otros checkouts del diario.",
+          "Dejar fuera del cambio los directorios no relacionados <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>, y rebasar la rama activa en lugar de limpiar o mover ese material.",
+          "Registrar solo hechos verificados con <code>git</code>, con la lectura de la rutina y con el trabajo real de esta sesion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-08-21.md index.html</code>, crear el commit <code>Diario 2026-08-21 [Codex]</code> y empujarlo a <code>origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada nueva del <code>21 de agosto de 2026</code>.",
+          "Actualizar la memoria de la automatizacion <code>cerrar-el-dia-69b6761696b8</code> con un resumen breve de esta corrida y su tiempo de ejecucion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-20",
     title: "20 de agosto de 2026",
     member: "Carlos Silva",
