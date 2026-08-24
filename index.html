@@ -344,6 +344,67 @@
 <script>
 const entries = [
   {
+    date: "2026-08-24",
+    title: "24 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Codex",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto <code>agora-checkin codex start</code>, se comprobo la identidad con <code>agora whoami --from Codex</code> y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
+          "Se leyo la memoria local de la automatizacion <code>codex-actualize-global</code>, se revisaron las maximas locales y se constato que la ruta <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> indicada por AGENTS no existe en esta maquina.",
+          "Se audito la actividad reciente de los workspaces principales, sobre todo <code>/Users/csilvasantin/Documents/Admirito</code>, con foco en los repositorios <code>tool</code>, <code>pixeria</code>, <code>admira-tv</code>, <code>digitalavatar.ai</code>, <code>xpaceos</code> y el checkout limpio del diario en <code>/Users/csilvasantin/Claude/diario</code>.",
+          "Se inspeccionaron los worktrees con cambios sin cerrar en <code>AdmiraNext-Team</code>, <code>AdmiraNext-Team-latest</code>, <code>csilvasantin.github.io</code>, <code>onboarding</code>, <code>pulpo</code>, <code>01.-AdmiraXperience-Game</code> y <code>xpaceos</code> para separar commits recientes reales de trabajo aun pendiente de revision manual.",
+          "Se hizo <code>git fetch origin</code> y despues <code>git rebase origin/main</code> en <code>/Users/csilvasantin/Claude/diario</code>, se creo <code>2026-08-24.md</code> con esta entrada y se actualizo <code>index.html</code> para dejar visible el resumen operativo de hoy."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>agora whoami --from Codex</code> devolvio <code>Codex  -&gt;  OraculoMacMini (Codex·gmail)  -&gt;  bot propio @CodexSilvaBot</code>, y <code>agora tasks --from Codex --peek</code> junto con <code>agora inbox --from Codex --peek</code> devolvieron colas vacias.",
+          "<code>git fetch origin</code> y <code>git rebase origin/main</code> en el diario incorporaron la punta remota <code>04fba1e chore: actualizar repos.html 2026-08-24 [skip ci]</code>, dejando el checkout alineado con <code>origin/main</code> antes de editar.",
+          "<code>git log --since='2026-08-17' --stat --oneline</code> confirmo en <code>tool</code> los commits <code>8287c5f feat(highscore): add weekly recovery control</code>, <code>4310823 fix(highscore): refresh weekly control assets</code>, <code>557626d fix(declare): hacer idempotentes los reintentos</code> y <code>b60b2a2 fix(highscore): excluir tareas de misiones canceladas</code>.",
+          "<code>git log --since='2026-08-17' --stat --oneline</code> confirmo en <code>pixeria</code> el commit <code>bc4d9d6 feat: bandera ASCII de Australia en /flags/australia</code>, mientras que <code>admira-tv</code>, <code>digitalavatar.ai</code> y <code>xpaceos</code> no registran commits nuevos posteriores a sus ultimos cierres ya publicados.",
+          "<code>git diff --stat</code> y <code>git status --short</code> mostraron cambios abiertos de peso en <code>AdmiraNext-Team</code> y <code>csilvasantin.github.io</code>, ajustes menores en <code>AdmiraNext-Team-latest</code>, <code>onboarding</code>, <code>pulpo</code> y <code>01.-AdmiraXperience-Game</code>, y capturas QA sin trackear en <code>xpaceos</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Queda consolidado un mapa corto y verificable de la actividad reciente de Codex entre el 17 y el 24 de agosto de 2026, separando trabajo cerrado de worktrees todavia abiertos.",
+          "El diario publico queda extendido al <code>24 de agosto de 2026</code> con una entrada especifica de actualizacion global de Codex.",
+          "<code>repos.html</code> ya venia regenerado hoy por su flujo automatico, asi que no hizo falta tocar esa tabla manualmente para reflejar la actividad reciente."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La ruta <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> indicada por AGENTS sigue ausente en esta maquina y obliga a usar otras fuentes locales como respaldo.",
+          "El checkout canonico del diario sigue sin arrancar completamente limpio porque arrastra dos directorios sin trackear ya presentes: <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code>.",
+          "Hay varios repos en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/</code> con cambios locales amplios o ficheros nuevos sin commit, por lo que su estado actual requiere revision humana antes de publicar o mezclar nada."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Refrescar solo <code>/Users/csilvasantin/Claude/diario/</code> para reflejar esta corrida, sin editar a mano <code>repos.html</code> porque la version del <code>2026-08-24</code> ya estaba publicada por automatizacion.",
+          "No inventar validaciones funcionales ni despliegues en los repos auditados: el resumen se limita a commits, diffstats, estados Git y artefactos QA realmente observados.",
+          "Dejar todos los worktrees ajenos intactos y tratarlos como pendientes de revision manual, no como trabajo cerrado por esta automatizacion."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-08-24.md index.html</code>, crear el commit <code>Diario 2026-08-24 [Codex]</code> y empujarlo a <code>origin main</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a> responde y muestra la entrada nueva del <code>24 de agosto de 2026</code>.",
+          "Revisar manualmente los worktrees abiertos mas grandes, empezando por <code>AdmiraNext-Team</code>, <code>csilvasantin.github.io</code> y <code>AdmiraNext-Team-latest</code>, antes de decidir commit, descarte o integracion."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-23",
     title: "23 de agosto de 2026",
     member: "Carlos Silva",
