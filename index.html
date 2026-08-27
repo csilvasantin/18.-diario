@@ -344,6 +344,64 @@
 <script>
 const entries = [
   {
+    date: "2026-08-27",
+    title: "27 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina programada de cierre del dia desde una sesion de Claude Code en la nube (<code>/home/user/18.-diario</code>, rama <code>main-qhm2ki</code>, entorno remoto efimero).",
+          "Se leyeron <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> locales para aplicar la rutina 1-2-3 (una entrada por fecha, historico separado, cierre en HTML publico).",
+          "Se ejecuto el pre-check con <code>git status</code>, <code>git log --since='2026-08-27 00:00' --until='2026-08-27 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-27 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se creo <code>2026-08-27.md</code> firmado como <code>[Claude]</code> y se actualizo <code>index.html</code> para reflejar la fecha en la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> mostro <code>main-qhm2ki</code> limpio antes de empezar, sin cambios en el working tree.",
+          "<code>git log</code> de las 24h confirmo un unico commit del dia: <code>1c28065 chore: actualizar repos.html 2026-08-27 [skip ci]</code>, generado automaticamente por el workflow <code>update-repos.yml</code>.",
+          "<code>date</code> devolvio <code>2026-08-27 21:07:20 UTC +0000</code> en el contenedor remoto de Claude Code.",
+          "No existia previamente <code>2026-08-27.md</code> en el repo antes del <code>Write</code> de esta corrida."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-27</code> queda documentada aunque no haya habido trabajo manual con IA en esta jornada, tal como pide la instruccion del usuario (\"si un dia en concreto no se ha hecho nada se documenta y ya esta\").",
+          "<code>index.html</code> queda con una nueva entrada de <code>Claude</code> para el <code>27 de agosto de 2026</code> visible en los filtros publicos.",
+          "Historico continuo sin saltos: la serie <code>24 -&gt; 25 -&gt; 26 -&gt; 27 de agosto de 2026</code> queda cerrada en <code>origin/main-qhm2ki</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno relevante: no hubo actividad manual del usuario ni de otras IAs sobre este repo en el dia, asi que el cierre se resuelve como jornada tranquila.",
+          "El entorno de ejecucion es un contenedor remoto efimero, no la Mac Mini canonica, asi que no aplican los pasos de la rutina que asumen <code>/Users/csilvasantin/Claude/diario/</code>; se opera sobre el clon disponible respetando la rama de trabajo indicada."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Firmar la entrada como <code>[Claude]</code> porque la corrida la ejecuta Claude Code, siguiendo la regla de firma de <code>CERRAR-EL-DIA.md</code>.",
+          "Documentar la jornada como <em>quiet day</em> (unico commit automatizado del workflow de <code>repos.html</code>) sin inventar trabajo que no ocurrio.",
+          "Trabajar en la rama <code>main-qhm2ki</code> segun las instrucciones del entorno remoto, en lugar de tocar <code>main</code> directamente, y abrir la PR para su revision."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "<code>git add 2026-08-27.md index.html</code>, commit <code>Diario 2026-08-27 [Claude]</code> y push a <code>origin main-qhm2ki</code>.",
+          "Abrir PR draft hacia <code>main</code> para que la entrada llegue a la web publica una vez revisada y fusionada.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestre la entrada del <code>27 de agosto de 2026</code> tras la fusion y la regeneracion automatica de <code>repos.html</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-26",
     title: "26 de agosto de 2026",
     member: "Carlos Silva",
