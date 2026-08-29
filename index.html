@@ -344,6 +344,115 @@
 <script>
 const entries = [
   {
+    date: "2026-08-29",
+    title: "29 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina programada de cierre del dia dentro de una sesion remota de Claude Code (entorno efimero en la nube, rama de trabajo <code>main-tyymfv</code>).",
+          "Se leyo la fuente canonica <code>CERRAR-EL-DIA.md</code> del propio repositorio <code>18.-diario</code> y se aplico su regla 1-2-3.",
+          "Se detecto que el diario no tenia <code>2026-08-28.md</code> ni <code>2026-08-29.md</code> y que la unica actividad de esos dos dias en <code>origin/main</code> eran los commits automaticos <code>fe2852c chore: actualizar repos.html 2026-08-28 [skip ci]</code> y <code>0bf99f0 chore: actualizar repos.html 2026-08-29 [skip ci]</code>.",
+          "Se creo <code>2026-08-28.md</code> documentando explicitamente la ausencia de actividad, se creo esta entrada <code>2026-08-29.md</code> y se actualizo <code>index.html</code> para incorporar ambas fechas a la UI publica.",
+          "Se hizo commit y push a la rama <code>main-tyymfv</code> del remoto <code>csilvasantin/18.-diario</code>, siguiendo las instrucciones de branch de la sesion."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status</code> inicial mostro rama <code>main-tyymfv</code> limpia y alineada con <code>origin/main-tyymfv</code>.",
+          "<code>git log --oneline -20</code> confirmo que los dos commits mas recientes eran los <code>chore: actualizar repos.html</code> automaticos, sin cierre de diario en medio.",
+          "<code>git log --since='2026-08-28 00:00' --until='2026-08-29 23:59:59' --date=iso --stat --oneline --all</code> no devolvio ningun commit humano fuera de esos dos automaticos.",
+          "<code>ls 2026-08-*.md</code> mostro que la ultima entrada humana previa era <code>2026-08-27.md</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "Quedan documentados y publicados los dias <code>2026-08-28</code> (sin actividad) y <code>2026-08-29</code> (este cierre), cerrando el hueco de dos dias.",
+          "<code>index.html</code> queda actualizado con ambas fechas para que el filtro de fechas del diario publico las liste sin saltos.",
+          "<code>repos.html</code> ya recogia el estado actualizado gracias a los commits automaticos previos, por lo que no requiere edicion manual en esta rutina."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "El entorno remoto no tiene acceso al Mac Mini de referencia (<code>/Users/csilvasantin/Claude/diario/</code>), por lo que la rutina se ejecuto contra el checkout efimero disponible, cumpliendo el espiritu de la rutina y sus seis secciones aunque no la letra sobre la ruta local.",
+          "La rama activa es <code>main-tyymfv</code> (rama de trabajo asignada a esta sesion) y no <code>main</code>; el push se hace a esa rama y sera un PR draft el que lleve el cierre a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Firmar como <code>[Claude]</code> porque el ejecutor es Claude Code, siguiendo la convencion de firma establecida por el propio <code>CERRAR-EL-DIA.md</code>.",
+          "Documentar el dia <code>2026-08-28</code> explicitamente como sin actividad antes que dejarlo en blanco, para mantener continuidad cronologica y cumplir la regla explicita del proyecto.",
+          "No tocar <code>repos.html</code> manualmente; se deja que la GitHub Action <code>update-repos.yml</code> lo regenere si detecta cambios tras el merge."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Abrir/actualizar el PR draft de la rama <code>main-tyymfv</code> contra <code>main</code> para que el cierre llegue al sitio publico.",
+          "Verificar tras merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> muestra las entradas del 28 y 29 de agosto de 2026 y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> sigue sincronizado."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-08-28",
+    title: "28 de agosto de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "No se registro trabajo interactivo con Claude Code en el repositorio <code>18.-diario</code> durante el dia 2026-08-28.",
+          "La unica actividad detectada en <code>origin/main</code> fue el commit automatico <code>fe2852c chore: actualizar repos.html 2026-08-28 [skip ci]</code> generado por la GitHub Action <code>update-repos.yml</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --since='2026-08-28 00:00' --until='2026-08-28 23:59:59' --date=iso --stat --oneline --all</code> devolvio unicamente <code>fe2852c chore: actualizar repos.html 2026-08-28 [skip ci]</code> con <code>repos.html | 8 ++++----</code>.",
+          "No existia previamente ningun fichero <code>2026-08-28.md</code> en <code>origin/main</code>, confirmando que la fecha no habia sido cerrada por ninguna IA.",
+          "El commit inmediatamente anterior en el historial es <code>de4d46d Diario 2026-08-27 [Codex]</code>, es decir, el cierre del dia previo."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-08-28</code> queda documentada aunque no haya trabajo relevante que registrar, cumpliendo la regla del proyecto: si un dia no se ha hecho nada, se documenta y ya esta.",
+          "<code>index.html</code> recibe una entrada minima para no dejar hueco en la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno; simplemente no hubo sesion interactiva con Claude Code ese dia."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar el dia como \"sin actividad relevante\" en lugar de omitirlo, para mantener continuidad cronologica del diario.",
+          "Firmar la entrada como <code>[Claude]</code> porque es Claude Code quien la escribe en diferido dentro de la rutina programada de cierre del dia 2026-08-29."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Continuar con el cierre normal del dia siguiente (<code>2026-08-29</code>) en la misma corrida.",
+          "Publicar ambas entradas en <code>origin/main</code> para que aparezcan en <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-08-27",
     title: "27 de agosto de 2026",
     member: "Carlos Silva",
