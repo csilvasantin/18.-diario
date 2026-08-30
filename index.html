@@ -6066,6 +6066,63 @@ const entries = [
   {
     date: "2026-05-22",
     title: "22 de mayo de 2026",
+    author: "Claude",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina &quot;Cerrar el dia&quot; desde Claude Code corriendo en el entorno remoto en la nube (contenedor efimero, repo clonado en <code>/home/user/18.-diario</code>), sobre la rama de trabajo <code>main-r3Wnb</code>, leyendo <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code>.",
+          "Se hizo el pre-check con <code>git status --short --branch</code>, <code>git log --since='2026-05-22 00:00' --until='2026-05-22 23:59:59' --date=iso --oneline --all</code>, <code>git reflog --date=iso --since='2026-05-22 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> para fijar la evidencia real del dia.",
+          "Se anadio esta entrada <code>[Claude]</code> a <code>2026-05-22.md</code>, separada por <code>---</code> de la entrada previa de Codex, junto con su reflejo en <code>index.html</code>, manteniendo la regla de un unico fichero por fecha.",
+          "Se commiteo y pusheo a <code>origin/main-r3Wnb</code> y se abrio un Pull Request en borrador hacia <code>main</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-r3Wnb</code> con arbol limpio; la rama se creo a partir de <code>origin/main</code> (commit <code>1e914b4</code>).",
+          "<code>git rev-parse origin/main main-r3Wnb HEAD</code> confirmo que las tres referencias apuntaban a <code>1e914b4</code> al iniciar la sesion.",
+          "<code>git log</code> del dia solo mostro <code>1e914b4 Diario 2026-05-22 [Codex]</code> y <code>45d4ac8 chore: actualizar repos.html 2026-05-22 [skip ci]</code>: no hay otra actividad de Claude Code trazable en este repo hoy.",
+          "<code>git reflog --date=iso --since='2026-05-22 00:00'</code> solo mostro el checkout de <code>main</code> a <code>main-r3Wnb</code> sobre <code>1e914b4</code> al arrancar esta sesion.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-05-22 21:09:20 UTC +0000</code>, asi que la fecha canonica de esta entrada es <code>2026-05-22</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El dia <code>2026-05-22</code> queda consolidado en un unico fichero con dos entradas (<code>Codex</code> + <code>Claude</code>) separadas por <code>---</code>, conforme a la regla 1-2-3.",
+          "<code>index.html</code> incorpora la entrada <code>[Claude]</code> para que sea visible en la UI publica y bajo el filtro <code>Claude</code>.",
+          "La publicacion queda lista para verificar en la URL publica del diario tras mergear el PR."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "<code>CERRAR-EL-DIA.md</code> asume un checkout en Mac Mini con push directo a <code>origin main</code>; esta sesion corre en un contenedor en la nube y, por las instrucciones del entorno, publica en la rama <code>main-r3Wnb</code> con PR hacia <code>main</code> en vez de pushear directo a <code>main</code>.",
+          "No se detecto trabajo adicional de Claude Code en otros proyectos trazable desde este repo hoy; siguiendo la regla &quot;si un dia no se ha hecho nada, se documenta&quot;, la jornada se cierra registrando solo la actualizacion del propio diario."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Convivir con la entrada previa de Codex en el mismo fichero en lugar de sobrescribirla, respetando una sola entrada por fecha.",
+          "Registrar unicamente hechos verificados con <code>git</code> en esta sesion, sin rellenar con actividad no trazable.",
+          "No editar <code>repos.html</code> a mano: lo regenera GitHub Actions (<code>update-repos.yml</code>) de forma automatica.",
+          "Publicar en <code>main-r3Wnb</code> y dejar el merge a <code>main</code> para revision via Pull Request en borrador."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Revisar y mergear el PR de <code>main-r3Wnb</code> a <code>main</code> para que GitHub Pages publique la entrada.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>repos.html</a> respondan y muestren la actualizacion (repos.html se regenera via GitHub Actions <code>update-repos.yml</code>)."
+        ]
+      }
+    ]
+  },
+  {
+    date: "2026-05-22",
+    title: "22 de mayo de 2026",
     author: "Codex",
     sections: [
       {
