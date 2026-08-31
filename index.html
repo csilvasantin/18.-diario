@@ -10173,7 +10173,8 @@ const entries = [
           "<code>cmp -s /Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md &lt;(git show origin/main:CERRAR-EL-DIA.md)</code> devolvio salida <code>0</code>, confirmando que la copia local coincide con la rutina remota vigente.",
           "El pre-check devolvio <code>## codex-diario-2026-07-30...origin/main</code>, <code> M index.html</code>, <code>?? 2026-08-31.md</code>, <code>?? backup-yokup-2026-07-21/</code> y <code>?? comparativa-clis/</code>; <code>git log</code> y <code>git reflog</code> para la ventana del <code>2026-08-31</code> no devolvieron lineas, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-31 23:56:51 CEST +0200</code>.",
           "<code>git log --oneline --max-count=2 origin/main</code> confirmo que el remoto quedo en <code>b4bfa8b chore: actualizar repos.html 2026-08-31 [skip ci]</code> y <code>ba79210 docs: Update Codex 2026-08-31 [skip ci]</code> antes de esta publicacion.",
-          "Tras el push, <code>curl -I https://csilvasantin.github.io/diario/</code> devolvio respuesta HTTP correcta y <code>curl -L https://csilvasantin.github.io/diario/</code> mostro la fecha <code>2026-08-31</code> y la autoria <code>Codex</code> en la pagina publicada."
+          "Tras el push, <code>git ls-remote origin refs/heads/main</code> confirmo la punta remota <code>86bdab84ac4d349b6bd5c6962cafe1815714bd48</code>, y <code>curl -H 'Cache-Control: no-cache' -L https://csilvasantin.github.io/18.-diario/</code> ya mostro la fecha <code>2026-08-31</code> con el contenido corregido.",
+          "<code>curl -I -L https://csilvasantin.github.io/diario/</code> confirmo que la URL pedida responde con <code>301</code> hacia <code>https://www.carlossilva.info/diario/</code> y despues <code>200</code>, pero esa ruta seguia sirviendo una copia antigua con <code>Last-Modified: Mon, 13 Jul 2026 16:00:05 GMT</code>, sin la entrada corregida de este cierre."
         ]
       },
       {
@@ -10181,7 +10182,8 @@ const entries = [
         items: [
           "<code>2026-08-31.md</code> queda reescrito con las seis secciones numeradas exigidas por la rutina y firmado como <code>[Codex]</code>.",
           "<code>index.html</code> vuelve a quedar alineado con esa misma narrativa factual bajo el filtro <code>Codex</code>.",
-          "La fecha <code>2026-08-31</code> queda publicada sobre la punta actual de <code>origin/main</code> sin sobrescribir el worktree local sucio del checkout designado."
+          "La fecha <code>2026-08-31</code> queda publicada sobre la punta actual de <code>origin/main</code> sin sobrescribir el worktree local sucio del checkout designado.",
+          "La publicacion efectiva ya aparece en <code>https://csilvasantin.github.io/18.-diario/</code>, mientras el alias <code>https://csilvasantin.github.io/diario/</code> sigue pendiente de servir esa misma version."
         ]
       },
       {
@@ -10189,7 +10191,8 @@ const entries = [
         items: [
           "La ruta <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> indicada por AGENTS no existe en esta maquina.",
           "El checkout obligatorio <code>/Users/csilvasantin/Claude/diario/</code> no arranco limpio: tenia <code>index.html</code> modificado, <code>2026-08-31.md</code> sin trackear, dos directorios sin trackear y la rama <code>codex-diario-2026-07-30</code> por detras de <code>origin/main</code>.",
-          "<code>origin/main</code> ya contenia una version previa de <code>2026-08-31</code>, asi que la rutina de hoy exigia actualizar esa fecha en vez de crear una nueva variante paralela."
+          "<code>origin/main</code> ya contenia una version previa de <code>2026-08-31</code>, asi que la rutina de hoy exigia actualizar esa fecha en vez de crear una nueva variante paralela.",
+          "La URL solicitada <code>https://csilvasantin.github.io/diario/</code> respondio, pero su destino final <code>https://www.carlossilva.info/diario/</code> seguia mostrando una copia antigua al cierre de esta corrida."
         ]
       },
       {
@@ -10204,7 +10207,8 @@ const entries = [
         heading: "Siguientes pasos",
         items: [
           "Reconciliar o limpiar el estado local de <code>/Users/csilvasantin/Claude/diario/</code> antes de la siguiente corrida, para que vuelva a ser un checkout limpio de verdad.",
-          "Mantener como URL publica de referencia <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>, que es la verificada al cierre de esta sesion."
+          "Mantener como URL publica de referencia <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>, que es la verificada al cierre de esta sesion.",
+          "Revisar la configuracion o cache del alias <code>www.carlossilva.info/diario/</code>, porque todavia no refleja el contenido ya publicado en <code>18.-diario</code>."
         ]
       }
     ]
