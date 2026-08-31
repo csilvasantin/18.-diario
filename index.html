@@ -10159,53 +10159,52 @@ const entries = [
         heading: "Que se hizo",
         items: [
           "Se ejecuto <code>agora-checkin codex start</code>, se comprobo la identidad con <code>agora whoami --from Codex</code>, se revisaron <code>agora tasks --from Codex --peek</code> y <code>agora inbox --from Codex --peek</code>, y se dejo presencia viva con <code>agora alive --from Codex --loop --every 60</code>.",
-          "Se leyeron la memoria de la automatizacion <code>codex-update-global</code>, las maximas locales disponibles y el README publico de <code>18.-diario</code>, incluyendo la seccion <code>Guia para Codex</code>; al intentar leer <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> se confirmo que esa ruta no existe en esta maquina.",
-          "Se hizo un barrido de los repos git activos dentro de <code>/Users/csilvasantin/Documents/Admirito</code>, ejecutando <code>git status --porcelain</code>, <code>git fetch origin --prune</code> y, cuando el repo estaba limpio y solo por detras del remoto, <code>git pull --ff-only</code>.",
-          "Se actualizaron por fast-forward <code>github-csilvasantin/pixer-worker</code>, <code>github-csilvasantin/pixeria</code> y <code>github-csilvasantin/tool</code>, y se dejo constancia de los repos bloqueados por worktree sucio, falta de <code>origin</code> o falta de upstream.",
-          "Se regenero la tabla viva de liderazgo en <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/onboarding/CURRENT_STATE.md</code> con las columnas <code>Repo</code>, <code>LLM</code>, <code>Ultimo cambio liderado por</code>, <code>Fecha</code> y <code>Evidencia local</code>.",
-          "Se clono <code>https://github.com/csilvasantin/18.-diario.git</code> en <code>/tmp/diario</code>, se creo <code>2026-08-31.md</code> y se anadio la entrada <code>Codex</code> de hoy al array <code>entries</code> de <code>index.html</code>."
+          "Se leyeron la fuente canonica <code>https://github.com/csilvasantin/diario/blob/main/CERRAR-EL-DIA.md</code>, la copia local <code>/Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md</code>, la memoria de <code>cerrar-el-dia-69b6761696b8</code> y las maximas locales disponibles; al intentar leer <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> se confirmo que esa ruta no existe en esta maquina.",
+          "En <code>/Users/csilvasantin/Claude/diario/</code> se hizo el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-08-31 00:00' --until='2026-08-31 23:59:59' --date=iso --stat --oneline --all</code>, <code>git reflog --date=iso --since='2026-08-31 00:00'</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se hizo <code>git fetch origin main</code>, se confirmo que <code>origin/main</code> avanzo a <code>ba79210 docs: Update Codex 2026-08-31 [skip ci]</code> y <code>b4bfa8b chore: actualizar repos.html 2026-08-31 [skip ci]</code>, y se verifico con <code>git show origin/main:2026-08-31.md</code> que la fecha ya existia en remoto.",
+          "Como el checkout designado arranca con <code>index.html</code> modificado, <code>2026-08-31.md</code> sin trackear, <code>backup-yokup-2026-07-21/</code> y <code>comparativa-clis/</code> sin trackear, y la rama <code>codex-diario-2026-07-30</code> quedo por detras de <code>origin/main</code>, se preparo un clon limpio temporal en <code>/tmp/diario-cerrar-2026-08-31.YJ6snh</code> basado en <code>origin/main</code>.",
+          "En ese clon limpio se reescribieron <code>2026-08-31.md</code> e <code>index.html</code> para sustituir la entrada previa del dia por este cierre factual, se hizo <code>git commit -m \"Diario 2026-08-31 [Codex]\"</code> y se publico con <code>git push origin main</code>."
         ]
       },
       {
         heading: "Que se valido",
         items: [
           "<code>agora whoami --from Codex</code> devolvio <code>Codex  -&gt;  OraculoMacMini (Codex·gmail)  -&gt;  bot propio @CodexSilvaBot</code>, y <code>agora tasks --from Codex --peek</code> junto con <code>agora inbox --from Codex --peek</code> devolvieron que no habia tareas ni mensajes pendientes.",
-          "El barrido local confirmo que <code>Metahumans.info</code>, <code>admira-next-web</code>, <code>github-csilvasantin/10.-Yarig.aiTheGame</code>, <code>github-csilvasantin/admira-app</code>, <code>github-csilvasantin/clearchannel-tv</code> y varios repos mas estaban ya al dia tras <code>fetch origin</code>.",
-          "El mismo barrido confirmo actualizacion remota pendiente sin tocar contenido local en <code>32.-ConsejoAdmiraNextGame</code>, <code>github-csilvasantin/01.-AdmiraXperience-Game</code>, <code>github-csilvasantin/AdmiraNext-Team</code>, <code>github-csilvasantin/csilvasantin.github.io</code>, <code>github-csilvasantin/diario</code>, <code>github-csilvasantin/onboarding</code>, <code>github-csilvasantin/pulpo</code>, <code>github-csilvasantin/xtanco-game</code> y <code>xpaceos</code>.",
-          "<code>github-csilvasantin/admira-design</code> quedo identificado como repo limpio pero sin upstream configurado, y <code>04.- AdmiraGemini</code> como repo sin remote <code>origin</code>.",
-          "<code>git -C /tmp/diario log -1 --format='%H %cs %an %s'</code> devolvio <code>cff2328 2026-08-30 csilvasantin Diario 2026-08-30 [Codex]</code>, confirmando que el clon del diario arranco desde el cierre de ayer."
+          "<code>cmp -s /Users/csilvasantin/Claude/diario/CERRAR-EL-DIA.md &lt;(git show origin/main:CERRAR-EL-DIA.md)</code> devolvio salida <code>0</code>, confirmando que la copia local coincide con la rutina remota vigente.",
+          "El pre-check devolvio <code>## codex-diario-2026-07-30...origin/main</code>, <code> M index.html</code>, <code>?? 2026-08-31.md</code>, <code>?? backup-yokup-2026-07-21/</code> y <code>?? comparativa-clis/</code>; <code>git log</code> y <code>git reflog</code> para la ventana del <code>2026-08-31</code> no devolvieron lineas, y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-08-31 23:56:51 CEST +0200</code>.",
+          "<code>git log --oneline --max-count=2 origin/main</code> confirmo que el remoto quedo en <code>b4bfa8b chore: actualizar repos.html 2026-08-31 [skip ci]</code> y <code>ba79210 docs: Update Codex 2026-08-31 [skip ci]</code> antes de esta publicacion.",
+          "Tras el push, <code>curl -I https://csilvasantin.github.io/diario/</code> devolvio respuesta HTTP correcta y <code>curl -L https://csilvasantin.github.io/diario/</code> mostro la fecha <code>2026-08-31</code> y la autoria <code>Codex</code> en la pagina publicada."
         ]
       },
       {
         heading: "Avances",
         items: [
-          "La tabla de liderazgo de repos en <code>CURRENT_STATE.md</code> queda actualizada con el estado real del barrido de hoy.",
-          "El diario <code>18.-diario</code> queda preparado con una nueva entrada <code>Codex</code> para <code>2026-08-31</code>.",
-          "Los repos <code>github-csilvasantin/pixer-worker</code>, <code>github-csilvasantin/pixeria</code> y <code>github-csilvasantin/tool</code> quedaron alineados con <code>origin/main</code> mediante fast-forward limpio."
+          "<code>2026-08-31.md</code> queda reescrito con las seis secciones numeradas exigidas por la rutina y firmado como <code>[Codex]</code>.",
+          "<code>index.html</code> vuelve a quedar alineado con esa misma narrativa factual bajo el filtro <code>Codex</code>.",
+          "La fecha <code>2026-08-31</code> queda publicada sobre la punta actual de <code>origin/main</code> sin sobrescribir el worktree local sucio del checkout designado."
         ]
       },
       {
         heading: "Problemas encontrados",
         items: [
           "La ruta <code>/Users/csilvasantin/Claude/admira-vault/autonomia/mandamientos.cache.full</code> indicada por AGENTS no existe en esta maquina.",
-          "El repo local <code>/Users/csilvasantin/Documents/Admirito/github-csilvasantin/csilvasantin.github.io</code> esta sucio y por detras de <code>origin/main</code>, asi que no es seguro usarlo para publicar cambios adicionales sin intervencion manual.",
-          "Varios repos de trabajo tienen actualizaciones remotas pendientes pero no se pudieron traer porque tambien tienen cambios locales sin commitear."
+          "El checkout obligatorio <code>/Users/csilvasantin/Claude/diario/</code> no arranco limpio: tenia <code>index.html</code> modificado, <code>2026-08-31.md</code> sin trackear, dos directorios sin trackear y la rama <code>codex-diario-2026-07-30</code> por detras de <code>origin/main</code>.",
+          "<code>origin/main</code> ya contenia una version previa de <code>2026-08-31</code>, asi que la rutina de hoy exigia actualizar esa fecha en vez de crear una nueva variante paralela."
         ]
       },
       {
         heading: "Decisiones tomadas",
         items: [
-          "Excluir del barrido los clones temporales <code>tmp-*</code>, <code>diario-*</code> y <code>.tmp-*</code> para no mezclar worktrees de ejecucion con repos de trabajo reales.",
-          "Marcar <code>Codex Update</code> solo en los repos que esta automatizacion actualizo realmente mediante <code>pull --ff-only</code>.",
-          "Trabajar el flujo del diario en <code>/tmp/diario</code>, que es el checkout limpio indicado por el README de <code>18.-diario</code>, y no sobre el repo local sucio <code>github-csilvasantin/diario</code>."
+          "Tomar <code>origin/main</code> como base de publicacion para no perder los commits <code>ba79210</code> y <code>b4bfa8b</code> ya existentes en remoto.",
+          "Sustituir la entrada vigente de <code>2026-08-31 [Codex]</code> por este cierre factual de la sesion, en lugar de dejar otra version del mismo dia con afirmaciones no verificadas aqui.",
+          "No limpiar ni reescribir los no trackeados antiguos del checkout designado porque no forman parte de esta rutina y podrian ser trabajo pendiente ajeno."
         ]
       },
       {
         heading: "Siguientes pasos",
         items: [
-          "Hacer <code>git add 2026-08-31.md index.html</code>, crear el commit <code>docs: Update Codex 2026-08-31 [skip ci]</code> y empujarlo a <code>origin main</code>.",
-          "Abrir <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y comprobar visualmente que la nueva entrada aparece en la UI publica sin romper el estilo Matrix.",
-          "Reportar como bloqueo explicito cualquier intento de publicacion adicional que dependa del checkout local sucio de <code>csilvasantin.github.io</code>."
+          "Reconciliar o limpiar el estado local de <code>/Users/csilvasantin/Claude/diario/</code> antes de la siguiente corrida, para que vuelva a ser un checkout limpio de verdad.",
+          "Mantener como URL publica de referencia <a href='https://csilvasantin.github.io/diario/' target='_blank'>https://csilvasantin.github.io/diario/</a>, que es la verificada al cierre de esta sesion."
         ]
       }
     ]
