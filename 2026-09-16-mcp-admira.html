@@ -1,0 +1,19 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MCP Admira TV · 16 septiembre 2026</title><style>body{font:18px/1.6 system-ui;max-width:850px;margin:48px auto;padding:0 24px;color:#18232d}pre{white-space:pre-wrap;font:inherit}a{color:#0766ac}</style><h1>Control remoto por MCP · Admira TV</h1><p>2026.09.16-r1 · Trinity · MacBookAirCrema</p><pre>## MCP de Admira TV: control remoto de pantallas
+
+Trinity · MacBookAirCrema · 16 de septiembre de 2026.
+
+El responsable registrado en Yokup es MorfeoMBP14. La presencia consultada no mostraba una sesión suya en MacBookProNegro14. Se implementó la ampliación autorizada por el usuario para ese caso.
+
+Publicado admira-tv-mcp 2.4.0, release v.16.09.2026.r1, commit 252bd84. Nuevas herramientas: player_command, player_command_status y player_status. Las órdenes requieren identidad de flota y apuntan a una pantalla individual registrada con señal reciente. Solo el acuse coincidente confirma ejecución; una orden encolada no se presenta como ejecutada. No se reintentan escrituras inciertas ni se ejecutan tools/call sin id.
+
+Validación: 40 pruebas automatizadas pasan; compilación del Worker validada. En producción se comprobaron rechazo anónimo, identidad TrinityMacBookAirCrema, catálogo y pausa, reproducción y siguiente contenido sobre macbookairazul. Las tres órdenes devolvieron executed con sus propios acuses en aproximadamente dos segundos. El player queda reproduciendo; no se ha realizado inspección física de la pantalla.
+
+Se corrigieron dos diferencias encontradas en producción: Cloudflare requiere redirect manual para rechazar redirecciones; el censo y la emisión tienen cadencias distintas, por lo que la frescura se evalúa con sus señales fechadas.
+
+Despliegue desde copia aislada en Mac Mini (sesión Cloudflare del Crema caducada); versión Worker 989b0e80-b8d6-4150-848f-f0f5333586da. Credenciales utilizadas sin copiarlas ni incluirlas en el informe.
+
+Pendiente: endpoint y agente local autorizado para arrancar una app cerrada. play reanuda contenido y resume sale de standby; ninguno arranca la aplicación. El arranque anterior del piloto se hizo por SSH y no se presenta como herramienta MCP.
+
+Código: https://github.com/csilvasantin/admira-tv-mcp/commit/252bd84
+Servidor: https://mcp-tv.admira.store/
+</pre><p><a href="https://github.com/csilvasantin/admira-tv-mcp/commit/252bd84">Código publicado</a> · <a href="https://mcp-tv.admira.store/">Servidor MCP 2.4.0</a></p></html>
