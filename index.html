@@ -344,6 +344,66 @@
 <script>
 const entries = [
   {
+    date: "2026-09-16",
+    title: "16 de septiembre de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se publico <code>admira-tv-mcp 2.4.0</code> (release <code>v.16.09.2026.r1</code>, commit <code>252bd84</code>) con las herramientas <code>player_command</code>, <code>player_command_status</code> y <code>player_status</code>, todas exigiendo identidad de flota y apuntando a una pantalla individual con senal reciente.",
+          "Se publico <code>admira-tv-mcp 2.5.0</code> (release <code>v.16.09.2026.r2</code>, commit <code>cf677da</code>, evidencias <code>7253267</code>) con las herramientas <code>player_launch</code>, <code>player_launch_status</code> y <code>player_launcher_status</code>, apoyadas en un agente local exclusivo de <code>MacBookAirAzul</code> con permisos de usuario, credencial por dispositivo, cola persistente y deduplicacion.",
+          "Se registro el trabajo del dia en <code>2026-09-16.md</code> y en la publicacion HTML <code>2026-09-16-mcp-admira.html</code>, con los commits <code>50c6c51 Diario: control MCP Admira TV validado en MacBookAirAzul</code> y <code>18eeff2 Diario: arranque MCP nativo verificado y mision 37 cerrada con 85 puntos</code>.",
+          "Claude Code cerro el dia desde el entorno remoto en la rama <code>main-qzr90v</code>, actualizando <code>index.html</code> para que la fecha <code>2026-09-16</code> aparezca en la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En produccion se comprobaron el rechazo anonimo, la identidad <code>TrinityMacBookAirCrema</code>, el catalogo y pausa, la reproduccion y el siguiente contenido sobre <code>macbookairazul</code>; las tres ordenes devolvieron <code>executed</code> con sus propios acuses en aproximadamente dos segundos.",
+          "Prueba real del arranque nativo con la aplicacion cerrada: arranque por MCP con <code>PID 23800</code>, nueva emision posterior confirmada; repetir <code>request_key</code> conservo la orden y solicitar arranque con la app abierta conservo <code>PID</code>. Autenticacion anonima y token incorrecto quedaron rechazados.",
+          "40 pruebas automatizadas pasan en 2.4.0 y 45 pruebas del servidor mas 4 del agente local pasan en 2.5.0; compilacion del Worker validada. Version Worker <code>989b0e80-b8d6-4150-848f-f0f5333586da</code>.",
+          "<code>git log --oneline</code> confirma los commits <code>50c6c51</code>, <code>18eeff2</code> y <code>7fbe8a0 chore: actualizar repos.html 2026-09-16 [skip ci]</code> ya publicados en <code>origin/main</code>; <code>repos.html</code> del diario incluye la fecha <code>2026-09-16</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "El diario recupera control remoto operativo de las pantallas Admira TV mediante MCP: catalogo, pausa, reproduccion, siguiente contenido y arranque nativo de <code>AdmiraSignageMac</code> quedan disponibles como herramientas MCP con acuse coincidente.",
+          "Mision <code>DCL-f21bea9b6d4170b43cd0c374</code>, Hoy #37, resuelta con informe y evidencias. Highscore confirmado para Trinity / MBACrema: 85 puntos (mision 40, tareas 3 x 15).",
+          "El player queda reproduciendo tras la validacion; la publicacion HTML <code>2026-09-16-mcp-admira.html</code> ofrece la URL comprobable exigida por la regla 1-2-3."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La sesion Cloudflare del Crema estaba caducada, por lo que el despliegue se hizo desde una copia aislada en el Mac Mini en lugar de desde la maquina principal.",
+          "No hubo inspeccion fisica de la pantalla ni captura fotografica: las evidencias en Yokup son transcripciones identificadas de la ejecucion real, no imagenes.",
+          "Se detectaron dos diferencias iniciales en produccion: Cloudflare requiere redirect manual para rechazar redirecciones, y el censo y la emision tienen cadencias distintas."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Publicar desde una copia aislada del repo cuando la sesion Cloudflare del equipo principal no esta disponible, en vez de forzar el despliegue con credenciales caducadas.",
+          "Restringir el arranque nativo exclusivamente a <code>AdmiraSignageMac</code>: no admitir ni <code>shell</code> ni <code>URL</code> desde MCP para reducir superficie de ataque.",
+          "No reintentar escrituras inciertas ni ejecutar <code>tools/call</code> sin <code>id</code>; solo el acuse coincidente confirma ejecucion, y una orden encolada no se presenta como ejecutada.",
+          "Evaluar la frescura del estado con las senales fechadas del censo y de la emision por separado, ya que sus cadencias no coinciden."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Definir el endpoint y el agente local autorizado para arrancar una aplicacion cerrada mas alla de <code>AdmiraSignageMac</code>, ya que <code>play</code> reanuda contenido y <code>resume</code> sale de standby, pero ninguno arranca una app cerrada.",
+          "Aprovisionar el resto de equipos con la credencial por dispositivo y el agente local para extender el arranque nativo a la flota completa.",
+          "Verificar tras la publicacion que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> responden y muestran la fecha <code>2026-09-16</code>."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-09-03",
     title: "3 de septiembre de 2026",
     member: "Carlos Silva",
