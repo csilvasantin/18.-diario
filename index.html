@@ -344,6 +344,62 @@
 <script>
 const entries = [
   {
+    date: "2026-09-20",
+    title: "20 de septiembre de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina de cierre del dia desde una sesion programada de Claude Code (contenedor efimero remoto), leyendo <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> como fuente canonica.",
+          "Se hizo el pre-check con <code>git status</code>, <code>git log</code> y <code>ls</code> sobre <code>18.-diario</code> para comprobar el estado real del repositorio en la ventana del <code>2026-09-20</code>.",
+          "Se documento la fecha con una entrada minima <code>2026-09-20.md</code> y se actualizo <code>index.html</code> para que la UI publica muestre el <code>20 de septiembre de 2026</code> bajo el filtro <code>Claude</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git log --oneline -10</code> mostro que el ultimo commit de trabajo real en el repo fue <code>18eeff2 Diario: arranque MCP nativo verificado y mision 37 cerrada con 85 puntos</code> (2026-09-16), y que desde entonces solo hay commits automatizados del workflow <code>update-repos.yml</code>: <code>cc46304</code>, <code>8d613e8</code>, <code>e952b0a</code>, <code>44068bc</code> para los dias 17, 18, 19 y 20.",
+          "<code>git log --since='2026-09-17 00:00' --until='2026-09-20 23:59:59'</code> no devolvio ningun commit humano ni de Claude Code entre esas fechas: solo los cuatro chores automaticos de <code>repos.html</code>.",
+          "<code>git status --short --branch</code> devolvio el arbol limpio sobre la rama <code>main-jwu1b3</code>, sin cambios sin trackear ni sin commitear al empezar la corrida."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-09-20</code> queda documentada en su propio fichero, cumpliendo la regla 1-2-3 (una entrada por fecha) y la barrera del <code>CLAUDE.md</code> (\"si un dia no se ha hecho nada se documenta y ya esta\").",
+          "<code>index.html</code> queda actualizado para que la nueva fecha aparezca en la lista publica del diario junto al resto del historico.",
+          "<code>repos.html</code> ya venia actualizado a la fecha por el workflow automatico <code>update-repos.yml</code> (commit <code>44068bc</code>), por lo que no ha requerido edicion manual."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No hay actividad de Claude Code para el <code>2026-09-20</code> en <code>18.-diario</code>: la sesion vive en un contenedor efimero remoto y no existe checkout local del usuario en <code>/Users/csilvasantin/Claude/diario/</code> accesible desde aqui.",
+          "Los dias <code>2026-09-17</code>, <code>2026-09-18</code> y <code>2026-09-19</code> tampoco tienen entrada Markdown en el repo: quedaron con solo el commit automatico de <code>repos.html</code> y sin cierre humano; este cierre no los reconstruye retroactivamente."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Cerrar el dia con una entrada minima y factual en vez de rellenar contenido no verificado, siguiendo la regla del <code>CLAUDE.md</code> para dias sin actividad.",
+          "No reescribir ni reconstruir los cierres de <code>2026-09-17</code>, <code>2026-09-18</code> ni <code>2026-09-19</code>: si algun dia hubo trabajo fuera de este repo, debe cerrarlo la sesion correspondiente con evidencia propia.",
+          "Publicar el cierre desde la rama de desarrollo <code>main-jwu1b3</code> (segun instrucciones de sesion), dejando que el flujo de PR lleve el cambio a <code>main</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-09-20.md index.html</code>, commit <code>Diario 2026-09-20 [Claude]</code> y push a <code>origin main-jwu1b3</code>.",
+          "Abrir Pull Request en draft para integrar el cierre en <code>main</code>; el workflow <code>update-repos.yml</code> regenerara <code>repos.html</code> tras el merge si hace falta.",
+          "Verificar despues del merge que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde y muestra la entrada del <code>20 de septiembre de 2026</code>, y que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> sigue publicandose correctamente."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-09-03",
     title: "3 de septiembre de 2026",
     member: "Carlos Silva",
