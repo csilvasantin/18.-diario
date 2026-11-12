@@ -344,6 +344,64 @@
 <script>
 const entries = [
   {
+    date: "2026-11-12",
+    title: "12 de noviembre de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Sesion Claude Code en entorno cloud remoto, disparada por tarea programada sobre el repo <code>18.-diario</code> (branch <code>main-glfcuk</code>).",
+          "Se leyo la fuente canonica <code>CERRAR-EL-DIA.md</code> y el <code>CLAUDE.md</code> del repo.",
+          "Se verifico el estado del arbol: <code>git status</code> devolvio arbol limpio; ultimo commit <code>3e3ddbe chore: actualizar repos.html 2026-11-12 [skip ci]</code>.",
+          "Se reviso <code>git log --since='2026-11-12 00:00' --until='2026-11-12 23:59:59'</code>, que devolvio unicamente el commit automatico de <code>repos.html</code> del workflow <code>update-repos.yml</code>.",
+          "Se creo el fichero <code>2026-11-12.md</code> documentando que no hubo trabajo manual con Claude Code en este dia.",
+          "Se actualizo <code>index.html</code> para que la fecha aparezca en la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>repos.html</code> esta regenerado para el 2026-11-12 (<code>generado 2026-11-12</code>); el repo con actividad mas reciente marcada hoy es <code>32.-ConsejoAdmiraNextGame</code> (Gemini CLI, 13:40 UTC).",
+          "El repo <code>18.-diario</code> figura en <code>repos.html</code> con fecha 2026-11-11 (anterior a este cierre), coherente con que no habia commit manual hoy.",
+          "No existian entradas <code>.md</code> entre <code>2026-09-16.md</code> y este <code>2026-11-12.md</code>; la cadena queda documentada tal cual."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-11-12</code> queda registrada en su propio fichero, aplicando la regla 1-2-3 (una entrada por fecha).",
+          "El <code>index.html</code> queda alineado con la realidad: entrada visible para el 12 de noviembre.",
+          "El cierre se publica desde el entorno cloud remoto en el branch de desarrollo <code>main-glfcuk</code>."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno: arbol limpio, sin conflictos, sin trabajo manual pendiente que registrar."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia aunque no haya trabajo manual, siguiendo la instruccion de la tarea programada: \"si un dia en concreto no se ha hecho nada se documenta y ya esta\".",
+          "No backfillear entre 2026-09-17 y 2026-11-11: esos dias quedan tal cual (sin entrada), fuera del ambito de esta tarea programada que solo cierra el dia actual.",
+          "Trabajar en el branch <code>main-glfcuk</code> conforme a la convencion del entorno remoto, no en <code>main</code>."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-11-12.md index.html</code>, commit <code>Diario 2026-11-12 [Claude]</code> y push a <code>origin/main-glfcuk</code>.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> y <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>repos.html</a> muestren la entrada tras el merge a <code>main</code>.",
+          "Si la IA del usuario detecta trabajo real en otros repos del dia, registrarlo en la siguiente corrida."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-09-03",
     title: "3 de septiembre de 2026",
     member: "Carlos Silva",
