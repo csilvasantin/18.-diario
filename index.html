@@ -344,6 +344,70 @@
 <script>
 const entries = [
   {
+    date: "2026-11-17",
+    title: "17 de noviembre de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina automatica <code>CERRAR-EL-DIA.md</code> desde una sesion programada de Claude Code (entorno remoto en la nube, modelo <code>claude-opus-4-7</code>), a las <code>22:10 UTC</code> del <code>2026-11-17</code>.",
+          "Se leyeron <code>CLAUDE.md</code> y <code>CERRAR-EL-DIA.md</code> locales del repo <code>18.-diario</code> para aplicar la rutina literal y la regla <em>si un dia en concreto no se ha hecho nada se documenta y ya esta</em>.",
+          "Se hizo el pre-check con <code>git status --short --branch</code> y <code>git log --since='2026-11-17 00:00' --until='2026-11-17 23:59:59'</code> sobre el checkout <code>/home/user/18.-diario/</code>.",
+          "Se verifico via <code>gh api search/commits author:csilvasantin author-date:2026-11-17</code> la actividad real del usuario en todos sus repos durante el dia, para auditar que trabajo existe fuera de <code>18.-diario</code>.",
+          "Se creo esta entrada <code>2026-11-17.md</code> con las seis secciones numeradas y se agrego el bloque correspondiente a <code>index.html</code> para que la fecha aparezca en la UI publica."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "En <code>18.-diario</code>, <code>git log --since='2026-11-17 00:00'</code> devolvio un unico commit del dia: <code>2c31657 chore: actualizar repos.html 2026-11-17 [skip ci]</code> (bot de GitHub Actions, workflow <code>update-repos.yml</code>).",
+          "<code>git status --short --branch</code> devolvio <code>## main-tzyliv</code> con <code>nothing to commit, working tree clean</code> al empezar la rutina.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-11-17 22:10:30 UTC +0000</code> en el entorno remoto.",
+          "<code>ls 2026-11*.md</code> confirmo que no habia aun ninguna entrada <code>.md</code> para noviembre de 2026; la ultima entrada previa era <code>2026-09-16.md</code>.",
+          "<code>gh api search/commits</code> devolvio 20 commits del dia en tres repos externos: <code>csilvasantin/admira-tv</code> (PRs <code>#200</code> a <code>#208</code>, linea Galleon y LaMetric y publicacion de <code>admira.tv</code>), <code>csilvasantin/admira-next-web</code> (PR <code>#500</code>, boton pantalla completa de ojos remotos) y <code>csilvasantin/portaventura-next</code> (PRs <code>#101</code> y <code>#102</code>, Ferrari Land)."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-11-17</code> queda registrada en un fichero propio con las seis secciones numeradas exigidas por la rutina, firmada como <code>[Claude]</code>.",
+          "<code>index.html</code> queda actualizado para que la entrada del <code>17 de noviembre de 2026</code> aparezca en la UI publica bajo los filtros <code>Todos</code> y <code>Claude</code>.",
+          "<code>repos.html</code> ya esta al dia por accion del workflow automatico <code>update-repos.yml</code>, sin necesidad de regeneracion manual (commit <code>2c31657</code> a las <code>05:00 UTC</code>).",
+          "Queda documentado en el diario, por auditoria externa de GitHub, que el trabajo real del dia se concentro en <code>admira-tv</code> (Galleon), <code>admira-next-web</code> (ojos remotos) y <code>portaventura-next</code> (Ferrari Land); el repo <code>18.-diario</code> no recibio trabajo humano, solo el commit automatico del bot."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rutina canonica pide operar sobre <code>/Users/csilvasantin/Claude/diario/</code> en el Mac Mini, pero esta sesion corre en un contenedor efimero remoto de Claude Code sobre <code>/home/user/18.-diario/</code>; se adapta al checkout disponible.",
+          "La rutina pide <code>git push origin main</code>, pero las instrucciones del harness obligan a desarrollar en <code>main-tzyliv</code> y publicar via Pull Request; se sigue el harness, no el push directo a <code>main</code>.",
+          "El scope de acceso a GitHub de esta sesion esta limitado a <code>csilvasantin/18.-diario</code>, asi que la actividad en otros repos del usuario solo pudo auditarse por <code>search/commits</code> y no se puede cross-check entrando en esos repos; los PRs quedan nombrados por numero y titulo para que el usuario los verifique directamente."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia aunque en <code>18.-diario</code> no haya trabajo humano, siguiendo literal la regla <code>si un dia en concreto no se ha hecho nada se documenta y ya esta</code>.",
+          "Incluir en la entrada el resumen auditado del trabajo del usuario en otros repos durante <code>2026-11-17</code>, no para reclamarlo como trabajo del diario, sino para que el diario refleje donde estuvo la actividad real del dia.",
+          "Firmar la entrada como <code>[Claude]</code> porque la sesion programada que la crea es Claude Code (<code>claude-opus-4-7</code>), no Codex ni Yarig.",
+          "Publicar via rama <code>main-tzyliv</code> + draft PR en lugar de push directo a <code>main</code>, respetando las restricciones del entorno remoto de sesion programada."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-11-17.md index.html</code>, crear el commit <code>Diario 2026-11-17 [Claude]</code> y empujarlo a <code>origin/main-tzyliv</code>.",
+          "Abrir draft PR <code>Diario 2026-11-17 [Claude]</code> contra <code>main</code> desde la rama <code>main-tzyliv</code> para que, al mergearse, la entrada quede en <code>origin/main</code>.",
+          "Verificar tras el merge del PR que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde y muestra la nueva entrada del <code>2026-11-17</code>.",
+          "Comprobar que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> sigue reflejando el estado actual de los repos con la fecha <code>2026-11-17</code> tras la ultima corrida del workflow automatico."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-09-03",
     title: "3 de septiembre de 2026",
     member: "Carlos Silva",
