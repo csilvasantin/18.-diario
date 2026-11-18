@@ -344,6 +344,64 @@
 <script>
 const entries = [
   {
+    date: "2026-11-18",
+    title: "18 de noviembre de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "En <code>admira-tv</code> se mergearon nueve PRs de la jornada: #209 duracion y cuenta atras con mute en Galleon (<code>4978aed</code> + merge <code>a325e23</code>), #211 LaMetric alterna notificaciones de playlist con el reloj nativo (<code>90a5e31</code> + merge <code>fd1c883</code>), #210 panel de control de tinta electronica en <code>/eink</code> (<code>2c3d08c</code>), #212 barra de progreso al emitir sin ordenes repetidas (<code>315fabd</code>), #213 textos &laquo;Enviar / Enviando... / Emitiendo&raquo; solo cuando ya se ve en pantalla (<code>e8410db</code>), #214 puente Web Bluetooth para que el Fold haga de puente de la SY11-ab (<code>a1a6786</code>), #215 el puente del Fold pide el relevo al Mac al conectar (<code>213e41f</code>), #216 cada pieza se adapta a la resolucion de la pantalla destino (<code>a41da94</code>) y #217 scripts de tinta se piden con version para no quedarse con la copia en cache (<code>db0818a</code>).",
+          "En <code>portaventura-next</code> se publicaron tres commits sobre &laquo;Esquema Netflix&raquo;: #103 (<code>5d3d94e</code>) presentacion editable y protegida en <code>/esquema/netflix</code> con Cloudflare Access propio + JWT, lista de dos correos en el worker y D1 <code>esquema-netflix-en</code> con historial y ordenes expertas; #104 (<code>2129b1f</code>) aceptar tokens de persona de Access type app y registrar el motivo de cada 403 sin datos personales; #105 (<code>242e257</code>) misma reticula que <code>/dmz/presentacion</code>, menu del sitio de visitShell (Opciones / Avanzado / Experto con CLI redimensionable), barra de capitulos, edicion desde modo experto y CSP por hash.",
+          "En <code>admira-next-web</code> se expuso Matrix Lab en la ruta publica <code>/Matrix</code> sin tocar la home: commit <code>3fbd555</code> y merge <code>d10aa0f</code> (PR #501, rama <code>feat/public-matrix-lab</code>).",
+          "En <code>18.-diario</code> se creo esta entrada <code>2026-11-18.md</code> y se actualizo <code>index.html</code> para que la fecha aparezca en la UI publica del diario."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>gh api -X GET search/commits -f q='author:csilvasantin author-date:2026-11-18'</code> devolvio 16 items del dia: 11 en <code>admira-tv</code>, 3 en <code>portaventura-next</code> y 2 en <code>admira-next-web</code>.",
+          "<code>git log --oneline -10</code> en <code>18.-diario</code> confirmo que la punta remota ya tenia <code>855f6f7 chore: actualizar repos.html 2026-11-18 [skip ci]</code>, generado por el workflow <code>.github/workflows/update-repos.yml</code> que corre a las 5:00 UTC.",
+          "<code>git rev-list --count origin/main..main-4fkem6</code> y la inversa devolvieron <code>0</code>, confirmando que la rama de trabajo arranco limpia y alineada con <code>origin/main</code> antes de escribir la entrada.",
+          "No se detecto actividad de hoy en <code>18.-diario</code> distinta de la actualizacion automatica de <code>repos.html</code>; todo el trabajo de Claude Code del dia esta en los repos de producto listados arriba."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-11-18</code> queda documentada en su propio fichero con las seis secciones numeradas exigidas por la rutina <code>CERRAR-EL-DIA.md</code>.",
+          "<code>index.html</code> queda actualizado para mostrar la nueva entrada en la UI publica del diario.",
+          "<code>repos.html</code> ya refleja la actividad del dia gracias al workflow programado; no requiere commit manual.",
+          "El bloque de tinta electronica (<code>/eink</code>) de <code>admira-tv</code> queda cerrado con panel, progreso, textos de estado, puente Bluetooth via Fold, relevo del Mac, adaptacion por resolucion y cache busting."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "Ninguno bloqueante en la corrida de esta rutina. La fuente canonica <code>CERRAR-EL-DIA.md</code> apunta al checkout del Mac Mini (<code>/Users/csilvasantin/Claude/diario/</code>); esta corrida se ejecuta desde un entorno remoto efimero en la rama <code>main-4fkem6</code>, por lo que no se hace el pre-check local sobre el checkout canonico."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Registrar solo hechos verificables con <code>gh api</code> y con el estado de git del repo, sin reconstruir detalles de implementacion que no estan en los mensajes de commit.",
+          "No tocar <code>repos.html</code> manualmente porque el workflow ya lo mantiene al dia.",
+          "Firmar la entrada como [Claude] por ser la IA que ejecuta esta rutina programada."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-11-18.md index.html</code>, crear el commit <code>Diario 2026-11-18 [Claude]</code> y publicar con <code>git push origin main-4fkem6</code>.",
+          "Abrir un PR en draft desde <code>main-4fkem6</code> hacia <code>main</code> con el cierre del dia.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde y muestra la entrada del <code>2026-11-18</code> una vez el PR se integre."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-09-03",
     title: "3 de septiembre de 2026",
     member: "Carlos Silva",
