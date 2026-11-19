@@ -344,6 +344,76 @@
 <script>
 const entries = [
   {
+    date: "2026-11-15",
+    title: "15 de noviembre de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se ejecuto la rutina automatica <code>CERRAR-EL-DIA.md</code> desde una sesion programada de Claude Code (entorno remoto en la nube), a las 22:10 UTC del <code>2026-11-15</code>.",
+          "Se leyeron <code>CLAUDE.md</code>, <code>CERRAR-EL-DIA.md</code> y <code>routines/cerrar-el-dia.md</code> locales del repo <code>18.-diario</code> para aplicar la rutina literal.",
+          "Se hizo el pre-check con <code>git status</code>, <code>git branch -a</code> y <code>git log --since='2026-11-15 00:00' --until='2026-11-15 23:59:59' --all</code> sobre el checkout <code>/home/user/18.-diario/</code>.",
+          "Se inspecciono la actividad real del dia en la cuenta del usuario con <code>gh api search/commits -f q='author:csilvasantin author-date:2026-11-15' --paginate</code>, que devolvio <code>total_count: 113</code> commits distribuidos en 6 repos.",
+          "Se creo la entrada <code>2026-11-15.md</code> con las seis secciones numeradas y se actualizo <code>index.html</code> para que la fecha aparezca en la UI publica.",
+          "Se preparo commit + push a la rama de trabajo <code>main-sjjhel</code> (rama designada por el harness de sesion programada) y draft PR contra <code>main</code>."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "El pre-check devolvio <code>On branch main-sjjhel</code>, <code>nothing to commit, working tree clean</code> sobre <code>/home/user/18.-diario/</code>.",
+          "<code>git log --since='2026-11-15 00:00' --until='2026-11-15 23:59:59' --all</code> en el repo <code>18.-diario</code> devolvio solo <code>979c0b4 chore: actualizar repos.html 2026-11-15 [skip ci]</code>, confirmando que el workflow <code>update-repos.yml</code> ya habia regenerado <code>repos.html</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-11-15 22:10:26 UTC +0000</code> en el entorno remoto.",
+          "<code>gh api search/commits</code> confirmo la distribucion por repo: <code>admira-next-web</code> 56, <code>portaventura-next</code> 24, <code>admira-tv</code> 14, <code>admira-store</code> 12, <code>32.-ConsejoAdmiraNextGame</code> 6 y <code>pixer-worker</code> 1.",
+          "En <code>admira-next-web</code> se verifico la serie <code>Show PortAventuraNeXT</code> construyendo progresivamente el sello de continuidad (reloj, duracion, mapa de 10 capitulos, cuenta atras, titulo del siguiente) a traves de los PRs <code>lucas/pan-*-20261115</code> (#446 a #480), junto con los PRs de <code>jony</code> (<code>admira-studio-control</code>, <code>credits-button-progress</code>, <code>vecna-layout-loop</code>, <code>display-modes</code>, <code>sequential-mode</code>, <code>controlshow-home</code>), <code>trinity</code> (<code>control-preview</code>, <code>control-dmz-bridge</code>, <code>control-targets</code>) y <code>neo</code> (<code>show-fixes-20261115</code>, <code>previa-admiratv-20261115</code>).",
+          "En <code>portaventura-next</code> se verifico la cadena iterativa del lanzador y receptor DMZ, desde <code>/presentation</code> a <code>/dmz/lanzador/</code> con 4 modos (Philips 86 + Pizarra) hasta la version <code>Receptor 15.12</code> (cerrar sin ventanas fantasma, pantalla completa macOS AX de reserva), incluyendo el <code>Modo 5 AdmiraNeXT</code> (zona interactiva + Mediterrania) y el <code>Mando remoto de la sala</code>.",
+          "En <code>admira-tv</code> + <code>admira-store</code> se verifico la escena <code>Hotel Creel</code> (PRs <code>jensen/creel-*</code>): pared LED a pantalla llena, intro de Stranger Things, control pantalla-off/on y sonido-off/on, propagacion a iPhone y Fold.",
+          "En <code>32.-ConsejoAdmiraNextGame</code> se verifico la <code>Escena 0</code>: Carlos Silva y Carlo Bonomi fuera del set por defecto, modo experto con <code>\\\\</code>, mando remoto por <code>&amp;mando=&lt;maquina&gt;.&lt;firma&gt;</code>.",
+          "En <code>pixer-worker</code> se verifico el merge del PR <code>#55 perf/stock-list-desde-indice</code>."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "La fecha <code>2026-11-15</code> queda registrada en un fichero propio con las seis secciones numeradas exigidas por la rutina, firmada como <code>[Claude]</code>.",
+          "<code>index.html</code> queda actualizado para que la entrada del <code>15 de noviembre de 2026</code> aparezca en la UI publica bajo los filtros <code>Todos</code> y <code>Claude</code>.",
+          "<code>repos.html</code> ya esta al dia por accion del workflow automatico <code>update-repos.yml</code> (commit <code>979c0b4</code> del <code>2026-11-15 12:33:36 UTC</code>), sin necesidad de regeneracion manual.",
+          "Queda documentado un dia muy activo: 113 commits en 6 repos, con hitos visibles del show PortAventuraNeXT, escena Hotel Creel, lanzador DMZ y escena 0 del Consejo."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "La rutina canonica pide operar sobre <code>/Users/csilvasantin/Claude/diario/</code> en el Mac Mini, pero esta sesion corre en un contenedor efimero remoto de Claude Code sobre <code>/home/user/18.-diario/</code>; se adapta al checkout disponible.",
+          "La rutina pide <code>git push origin main</code>, pero las instrucciones del harness obligan a desarrollar en <code>main-sjjhel</code> y publicar via PR; se sigue el harness, no el push directo a <code>main</code>.",
+          "Desde esta sesion remota no es posible leer el trabajo local pendiente que haya podido quedar sin commit en las maquinas del usuario: solo se registra lo que ya esta en GitHub.",
+          "Hay un hueco en el diario entre <code>2026-09-03</code> y <code>2026-11-15</code> que no corresponde a esta corrida llenarlo: este cierre solo documenta el dia <code>2026-11-15</code> segun la regla <code>si un dia en concreto no se ha hecho nada se documenta y ya esta</code> aplicada a la fecha de hoy."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia resumiendo la actividad verificable en GitHub (113 commits en 6 repos), sin inventar detalles no contrastados con la API.",
+          "Firmar la entrada como <code>[Claude]</code> porque la sesion que la crea es Claude Code (identificador de modelo configurado <code>claude-opus-4-7</code>), no Codex.",
+          "Publicar via rama <code>main-sjjhel</code> + draft PR en lugar de push directo a <code>main</code>, respetando las restricciones del entorno remoto de sesion programada.",
+          "No tocar <code>repos.html</code> a mano: el workflow diario <code>update-repos.yml</code> ya lo regenero esta manana con la fecha del dia.",
+          "No backfillear los dias pendientes entre <code>2026-09-04</code> y <code>2026-11-14</code>: esta corrida es el cierre del <code>2026-11-15</code>, no un rebuild del historico."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Verificar tras el merge del PR que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde y muestra la nueva entrada del <code>2026-11-15</code>.",
+          "Comprobar que <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> sigue reflejando el estado actual de los repos con la fecha <code>2026-11-15</code>.",
+          "Mantener el ritmo diario de cierre automatico via sesion programada."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-09-03",
     title: "3 de septiembre de 2026",
     member: "Carlos Silva",
