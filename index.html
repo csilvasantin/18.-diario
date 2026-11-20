@@ -344,6 +344,67 @@
 <script>
 const entries = [
   {
+    date: "2026-11-20",
+    title: "20 de noviembre de 2026",
+    member: "Carlos Silva",
+    author: "Claude",
+    xpacio: "",
+    sections: [
+      {
+        heading: "Que se hizo",
+        items: [
+          "Se disparo la rutina <code>Cerrar el dia</code> desde el trigger programado de Claude Code (sesion remota en contenedor efimero sobre <code>csilvasantin/18.-diario</code>).",
+          "Se leyeron la fuente canonica <code>CERRAR-EL-DIA.md</code> y la copia local del repo, se contrastaron las instrucciones del proyecto <code>CLAUDE.md</code> y se ejecuto el pre-check literal con <code>git status --short --branch</code>, <code>git log --since='2026-11-20 00:00' --until='2026-11-20 23:59:59' --date=iso --stat --oneline --all</code> y <code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code>.",
+          "Se verifico que no hay trabajo nuevo de Claude Code pendiente de subir en este checkout y que la unica actividad del dia es el commit automatico del workflow <code>update-repos.yml</code>.",
+          "Se creo <code>2026-11-20.md</code> y se actualizo <code>index.html</code> para documentar el dia sin trabajo manual, tal como pide la rutina (<code>si un dia en concreto no se ha hecho nada se documenta y ya esta</code>)."
+        ]
+      },
+      {
+        heading: "Que se valido",
+        items: [
+          "<code>git status --short --branch</code> devolvio <code>## main-hkt47e</code> con worktree limpio al arrancar.",
+          "<code>git log --since='2026-11-20 00:00' --until='2026-11-20 23:59:59' --date=iso --stat --oneline --all</code> devolvio una sola linea: <code>5a0cdb1 chore: actualizar repos.html 2026-11-20 [skip ci]</code>, autor <code>github-actions[bot]</code>, fecha <code>Fri Nov 20 13:53:08 2026 +0000</code>.",
+          "<code>date '+%Y-%m-%d %H:%M:%S %Z %z'</code> devolvio <code>2026-11-20 22:11:40 UTC +0000</code> en el pre-check.",
+          "El diff de ese commit toca solo <code>repos.html</code> (6 lineas: fecha <code>generado</code> a <code>2026-11-20</code> y contadores de <code>18.-diario</code> 990 -&gt; 991, <code>32.-ConsejoAdmiraNextGame</code> 2096 -&gt; 2119 commits y push <code>↑74</code> -&gt; <code>↑81</code>). Ningun fichero <code>*.md</code> del diario cambio hoy.",
+          "La ultima entrada previa en el repo era <code>2026-09-16.md</code>; desde entonces no se habian creado nuevos ficheros diarios."
+        ]
+      },
+      {
+        heading: "Avances",
+        items: [
+          "<code>2026-11-20.md</code> queda registrado en el repo con las seis secciones numeradas exigidas por la rutina.",
+          "<code>index.html</code> queda actualizado para que la fecha de hoy aparezca en la UI publica bajo el filtro <code>Claude</code>.",
+          "La tabla <code>repos.html</code> esta al dia (regenerada esta manana por el workflow automatico), por lo que la URL <a href='https://csilvasantin.github.io/18.-diario/repos.html' target='_blank'>https://csilvasantin.github.io/18.-diario/repos.html</a> ya refleja el estado actual de los repositorios al ejecutarse el cierre."
+        ]
+      },
+      {
+        heading: "Problemas encontrados",
+        items: [
+          "No se detectaron problemas operativos. El unico hecho reportable es la ausencia de trabajo manual con Claude Code en esta fecha.",
+          "La rama activa del checkout remoto es <code>main-hkt47e</code> (rama de desarrollo asignada a esta sesion en la nube), no <code>main</code>; el push final ira a <code>main-hkt47e</code> segun las reglas del entorno remoto, y la integracion a <code>main</code> queda via pull request."
+        ]
+      },
+      {
+        heading: "Decisiones tomadas",
+        items: [
+          "Documentar el dia como \"sin trabajo manual\" en vez de inventar actividad, cumpliendo literalmente la clausula de la rutina para dias vacios.",
+          "Firmar la entrada como <code>[Claude]</code> porque la ejecuto Claude Code (<code>claude-opus-4-7</code>) desde el trigger programado.",
+          "No tocar <code>repos.html</code> manualmente: ya fue regenerado por el workflow <code>update-repos.yml</code> del dia.",
+          "Registrar solo hechos comprobables con <code>git</code> y con el pre-check de esta sesion, sin reconstruir actividad externa al repo."
+        ]
+      },
+      {
+        heading: "Siguientes pasos",
+        items: [
+          "Hacer <code>git add 2026-11-20.md index.html</code>, crear el commit <code>Diario 2026-11-20 [Claude]</code> y publicarlo con <code>git push origin main-hkt47e</code>.",
+          "Abrir pull request draft desde <code>main-hkt47e</code> a <code>main</code> para integrar el cierre, segun las reglas del entorno remoto.",
+          "Verificar que <a href='https://csilvasantin.github.io/18.-diario/' target='_blank'>https://csilvasantin.github.io/18.-diario/</a> responde tras el deploy y muestra la entrada del <code>20 de noviembre de 2026</code>.",
+          "Mandar el aviso de cierre por notificacion push al usuario con el estado del dia y la URL publica."
+        ]
+      }
+    ]
+  },
+  {
     date: "2026-09-03",
     title: "3 de septiembre de 2026",
     member: "Carlos Silva",
